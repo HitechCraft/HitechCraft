@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.UI.WebControls;
+using Microsoft.Ajax.Utilities;
+using MySql.Data.MySqlClient.Properties;
 
 namespace WebApplication.Models
 {
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Адрес электронной почты")]
+        [Display(Name = "Email", ResourceType = typeof(Resources))]
         public string Email { get; set; }
     }
 
@@ -49,9 +53,9 @@ namespace WebApplication.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Адрес электронной почты")]
+        [Display(Name = "EmailOrNickName", ResourceType = typeof(Resources))]
         [EmailAddress]
-        public string Email { get; set; }
+        public string EmailOrNickName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,20 +68,30 @@ namespace WebApplication.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(Resources))]
+        [MinLength(4, ErrorMessageResourceName = "ErrorMinLength", ErrorMessageResourceType = typeof(Resources))]
+        [Display(Name = "NickName", ResourceType = typeof(Resources))]
+        public string UserName { get; set; }
+
+        [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(Resources))]
         [EmailAddress]
-        [Display(Name = "Адрес электронной почты")]
+        [Display(Name = "Email", ResourceType = typeof(Resources))]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]
+        [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(Resources))]
+        [Display(Name = "Gender", ResourceType = typeof(Resources))]
+        public Gender Gender { get; set; }
+
+        [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(Resources))]
+        [StringLength(100, ErrorMessageResourceName = "ErrorStringMinLength", MinimumLength = 6, ErrorMessageResourceType = typeof(Resources))]
         [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
+        [Display(Name = "Password", ResourceType = typeof(Resources))]
         public string Password { get; set; }
 
+        [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(Resources))]
         [DataType(DataType.Password)]
-        [Display(Name = "Подтверждение пароля")]
-        [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
+        [Display(Name = "PasswordConfirm", ResourceType = typeof(Resources))]
+        [Compare("Password", ErrorMessageResourceName = "ErrorPasswordsCompare", ErrorMessageResourceType = typeof(Resources))]
         public string ConfirmPassword { get; set; }
     }
 
