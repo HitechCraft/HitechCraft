@@ -1,4 +1,5 @@
 ﻿using System;
+using Duke.Owin.VkontakteMiddleware;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -11,6 +12,10 @@ namespace WebApplication
 {
     public partial class Startup
     {
+        private string AppVkId = "5028893";
+        private string AppVkSecret = "sgW1Zecnz46GiCNWlJm8";
+        private string AppVkScope = "notify,friends";
+
         // Дополнительные сведения о настройке проверки подлинности см. по адресу: http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -63,6 +68,14 @@ namespace WebApplication
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+            //todo: подумать над целесообразностью добавления аутиентификации с google и facebook
+            app.UseVkontakteAuthentication(new VkAuthenticationOptions()
+            {
+                AppId = AppVkId,
+                AppSecret = AppVkSecret,
+                Scope = AppVkScope,
+                Caption = "Вконтакте"
+            });
         }
     }
 }

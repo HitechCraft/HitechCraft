@@ -12,7 +12,7 @@ namespace WebApplication.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        Name = c.String(nullable: false, maxLength: 256, storeType: "nvarchar"),
+                        Name = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
@@ -35,7 +35,7 @@ namespace WebApplication.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
-                        Email = c.String(maxLength: 256, storeType: "nvarchar"),
+                        Email = c.String(maxLength: 128, storeType: "nvarchar"),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(unicode: false),
                         SecurityStamp = c.String(unicode: false),
@@ -45,7 +45,7 @@ namespace WebApplication.Migrations
                         LockoutEndDateUtc = c.DateTime(precision: 0),
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256, storeType: "nvarchar"),
+                        UserName = c.String(nullable: false, maxLength: 128, storeType: "nvarchar"),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");

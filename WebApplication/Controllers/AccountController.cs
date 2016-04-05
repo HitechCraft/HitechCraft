@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -176,22 +177,41 @@ namespace WebApplication.Controllers
                 //todo: реализовать ReCaptcha
                 var result = await UserManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded)
+                try
                 {
-                    string token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = token }, protocol: Request.Url.Scheme);
-                    //todo: стилизовать письмо и засунуть в отдельный template
-                    await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
+                    CheckUserName(user.UserName);
 
-                    ViewBag.Email = user.Email;
-                    return View("ConfirmEmailInfo");
+                    if (result.Succeeded)
+                    {
+                        string token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = token }, protocol: Request.Url.Scheme);
+                        //todo: стилизовать письмо и засунуть в отдельный template
+                        await UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи", "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
+
+                        ViewBag.Email = user.Email;
+                        return View("ConfirmEmailInfo");
+                    }
+
+                    AddErrors(result);
                 }
-
-                AddErrors(result);
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                }
             }
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
+        }
+
+        private void CheckUserName(string userName)
+        {
+            var user = UserManager.FindByNameAsync(userName);
+
+            if (user != null)
+            {
+                throw new Exception(Resources.ErrorUserNameExists);
+            }
         }
 
         //

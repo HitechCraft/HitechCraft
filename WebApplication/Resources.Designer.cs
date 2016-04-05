@@ -124,6 +124,15 @@ namespace WebApplication {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Пользователь с таким именем уже существует.
+        /// </summary>
+        public static string ErrorUserNameExists {
+            get {
+                return ResourceManager.GetString("ErrorUserNameExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Пол.
         /// </summary>
         public static string Gender {

@@ -138,6 +138,9 @@
   <data name="ErrorStringMinLength" xml:space="preserve">
     <value>Минимальная длина {2}</value>
   </data>
+  <data name="ErrorUserNameExists" xml:space="preserve">
+    <value>Пользователь с таким именем уже существует</value>
+  </data>
   <data name="Gender" xml:space="preserve">
     <value>Пол</value>
   </data>
