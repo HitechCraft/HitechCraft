@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CheckUserName" xml:space="preserve">
+    <value>Проверить уникальность</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -138,6 +141,9 @@
   <data name="ErrorStringMinLength" xml:space="preserve">
     <value>Минимальная длина {2}</value>
   </data>
+  <data name="ErrorUserNameEmpty" xml:space="preserve">
+    <value>Имя пользователя не может быть пустым</value>
+  </data>
   <data name="ErrorUserNameExists" xml:space="preserve">
     <value>Пользователь с таким именем уже существует</value>
   </data>
@@ -158,5 +164,8 @@
   </data>
   <data name="PasswordConfirm" xml:space="preserve">
     <value>Подтверждение пароля</value>
+  </data>
+  <data name="UserNameNoExists" xml:space="preserve">
+    <value>Это имя не занято</value>
   </data>
 </root>

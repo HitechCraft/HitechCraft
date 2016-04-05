@@ -206,11 +206,27 @@ namespace WebApplication.Controllers
 
         private void CheckUserName(string userName)
         {
+            if(userName == "") throw new Exception(Resources.ErrorUserNameEmpty);
+
             var user = UserManager.FindByNameAsync(userName);
 
-            if (user != null)
+            if (user.Result != null)
             {
                 throw new Exception(Resources.ErrorUserNameExists);
+            }
+        }
+        
+        public JsonResult IsUserExists(string userName)
+        {
+            try
+            {
+                CheckUserName(userName);
+
+                return Json(new { message = Resources.UserNameNoExists, status = "success" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { message = e.Message, status = "error" }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -444,7 +460,7 @@ namespace WebApplication.Controllers
         {
             return View();
         }
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)
