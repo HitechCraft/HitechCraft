@@ -2,7 +2,7 @@
   z-index: 9999;
   color: #ffffff;
   font-size: 12px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Sans, sans-serif;
   position: fixed;
 }
 .jGrowl.top-left {
@@ -54,7 +54,7 @@
 }
 .jGrowl-notification .jGrowl-header {
   font-weight: bold;
-  font-size: .85em;
+  font-size: 14px;
 }
 .jGrowl-notification .jGrowl-close {
   background-color: transparent;
