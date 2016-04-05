@@ -1,15 +1,18 @@
-﻿using System;
-using Duke.Owin.VkontakteMiddleware;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
-using Owin;
-using WebApplication.Models;
-
-namespace WebApplication
+﻿namespace WebApplication
 {
+    #region Usings
+
+    using System;
+    using Duke.Owin.VkontakteMiddleware;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin;
+    using Microsoft.Owin.Security.Cookies;
+    using Owin;
+    using Domain;
+
+    #endregion
+
     public partial class Startup
     {
         private string AppVkId = "5028893";

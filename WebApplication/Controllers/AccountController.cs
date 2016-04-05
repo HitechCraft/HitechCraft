@@ -1,21 +1,29 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using WebApplication.Models;
-using AutoMapper;
+﻿using System.IO;
 
 namespace WebApplication.Controllers
 {
+    #region Usings
+
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
+    using WebApplication.Models;
+    using AutoMapper;
+    using WebApplication.Domain;
+
+    #endregion
+
     [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        ApplicationDbContext context = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -50,18 +58,14 @@ namespace WebApplication.Controllers
                 _userManager = value;
             }
         }
-
-        //
-        // GET: /Account/Login
+        
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
-        //
-        // POST: /Account/Login
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -109,9 +113,7 @@ namespace WebApplication.Controllers
                     return View(model);
             }
         }
-
-        //
-        // GET: /Account/VerifyCode
+    
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
@@ -122,9 +124,7 @@ namespace WebApplication.Controllers
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-
-        //
-        // POST: /Account/VerifyCode
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -152,9 +152,7 @@ namespace WebApplication.Controllers
                     return View(model);
             }
         }
-
-        //
-        // GET: /Account/Register
+        
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -230,8 +228,53 @@ namespace WebApplication.Controllers
             }
         }
 
-        //
-        // GET: /Account/ConfirmEmail
+        public ActionResult UploadSkin()
+        {
+            var userId = User.Identity.GetUserId().ToString();
+            var userSkin = context.UserSkins.First(us => us.UserId == userId);
+
+            Mapper.CreateMap<UserSkin, UserSkinViewModel>()
+                    .ForMember(dst => dst.Id, exp => exp.MapFrom(src => src.Id))
+                    .ForMember(dst => dst.Image, exp => exp.MapFrom(src => src.Image))
+                    .ForMember(dst => dst.UserId, exp => exp.MapFrom(src => src.UserId));
+
+            var vm = Mapper.Map<UserSkin, UserSkinViewModel>(userSkin);
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult UploadSkin(UserSkinViewModel vm, HttpPostedFileBase uploadImage)
+        {
+            if (ModelState.IsValid && uploadImage != null)
+            {
+                byte[] imageData = null;
+
+                using (var binaryReader = new BinaryReader(uploadImage.InputStream))
+                {
+                    imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
+                }
+
+                vm.Image = imageData;
+
+                Mapper.CreateMap<UserSkinViewModel, UserSkin>()
+                    .ForMember(dst => dst.Id, exp => exp.MapFrom(src => src.Id))
+                    .ForMember(dst => dst.Image, exp => exp.MapFrom(src => src.Image))
+                    .ForMember(dst => dst.UserId, exp => exp.MapFrom(src => src.UserId));
+
+                var userSkin = Mapper.Map<UserSkinViewModel, UserSkin>(vm);
+
+                userSkin.UserId = User.Identity.GetUserId();
+
+                context.UserSkins.Add(userSkin);
+                context.SaveChanges();
+            }
+
+            return View();
+        }
+
+
+
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
@@ -242,17 +285,13 @@ namespace WebApplication.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
-
-        //
-        // GET: /Account/ForgotPassword
+        
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
-
-        //
-        // POST: /Account/ForgotPassword
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -278,25 +317,19 @@ namespace WebApplication.Controllers
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
         }
-
-        //
-        // GET: /Account/ForgotPasswordConfirmation
+        
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
-
-        //
-        // GET: /Account/ResetPassword
+        
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
         }
-
-        //
-        // POST: /Account/ResetPassword
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -320,28 +353,21 @@ namespace WebApplication.Controllers
             AddErrors(result);
             return View();
         }
-
-        //
-        // GET: /Account/ResetPasswordConfirmation
+        
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
         }
-
-        //
-        // POST: /Account/ExternalLogin
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            // Запрос перенаправления к внешнему поставщику входа
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
-
-        //
-        // GET: /Account/SendCode
+        
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
@@ -354,9 +380,7 @@ namespace WebApplication.Controllers
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-
-        //
-        // POST: /Account/SendCode
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -374,9 +398,7 @@ namespace WebApplication.Controllers
             }
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
-
-        //
-        // GET: /Account/ExternalLoginCallback
+        
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
@@ -404,9 +426,7 @@ namespace WebApplication.Controllers
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
-
-        //
-        // POST: /Account/ExternalLoginConfirmation
+        
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -442,9 +462,7 @@ namespace WebApplication.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
-
-        //
-        // POST: /Account/LogOff
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -452,9 +470,7 @@ namespace WebApplication.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
-
-        //
-        // GET: /Account/ExternalLoginFailure
+        
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {

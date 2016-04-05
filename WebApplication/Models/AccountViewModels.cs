@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Web.UI.WebControls;
-using Microsoft.Ajax.Utilities;
-using MySql.Data.MySqlClient.Properties;
-
-namespace WebApplication.Models
+﻿namespace WebApplication.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using Domain;
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -54,7 +51,6 @@ namespace WebApplication.Models
     {
         [Required]
         [Display(Name = "EmailOrNickName", ResourceType = typeof(Resources))]
-        [EmailAddress]
         public string EmailOrNickName { get; set; }
 
         [Required]

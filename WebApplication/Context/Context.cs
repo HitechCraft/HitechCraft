@@ -2,7 +2,7 @@
 {
     using System.Data.Entity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Models;
+    using Domain;
 
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -21,5 +21,7 @@
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<UserSkin> UserSkins { get; set; }
     }
 }
