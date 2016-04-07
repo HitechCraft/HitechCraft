@@ -220,8 +220,9 @@ namespace WebApplication.Controllers
                 throw new Exception(Resources.ErrorUserNameExists);
             }
         }
-
+        
         [HttpPost]
+        [AllowAnonymous]
         public JsonResult IsUserExists(string userName)
         {
             try
