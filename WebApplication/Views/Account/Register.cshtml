@@ -1,4 +1,5 @@
 ﻿@using System.ComponentModel
+@using WebApplication.Domain
 @using WebApplication.Models
 @model WebApplication.Models.RegisterViewModel
 @{
@@ -33,7 +34,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.EnumDropDownListFor(m => m.Gender, new { @class = "form-control" })
+            @Html.EnumDropDownListFor(m => m.Gender, new { @class = "form-control", @id = "gender" })
             @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -58,6 +59,8 @@
     </div>
 }
 
+<img src="@Url.Action("GetSkinImage", "Account", new { userName = ViewBag.UserName, gender = Gender.Male })" id="skin-image" />
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
@@ -68,7 +71,7 @@
             {
                 userName: $('#user-name').val()
             })
-            .done(function (data) {
+            .done(function(data) {
                 console.log(data);
                 if (data.status === "success") {
                     growlSuccess(data.message);
@@ -76,5 +79,17 @@
                     growlError(data.message);
                 }
             });
+    });
+
+    $('#gender').change(function() {
+        var _gender = $('#gender option:selected').val();
+
+        if (_gender == 0) {
+            _gender = "Male";
+        } else {
+            _gender = "Female";
+        }
+
+        $('#skin-image').attr("src", "/Account/GetSkinImage?gender=" + _gender);
     });
 </script>

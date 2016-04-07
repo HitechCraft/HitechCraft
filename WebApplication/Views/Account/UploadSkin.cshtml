@@ -22,7 +22,7 @@
     </fieldset>
 }
 
-@Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Image) + "\" />")
+<img src="@Url.Action("GetSkinImage", "Account" , new { userName = ViewBag.UserName })"/>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

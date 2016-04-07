@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Data.Entity;
+using System.IO;
+using System.Web.WebPages;
 
 namespace WebApplication.Controllers
 {
@@ -25,11 +27,16 @@ namespace WebApplication.Controllers
         private ApplicationUserManager _userManager;
         ApplicationDbContext context = new ApplicationDbContext();
 
+        private string DefaultMaleUserId;
+        private string DefaultFemaleUserId;
+
         public AccountController()
         {
+            this.DefaultMaleUserId = "882155f6-f5a9-4a26-a5dd-d51f58492906";
+            this.DefaultFemaleUserId = "f2e20140-3ab1-4b1f-ba30-c03824b3a91b";
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -41,9 +48,9 @@ namespace WebApplication.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -58,14 +65,14 @@ namespace WebApplication.Controllers
                 _userManager = value;
             }
         }
-        
+
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -90,7 +97,7 @@ namespace WebApplication.Controllers
             if (user != null)
             {
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
-                {   
+                {
                     ModelState.AddModelError("", string.Format(Resources.ErrorEmailNotConfirmed, user.Email));
                     return View(model);
                 }
@@ -113,7 +120,7 @@ namespace WebApplication.Controllers
                     return View(model);
             }
         }
-    
+
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
@@ -124,7 +131,7 @@ namespace WebApplication.Controllers
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -139,7 +146,7 @@ namespace WebApplication.Controllers
             // Если пользователь введет неправильные коды за указанное время, его учетная запись 
             // будет заблокирована на заданный период. 
             // Параметры блокирования учетных записей можно настроить в IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -152,7 +159,7 @@ namespace WebApplication.Controllers
                     return View(model);
             }
         }
-        
+
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -204,7 +211,7 @@ namespace WebApplication.Controllers
 
         private void CheckUserName(string userName)
         {
-            if(userName == "") throw new Exception(Resources.ErrorUserNameEmpty);
+            if (userName == "") throw new Exception(Resources.ErrorUserNameEmpty);
 
             var user = UserManager.FindByNameAsync(userName);
 
@@ -213,7 +220,8 @@ namespace WebApplication.Controllers
                 throw new Exception(Resources.ErrorUserNameExists);
             }
         }
-        
+
+        [HttpPost]
         public JsonResult IsUserExists(string userName)
         {
             try
@@ -231,7 +239,9 @@ namespace WebApplication.Controllers
         public ActionResult UploadSkin()
         {
             var userId = User.Identity.GetUserId().ToString();
-            var userSkin = context.UserSkins.First(us => us.UserId == userId);
+            UserSkin userSkin = GetSkinByUserId(userId);
+
+            ViewBag.UserName = User.Identity.GetUserName();
 
             Mapper.CreateMap<UserSkin, UserSkinViewModel>()
                     .ForMember(dst => dst.Id, exp => exp.MapFrom(src => src.Id))
@@ -241,6 +251,62 @@ namespace WebApplication.Controllers
             var vm = Mapper.Map<UserSkin, UserSkinViewModel>(userSkin);
 
             return View(vm);
+        }
+
+        private UserSkin GetSkinByUserId(string userId)
+        {
+            ApplicationUser user = context.Users.First(u => u.Id == userId);
+            UserSkin userSkin;
+
+            try
+            {
+                userSkin = context.UserSkins.First(us => us.UserId == userId);
+            }
+            catch (Exception)
+            {
+                return GetSkinByGender(user.Gender);
+            }
+
+            return userSkin;
+        }
+
+        public UserSkin GetSkinByGender(Gender? gender)
+        {
+            string userId = "";
+
+            switch (gender)
+            {
+                case Gender.Male:
+                    userId = this.DefaultMaleUserId;
+                    break;
+                case Gender.Female:
+                    userId = this.DefaultFemaleUserId;
+                    break;
+            }
+
+            return context.UserSkins.First(us => us.UserId == userId);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult GetSkinImage(string userName, Gender? gender)
+        {
+            string userId;
+
+            if(gender != null) return File(GetSkinByGender(gender).Image, "image/png");
+
+            try
+            {
+                userId = context.Users.First(u => u.UserName == userName).Id;
+
+                UserSkin userSkin = GetSkinByUserId(userId);
+
+                return File(userSkin.Image, "image/png");
+            }
+            catch (Exception)
+            {
+                return File(new byte[] { }, "image/png");
+            }
         }
 
         [HttpPost]
@@ -266,14 +332,34 @@ namespace WebApplication.Controllers
 
                 userSkin.UserId = User.Identity.GetUserId();
 
+                //todo убрать этот костыль нахер
+                if (IsUserSkinExists(userSkin.UserId))
+                {
+                    context.UserSkins.Remove(context.UserSkins.First(us => us.UserId == userSkin.UserId));
+                }
+
                 context.UserSkins.Add(userSkin);
                 context.SaveChanges();
             }
 
+            ViewBag.UserName = User.Identity.GetUserName();
+
             return View();
         }
 
+        private bool IsUserSkinExists(string userId)
+        {
+            try
+            {
+                context.UserSkins.First(us => us.UserId == userId);
 
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
@@ -285,13 +371,13 @@ namespace WebApplication.Controllers
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
-        
+
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -317,19 +403,19 @@ namespace WebApplication.Controllers
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
         }
-        
+
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
-        
+
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -353,13 +439,13 @@ namespace WebApplication.Controllers
             AddErrors(result);
             return View();
         }
-        
+
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -367,7 +453,7 @@ namespace WebApplication.Controllers
         {
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
-        
+
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
@@ -380,7 +466,7 @@ namespace WebApplication.Controllers
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -398,7 +484,7 @@ namespace WebApplication.Controllers
             }
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
-        
+
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
@@ -426,7 +512,7 @@ namespace WebApplication.Controllers
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -462,7 +548,7 @@ namespace WebApplication.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -470,13 +556,13 @@ namespace WebApplication.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
-        
+
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
         }
-        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
