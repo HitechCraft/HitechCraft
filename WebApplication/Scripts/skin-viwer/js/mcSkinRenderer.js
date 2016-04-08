@@ -83,12 +83,16 @@
 		if(skinImage.height/skinImage.width===1){
 			c=skinImage.width/64;
 			var canvas = document.createElement('canvas');
-			canvas.width = 256;// * scale;
-			canvas.height = 256;// * scale;
+			canvas.width = 160; //* scale;
+			canvas.height = 320;//* scale;
 			//we assign the same classname the image has, for CSS purposes
 			canvas.setAttribute('class', skinImage.getAttribute('class'));
 			var context = canvas.getContext("2d");
 			var s = scale;
+			context.mozImageSmoothingEnabled = false;
+  			context.webkitImageSmoothingEnabled = false;
+  			context.msImageSmoothingEnabled = false;
+  			context.imageSmoothingEnabled = false;
 			//draw the head
 			context.drawImage(skinImage, 8*c,  8*c,  8*c, 8*c,  4*s,  0*s,  8*s, 8*s);
 			//draw the mask
@@ -107,18 +111,22 @@
 			context.drawImage(skinImage, 20*c,  52*c,  4*c, 12*c,  4*s,  20*s, 4*s, 12*s);
 			//draw down lefthand
 			context.drawImage(skinImage, 36*c,  52*c,  4*c, 12*c,  0*s,  8*s,  4*s, 12*s);
-
+			
 			//we replace the image with the canvas
 			skinImage.parentNode.replaceChild(canvas, skinImage);
 		}else{
 			c=skinImage.width/64;
 			var canvas = document.createElement('canvas');
-			canvas.width = 256 * scale;
-			canvas.height = 256 * scale;
+			canvas.width = 256;// * scale;
+			canvas.height = 400;// * scale;
 			//we assign the same classname the image has, for CSS purposes
 			canvas.setAttribute('class', skinImage.getAttribute('class'));
 			var context = canvas.getContext("2d");
 			var s = scale;
+			context.mozImageSmoothingEnabled = false;
+  			context.webkitImageSmoothingEnabled = false;
+  			context.msImageSmoothingEnabled = false;
+  			context.imageSmoothingEnabled = false;
 			//draw the head
 			context.drawImage(skinImage, 8*c,  8*c,  8*c, 8*c,  4*s,  0*s,  8*s, 8*s);
 			//draw the mask
@@ -131,9 +139,8 @@
 			context.drawImage(skinImage, 4*c,  20*c, 4*c, 12*c, 8*s,  20*s, 4*s, 12*s);
 			//draw the left arm
 			context.drawImage(skinImage, 44*c, 20*c, 4*c, 12*c, 0*s,  8*s,  4*s, 12*s);
-			//draw the right arm
+			//draw the right aontext
 			context.drawImage(skinImage, 52*c, 20*c, 4*c, 12*c, 12*s, 8*s,  4*s, 12*s);
-
 			//we replace the image with the canvas
 			skinImage.parentNode.replaceChild(canvas, skinImage);		}
 		//we create a new canvas element
