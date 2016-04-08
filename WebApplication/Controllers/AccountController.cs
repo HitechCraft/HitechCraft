@@ -311,8 +311,10 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult UploadSkin(UserSkinViewModel vm, HttpPostedFileBase uploadImage)
+        public ActionResult UploadSkin(UserSkinViewModel vm)
         {
+            var uploadImage = Request.Files["uploadImage"];
+
             if (ModelState.IsValid && uploadImage != null)
             {
                 byte[] imageData = null;

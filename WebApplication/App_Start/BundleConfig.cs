@@ -10,14 +10,16 @@ namespace WebApplication
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-1.*",
-                        "~/Scripts/jquery.unobtrusive-ajax.js"));
+                        "~/Scripts/jquery.jgrowl*",
+                        "~/Scripts/jquery.unobtrusive*",
+                        "~/Scripts/jquery.fileupload*",
+                        "~/Scripts/jquery.ui*",
+                        "~/Scripts/jgrowl.alerts.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/growl").Include(
-                        "~/Scripts/jquery.jgrowl.js",
-                        "~/Scripts/jgrowl.alerts.js"));
+            
 
             // Используйте версию Modernizr для разработчиков, чтобы учиться работать. Когда вы будете готовы перейти к работе,
             // используйте средство сборки на сайте http://modernizr.com, чтобы выбрать только нужные тесты.

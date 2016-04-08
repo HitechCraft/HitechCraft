@@ -5,25 +5,44 @@
 
 <h2>UploadSkin</h2>
 
-@using (Html.BeginForm("UploadSkin", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Добавить изображение</legend>
+<div class="progress" style="visibility: hidden">
+    <div class="progress-bar" style="width: 0;"></div>
+</div>
 
-        <div class="editor-label">Файл изображения</div>
-        <div class="editor-field">
-            <input type="file" name="uploadImage" />
-        </div>
+<fieldset>
+    <legend>Добавить изображение</legend>
 
-        <p>
-            <input type="submit" value="Добавить" />
-        </p>
-    </fieldset>
-}
+    <div class="editor-label">Файл изображения</div>
+    <div class="editor-field">
+        <input type="file" name="uploadImage" id="file-upload" />
+    </div>
 
-<img src="@Url.Action("GetSkinImage", "Account" , new { userName = ViewBag.UserName })"/>
+    <p>
+        <input type="button" value="Загрузить" id="load-image"/>
+    </p>
+</fieldset>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<img src="@Url.Action("GetSkinImage", "Account" , new { userName = ViewBag.UserName })" id="skin-image"/>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#file-upload').fileupload({
+            url: '@Url.Action("UploadSkin", "Account")',
+            autoUpload: true
+        }).on('fileuploadprogressall', function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+
+            $('.progress .progress-bar').css('visibility', 'visible');
+            $('.progress .progress-bar').css('width', progress + '%');
+            $('.progress .progress-bar').html(progress + '%');
+            $('#skin-image').attr("src", "");
+
+            if (progress >= 100) {
+                $('#skin-image').attr("src", "");
+                setTimeout(function() {
+                    location.reload();
+                }, 2000);
+            }
+        });
+    });
+</script>
