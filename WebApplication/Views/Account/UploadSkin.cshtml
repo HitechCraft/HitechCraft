@@ -22,7 +22,7 @@
     </p>
 </fieldset>
 
-<img src="@Url.Action("GetSkinImage", "Account" , new { userName = ViewBag.UserName })" id="skin-image" class="skin"/>
+<img src="@Url.Action("GetSkinImage", "Account" , new { userName = ViewBag.UserName })" id="skin-image" class="skin" hidden=""/>
 
 <script type="text/javascript">
     renderMCSkins('skin', 10);
