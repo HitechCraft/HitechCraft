@@ -1,0 +1,49 @@
+﻿@model WebApplication.Models.UserSkinViewModel
+@{
+    ViewBag.Title = "UploadSkin";
+}
+
+<h2>UploadSkin</h2>
+
+<div class="progress progress-striped active" style="visibility: hidden">
+    <div class="progress-bar" style="width: 0;"></div>
+</div>
+
+<fieldset>
+    <legend>Добавить изображение</legend>
+
+    <div class="editor-label">Файл изображения</div>
+    <div class="editor-field">
+        <input type="file" name="uploadImage" id="file-upload" />
+    </div>
+
+    <p>
+        <input type="button" value="Загрузить" id="load-image"/>
+    </p>
+</fieldset>
+
+<img src="@Url.Action("GetSkinImage", "Account" , new { userName = ViewBag.UserName })" id="skin-image" class="skin"/>
+
+<script type="text/javascript">
+    renderMCSkins('skin', 10);
+    $(document).ready(function () {
+        $('#file-upload').fileupload({
+            url: '@Url.Action("UploadSkin", "Account")',
+            autoUpload: true
+        }).on('fileuploadprogressall', function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+
+            $('.progress .progress-bar').css('visibility', 'visible');
+            $('.progress .progress-bar').css('width', progress + '%');
+            $('.progress .progress-bar').html(progress + '%');
+            $('#skin-image').attr("src", "");
+
+            if (progress >= 100) {
+                $('#skin-image').attr("src", "");
+                setTimeout(function() {
+                    location.reload();
+                }, 2000);
+            }
+        });
+    });
+</script>
