@@ -13,6 +13,12 @@ namespace WebApplication.Controllers
     {
         public ApplicationDbContext context = new ApplicationDbContext();
 
+        private string DefaultMaleUserId;
+        private string DefaultFemaleUserId;
+
+        private double DefaultUserGonts = 30.00;
+        private double DefaultUserRubls = 5.00;
+
         public Currency UserCurrency
         {
             get
@@ -36,7 +42,13 @@ namespace WebApplication.Controllers
         {
             get { return UserCurrency != null ? UserCurrency.realmoney : -1; }
         }
-        
+
+        public BaseController()
+        {
+            this.DefaultMaleUserId = "882155f6-f5a9-4a26-a5dd-d51f58492906";
+            this.DefaultFemaleUserId = "f2e20140-3ab1-4b1f-ba30-c03824b3a91b";
+        }
+
         /// <summary>
         /// Обновление осуществляется прибавлением (вычетом) значения. Указываем разницу, а не новое кол-во валюты!!!
         /// </summary>
