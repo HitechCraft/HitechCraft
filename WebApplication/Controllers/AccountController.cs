@@ -31,6 +31,9 @@ namespace WebApplication.Controllers
         private string DefaultMaleUserId;
         private string DefaultFemaleUserId;
 
+        private double DefaultUserGonts = 30.00;
+        private double DefaultUserRubls = 5.00;
+
         public AccountController()
         {
             this.DefaultMaleUserId = "882155f6-f5a9-4a26-a5dd-d51f58492906";
@@ -190,6 +193,8 @@ namespace WebApplication.Controllers
 
                     if (result.Succeeded)
                     {
+                        AddCurrency(user);
+
                         string token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = token }, protocol: Request.Url.Scheme);
                         //todo: стилизовать письмо и засунуть в отдельный template
@@ -209,6 +214,21 @@ namespace WebApplication.Controllers
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
+        }
+
+        private void AddCurrency(ApplicationUser user)
+        {
+            var currency = new Currency
+            {
+                username = user.UserName,
+                user_id = user.Id,
+                balance = this.DefaultUserGonts,
+                realmoney = this.DefaultUserRubls,
+                status = 0
+            };
+
+            context.Currencies.Add(currency);
+            context.SaveChanges();
         }
 
         private void CheckUserName(string userName)
