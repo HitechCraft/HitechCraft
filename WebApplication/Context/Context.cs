@@ -23,5 +23,9 @@
         }
 
         public DbSet<UserSkin> UserSkins { get; set; }
+
+        public DbSet<PlayerItem> PlayerItems { get; set; }
+
+        public DbSet<ShopItem> ShopItems { get; set; }
     }
 }
