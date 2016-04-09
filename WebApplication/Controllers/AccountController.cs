@@ -320,7 +320,7 @@ namespace WebApplication.Controllers
             }
             catch (Exception)
             {
-                return File(new byte[] { }, "image/png");
+                return File(this.GetSkinByUserId(this.DefaultMaleUserId).Image, "image/png");
             }
         }
 

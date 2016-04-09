@@ -18,13 +18,17 @@
     </div>
 </fieldset>
 
-<img src="@Url.Action("GetSkinImage", "Account" , new { userName = User.Identity.Name })" id="skin-image" class="skin" hidden="" />
+<div id="skin-container">
+    <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name })" id="skin-image" class="frontSkin" hidden=""/>
+    <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name })" id="skin-image" class="backSkin" hidden=""/>
+</div>
 
 <script type="text/javascript">
 
     $(document).ready(function () {
 
-        renderMCSkins('skin', 10);
+        renderMCSkins('frontSkin', 10);
+        renderMCSkins('backSkin', 10);
 
         $('#file-upload').change(function () {
             var ext = $(this).val().match(/\.([^\.]+)$/)[1];
