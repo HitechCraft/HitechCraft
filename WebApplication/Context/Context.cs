@@ -27,5 +27,7 @@
         public DbSet<PlayerItem> PlayerItems { get; set; }
 
         public DbSet<ShopItem> ShopItems { get; set; }
+
+        public DbSet<Currency> Currencies { get; set; }
     }
 }

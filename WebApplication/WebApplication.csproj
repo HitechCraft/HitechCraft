@@ -188,6 +188,7 @@
     <Compile Include="Domain\PlayerItem.cs" />
     <Compile Include="Domain\ShopItem.cs" />
     <Compile Include="Domain\UserSkin.cs" />
+    <Compile Include="Domain\Currency.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -210,6 +211,14 @@
     <Compile Include="Migrations\201604090958478_ShopFix.cs" />
     <Compile Include="Migrations\201604090958478_ShopFix.Designer.cs">
       <DependentUpon>201604090958478_ShopFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604091101404_ModelRelationFix.cs" />
+    <Compile Include="Migrations\201604091101404_ModelRelationFix.Designer.cs">
+      <DependentUpon>201604091101404_ModelRelationFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604091104507_Currency.cs" />
+    <Compile Include="Migrations\201604091104507_Currency.Designer.cs">
+      <DependentUpon>201604091104507_Currency.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -320,6 +329,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604090958478_ShopFix.resx">
       <DependentUpon>201604090958478_ShopFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604091101404_ModelRelationFix.resx">
+      <DependentUpon>201604091101404_ModelRelationFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604091104507_Currency.resx">
+      <DependentUpon>201604091104507_Currency.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
