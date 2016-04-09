@@ -14,19 +14,25 @@
 
     <div class="editor-label">Файл изображения</div>
     <div class="editor-field">
-        <input type="file" name="uploadImage" id="file-upload" />
+        <input type="file" accept="image/png" name="uploadSkinImage" id="file-upload" />
     </div>
-
-    <p>
-        <input type="button" value="Загрузить" id="load-image"/>
-    </p>
 </fieldset>
 
-<img src="@Url.Action("GetSkinImage", "Account" , new { userName = ViewBag.UserName })" id="skin-image" class="skin" hidden=""/>
+<img src="@Url.Action("GetSkinImage", "Account" , new { userName = ViewBag.UserName })" id="skin-image" class="skin" hidden="" />
 
 <script type="text/javascript">
     renderMCSkins('skin', 10);
+
     $(document).ready(function () {
+
+        $('#file-upload').change(function () {
+            var ext = $(this).val().match(/\.([^\.]+)$/)[1];
+
+            if (ext != "png") {
+                growlError("@Resources.ErrorSkinFormat");
+            }
+        });
+
         $('#file-upload').fileupload({
             url: '@Url.Action("UploadSkin", "Account")',
             autoUpload: true
@@ -40,7 +46,7 @@
 
             if (progress >= 100) {
                 $('#skin-image').attr("src", "");
-                setTimeout(function() {
+                setTimeout(function () {
                     location.reload();
                 }, 2000);
             }

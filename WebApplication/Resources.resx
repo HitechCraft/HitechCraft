@@ -138,6 +138,12 @@
   <data name="ErrorRequired" xml:space="preserve">
     <value>{0} является обязательным полем</value>
   </data>
+  <data name="ErrorSkinEmpty" xml:space="preserve">
+    <value>Выберите файл скина</value>
+  </data>
+  <data name="ErrorSkinFormat" xml:space="preserve">
+    <value>Скин должен быть формата png</value>
+  </data>
   <data name="ErrorStringMinLength" xml:space="preserve">
     <value>Минимальная длина {2}</value>
   </data>

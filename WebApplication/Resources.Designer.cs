@@ -124,6 +124,24 @@ namespace WebApplication {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Выберите файл скина.
+        /// </summary>
+        public static string ErrorSkinEmpty {
+            get {
+                return ResourceManager.GetString("ErrorSkinEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Скин должен быть формата png.
+        /// </summary>
+        public static string ErrorSkinFormat {
+            get {
+                return ResourceManager.GetString("ErrorSkinFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Минимальная длина {2}.
         /// </summary>
         public static string ErrorStringMinLength {

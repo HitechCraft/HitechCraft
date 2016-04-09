@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Web.WebPages;
 
@@ -313,7 +314,9 @@ namespace WebApplication.Controllers
         [HttpPost]
         public ActionResult UploadSkin(UserSkinViewModel vm)
         {
-            var uploadImage = Request.Files["uploadImage"];
+            var uploadImage = Request.Files["uploadSkinImage"];
+
+            this.CheckImage(uploadImage);
 
             if (ModelState.IsValid && uploadImage != null)
             {
@@ -335,19 +338,37 @@ namespace WebApplication.Controllers
 
                 userSkin.UserId = User.Identity.GetUserId();
 
-                //todo убрать этот костыль нахер
                 if (IsUserSkinExists(userSkin.UserId))
                 {
-                    context.UserSkins.Remove(context.UserSkins.First(us => us.UserId == userSkin.UserId));
+                    this.UserSkinUpdate(userSkin.UserId, userSkin.Image);
                 }
-
-                context.UserSkins.Add(userSkin);
-                context.SaveChanges();
+                else
+                {
+                    context.UserSkins.Add(userSkin);
+                    context.SaveChanges();
+                }
             }
-
             ViewBag.UserName = User.Identity.GetUserName();
 
             return View();
+        }
+
+        private void CheckImage(HttpPostedFileBase uploadImage)
+        {
+            if (uploadImage == null || uploadImage.ContentType != "image/png")
+            {
+                ModelState.AddModelError("", "error");
+            }
+        }
+
+        private void UserSkinUpdate(string userId, byte[] newImage)
+        {
+            var userSkin = context.UserSkins.First(us => us.UserId == userId);
+
+            userSkin.Image = newImage;
+
+            context.Entry(userSkin).State = EntityState.Modified;
+            context.SaveChanges();
         }
 
         private bool IsUserSkinExists(string userId)
