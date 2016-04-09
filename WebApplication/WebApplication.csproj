@@ -320,12 +320,12 @@
     <EmbeddedResource Include="Migrations\201604051704464_UserSkin.resx">
       <DependentUpon>201604051704464_UserSkin.cs</DependentUpon>
     </EmbeddedResource>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604091101404_ModelRelationFix.resx">
       <DependentUpon>201604091101404_ModelRelationFix.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604091104507_Currency.resx">
       <DependentUpon>201604091104507_Currency.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
