@@ -21,15 +21,19 @@
 <img src="@Url.Action("GetSkinImage", "Account" , new { userName = ViewBag.UserName })" id="skin-image" class="skin" hidden="" />
 
 <script type="text/javascript">
-    renderMCSkins('skin', 10);
 
     $(document).ready(function () {
+
+        renderMCSkins('skin', 10);
 
         $('#file-upload').change(function () {
             var ext = $(this).val().match(/\.([^\.]+)$/)[1];
 
             if (ext != "png") {
                 growlError("@Resources.ErrorSkinFormat");
+                setTimeout(function () {
+                    window.location.href = window.location.href;
+                }, 2000);
             }
         });
 
@@ -47,7 +51,7 @@
             if (progress >= 100) {
                 $('#skin-image').attr("src", "");
                 setTimeout(function () {
-                    location.reload();
+                    window.location.href = window.location.href;
                 }, 2000);
             }
         });

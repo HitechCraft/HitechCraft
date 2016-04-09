@@ -180,12 +180,13 @@ namespace WebApplication.Controllers
             {
                 Mapper.CreateMap<RegisterViewModel, ApplicationUser>();
                 var user = Mapper.Map<RegisterViewModel, ApplicationUser>(model);
-                //todo: реализовать ReCaptcha
-                var result = await UserManager.CreateAsync(user, model.Password);
 
                 try
                 {
                     CheckUserName(user.UserName);
+
+                    //todo: реализовать ReCaptcha
+                    var result = await UserManager.CreateAsync(user, model.Password);
 
                     if (result.Succeeded)
                     {
