@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication.Domain
 {
@@ -13,6 +14,7 @@ namespace WebApplication.Domain
 
         public double balance { get; set; }
 
+        [DefaultValue(0)]
         public double realmoney { get; set; }
 
         public int status { get; set; }
