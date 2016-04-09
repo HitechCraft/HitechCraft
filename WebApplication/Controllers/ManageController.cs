@@ -11,7 +11,7 @@ using WebApplication.Models;
 namespace WebApplication.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -64,6 +64,10 @@ namespace WebApplication.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+
+            ViewBag.Gonts = this.Gonts;
+            ViewBag.Rubels = this.Rubels;
+
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
