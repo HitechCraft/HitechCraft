@@ -14,7 +14,8 @@ namespace WebApplication
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.fileupload*",
                         "~/Scripts/jquery.ui*",
-                        "~/Scripts/jgrowl.alerts.js"
+                        "~/Scripts/jgrowl.alerts.js",
+                        "~/Scripts/2DRender.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

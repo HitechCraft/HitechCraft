@@ -59,13 +59,14 @@
     </div>
 }
 
-<img src="@Url.Action("GetSkinImage", "Account", new { userName = ViewBag.UserName, gender = Gender.Male })" id="skin-image" />
+<img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="skin" />
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
 
 <script type="text/javascript">
+    renderMCSkins('skin', 10);
     $('#check-username').click(function () {
         $.post('@Url.Action("IsUserExists", "Account")',
             {
@@ -89,7 +90,8 @@
         } else {
             _gender = "Female";
         }
-
+        $(".skin").replaceWith('<img src="" id="skin-image" class="skin" />');
         $('#skin-image').attr("src", "/Account/GetSkinImage?gender=" + _gender);
+        renderMCSkins('skin', 10);
     });
 </script>

@@ -3,3 +3,4 @@ syntax: glob
 WebApplication/bin/
 WebApplication/obj/
 packages/
+WebApplication/Web.config

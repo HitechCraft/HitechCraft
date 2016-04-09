@@ -22,9 +22,10 @@
     </p>
 </fieldset>
 
-<img src="@Url.Action("GetSkinImage", "Account" , new { userName = ViewBag.UserName })" id="skin-image"/>
+<img src="@Url.Action("GetSkinImage", "Account" , new { userName = ViewBag.UserName })" id="skin-image" class="skin"/>
 
 <script type="text/javascript">
+    renderMCSkins('skin', 10);
     $(document).ready(function () {
         $('#file-upload').fileupload({
             url: '@Url.Action("UploadSkin", "Account")',
