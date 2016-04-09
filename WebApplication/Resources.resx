@@ -147,6 +147,9 @@
   <data name="ErrorStringMinLength" xml:space="preserve">
     <value>Минимальная длина {2}</value>
   </data>
+  <data name="ErrorUserNameChars" xml:space="preserve">
+    <value>Разрешены латинские буквы и цифры, а также символы - и  _</value>
+  </data>
   <data name="ErrorUserNameEmpty" xml:space="preserve">
     <value>Имя пользователя не может быть пустым</value>
   </data>

@@ -151,6 +151,15 @@ namespace WebApplication {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Разрешены латинские буквы и цифры, а также символы - и  _.
+        /// </summary>
+        public static string ErrorUserNameChars {
+            get {
+                return ResourceManager.GetString("ErrorUserNameChars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Имя пользователя не может быть пустым.
         /// </summary>
         public static string ErrorUserNameEmpty {

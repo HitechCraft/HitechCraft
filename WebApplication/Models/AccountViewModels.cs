@@ -66,6 +66,7 @@
     {
         [Required(ErrorMessageResourceName = "ErrorRequired", ErrorMessageResourceType = typeof(Resources))]
         [MinLength(4, ErrorMessageResourceName = "ErrorMinLength", ErrorMessageResourceType = typeof(Resources))]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessageResourceName = "ErrorUserNameChars", ErrorMessageResourceType = typeof(Resources))]
         [Display(Name = "NickName", ResourceType = typeof(Resources))]
         public string UserName { get; set; }
 
