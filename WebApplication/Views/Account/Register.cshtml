@@ -59,14 +59,14 @@
     </div>
 }
 
-<img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="skin" />
+<img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="frontSkin" />
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
 
 <script type="text/javascript">
-    renderMCSkins('skin', 10);
+    renderMCSkins('frontSkin', 10);
     $('#check-username').click(function () {
         $.post('@Url.Action("IsUserExists", "Account")',
             {
@@ -81,7 +81,14 @@
                 }
             });
     });
-
+    //for Firefox update page
+    $(document).ready(function () {
+        if ($('#gender option:selected').val() != 0) {
+            $(".frontSkin").replaceWith('<img src="" id="skin-image" class="frontSkin"/>');
+            $('#skin-image').attr("src", "/Account/GetSkinImage?gender=" + "Female");
+            renderMCSkins('frontSkin', 10);
+        }
+    });
     $('#gender').change(function() {
         var _gender = $('#gender option:selected').val();
 
@@ -90,8 +97,8 @@
         } else {
             _gender = "Female";
         }
-        $(".skin").replaceWith('<img src="" id="skin-image" class="skin" />');
+        $(".frontSkin").replaceWith('<img src="" id="skin-image" class="frontSkin"/>');
         $('#skin-image').attr("src", "/Account/GetSkinImage?gender=" + _gender);
-        renderMCSkins('skin', 10);
+        renderMCSkins('frontSkin', 10);
     });
 </script>

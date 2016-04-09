@@ -6,18 +6,24 @@
 	//this is the image displayed when there is no support for canvas
 	var defaultImageSrc = "~/Content/Images/charRendered.png";
 	//this is the default scale to render the image
-	var scale = 3;
-
+	var scale = 1;
+	var GClass = "";
+	var CanvasHeight = 0;
+	var CanvasWidth = 0;
 	function renderMCSkins(classNameIn, scaleIn, replacementImageIn)
 	{
 		scale = scaleIn || scale;
 		defaultImageSrc = replacementImageIn || defaultImageSrc;
-		
+	    GClass = classNameIn;
 		//we need custom support for IE, because it doesn't support getElementsByClassName
 		if (navigator.appName=="Microsoft Internet Explorer") {
 			var skinImages = getElementsByClassName(classNameIn, 'img');
 		} else {
-			var skinImages = document.getElementsByClassName(classNameIn);
+		    var skinImages = document.getElementsByClassName(classNameIn);
+		 //   CanvasWidth = $("." + classNameIn).width();
+		 //   CanvasHeight = $("." + classNameIn).height();
+		 //   console.log(CanvasHeight);
+		 //   console.log(CanvasWidth);
 		}
 		
 		var canvasSupported = supportsCanvas();
@@ -62,8 +68,8 @@
 		console.log(skinImage.height);
 		c = skinImage.width / 64;
 		var canvas = document.createElement('canvas');
-		canvas.width = 320;// * scale;
-		canvas.height = 320;// * scale;
+		canvas.width = 16 * scale;
+		canvas.height = 32 * scale;
 	    //we assign the same classname the image has, for CSS purposes
 		canvas.setAttribute('class', skinImage.getAttribute('class'));
 		var context = canvas.getContext("2d");
@@ -72,65 +78,68 @@
 		context.webkitImageSmoothingEnabled = false;
 		context.msImageSmoothingEnabled = false;
 		context.imageSmoothingEnabled = false;
-
-        //startFront
-		    context.scale(-1, 1);
+	    if (GClass === "frontSkin") {
+	        //startFront
+	        context.scale(-1, 1);
 	        //draw the left leg
-		    context.drawImage(skinImage, 4 * c, 20 * c, 4 * c, 12 * c, -8 * s, 20 * s, -4 * s, 12 * s);
+	        context.drawImage(skinImage, 4 * c, 20 * c, 4 * c, 12 * c, -8 * s, 20 * s, -4 * s, 12 * s);
 	        //draw the left arm
-		    context.drawImage(skinImage, 44 * c, 20 * c, 4 * c, 12 * c, -12 * s, 8 * s, -4 * s, 12 * s);
-            context.scale(-1, 1);
+	        context.drawImage(skinImage, 44 * c, 20 * c, 4 * c, 12 * c, -12 * s, 8 * s, -4 * s, 12 * s);
+	        context.scale(-1, 1);
 
 	        //draw the head
-		    context.drawImage(skinImage, 8 * c, 8 * c, 8 * c, 8 * c, 4 * s, 0 * s, 8 * s, 8 * s);
+	        context.drawImage(skinImage, 8 * c, 8 * c, 8 * c, 8 * c, 4 * s, 0 * s, 8 * s, 8 * s);
 	        //draw the mask
-		    context.drawImage(skinImage, 40 * c, 8 * c, 8 * c, 8 * c, 4 * s, 0 * s, 8 * s, 8 * s);
+	        context.drawImage(skinImage, 40 * c, 8 * c, 8 * c, 8 * c, 4 * s, 0 * s, 8 * s, 8 * s);
 	        //draw the body
-		    context.drawImage(skinImage, 20 * c, 20 * c, 8 * c, 12 * c, 4 * s, 8 * s, 8 * s, 12 * s);
+	        context.drawImage(skinImage, 20 * c, 20 * c, 8 * c, 12 * c, 4 * s, 8 * s, 8 * s, 12 * s);
 	        //draw the right leg
-		    context.drawImage(skinImage, 4 * c, 20 * c, 4 * c, 12 * c, 4 * s, 20 * s, 4 * s, 12 * s);
+	        context.drawImage(skinImage, 4 * c, 20 * c, 4 * c, 12 * c, 4 * s, 20 * s, 4 * s, 12 * s);
 	        //draw the right arm
-		    context.drawImage(skinImage, 44 * c, 20 * c, 4 * c, 12 * c, 0 * s, 8 * s, 4 * s, 12 * s);
+	        context.drawImage(skinImage, 44 * c, 20 * c, 4 * c, 12 * c, 0 * s, 8 * s, 4 * s, 12 * s);
 
-		    if(skinImage.height/skinImage.width===1){
-			    //draw down left leg
-			    context.drawImage(skinImage, 20*c,  52*c,  4*c, 12*c,  4*s,  20*s, 4*s, 12*s);
-			    //draw down left arm
-			    context.drawImage(skinImage, 36*c,  52*c,  4*c, 12*c,  0*s,  8*s,  4*s, 12*s);
-		    }
-	    //endFront
-
-	    //startBack
-		    context.scale(-1, 1);
+	        if (skinImage.height / skinImage.width === 1) {
+	            //draw down left leg
+	            context.drawImage(skinImage, 20 * c, 52 * c, 4 * c, 12 * c, 4 * s, 20 * s, 4 * s, 12 * s);
+	            //draw down left arm
+	            context.drawImage(skinImage, 36 * c, 52 * c, 4 * c, 12 * c, 0 * s, 8 * s, 4 * s, 12 * s);
+	        }
+	        //endFront
+	    } else if (GClass === "backSkin") {
+	        //startBack
+	        context.scale(-1, 1);
 	        //draw the right leg
-		    context.drawImage(skinImage, 12 * c, 20 * c, 4 * c, 12 * c, -4 * s - canvas.width / 2, 20 * s, -4 * s, 12 * s);
+	        context.drawImage(skinImage, 12 * c, 20 * c, 4 * c, 12 * c, -4 * s - canvas.width / 2, 20 * s, -4 * s, 12 * s);
 	        //draw the right arm
-		    context.drawImage(skinImage, 52 * c, 20 * c, 4 * c, 12 * c, -0 * s - canvas.width / 2, 8 * s, -4 * s, 12 * s);
-		    context.scale(-1, 1);
-            
+	        context.drawImage(skinImage, 52 * c, 20 * c, 4 * c, 12 * c, -0 * s - canvas.width / 2, 8 * s, -4 * s, 12 * s);
+	        context.scale(-1, 1);
+
 	        //draw the head
-		    context.drawImage(skinImage, 24 * c, 8 * c, 8 * c, 8 * c, 4 * s + canvas.width / 2, 0 * s, 8 * s, 8 * s);
+	        context.drawImage(skinImage, 24 * c, 8 * c, 8 * c, 8 * c, 4 * s + canvas.width / 2, 0 * s, 8 * s, 8 * s);
 	        //draw the mask
-		    context.drawImage(skinImage, 56 * c, 8 * c, 8 * c, 8 * c, 4 * s + canvas.width / 2, 0 * s, 8 * s, 8 * s);
+	        context.drawImage(skinImage, 56 * c, 8 * c, 8 * c, 8 * c, 4 * s + canvas.width / 2, 0 * s, 8 * s, 8 * s);
 	        //draw the body
-		    context.drawImage(skinImage, 32 * c, 20 * c, 8 * c, 12 * c, 4 * s + canvas.width / 2, 8 * s, 8 * s, 12 * s);
+	        context.drawImage(skinImage, 32 * c, 20 * c, 8 * c, 12 * c, 4 * s + canvas.width / 2, 8 * s, 8 * s, 12 * s);
 	        //draw the left leg
-		    context.drawImage(skinImage, 12 * c, 20 * c, 4 * c, 12 * c, 8 * s + canvas.width / 2, 20 * s, 4 * s, 12 * s);
+	        context.drawImage(skinImage, 12 * c, 20 * c, 4 * c, 12 * c, 8 * s + canvas.width / 2, 20 * s, 4 * s, 12 * s);
 	        //draw the left arm
-		    context.drawImage(skinImage, 52 * c, 20 * c, 4 * c, 12 * c, 12 * s + canvas.width / 2, 8 * s, 4 * s, 12 * s);
+	        context.drawImage(skinImage, 52 * c, 20 * c, 4 * c, 12 * c, 12 * s + canvas.width / 2, 8 * s, 4 * s, 12 * s);
 
-		    if (skinImage.height / skinImage.width === 1) {
-		        //draw down left leg
-		        context.drawImage(skinImage, 20 * c, 52 * c, 4 * c, 12 * c + canvas.width / 2, 4 * s, 20 * s, 4 * s, 12 * s);
-		        //draw down left arm
-		        context.drawImage(skinImage, 36 * c, 52 * c, 4 * c, 12 * c + canvas.width / 2, 0 * s, 8 * s, 4 * s, 12 * s);
-		    }
-        //endBack
+	        if (skinImage.height / skinImage.width === 1) {
+	            //draw down left leg
+	            context.drawImage(skinImage, 20 * c, 52 * c, 4 * c, 12 * c + canvas.width / 2, 4 * s, 20 * s, 4 * s, 12 * s);
+	            //draw down left arm
+	            context.drawImage(skinImage, 36 * c, 52 * c, 4 * c, 12 * c + canvas.width / 2, 0 * s, 8 * s, 4 * s, 12 * s);
+	        }
+	        //endBack
+	    } else if (GClass === "avaSkin") {
+	        //draw the head
+	        context.drawImage(skinImage, 24 * c, 8 * c, 8 * c, 8 * c, 4 * s + canvas.width / 2, 0 * s, 8 * s, 8 * s);
+	    }
 
 	    //we replace the image with the canvas
 		skinImage.parentNode.replaceChild(canvas, skinImage);
 		//we create a new canvas element
-		
 	}
     
     
