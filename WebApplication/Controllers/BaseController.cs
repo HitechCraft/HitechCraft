@@ -12,12 +12,26 @@ namespace WebApplication.Controllers
     public class BaseController : Controller
     {
         public ApplicationDbContext context = new ApplicationDbContext();
+        
+        public string DefaultMaleUserId
+        {
+            get { return "882155f6-f5a9-4a26-a5dd-d51f58492906"; }
+        }
 
-        private string DefaultMaleUserId;
-        private string DefaultFemaleUserId;
+        public string DefaultFemaleUserId
+        {
+            get { return "f2e20140-3ab1-4b1f-ba30-c03824b3a91b"; }
+        }
+        
+        public double DefaultUserGonts
+        {
+            get { return 30.00; }
+        }
 
-        private double DefaultUserGonts = 30.00;
-        private double DefaultUserRubls = 5.00;
+        public double DefaultUserRubels
+        {
+            get { return 5.00; }
+        }
 
         public Currency UserCurrency
         {
@@ -45,8 +59,6 @@ namespace WebApplication.Controllers
 
         public BaseController()
         {
-            this.DefaultMaleUserId = "882155f6-f5a9-4a26-a5dd-d51f58492906";
-            this.DefaultFemaleUserId = "f2e20140-3ab1-4b1f-ba30-c03824b3a91b";
         }
 
         /// <summary>
@@ -62,7 +74,7 @@ namespace WebApplication.Controllers
             context.Entry(currency).State = EntityState.Modified;
             context.SaveChanges();
         }
-        
+
         /// <summary>
         /// Обновление осуществляется прибавлением (вычетом) значения. Указываем разницу, а не новое кол-во валюты!!!
         /// </summary>

@@ -215,7 +215,7 @@ namespace WebApplication.Controllers
                 username = user.UserName,
                 user_id = user.Id,
                 balance = this.DefaultUserGonts,
-                realmoney = this.DefaultUserRubls,
+                realmoney = this.DefaultUserRubels,
                 status = 0
             };
 
