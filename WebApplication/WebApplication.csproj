@@ -189,6 +189,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Domain\PlayerItem.cs" />
+    <Compile Include="Domain\ShopItem.cs" />
     <Compile Include="Domain\UserSkin.cs" />
     <Compile Include="Domain\Currency.cs" />
     <Compile Include="Global.asax.cs">
@@ -205,6 +207,14 @@
     <Compile Include="Migrations\201604051704464_UserSkin.cs" />
     <Compile Include="Migrations\201604051704464_UserSkin.Designer.cs">
       <DependentUpon>201604051704464_UserSkin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604090957164_Shop.cs" />
+    <Compile Include="Migrations\201604090957164_Shop.Designer.cs">
+      <DependentUpon>201604090957164_Shop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604090958478_ShopFix.cs" />
+    <Compile Include="Migrations\201604090958478_ShopFix.Designer.cs">
+      <DependentUpon>201604090958478_ShopFix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201604091101404_ModelRelationFix.cs" />
     <Compile Include="Migrations\201604091101404_ModelRelationFix.Designer.cs">
@@ -319,6 +329,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604051704464_UserSkin.resx">
       <DependentUpon>201604051704464_UserSkin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604090957164_Shop.resx">
+      <DependentUpon>201604090957164_Shop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604090958478_ShopFix.resx">
+      <DependentUpon>201604090958478_ShopFix.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604091101404_ModelRelationFix.resx">
       <DependentUpon>201604091101404_ModelRelationFix.cs</DependentUpon>
