@@ -189,6 +189,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Domain\Ban.cs" />
+    <Compile Include="Domain\BanIp.cs" />
     <Compile Include="Domain\PlayerItem.cs" />
     <Compile Include="Domain\ShopItem.cs" />
     <Compile Include="Domain\UserSkin.cs" />
@@ -223,6 +225,10 @@
     <Compile Include="Migrations\201604091104507_Currency.cs" />
     <Compile Include="Migrations\201604091104507_Currency.Designer.cs">
       <DependentUpon>201604091104507_Currency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604102317055_BanObjects.cs" />
+    <Compile Include="Migrations\201604102317055_BanObjects.Designer.cs">
+      <DependentUpon>201604102317055_BanObjects.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -341,6 +347,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604091104507_Currency.resx">
       <DependentUpon>201604091104507_Currency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604102317055_BanObjects.resx">
+      <DependentUpon>201604102317055_BanObjects.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

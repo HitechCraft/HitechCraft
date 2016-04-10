@@ -29,5 +29,9 @@
         public DbSet<ShopItem> ShopItems { get; set; }
 
         public DbSet<Currency> Currencies { get; set; }
+
+        public DbSet<Ban> Bans { get; set; }
+
+        public DbSet<BanIp> BanIps { get; set; }
     }
 }
