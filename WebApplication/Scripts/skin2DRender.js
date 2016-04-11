@@ -27,7 +27,6 @@
         var canvasSupported = supportsCanvas();
 
         var skin = skinImages[0];
-        console.log(skin);
         //if canvas is supported, we render the image to a skin
         if (canvasSupported) {
             if (skin.complete) {
@@ -137,8 +136,6 @@
             //draw the head
             context.drawImage(skinImage, 8 * c, 8 * c, 8 * c, 8 * c, 0 * s, 0 * s, 15 * s, 15 * s);
         }
-
-        console.log(skinImage);
         //we replace the image with the canvas
         skinImage.parentNode.replaceChild(canvas, skinImage);
         //we create a new canvas element

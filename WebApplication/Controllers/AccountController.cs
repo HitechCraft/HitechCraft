@@ -234,7 +234,7 @@ namespace WebApplication.Controllers
                 throw new Exception(Resources.ErrorUserNameExists);
             }
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         public JsonResult IsUserExists(string userName)
@@ -308,7 +308,7 @@ namespace WebApplication.Controllers
         {
             string userId;
 
-            if(gender != null) return File(GetSkinByGender(gender).Image, "image/png");
+            if (gender != null) return File(GetSkinByGender(gender).Image, "image/png");
 
             try
             {
@@ -324,54 +324,53 @@ namespace WebApplication.Controllers
             }
         }
 
+        public void AddUserSkin(HttpPostedFileBase image)
+        {
+            var userSkin = new UserSkin();
+
+            byte[] imageData = null;
+
+            using (var binaryReader = new BinaryReader(image.InputStream))
+            {
+                imageData = binaryReader.ReadBytes(image.ContentLength);
+            }
+
+            userSkin.Image = imageData;
+
+            userSkin.UserId = User.Identity.GetUserId();
+
+            if (IsUserSkinExists(userSkin.UserId))
+            {
+                this.UserSkinUpdate(userSkin.UserId, userSkin.Image);
+            }
+            else
+            {
+                context.UserSkins.Add(userSkin);
+                context.SaveChanges();
+            }
+        }
+
+        [AllowAnonymous]
         [HttpPost]
-        public ActionResult UploadSkin(UserSkinViewModel vm)
+        public JsonResult CheckSkinImage()
         {
             var uploadImage = Request.Files["uploadSkinImage"];
 
-            this.CheckImage(uploadImage);
+            var success = true;
 
-            if (ModelState.IsValid && uploadImage != null)
-            {
-                byte[] imageData = null;
-
-                using (var binaryReader = new BinaryReader(uploadImage.InputStream))
-                {
-                    imageData = binaryReader.ReadBytes(uploadImage.ContentLength);
-                }
-
-                vm.Image = imageData;
-
-                Mapper.CreateMap<UserSkinViewModel, UserSkin>()
-                    .ForMember(dst => dst.Id, exp => exp.MapFrom(src => src.Id))
-                    .ForMember(dst => dst.Image, exp => exp.MapFrom(src => src.Image))
-                    .ForMember(dst => dst.UserId, exp => exp.MapFrom(src => src.UserId));
-
-                var userSkin = Mapper.Map<UserSkinViewModel, UserSkin>(vm);
-
-                userSkin.UserId = User.Identity.GetUserId();
-
-                if (IsUserSkinExists(userSkin.UserId))
-                {
-                    this.UserSkinUpdate(userSkin.UserId, userSkin.Image);
-                }
-                else
-                {
-                    context.UserSkins.Add(userSkin);
-                    context.SaveChanges();
-                }
-            }
-            ViewBag.UserName = User.Identity.GetUserName();
-
-            return View();
-        }
-
-        private void CheckImage(HttpPostedFileBase uploadImage)
-        {
             if (uploadImage == null || uploadImage.ContentType != "image/png")
             {
-                ModelState.AddModelError("", "error");
+                ModelState.AddModelError("", Resources.ErrorSkinFormat);
+                ModelState.AddModelError("", "Ошибка для теста");
+
+                success = false;
             }
+            else
+            {
+                this.AddUserSkin(uploadImage);
+            }
+
+            return Json(new { status = success, data = ModelState.Values });
         }
 
         private void UserSkinUpdate(string userId, byte[] newImage)

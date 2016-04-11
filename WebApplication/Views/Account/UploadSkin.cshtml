@@ -30,21 +30,35 @@
         renderMCSkins('frontSkin', 10);
         renderMCSkins('backSkin', 10);
 
-        $('#file-upload').change(function () {
+        @*$('#file-upload').change(function () {
+
             var ext = $(this).val().match(/\.([^\.]+)$/)[1];
 
             if (ext != "png") {
                 growlError("@Resources.ErrorSkinFormat");
                 setTimeout(function () {
-                    window.location.href = window.location.href;
                 }, 2000);
             }
-        });
+        });*@
 
         $('#file-upload').fileupload({
-            url: '@Url.Action("UploadSkin", "Account")',
+            url: '@Url.Action("CheckSkinImage")',
+            type: 'POST',
             autoUpload: true
+        }).on('fileuploaddone', function (e, data) {
+            if (!data.result.status) {
+                console.log(data.result);
+                $.each(data.result.data, function (i, object) {
+                    $.each(object.Errors, function (j, error) {
+                        growlError(error.ErrorMessage);
+                    });
+                });
+            }
+            else {
+                location.reload();
+            }
         }).on('fileuploadprogressall', function (e, data) {
+
             var progress = parseInt(data.loaded / data.total * 100, 10);
 
             $('.progress .progress-bar').css('visibility', 'visible');
@@ -55,8 +69,8 @@
             if (progress >= 100) {
                 $('#skin-image').attr("src", "");
                 setTimeout(function () {
-                    window.location.href = window.location.href;
-                }, 2000);
+                    location.reload();
+                }, 4000);
             }
         });
     });
