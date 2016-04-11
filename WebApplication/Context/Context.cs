@@ -22,6 +22,8 @@
             return new ApplicationDbContext();
         }
 
+        public DbSet<Player> Players { get; set; }
+
         public DbSet<UserSkin> UserSkins { get; set; }
 
         public DbSet<PlayerItem> PlayerItems { get; set; }

@@ -185,7 +185,7 @@ namespace WebApplication.Controllers
 
                     if (result.Succeeded)
                     {
-                        AddCurrency(user);
+                        this.AddPlayer(user);
 
                         string token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = token }, protocol: Request.Url.Scheme);
@@ -208,18 +208,28 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
-        private void AddCurrency(ApplicationUser user)
+        private void AddPlayer(ApplicationUser user)
         {
+            var player = new Player
+            {
+                Name = user.UserName,
+                User = user,
+                UserId = user.Id
+            };
+
+            context.Players.Add(player);
+
             var currency = new Currency
             {
-                username = user.UserName,
-                user_id = user.Id,
+                username = player.Name,
+                player = player,
                 balance = this.DefaultUserGonts,
                 realmoney = this.DefaultUserRubels,
                 status = 0
             };
 
             context.Currencies.Add(currency);
+
             context.SaveChanges();
         }
 
