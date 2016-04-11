@@ -30,17 +30,6 @@
         renderMCSkins('frontSkin', 10);
         renderMCSkins('backSkin', 10);
 
-        @*$('#file-upload').change(function () {
-
-            var ext = $(this).val().match(/\.([^\.]+)$/)[1];
-
-            if (ext != "png") {
-                growlError("@Resources.ErrorSkinFormat");
-                setTimeout(function () {
-                }, 2000);
-            }
-        });*@
-
         $('#file-upload').fileupload({
             url: '@Url.Action("CheckSkinImage")',
             type: 'POST',
