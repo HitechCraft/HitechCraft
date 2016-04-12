@@ -7,13 +7,13 @@ namespace WebApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class BanObjects : IMigrationMetadata
+    public sealed partial class PlayerFix : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(BanObjects));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(PlayerFix));
         
         string IMigrationMetadata.Id
         {
-            get { return "201604102317055_BanObjects"; }
+            get { return "201604120734307_PlayerFix"; }
         }
         
         string IMigrationMetadata.Source

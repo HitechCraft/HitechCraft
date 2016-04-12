@@ -7,10 +7,8 @@ namespace WebApplication.Domain
     {
         public int id { get; set; }
 
+        [ForeignKey("Player")]
         public string username { get; set; }
-
-        [ForeignKey("User")]
-        public string user_id { get; set; }
 
         public double balance { get; set; }
 
@@ -19,6 +17,6 @@ namespace WebApplication.Domain
 
         public int status { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public virtual Player Player { get; set; }
     }
 }

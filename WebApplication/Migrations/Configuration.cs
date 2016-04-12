@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using System.Data.Entity.Migrations.Model;
+using System.Data.Entity.Migrations.Sql;
+
 namespace WebApplication.Migrations
 {
     using System.Data.Entity.Migrations;

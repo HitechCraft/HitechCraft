@@ -7,14 +7,9 @@ namespace WebApplication.Domain
         /// <summary>
         /// Player baned name
         /// </summary>
+        [ForeignKey("Player")]
         public string name { get; set; }
-
-        /// <summary>
-        /// Baned User
-        /// </summary>
-        [ForeignKey("BanedUser")]
-        public string BanedUserId { get; set; }
-
+        
         /// <summary>
         /// Baned reason
         /// </summary>
@@ -23,14 +18,9 @@ namespace WebApplication.Domain
         /// <summary>
         /// Admin or moderator, who banned player
         /// </summary>
+        [ForeignKey("Admin")]
         public string admin { get; set; }
-
-        /// <summary>
-        /// Admin User
-        /// </summary>
-        [ForeignKey("AdminUser")]
-        public string AdminUserId { get; set; }
-
+        
         /// <summary>
         /// Time in unix
         /// </summary>
@@ -58,8 +48,8 @@ namespace WebApplication.Domain
         /// </summary>
         public int type { get; set; }
 
-        public virtual ApplicationUser BanedUser { get; set; }
+        public virtual Player Player { get; set; }
 
-        public virtual ApplicationUser AdminUser { get; set; }
+        public virtual Player Admin { get; set; }
     }
 }

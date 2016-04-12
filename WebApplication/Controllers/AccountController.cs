@@ -222,7 +222,6 @@ namespace WebApplication.Controllers
             var currency = new Currency
             {
                 username = player.Name,
-                player = player,
                 balance = this.DefaultUserGonts,
                 realmoney = this.DefaultUserRubels,
                 status = 0

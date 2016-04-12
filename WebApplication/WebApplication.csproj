@@ -211,25 +211,13 @@
     <Compile Include="Migrations\201604051704464_UserSkin.Designer.cs">
       <DependentUpon>201604051704464_UserSkin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604090957164_Shop.cs" />
-    <Compile Include="Migrations\201604090957164_Shop.Designer.cs">
-      <DependentUpon>201604090957164_Shop.cs</DependentUpon>
+    <Compile Include="Migrations\201604112310444_PlayerModels.cs" />
+    <Compile Include="Migrations\201604112310444_PlayerModels.Designer.cs">
+      <DependentUpon>201604112310444_PlayerModels.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604090958478_ShopFix.cs" />
-    <Compile Include="Migrations\201604090958478_ShopFix.Designer.cs">
-      <DependentUpon>201604090958478_ShopFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604091101404_ModelRelationFix.cs" />
-    <Compile Include="Migrations\201604091101404_ModelRelationFix.Designer.cs">
-      <DependentUpon>201604091101404_ModelRelationFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604091104507_Currency.cs" />
-    <Compile Include="Migrations\201604091104507_Currency.Designer.cs">
-      <DependentUpon>201604091104507_Currency.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604102317055_BanObjects.cs" />
-    <Compile Include="Migrations\201604102317055_BanObjects.Designer.cs">
-      <DependentUpon>201604102317055_BanObjects.cs</DependentUpon>
+    <Compile Include="Migrations\201604120734307_PlayerFix.cs" />
+    <Compile Include="Migrations\201604120734307_PlayerFix.Designer.cs">
+      <DependentUpon>201604120734307_PlayerFix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -337,20 +325,11 @@
     <EmbeddedResource Include="Migrations\201604051704464_UserSkin.resx">
       <DependentUpon>201604051704464_UserSkin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604090957164_Shop.resx">
-      <DependentUpon>201604090957164_Shop.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604112310444_PlayerModels.resx">
+      <DependentUpon>201604112310444_PlayerModels.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604090958478_ShopFix.resx">
-      <DependentUpon>201604090958478_ShopFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604091101404_ModelRelationFix.resx">
-      <DependentUpon>201604091101404_ModelRelationFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604091104507_Currency.resx">
-      <DependentUpon>201604091104507_Currency.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604102317055_BanObjects.resx">
-      <DependentUpon>201604102317055_BanObjects.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604120734307_PlayerFix.resx">
+      <DependentUpon>201604120734307_PlayerFix.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

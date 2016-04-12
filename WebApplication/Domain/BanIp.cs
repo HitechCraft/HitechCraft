@@ -12,19 +12,14 @@ namespace WebApplication.Domain
         /// <summary>
         /// User Name
         /// </summary>
+        [ForeignKey("Player")]
         public string name { get; set; }
-
-        /// <summary>
-        /// User Id
-        /// </summary>
-        [ForeignKey("User")]
-        public string UserId { get; set; }
-
+        
         /// <summary>
         /// Last user login ip
         /// </summary>
         public string lastip { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual Player Player { get; set; }
     }
 }

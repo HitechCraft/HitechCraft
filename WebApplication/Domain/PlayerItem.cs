@@ -7,11 +7,9 @@
     public class PlayerItem
     {
         public int id { get; set; }
-        
-        public string nickname { get; set; }
 
-        [ForeignKey("User")]
-        public string user_id { get; set; }
+        [ForeignKey("Player")]
+        public string nickname { get; set; }
 
         [ForeignKey("Item")]
         public int item_id { get; set; }
@@ -20,6 +18,6 @@
         
         public virtual ShopItem Item { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public virtual Player Player { get; set; }
     }
 }
