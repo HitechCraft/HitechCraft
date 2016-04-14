@@ -2,10 +2,12 @@
 {
     using System.Web.Mvc;
 
-    [Bind(Include = "Id, Name, Description, Amount")]
+    [Bind(Include = "Id, GameId, Name, Description, Amount")]
     public class ShopItem
     {
         public int Id { get; set; }
+
+        public int GameId { get; set; }
 
         public string Name { get; set; }
 
