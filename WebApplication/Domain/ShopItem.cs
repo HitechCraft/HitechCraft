@@ -11,7 +11,9 @@
 
         public string Description { get; set; }
 
+        public byte[] Image { get; set; }
+
         //todo сделать возможность установки цен по разным видам валюты
-        public float Amount { get; set; }
+        public float Price { get; set; }
     }
 }
