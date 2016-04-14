@@ -196,10 +196,10 @@
     <Compile Include="Domain\ShopItem.cs" />
     <Compile Include="Domain\UserSkin.cs" />
     <Compile Include="Domain\Currency.cs" />
+    <Compile Include="Extentions\MD5Extentions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="SystemExtentions\MD5Extentions.cs" />
     <Compile Include="Migrations\201602161705487_First.cs" />
     <Compile Include="Migrations\201602161705487_First.Designer.cs">
       <DependentUpon>201602161705487_First.cs</DependentUpon>
@@ -312,9 +312,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201602161705487_First.resx">

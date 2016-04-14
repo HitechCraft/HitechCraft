@@ -187,7 +187,7 @@ namespace WebApplication.Controllers
 
                     if (result.Succeeded)
                     {
-                        this.AddPlayer(user, model.Password);
+                        this.AddPlayer(user);
 
                         string token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = token }, protocol: Request.Url.Scheme);
@@ -214,13 +214,11 @@ namespace WebApplication.Controllers
         /// Method added player for plugin models relations
         /// </summary>
         /// <param name="user"></param>
-        /// <param name="password">Timed field for md5 hash launcher</param>
-        private void AddPlayer(ApplicationUser user, string password)
+        private void AddPlayer(ApplicationUser user)
         {
             Mapper.CreateMap<ApplicationUser, Player>()
                     .ForMember(dst => dst.Name, exp => exp.MapFrom(src => src.UserName))
-                    .ForMember(dst => dst.UserId, exp => exp.MapFrom(src => src.Id))
-                    .ForMember(dst => dst.PasswordMD5, exp => exp.MapFrom(src => MD5Extentions.GetMd5Hash(MD5.Create(), password)));
+                    .ForMember(dst => dst.UserId, exp => exp.MapFrom(src => src.Id));
             
             var player = Mapper.Map<ApplicationUser, Player>(user);
             
