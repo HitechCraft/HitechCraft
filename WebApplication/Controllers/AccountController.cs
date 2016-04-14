@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 using System.Web.WebPages;
 
 namespace WebApplication.Controllers
@@ -185,7 +187,7 @@ namespace WebApplication.Controllers
 
                     if (result.Succeeded)
                     {
-                        this.AddPlayer(user);
+                        this.AddPlayer(user, model.Password);
 
                         string token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = token }, protocol: Request.Url.Scheme);
@@ -208,15 +210,20 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
-        private void AddPlayer(ApplicationUser user)
+        /// <summary>
+        /// Method added player for plugin models relations
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password">Timed field for md5 hash launcher</param>
+        private void AddPlayer(ApplicationUser user, string password)
         {
-            var player = new Player
-            {
-                Name = user.UserName,
-                User = user,
-                UserId = user.Id
-            };
-
+            Mapper.CreateMap<ApplicationUser, Player>()
+                    .ForMember(dst => dst.Name, exp => exp.MapFrom(src => src.UserName))
+                    .ForMember(dst => dst.UserId, exp => exp.MapFrom(src => src.Id))
+                    .ForMember(dst => dst.PasswordMD5, exp => exp.MapFrom(src => MD5Extentions.GetMd5Hash(MD5.Create(), password)));
+            
+            var player = Mapper.Map<ApplicationUser, Player>(user);
+            
             context.Players.Add(player);
 
             var currency = new Currency
@@ -241,6 +248,11 @@ namespace WebApplication.Controllers
             if (user.Result != null)
             {
                 throw new Exception(Resources.ErrorUserNameExists);
+            }
+
+            if (Regex.IsMatch(userName, @"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"))
+            {
+                throw new Exception("Имя не может быть email адресом");
             }
         }
 

@@ -199,6 +199,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="SystemExtentions\MD5Extentions.cs" />
     <Compile Include="Migrations\201602161705487_First.cs" />
     <Compile Include="Migrations\201602161705487_First.Designer.cs">
       <DependentUpon>201602161705487_First.cs</DependentUpon>

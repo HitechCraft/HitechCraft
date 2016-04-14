@@ -8,6 +8,11 @@
         [Key]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Timed field
+        /// </summary>
+        public string PasswordMD5 { get; set; }
+
         [ForeignKey("User")]
         public string UserId { get; set; }
 
