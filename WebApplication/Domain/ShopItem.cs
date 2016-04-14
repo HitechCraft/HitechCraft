@@ -1,13 +1,13 @@
 ﻿namespace WebApplication.Domain
 {
+    using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
     [Bind(Include = "Id, GameId, Name, Description, Amount")]
     public class ShopItem
     {
-        public int Id { get; set; }
-
-        public int GameId { get; set; }
+        [Key]
+        public string GameId { get; set; }
 
         public string Name { get; set; }
 

@@ -12,7 +12,7 @@
         public string nickname { get; set; }
 
         [ForeignKey("Item")]
-        public int item_id { get; set; }
+        public string item_id { get; set; }
 
         public int item_amount { get; set; }
         

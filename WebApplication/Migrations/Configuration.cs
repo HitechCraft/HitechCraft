@@ -13,6 +13,7 @@ namespace WebApplication.Migrations
         {
             AutomaticMigrationsEnabled = true;
             SetSqlGenerator("MySql.Data.MySqlClient", new MySqlMigrationSqlGenerator());
+            CodeGenerator = new MySql.Data.Entity.MySqlMigrationCodeGenerator();
         }
 
         protected override void Seed(ApplicationDbContext context)
