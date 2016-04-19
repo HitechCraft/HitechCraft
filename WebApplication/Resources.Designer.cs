@@ -61,6 +61,15 @@ namespace WebApplication {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Роль с данным именем уже существует.
+        /// </summary>
+        public static string Administration_AddRole_ErrorAlreadyExists {
+            get {
+                return ResourceManager.GetString("Administration_AddRole_ErrorAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Проверить уникальность.
         /// </summary>
         public static string CheckUserName {

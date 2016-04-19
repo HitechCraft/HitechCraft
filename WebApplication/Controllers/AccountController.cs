@@ -189,6 +189,8 @@ namespace WebApplication.Controllers
                     {
                         this.AddPlayer(user);
 
+                        await UserManager.AddToRoleAsync(user.Id, "User");
+
                         string token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = token }, protocol: Request.Url.Scheme);
                         //todo: стилизовать письмо и засунуть в отдельный template
