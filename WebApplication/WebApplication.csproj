@@ -186,7 +186,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Context\Context.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BanController.cs" />
+    <Compile Include="Controllers\BanSystemController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -289,7 +289,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Ban\" />
+    <Folder Include="Views\BanSystem\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

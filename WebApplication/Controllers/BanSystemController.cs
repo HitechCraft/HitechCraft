@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace WebApplication.Controllers
 {
-    public class BanController : Controller
+    public class BanSystemController : Controller
     {
         // GET: Ban
         public ActionResult Index()
