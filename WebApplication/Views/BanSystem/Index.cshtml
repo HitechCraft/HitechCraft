@@ -1,38 +1,44 @@
-﻿@model IEnumerable<WebApplication.Models.BanViewModel>
+﻿@using WebApplication.Domain
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>@ViewBag.Title</h2>
 
-@if (Model.Any())
-{
-    <div class="ban-row">
-        <div class="ban-cell">Ник игрока</div>
-        <div class="ban-cell">Причина</div>
-        <div class="ban-cell">Тип наказания</div>
-        <div class="ban-cell">Ник администратора</div>
-        <div class="ban-cell">Дата и время</div>
+<div class="form-inline">
+    <div class="form-group">
+        <label for="Player">Игрок</label>
+        @Html.DropDownList("Player", null, "None", new { @class = "form-control input-sm" })
     </div>
+    <div class="form-group">
+        <label for="Type">Тип наказания</label>
+        @Html.DropDownList("Type", EnumHelper.GetSelectList(typeof(BanType)), "None", new { @class = "form-control input-sm" })
+    </div>
+    <button class="btn btn-default btn-sm" id="filter">Отфильтровать</button>
+</div>
 
-    foreach (var banLog in Model)
-    {
-        <div class="ban-row" onclick="javascript:redirectToBanAction(@banLog.Id);">
-            <div class="ban-cell">@banLog.PlayerName</div>
-            <div class="ban-cell">@banLog.Reason</div>
-            <div class="ban-cell">@banLog.Type</div>
-            <div class="ban-cell">@banLog.BannedBy</div>
-            <div class="ban-cell">@banLog.ActionTime</div>
-        </div>
-    }
-}
-else
-{
-    <h4 style="text-align: center">Записей не найдено</h4>
-}
+<br/>
+
+<div id="ban-list">
+    @Html.Action("BanListPartial")
+</div>
 
 <script type="text/javascript">
     function redirectToBanAction(actionId) {
         location.replace('@Url.Action("BanAction")?actionId=' + actionId);
     }
+
+    $('#filter').click(function () {
+        console.log($('#Type').val());
+        $.ajax({
+            url: '@Url.Action("BanListPartial")',
+            data: {
+                banType: $('#Type').val(),
+                playerId: $('#Player').val(),
+            }
+        }).done(function(response) {
+            $('#ban-list').html("");
+            $('#ban-list').html(response);
+        });
+    });
 </script>

@@ -293,6 +293,7 @@
     <Content Include="Views\Administration\Index.cshtml" />
     <Content Include="Views\Administration\AddUserRole.cshtml" />
     <Content Include="Views\BanSystem\BanAction.cshtml" />
+    <Content Include="Views\BanSystem\BanListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
