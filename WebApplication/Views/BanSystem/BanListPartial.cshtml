@@ -2,24 +2,29 @@
 
 @if (Model.Any())
 {
-    <div class="ban-row">
-        <div class="ban-cell">Ник игрока</div>
-        <div class="ban-cell">Причина</div>
-        <div class="ban-cell">Тип наказания</div>
-        <div class="ban-cell">Ник администратора</div>
-        <div class="ban-cell">Дата и время</div>
-    </div>
-
-    foreach (var banLog in Model)
-    {
-        <div class="ban-row" onclick="javascript:redirectToBanAction(@banLog.Id);">
-            <div class="ban-cell">@banLog.PlayerName</div>
-            <div class="ban-cell">@banLog.Reason</div>
-            <div class="ban-cell">@banLog.Type</div>
-            <div class="ban-cell">@banLog.BannedBy</div>
-            <div class="ban-cell">@banLog.ActionTime</div>
-        </div>
-    }
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Ник игрока</th>
+            <th>Причина</th>
+            <th>Тип записи</th>
+            <th>Ник администратора</th>
+            <th>Дата и время</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var banLog in Model)
+            {
+                <tr onclick="javascript:redirectToBanAction(@banLog.Id);">
+                    <td>@banLog.PlayerName</td>
+                    <td>@banLog.Reason</td>
+                    <td>@banLog.Type</td>
+                    <td>@banLog.BannedBy</td>
+                    <td>@banLog.ActionTime</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {

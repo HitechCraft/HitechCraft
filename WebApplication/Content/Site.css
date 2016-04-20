@@ -61,3 +61,11 @@ select {
     z-index: 999;
     position: fixed;
 }
+
+.table-hover tr:hover {
+    cursor: pointer;
+}
+
+.table-hover tr td:hover {
+    cursor: pointer;
+}

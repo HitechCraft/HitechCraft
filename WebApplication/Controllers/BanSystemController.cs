@@ -77,12 +77,21 @@ namespace WebApplication.Controllers
 
                 BanViewModel banActionView = Mapper.Map<Ban, BanViewModel>(banAction);
 
+                ViewBag.PlayerId = context.Users.First(u => u.UserName == banActionView.PlayerName).Id;
+
                 return View(banActionView);
             }
             catch (Exception)
             {
                 new HttpNotFoundResult();
             }
+
+            return View();
+        }
+
+        public ActionResult PlayerBanList(string playerName = "")
+        {
+            if(playerName != String.Empty) ViewBag.PlayerId = context.Users.First(u => u.UserName == playerName).Id;
 
             return View();
         }
