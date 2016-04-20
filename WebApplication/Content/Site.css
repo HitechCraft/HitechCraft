@@ -33,13 +33,17 @@ textarea {
     display: table-row;
 }
 
-.ban-row:hover {
-    background: #000;
-    cursor: pointer;
-}
+    .ban-row:hover {
+        background: #000;
+        cursor: pointer;
+    }
 
 select {
     color: #000;
+}
+
+.ajax-loader {
+    display: none;
 }
 
     .ajax-loader img {
