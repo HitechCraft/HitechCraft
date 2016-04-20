@@ -1,0 +1,17 @@
+﻿@model WebApplication.Models.BanViewModel
+@{
+    ViewBag.Title = "BanAction";
+}
+
+<h2>BanAction</h2>
+
+@Html.DisplayFor(model => model.PlayerName)
+@Html.DisplayFor(model => model.Type)
+@Html.DisplayFor(model => model.Reason)
+@Html.DisplayFor(model => model.BannedBy)
+@Html.DisplayFor(model => model.ActionTime)
+
+@if (Model.TempTime.Date != new DateTime(1970, 1, 1))
+{
+    @Html.DisplayFor(model => model.TempTime)
+}

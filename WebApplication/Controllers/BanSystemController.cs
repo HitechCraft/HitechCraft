@@ -1,89 +1,67 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
 namespace WebApplication.Controllers
 {
-    public class BanSystemController : Controller
+    #region Using Derectives
+
+    using System.Collections.Generic;
+    using Domain;
+    using Models;
+    using System.Linq;
+    using AutoMapper;
+    using System.Web.Mvc;
+
+    #endregion
+
+    public class BanSystemController : BaseController
     {
-        // GET: Ban
         public ActionResult Index()
         {
-            return View();
+            var bans = context.Bans.ToList();
+
+            Mapper.CreateMap<Ban, BanViewModel>()
+                    .ForMember(dst => dst.Id, exp => exp.MapFrom(src => src.id))
+                    .ForMember(dst => dst.PlayerName, exp => exp.MapFrom(src => src.name))
+                    .ForMember(dst => dst.ActionTime, exp => exp.MapFrom(src => 
+                    new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(src.time).ToLocalTime()))
+                    .ForMember(dst => dst.BannedBy, exp => exp.MapFrom(src => src.admin))
+                    .ForMember(dst => dst.Reason, exp => exp.MapFrom(src => src.reason))
+                    .ForMember(dst => dst.TempTime, exp => exp.MapFrom(src =>
+                    new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(src.temptime).ToLocalTime()))
+                    .ForMember(dst => dst.Type, exp => exp.MapFrom(src => (BanType)src.type));
+
+            IEnumerable<BanViewModel> banLogs = Mapper.Map<IEnumerable<Ban>, IEnumerable<BanViewModel>>(bans);
+
+            return View(banLogs);
         }
 
-        // GET: Ban/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Ban/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Ban/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Ban/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Ban/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult BanAction(int actionId)
         {
             try
             {
-                // TODO: Add update logic here
+                var banAction = context.Bans.Find(actionId);
 
-                return RedirectToAction("Index");
+                Mapper.CreateMap<Ban, BanViewModel>()
+                    .ForMember(dst => dst.Id, exp => exp.MapFrom(src => src.id))
+                    .ForMember(dst => dst.PlayerName, exp => exp.MapFrom(src => src.name))
+                    .ForMember(dst => dst.ActionTime, exp => exp.MapFrom(src =>
+                    new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(src.time).ToLocalTime()))
+                    .ForMember(dst => dst.BannedBy, exp => exp.MapFrom(src => src.admin))
+                    .ForMember(dst => dst.Reason, exp => exp.MapFrom(src => src.reason))
+                    .ForMember(dst => dst.TempTime, exp => exp.MapFrom(src =>
+                    new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(src.temptime).ToLocalTime()))
+                    .ForMember(dst => dst.Type, exp => exp.MapFrom(src => (BanType)src.type));
+
+                BanViewModel banActionView = Mapper.Map<Ban, BanViewModel>(banAction);
+
+                return View(banActionView);
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                new HttpNotFoundResult();
             }
-        }
 
-        // GET: Ban/Delete/5
-        public ActionResult Delete(int id)
-        {
             return View();
-        }
-
-        // POST: Ban/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }
