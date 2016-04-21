@@ -5,8 +5,10 @@ namespace WebApplication.Models
     using Domain;
     using System;
 
-    public class BanViewModel
+    public class BanEditViewModel
     {
+        public int Id { get; set; }
+
         public string PlayerName { get; set; }
         
         [Required]

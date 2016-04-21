@@ -12,18 +12,38 @@
 
     <div class="form-group">
         @Html.DisplayNameFor(model => model.PlayerName)
-        @Html.DropDownListFor(model => model.PlayerName, ViewBag.Player as SelectList, "None", new { @class = "form-control input-sm" })
+        @Html.DropDownListFor(model => model.PlayerName, ViewBag.PlayerName as SelectList, "None", new { @class = "form-control input-sm" })
     </div>
     <div class="form-group">
         @Html.DisplayNameFor(model => model.Type)
-        @Html.DropDownListFor(model => model.Type, EnumHelper.GetSelectList(typeof(BanType)), "None", new { @class = "form-control input-sm" })
+        @Html.DropDownListFor(model => model.Type, EnumHelper.GetSelectList(typeof(BanType)), "None", new { @class = "form-control input-sm", @id = "Type" })
     </div>
     <div class="form-group">
         @Html.DisplayNameFor(model => model.Reason)
-        @Html.EditorFor(model => model.PlayerName, new { @class = "form-control" })
+        @Html.EditorFor(model => model.PlayerName, new {@class = "form-control"})
     </div>
     <div class="form-group">
-        @Html.DisplayNameFor(model => model.PlayerName)
-        @Html.EditorFor(model => model.PlayerName, new { @class = "form-control" })
+        <input id="tempTimeCheck" type="checkbox"/> Временное наказание
+    </div>
+    <div id="tempTime" class="form-group" style="display: none">
+        @Html.DisplayNameFor(model => model.TempTime)
+        @Html.EditorFor(model => model.TempTime, new { @class = "form-control", @type="datetime", @id = "tempTimeField" })
+    </div>
+    <div class="form-group">
+        <input class="btn btn-default" type="submit" value="Create" />
     </div>
 }
+
+<script type="text/javascript">
+    $('#tempTimeCheck').change(function() {
+        var isChecked = $('#tempTimeCheck:checked').length;
+
+        if (isChecked) {
+            $('#tempTime').css('display', 'block');
+            $('#tempTimeField').attr('required', 'required');
+        } else {
+            $('#tempTime').css('display', 'none');
+            $('#tempTimeField').removeAttr('required');
+        }
+    });
+</script>
