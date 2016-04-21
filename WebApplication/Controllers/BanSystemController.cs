@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Security;
 
 namespace WebApplication.Controllers
 {
@@ -13,6 +14,7 @@ namespace WebApplication.Controllers
 
     #endregion
 
+    [Authorize(Roles = "Moderator, Administrator")]
     public class BanSystemController : BaseController
     {
         public ActionResult Index()
@@ -25,12 +27,13 @@ namespace WebApplication.Controllers
             
             return View();
         }
-
+        
         public ActionResult BanListPartial(int? banType, string playerId = "")
         {
             var bans = context.Bans.ToList();
 
             Mapper.CreateMap<Ban, BanViewModel>()
+                    .ForMember(dst => dst.Id, exp => exp.MapFrom(src => src.id))
                     .ForMember(dst => dst.PlayerName, exp => exp.MapFrom(src => src.name))
                     .ForMember(dst => dst.ActionTime, exp => exp.MapFrom(src =>
                     new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(src.time).ToLocalTime()))
@@ -56,7 +59,7 @@ namespace WebApplication.Controllers
 
             return PartialView(banLogs);
         }
-
+        
         public ActionResult BanAction(int actionId)
         {
             try
@@ -64,6 +67,7 @@ namespace WebApplication.Controllers
                 var banAction = context.Bans.Find(actionId);
 
                 Mapper.CreateMap<Ban, BanViewModel>()
+                    .ForMember(dst => dst.Id, exp => exp.MapFrom(src => src.id))
                     .ForMember(dst => dst.PlayerName, exp => exp.MapFrom(src => src.name))
                     .ForMember(dst => dst.ActionTime, exp => exp.MapFrom(src =>
                     new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(src.time).ToLocalTime()))
@@ -113,35 +117,55 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateAction(BanViewModel vm)
+        public ActionResult CreateAction(BanEditViewModel vm)
         {
+            int unix = 0;
+
             if (vm.PlayerName == String.Empty)
             {
                 ModelState.AddModelError(string.Empty, "Необходимо выбрать игрока");
+            }
+
+            if (vm.TempTime != null)
+            {
+                unix = (int)vm.TempTime.Value.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+
+                if (vm.IsTemped && unix < 0)
+                {
+                    ModelState.AddModelError("TempTime", "Необходимо выбрать дату");
+                }
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    vm.BannedBy = User.Identity.Name;
                     vm.ActionTime = DateTime.Now;
+                    vm.BannedBy = User.Identity.Name;
 
-                    Mapper.CreateMap<Ban, BanEditViewModel>()
-                        .ForMember(dst => dst.PlayerName, exp => exp.MapFrom(src => src.name))
-                        .ForMember(dst => dst.ActionTime, exp => exp.MapFrom(src => src.time))
-                        .ForMember(dst => dst.BannedBy, exp => exp.MapFrom(src => src.admin))
-                        .ForMember(dst => dst.Reason, exp => exp.MapFrom(src => src.reason))
-                        .ForMember(dst => dst.TempTime, exp => exp.MapFrom(src => src.temptime))
-                        .ForMember(dst => dst.Type, exp => exp.MapFrom(src => (BanType)src.type));
+                    Mapper.CreateMap<BanEditViewModel, Ban>()
+                        .ForMember(dst => dst.name, exp => exp.MapFrom(src => src.PlayerName))
+                        .ForMember(dst => dst.time, exp => exp.MapFrom(src => (int)src.ActionTime.Subtract(new DateTime(1970, 1, 1)).TotalSeconds))
+                        .ForMember(dst => dst.admin, exp => exp.MapFrom(src => src.BannedBy))
+                        .ForMember(dst => dst.reason, exp => exp.MapFrom(src => src.Reason))
+                        .ForMember(dst => dst.temptime, exp => exp.MapFrom(src => src.TempTime != null ? unix : 0))
+                        .ForMember(dst => dst.type, exp => exp.MapFrom(src => src.Type));
 
-                    var banAction = Mapper.Map<BanViewModel, Ban>(vm);
+                    var banAction = Mapper.Map<BanEditViewModel, Ban>(vm);
 
+                    if (!IsBanExists(banAction))
+                    {
+                        context.Bans.Add(banAction);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(String.Empty, "Такое наказание у пользователя все еще действует");
+                    }
                 }
                 catch (Exception e)
                 {
-                    
-                    throw;
+                    ModelState.AddModelError(String.Empty, e.Message);
                 }
             }
 
@@ -158,6 +182,25 @@ namespace WebApplication.Controllers
             });
 
             return View(vm);
+        }
+
+        private bool IsBanExists(Ban ban)
+        {
+            try
+            {
+                var banAction = context.Bans.First(b => b.name == ban.name && b.type == ban.type);
+
+                if (banAction.temptime != 0 && banAction.temptime < (int)DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

@@ -7,12 +7,12 @@ namespace WebApplication.Models
 
     public class BanViewModel
     {
+        public int Id { get; set; }
+
         public string PlayerName { get; set; }
         
-        [Required]
         public string Reason { get; set; }
         
-        [Required]
         public string BannedBy { get; set; }
         
         public DateTime ActionTime { get; set; }

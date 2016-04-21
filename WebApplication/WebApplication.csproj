@@ -191,7 +191,6 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Domain\Ban.cs" />
     <Compile Include="Domain\BanIp.cs" />
     <Compile Include="Domain\Modification.cs" />
@@ -209,10 +208,6 @@
     <Compile Include="Migrations\201604142008281_AddModels.cs" />
     <Compile Include="Migrations\201604142008281_AddModels.Designer.cs">
       <DependentUpon>201604142008281_AddModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604211652487_Test.cs" />
-    <Compile Include="Migrations\201604211652487_Test.Designer.cs">
-      <DependentUpon>201604211652487_Test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -308,7 +303,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shop\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -321,9 +315,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604142008281_AddModels.resx">
       <DependentUpon>201604142008281_AddModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604211652487_Test.resx">
-      <DependentUpon>201604211652487_Test.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
