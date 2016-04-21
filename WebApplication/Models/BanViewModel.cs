@@ -1,4 +1,6 @@
-﻿namespace WebApplication.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication.Models
 {
     using Domain;
     using System;
@@ -9,8 +11,10 @@
 
         public string PlayerName { get; set; }
         
+        [Required]
         public string Reason { get; set; }
         
+        [Required]
         public string BannedBy { get; set; }
         
         public DateTime ActionTime { get; set; }

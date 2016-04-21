@@ -295,6 +295,7 @@
     <Content Include="Views\BanSystem\BanAction.cshtml" />
     <Content Include="Views\BanSystem\BanListPartial.cshtml" />
     <Content Include="Views\BanSystem\PlayerBanList.cshtml" />
+    <Content Include="Views\BanSystem\CreateAction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

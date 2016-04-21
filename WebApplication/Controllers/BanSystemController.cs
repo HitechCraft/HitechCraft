@@ -95,5 +95,54 @@ namespace WebApplication.Controllers
 
             return View();
         }
+        
+        [HttpGet]
+        public ActionResult CreateAction()
+        {
+            ViewBag.Player = context.Users.Select(u => new SelectListItem
+            {
+                Text = u.UserName,
+                Value = u.UserName
+            });
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateAction(BanViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Mapper.CreateMap<Ban, BanViewModel>()
+                        .ForMember(dst => dst.Id, exp => exp.MapFrom(src => src.id))
+                        .ForMember(dst => dst.PlayerName, exp => exp.MapFrom(src => src.name))
+                        .ForMember(dst => dst.ActionTime, exp => exp.MapFrom(src =>
+                        new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(src.time).ToLocalTime()))
+                        .ForMember(dst => dst.BannedBy, exp => exp.MapFrom(src => src.admin))
+                        .ForMember(dst => dst.Reason, exp => exp.MapFrom(src => src.reason))
+                        .ForMember(dst => dst.TempTime, exp => exp.MapFrom(src =>
+                        new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(src.temptime).ToLocalTime()))
+                        .ForMember(dst => dst.Type, exp => exp.MapFrom(src => (BanType)src.type));
+
+                    var banAction = Mapper.Map<BanViewModel, Ban>(vm);
+
+                }
+                catch (Exception)
+                {
+                    
+                    throw;
+                }
+            }
+
+            ViewBag.Player = context.Users.Select(u => new SelectListItem
+            {
+                Text = u.UserName,
+                Value = u.UserName
+            });
+
+            return View(vm);
+        }
     }
 }
