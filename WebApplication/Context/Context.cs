@@ -30,6 +30,8 @@
 
         public DbSet<ShopItem> ShopItems { get; set; }
 
+        public DbSet<ShopSale> ShopSales { get; set; }
+
         public DbSet<Currency> Currencies { get; set; }
 
         public DbSet<Ban> Bans { get; set; }
