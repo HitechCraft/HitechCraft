@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Entity;
+using System.Net;
 using System.Web.Security;
 
 namespace WebApplication.Controllers
@@ -201,6 +203,66 @@ namespace WebApplication.Controllers
             {
                 return false;
             }
+        }
+
+        public ActionResult Unban(int id)
+        {
+            if (id == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var banAction = context.Bans.Find(id);
+
+            if (banAction.type == 0 || banAction.type == 6)
+            {
+
+                if (banAction == null)
+                {
+                    return HttpNotFound();
+                }
+
+                Mapper.CreateMap<Ban, BanUnbanViewModel>()
+                    .ForMember(dst => dst.Id, exp => exp.MapFrom(src => src.id))
+                    .ForMember(dst => dst.PlayerName, exp => exp.MapFrom(src => src.name))
+                    .ForMember(dst => dst.ActionTime, exp => exp.MapFrom(src =>
+                    new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(src.time).ToLocalTime()))
+                    .ForMember(dst => dst.Type, exp => exp.MapFrom(src => (BanType)src.type));
+
+                var vm = Mapper.Map<Ban, BanUnbanViewModel>(banAction);
+
+                return View(vm);
+            }
+            else
+            {
+                ViewBag.TypeError = "Игрока можно только разбанить или освободить из тюрьмы";
+
+                return View();
+            }
+        }
+
+        [HttpPost, ActionName("Unban")]
+        [ValidateAntiForgeryToken]
+        public ActionResult UnbanConfirmed(int id)
+        {
+            var banAction = context.Bans.Find(id);
+
+            switch (banAction.type)
+            {
+                case 0:
+                    banAction.reason = "Unbanned: ";
+                    banAction.type = 5;
+                    break;
+                case 6:
+                    banAction.reason = "Released From Jail";
+                    banAction.type = 8;
+                    break;
+            }
+
+            context.Entry(banAction).State = EntityState.Modified;
+            context.SaveChanges();
+            
+            return RedirectToAction("Index");
         }
     }
 }
