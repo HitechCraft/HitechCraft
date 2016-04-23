@@ -30,7 +30,7 @@ namespace WebApplication.Models
 
         [Required]
         [Display(Name = "Цена")]
-        [Range(0.01f, float.MaxValue, ErrorMessage = "Минимальное значение цены 0.01 рубля")]
+        [Range(0.01f, float.MaxValue, ErrorMessage = "Минимальное значение цены 0.01")]
         public float Price { get; set; }
     }
 }

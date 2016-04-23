@@ -11,6 +11,7 @@ namespace WebApplication.Controllers
         // GET: Shop
         public ActionResult Index()
         {
+            ViewBag.Message = "test";
             return View();
         }
 

@@ -212,6 +212,8 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ShopItemCategoryViewModel.cs" />
+    <Compile Include="Models\ShopItemViewModel.cs" />
     <Compile Include="Models\UserSkinViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
@@ -289,10 +291,11 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmailInfo.cshtml" />
     <Content Include="Views\Account\UploadSkin.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Shop\ShopItemListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Shop\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
