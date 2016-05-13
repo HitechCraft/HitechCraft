@@ -1,5 +1,7 @@
 syntax: glob
 .vs/
-WebApplication/bin/
-WebApplication/obj/
+bin/
+obj/
 packages/
+Web.config
+Documentation/
