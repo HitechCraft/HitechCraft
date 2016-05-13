@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApplication {
+namespace WebApplication.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace WebApplication {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WebApplication.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WebApplication.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,15 @@ namespace WebApplication {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Роль с данным именем уже существует.
+        /// </summary>
+        public static string Administration_AddRole_ErrorAlreadyExists {
+            get {
+                return ResourceManager.GetString("Administration_AddRole_ErrorAlreadyExists", resourceCulture);
             }
         }
         

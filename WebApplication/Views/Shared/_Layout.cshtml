@@ -10,6 +10,10 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <div class="ajax-loader">
+        <img src="/Content/Images/loader.gif" />
+    </div>
+    <div class="ajax-bg"></div>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -37,7 +41,15 @@
             <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
         </footer>
     </div>
-
+    <script type="text/javascript">
+        $(document).ajaxStart(function () {
+            $('.ajax-loader').show();
+            $('.ajax-bg').show();
+        }).ajaxStop(function () {
+            $('.ajax-loader').hide();
+            $('.ajax-bg').hide();
+        });
+    </script>
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

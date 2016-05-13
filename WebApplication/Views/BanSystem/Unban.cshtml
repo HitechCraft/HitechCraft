@@ -1,0 +1,30 @@
+﻿@model WebApplication.Models.BanUnbanViewModel
+@{
+    ViewBag.Title = "Unban";
+}
+
+<h2>Unban</h2>
+
+@if (ViewBag.TypeError != null)
+{
+    <p>@ViewBag.TypeError</p>
+}
+else
+{
+    <p>Вы собираетесь снять наказание "@Html.DisplayFor(model => model.Type)" с пользователя "@Html.DisplayFor(model => model.PlayerName)"
+
+
+    Вы уверены?
+
+    </p>
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Unban" class="btn btn-default" />
+            @Html.ActionLink("Back", "Index")
+        </div>
+    }
+}

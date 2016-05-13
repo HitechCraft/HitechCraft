@@ -21,6 +21,7 @@ namespace WebApplication.Controllers
     using AutoMapper;
     using WebApplication.Domain;
 
+    using Properties;
     #endregion
 
     [Authorize]
@@ -188,6 +189,8 @@ namespace WebApplication.Controllers
                     if (result.Succeeded)
                     {
                         this.AddPlayer(user);
+
+                        await UserManager.AddToRoleAsync(user.Id, "User");
 
                         string token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = token }, protocol: Request.Url.Scheme);
