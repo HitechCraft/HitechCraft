@@ -56,8 +56,11 @@
         /// <param name="login">Player login</param>
         /// <param name="password">Player password</param>
         /// <returns></returns>
+        [HttpGet]
         public JsonResult CheckPlayerData(string login, string password)
         {
+            //TODO: сделать отправку пароля хэшем
+
             if (IsValidAuth(login, password))
             {
                 this.ChangeOrSetPlayerSession(login);
@@ -115,15 +118,16 @@
         private string GenerateKey()
         {
             var key = String.Empty;
+            var random = new Random();
 
             for (int i = 0; i < this.KeyLength; i++)
             {
-                key += this.KeyChars[new Random().Next(0, this.KeyChars.Length - 1)];
+                key += this.KeyChars[random.Next(this.KeyChars.Length)];
             }
 
             return key;
         }
-
+        
         #endregion
     }
 }
