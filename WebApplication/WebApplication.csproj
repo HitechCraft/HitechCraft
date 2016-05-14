@@ -190,6 +190,7 @@
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LauncherController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Domain\Ban.cs" />
     <Compile Include="Domain\BanIp.cs" />
@@ -209,6 +210,10 @@
     <Compile Include="Migrations\201604142008281_AddModels.cs" />
     <Compile Include="Migrations\201604142008281_AddModels.Designer.cs">
       <DependentUpon>201604142008281_AddModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605142208070_PlayerSession.cs" />
+    <Compile Include="Migrations\201605142208070_PlayerSession.Designer.cs">
+      <DependentUpon>201605142208070_PlayerSession.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -318,6 +323,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604142008281_AddModels.resx">
       <DependentUpon>201604142008281_AddModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605142208070_PlayerSession.resx">
+      <DependentUpon>201605142208070_PlayerSession.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

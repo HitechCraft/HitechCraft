@@ -37,5 +37,7 @@
         public DbSet<Ban> Bans { get; set; }
 
         public DbSet<BanIp> BanIps { get; set; }
+
+        public DbSet<PlayerSession> PlayerSessions { get; set; }
     }
 }
