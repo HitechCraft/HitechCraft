@@ -196,6 +196,7 @@
     <Compile Include="Domain\Modification.cs" />
     <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\PlayerItem.cs" />
+    <Compile Include="Domain\PlayerSession.cs" />
     <Compile Include="Domain\ShopItem.cs" />
     <Compile Include="Domain\ShopItemCategory.cs" />
     <Compile Include="Domain\ShopSale.cs" />
