@@ -1,19 +1,25 @@
-﻿using System.Data.Entity;
-using Microsoft.Ajax.Utilities;
-using WebApplication.Domain;
-
-namespace WebApplication.Controllers
+﻿namespace WebApplication.Controllers
 {
     #region Using Directories
 
+    using System.Data.Entity;
+    using System.Web;
+    using Microsoft.AspNet.Identity.Owin;
+    using Domain;
     using System;
     using System.Linq;
     using System.Web.Mvc;
 
     #endregion
     
-    public class LauncherController : AccountController
+    public class LauncherController : BaseController
     {
+        #region Private Fields
+
+        private ApplicationUserManager _userManager;
+
+        #endregion
+        
         #region Properties
 
         public int KeyLength
@@ -28,20 +34,38 @@ namespace WebApplication.Controllers
             protected set { }
         }
 
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         #endregion
 
         #region Launcher Actions
 
+        /// <summary>
+        /// Player atuh cheking
+        /// </summary>
+        /// <param name="login">Player login</param>
+        /// <param name="password">Player password</param>
+        /// <returns></returns>
         public JsonResult CheckPlayerData(string login, string password)
         {
             if (IsValidAuth(login, password))
             {
                 this.ChangeOrSetPlayerSession(login);
 
-                return Json(new { status = "YES", message = "Успешная авторизация" });
+                return Json(new { status = "YES", message = "Успешная авторизация" }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new { status = "NO", message = "Неверные данные" });
+            return Json(new { status = "NO", message = "Неверные данные" }, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
