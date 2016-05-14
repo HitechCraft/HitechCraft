@@ -118,7 +118,7 @@
 
             for (int i = 0; i < this.KeyLength; i++)
             {
-                key += this.KeyChars[new Random().Next(0, this.KeyLength - 1)];
+                key += this.KeyChars[new Random().Next(0, this.KeyChars.Length - 1)];
             }
 
             return key;
