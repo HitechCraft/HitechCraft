@@ -1,4 +1,4 @@
-﻿namespace WebApplication
+﻿namespace WebApplication.Extentions
 {
     using System;
     using System.Security.Cryptography;
