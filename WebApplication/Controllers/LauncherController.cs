@@ -1,6 +1,4 @@
-﻿using WebApplication.Managers;
-
-namespace WebApplication.Controllers
+﻿namespace WebApplication.Controllers
 {
     #region Using Directories
 
@@ -12,6 +10,7 @@ namespace WebApplication.Controllers
     using System.Linq;
     using System.Web.Mvc;
     using Properties;
+    using Managers;
 
     #endregion
 
@@ -94,6 +93,11 @@ namespace WebApplication.Controllers
             JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Check client structure
+        /// </summary>
+        /// <param name="clientName">name of selected client</param>
+        /// <returns></returns>
         public JsonResult CheckRequredFolders(string clientName)
         {
             var folders = LauncherManager.GetRequiredFolderList(clientName);
