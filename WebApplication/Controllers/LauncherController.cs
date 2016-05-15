@@ -9,9 +9,11 @@
     using System;
     using System.Linq;
     using System.Web.Mvc;
+    using Properties;
+    using Extentions;
 
     #endregion
-    
+
     public class LauncherController : BaseController
     {
         #region Private Fields
@@ -21,18 +23,6 @@
         #endregion
         
         #region Properties
-
-        public int KeyLength
-        {
-            get { return 64; } 
-            protected set { }
-        }
-
-        public string KeyChars
-        {
-            get { return "abcdefghijklmnopqrstuvwxyz1234567890"; }
-            protected set { }
-        }
 
         public ApplicationUserManager UserManager
         {
@@ -65,16 +55,32 @@
             {
                 this.ChangeOrSetPlayerSession(login);
 
-                return Json(new { status = "YES", message = "Успешная авторизация" }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = "YES", message = Resources.LauncherSuccessAuth }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new { status = "NO", message = "Неверные данные" }, JsonRequestBehavior.AllowGet);
+            return Json(new { status = "NO", message = Resources.LauncherErrorAuth }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Check launcher version
+        /// </summary>
+        /// <param name="masterVersion">Launcher Master Version</param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult CheckMasterVersion(string masterVersion)
+        {
+            if (LauncherExtentions.MasterVersion.Equals(masterVersion))
+            {
+                return Json(new {status = "OK", message = Resources.LauncherValidVersion });
+            }
+
+            return Json(new { status = "NO", message = Resources.LauncherInvalidVersion });
         }
 
         #endregion
-        
-        #region Private Methods
 
+        #region Private Methods
+        
         private bool IsValidAuth(string login, string password)
         {
             try
@@ -118,11 +124,13 @@
         private string GenerateKey()
         {
             var key = String.Empty;
+            var keyChars = LauncherExtentions.KeyChars;
+
             var random = new Random();
 
-            for (int i = 0; i < this.KeyLength; i++)
+            for (int i = 0; i < LauncherExtentions.KeyLength; i++)
             {
-                key += this.KeyChars[random.Next(this.KeyChars.Length)];
+                key += keyChars[random.Next(keyChars.Length)];
             }
 
             return key;

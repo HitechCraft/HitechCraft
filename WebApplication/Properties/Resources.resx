@@ -168,6 +168,18 @@
   <data name="GenderMale" xml:space="preserve">
     <value>Мужской</value>
   </data>
+  <data name="LauncherErrorAuth" xml:space="preserve">
+    <value>Неверные данные для входа</value>
+  </data>
+  <data name="LauncherInvalidVersion" xml:space="preserve">
+    <value>Версия лаунчера устарела</value>
+  </data>
+  <data name="LauncherSuccessAuth" xml:space="preserve">
+    <value>Успешная авторизация</value>
+  </data>
+  <data name="LauncherValidVersion" xml:space="preserve">
+    <value>Версия лаунчера валидная</value>
+  </data>
   <data name="NickName" xml:space="preserve">
     <value>Имя пользователя</value>
   </data>

@@ -214,6 +214,42 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Неверные данные для входа.
+        /// </summary>
+        public static string LauncherErrorAuth {
+            get {
+                return ResourceManager.GetString("LauncherErrorAuth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Версия лаунчера устарела.
+        /// </summary>
+        public static string LauncherInvalidVersion {
+            get {
+                return ResourceManager.GetString("LauncherInvalidVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Успешная авторизация.
+        /// </summary>
+        public static string LauncherSuccessAuth {
+            get {
+                return ResourceManager.GetString("LauncherSuccessAuth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Версия лаунчера валидная.
+        /// </summary>
+        public static string LauncherValidVersion {
+            get {
+                return ResourceManager.GetString("LauncherValidVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Имя пользователя.
         /// </summary>
         public static string NickName {
