@@ -1,4 +1,4 @@
-﻿namespace WebApplication.Extentions
+﻿namespace WebApplication.Managers
 {
     using System;
     using System.Security.Cryptography;
@@ -7,7 +7,7 @@
     /// <summary>
     /// From https://msdn.microsoft.com/ru-ru/library/system.security.cryptography.md5(v=vs.110).aspx
     /// </summary>
-    public static class MD5Extentions
+    public static class MD5Manager
     {
         public static string GetMd5Hash(MD5 md5Hash, string input)
         {

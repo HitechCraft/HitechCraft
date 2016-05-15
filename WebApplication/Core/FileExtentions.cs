@@ -1,11 +1,10 @@
-﻿using System;
-
-namespace WebApplication.Extentions
+﻿namespace WebApplication.Managers
 {
     using System.Web;
     using System.IO;
+    using System;
 
-    public static class FileExtentions
+    public static class FileManager
     {
         public static bool IsDirOrFileExists(string path)
         {

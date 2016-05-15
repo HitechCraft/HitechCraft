@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
-
-namespace WebApplication.Extentions
+﻿namespace WebApplication.Managers
 {
-    public static class LauncherExtentions
+    using System.Collections.Generic;
+
+    public static class LauncherManager
     {
         #region Properties
 

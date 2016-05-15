@@ -203,12 +203,12 @@
     <Compile Include="Domain\ShopSale.cs" />
     <Compile Include="Domain\UserSkin.cs" />
     <Compile Include="Domain\Currency.cs" />
-    <Compile Include="Extentions\FileExtentions.cs" />
-    <Compile Include="Extentions\MD5Extentions.cs" />
+    <Compile Include="Core\FileExtentions.cs" />
+    <Compile Include="Core\MD5Extentions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Extentions\LauncherExtentions.cs" />
+    <Compile Include="Core\LauncherExtentions.cs" />
     <Compile Include="Migrations\201604142008281_AddModels.cs" />
     <Compile Include="Migrations\201604142008281_AddModels.Designer.cs">
       <DependentUpon>201604142008281_AddModels.cs</DependentUpon>

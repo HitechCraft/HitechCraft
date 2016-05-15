@@ -1,4 +1,6 @@
-﻿namespace WebApplication.Controllers
+﻿using WebApplication.Managers;
+
+namespace WebApplication.Controllers
 {
     #region Using Directories
 
@@ -10,7 +12,6 @@
     using System.Linq;
     using System.Web.Mvc;
     using Properties;
-    using Extentions;
 
     #endregion
 
@@ -77,7 +78,7 @@
         [HttpGet]
         public JsonResult CheckMasterVersion(string masterVersion)
         {
-            if (LauncherExtentions.MasterVersion.Equals(masterVersion))
+            if (LauncherManager.MasterVersion.Equals(masterVersion))
             {
                 return Json(new
                 {
@@ -95,11 +96,11 @@
 
         public JsonResult CheckRequredFolders(string clientName)
         {
-            var folders = LauncherExtentions.GetRequiredFolderList(clientName);
+            var folders = LauncherManager.GetRequiredFolderList(clientName);
 
             foreach (string folder in folders)
             {
-                if (!FileExtentions.IsDirOrFileExists(folder))
+                if (!FileManager.IsDirOrFileExists(folder))
                 {
                     return Json(new
                     {
@@ -164,11 +165,11 @@
         private string GenerateKey()
         {
             var key = String.Empty;
-            var keyChars = LauncherExtentions.KeyChars;
+            var keyChars = LauncherManager.KeyChars;
 
             var random = new Random();
 
-            for (int i = 0; i < LauncherExtentions.KeyLength; i++)
+            for (int i = 0; i < LauncherManager.KeyLength; i++)
             {
                 key += keyChars[random.Next(keyChars.Length)];
             }
