@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WebApplication.Models.BanViewModel>
+
+@if (Model.Any())
+{
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Ник игрока</th>
+            <th>Причина</th>
+            <th>Тип записи</th>
+            <th>Ник администратора</th>
+            <th>Дата и время</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var banLog in Model)
+            {
+                <tr onclick="javascript:redirectToBanAction(@banLog.Id);">
+                    <td>@banLog.PlayerName</td>
+                    <td>@banLog.Reason</td>
+                    <td>@banLog.Type</td>
+                    <td>@banLog.BannedBy</td>
+                    <td>@banLog.ActionTime</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h4 style="text-align: center">Записей не найдено</h4>
+}
