@@ -36,7 +36,7 @@ namespace WebApplication.Extentions
         /// </summary>
         public static string LauncherDataDir
         {
-            get { return "/" + "Launcher"; }
+            get { return "~/" + "Launcher"; }
         }
 
         /// <summary>
@@ -50,19 +50,19 @@ namespace WebApplication.Extentions
         #endregion
 
         #region Methods
-
+        
         public static List<string> GetRequiredFolderList(string clientName)
         {
-            var clientDir = LauncherClientsDir + "/" + clientName;
+            var clientDir = LauncherClientsDir + "/" + clientName + "/";
 
             return new List<string>
             {
-                LauncherClientsDir + "assets.zip",
-                clientDir + "/" + "bin",
-                clientDir + "/" + "natives",
-                clientDir + "/" + "mods",
-                clientDir + "/" + "coremods",
-                clientDir + "/" + "config.zip"
+                LauncherClientsDir + "/" + "assets.zip",
+                clientDir + "bin" + "/",
+                clientDir + "natives" + "/",
+                clientDir + "mods" + "/",
+                clientDir + "coremods" + "/",
+                clientDir + "config.zip"
             };
         }
 

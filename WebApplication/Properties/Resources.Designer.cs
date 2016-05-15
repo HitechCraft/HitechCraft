@@ -214,6 +214,24 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Структура папок клиента проверена.
+        /// </summary>
+        public static string LauncherClientAllFolders {
+            get {
+                return ResourceManager.GetString("LauncherClientAllFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Структура папок неверная.
+        /// </summary>
+        public static string LauncherClientNoFolders {
+            get {
+                return ResourceManager.GetString("LauncherClientNoFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Неверные данные для входа.
         /// </summary>
         public static string LauncherErrorAuth {

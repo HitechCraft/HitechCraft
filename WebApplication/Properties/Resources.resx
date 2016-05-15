@@ -168,6 +168,12 @@
   <data name="GenderMale" xml:space="preserve">
     <value>Мужской</value>
   </data>
+  <data name="LauncherClientAllFolders" xml:space="preserve">
+    <value>Структура папок клиента проверена</value>
+  </data>
+  <data name="LauncherClientNoFolders" xml:space="preserve">
+    <value>Структура папок неверная</value>
+  </data>
   <data name="LauncherErrorAuth" xml:space="preserve">
     <value>Неверные данные для входа</value>
   </data>

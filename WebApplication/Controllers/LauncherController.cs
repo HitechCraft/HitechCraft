@@ -55,10 +55,18 @@
             {
                 this.ChangeOrSetPlayerSession(login);
 
-                return Json(new { status = "YES", message = Resources.LauncherSuccessAuth }, JsonRequestBehavior.AllowGet);
+                return Json(new
+                {
+                    status = "YES", message = Resources.LauncherSuccessAuth
+                }, 
+                JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new { status = "NO", message = Resources.LauncherErrorAuth }, JsonRequestBehavior.AllowGet);
+            return Json(new
+            {
+                status = "NO", message = Resources.LauncherErrorAuth
+            }, 
+            JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -71,10 +79,42 @@
         {
             if (LauncherExtentions.MasterVersion.Equals(masterVersion))
             {
-                return Json(new {status = "OK", message = Resources.LauncherValidVersion });
+                return Json(new
+                {
+                    status = "OK", message = Resources.LauncherValidVersion
+                }, 
+                JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new { status = "NO", message = Resources.LauncherInvalidVersion });
+            return Json(new
+            {
+                status = "NO", message = Resources.LauncherInvalidVersion
+            }, 
+            JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CheckRequredFolders(string clientName)
+        {
+            var folders = LauncherExtentions.GetRequiredFolderList(clientName);
+
+            foreach (string folder in folders)
+            {
+                if (!FileExtentions.IsDirOrFileExists(folder))
+                {
+                    return Json(new
+                    {
+                        status = "NO",
+                        message = Resources.LauncherClientNoFolders
+                    },
+                        JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            return Json(new
+            {
+                status = "YES", message = Resources.LauncherClientAllFolders
+            }, 
+            JsonRequestBehavior.AllowGet);
         }
 
         #endregion
