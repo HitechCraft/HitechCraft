@@ -1,4 +1,6 @@
-﻿namespace WebApplication.Managers
+﻿using System;
+
+namespace WebApplication.Managers
 {
     using System.Collections.Generic;
 
@@ -36,6 +38,14 @@
         public static string LauncherDataDir
         {
             get { return "~/" + "Launcher"; }
+        }
+
+        /// <summary>
+        /// Player skin url
+        /// </summary>
+        public static string SkinsUrlString
+        {
+            get { return "http://hitechcraft.ru/Account/GetSkinImage?userName="; }
         }
 
         /// <summary>

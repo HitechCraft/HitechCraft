@@ -1,4 +1,7 @@
-﻿namespace WebApplication.Controllers
+﻿using System.Text;
+using System.Web.Script.Serialization;
+
+namespace WebApplication.Controllers
 {
     #region Using Directories
 
@@ -129,7 +132,7 @@
         }
 
         /// <summary>
-        /// Join server (j)
+        /// Join server (../minecraft/join)
         /// </summary>
         /// <param name="selectedProfile">User Id (UUID)</param>
         /// <param name="accessToken">Session Id</param>
@@ -138,16 +141,35 @@
         [HttpGet]
         public JsonResult JoinServer(string selectedProfile, string accessToken, string serverId)
         {
-            return Json(new
+            try
             {
-                error = "Bad login",
-                errorMessage = "Bad login"
-            },
-            JsonRequestBehavior.AllowGet);
+                var playerSession =
+                    this.context.PlayerSessions.First(ps => ps.Md5 == selectedProfile && ps.Session == accessToken);
+
+                playerSession.Server = serverId;
+
+                this.context.Entry(playerSession).State = EntityState.Modified;
+                this.context.SaveChanges();
+
+                return Json(new
+                {
+                    id = playerSession.Md5, name = playerSession.PlayerName
+                }, 
+                JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    error = "Bad login",
+                    errorMessage = "Bad login"
+                },
+                JsonRequestBehavior.AllowGet);
+            }
         }
 
         /// <summary>
-        /// Check server (h)
+        /// Check server (../minecraft/hasJoined)
         /// </summary>
         /// <param name="username">>Player nickname</param>
         /// <param name="serverId">Server Id</param>
@@ -155,12 +177,62 @@
         [HttpGet]
         public JsonResult CheckServer(string username, string serverId)
         {
-            return Json(new
+            try
             {
-                error = "Bad login",
-                errorMessage = "Bad login"
-            },
-            JsonRequestBehavior.AllowGet);
+                var playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == username && ps.Server == serverId);
+                var unixTimeNow = ((int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
+                var userSkinUrl = LauncherManager.SkinsUrlString + playerSession.PlayerName;
+
+                var userData = Json(new
+                {
+                    timestamp = unixTimeNow,
+                    profileId = playerSession.Md5,
+                    profileName = playerSession.PlayerName,
+                    textures = new
+                    {
+                        SKIN = new
+                        {
+                            url = userSkinUrl
+                        } 
+                        //TODO Реализовать загрузку плаща и добавить сюда параметр CAPE с ссылой на плащ
+                    }
+                }, JsonRequestBehavior.AllowGet);
+
+                return Json(new
+                {
+                    id = playerSession.Md5,
+                    name = playerSession.PlayerName,
+                    properties = new object[]
+                    {
+                        new
+                        {
+                            name = "textures",
+                            value = Convert.ToBase64String(Encoding.ASCII.GetBytes(new JavaScriptSerializer().Serialize(userData.Data))),
+                            signature = "Cg=="
+                        }
+                    }
+                },
+                JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    error = "Bad login",
+                    errorMessage = "Bad login"
+                },
+                JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// Returns player data (../minecraft/profile/)
+        /// </summary>
+        /// <param name="user">Player md5 hash</param>
+        /// <returns></returns>
+        public JsonResult PlayerProfile(string user)
+        {
+            return null;
         }
 
         /// <summary>
