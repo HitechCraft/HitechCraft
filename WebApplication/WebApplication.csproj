@@ -203,12 +203,12 @@
     <Compile Include="Domain\ShopSale.cs" />
     <Compile Include="Domain\UserSkin.cs" />
     <Compile Include="Domain\Currency.cs" />
-    <Compile Include="Core\FileExtentions.cs" />
-    <Compile Include="Core\MD5Extentions.cs" />
+    <Compile Include="Core\FileManager.cs" />
+    <Compile Include="Core\MD5Manager.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Core\LauncherExtentions.cs" />
+    <Compile Include="Core\LauncherManager.cs" />
     <Compile Include="Migrations\201604142008281_AddModels.cs" />
     <Compile Include="Migrations\201604142008281_AddModels.Designer.cs">
       <DependentUpon>201604142008281_AddModels.cs</DependentUpon>
@@ -216,6 +216,10 @@
     <Compile Include="Migrations\201605142208070_PlayerSession.cs" />
     <Compile Include="Migrations\201605142208070_PlayerSession.Designer.cs">
       <DependentUpon>201605142208070_PlayerSession.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605161253363_PlayerSessionMd5.cs" />
+    <Compile Include="Migrations\201605161253363_PlayerSessionMd5.Designer.cs">
+      <DependentUpon>201605161253363_PlayerSessionMd5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -329,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605142208070_PlayerSession.resx">
       <DependentUpon>201605142208070_PlayerSession.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605161253363_PlayerSessionMd5.resx">
+      <DependentUpon>201605161253363_PlayerSessionMd5.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

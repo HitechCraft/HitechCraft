@@ -1,4 +1,7 @@
-﻿namespace WebApplication.Controllers
+﻿using System.Text;
+using System.Web.Script.Serialization;
+
+namespace WebApplication.Controllers
 {
     #region Using Directories
 
@@ -21,7 +24,7 @@
         private ApplicationUserManager _userManager;
 
         #endregion
-        
+
         #region Properties
 
         public ApplicationUserManager UserManager
@@ -57,15 +60,17 @@
 
                 return Json(new
                 {
-                    status = "YES", message = Resources.LauncherSuccessAuth
-                }, 
+                    status = "YES",
+                    message = Resources.LauncherSuccessAuth
+                },
                 JsonRequestBehavior.AllowGet);
             }
 
             return Json(new
             {
-                status = "NO", message = Resources.LauncherErrorAuth
-            }, 
+                status = "NO",
+                message = Resources.LauncherErrorAuth
+            },
             JsonRequestBehavior.AllowGet);
         }
 
@@ -81,15 +86,17 @@
             {
                 return Json(new
                 {
-                    status = "OK", message = Resources.LauncherValidVersion
-                }, 
+                    status = "OK",
+                    message = Resources.LauncherValidVersion
+                },
                 JsonRequestBehavior.AllowGet);
             }
 
             return Json(new
             {
-                status = "NO", message = Resources.LauncherInvalidVersion
-            }, 
+                status = "NO",
+                message = Resources.LauncherInvalidVersion
+            },
             JsonRequestBehavior.AllowGet);
         }
 
@@ -98,6 +105,7 @@
         /// </summary>
         /// <param name="clientName">name of selected client</param>
         /// <returns></returns>
+        [HttpGet]
         public JsonResult CheckRequredFolders(string clientName)
         {
             var folders = LauncherManager.GetRequiredFolderList(clientName);
@@ -111,21 +119,189 @@
                         status = "NO",
                         message = Resources.LauncherClientNoFolders
                     },
-                        JsonRequestBehavior.AllowGet);
+                    JsonRequestBehavior.AllowGet);
                 }
             }
 
             return Json(new
             {
-                status = "YES", message = Resources.LauncherClientAllFolders
-            }, 
+                status = "YES",
+                message = Resources.LauncherClientAllFolders
+            },
             JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Join server (../minecraft/join)
+        /// </summary>
+        /// <param name="selectedProfile">User Id (UUID)</param>
+        /// <param name="accessToken">Session Id</param>
+        /// <param name="serverId">Server Id</param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult JoinServer(string selectedProfile, string accessToken, string serverId)
+        {
+            try
+            {
+                var playerSession =
+                    this.context.PlayerSessions.First(ps => ps.Md5 == selectedProfile && ps.Session == accessToken);
+
+                playerSession.Server = serverId;
+
+                this.context.Entry(playerSession).State = EntityState.Modified;
+                this.context.SaveChanges();
+
+                return Json(new
+                {
+                    id = playerSession.Md5, name = playerSession.PlayerName
+                }, 
+                JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    error = "Bad login",
+                    errorMessage = "Bad login"
+                },
+                JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// Check server (../minecraft/hasJoined)
+        /// </summary>
+        /// <param name="username">>Player nickname</param>
+        /// <param name="serverId">Server Id</param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult CheckServer(string username, string serverId)
+        {
+            try
+            {
+                var playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == username && ps.Server == serverId);
+                var unixTimeNow = ((int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
+                var userSkinUrl = LauncherManager.SkinsUrlString + playerSession.PlayerName;
+
+                var userData = Json(new
+                {
+                    timestamp = unixTimeNow,
+                    profileId = playerSession.Md5,
+                    profileName = playerSession.PlayerName,
+                    textures = new
+                    {
+                        SKIN = new
+                        {
+                            url = userSkinUrl
+                        } 
+                        //TODO Реализовать загрузку плаща и добавить сюда параметр CAPE с ссылой на плащ
+                    }
+                }, JsonRequestBehavior.AllowGet);
+
+                return Json(new
+                {
+                    id = playerSession.Md5,
+                    name = playerSession.PlayerName,
+                    properties = new object[]
+                    {
+                        new
+                        {
+                            name = "textures",
+                            value = Convert.ToBase64String(Encoding.ASCII.GetBytes(new JavaScriptSerializer().Serialize(userData.Data))),
+                            signature = "Cg=="
+                        }
+                    }
+                },
+                JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    error = "Bad login",
+                    errorMessage = "Bad login"
+                },
+                JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// Returns player data (../minecraft/profile/)
+        /// </summary>
+        /// <param name="user">Player md5 hash</param>
+        /// <returns></returns>
+        public JsonResult PlayerProfile(string user)
+        {
+            try
+            {
+                var playerSession = this.context.PlayerSessions.First(ps => ps.Md5 == user);
+                var unixTimeNow = ((int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
+                var userSkinUrl = LauncherManager.SkinsUrlString + playerSession.PlayerName;
+
+                var userData = Json(new
+                {
+                    timestamp = unixTimeNow,
+                    profileId = playerSession.Md5,
+                    profileName = playerSession.PlayerName,
+                    textures = new
+                    {
+                        SKIN = new
+                        {
+                            url = userSkinUrl
+                        }
+                        //TODO Реализовать загрузку плаща и добавить сюда параметр CAPE с ссылой на плащ
+                    }
+                }, JsonRequestBehavior.AllowGet);
+
+                return Json(new
+                {
+                    id = playerSession.Md5,
+                    name = playerSession.PlayerName,
+                    properties = new object[]
+                    {
+                        new
+                        {
+                            name = "textures",
+                            value = Convert.ToBase64String(Encoding.ASCII.GetBytes(new JavaScriptSerializer().Serialize(userData.Data)))
+                        }
+                    }
+                },
+                JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Player skull fix
+        /// </summary>
+        /// <param name="username">Player nickname</param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult UuidSkull(string username)
+        {
+            try
+            {
+                var playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == username);
+
+                return Json(new
+                {
+                    id = playerSession.Md5, name = playerSession.PlayerName
+                },
+                JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         #endregion
 
         #region Private Methods
-        
+
         private bool IsValidAuth(string login, string password)
         {
             try
@@ -159,11 +335,17 @@
                     PlayerName = login,
                     Session = this.GenerateKey(),
                     Server = null,
-                    Token = this.GenerateKey()
+                    Token = this.GenerateKey(),
+                    Md5 = this.UuidConvert(login)
                 });
 
                 this.context.SaveChanges();
             }
+        }
+
+        private string UuidConvert(string username)
+        {
+            return Md5Manager.StringFromUuid(Md5Manager.UuidFromString("OfflinePlayer:" + username));
         }
 
         private string GenerateKey()
@@ -180,7 +362,7 @@
 
             return key;
         }
-        
+
         #endregion
     }
 }
