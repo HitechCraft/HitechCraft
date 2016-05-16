@@ -1,11 +1,20 @@
 ﻿namespace WebApplication.Managers
 {
+    #region Using Directives
+
     using System.Web;
     using System.IO;
     using System;
 
+    #endregion
+    
     public static class FileManager
     {
+        /// <summary>
+        /// Check is valid file or dir path
+        /// </summary>
+        /// <param name="path">File or dir path</param>
+        /// <returns></returns>
         public static bool IsDirOrFileExists(string path)
         {
             var sitePath = HttpContext.Current.Server.MapPath(path);
@@ -25,6 +34,8 @@
             }
         }
 
+        #region Private Methods
+
         private static bool IsFileExists(string path)
         {
             return File.Exists(path);
@@ -34,5 +45,7 @@
         {
             return Directory.Exists(path);
         }
+
+        #endregion
     }
 }

@@ -133,7 +133,11 @@
         [HttpGet]
         public JsonResult JoinServer(string selectedProfile, string accessToken, string serverId)
         {
-            return Json(new {error = "Bad login", errorMessage = "Bad login"}, JsonRequestBehavior.AllowGet);
+            return Json(new
+            {
+                error = "Bad login", errorMessage = "Bad login"
+            }, 
+            JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
@@ -145,7 +149,21 @@
         [HttpGet]
         public JsonResult CheckServer(string username, string serverId)
         {
-            return Json(new { error = "Bad login", errorMessage = "Bad login" }, JsonRequestBehavior.AllowGet);
+            return Json(new
+            {
+                error = "Bad login", errorMessage = "Bad login"
+            }, 
+            JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public string UuidConvert(string username)
+        {
+            return uuidFromString();
         }
 
         #endregion
