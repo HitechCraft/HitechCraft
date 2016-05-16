@@ -49,7 +49,7 @@
         /// <returns></returns>
         public static string UuidFromString(string input)
         {
-            
+            return GetMd5Hash(MD5.Create(), input);
         }
     }
 }
