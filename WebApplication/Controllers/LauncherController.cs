@@ -98,6 +98,7 @@
         /// </summary>
         /// <param name="clientName">name of selected client</param>
         /// <returns></returns>
+        [HttpGet]
         public JsonResult CheckRequredFolders(string clientName)
         {
             var folders = LauncherManager.GetRequiredFolderList(clientName);
@@ -120,6 +121,31 @@
                 status = "YES", message = Resources.LauncherClientAllFolders
             }, 
             JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Join server (j)
+        /// </summary>
+        /// <param name="selectedProfile">User Id (UUID)</param>
+        /// <param name="accessToken">Session Id</param>
+        /// <param name="serverId">Server Id</param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult JoinServer(string selectedProfile, string accessToken, string serverId)
+        {
+            return Json(new {error = "Bad login", errorMessage = "Bad login"}, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Check server (h)
+        /// </summary>
+        /// <param name="username">Player name</param>
+        /// <param name="serverId">Server Id</param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult CheckServer(string username, string serverId)
+        {
+            return Json(new { error = "Bad login", errorMessage = "Bad login" }, JsonRequestBehavior.AllowGet);
         }
 
         #endregion
