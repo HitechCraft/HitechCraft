@@ -1,7 +1,4 @@
-﻿using System.Text;
-using System.Web.Script.Serialization;
-
-namespace WebApplication.Controllers
+﻿namespace WebApplication.Controllers
 {
     #region Using Directories
 
@@ -14,6 +11,8 @@ namespace WebApplication.Controllers
     using System.Web.Mvc;
     using Properties;
     using Managers;
+    using System.Text;
+    using System.Web.Script.Serialization;
 
     #endregion
 
