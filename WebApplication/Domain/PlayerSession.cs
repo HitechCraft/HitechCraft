@@ -16,6 +16,8 @@
         public string Server { get; set; }
 
         public string Token { get; set; }
+
+        public string Md5 { get; set; }
         
         public virtual Player Player { get; set; }
     }
