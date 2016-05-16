@@ -21,7 +21,7 @@
         private ApplicationUserManager _userManager;
 
         #endregion
-        
+
         #region Properties
 
         public ApplicationUserManager UserManager
@@ -57,15 +57,17 @@
 
                 return Json(new
                 {
-                    status = "YES", message = Resources.LauncherSuccessAuth
-                }, 
+                    status = "YES",
+                    message = Resources.LauncherSuccessAuth
+                },
                 JsonRequestBehavior.AllowGet);
             }
 
             return Json(new
             {
-                status = "NO", message = Resources.LauncherErrorAuth
-            }, 
+                status = "NO",
+                message = Resources.LauncherErrorAuth
+            },
             JsonRequestBehavior.AllowGet);
         }
 
@@ -81,15 +83,17 @@
             {
                 return Json(new
                 {
-                    status = "OK", message = Resources.LauncherValidVersion
-                }, 
+                    status = "OK",
+                    message = Resources.LauncherValidVersion
+                },
                 JsonRequestBehavior.AllowGet);
             }
 
             return Json(new
             {
-                status = "NO", message = Resources.LauncherInvalidVersion
-            }, 
+                status = "NO",
+                message = Resources.LauncherInvalidVersion
+            },
             JsonRequestBehavior.AllowGet);
         }
 
@@ -112,14 +116,15 @@
                         status = "NO",
                         message = Resources.LauncherClientNoFolders
                     },
-                        JsonRequestBehavior.AllowGet);
+                    JsonRequestBehavior.AllowGet);
                 }
             }
 
             return Json(new
             {
-                status = "YES", message = Resources.LauncherClientAllFolders
-            }, 
+                status = "YES",
+                message = Resources.LauncherClientAllFolders
+            },
             JsonRequestBehavior.AllowGet);
         }
 
@@ -135,15 +140,16 @@
         {
             return Json(new
             {
-                error = "Bad login", errorMessage = "Bad login"
-            }, 
+                error = "Bad login",
+                errorMessage = "Bad login"
+            },
             JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
         /// Check server (h)
         /// </summary>
-        /// <param name="username">Player name</param>
+        /// <param name="username">>Player nickname</param>
         /// <param name="serverId">Server Id</param>
         /// <returns></returns>
         [HttpGet]
@@ -151,25 +157,40 @@
         {
             return Json(new
             {
-                error = "Bad login", errorMessage = "Bad login"
-            }, 
+                error = "Bad login",
+                errorMessage = "Bad login"
+            },
             JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
-        /// 
+        /// Player skull fix
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="username">Player nickname</param>
         /// <returns></returns>
-        public string UuidConvert(string username)
+        [HttpGet]
+        public JsonResult UuidSkull(string username)
         {
-            return uuidFromString();
+            try
+            {
+                var playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == username);
+
+                return Json(new
+                {
+                    id = playerSession.Md5, name = playerSession.PlayerName
+                },
+                JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         #endregion
 
         #region Private Methods
-        
+
         private bool IsValidAuth(string login, string password)
         {
             try
@@ -203,11 +224,17 @@
                     PlayerName = login,
                     Session = this.GenerateKey(),
                     Server = null,
-                    Token = this.GenerateKey()
+                    Token = this.GenerateKey(),
+                    Md5 = this.UuidConvert(login)
                 });
 
                 this.context.SaveChanges();
             }
+        }
+
+        private string UuidConvert(string username)
+        {
+            return Md5Manager.UuidFromString("OfflinePlayer:" + username);
         }
 
         private string GenerateKey()
@@ -224,7 +251,7 @@
 
             return key;
         }
-        
+
         #endregion
     }
 }
