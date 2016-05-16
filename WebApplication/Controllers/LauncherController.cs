@@ -304,9 +304,9 @@ namespace WebApplication.Controllers
             }
         }
 
-        private string UuidConvert(string username)
+        public string UuidConvert(string username)
         {
-            return Md5Manager.UuidFromString("OfflinePlayer:" + username);
+            return Md5Manager.StringFromUuid(Md5Manager.UuidFromString("OfflinePlayer:" + username));
         }
 
         private string GenerateKey()
