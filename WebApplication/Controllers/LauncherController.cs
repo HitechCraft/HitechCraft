@@ -232,7 +232,46 @@ namespace WebApplication.Controllers
         /// <returns></returns>
         public JsonResult PlayerProfile(string user)
         {
-            return null;
+            try
+            {
+                var playerSession = this.context.PlayerSessions.First(ps => ps.Md5 == user);
+                var unixTimeNow = ((int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
+                var userSkinUrl = LauncherManager.SkinsUrlString + playerSession.PlayerName;
+
+                var userData = Json(new
+                {
+                    timestamp = unixTimeNow,
+                    profileId = playerSession.Md5,
+                    profileName = playerSession.PlayerName,
+                    textures = new
+                    {
+                        SKIN = new
+                        {
+                            url = userSkinUrl
+                        }
+                        //TODO Реализовать загрузку плаща и добавить сюда параметр CAPE с ссылой на плащ
+                    }
+                }, JsonRequestBehavior.AllowGet);
+
+                return Json(new
+                {
+                    id = playerSession.Md5,
+                    name = playerSession.PlayerName,
+                    properties = new object[]
+                    {
+                        new
+                        {
+                            name = "textures",
+                            value = Convert.ToBase64String(Encoding.ASCII.GetBytes(new JavaScriptSerializer().Serialize(userData.Data)))
+                        }
+                    }
+                },
+                JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -304,7 +343,7 @@ namespace WebApplication.Controllers
             }
         }
 
-        public string UuidConvert(string username)
+        private string UuidConvert(string username)
         {
             return Md5Manager.StringFromUuid(Md5Manager.UuidFromString("OfflinePlayer:" + username));
         }
