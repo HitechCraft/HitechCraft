@@ -1,6 +1,4 @@
-﻿using System.Text;
-using System.Web.Script.Serialization;
-
+﻿using System.Web.Script.Serialization;
 namespace WebApplication.Controllers
 {
     #region Using Directories
@@ -14,6 +12,7 @@ namespace WebApplication.Controllers
     using System.Web.Mvc;
     using Properties;
     using Managers;
+    using AutoMapper;
 
     #endregion
 
@@ -56,8 +55,6 @@ namespace WebApplication.Controllers
 
             if (IsValidAuth(login, password))
             {
-                this.ChangeOrSetPlayerSession(login);
-
                 return Json(new
                 {
                     status = "YES",
@@ -316,6 +313,9 @@ namespace WebApplication.Controllers
             }
         }
 
+            this.ChangeOrSetPlayerSession(login);
+
+                return new JsonSessionData();
         private void ChangeOrSetPlayerSession(string login)
         {
             try
