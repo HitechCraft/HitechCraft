@@ -1,0 +1,116 @@
+﻿@using System.ComponentModel
+@using WebApplication.Domain
+@using WebApplication.Models
+@model WebApplication.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Регистрация";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Создайте новую учетную запись.</h4>
+    @Html.ValidationSummary(true)
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <div class="form-inline">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @id = "user-name" })
+                <input type="button" id="check-username" class="btn btn-primary" value="@Resources.CheckUserName" />
+            </div>
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(m => m.Gender, new { @class = "form-control", @id = "gender" })
+            @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Регистрация" />
+        </div>
+    </div>
+}
+<div id="skin-container">
+    <img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="frontSkin" hidden="" />
+    <img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="backSkin" hidden="" />
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    renderMCSkins('backSkin', 10);
+    renderMCSkins('frontSkin', 10);
+
+    $('#check-username').click(function () {
+        $.post('@Url.Action("IsUserExists", "Account")',
+            {
+                userName: $('#user-name').val()
+            })
+            .done(function (data) {
+                console.log(data);
+                if (data.status === "success") {
+                    growlSuccess(data.message);
+                } else {
+                    growlError(data.message);
+                }
+            });
+    });
+
+    //for Firefox update page
+    $(document).ready(function () {
+        if ($('#gender option:selected').val() != 0) {
+            $(".frontSkin").replaceWith('<img src="" id="skin-image" class="frontSkin"/>');
+            $(".backSkin").replaceWith('<img src="" id="skin-image" class="backSkin"/>');
+            $('.frontSkin').attr("src", "/Account/GetSkinImage?gender=" + "Female");
+            $('.frontSkin').attr("src", "/Account/GetSkinImage?gender=" + "Female");
+            renderMCSkins('frontSkin', 10);
+            renderMCSkins('backSkin', 10);
+        }
+    });
+
+    $('#gender').change(function () {
+        var _gender = $('#gender option:selected').val();
+
+        if (_gender == 0) {
+            _gender = "Male";
+        } else {
+            _gender = "Female";
+        }
+        $(".frontSkin").replaceWith('<img src="" id="skin-image" class="frontSkin"/>');
+        $(".backSkin").replaceWith('<img src="" id="skin-image" class="backSkin"/>');
+        $('.frontSkin').attr("src", "/Account/GetSkinImage?gender=" + _gender);
+        $('.backSkin').attr("src", "/Account/GetSkinImage?gender=" + _gender);
+        renderMCSkins('frontSkin', 10);
+        renderMCSkins('backSkin', 10);
+    });
+</script>

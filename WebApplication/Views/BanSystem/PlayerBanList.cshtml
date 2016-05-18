@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "PlayerBanList";
+}
+
+<h2>PlayerBanList</h2>
+
+<div id="ban-list">
+    @Html.Action("BanListPartial", "BanSystem", new {playerId = ViewBag.PlayerId})
+</div>
+
+<script type="text/javascript">
+    function redirectToBanAction(actionId) {
+        location.replace('@Url.Action("BanAction")?actionId=' + actionId);
+    }
+</script>
