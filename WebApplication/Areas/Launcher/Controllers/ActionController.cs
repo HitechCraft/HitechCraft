@@ -11,10 +11,10 @@
     using Microsoft.AspNet.Identity.Owin;
     using WebApplication.Controllers;
     using Domain;
-    using Domain.Json;
     using Managers;
     using Properties;
     using Services;
+    using Models.Json;
 
     #endregion
 

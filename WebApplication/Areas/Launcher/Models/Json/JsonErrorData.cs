@@ -1,4 +1,4 @@
-﻿namespace WebApplication.Domain.Json
+﻿namespace WebApplication.Areas.Launcher.Models.Json
 {
     public class JsonErrorData
     {

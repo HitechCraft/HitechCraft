@@ -9,8 +9,8 @@
     using System.Web.Mvc;
     using System.Web.Script.Serialization;
     using Services;
-    using Domain.Json;
     using WebApplication.Controllers;
+    using Models.Json;
 
     #endregion
 
@@ -171,7 +171,7 @@
             {
                 var playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == username);
 
-                return Json(new
+                return Json(new JsonUserUuidData
                 {
                     id = playerSession.Md5,
                     name = playerSession.PlayerName

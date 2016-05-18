@@ -186,6 +186,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Launcher\Controllers\ClientServerController.cs" />
     <Compile Include="Areas\Launcher\LauncherAreaRegistration.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonUserUuidData.cs" />
     <Compile Include="Areas\Launcher\Services\LauncherConfig.cs" />
     <Compile Include="Areas\Launcher\Services\LauncherManager.cs" />
     <Compile Include="Context\Context.cs" />
