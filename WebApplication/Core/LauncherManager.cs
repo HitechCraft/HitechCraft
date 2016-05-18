@@ -21,7 +21,7 @@ namespace WebApplication.Managers
         /// </summary>
         public static int KeyLength
         {
-            get { return 64; }
+            get { return 32; }
         }
 
         /// <summary>
