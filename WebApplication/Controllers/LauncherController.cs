@@ -135,7 +135,7 @@
         #endregion
 
         #region Client - Server Actions
-        
+
         /// <summary>
         /// Join server (../minecraft/join)
         /// </summary>
@@ -158,8 +158,9 @@
 
                 return Json(new
                 {
-                    id = playerSession.Md5, name = playerSession.PlayerName
-                }, 
+                    id = playerSession.Md5,
+                    name = playerSession.PlayerName
+                },
                 JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -198,7 +199,7 @@
                         SKIN = new JsonUserSkinData
                         {
                             url = userSkinUrl
-                        } 
+                        }
                     }
                 }, JsonRequestBehavior.AllowGet);
 
@@ -292,7 +293,8 @@
 
                 return Json(new
                 {
-                    id = playerSession.Md5, name = playerSession.PlayerName
+                    id = playerSession.Md5,
+                    name = playerSession.PlayerName
                 },
                 JsonRequestBehavior.AllowGet);
             }
@@ -301,7 +303,7 @@
                 return null;
             }
         }
-        
+
         #endregion
 
         #region Private Methods
@@ -322,11 +324,11 @@
 
         private JsonSessionData GetUserSessionData(string login)
         {
-            PlayerSession playerSession;
+            this.ChangeOrSetPlayerSession(login);
 
             try
             {
-                playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == login);
+                PlayerSession playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == login);
 
                 Mapper.CreateMap<PlayerSession, JsonSessionData>()
                         .ForMember(dst => dst.PlayerName, exp => exp.MapFrom(src => src.PlayerName))
@@ -339,24 +341,10 @@
             }
             catch (Exception)
             {
-                ChangeOrSetPlayerSession(login);
-
-                playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == login);
-
-                Mapper.CreateMap<PlayerSession, JsonSessionData>()
-                        .ForMember(dst => dst.PlayerName, exp => exp.MapFrom(src => src.PlayerName))
-                        .ForMember(dst => dst.Md5, exp => exp.MapFrom(src => src.Md5))
-                        .ForMember(dst => dst.ServerId, exp => exp.MapFrom(src => src.Server))
-                        .ForMember(dst => dst.SessionId, exp => exp.MapFrom(src => src.Session))
-                        .ForMember(dst => dst.Token, exp => exp.MapFrom(src => src.Token));
-
-                return Mapper.Map<PlayerSession, JsonSessionData>(playerSession);
+                return new JsonSessionData();
             }
         }
 
-            this.ChangeOrSetPlayerSession(login);
-
-                return new JsonSessionData();
         private void ChangeOrSetPlayerSession(string login)
         {
             try
