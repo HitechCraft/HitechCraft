@@ -184,26 +184,30 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Launcher\Controllers\ClientServerController.cs" />
+    <Compile Include="Areas\Launcher\LauncherAreaRegistration.cs" />
+    <Compile Include="Areas\Launcher\Services\LauncherConfig.cs" />
+    <Compile Include="Areas\Launcher\Services\LauncherManager.cs" />
     <Compile Include="Context\Context.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BanSystemController.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LauncherController.cs" />
+    <Compile Include="Areas\Launcher\Controllers\ActionController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Domain\Ban.cs" />
     <Compile Include="Domain\BanIp.cs" />
-    <Compile Include="Domain\Json\JsonClientPropertiesData.cs" />
-    <Compile Include="Domain\Json\JsonClientResponseData.cs" />
-    <Compile Include="Domain\Json\JsonClientUserData.cs" />
-    <Compile Include="Domain\Json\JsonErrorData.cs" />
-    <Compile Include="Domain\Json\JsonSessionData.cs" />
-    <Compile Include="Domain\Json\JsonStatus.cs" />
-    <Compile Include="Domain\Json\JsonStatusData.cs" />
-    <Compile Include="Domain\Json\JsonTextureData.cs" />
-    <Compile Include="Domain\Json\JsonUserAuthData.cs" />
-    <Compile Include="Domain\Json\JsonUserSkinData.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonClientPropertiesData.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonClientResponseData.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonClientUserData.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonErrorData.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonSessionData.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonStatus.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonStatusData.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonTextureData.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonUserAuthData.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonUserSkinData.cs" />
     <Compile Include="Domain\Modification.cs" />
     <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\PlayerItem.cs" />
@@ -220,7 +224,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Core\LauncherManager.cs" />
     <Compile Include="Migrations\201604142008281_AddModels.cs" />
     <Compile Include="Migrations\201604142008281_AddModels.Designer.cs">
       <DependentUpon>201604142008281_AddModels.cs</DependentUpon>
@@ -260,6 +263,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Launcher\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\Images\charRendered.png" />
     <Content Include="Scripts\jgrowl.alerts.js" />
@@ -329,6 +333,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Launcher\Views\Shared\" />
     <Folder Include="Launcher\Clients\" />
   </ItemGroup>
   <ItemGroup>

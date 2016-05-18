@@ -1,13 +1,7 @@
-﻿using System;
-
-namespace WebApplication.Managers
+﻿namespace WebApplication.Areas.Launcher.Services
 {
-    using System.Collections.Generic;
-
-    public static class LauncherManager
+    public static class LauncherConfig
     {
-        #region Properties
-
         /// <summary>
         /// Launcher master vversion (must equal with version in launcher)
         /// </summary>
@@ -35,7 +29,7 @@ namespace WebApplication.Managers
         /// <summary>
         /// Launcher site folder
         /// </summary>
-        public static string LauncherDataDir
+        public static string DataDir
         {
             get { return "~/" + "Launcher"; }
         }
@@ -51,30 +45,9 @@ namespace WebApplication.Managers
         /// <summary>
         /// Minecraft clients folder
         /// </summary>
-        public static string LauncherClientsDir
+        public static string ClientsDir
         {
-            get { return LauncherDataDir + "/" + "Clients"; }
+            get { return DataDir + "/" + "Clients"; }
         }
-
-        #endregion
-
-        #region Methods
-        
-        public static List<string> GetRequiredFolderList(string clientName)
-        {
-            var clientDir = LauncherClientsDir + "/" + clientName + "/";
-
-            return new List<string>
-            {
-                LauncherClientsDir + "/" + "assets.zip",
-                clientDir + "bin" + "/",
-                clientDir + "natives" + "/",
-                clientDir + "mods" + "/",
-                clientDir + "coremods" + "/",
-                clientDir + "config.zip"
-            };
-        }
-
-        #endregion
     }
 }
