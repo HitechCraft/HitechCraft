@@ -16,7 +16,8 @@ namespace WebApplication.Areas.Launcher
         {
             context.MapRoute(
                 "Launcher_default",
-                "Launcher/{controller}/{action}/{id}"
+                "Launcher/{controller}/{action}/{id}",
+                 new { id = UrlParameter.Optional }
             );
         }
     }
