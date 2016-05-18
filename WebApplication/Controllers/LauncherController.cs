@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace WebApplication.Controllers
+﻿namespace WebApplication.Controllers
 {
     #region Using Directories
 
@@ -16,6 +14,7 @@ namespace WebApplication.Controllers
     using System.Text;
     using System.Web.Script.Serialization;
     using Domain.Json;
+    using AutoMapper;
 
     #endregion
 
