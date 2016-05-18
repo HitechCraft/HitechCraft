@@ -347,12 +347,15 @@
 
         private void ChangeOrSetPlayerSession(string login)
         {
+            var session = this.GenerateKey("Session", login);
+            var token = this.GenerateKey("Token", login);
+
             try
             {
                 var playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == login);
 
-                playerSession.Session = this.GenerateKey();
-                playerSession.Token = this.GenerateKey();
+                playerSession.Session = session;
+                playerSession.Token = token;
 
                 this.context.Entry(playerSession).State = EntityState.Modified;
                 this.context.SaveChanges();
@@ -362,9 +365,9 @@
                 this.context.PlayerSessions.Add(new PlayerSession
                 {
                     PlayerName = login,
-                    Session = this.GenerateKey(),
+                    Session = session,
                     Server = null,
-                    Token = this.GenerateKey(),
+                    Token = token,
                     Md5 = this.UuidConvert(login)
                 });
 
@@ -377,19 +380,9 @@
             return Md5Manager.StringFromUuid(Md5Manager.UuidFromString("OfflinePlayer:" + username));
         }
 
-        private string GenerateKey()
+        private string GenerateKey(string keyWord, string userName)
         {
-            var key = String.Empty;
-            var keyChars = LauncherManager.KeyChars;
-
-            var random = new Random();
-
-            for (int i = 0; i < LauncherManager.KeyLength; i++)
-            {
-                key += keyChars[random.Next(keyChars.Length)];
-            }
-
-            return key;
+            return this.UuidConvert(keyWord + userName + DateTime.Now);
         }
 
         #endregion
