@@ -1,4 +1,9 @@
+<<<<<<< local
 ﻿namespace WebApplication.Controllers
+=======
+﻿using System.Web.Script.Serialization;
+namespace WebApplication.Controllers
+>>>>>>> other
 {
     #region Using Directories
 
@@ -11,10 +16,14 @@
     using System.Web.Mvc;
     using Properties;
     using Managers;
+<<<<<<< local
     using System.Text;
     using System.Web.Script.Serialization;
     using Domain.Json;
     using AutoMapper;
+=======
+    using AutoMapper;
+>>>>>>> other
 
     #endregion
 
@@ -57,7 +66,13 @@
 
             if (this.IsValidAuth(login, password))
             {
+<<<<<<< local
+                this.ChangeOrSetPlayerSession(login);
+
                 return Json(new JsonUserAuthData()
+=======
+                return Json(new
+>>>>>>> other
                 {
                     Status = JsonStatus.YES,
                     Message = Resources.LauncherSuccessAuth,
@@ -320,6 +335,7 @@
             }
         }
 
+<<<<<<< local
         private JsonSessionData GetUserSessionData(string login)
         {
             PlayerSession playerSession;
@@ -354,9 +370,11 @@
             }
         }
 
+=======
             this.ChangeOrSetPlayerSession(login);
 
                 return new JsonSessionData();
+>>>>>>> other
         private void ChangeOrSetPlayerSession(string login)
         {
             try
