@@ -198,8 +198,11 @@
     <Compile Include="Domain\Json\JsonClientResponseData.cs" />
     <Compile Include="Domain\Json\JsonClientUserData.cs" />
     <Compile Include="Domain\Json\JsonErrorData.cs" />
+    <Compile Include="Domain\Json\JsonSessionData.cs" />
+    <Compile Include="Domain\Json\JsonStatus.cs" />
     <Compile Include="Domain\Json\JsonStatusData.cs" />
     <Compile Include="Domain\Json\JsonTextureData.cs" />
+    <Compile Include="Domain\Json\JsonUserAuthData.cs" />
     <Compile Include="Domain\Json\JsonUserSkinData.cs" />
     <Compile Include="Domain\Modification.cs" />
     <Compile Include="Domain\Player.cs" />
@@ -366,7 +369,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50214</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

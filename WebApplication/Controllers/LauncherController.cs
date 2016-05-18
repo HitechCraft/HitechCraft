@@ -1,4 +1,6 @@
-﻿namespace WebApplication.Controllers
+﻿using AutoMapper;
+
+namespace WebApplication.Controllers
 {
     #region Using Directories
 
@@ -54,19 +56,20 @@
         {
             //TODO: сделать отправку пароля хэшем
 
-            if (IsValidAuth(login, password))
+            if (this.IsValidAuth(login, password))
             {
                 this.ChangeOrSetPlayerSession(login);
 
-                return Json(new JsonStatusData()
+                return Json(new JsonUserAuthData()
                 {
                     Status = JsonStatus.YES,
-                    Message = Resources.LauncherSuccessAuth
+                    Message = Resources.LauncherSuccessAuth,
+                    SessionData = this.GetUserSessionData(login)
                 },
                 JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new JsonStatusData()
+            return Json(new JsonUserAuthData()
             {
                 Status = JsonStatus.YES,
                 Message = Resources.LauncherErrorAuth
@@ -317,6 +320,40 @@
             catch (Exception)
             {
                 return false;
+            }
+        }
+
+        private JsonSessionData GetUserSessionData(string login)
+        {
+            PlayerSession playerSession;
+
+            try
+            {
+                playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == login);
+
+                Mapper.CreateMap<PlayerSession, JsonSessionData>()
+                        .ForMember(dst => dst.PlayerName, exp => exp.MapFrom(src => src.PlayerName))
+                        .ForMember(dst => dst.Md5, exp => exp.MapFrom(src => src.Md5))
+                        .ForMember(dst => dst.ServerId, exp => exp.MapFrom(src => src.Server))
+                        .ForMember(dst => dst.SessionId, exp => exp.MapFrom(src => src.Session))
+                        .ForMember(dst => dst.Token, exp => exp.MapFrom(src => src.Token));
+
+                return Mapper.Map<PlayerSession, JsonSessionData>(playerSession);
+            }
+            catch (Exception)
+            {
+                ChangeOrSetPlayerSession(login);
+
+                playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == login);
+
+                Mapper.CreateMap<PlayerSession, JsonSessionData>()
+                        .ForMember(dst => dst.PlayerName, exp => exp.MapFrom(src => src.PlayerName))
+                        .ForMember(dst => dst.Md5, exp => exp.MapFrom(src => src.Md5))
+                        .ForMember(dst => dst.ServerId, exp => exp.MapFrom(src => src.Server))
+                        .ForMember(dst => dst.SessionId, exp => exp.MapFrom(src => src.Session))
+                        .ForMember(dst => dst.Token, exp => exp.MapFrom(src => src.Token));
+
+                return Mapper.Map<PlayerSession, JsonSessionData>(playerSession);
             }
         }
 
