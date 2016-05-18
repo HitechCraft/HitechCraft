@@ -13,6 +13,7 @@
     using Managers;
     using System.Text;
     using System.Web.Script.Serialization;
+    using Domain.Json;
 
     #endregion
 
@@ -57,18 +58,18 @@
             {
                 this.ChangeOrSetPlayerSession(login);
 
-                return Json(new
+                return Json(new JsonStatusData()
                 {
-                    status = "YES",
-                    message = Resources.LauncherSuccessAuth
+                    Status = JsonStatus.YES,
+                    Message = Resources.LauncherSuccessAuth
                 },
                 JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new
+            return Json(new JsonStatusData()
             {
-                status = "NO",
-                message = Resources.LauncherErrorAuth
+                Status = JsonStatus.YES,
+                Message = Resources.LauncherErrorAuth
             },
             JsonRequestBehavior.AllowGet);
         }
@@ -83,18 +84,18 @@
         {
             if (LauncherManager.MasterVersion.Equals(masterVersion))
             {
-                return Json(new
+                return Json(new JsonStatusData()
                 {
-                    status = "OK",
-                    message = Resources.LauncherValidVersion
+                    Status = JsonStatus.YES,
+                    Message = Resources.LauncherValidVersion
                 },
                 JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new
+            return Json(new JsonStatusData()
             {
-                status = "NO",
-                message = Resources.LauncherInvalidVersion
+                Status = JsonStatus.NO,
+                Message = Resources.LauncherInvalidVersion
             },
             JsonRequestBehavior.AllowGet);
         }
@@ -113,23 +114,28 @@
             {
                 if (!FileManager.IsDirOrFileExists(folder))
                 {
-                    return Json(new
+                    return Json(new JsonStatusData()
                     {
-                        status = "NO",
-                        message = Resources.LauncherClientNoFolders
+                        Status = JsonStatus.NO,
+                        Message = Resources.LauncherClientNoFolders
                     },
                     JsonRequestBehavior.AllowGet);
                 }
             }
 
-            return Json(new
+            return Json(new JsonStatusData()
             {
-                status = "YES",
-                message = Resources.LauncherClientAllFolders
+                Status = JsonStatus.YES,
+                Message = Resources.LauncherClientAllFolders
             },
             JsonRequestBehavior.AllowGet);
         }
 
+
+        #endregion
+
+        #region Client - Server Actions
+        
         /// <summary>
         /// Join server (../minecraft/join)
         /// </summary>
@@ -158,7 +164,7 @@
             }
             catch (Exception)
             {
-                return Json(new
+                return Json(new JsonErrorData
                 {
                     error = "Bad login",
                     errorMessage = "Bad login"
@@ -182,28 +188,27 @@
                 var unixTimeNow = ((int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
                 var userSkinUrl = LauncherManager.SkinsUrlString + playerSession.PlayerName;
 
-                var userData = Json(new
+                var userData = Json(new JsonClientUserData
                 {
                     timestamp = unixTimeNow,
                     profileId = playerSession.Md5,
                     profileName = playerSession.PlayerName,
-                    textures = new
+                    textures = new JsonTextureData
                     {
-                        SKIN = new
+                        SKIN = new JsonUserSkinData
                         {
                             url = userSkinUrl
                         } 
-                        //TODO Реализовать загрузку плаща и добавить сюда параметр CAPE с ссылой на плащ
                     }
                 }, JsonRequestBehavior.AllowGet);
 
-                return Json(new
+                return Json(new JsonClientResponseData
                 {
                     id = playerSession.Md5,
                     name = playerSession.PlayerName,
-                    properties = new object[]
+                    properties = new JsonClientPropertiesData[]
                     {
-                        new
+                        new JsonClientPropertiesData
                         {
                             name = "textures",
                             value = Convert.ToBase64String(Encoding.ASCII.GetBytes(new JavaScriptSerializer().Serialize(userData.Data))),
@@ -215,7 +220,7 @@
             }
             catch (Exception)
             {
-                return Json(new
+                return Json(new JsonErrorData
                 {
                     error = "Bad login",
                     errorMessage = "Bad login"
@@ -237,31 +242,31 @@
                 var unixTimeNow = ((int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
                 var userSkinUrl = LauncherManager.SkinsUrlString + playerSession.PlayerName;
 
-                var userData = Json(new
+                var userData = Json(new JsonClientUserData
                 {
                     timestamp = unixTimeNow,
                     profileId = playerSession.Md5,
                     profileName = playerSession.PlayerName,
-                    textures = new
+                    textures = new JsonTextureData
                     {
-                        SKIN = new
+                        SKIN = new JsonUserSkinData
                         {
                             url = userSkinUrl
                         }
-                        //TODO Реализовать загрузку плаща и добавить сюда параметр CAPE с ссылой на плащ
                     }
                 }, JsonRequestBehavior.AllowGet);
 
-                return Json(new
+                return Json(new JsonClientResponseData
                 {
                     id = playerSession.Md5,
                     name = playerSession.PlayerName,
-                    properties = new object[]
+                    properties = new JsonClientPropertiesData[]
                     {
-                        new
+                        new JsonClientPropertiesData
                         {
                             name = "textures",
-                            value = Convert.ToBase64String(Encoding.ASCII.GetBytes(new JavaScriptSerializer().Serialize(userData.Data)))
+                            value = Convert.ToBase64String(Encoding.ASCII.GetBytes(new JavaScriptSerializer().Serialize(userData.Data))),
+                            signature = ""
                         }
                     }
                 },
@@ -296,7 +301,7 @@
                 return null;
             }
         }
-
+        
         #endregion
 
         #region Private Methods
