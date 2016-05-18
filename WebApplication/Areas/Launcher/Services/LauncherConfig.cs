@@ -1,5 +1,7 @@
 ﻿namespace WebApplication.Areas.Launcher.Services
 {
+    using System.Web.Configuration;
+
     public static class LauncherConfig
     {
         /// <summary>
@@ -39,7 +41,7 @@
         /// </summary>
         public static string SkinsUrlString
         {
-            get { return "http://hitechcraft.ru/Account/GetSkinImage?userName="; }
+            get { return WebConfigurationManager.AppSettings["BaseUrl"] + "Account/GetSkinImage?userName="; }
         }
 
         /// <summary>
