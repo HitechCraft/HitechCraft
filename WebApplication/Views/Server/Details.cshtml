@@ -6,6 +6,8 @@
 @if (Model != null)
 {
         <h2>Сервер @Model.Name</h2>
+        <p>@Html.ServerStatusText(Model.ServerData.Status, Model.ServerData.Message)</p>
+
         <p>@Model.Description</p>
         <p>@Model.ClientVersion</p>
         <p>@(Model.IpAddress + ":" + Model.Port)</p>
@@ -22,16 +24,11 @@
                 <p>Нет установленных модов</p>
             }
         </p>
-        <p>Статус "@Model.ServerData.Message"</p>
-
+        
         if (Model.ServerData.Status == JsonServerStatus.Online)
         {
             <p>Игроков всего @Model.ServerData.MaxPlayerCount</p>
             <p>Сейчас играют @Model.ServerData.PlayerCount</p>
-        }
-        else
-        {
-            <p>@Model.ServerData.Message</p>
         }
 
         <div>
