@@ -9,8 +9,14 @@
 
         public string Name { get; set; }
 
+        public string ClientVersion { get; set; }
+
+        public string IpAddress { get; set; }
+
+        public int Port { get; set; }
+
         public string Description { get; set; }
-        
+
         public IEnumerable<ServerModificationViewModel> Modifications { get; set; }
 
         public JsonServerData ServerData { get; set; }

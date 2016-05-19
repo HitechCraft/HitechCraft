@@ -31,8 +31,18 @@
             {
                 // ToDo: Add timeout
                 TcpClient tcpclient = new TcpClient();
-                tcpclient.Connect(address, port);
+
+                var result = tcpclient.BeginConnect(address, port, null, null);
+
+                var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(2));
+
+                if (!success)
+                {
+                    throw new Exception("Failed to connect");
+                }
+
                 Stream stream = tcpclient.GetStream();
+
                 byte[] payload = { 0xFE, 0x01 };
                 stream.Write(payload, 0, payload.Length);
                 stream.Read(rawServerData, 0, dataSize);

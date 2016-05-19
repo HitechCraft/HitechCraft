@@ -1,11 +1,14 @@
 ﻿@model WebApplication.Models.ServerViewModel
+@{
+    ViewBag.Title = "Подробно";
+}
 @using WebApplication.Areas.Launcher.Models.Json
 @if (Model != null)
 {
         <h2>Сервер @Model.Name</h2>
         <p>@Model.Description</p>
-        <p>@Model.ServerData.ClientVersion</p>
-        <p>@(Model.ServerData.IpAddress + ":" + Model.ServerData.Port)</p>
+        <p>@Model.ClientVersion</p>
+        <p>@(Model.IpAddress + ":" + Model.Port)</p>
         <p>
             @if (Model.Modifications != null && Model.Modifications.Count() > 0)
             {
@@ -19,9 +22,21 @@
                 <p>Нет установленных модов</p>
             }
         </p>
-        <p>Статус @Enum.GetName(typeof(JsonServerStatus), Model.ServerData.Status)</p>
-        <p>Игроков всего @Model.ServerData.MaxPlayerCount</p>
-        <p>Сейчас играют @Model.ServerData.PlayerCount</p>
+        <p>Статус "@Model.ServerData.Message"</p>
+
+        if (Model.ServerData.Status == JsonServerStatus.Online)
+        {
+            <p>Игроков всего @Model.ServerData.MaxPlayerCount</p>
+            <p>Сейчас играют @Model.ServerData.PlayerCount</p>
+        }
+        else
+        {
+            <p>@Model.ServerData.Message</p>
+        }
+
+        <div>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        </div>
 }
 else
 {

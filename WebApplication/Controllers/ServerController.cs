@@ -1,7 +1,6 @@
 ﻿namespace WebApplication.Controllers
 {
     using Areas.Launcher.Models.Json;
-    using Core;
     using Domain;
     using System;
     using System.Web.Mvc;
@@ -9,7 +8,7 @@
     using AutoMapper;
     using Models;
     using System.Collections.Generic;
-
+    using System.Data.Entity;
     public class ServerController : BaseController
     {
         public ServerController()
@@ -24,6 +23,9 @@
                        }).ToList() : new List<ServerModificationViewModel>()))
                 .ForMember(dst => dst.ServerData, exp => exp.MapFrom(
                    src => src.GetServerData()));
+            
+            Mapper.CreateMap<Server, ServerEditViewModel>();
+            Mapper.CreateMap<ServerEditViewModel, Server>();
         }
 
         public ActionResult Index()
@@ -53,23 +55,59 @@
             }
         }
 
-        public JsonResult ReturnServerData(string ipAddress, int? port)
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Add(ServerEditViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var server = Mapper.Map<ServerEditViewModel, Server>(vm);
+
+                this.context.Servers.Add(server);
+                this.context.SaveChanges();
+
+                return RedirectToAction("Details", new { id = server.Id });
+            }
+
+            return View(vm);
+        }
+
+        public ActionResult Edit(int id)
         {
             try
             {
-                var server = this.context.Servers.First(s => s.IpAddress == ipAddress && s.Port == (port != null ? port : 25565).Value);
+                var server = this.context.Servers.First(s => s.Id == id);
 
-                return Json(server.GetServerData(), JsonRequestBehavior.AllowGet);
+                var vm = Mapper.Map<Server, ServerEditViewModel>(server);
+
+                return View(vm);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Json(new JsonServerData()
-                {
-                    Status = JsonServerStatus.Error,
-                    Message = "Указанный сервер не найден"
-                },
-                JsonRequestBehavior.AllowGet);
+                ViewBag.Error = "Сервера не существует";
+
+                return View();
             }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ServerEditViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var server = Mapper.Map<ServerEditViewModel, Server>(vm);
+
+                this.context.Entry(server).State = EntityState.Modified;
+                this.context.SaveChanges();
+
+                return RedirectToAction("Details", new { id = server.Id });
+            }
+
+            return View(vm);
         }
     }
 }

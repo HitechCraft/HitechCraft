@@ -25,8 +25,8 @@
                 <tr>
                     <td><a href="@Url.Action("Details", new { id = server.Id })">@server.Name</a></td>
                     <td>@server.Description</td>
-                    <td>@server.ServerData.ClientVersion</td>
-                    <td>@(server.ServerData.IpAddress + ":" + server.ServerData.Port)</td>
+                    <td>@server.ClientVersion</td>
+                    <td>@(server.IpAddress + ":" + server.Port)</td>
                     <td>
                         @if (server.Modifications != null && server.Modifications.Count() > 0)
                         {
