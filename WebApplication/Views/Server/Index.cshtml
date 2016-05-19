@@ -1,0 +1,53 @@
+﻿@model IEnumerable<WebApplication.Models.ServerViewModel>
+@{
+    ViewBag.Title = "Список серверов";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th>Описание</th>
+                <th>Версия</th>
+                <th>Адрес</th>
+                <th>Модификации</th>
+                <th>Информация</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var server in Model)
+            {
+                <tr>
+                    <td><a href="@Url.Action("Details", new { id = server.Id })">@server.Name</a></td>
+                    <td>@server.Description</td>
+                    <td>@server.ClientVersion</td>
+                    <td>@(server.IpAddress + ":" + server.Port)</td>
+                    <td>
+                        @if (server.Modifications != null && server.Modifications.Count() > 0)
+                        {
+                            foreach (var mod in server.Modifications)
+                            {
+                                @mod.Name<br />
+                            }
+                        }
+                        else
+                        {
+                            <p>Нет установленных модов</p>
+                        }
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Серверов не найдено</p>
+}

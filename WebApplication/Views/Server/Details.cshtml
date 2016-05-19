@@ -1,0 +1,27 @@
+﻿@model WebApplication.Models.ServerViewModel
+
+@if (Model != null)
+{
+        <h2>Сервер @Model.Name</h2>
+        <p>@Model.Description</p>
+        <p>@Model.ClientVersion</p>
+        <p>@(Model.IpAddress + ":" + Model.Port)</p>
+        <p>
+            @if (Model.Modifications != null && Model.Modifications.Count() > 0)
+            {
+                foreach (var mod in Model.Modifications)
+                {
+                    @mod.Name<br />
+                }
+            }
+            else
+            {
+                <p>Нет установленных модов</p>
+            }
+        </p>
+}
+else
+{
+    <h2>Ошибка</h2>
+    <p>@ViewBag.Error</p>
+}
