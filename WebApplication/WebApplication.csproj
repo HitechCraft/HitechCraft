@@ -255,6 +255,10 @@
     <Compile Include="Migrations\201605161253363_PlayerSessionMd5.Designer.cs">
       <DependentUpon>201605161253363_PlayerSessionMd5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605191613418_ServerModification.cs" />
+    <Compile Include="Migrations\201605191613418_ServerModification.Designer.cs">
+      <DependentUpon>201605191613418_ServerModification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
@@ -372,6 +376,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605161253363_PlayerSessionMd5.resx">
       <DependentUpon>201605161253363_PlayerSessionMd5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605191613418_ServerModification.resx">
+      <DependentUpon>201605191613418_ServerModification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
