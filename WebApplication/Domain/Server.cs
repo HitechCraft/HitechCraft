@@ -4,7 +4,7 @@
 
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using System.Net;
     #endregion
 
     public class Server
@@ -17,6 +17,10 @@
         public string Description { get; set; }
 
         public string ClientVersion { get; set; }
+
+        public string IpAddress { get; set; }
+
+        public int Port { get; set; }
 
         public ISet<ServerModification> ServerModifications { get; set; }
     }

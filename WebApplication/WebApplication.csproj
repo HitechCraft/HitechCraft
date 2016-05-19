@@ -69,12 +69,24 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -184,8 +196,12 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Launcher\Controllers\ClientServerController.cs" />
     <Compile Include="Areas\Launcher\LauncherAreaRegistration.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonServerStatus.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonServerData.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonServerStatusData.cs" />
     <Compile Include="Areas\Launcher\Models\Json\JsonUserUuidData.cs" />
     <Compile Include="Areas\Launcher\Services\LauncherConfig.cs" />
     <Compile Include="Areas\Launcher\Services\LauncherManager.cs" />
@@ -197,6 +213,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Launcher\Controllers\ActionController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ModificationController.cs" />
+    <Compile Include="Controllers\ServerController.cs" />
+    <Compile Include="Core\MinecraftServerStatusManager.cs" />
     <Compile Include="Domain\Ban.cs" />
     <Compile Include="Domain\BanIp.cs" />
     <Compile Include="Areas\Launcher\Models\Json\JsonClientPropertiesData.cs" />
@@ -209,6 +228,7 @@
     <Compile Include="Areas\Launcher\Models\Json\JsonTextureData.cs" />
     <Compile Include="Areas\Launcher\Models\Json\JsonUserAuthData.cs" />
     <Compile Include="Areas\Launcher\Models\Json\JsonUserSkinData.cs" />
+    <Compile Include="Domain\BanType.cs" />
     <Compile Include="Domain\Modification.cs" />
     <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\PlayerItem.cs" />
@@ -236,6 +256,10 @@
     <Compile Include="Migrations\201605161253363_PlayerSessionMd5.cs" />
     <Compile Include="Migrations\201605161253363_PlayerSessionMd5.Designer.cs">
       <DependentUpon>201605161253363_PlayerSessionMd5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605191613418_ServerModification.cs" />
+    <Compile Include="Migrations\201605191613418_ServerModification.Designer.cs">
+      <DependentUpon>201605191613418_ServerModification.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -354,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605161253363_PlayerSessionMd5.resx">
       <DependentUpon>201605161253363_PlayerSessionMd5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605191613418_ServerModification.resx">
+      <DependentUpon>201605191613418_ServerModification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
