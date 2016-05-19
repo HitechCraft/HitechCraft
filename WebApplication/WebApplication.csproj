@@ -234,6 +234,7 @@
     <Compile Include="Domain\PlayerItem.cs" />
     <Compile Include="Domain\PlayerSession.cs" />
     <Compile Include="Domain\Server.cs" />
+    <Compile Include="Domain\ServerExtentions.cs" />
     <Compile Include="Domain\ServerModification.cs" />
     <Compile Include="Domain\ShopItem.cs" />
     <Compile Include="Domain\ShopItemCategory.cs" />

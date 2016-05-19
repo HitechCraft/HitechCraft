@@ -23,7 +23,7 @@
                            Name = sm.Modification.Name
                        }).ToList() : new List<ServerModificationViewModel>()))
                 .ForMember(dst => dst.ServerData, exp => exp.MapFrom(
-                   src => this.GetServerData(src.IpAddress, src.Port)));
+                   src => src.GetServerData()));
         }
 
         public ActionResult Index()
@@ -53,63 +53,15 @@
             }
         }
 
-        public JsonResult GetServerData(string ipAddress, int? port)
+        public JsonResult ReturnServerData(string ipAddress, int? port)
         {
             try
             {
                 var server = this.context.Servers.First(s => s.IpAddress == ipAddress && s.Port == (port != null ? port : 25565).Value);
 
-                var serverStatus = new MinecraftServerStatusManager(server.IpAddress, server.Port);
-
-                if (server.ClientVersion != serverStatus.GetVersion())
-                {
-                    return Json(new JsonServerData()
-                    {
-                        Status = JsonServerStatus.Error,
-                        Message = "Версия клиента не совпадает с версией сервера"
-                    },
-                    JsonRequestBehavior.AllowGet);
-                }
-
-                if (!serverStatus.IsServerUp())
-                {
-                    return Json(new JsonServerData()
-                    {
-                        Status = JsonServerStatus.Offline,
-                        Message = "Сервер выключен"
-                    },
-                    JsonRequestBehavior.AllowGet);
-                }
-
-                //TODO автомаппер прикрутить потом
-                var serverData = new JsonServerData()
-                {
-                    Status = JsonServerStatus.Online,
-                    Message = "Сервер онлайн",
-                    ServerName = server.Name,
-                    ServerDescription = server.Description,
-                    IpAddress = server.IpAddress,
-                    Port = server.Port,
-                    ClientVersion = server.ClientVersion,
-                    PlayerCount = serverStatus.GetCurrentPlayers(),
-                    MaxPlayerCount = serverStatus.GetMaximumPlayers()
-                };
-
-                if (serverData.PlayerCount == 0)
-                {
-                    serverData.Status = JsonServerStatus.Empty;
-                    serverData.Message = "Сервер пуст";
-                }
-
-                if (serverData.PlayerCount >= serverData.MaxPlayerCount)
-                {
-                    serverData.Status = JsonServerStatus.Full;
-                    serverData.Message = "Сервер полон";
-                }
-
-                return Json(serverData, JsonRequestBehavior.AllowGet);
+                return Json(server.GetServerData(), JsonRequestBehavior.AllowGet);
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return Json(new JsonServerData()
                 {

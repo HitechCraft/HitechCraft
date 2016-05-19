@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<WebApplication.Models.ServerViewModel>
+@using WebApplication.Areas.Launcher.Models.Json
 @{
     ViewBag.Title = "Список серверов";
 }
@@ -24,8 +25,8 @@
                 <tr>
                     <td><a href="@Url.Action("Details", new { id = server.Id })">@server.Name</a></td>
                     <td>@server.Description</td>
-                    <td>@server.ClientVersion</td>
-                    <td>@(server.IpAddress + ":" + server.Port)</td>
+                    <td>@server.ServerData.ClientVersion</td>
+                    <td>@(server.ServerData.IpAddress + ":" + server.ServerData.Port)</td>
                     <td>
                         @if (server.Modifications != null && server.Modifications.Count() > 0)
                         {
@@ -40,7 +41,9 @@
                         }
                     </td>
                     <td>
-
+                        <p>Статус @Enum.GetName(typeof(JsonServerStatus), server.ServerData.Status)</p>
+                        <p>Игроков всего @server.ServerData.MaxPlayerCount</p>
+                        <p>Сейчас играют @server.ServerData.PlayerCount</p>
                     </td>
                 </tr>
             }
