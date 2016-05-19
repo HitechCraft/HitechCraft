@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace WebApplication.Domain
+﻿namespace WebApplication.Domain
 {
+    #region Using Directives
+    
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    #endregion
+
     public class Modification
     {
         [Key]
@@ -16,6 +17,8 @@ namespace WebApplication.Domain
         public string Version { get; set; }
 
         public string Description { get; set; }
+
+        public ISet<ServerModification> ServerModifications { get; set; }
 
     }
 }

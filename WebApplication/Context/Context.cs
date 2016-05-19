@@ -39,5 +39,11 @@
         public DbSet<BanIp> BanIps { get; set; }
 
         public DbSet<PlayerSession> PlayerSessions { get; set; }
+
+        public DbSet<Server> Servers { get; set; }
+
+        public DbSet<Modification> Modifications { get; set; }
+
+        public DbSet<ServerModification> ServerModifications { get; set; }
     }
 }
