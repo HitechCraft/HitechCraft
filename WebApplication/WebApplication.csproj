@@ -199,7 +199,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Launcher\Controllers\ClientServerController.cs" />
     <Compile Include="Areas\Launcher\LauncherAreaRegistration.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonServerStatus.cs" />
     <Compile Include="Areas\Launcher\Models\Json\JsonServerData.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonServerStatusData.cs" />
     <Compile Include="Areas\Launcher\Models\Json\JsonUserUuidData.cs" />
     <Compile Include="Areas\Launcher\Services\LauncherConfig.cs" />
     <Compile Include="Areas\Launcher\Services\LauncherManager.cs" />
@@ -213,6 +215,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModificationController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
+    <Compile Include="Core\MinecraftServerStatusManager.cs" />
     <Compile Include="Domain\Ban.cs" />
     <Compile Include="Domain\BanIp.cs" />
     <Compile Include="Areas\Launcher\Models\Json\JsonClientPropertiesData.cs" />
@@ -231,7 +234,6 @@
     <Compile Include="Domain\PlayerItem.cs" />
     <Compile Include="Domain\PlayerSession.cs" />
     <Compile Include="Domain\Server.cs" />
-    <Compile Include="Domain\ServerExtentions.cs" />
     <Compile Include="Domain\ServerModification.cs" />
     <Compile Include="Domain\ShopItem.cs" />
     <Compile Include="Domain\ShopItemCategory.cs" />

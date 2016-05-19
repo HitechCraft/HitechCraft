@@ -1,15 +1,23 @@
 ﻿namespace WebApplication.Areas.Launcher.Models.Json
 {
-    public class JsonServerData
+    using System.Collections.Generic;
+
+    public class JsonServerData : JsonServerStatusData
     {
-        public string Hostname { get; set; }
+        public string ServerName { get; set; }
+
+        public string ServerDescription { get; set; }
+
+        public string ClientVersion { get; set; }
+
+        public string IpAddress { get; set; }
+
+        public int Port { get; set; }
 
         public int PlayerCount { get; set; }
 
         public int MaxPlayerCount { get; set; }
 
-        public int Protocol { get; set; }
-
-        public string Version { get; set; }
+        public IEnumerable<string> ServerModifications { get; set; }
     }
 }

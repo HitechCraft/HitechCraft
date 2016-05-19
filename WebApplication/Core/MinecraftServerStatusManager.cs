@@ -4,21 +4,22 @@
     using System.IO;
     using System.Net.Sockets;
     using System.Text;
+
     public class MinecraftServerStatusManager
     {
         //TODO переписать это убожество....
 
-        const ushort dataSize = 512;
-        const ushort numFields = 6; 
+        const int dataSize = 512;
+        const int numFields = 6; 
         private string address;
-        private ushort port;
+        private int port;
         private bool serverUp;
         private string motd;
         private string version;
-        private string currentPlayers;
-        private string maximumPlayers;
+        private int currentPlayers;
+        private int maximumPlayers;
 
-        public MinecraftServerStatusManager(string address, ushort port)
+        public MinecraftServerStatusManager(string address, int port)
         {
             byte[] rawServerData = new byte[dataSize];
             string[] serverData;
@@ -36,28 +37,30 @@
                 stream.Write(payload, 0, payload.Length);
                 stream.Read(rawServerData, 0, dataSize);
                 tcpclient.Close();
+
+                if (rawServerData == null || rawServerData.Length == 0)
+                    serverUp = false;
+                else
+                {
+                    serverData = Encoding.Unicode.GetString(rawServerData).Split("\u0000\u0000\u0000".ToCharArray());
+                    if (serverData != null && serverData.Length >= numFields)
+                    {
+                        serverUp = true;
+                        SetVersion(serverData[2]);
+                        SetMotd(serverData[3]);
+                        SetCurrentPlayers(int.Parse(serverData[4]));
+                        SetMaximumPlayers(int.Parse(serverData[5]));
+                    }
+                    else
+                    {
+                        serverUp = false;
+                    }
+                }
             }
             catch (Exception)
             {
                 serverUp = false;
                 return;
-            }
-
-            if (rawServerData == null || rawServerData.Length == 0)
-                serverUp = false;
-            else
-            {
-                serverData = Encoding.Unicode.GetString(rawServerData).Split("\u0000\u0000\u0000".ToCharArray());
-                if (serverData != null && serverData.Length >= numFields)
-                {
-                    serverUp = true;
-                    SetVersion(serverData[2]);
-                    SetMotd(serverData[3]);
-                    SetCurrentPlayers(serverData[4]);
-                    SetMaximumPlayers(serverData[5]);
-                }
-                else
-                    serverUp = false;
             }
         }
 
@@ -71,12 +74,12 @@
             this.address = address;
         }
 
-        public ushort GetPort()
+        public int GetPort()
         {
             return port;
         }
 
-        public void SetPort(ushort port)
+        public void SetPort(int port)
         {
             this.port = port;
         }
@@ -101,22 +104,22 @@
             this.version = version;
         }
 
-        public string GetCurrentPlayers()
+        public int GetCurrentPlayers()
         {
             return currentPlayers;
         }
 
-        public void SetCurrentPlayers(string currentPlayers)
+        public void SetCurrentPlayers(int currentPlayers)
         {
             this.currentPlayers = currentPlayers;
         }
 
-        public string GetMaximumPlayers()
+        public int GetMaximumPlayers()
         {
             return maximumPlayers;
         }
 
-        public void SetMaximumPlayers(string maximumPlayers)
+        public void SetMaximumPlayers(int maximumPlayers)
         {
             this.maximumPlayers = maximumPlayers;
         }
