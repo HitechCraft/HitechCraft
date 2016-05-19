@@ -1,4 +1,4 @@
-﻿namespace WebApplication.Domain.Extentions
+﻿namespace WebApplication.Domain
 {
     using Core;
     using Areas.Launcher.Models.Json;
