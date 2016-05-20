@@ -11,6 +11,8 @@
     using System.Data.Entity;
     public class ServerController : BaseController
     {
+        public IEnumerable<Server> Servers { get { return this.context.Servers.Include("ServerModifications.Modification"); } }
+
         public ServerController()
         {
             Mapper.CreateMap<Server, ServerViewModel>()
@@ -30,9 +32,7 @@
 
         public ActionResult Index()
         {
-            IEnumerable<Server> servers = this.context.Servers.Include("ServerModifications.Modification").ToList();
-            
-            var vm = Mapper.Map<IEnumerable<Server>, IEnumerable<ServerViewModel>>(servers);
+            var vm = Mapper.Map<IEnumerable<Server>, IEnumerable<ServerViewModel>>(this.Servers);
 
             return View(vm.ToList());
         }
@@ -41,7 +41,7 @@
         {
             try
             {
-                var server = this.context.Servers.Include("ServerModifications.Modification").First(s => s.Id == id);
+                var server = this.Servers.First(s => s.Id == id);
 
                 var vm = Mapper.Map<Server, ServerViewModel>(server);
 
@@ -80,7 +80,7 @@
         {
             try
             {
-                var server = this.context.Servers.First(s => s.Id == id);
+                var server = this.Servers.First(s => s.Id == id);
 
                 var vm = Mapper.Map<Server, ServerEditViewModel>(server);
 
@@ -108,6 +108,36 @@
             }
 
             return View(vm);
+        }
+        
+        public ActionResult Delete(int? id)
+        {
+            try
+            {
+                var server = this.Servers.First(s => s.Id == id);
+
+                var vm = Mapper.Map<Server, ServerEditViewModel>(server);
+
+                return View(vm);
+            }
+            catch (Exception)
+            {
+                ViewBag.Error = "Сервера не существует";
+
+                return View();
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var server = this.Servers.First(s => s.Id == id);
+
+            this.context.Servers.Remove(server);
+            this.context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

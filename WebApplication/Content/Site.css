@@ -69,3 +69,7 @@ select {
 .table-hover tr td:hover {
     cursor: pointer;
 }
+
+.progress{
+    height: 20px;
+}

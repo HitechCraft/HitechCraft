@@ -365,6 +365,7 @@
     <Content Include="Views\Server\Details.cshtml" />
     <Content Include="Views\Server\Edit.cshtml" />
     <Content Include="Views\Server\Add.cshtml" />
+    <Content Include="Views\Server\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

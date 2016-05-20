@@ -21,18 +21,20 @@
             }
             else
             {
-                <p>Нет установленных модов</p>
+                <p>Ванильный сервер</p>
             }
         </p>
         
         if (Model.ServerData.Status == JsonServerStatus.Online)
         {
-            <p>Игроков всего @Model.ServerData.MaxPlayerCount</p>
-            <p>Сейчас играют @Model.ServerData.PlayerCount</p>
+            <div class="progress progress-striped active" style="width: 500px">
+                <div class="progress-bar" style="width: @((int)((float)Model.ServerData.PlayerCount / Model.ServerData.MaxPlayerCount * 100f))%"></div>
+            </div>
         }
-
+        
         <div>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
         </div>
 }
 else
