@@ -4,7 +4,7 @@
 
     public static class HtmlHelperExtentions
     {
-        public static MvcHtmlString ServerStatusText(this HtmlHelper html, JsonServerStatus status, string text)
+        public static MvcHtmlString ServerStatusLabel(this HtmlHelper html, JsonServerStatus status, string text)
         {
             string textClass = "";
 

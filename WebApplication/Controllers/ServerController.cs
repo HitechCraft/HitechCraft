@@ -1,6 +1,7 @@
 ﻿namespace WebApplication.Controllers
 {
-    using Areas.Launcher.Models.Json;
+    #region Using Directives
+
     using Domain;
     using System;
     using System.Web.Mvc;
@@ -9,6 +10,9 @@
     using Models;
     using System.Collections.Generic;
     using System.Data.Entity;
+
+    #endregion
+
     public class ServerController : BaseController
     {
         public IEnumerable<Server> Servers { get { return this.context.Servers.Include("ServerModifications.Modification"); } }
@@ -34,7 +38,7 @@
         {
             var vm = Mapper.Map<IEnumerable<Server>, IEnumerable<ServerViewModel>>(this.Servers);
 
-            return View(vm.ToList());
+            return View(vm);
         }
         
         public ActionResult Details(int id)

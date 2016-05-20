@@ -6,7 +6,7 @@
 @if (Model != null)
 {
         <h2>Сервер @Model.Name</h2>
-        <p>@Html.ServerStatusText(Model.ServerData.Status, Model.ServerData.Message)</p>
+        <p>@Html.ServerStatusLabel(Model.ServerData.Status, Model.ServerData.Message)</p>
 
         <p>@Model.Description</p>
         <p>@Model.ClientVersion</p>

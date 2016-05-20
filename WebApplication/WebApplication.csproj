@@ -266,13 +266,14 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
-    <Compile Include="Models\BanUnbanViewModel.cs" />
-    <Compile Include="Models\BanEditViewModel.cs" />
-    <Compile Include="Models\BanViewModel.cs" />
+    <Compile Include="Models\Ban\BanUnbanViewModel.cs" />
+    <Compile Include="Models\Ban\BanEditViewModel.cs" />
+    <Compile Include="Models\Ban\BanViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ModificationEditViewModel.cs" />
     <Compile Include="Models\ModificationViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
-    <Compile Include="Models\ServerModificationViewModel.cs" />
+    <Compile Include="Models\Server\ServerModificationViewModel.cs" />
     <Compile Include="Models\Server\ServerEditViewModel.cs" />
     <Compile Include="Models\Server\ServerViewModel.cs" />
     <Compile Include="Models\UserSkinViewModel.cs" />
@@ -366,6 +367,11 @@
     <Content Include="Views\Server\Edit.cshtml" />
     <Content Include="Views\Server\Add.cshtml" />
     <Content Include="Views\Server\Delete.cshtml" />
+    <Content Include="Views\Modification\Add.cshtml" />
+    <Content Include="Views\Modification\Delete.cshtml" />
+    <Content Include="Views\Modification\Details.cshtml" />
+    <Content Include="Views\Modification\Edit.cshtml" />
+    <Content Include="Views\Modification\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

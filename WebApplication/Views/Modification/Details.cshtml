@@ -1,0 +1,22 @@
+﻿@model WebApplication.Models.ModificationViewModel
+@{
+    ViewBag.Title = "Подробно";
+}
+
+@if (Model != null)
+{
+
+    <h2>Сервер @Model.Name</h2>
+    <p>@Model.Description</p>
+    <p>@Model.Version</p>
+
+        <div>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+        </div>
+}
+else
+{
+    <h2>Ошибка</h2>
+    <p>@ViewBag.Error</p>
+}
