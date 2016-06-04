@@ -1,4 +1,6 @@
-﻿namespace WebApplication.Managers
+﻿using System.IO;
+
+namespace WebApplication.Managers
 {
     using System;
     using System.Security.Cryptography;
@@ -9,37 +11,21 @@
         /// <summary>
         /// Method returns hash md5
         /// </summary>
-        /// <param name="md5Hash">Md5 hash instance</param>
-        /// <param name="input">Input string</param>
+        /// <param name="inputString">Input string</param>
         /// <returns></returns>
-        public static string GetMd5Hash(MD5 md5Hash, string input)
+        public static string GetMd5Hash(string inputString)
         {
-            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-
-            StringBuilder sBuilder = new StringBuilder();
-
-            for (int i = 0; i < data.Length; i++)
-            {
-                sBuilder.Append(data[i].ToString("x2"));
-            }
-
-            return sBuilder.ToString();
+            return BuildMd5(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(inputString)));
         }
 
         /// <summary>
-        /// Verify md5 hash input string
+        /// Method returns hash md5
         /// </summary>
-        /// <param name="md5Hash">Md5 hash instance</param>
-        /// <param name="input">Input string</param>
-        /// <param name="hash">Md5 hash of Input string</param>
+        /// <param name="inputStream">Input data stream</param>
         /// <returns></returns>
-        public static bool VerifyMd5Hash(MD5 md5Hash, string input, string hash)
+        public static string GetMd5Hash(Stream inputStream)
         {
-            string hashOfInput = GetMd5Hash(md5Hash, input);
-
-            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-
-            return comparer.Compare(hashOfInput, hash) == 0;
+            return BuildMd5(MD5.Create().ComputeHash(inputStream));
         }
 
         /// <summary>
@@ -71,5 +57,21 @@
         {
             return hex.Replace(@"-", String.Empty);
         }
+
+        #region Private Methods
+
+        private static string BuildMd5(byte[] data)
+        {
+            StringBuilder sBuilder = new StringBuilder();
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            return sBuilder.ToString();
+        }
+
+        #endregion
     }
 }
