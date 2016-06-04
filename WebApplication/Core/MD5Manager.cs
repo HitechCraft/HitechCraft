@@ -25,7 +25,11 @@ namespace WebApplication.Managers
         /// <returns></returns>
         public static string GetMd5Hash(Stream inputStream)
         {
-            return BuildMd5(MD5.Create().ComputeHash(inputStream));
+            var md5Hash = BuildMd5(MD5.Create().ComputeHash(inputStream));
+
+            inputStream.Close();
+
+            return md5Hash;
         }
 
         /// <summary>
