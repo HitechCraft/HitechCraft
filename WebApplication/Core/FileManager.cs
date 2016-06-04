@@ -34,6 +34,28 @@
             }
         }
 
+        /// <summary>
+        /// Check is path as directory
+        /// </summary>
+        /// <param name="path">File or dir path</param>
+        /// <returns></returns>
+        public static bool IsDirectory(string path)
+        {
+            var attrs = File.GetAttributes(path);
+
+            return attrs.HasFlag(FileAttributes.Directory);
+        }
+
+        /// <summary>
+        /// Check is path as file
+        /// </summary>
+        /// <param name="path">File or dir path</param>
+        /// <returns></returns>
+        public static bool IsFile(string path)
+        {
+            return !IsDirectory(path);
+        }
+
         #region Private Methods
 
         private static bool IsFileExists(string path)
