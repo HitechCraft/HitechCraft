@@ -1,4 +1,6 @@
-﻿namespace WebApplication.Areas.Launcher.Controllers
+﻿using System.Collections.Generic;
+
+namespace WebApplication.Areas.Launcher.Controllers
 {
     #region Using Directives
 
@@ -23,7 +25,7 @@
         /// <param name="accessToken">Session Id</param>
         /// <param name="serverId">Server Id</param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         public JsonResult JoinServer(string selectedProfile, string accessToken, string serverId)
         {
             try
@@ -115,6 +117,7 @@
         /// </summary>
         /// <param name="user">Player md5 hash</param>
         /// <returns></returns>
+        [HttpGet]
         public JsonResult PlayerProfile(string user)
         {
             try
@@ -164,7 +167,7 @@
         /// </summary>
         /// <param name="username">Player nickname</param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         public JsonResult UuidSkull(string username)
         {
             try

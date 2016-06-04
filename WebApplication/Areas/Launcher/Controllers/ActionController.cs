@@ -68,7 +68,7 @@
 
             return Json(new JsonUserAuthData()
             {
-                Status = JsonStatus.YES,
+                Status = JsonStatus.NO,
                 Message = Resources.LauncherErrorAuth
             },
             JsonRequestBehavior.AllowGet);

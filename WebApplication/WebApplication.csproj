@@ -230,7 +230,9 @@
     <Compile Include="Areas\Launcher\Models\Json\JsonUserSkinData.cs" />
     <Compile Include="Domain\BanType.cs" />
     <Compile Include="Core\Anotations\HtmlHelperExtentions.cs" />
+    <Compile Include="Domain\Comment.cs" />
     <Compile Include="Domain\Modification.cs" />
+    <Compile Include="Domain\News.cs" />
     <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\PlayerItem.cs" />
     <Compile Include="Domain\PlayerSession.cs" />
@@ -375,6 +377,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Launcher\Clients\IndustrialExtentions\" />
     <Folder Include="Areas\Launcher\Views\Shared\" />
     <Folder Include="Launcher\Clients\" />
   </ItemGroup>
