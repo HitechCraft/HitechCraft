@@ -33,7 +33,8 @@
         /// </summary>
         public static string DataDir
         {
-            get { return "~/" + "Launcher"; }
+            //TODO сделать нормальный редирект на Launcher (проверять через web request), без Areas
+            get { return "/" + "Areas" + "/" + "Launcher"; }
         }
 
         /// <summary>
