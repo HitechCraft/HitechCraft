@@ -1,4 +1,4 @@
-﻿namespace LauncherCore.Models.Json
+﻿namespace WebApplication.Areas.Launcher.Models.Json
 {
     public class JsonClientFilesData
     {
