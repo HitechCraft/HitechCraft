@@ -129,6 +129,9 @@
   <data name="EmailOrNickName" xml:space="preserve">
     <value>Email или Имя пользователя</value>
   </data>
+  <data name="ErrorClientFilesCheck" xml:space="preserve">
+    <value>Файлы клиента будут перезакачены</value>
+  </data>
   <data name="ErrorEmailNotConfirmed" xml:space="preserve">
     <value>Для авторизации необходимо подтвердить Email {0}</value>
   </data>
@@ -194,6 +197,9 @@
   </data>
   <data name="PasswordConfirm" xml:space="preserve">
     <value>Подтверждение пароля</value>
+  </data>
+  <data name="SuccessClientFilesCheck" xml:space="preserve">
+    <value>Файлы клиента прошли проверку</value>
   </data>
   <data name="UserNameNoExists" xml:space="preserve">
     <value>Это имя не занято</value>

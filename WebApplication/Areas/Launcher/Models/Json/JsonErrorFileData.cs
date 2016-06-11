@@ -1,15 +1,15 @@
 ﻿namespace WebApplication.Areas.Launcher.Models.Json
 {
-    public enum ErrorAction
+    public enum FileAction
     {
-        Reupload,
+        Load,
         Remove
     }
 
     public class JsonErrorFileData
     {
-        public string FileUrl { get; set; }
+        public string FilePath { get; set; }
 
-        public ErrorAction FileAction { get; set; }
+        public FileAction FileAction { get; set; }
     }
 }

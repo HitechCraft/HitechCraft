@@ -2,8 +2,8 @@
 {
     public class JsonClientFilesData
     {
-        public string FileUrl { get; set; }
+        public string FilePath { get; set; }
 
-        public string HashSumm { get; set; }
+        public string HashSum { get; set; }
     }
 }

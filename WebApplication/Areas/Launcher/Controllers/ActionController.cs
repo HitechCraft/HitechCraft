@@ -1,7 +1,11 @@
-﻿namespace WebApplication.Areas.Launcher.Controllers
+﻿using System.IO;
+using WebApplication.Core;
+
+namespace WebApplication.Areas.Launcher.Controllers
 {
     #region Using Directives
 
+    using System.Collections.Generic;
     using System;
     using System.Data.Entity;
     using System.Linq;
@@ -130,7 +134,48 @@
             },
             JsonRequestBehavior.AllowGet);
         }
+        
+        [HttpGet]
+        public JsonResult CheckClientFiles(string clientFilesData)
+        {
+            var errorFileList = new List<JsonErrorFileData>();
 
+            try
+            {
+                var filesFromClient = JsonManager.Deserialize<JsonClientData>(clientFilesData);
+
+                var clientFolders = LauncherManager.GetRequiredFolderList(filesFromClient.ClientName);
+
+                var filesFromApp = this.GetJsonClientFilesData(clientFolders, filesFromClient);
+
+                errorFileList = this.GetErrorFileList(filesFromClient, filesFromApp, errorFileList);
+
+                if (!errorFileList.Any())
+                {
+                    return Json(new JsonClientFilesStatusData()
+                    {
+                        Status = JsonStatus.YES,
+                        Message = Resources.SuccessClientFilesCheck
+                    }, JsonRequestBehavior.AllowGet);
+                }
+                
+                return Json(new JsonClientFilesStatusData()
+                {
+                    FileData = errorFileList,
+                    Status = JsonStatus.NO,
+                    Message = Resources.ErrorClientFilesCheck
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new JsonClientFilesStatusData()
+                {
+                    FileData = errorFileList,
+                    Status = JsonStatus.NO,
+                    Message = e.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         #endregion
 
@@ -211,6 +256,69 @@
         private string GenerateKey(string keyWord, string userName)
         {
             return this.UuidConvert(keyWord + userName + DateTime.Now);
+        }
+        
+        private List<JsonClientFilesData> GetJsonClientFilesData(List<string> clientFolders, JsonClientData filesData)
+        {
+            List<JsonClientFilesData> clientFiles = new List<JsonClientFilesData>();
+
+            foreach (var folder in clientFolders)
+            {
+                if (FileManager.IsDirectory(folder))
+                {
+                    var files = FileManager.GetFiles(folder, "*", SearchOption.AllDirectories);
+
+                    clientFiles.AddRange(files
+                        .Select(x => new JsonClientFilesData()
+                        {
+                            FilePath = FileManager.GetClientFilePath(x, filesData.ClientName),
+                            HashSum = Md5Manager.GetMd5Hash(new FileStream(x, FileMode.Create))
+                        }));
+                }
+            }
+
+            return clientFiles;
+        }
+
+        private List<JsonErrorFileData> GetErrorFileList(JsonClientData filesFromClient, List<JsonClientFilesData> filesFromApp, List<JsonErrorFileData> errorFileList)
+        {
+            //Check client files contains on server (if contains - check hashsum)
+            foreach (var clientFile in filesFromClient.FilesData)
+            {
+                if (filesFromApp.Any(f => f.FilePath == clientFile.FilePath))
+                {
+                    var existingFile = filesFromApp.First(f => f.FilePath == clientFile.FilePath);
+
+                    if (existingFile.HashSum != clientFile.HashSum)
+                    {
+                        errorFileList.Add(new JsonErrorFileData()
+                        {
+                            FilePath = clientFile.FilePath,
+                            FileAction = FileAction.Load
+                        });
+                    }
+
+                    filesFromApp.Remove(existingFile);
+                }
+                else
+                {
+                    errorFileList.Add(new JsonErrorFileData()
+                    {
+                        FilePath = clientFile.FilePath,
+                        FileAction = FileAction.Remove
+                    });
+                }
+            }
+
+            //Add remaining files to upload
+            if (filesFromApp.Any())
+                errorFileList.AddRange(filesFromApp.Select(f => new JsonErrorFileData()
+                {
+                    FilePath = f.FilePath,
+                    FileAction = FileAction.Load
+                }));
+
+            return errorFileList;
         }
 
         #endregion

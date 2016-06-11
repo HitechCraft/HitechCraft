@@ -97,6 +97,15 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Файлы клиента будут перезакачены.
+        /// </summary>
+        public static string ErrorClientFilesCheck {
+            get {
+                return ResourceManager.GetString("ErrorClientFilesCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Для авторизации необходимо подтвердить Email {0}.
         /// </summary>
         public static string ErrorEmailNotConfirmed {
@@ -291,6 +300,15 @@ namespace WebApplication.Properties {
         public static string PasswordConfirm {
             get {
                 return ResourceManager.GetString("PasswordConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Файлы клиента прошли проверку.
+        /// </summary>
+        public static string SuccessClientFilesCheck {
+            get {
+                return ResourceManager.GetString("SuccessClientFilesCheck", resourceCulture);
             }
         }
         
