@@ -58,17 +58,23 @@
             get { return UserCurrency != null ? UserCurrency.realmoney : -1; }
         }
 
-        public ApplicationUser CurrentUser { get; set; }
+        public ApplicationUser CurrentUser {
+            get
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    var userId = User.Identity.GetUserId();
+                    return context.Users.First(c => c.Id == userId);
+                }
+
+                return null;
+            }
+        }
 
         public Player CurrentPlayer { get; set; }
 
         public BaseController()
         {
-            if (User != null && User.Identity.IsAuthenticated)
-            {
-                CurrentUser = context.Users.Find(User.Identity.GetUserId());
-                CurrentPlayer = context.Players.First(p => p.UserId == User.Identity.GetUserId());
-            }
         }
 
         /// <summary>

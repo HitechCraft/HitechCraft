@@ -1,7 +1,9 @@
 ﻿namespace WebApplication.Domain
 {
     using System;
+    using System.Web.Mvc;
 
+    [Bind(Include = "Author")]
     public class News
     {
         /// <summary>

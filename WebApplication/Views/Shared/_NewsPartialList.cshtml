@@ -8,6 +8,7 @@
 {
     foreach (var news in Model)
     {
+        @Html.ActionLink(news.Title, "Details", "News", new { id = news.Id }, new { @class="" })
         <p>@news.Text</p>
         <p>@news.AuthorName</p>
     }

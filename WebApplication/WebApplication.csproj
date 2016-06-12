@@ -228,6 +228,7 @@
     <Compile Include="Controllers\ModificationController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
+    <Compile Include="Core\ImageManager.cs" />
     <Compile Include="Core\JsonManager.cs" />
     <Compile Include="Core\MinecraftServerStatusManager.cs" />
     <Compile Include="Domain\Ban.cs" />
@@ -422,6 +423,9 @@
     <Content Include="Views\Shared\_NewsPartialList.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\Shared\_CommentsPartialList.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\News\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
