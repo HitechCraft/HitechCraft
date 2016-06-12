@@ -1,4 +1,6 @@
-﻿namespace WebApplication.Areas.Launcher.Controllers
+﻿using System.Text;
+
+namespace WebApplication.Areas.Launcher.Controllers
 {
     #region Using Directives
 
@@ -133,20 +135,22 @@
             },
             JsonRequestBehavior.AllowGet);
         }
-        
+
         /// <summary>
         /// Check client files
         /// </summary>
-        /// <param name="clientFilesData">Files data from client</param>
+        /// <param name="base64Hash">Base64 hash of clients file data</param>
         /// <returns></returns>
         [HttpGet]
-        public JsonResult CheckClientFiles(string clientFilesData)
+        public JsonResult CheckClientFiles(string base64Hash)
         {
             var errorFileList = new List<JsonErrorFileData>();
 
             try
             {
-                var filesFromClient = JsonManager.Deserialize<JsonClientData>(clientFilesData);
+                var clientFilesData = Convert.FromBase64String(base64Hash);
+
+                var filesFromClient = JsonManager.Deserialize<JsonClientData>(Encoding.UTF8.GetString(clientFilesData));
 
                 var clientFolders = LauncherManager.GetRequiredFolderList(filesFromClient.ClientName);
 

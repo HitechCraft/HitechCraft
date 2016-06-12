@@ -10,6 +10,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+
     #endregion
 
     public class NewsController : BaseController
