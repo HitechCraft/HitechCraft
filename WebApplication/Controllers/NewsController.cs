@@ -31,7 +31,7 @@
                 .ForMember(dst => dst.NewsId, ext => ext.MapFrom(src => src.News.Id));
         }
 
-        public IEnumerable<NewsViewModel> GetNewsList(int? page)
+        public IPagedList<NewsViewModel> GetNewsList(int? page)
         {
             int currentPage = page ?? 1;
 
@@ -42,7 +42,7 @@
             return vm.ToPagedList(currentPage, this.NewsOnPage);
         }
 
-        public IEnumerable<CommentViewModel> GetCommentList(int? page)
+        public IPagedList<CommentViewModel> GetCommentList(int? page)
         {
             int currentPage = page ?? 1;
 
