@@ -185,6 +185,21 @@ namespace WebApplication.Areas.Launcher.Controllers
             }
         }
 
+        /// <summary>
+        /// Feature for file download (from launcher client site folder)
+        /// </summary>
+        /// <param name="filePath">File Path with client name</param>
+        public void DownloadClientFile(string filePath)
+        {
+            string serverClientPath = "\\Areas\\Launcher\\Clients\\";
+
+            string fileServerPath = (serverClientPath + filePath.Replace("/", "\\")).Replace("\\\\", "\\"); //fix
+
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(fileServerPath));
+            Response.WriteFile(fileServerPath);
+            Response.End();
+        }
+        
         #endregion
 
         #region Private Methods
