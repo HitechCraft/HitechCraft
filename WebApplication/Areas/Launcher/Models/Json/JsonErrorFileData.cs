@@ -3,6 +3,7 @@
     public enum FileAction
     {
         Load,
+        Reload,
         Remove
     }
 

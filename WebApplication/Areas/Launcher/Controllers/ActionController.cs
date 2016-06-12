@@ -1,7 +1,4 @@
-﻿using System.IO;
-using WebApplication.Core;
-
-namespace WebApplication.Areas.Launcher.Controllers
+﻿namespace WebApplication.Areas.Launcher.Controllers
 {
     #region Using Directives
 
@@ -19,6 +16,8 @@ namespace WebApplication.Areas.Launcher.Controllers
     using Properties;
     using Services;
     using Models.Json;
+    using System.IO;
+    using Core;
 
     #endregion
 
@@ -135,6 +134,11 @@ namespace WebApplication.Areas.Launcher.Controllers
             JsonRequestBehavior.AllowGet);
         }
         
+        /// <summary>
+        /// Check client files
+        /// </summary>
+        /// <param name="clientFilesData">Files data from client</param>
+        /// <returns></returns>
         [HttpGet]
         public JsonResult CheckClientFiles(string clientFilesData)
         {
@@ -294,7 +298,7 @@ namespace WebApplication.Areas.Launcher.Controllers
                         errorFileList.Add(new JsonErrorFileData()
                         {
                             FilePath = clientFile.FilePath,
-                            FileAction = FileAction.Load
+                            FileAction = FileAction.Reload
                         });
                     }
 
