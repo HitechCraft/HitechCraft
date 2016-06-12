@@ -1,14 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text.RegularExpressions;
-using System.Web.WebPages;
-
-namespace WebApplication.Controllers
+﻿namespace WebApplication.Controllers
 {
     #region Usings
 
+    using System.Data.Entity;
+    using System.Text.RegularExpressions;
+    using Core;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
@@ -17,11 +13,11 @@ namespace WebApplication.Controllers
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
-    using WebApplication.Models;
+    using Models;
     using AutoMapper;
-    using WebApplication.Domain;
-
+    using Domain;
     using Properties;
+
     #endregion
 
     [Authorize]
@@ -350,14 +346,7 @@ namespace WebApplication.Controllers
         {
             var userSkin = new UserSkin();
 
-            byte[] imageData = null;
-
-            using (var binaryReader = new BinaryReader(image.InputStream))
-            {
-                imageData = binaryReader.ReadBytes(image.ContentLength);
-            }
-
-            userSkin.Image = imageData;
+            userSkin.Image = ImageManager.GetImageBytes(image);
 
             userSkin.UserId = User.Identity.GetUserId();
 
