@@ -60,11 +60,14 @@
 
         public ApplicationUser CurrentUser { get; set; }
 
+        public Player CurrentPlayer { get; set; }
+
         public BaseController()
         {
             if (User.Identity.IsAuthenticated)
             {
                 CurrentUser = context.Users.Find(User.Identity.GetUserId());
+                CurrentPlayer = context.Players.First(p => p.UserId == User.Identity.GetUserId());
             }
         }
 
