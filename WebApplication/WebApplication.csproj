@@ -302,6 +302,10 @@
     <Compile Include="Migrations\201606121338448_News.Designer.cs">
       <DependentUpon>201606121338448_News.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606121430570_CommentFix.cs" />
+    <Compile Include="Migrations\201606121430570_CommentFix.Designer.cs">
+      <DependentUpon>201606121430570_CommentFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
@@ -311,6 +315,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModificationEditViewModel.cs" />
     <Compile Include="Models\ModificationViewModel.cs" />
+    <Compile Include="Models\News\CommentEditViewModel.cs" />
+    <Compile Include="Models\News\CommentViewModel.cs" />
     <Compile Include="Models\News\NewsEditViewModel.cs" />
     <Compile Include="Models\News\NewsViewModel.cs" />
     <Compile Include="Models\RoleViewModel.cs" />
@@ -330,7 +336,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\jquery.jgrowl.css" />
-    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -415,6 +420,8 @@
     <Content Include="Views\Modification\Edit.cshtml" />
     <Content Include="Views\Modification\Index.cshtml" />
     <Content Include="Views\Shared\_NewsPartialList.cshtml" />
+    <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\Shared\_CommentsPartialList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -456,6 +463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606121338448_News.resx">
       <DependentUpon>201606121338448_News.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606121430570_CommentFix.resx">
+      <DependentUpon>201606121430570_CommentFix.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

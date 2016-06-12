@@ -1,6 +1,10 @@
 ﻿namespace WebApplication.Domain
 {
+    #region Using Directives
+
     using System;
+
+    #endregion
 
     public class Comment
     {

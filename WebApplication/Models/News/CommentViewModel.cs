@@ -16,6 +16,8 @@
 
         public string AuthorName { get; set; }
 
+        public int NewsId { get; set; }
+
         public DateTime TimeCreate { get; set; }
     }
 }

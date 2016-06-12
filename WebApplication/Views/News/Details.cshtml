@@ -1,0 +1,30 @@
+﻿@model WebApplication.Models.NewsViewModel
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Detail</h2>
+
+<p>@Model.Title</p>
+<p>@Model.Text</p>
+
+<div id="comments">
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadComments(1);
+    });
+
+    function FilterComments(currentPage) {
+        LoadComments(currentPage);
+    }
+
+    function LoadComments(currentPage) {
+        $.get("@Url.Action("CommentsPartialList", "News")", { page: currentPage })
+        .done(function (data) {
+            $('#comments').html('');
+            $('#comments').html(data);
+        });
+    }
+</script>
