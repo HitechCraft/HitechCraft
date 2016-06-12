@@ -414,6 +414,7 @@
     <Content Include="Views\Modification\Details.cshtml" />
     <Content Include="Views\Modification\Edit.cshtml" />
     <Content Include="Views\Modification\Index.cshtml" />
+    <Content Include="Views\Shared\_NewsPartialList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

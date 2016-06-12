@@ -1,0 +1,20 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<WebApplication.Models.NewsViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model!= null && Model.Any())
+{
+    foreach (var news in Model)
+    {
+        <p>@news.Text</p>
+        <p>@news.AuthorName</p>
+    }
+
+    @Html.PagedListPager(Model, page => "javascript:FilterNews(" + page + ")")
+}
+else
+{
+    <p>Нет новостей</p>
+}

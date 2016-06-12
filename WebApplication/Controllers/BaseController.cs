@@ -64,7 +64,7 @@
 
         public BaseController()
         {
-            if (User.Identity.IsAuthenticated)
+            if (User != null && User.Identity.IsAuthenticated)
             {
                 CurrentUser = context.Users.Find(User.Identity.GetUserId());
                 CurrentPlayer = context.Players.First(p => p.UserId == User.Identity.GetUserId());
