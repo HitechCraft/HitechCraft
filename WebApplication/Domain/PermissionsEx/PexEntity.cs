@@ -23,6 +23,6 @@
         /// <summary>
         /// Is entity default
         /// </summary>
-        public int isDefault { get; set; }
+        public int isDefault { get { return 0; } set { } }
     }
 }

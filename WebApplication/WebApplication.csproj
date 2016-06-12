@@ -285,6 +285,10 @@
     <Compile Include="Migrations\201606121222572_PexFix.Designer.cs">
       <DependentUpon>201606121222572_PexFix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606121234413_PexFixDefault.cs" />
+    <Compile Include="Migrations\201606121234413_PexFixDefault.Designer.cs">
+      <DependentUpon>201606121234413_PexFixDefault.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
@@ -430,6 +434,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606121222572_PexFix.resx">
       <DependentUpon>201606121222572_PexFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606121234413_PexFixDefault.resx">
+      <DependentUpon>201606121234413_PexFixDefault.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
