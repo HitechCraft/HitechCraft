@@ -27,6 +27,8 @@
             return new ApplicationDbContext();
         }
 
+        #region Domain DbSets
+
         public DbSet<Player> Players { get; set; }
 
         public DbSet<UserSkin> UserSkins { get; set; }
@@ -56,5 +58,7 @@
         public DbSet<PexEntity> PexEntities { get; set; }
 
         public DbSet<PexInheritance> PexInheritances { get; set; }
+
+        #endregion
     }
 }

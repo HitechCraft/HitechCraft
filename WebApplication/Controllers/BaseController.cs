@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using WebApplication.Domain;
-
-namespace WebApplication.Controllers
+﻿namespace WebApplication.Controllers
 {
+    #region Using Directives
+
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
+    using Domain;
+
+    #endregion
+
     public class BaseController : Controller
     {
         public ApplicationDbContext context = new ApplicationDbContext();
@@ -57,8 +58,14 @@ namespace WebApplication.Controllers
             get { return UserCurrency != null ? UserCurrency.realmoney : -1; }
         }
 
+        public ApplicationUser CurrentUser { get; set; }
+
         public BaseController()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                CurrentUser = context.Users.Find(User.Identity.GetUserId());
+            }
         }
 
         /// <summary>
