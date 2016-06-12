@@ -17,6 +17,10 @@
         /// </summary>
         public ApplicationUser Author { get; set; }
         /// <summary>
+        /// Comment news
+        /// </summary>
+        public News News { get; set; }
+        /// <summary>
         /// Comment time create
         /// </summary>
         public DateTime TimeCreate { get; set; }
