@@ -238,6 +238,9 @@
     <Compile Include="Domain\Comment.cs" />
     <Compile Include="Domain\Modification.cs" />
     <Compile Include="Domain\News.cs" />
+    <Compile Include="Domain\PermissionsEx\PexEntity.cs" />
+    <Compile Include="Domain\PermissionsEx\Pex.cs" />
+    <Compile Include="Domain\PermissionsEx\PexInheritance.cs" />
     <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\PlayerItem.cs" />
     <Compile Include="Domain\PlayerSession.cs" />
@@ -269,6 +272,18 @@
     <Compile Include="Migrations\201605191613418_ServerModification.cs" />
     <Compile Include="Migrations\201605191613418_ServerModification.Designer.cs">
       <DependentUpon>201605191613418_ServerModification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606121208060_Pex.cs" />
+    <Compile Include="Migrations\201606121208060_Pex.Designer.cs">
+      <DependentUpon>201606121208060_Pex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606121215437_PexRef.cs" />
+    <Compile Include="Migrations\201606121215437_PexRef.Designer.cs">
+      <DependentUpon>201606121215437_PexRef.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606121222572_PexFix.cs" />
+    <Compile Include="Migrations\201606121222572_PexFix.Designer.cs">
+      <DependentUpon>201606121222572_PexFix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -406,6 +421,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201605191613418_ServerModification.resx">
       <DependentUpon>201605191613418_ServerModification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606121208060_Pex.resx">
+      <DependentUpon>201606121208060_Pex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606121215437_PexRef.resx">
+      <DependentUpon>201606121215437_PexRef.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606121222572_PexFix.resx">
+      <DependentUpon>201606121222572_PexFix.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -1,8 +1,13 @@
 ﻿namespace WebApplication
 {
+    #region Using Directives
+
     using System.Data.Entity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Domain;
+    using Domain.PermissionsEx;
+
+    #endregion
 
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -45,5 +50,11 @@
         public DbSet<Modification> Modifications { get; set; }
 
         public DbSet<ServerModification> ServerModifications { get; set; }
+
+        public DbSet<Permission> Permissions { get; set; }
+
+        public DbSet<PexEntity> PexEntities { get; set; }
+
+        public DbSet<PexInheritance> PexInheritances { get; set; }
     }
 }
