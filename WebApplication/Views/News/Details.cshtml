@@ -4,12 +4,26 @@
 }
 
 <h2>Detail</h2>
-@Html.ActionLink("Edit", "Edit", new { id = Model.Id })<br/>
+@Html.ActionLink("Edit", "Edit", new { id = Model.Id })<br />
 @Html.ActionLink("Delete", "Delete", new { id = Model.Id })<br />
-<img alt="" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" style="max-width: 500px"/>
+<img alt="" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" style="max-width: 500px" />
 
 <p>@Model.Title</p>
 <p>@Model.Text</p>
+
+<div class="form-horizontal">
+    <h5>Добавить комментарий</h5>
+    <hr/>
+    <div class="form-group">
+        <span id="error-alert"></span>
+    </div>
+    <div class="form-group">
+        <textarea id="ncomment-text"></textarea>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-default btn-sm" onclick="javascript:AddComment();">Добавить комментарий</button>
+    </div>
+</div>
 
 <div id="comments">
 </div>
@@ -30,4 +44,36 @@
             $('#comments').html(data);
         });
     }
+
+    function AddComment() {
+        $.post("@Url.Action("Create", "Comment")", { newsId : @Model.Id, text: $('#ncomment-text').val() })
+        .done(function (data) {
+            if (data == "OK") {
+                LoadComments(1);
+                $('#ncomment-text').val('');
+            } else {
+                $('#error-alert').html('');
+                $('#error-alert').html(data);
+            }
+        });
+    }
+
+    function RemoveComment(commentId) {
+        if (confirm("Вы уверены?")) {
+            $.post("@Url.Action("Delete", "Comment")", { id : commentId })
+            .done(function (data) {
+                LoadComments(1);
+            });
+        } 
+    }
+    
+    //function EditComment(commentId) {
+    //    var text = $('#comment-text' + commentId + '>p').html();
+
+    //    $('#comment-text' + commentId).html('<textarea>' + text + '</textarea>');
+    //    $('#comment-edit-btn').html('Сохранить');
+    //    $('#comment-edit-btn').attr('onclick', 'javascript:SaveComment(' + commentId + ')');
+    //}
+
+
 </script>

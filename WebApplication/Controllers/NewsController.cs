@@ -44,7 +44,7 @@
         {
             int currentPage = page ?? 1;
 
-            var news = this.context.News.Include("Author");
+            var news = this.context.News.Include("Author").OrderByDescending(n => n.Id).ToList();
 
             var vm = Mapper.Map<IEnumerable<News>, IEnumerable<NewsViewModel>>(news.ToList());
 
@@ -55,7 +55,7 @@
         {
             int currentPage = page ?? 1;
 
-            var comments = this.context.Comments.Include("Author").Include("News").Where(c => c.News.Id == newsId);
+            var comments = this.context.Comments.Include("Author").Include("News").Where(c => c.News.Id == newsId).OrderByDescending(c => c.Id);
 
             var vm = Mapper.Map<IEnumerable<Comment>, IEnumerable<CommentViewModel>>(comments.ToList());
 

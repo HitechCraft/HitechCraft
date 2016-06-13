@@ -222,6 +222,7 @@
     <Compile Include="Controllers\BanSystemController.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Launcher\Controllers\ActionController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
