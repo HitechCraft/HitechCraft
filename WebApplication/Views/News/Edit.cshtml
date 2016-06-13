@@ -27,14 +27,21 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Text, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Text, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.Text, new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Text, "", new {@class = "text-danger"})
             </div>
         </div>
 
-        <img alt="" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" style="max-width: 500px"/>
+        @if (Convert.ToBase64String(Model.Image) != String.Empty)
+        {
+            <img alt="" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" style="max-width: 200px" />
+        }
+        else
+        {
+            <img alt="" src="~/Content/Images/no-image.jpg" style="max-width: 200px" />
+        }
 
         <div class="form-group">
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
