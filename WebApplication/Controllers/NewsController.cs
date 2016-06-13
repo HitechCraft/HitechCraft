@@ -211,14 +211,35 @@
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var news = this.context.News.Include("Author").First(s => s.Id == id);
+            try
+            {
+                var news = this.context.News.Include("Author").First(s => s.Id == id);
 
-            //Remove comments here
+                this.RemoveNewsComments(id);
 
-            this.context.News.Remove(news);
-            this.context.SaveChanges();
+                this.context.News.Remove(news);
+                this.context.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        private void RemoveNewsComments(int newsId)
+        {
+            try
+            {
+                var comments = this.context.Comments.Include("News").Where(c => c.News.Id == newsId);
+
+                this.context.Comments.RemoveRange(comments);
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

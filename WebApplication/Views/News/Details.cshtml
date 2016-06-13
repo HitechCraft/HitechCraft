@@ -11,19 +11,26 @@
 <p>@Model.Title</p>
 <p>@Model.Text</p>
 
-<div class="form-horizontal">
-    <h5>Добавить комментарий</h5>
-    <hr/>
-    <div class="form-group">
-        <span id="error-alert"></span>
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="form-horizontal">
+        <h5>Добавить комментарий</h5>
+        <hr/>
+        <div class="form-group">
+            <span id="error-alert"></span>
+        </div>
+        <div class="form-group">
+            <textarea id="ncomment-text"></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-default btn-sm" onclick="javascript:AddComment();">Добавить комментарий</button>
+        </div>
     </div>
-    <div class="form-group">
-        <textarea id="ncomment-text"></textarea>
-    </div>
-    <div class="form-group">
-        <button class="btn btn-default btn-sm" onclick="javascript:AddComment();">Добавить комментарий</button>
-    </div>
-</div>
+}
+else
+{
+    <p>Для того чтобы добавить комментарий вы должны @Html.ActionLink("войти", "Login", "Account", new { returnUrl = "/News/Details/" + Model.Id }, new {})</p>
+}
 
 <div id="comments">
 </div>
