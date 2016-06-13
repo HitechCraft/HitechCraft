@@ -5,8 +5,16 @@
 
 <h2>Detail</h2>
 @Html.ActionLink("Edit", "Edit", new { id = Model.Id })<br />
-@Html.ActionLink("Delete", "Delete", new { id = Model.Id })<br />
-<img alt="" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" style="max-width: 500px" />
+@Html.ActionLink("Delete", "Delete", new {id = Model.Id})<br/>
+
+@if (Model.Image != null)
+{
+    <img alt="" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" style="max-width: 500px"/>
+}
+else
+{
+    <img alt="" src="~/Content/Images/no-image.jpg" style="max-width: 500px" />
+}
 
 <p>@Model.Title</p>
 <p>@Model.Text</p>
