@@ -135,6 +135,8 @@
         } else if (classname === "avaSkin") {
             //draw the head
             context.drawImage(skinImage, 8 * c, 8 * c, 8 * c, 8 * c, 0 * s, 0 * s, 15 * s, 15 * s);
+            //draw the mask
+            context.drawImage(skinImage, 40 * c, 8 * c, 8 * c, 8 * c, 0 * s, 0 * s, 15 * s, 15 * s);
         }
         //we replace the image with the canvas
         skinImage.parentNode.replaceChild(canvas, skinImage);
