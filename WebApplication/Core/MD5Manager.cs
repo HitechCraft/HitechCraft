@@ -21,16 +21,26 @@ namespace WebApplication.Managers
         /// <summary>
         /// Method returns hash md5
         /// </summary>
+        /// <param name="bytes">Bytes for hash</param>
+        /// <returns></returns>
+        public static string GetMd5Hash(byte[] bytes)
+        {
+            return BuildMd5(MD5.Create().ComputeHash(bytes));
+        }
+
+        /// <summary>
+        /// Method returns hash md5
+        /// </summary>
         /// <param name="inputStream">Input data stream</param>
         /// <returns></returns>
-        public static string GetMd5Hash(Stream inputStream)
-        {
-            var md5Hash = BuildMd5(MD5.Create().ComputeHash(inputStream));
+        //public static string GetMd5Hash(Stream inputStream)
+        //{
+        //    var md5Hash = BuildMd5(MD5.Create().ComputeHash(inputStream));
 
-            inputStream.Close();
+        //    inputStream.Close();
 
-            return md5Hash;
-        }
+        //    return md5Hash;
+        //}
 
         /// <summary>
         /// Get uuid from input string (ебать говнокод, но хуле делать?)

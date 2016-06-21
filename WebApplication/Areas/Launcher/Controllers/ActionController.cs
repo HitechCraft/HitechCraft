@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Configuration;
+using System.Text;
 
 namespace WebApplication.Areas.Launcher.Controllers
 {
@@ -144,6 +146,7 @@ namespace WebApplication.Areas.Launcher.Controllers
         [HttpGet]
         public JsonResult CheckClientFiles(string base64Hash)
         {
+            var test = base64Hash.Length;
             var errorFileList = new List<JsonErrorFileData>();
 
             try
@@ -194,9 +197,9 @@ namespace WebApplication.Areas.Launcher.Controllers
             string serverClientPath = "\\Areas\\Launcher\\Clients\\";
 
             string fileServerPath = (serverClientPath + filePath.Replace("/", "\\")).Replace("\\\\", "\\"); //fix
-
+            
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(fileServerPath));
-            Response.WriteFile(fileServerPath);
+            Response.TransmitFile(fileServerPath);
             Response.End();
         }
         
@@ -290,12 +293,12 @@ namespace WebApplication.Areas.Launcher.Controllers
                 if (FileManager.IsDirectory(folder))
                 {
                     var files = FileManager.GetFiles(folder, "*", SearchOption.AllDirectories);
-
+                    
                     clientFiles.AddRange(files
                         .Select(x => new JsonClientFilesData()
                         {
                             FilePath = FileManager.GetClientFilePath(x, filesData.ClientName),
-                            HashSum = Md5Manager.GetMd5Hash(new FileStream(x, FileMode.Create))
+                            HashSum = Md5Manager.GetMd5Hash(System.IO.File.ReadAllBytes(x))
                         }));
                 }
             }
@@ -305,8 +308,10 @@ namespace WebApplication.Areas.Launcher.Controllers
 
         private List<JsonErrorFileData> GetErrorFileList(JsonClientData filesFromClient, List<JsonClientFilesData> filesFromApp, List<JsonErrorFileData> errorFileList)
         {
+            var fixedFiles = this.FixPathString(filesFromClient.FilesData);
+
             //Check client files contains on server (if contains - check hashsum)
-            foreach (var clientFile in filesFromClient.FilesData)
+            foreach (var clientFile in fixedFiles)
             {
                 if (filesFromApp.Any(f => f.FilePath == clientFile.FilePath))
                 {
@@ -342,6 +347,15 @@ namespace WebApplication.Areas.Launcher.Controllers
                 }));
 
             return errorFileList;
+        }
+
+        private IEnumerable<JsonClientFilesData> FixPathString(ICollection<JsonClientFilesData> filesData)
+        {
+            return filesData.Select(fd => new JsonClientFilesData()
+            {
+                FilePath = fd.FilePath.Replace("\\", "/"),
+                HashSum = fd.HashSum
+            });
         }
 
         #endregion

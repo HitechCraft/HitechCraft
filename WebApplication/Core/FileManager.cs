@@ -109,7 +109,9 @@
             //TODO переписать!!!
             var clientPath = (HttpRuntime.AppDomainAppPath + LauncherConfig.ClientsDir.Replace("/", "\\")) + "\\" + clientName;
 
-            return serverPath.Replace(clientPath.Replace("\\\\", "\\"), "");
+            var path = serverPath.Replace(clientPath.Replace("\\\\", "\\"), "");
+
+            return path;
         }
 
         #endregion
