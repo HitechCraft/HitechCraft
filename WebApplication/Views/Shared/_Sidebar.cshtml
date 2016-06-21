@@ -1,13 +1,37 @@
-﻿
+﻿@using Microsoft.AspNet.Identity
+
 @{
     Layout = null;
 }
 
 <div class="col-md-4">
-    <div class="panel panel-default">
-        <div class="panel-heading">Panel heading</div>
-        <div class="panel-body">
-            Panel content
+    @if (Request.IsAuthenticated)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">@(User.Identity.GetUserName())</div>
+            <div class="panel-body">
+                <div id="skin-container" style="width: 120px; margin: 0 auto">
+                    <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name })" id="skin-image" class="avaSkin" hidden="" />
+                </div>
+            </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">Меню пользователя</div>
+            <div class="panel-body">
+                @Html.ActionLink("Войти", "Login", "Account", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    }
 </div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        renderMCSkins('avaSkin', 8);
+        $('.avaSkin').css('border', '2px solid');
+    });
+</script>

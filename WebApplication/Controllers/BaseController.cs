@@ -1,4 +1,6 @@
-﻿namespace WebApplication.Controllers
+﻿using System;
+
+namespace WebApplication.Controllers
 {
     #region Using Directives
 
@@ -38,14 +40,37 @@
         {
             get
             {
-                if (User.Identity.IsAuthenticated)
+                return this.GetUserCurrency();
+            }
+        }
+
+        private Currency GetUserCurrency()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var userName = User.Identity.GetUserName().ToString();
+
+                try
                 {
-                    var userName = User.Identity.GetUserName().ToString();
                     return context.Currencies.First(c => c.username == userName);
                 }
+                catch (Exception)
+                {
+                    context.Currencies.Add(new Currency
+                    {
+                        username = userName,
+                        balance = this.DefaultUserGonts,
+                        realmoney = this.DefaultUserRubels,
+                        status = 0
+                    });
 
-                return null;
+                    context.SaveChanges();
+
+                    return context.Currencies.First(c => c.username == userName);
+                }
             }
+
+            return null;
         }
 
         public double Gonts
