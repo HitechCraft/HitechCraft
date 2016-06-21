@@ -1,6 +1,7 @@
 ﻿html, body {
     padding: 0;
     margin: 0;
+    font-family: "Open Sans", sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -8,7 +9,14 @@
     padding-left: 15px;
     padding-right: 15px;
 }
-
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Open Sans", sans-serif;
+}
+a:hover {
+    color: #ff7518;
+    text-decoration: none;
+    cursor: pointer;
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -108,7 +116,7 @@ select {
 }
 
 .title-box {
-    background: #d2d2d2;
+    background: #222;
     border: 2px solid;
     width: 100%;
     height: auto;
@@ -128,4 +136,17 @@ select {
 .title-media {
     border: 3px solid black;
     border-radius: 4px;
+}
+
+.overall {
+    text-align: center;
+    margin: 30px;
+}
+
+.clear {
+    clear: both;
+}
+
+.wrapper {
+    margin-top: 50px;
 }

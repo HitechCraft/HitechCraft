@@ -45,8 +45,11 @@
     </div>
     <div class="container body-content">
         <div class="logo"></div>
-        <div class="game-start">Начать игру!</div>
-        @RenderBody()
+        <a class="game-start">Начать игру!</a>
+
+        <div class="row wrapper">
+            @RenderBody()
+        </div>
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
