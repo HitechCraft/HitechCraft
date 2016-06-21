@@ -1,6 +1,6 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿html, body {
+    padding: 0;
+    margin: 0;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -70,6 +70,62 @@ select {
     cursor: pointer;
 }
 
-.progress{
+.progress {
     height: 20px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.container {
+    min-width: 1170px;
+}
+
+.navbar {
+    min-width: 1170px;
+}
+
+.logo {
+    display: inline-block;
+    background: url("Images/logo.png");
+    width: 465px;
+    height: 66px;
+    margin: 40px 0 40px 0;
+}
+
+.game-start {
+    background: url("Images/game-start.png") no-repeat;
+    background-position: 0 10px;
+    padding: 0 50px;
+    float: right;
+    margin-top: 40px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+.title-box {
+    background: #d2d2d2;
+    border: 2px solid;
+    width: 100%;
+    height: auto;
+    padding: 28px;
+}
+
+.ztn-team {
+    background: url("Images/ztnTeam.png") no-repeat;
+    background-size: 100% 100%;
+    width: 537px;
+    height: 303px;
+    float: left;
+    margin-left: -10px;
+    margin-right: 10px;
+}
+
+.title-media {
+    border: 3px solid black;
+    border-radius: 4px;
 }
