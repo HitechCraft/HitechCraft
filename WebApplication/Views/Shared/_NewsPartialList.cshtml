@@ -1,0 +1,40 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<WebApplication.Models.NewsViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null && Model.Any())
+{
+    foreach (var news in Model)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">@Html.ActionLink(news.Title, "Details", "News", new { id = news.Id }, new { @class = "" })</div>
+            <div class="panel-body">
+                <div class="col-md-5">
+                    @if (Convert.ToBase64String(news.Image) != String.Empty)
+                    {
+                        <img alt="" src="data:image/jpeg;base64,@Convert.ToBase64String(news.Image)" style="max-width: 200px"/>
+                    }
+                    else
+                    {
+                        <img alt="" src="~/Content/Images/no-image.jpg" style="max-width: 200px"/>
+                    }
+                </div>
+                <div class="col-md-7" style="min-height: 250px">
+                    <p>@news.Text</p>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <p>@news.AuthorName</p>
+            </div>
+        </div>
+        
+    }
+
+    @Html.PagedListPager(Model, page => "javascript:FilterNews(" + page + ")")
+}
+else
+{
+    <h2 style="text-align: center">Нет новостей</h2>
+}

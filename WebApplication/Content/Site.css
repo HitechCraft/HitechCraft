@@ -1,0 +1,177 @@
+﻿html, body {
+    padding: 0;
+    margin: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Open Sans", sans-serif;
+}
+
+a:hover {
+    color: #ff7518;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.ban-cell {
+    display: table-cell;
+    padding: 5px 0;
+    border: 1px solid;
+}
+
+.ban-row {
+    display: table-row;
+}
+
+    .ban-row:hover {
+        background: #000;
+        cursor: pointer;
+    }
+
+select {
+    color: #000;
+}
+
+.ajax-loader {
+    display: none;
+}
+
+    .ajax-loader img {
+        left: 42.8086%;
+        top: 46.0195%;
+        z-index: 1000;
+        position: fixed;
+    }
+
+.ajax-bg {
+    display: none;
+    width: 100%;
+    height: 100%;
+    /*background: rgba(0, 0, 0, 0.16);*/
+    background: #fff;
+    z-index: 999;
+    position: fixed;
+}
+
+.table-hover tr:hover {
+    cursor: pointer;
+}
+
+.table-hover tr td:hover {
+    cursor: pointer;
+}
+
+.progress {
+    height: 20px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.container {
+    min-width: 1170px;
+}
+
+.navbar {
+    min-width: 1170px;
+}
+
+.logo {
+    display: inline-block;
+    background: url("Images/logo.png");
+    width: 465px;
+    height: 66px;
+    margin: 40px 0 40px 0;
+}
+
+.game-start {
+    background: url("Images/game-start.png") no-repeat;
+    background-position: 0 10px;
+    padding: 0 50px;
+    float: right;
+    margin-top: 40px;
+    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+.title-box {
+    background: #ccc;
+    border: 2px solid;
+    width: 100%;
+    height: auto;
+    padding: 28px;
+}
+
+.ztn-team {
+    background: url("Images/ztnTeam.png") no-repeat;
+    background-size: 100% 100%;
+    width: 537px;
+    height: 303px;
+    float: left;
+    margin-left: -11px;
+    margin-right: 45px;
+}
+
+.title-media {
+    border: 3px solid black;
+    border-radius: 4px;
+}
+
+.overall {
+    text-align: center;
+    margin: 30px;
+}
+
+.clear {
+    clear: both;
+}
+
+.wrapper {
+    margin-top: 50px;
+}
+
+.user-menu {
+    text-align: center;
+}
+
+.monitoring {
+    margin-bottom: 50px;
+}
+
+.server {
+}
+
+.server-title {
+}
+
+.server-progress {
+}
+
+.server-players {
+    position: absolute;
+    margin: 0 auto;
+}

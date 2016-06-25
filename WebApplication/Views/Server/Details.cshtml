@@ -1,0 +1,44 @@
+﻿@model WebApplication.Models.ServerViewModel
+@{
+    ViewBag.Title = "Подробно";
+}
+@using WebApplication.Areas.Launcher.Models.Json
+@if (Model != null)
+{
+        <h2>Сервер @Model.Name</h2>
+        <p>@Html.ServerStatusLabel(Model.ServerData.Status, Model.ServerData.Message)</p>
+
+        <p>@Model.Description</p>
+        <p>@Model.ClientVersion</p>
+        <p>@(Model.IpAddress + ":" + Model.Port)</p>
+        <p>
+            @if (Model.Modifications != null && Model.Modifications.Count() > 0)
+            {
+                foreach (var mod in Model.Modifications)
+                {
+                    @mod.Name<br />
+                }
+            }
+            else
+            {
+                <p>Ванильный сервер</p>
+            }
+        </p>
+        
+        if (Model.ServerData.Status == JsonServerStatus.Online)
+        {
+            <div class="progress progress-striped active" style="width: 500px">
+                <div class="progress-bar" style="width: @((int)((float)Model.ServerData.PlayerCount / Model.ServerData.MaxPlayerCount * 100f))%"></div>
+            </div>
+        }
+        
+        <div>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+        </div>
+}
+else
+{
+    <h2>Ошибка</h2>
+    <p>@ViewBag.Error</p>
+}

@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    Layout = null;
+}
+
+<div class="col-md-4">
+    @if (Request.IsAuthenticated)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">@(User.Identity.GetUserName())</div>
+            <div class="panel-body">
+                <div class="user-menu">
+                    <div id="skin-container" style="width: 120px; margin: 0 auto">
+                        <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name})" id="skin-image" class="avaSkin" hidden="" />
+                    </div>
+
+                    @Html.ActionLink("Перейти в профиль", "Profile", "Account", null, new { @class = "btn btn-primary", @style = "margin-top: 20px" })<br />
+                    @Html.ActionLink("Выйти", "LogOff", "Account", null, new { @class = "btn btn-primary", @style = "margin-top: 20px" })
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">Меню пользователя</div>
+            <div class="panel-body">
+                <div class="user-menu">
+                    @Html.ActionLink("Войти", "Login", "Account", null, new { @class = "btn btn-primary", @style = "text-align: center" })
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Мониторинг</div>
+        <div class="panel-body">
+            <div class="server">
+                <div class="server-title">Industrial Extentions</div>
+                <div class="server-progress">
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-success" style="width: 35%"></div>
+                        <div class="server-players">35/100</div>
+                    </div>
+                </div>
+                <div class="server-title">Parallel Worlds</div>
+                <div class="server-progress">
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-success" style="width: 75%"></div>
+                        <div class="server-players">75/100</div>
+                    </div>
+                </div>
+                <div class="server-title">Clan Wars</div>
+                <div class="server-progress">
+                    <div class="progress progress-striped active">
+                        <div class="progress-bar progress-bar-success" style="width: 100%"></div>
+                        <div class="server-players">Full</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        renderMCSkins('avaSkin', 8);
+        $('.avaSkin').css('border', '2px solid');
+    });
+</script>
