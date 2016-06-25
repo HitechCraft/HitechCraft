@@ -9,9 +9,11 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: "Open Sans", sans-serif;
 }
+
 a:hover {
     color: #ff7518;
     text-decoration: none;
@@ -65,7 +67,8 @@ select {
     display: none;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.16);
+    /*background: rgba(0, 0, 0, 0.16);*/
+    background: #fff;
     z-index: 999;
     position: fixed;
 }
@@ -116,7 +119,7 @@ select {
 }
 
 .title-box {
-    background: #222;
+    background: #ccc;
     border: 2px solid;
     width: 100%;
     height: auto;
@@ -129,8 +132,8 @@ select {
     width: 537px;
     height: 303px;
     float: left;
-    margin-left: -10px;
-    margin-right: 10px;
+    margin-left: -11px;
+    margin-right: 45px;
 }
 
 .title-media {
@@ -149,4 +152,26 @@ select {
 
 .wrapper {
     margin-top: 50px;
+}
+
+.user-menu {
+    text-align: center;
+}
+
+.monitoring {
+    margin-bottom: 50px;
+}
+
+.server {
+}
+
+.server-title {
+}
+
+.server-progress {
+}
+
+.server-players {
+    position: absolute;
+    margin: 0 auto;
 }

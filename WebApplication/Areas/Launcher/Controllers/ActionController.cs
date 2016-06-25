@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Text;
 
@@ -143,7 +144,6 @@ namespace WebApplication.Areas.Launcher.Controllers
         /// </summary>
         /// <param name="base64Hash">Base64 hash of clients file data</param>
         /// <returns></returns>
-        [HttpGet]
         public JsonResult CheckClientFiles(string base64Hash)
         {
             var test = base64Hash.Length;
