@@ -14,19 +14,21 @@
                 <div class="col-md-5">
                     @if (Convert.ToBase64String(news.Image) != String.Empty)
                     {
-                        <img alt="" src="data:image/jpeg;base64,@Convert.ToBase64String(news.Image)" style="max-width: 200px"/>
+                        <img alt="" class="news-image" src="data:image/jpeg;base64,@Convert.ToBase64String(news.Image)" onclick="document.location = '@Url.Action("Details", "News", new { id = news.Id })'"/>
                     }
                     else
                     {
-                        <img alt="" src="~/Content/Images/no-image.jpg" style="max-width: 200px"/>
+                        <img alt="" class="news-image" src="~/Content/Images/no-image.jpg" onclick="document.location = '@Url.Action("Details", "News", new { id = news.Id })'"/>
                     }
                 </div>
                 <div class="col-md-7" style="min-height: 250px">
                     <p>@news.Text</p>
                 </div>
             </div>
-            <div class="panel-footer">
-                <p>@news.AuthorName</p>
+            <div class="panel-footer cols">
+                <span class="footer-left">Автор: @news.AuthorName</span>
+                <span class="footer-right">Дата: @news.TimeCreate.ToShortDateString()</span>
+                <div class="clear"></div>
             </div>
         </div>
         

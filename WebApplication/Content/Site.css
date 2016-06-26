@@ -97,6 +97,18 @@ select {
     min-width: 1170px;
 }
 
+footer {
+    
+}
+
+.footer-left {
+    float: left;
+}
+
+.footer-right {
+    float: right;
+}
+
 .logo {
     display: inline-block;
     background: url("Images/logo.png");
@@ -174,4 +186,38 @@ select {
 .server-players {
     position: absolute;
     margin: 0 auto;
+}
+
+.panel {
+    -ms-border-top-left-radius: 34px;
+    border-top-left-radius: 34px;
+    -ms-border-bottom-right-radius: 34px;
+    border-bottom-right-radius: 34px;
+}
+
+.panel-heading {
+    -ms-border-top-left-radius: 34px;
+    border-top-left-radius: 34px;
+    text-align: center;
+    font-size: 21px;
+}
+
+.panel-footer {
+    -ms-border-bottom-right-radius: 34px;
+    border-bottom-right-radius: 34px;
+}
+
+.clear {
+    clear: both;
+}
+
+.news-image {
+    border: 1px solid #fff;
+    max-width: 200px;
+    height: 200px;
+}
+
+.news-image:hover {
+    border: 1px solid #eee;
+    cursor: pointer;
 }

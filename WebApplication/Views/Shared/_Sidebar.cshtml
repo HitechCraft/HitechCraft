@@ -12,11 +12,11 @@
             <div class="panel-body">
                 <div class="user-menu">
                     <div id="skin-container" style="width: 120px; margin: 0 auto">
-                        <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name})" id="skin-image" class="avaSkin" hidden="" />
+                        <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name})" id="skin-image" class="avaSkin" hidden=""/>
                     </div>
 
-                    @Html.ActionLink("Перейти в профиль", "Profile", "Account", null, new { @class = "btn btn-primary", @style = "margin-top: 20px" })<br />
-                    @Html.ActionLink("Выйти", "LogOff", "Account", null, new { @class = "btn btn-primary", @style = "margin-top: 20px" })
+                    @Html.ActionLink("Перейти в профиль", "Profile", "Account", null, new {@class = "btn btn-primary", @style = "margin-top: 20px"})<br/>
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-primary" style="margin-top: 20px">Выйти</a>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="panel-heading">Меню пользователя</div>
             <div class="panel-body">
                 <div class="user-menu">
-                    @Html.ActionLink("Войти", "Login", "Account", null, new { @class = "btn btn-primary", @style = "text-align: center" })
+                    @Html.ActionLink("Войти", "Login", "Account", null, new {@class = "btn btn-primary", @style = "text-align: center"})
                 </div>
             </div>
         </div>
@@ -63,10 +63,12 @@
     </div>
 </div>
 
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        renderMCSkins('avaSkin', 8);
-        $('.avaSkin').css('border', '2px solid');
-    });
-</script>
+@if (User.Identity.IsAuthenticated)
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            renderMCSkins('avaSkin', 8);
+            $('.avaSkin').css('border', '2px solid');
+        });
+    </script>
+}
