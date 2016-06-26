@@ -68,7 +68,7 @@
     //val offline is -1
     function setProgress(objclass, val, maxval) {
         $('.' + objclass).circleProgress({
-            value: (val < 0 ? 1 : val / 100),
+            value: (val <= 0 ? 1 : val / 100),
             fill: {
                 color: getColor(val, maxval)
             },
