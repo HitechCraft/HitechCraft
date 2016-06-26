@@ -337,8 +337,15 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\banners\acc_blue_on_white_ru.png" />
+    <Content Include="Content\Images\banners\v_blue_on_white_ru.png" />
+    <Content Include="Content\Images\game-start.png" />
     <Content Include="Content\Images\loader.gif" />
+    <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\no-image.jpg" />
+    <Content Include="Content\Images\social-icons.png" />
+    <Content Include="Content\Images\ztn-logo.png" />
+    <Content Include="Content\Images\ZTNTeam.png" />
     <Content Include="Content\jquery.jgrowl.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -349,6 +356,7 @@
     <Content Include="Areas\Launcher\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\Images\charRendered.png" />
+    <Content Include="Scripts\circle-progress.js" />
     <Content Include="Scripts\jgrowl.alerts.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -430,6 +438,8 @@
     <Content Include="Views\News\Edit.cshtml" />
     <Content Include="Views\News\Delete.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Views\Shared\_ServerMonitoring.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

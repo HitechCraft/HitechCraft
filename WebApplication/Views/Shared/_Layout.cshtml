@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="ajax-loader">
-        <img src="/Content/Images/loader.gif"/>
+        <img src="/Content/Images/loader.gif" />
     </div>
     <div class="ajax-bg"></div>
     <div class="navbar navbar-default">
@@ -48,12 +48,13 @@
         <a class="game-start">Начать игру!</a>
 
         <div class="row wrapper">
-            @RenderBody()
+            <div class="cont">
+                @RenderBody()
+            </div>
         </div>
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
-        </footer>
+    </div>
+    <div class="footer-content">
+        @Html.Partial("_Footer")
     </div>
     <script type="text/javascript">
         $(document).ajaxStart(function () {

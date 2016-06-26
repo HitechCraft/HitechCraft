@@ -2,6 +2,8 @@
     padding: 0;
     margin: 0;
     font-family: "Open Sans", sans-serif;
+    min-width: 768px;
+    height: 100%;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -90,16 +92,28 @@ select {
 }
 
 .container {
-    min-width: 1170px;
+    min-width: 768px;
+    min-height: 100%;
 }
 
 .navbar {
-    min-width: 1170px;
+    min-width: 768px;
 }
 
 footer {
-    
+    min-height: 200px;
+    border-top: 1px solid #ddd;
+    margin-bottom: 50px;
 }
+
+.footer-content {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+    footer p {
+        margin-top: 10px;
+    }
 
 .footer-left {
     float: left;
@@ -107,6 +121,46 @@ footer {
 
 .footer-right {
     float: right;
+}
+
+.footer-col-title {
+    margin: 19px 0px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.footer-col-content {
+}
+
+.email {
+    color: #13baab;
+}
+
+.social-icon {
+    display: inline-block;
+    background: url("Images/social-icons.png") no-repeat;
+    -ms-background-size: 460%;
+    background-size: 460%;
+    height: 30px;
+    width: 30px;
+}
+
+.social-title {
+    position: absolute;
+    padding: 6px;
+}
+
+.vk {
+    background-position: -70px -36px;
+}
+
+.youtube {
+    background-position: -3px -36px;
+}
+
+.twitter {
+    background-position: -105px -2px;
 }
 
 .logo {
@@ -131,11 +185,12 @@ footer {
 }
 
 .title-box {
-    background: #ccc;
-    border: 2px solid;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
     width: 100%;
     height: auto;
     padding: 28px;
+    margin-bottom: 50px;
 }
 
 .ztn-team {
@@ -163,7 +218,8 @@ footer {
 }
 
 .wrapper {
-    margin-top: 50px;
+    margin-top: 50px;    
+    min-height: 100%;
 }
 
 .user-menu {
@@ -178,9 +234,16 @@ footer {
 }
 
 .server-title {
+    text-align: center;
+    font-weight: bold;
 }
 
 .server-progress {
+    padding-top: 15px;
+    width: 100px;
+    margin: 0 auto;
+    position: relative;
+    margin-bottom: 10px;
 }
 
 .server-players {
@@ -217,7 +280,120 @@ footer {
     height: 200px;
 }
 
-.news-image:hover {
-    border: 1px solid #eee;
-    cursor: pointer;
+    .news-image:hover {
+        border: 1px solid #eee;
+        cursor: pointer;
+    }
+
+.circle-progress strong {
+    position: absolute;
+    top: 44px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 22px;
+}
+
+.banners {
+    margin-top: -10px;
+}
+
+    .banners a {
+        display: inline-block;
+        padding-top: 10px;
+    }
+
+.news-title {
+    display: none;
+    text-align: center;
+    margin: 3px 0 37px 0;
+}
+
+.ztn-logo {
+    background: url("Images/ztn-logo.png");
+    background-size: 100%;
+    width: 150px;
+    height: 150px;
+}
+
+.wrapper .content {
+    margin: 0 -15px;
+}
+
+@media(max-width: 992px) {
+    .game-start {
+        float: left;
+        margin-top: -22px;
+        margin-left: 20px;
+    }
+
+    .title-media {
+        width: 642px !important;
+        height: 361px !important;
+    }
+
+    .title-box {
+        margin-bottom: 21px;
+    }
+
+    footer {
+        border-top: none;
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+        footer .row {
+            margin: 0;
+        }
+
+        footer .col-md-3,
+        footer .col-md-2,
+        footer .col-md-4 {
+            border-top: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        footer .ztn {
+            display: none;
+        }
+
+    .news-title {
+        display: block;
+        margin: 27px 0 37px 0;
+    }
+
+    .wrapper .content .col-md-4,
+    .wrapper .content .col-md-8 {
+        padding: 0;
+    }
+
+    .wrapper {
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    .logo {
+        margin-left: 20px;
+    }
+    
+    #news .col-md-5,
+    #news .col-md-7 {
+        float: left;
+    }
+}
+
+@media(max-width: 1200px) {
+    .ztn-team {
+        display: none;
+    }
+
+    .title-media {
+        width: 914px;
+        height: 514px;
+    }
+
+    .title-box {
+        margin-bottom: 21px;
+    }
 }

@@ -59,6 +59,14 @@
             }
         }
 
+        [HttpGet]
+        public ActionResult MonitoringList()
+        {
+            var vm = Mapper.Map<IEnumerable<Server>, IEnumerable<ServerViewModel>>(this.Servers);
+
+            return View("_ServerMonitoring", vm);
+        }
+
         public ActionResult Add()
         {
             return View();
