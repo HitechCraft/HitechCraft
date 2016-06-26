@@ -1,4 +1,5 @@
 ﻿@using WebApplication.Areas.Launcher.Models.Json
+@using WebApplication.Models
 @model IEnumerable<WebApplication.Models.ServerViewModel>
 @{
     Layout = null;
@@ -15,6 +16,11 @@
                 <div class="circle-progress @server.Id"><strong>0</strong></div>
             </div>
         }
+
+        <div class="server-title">Общий онлайн</div>
+            <div class="server-progress">
+                <div class="circle-progress 99999"><strong>0</strong></div>
+            </div>
     }
     else
     {
@@ -32,4 +38,10 @@
             });
         </script>
     }
+    
+    <script type="text/javascript">
+            $(document).ready(function () {
+                setProgress('99999', '@(Model.Aggregate<ServerViewModel, int>(0, (total, next) => total + next.ServerData.PlayerCount))', '@(Model.Aggregate<ServerViewModel, int>(0, (total, next) => total + next.ServerData.MaxPlayerCount))');
+            });
+    </script>
 }
