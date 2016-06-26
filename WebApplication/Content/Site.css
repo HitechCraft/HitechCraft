@@ -187,6 +187,7 @@ footer {
     width: 100px;
     margin: 0 auto;
     position: relative;
+    margin-bottom: 10px;
 }
 
 .server-players {
