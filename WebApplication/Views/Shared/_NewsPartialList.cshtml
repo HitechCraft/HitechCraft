@@ -40,3 +40,11 @@ else
 {
     <h2 style="text-align: center">Нет новостей</h2>
 }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($('ul.pagination').children().length <= 1) {
+            $('ul.pagination').css('visibility', 'hidden');
+        }
+    });
+</script>

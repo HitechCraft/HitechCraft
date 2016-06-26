@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     font-family: "Open Sans", sans-serif;
+    min-width: 768px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -90,11 +91,11 @@ select {
 }
 
 .container {
-    min-width: 1170px;
+    min-width: 768px;
 }
 
 .navbar {
-    min-width: 1170px;
+    min-width: 768px;
 }
 
 footer {
@@ -295,9 +296,91 @@ footer {
         padding-top: 10px;
     }
 
+.news-title {
+    display: none;
+    text-align: center;
+    margin: 3px 0 37px 0;
+}
+
 .ztn-logo {
     background: url("Images/ztn-logo.png");
     background-size: 100%;
     width: 150px;
     height: 150px;
+}
+
+.wrapper .content {
+    margin: 0 -15px;
+}
+
+@media(max-width: 992px) {
+    .game-start {
+        float: left;
+        margin-top: -22px;
+        margin-left: 20px;
+    }
+
+    .title-media {
+        width: 642px !important;
+        height: 361px !important;
+    }
+
+    .title-box {
+        margin-bottom: 21px;
+    }
+
+    footer {
+        border-top: none;
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+        footer .row {
+            margin: 0;
+        }
+
+        footer .col-md-3,
+        footer .col-md-2,
+        footer .col-md-4 {
+            border-top: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        footer .ztn {
+            display: none;
+        }
+
+    .news-title {
+        display: block;
+        margin: 27px 0 37px 0;
+    }
+
+    .wrapper .content .col-md-4,
+    .wrapper .content .col-md-8 {
+        padding: 0;
+    }
+
+    .wrapper {
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    .logo {
+        margin-left: 20px;
+    }
+}
+
+@media(max-width: 1200px) {
+    .ztn-team {
+        display: none;
+    }
+
+    .title-media {
+        width: 914px;
+        height: 514px;
+    }
+
+    .title-box {
+        margin-bottom: 21px;
+    }
 }
