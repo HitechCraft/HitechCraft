@@ -39,11 +39,11 @@
             <div class="server">
                 <div class="server-title">Industrial Extentions</div>
                 <div class="server-progress">
-                    <div class="circle-progress 1"><strong>0<i>%</i></strong></div>
+                    <div class="circle-progress 1"><strong>0</strong></div>
                 </div>
                 <div class="server-title">Parallel Worlds</div>
                 <div class="server-progress">
-                    <div class="circle-progress 2"><strong>0<i>%</i></strong></div>
+                    <div class="circle-progress 2"><strong>0</strong></div>
                 </div>
             </div>
         </div>
@@ -72,13 +72,13 @@
     //value in interval [0; 1] (offline is -1)
     function setProgress(objclass, val) {
         $('.' + objclass).circleProgress({
-            value: val,
+            value: (val < 0 ? 1 : val),
             fill: {
                 color: getColor(val, 1)
             },
             startAngle: -Math.PI / 2
         }).on('circle-animation-progress', function (event, progress) {
-            var html = parseInt((val < 0 ? 1 : val) * 100 * progress) + '<i>%</i>';
+            var html = parseInt(val * 100 * progress);
 
             if (val < 0) {
                 html = fixValue(val);
