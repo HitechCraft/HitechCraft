@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="ajax-loader">
-        <img src="/Content/Images/loader.gif"/>
+        <img src="/Content/Images/loader.gif" />
     </div>
     <div class="ajax-bg"></div>
     <div class="navbar navbar-default">
@@ -50,10 +50,8 @@
         <div class="row wrapper">
             @RenderBody()
         </div>
-        <hr />
-        <footer>
-            
-        </footer>
+
+        @Html.Partial("_Footer")
     </div>
     <script type="text/javascript">
         $(document).ajaxStart(function () {

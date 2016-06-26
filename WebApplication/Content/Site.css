@@ -98,7 +98,14 @@ select {
 }
 
 footer {
+    min-height: 200px;
+    border-top: 1px solid #ddd;
+    margin-bottom: 50px;
 }
+
+    footer p {
+        margin-top: 10px;
+    }
 
 .footer-left {
     float: left;
@@ -106,6 +113,46 @@ footer {
 
 .footer-right {
     float: right;
+}
+
+.footer-col-title {
+    margin: 19px 0px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.footer-col-content {
+}
+
+.email {
+    color: #13baab;
+}
+
+.social-icon {
+    display: inline-block;
+    background: url("Images/social-icons.png") no-repeat;
+    -ms-background-size: 460%;
+    background-size: 460%;
+    height: 30px;
+    width: 30px;
+}
+
+.social-title {
+    position: absolute;
+    padding: 6px;
+}
+
+.vk {
+    background-position: -70px -36px;
+}
+
+.youtube {
+    background-position: -3px -36px;
+}
+
+.twitter {
+    background-position: -105px -2px;
 }
 
 .logo {
@@ -129,7 +176,7 @@ footer {
     text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
 }
 
-.title-box {    
+.title-box {
     background: #f5f5f5;
     border: 1px solid #ddd;
     width: 100%;
@@ -237,4 +284,20 @@ footer {
     text-align: center;
     line-height: 40px;
     font-size: 22px;
+}
+
+.banners {
+    margin-top: -10px;
+}
+
+    .banners a {
+        display: inline-block;
+        padding-top: 10px;
+    }
+
+.ztn-logo {
+    background: url("Images/ztn-logo.png");
+    background-size: 100%;
+    width: 150px;
+    height: 150px;
 }
