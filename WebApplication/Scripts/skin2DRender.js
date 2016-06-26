@@ -73,7 +73,6 @@
         var context = canvas.getContext("2d");
         var s = scale;
         context.mozImageSmoothingEnabled = false;
-        context.webkitImageSmoothingEnabled = false;
         context.msImageSmoothingEnabled = false;
         context.imageSmoothingEnabled = false;
         if (classname === "frontSkin") {
