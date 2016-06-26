@@ -376,6 +376,11 @@ footer {
     .logo {
         margin-left: 20px;
     }
+    
+    #news .col-md-5,
+    #news .col-md-7 {
+        float: left;
+    }
 }
 
 @media(max-width: 1200px) {
