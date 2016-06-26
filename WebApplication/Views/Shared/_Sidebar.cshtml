@@ -39,29 +39,18 @@
             <div class="server">
                 <div class="server-title">Industrial Extentions</div>
                 <div class="server-progress">
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-success" style="width: 35%"></div>
-                        <div class="server-players">35/100</div>
-                    </div>
+                    <div class="circle-progress 1"><strong>0<i>%</i></strong></div>
                 </div>
                 <div class="server-title">Parallel Worlds</div>
                 <div class="server-progress">
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-success" style="width: 75%"></div>
-                        <div class="server-players">75/100</div>
-                    </div>
-                </div>
-                <div class="server-title">Clan Wars</div>
-                <div class="server-progress">
-                    <div class="progress progress-striped active">
-                        <div class="progress-bar progress-bar-success" style="width: 100%"></div>
-                        <div class="server-players">Full</div>
-                    </div>
+                    <div class="circle-progress 2"><strong>0<i>%</i></strong></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@Scripts.Render("~/bundles/progress")
 
 @if (User.Identity.IsAuthenticated)
 {
@@ -72,3 +61,47 @@
         });
     </script>
 }
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        setProgress('1', -1);
+        setProgress('2', 0.64);
+    });
+
+    //value in interval [0; 1] (offline is -1)
+    function setProgress(objclass, val) {
+        $('.' + objclass).circleProgress({
+            value: val,
+            fill: {
+                color: getColor(val, 1)
+            },
+            startAngle: -Math.PI / 2
+        }).on('circle-animation-progress', function (event, progress) {
+            var html = parseInt((val < 0 ? 1 : val) * 100 * progress) + '<i>%</i>';
+
+            if (val < 0) {
+                html = fixValue(val);
+            }
+
+            $(this).find('strong').html(html);
+        });
+    }
+
+    function getColor(value, maxvalue) {
+        //colors compare offline, online, empty, full
+        var colors = ['#ff0000', '#4fc500', '#0075ed', '#ff7200'];
+        
+        console.log(colors[1]);
+
+        if (value < 0) return colors[0];
+        if (value >= maxvalue) return colors[3];
+        if (value === 0) return colors[2];
+
+        return colors[1];
+    }
+
+    function fixValue(value) {
+        if (value < 0) return 'Offline';
+    }
+</script>
