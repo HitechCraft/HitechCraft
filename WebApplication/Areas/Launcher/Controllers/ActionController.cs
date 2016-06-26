@@ -146,7 +146,6 @@ namespace WebApplication.Areas.Launcher.Controllers
         /// <returns></returns>
         public JsonResult CheckClientFiles(string base64Hash)
         {
-            var test = base64Hash.Length;
             var errorFileList = new List<JsonErrorFileData>();
 
             try
@@ -187,6 +186,43 @@ namespace WebApplication.Areas.Launcher.Controllers
                 }, JsonRequestBehavior.AllowGet);
             }
         }
+        
+        /// <summary>
+        /// Returns Client file paths from server
+        /// </summary>
+        /// <param name="base64Hash">Base64 hash of client name</param>
+        /// <returns></returns>
+        public JsonResult GetJsonClientServerFilesData(string base64Hash)
+        {
+            List<JsonClientFilesData> clientFiles = new List<JsonClientFilesData>();
+
+            var clientName = Encoding.UTF8.GetString(Convert.FromBase64String(base64Hash));
+
+            var clientFolders = LauncherManager.GetRequiredFolderList(clientName);
+
+            foreach (var folder in clientFolders)
+            {
+                if (FileManager.IsDirectory(folder))
+                {
+                    var files = FileManager.GetFiles(folder, "*", SearchOption.AllDirectories);
+
+                    clientFiles.AddRange(files
+                        .Select(x => new JsonClientFilesData()
+                        {
+                            FilePath = FileManager.GetClientFilePath(x, clientName),
+                            HashSum = Md5Manager.GetMd5Hash(System.IO.File.ReadAllBytes(x))
+                        }));
+                }
+            }
+
+            return Json(new JsonClientData()
+            {
+                FilesData = clientFiles,
+                ClientName = clientName
+            }, 
+            JsonRequestBehavior.AllowGet);
+        }
+
 
         /// <summary>
         /// Feature for file download (from launcher client site folder)
