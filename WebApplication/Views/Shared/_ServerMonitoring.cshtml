@@ -28,7 +28,7 @@
     {
         <script type="text/javascript">
             $(document).ready(function () {
-                setProgress('@server.Id', '@(server.ServerData.Status != JsonServerStatus.Error || server.ServerData.Status != JsonServerStatus.Offline ? server.ServerData.PlayerCount : -1)', '@server.ServerData.MaxPlayerCount');
+                setProgress('@server.Id', '@(server.ServerData.Status != JsonServerStatus.Error && server.ServerData.Status != JsonServerStatus.Offline ? server.ServerData.PlayerCount : -1)', '@server.ServerData.MaxPlayerCount');
             });
         </script>
     }
