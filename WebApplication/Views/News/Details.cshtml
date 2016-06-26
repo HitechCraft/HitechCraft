@@ -1,0 +1,94 @@
+﻿@model WebApplication.Models.NewsViewModel
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Detail</h2>
+@Html.ActionLink("Edit", "Edit", new { id = Model.Id })<br />
+@Html.ActionLink("Delete", "Delete", new {id = Model.Id})<br/>
+
+@if (Convert.ToBase64String(Model.Image) != String.Empty)
+{
+    <img alt="" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" style="max-width: 200px"/>
+}
+else
+{
+    <img alt="" src="~/Content/Images/no-image.jpg" style="max-width: 200px" />
+}
+
+<p>@Model.Title</p>
+<p>@Model.Text</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="form-horizontal">
+        <h5>Добавить комментарий</h5>
+        <hr/>
+        <div class="form-group">
+            <span id="error-alert"></span>
+        </div>
+        <div class="form-group">
+            <textarea id="ncomment-text"></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-default btn-sm" onclick="javascript:AddComment();">Добавить комментарий</button>
+        </div>
+    </div>
+}
+else
+{
+    <p>Для того чтобы добавить комментарий вы должны @Html.ActionLink("войти", "Login", "Account", new { returnUrl = "/News/Details/" + Model.Id }, new {})</p>
+}
+
+<div id="comments">
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadComments(1);
+    });
+
+    function FilterComments(currentPage) {
+        LoadComments(currentPage);
+    }
+
+    function LoadComments(currentPage) {
+        $.get("@Url.Action("CommentsPartialList", "News")", { page: currentPage, newsId : @Model.Id })
+        .done(function (data) {
+            $('#comments').html('');
+            $('#comments').html(data);
+        });
+    }
+
+    function AddComment() {
+        $.post("@Url.Action("Create", "Comment")", { newsId : @Model.Id, text: $('#ncomment-text').val() })
+        .done(function (data) {
+            if (data == "OK") {
+                LoadComments(1);
+                $('#ncomment-text').val('');
+            } else {
+                $('#error-alert').html('');
+                $('#error-alert').html(data);
+            }
+        });
+    }
+
+    function RemoveComment(commentId) {
+        if (confirm("Вы уверены?")) {
+            $.post("@Url.Action("Delete", "Comment")", { id : commentId })
+            .done(function (data) {
+                LoadComments(1);
+            });
+        } 
+    }
+    
+    //function EditComment(commentId) {
+    //    var text = $('#comment-text' + commentId + '>p').html();
+
+    //    $('#comment-text' + commentId).html('<textarea>' + text + '</textarea>');
+    //    $('#comment-edit-btn').html('Сохранить');
+    //    $('#comment-edit-btn').attr('onclick', 'javascript:SaveComment(' + commentId + ')');
+    //}
+
+
+</script>

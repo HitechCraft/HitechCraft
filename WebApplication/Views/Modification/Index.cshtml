@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebApplication.Models.ModificationViewModel>
+@using WebApplication.Areas.Launcher.Models.Json
+@{
+    ViewBag.Title = "Список модификаций";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th>Описание</th>
+                <th>Версия</th>
+                <th>Используется в серверах</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mod in Model)
+            {
+                <tr>
+                    <td><a href="@Url.Action("Details", new { id = mod.Id })">@mod.Name</a></td>
+                    <td>@mod.Description</td>
+                    <td>@mod.Version</td>
+                    <td>
+                        @if (mod != null && mod.Servers.Count() > 0)
+                        {
+                            foreach (var server in mod.Servers)
+                            {
+                                @server.Name<br />
+                            }
+                        }
+                        else
+                        {
+                            <p>Не используется</p>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        @Html.ActionLink("Add", "Add", null, new { @class = "btn btn-success" })
+    </div>
+}
+else
+{
+    <p>Модификаций не найдено</p>
+}

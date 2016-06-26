@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNet.Identity
+@using PagedList.Mvc
+@model PagedList.IPagedList<WebApplication.Models.CommentViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model!= null && Model.Any())
+{
+    foreach (var comment in Model)
+    {
+        <div id="comment-text@(comment.Id)">
+            <p>@comment.Text</p>
+        </div>
+        <p>@comment.AuthorName</p>
+
+        if (comment.AuthorId == User.Identity.GetUserId())
+        {
+            <button class="btn btn-danger btn-sm" onclick="javascript:RemoveComment(@comment.Id);">Удалить</button>
+        }
+    }
+
+    @Html.PagedListPager(Model, page => "javascript:FilterComments(" + page + ")")
+}
+else
+{
+    <p>Нет комментариев</p>
+}
