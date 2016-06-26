@@ -32,19 +32,12 @@
             </div>
         </div>
     }
-
+    
     <div class="panel panel-default">
         <div class="panel-heading">Мониторинг</div>
         <div class="panel-body">
             <div class="server">
-                <div class="server-title">Industrial Extentions (@Html.ActionLink("?", "Details", "Server", new { id = 1 }, null))</div>
-                <div class="server-progress">
-                    <div class="circle-progress 1"><strong>0</strong></div>
-                </div>
-                <div class="server-title">Parallel Worlds (@Html.ActionLink("?", "Details", "Server", new { id = 2 }, null))</div>
-                <div class="server-progress">
-                    <div class="circle-progress 2"><strong>0</strong></div>
-                </div>
+                <div id="servers"></div>
             </div>
         </div>
     </div>
@@ -64,21 +57,25 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
-        setProgress('1', -1);
-        setProgress('2', 0.64);
+    $(document).ready(function() {
+        $.get("@Url.Action("MonitoringList", "Server")")
+        .done(function (data) {
+            $('#servers').html('');
+            $('#servers').html(data);
+        });
     });
 
-    //value in interval [0; 1] (offline is -1)
-    function setProgress(objclass, val) {
+    //val offline is -1
+    function setProgress(objclass, val, maxval) {
         $('.' + objclass).circleProgress({
-            value: (val < 0 ? 1 : val),
+            value: (val < 0 ? 1 : val / 100),
             fill: {
-                color: getColor(val, 1)
+                color: getColor(val, maxval)
             },
-            startAngle: -Math.PI / 2
+            startAngle: -Math.PI / 2,
+            thickness: 10
         }).on('circle-animation-progress', function (event, progress) {
-            var html = parseInt(val * 100 * progress);
+            var html = parseInt(val * progress);
 
             if (val < 0) {
                 html = fixValue(val);
@@ -91,8 +88,9 @@
     function getColor(value, maxvalue) {
         //colors compare offline, online, empty, full
         var colors = ['#ff0000', '#4fc500', '#0075ed', '#ff7200'];
-        
-        console.log(colors[1]);
+
+        value = parseInt(value);
+        maxvalue = parseInt(maxvalue);
 
         if (value < 0) return colors[0];
         if (value >= maxvalue) return colors[3];
@@ -104,4 +102,5 @@
     function fixValue(value) {
         if (value < 0) return 'Offline';
     }
+
 </script>
