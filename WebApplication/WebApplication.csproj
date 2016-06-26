@@ -349,6 +349,7 @@
     <Content Include="Areas\Launcher\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\Images\charRendered.png" />
+    <Content Include="Scripts\circle-progress.js" />
     <Content Include="Scripts\jgrowl.alerts.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
