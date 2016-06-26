@@ -1,4 +1,6 @@
-﻿namespace WebApplication.Controllers
+﻿using WebApplication.Core;
+
+namespace WebApplication.Controllers
 {
     #region Using Directives
 
@@ -78,6 +80,10 @@
             if (ModelState.IsValid)
             {
                 var server = Mapper.Map<ServerEditViewModel, Server>(vm);
+                
+                var uploadImage = Request.Files["uploadServerImage"];
+                
+                server.Image = ImageManager.GetImageBytes(uploadImage);
 
                 this.context.Servers.Add(server);
                 this.context.SaveChanges();
@@ -112,6 +118,10 @@
             if (ModelState.IsValid)
             {
                 var server = Mapper.Map<ServerEditViewModel, Server>(vm);
+
+                var uploadImage = Request.Files["uploadServerImage"];
+                
+                if (uploadImage.ContentLength > 0) server.Image = ImageManager.GetImageBytes(uploadImage);
 
                 this.context.Entry(server).State = EntityState.Modified;
                 this.context.SaveChanges();

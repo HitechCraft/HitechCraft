@@ -54,6 +54,30 @@
                 @Html.ValidationMessageFor(model => model.Port, "", new { @class = "text-danger" })
             </div>
         </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.MapPort, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MapPort, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.MapPort, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        @if (Model.Image != null && Convert.ToBase64String(Model.Image) != String.Empty)
+        {
+            //todo: профиксить изображение, при повторном выборе - отмене выбора изображение остается прежним
+            <img alt="" id="server-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" style="max-width: 200px" />
+        }
+        else
+        {
+            <img alt="" id="server-image" src="~/Content/Images/no-image.jpg" style="max-width: 200px" />
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="uploadServerImage" id="uploadServerImage" />
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -67,6 +91,21 @@
     @Html.ActionLink("Back", "Details", new { id = Model.Id })
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<script type="text/javascript">
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#server-image').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#uploadServerImage").change(function () {
+        readURL(this);
+    });
+</script>

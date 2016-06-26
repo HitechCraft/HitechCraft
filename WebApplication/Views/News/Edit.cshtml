@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        @if (Convert.ToBase64String(Model.Image) != String.Empty)
+        @if (Model.Image != null && Convert.ToBase64String(Model.Image) != String.Empty)
         {
             //todo: профиксить изображение, при повторном выборе - отмене выбора изображение остается прежним
             <img alt="" id="news-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" style="max-width: 200px" />

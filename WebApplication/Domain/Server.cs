@@ -8,7 +8,7 @@
     using System.Web.Mvc;
     #endregion
 
-    [Bind(Include= "Id, Name, Description, ClientVersion, IpAddress, Port, MapPort, ServerModifications")]
+    [Bind(Include= "Id, Name, Description, ClientVersion, IpAddress, Port, MapPort, Image, ServerModifications")]
     public class Server
     {
         /// <summary>

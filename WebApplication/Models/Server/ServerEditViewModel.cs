@@ -17,8 +17,14 @@
 
         [Required]
         public string IpAddress { get; set; }
+        
+        [Required]
+        public byte[] Image { get; set; }
 
         [Required]
         public int Port { get; set; }
+
+        [Required]
+        public int MapPort { get; set; }
     }
 }

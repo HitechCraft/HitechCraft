@@ -16,6 +16,10 @@
         public int Port { get; set; }
 
         public string Description { get; set; }
+        
+        public byte[] Image { get; set; }
+        
+        public int MapPort { get; set; }
 
         public IEnumerable<ServerModificationViewModel> Modifications { get; set; }
 
