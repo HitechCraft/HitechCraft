@@ -308,6 +308,14 @@
     <Compile Include="Migrations\201606121430570_CommentFix.Designer.cs">
       <DependentUpon>201606121430570_CommentFix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606262029117_ServerMap.cs" />
+    <Compile Include="Migrations\201606262029117_ServerMap.Designer.cs">
+      <DependentUpon>201606262029117_ServerMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606262138519_ServerImage.cs" />
+    <Compile Include="Migrations\201606262138519_ServerImage.Designer.cs">
+      <DependentUpon>201606262138519_ServerImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
@@ -484,6 +492,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606121430570_CommentFix.resx">
       <DependentUpon>201606121430570_CommentFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606262029117_ServerMap.resx">
+      <DependentUpon>201606262029117_ServerMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606262138519_ServerImage.resx">
+      <DependentUpon>201606262138519_ServerImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
