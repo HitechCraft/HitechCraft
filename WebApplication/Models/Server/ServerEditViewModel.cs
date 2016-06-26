@@ -18,7 +18,6 @@
         [Required]
         public string IpAddress { get; set; }
         
-        [Required]
         public byte[] Image { get; set; }
 
         [Required]
