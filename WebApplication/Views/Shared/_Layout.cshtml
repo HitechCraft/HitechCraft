@@ -48,9 +48,12 @@
         <a class="game-start">Начать игру!</a>
 
         <div class="row wrapper">
-            @RenderBody()
+            <div class="cont">
+                @RenderBody()
+            </div>
         </div>
-
+    </div>
+    <div class="footer-content">
         @Html.Partial("_Footer")
     </div>
     <script type="text/javascript">

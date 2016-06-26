@@ -3,6 +3,7 @@
     margin: 0;
     font-family: "Open Sans", sans-serif;
     min-width: 768px;
+    height: 100%;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -92,6 +93,7 @@ select {
 
 .container {
     min-width: 768px;
+    min-height: 100%;
 }
 
 .navbar {
@@ -102,6 +104,11 @@ footer {
     min-height: 200px;
     border-top: 1px solid #ddd;
     margin-bottom: 50px;
+}
+
+.footer-content {
+    max-width: 1170px;
+    margin: 0 auto;
 }
 
     footer p {
@@ -211,7 +218,8 @@ footer {
 }
 
 .wrapper {
-    margin-top: 50px;
+    margin-top: 50px;    
+    min-height: 100%;
 }
 
 .user-menu {
