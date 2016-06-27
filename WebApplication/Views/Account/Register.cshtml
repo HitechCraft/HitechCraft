@@ -47,8 +47,9 @@
                     @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
+                    <div class="btn-group">
                         <input type="submit" class="btn btn-default" value="Регистрация" />
+                        @Html.ActionLink("Вход", "Login", null, new { @class = "btn btn-primary" })
                     </div>
                 </div>
             }

@@ -173,6 +173,11 @@ footer p {
 
 .game-start {
     float: right;
+    cursor: pointer;
+}
+
+.game-start a:hover {
+    color: #ff8400;
 }
 
 .game-start a {
@@ -380,8 +385,8 @@ footer p {
     }
 
     .game-start {
-        float: none;
-        width: 394px;
+        float: none;    
+        width: 383px;
         margin: 0 auto;
         padding-bottom: 3px;
     }
