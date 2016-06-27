@@ -26,7 +26,7 @@
 
             <p>
                 Установленные модификации:<br />
-                @if (Model.Modifications != null && Model.Modifications.Count() > 0)
+                @if (Model.Modifications != null && Model.Modifications.Any())
                 {
                     foreach (var mod in Model.Modifications)
                     {
@@ -39,22 +39,28 @@
                 }
                 </p>
 
-                <p>
-                    @Html.ActionLink("Edit", "Edit", new {id = Model.Id})
-                    @Html.ActionLink("Delete", "Delete", new {id = Model.Id})
-                </p>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+                        @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+                    </p>
+                }
 
                 @*@if (Model.ServerData.Status == JsonServerStatus.Online)
-                    {
-                    <div class="progress progress-striped active" style="width: 500px">
-                        <div class="progress-bar" style="width: @((int)((float)Model.ServerData.PlayerCount / Model.ServerData.MaxPlayerCount * 100f))%"></div>
-                    </div>
-                    }*@
+                {
+                <div class="progress progress-striped active" style="width: 500px">
+                    <div class="progress-bar" style="width: @((int)((float)Model.ServerData.PlayerCount / Model.ServerData.MaxPlayerCount * 100f))%"></div>
+                </div>
+                }*@
             </div>
         </div>
-        <p>Описание:
+    <p>Описание:
         <p>@Model.Description</p>
-        </p>
+    </p>
+    <h1 class="server-map-title">Интерактивная карта <a href="http://@(Model.IpAddress):@(Model.MapPort)" target="_blank"><span class="glyphicon glyphicon-fullscreen server-map-fullscreen" title="Полный экран"></span></a></h1>
+    <iframe class="server-map" src="http://@(Model.IpAddress):@(Model.MapPort)">
+    </iframe>
 }
 else
 {

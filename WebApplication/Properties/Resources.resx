@@ -127,7 +127,7 @@
     <value>Email</value>
   </data>
   <data name="EmailOrNickName" xml:space="preserve">
-    <value>Email или Имя пользователя</value>
+    <value>Email/Ник</value>
   </data>
   <data name="ErrorClientFilesCheck" xml:space="preserve">
     <value>Файлы клиента будут перезакачены</value>

@@ -88,7 +88,7 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Email или Имя пользователя.
+        ///   Ищет локализованную строку, похожую на Email/Ник.
         /// </summary>
         public static string EmailOrNickName {
             get {
