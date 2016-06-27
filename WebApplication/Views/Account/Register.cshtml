@@ -38,12 +38,13 @@
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Password)
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id="pass" })
+                    <span id="show-pass" class="glyphicon glyphicon-eye-open show-reg-pass" title="Показать пароль"></span>
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.ConfirmPassword)
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @id = "conf-pass" })
                     @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
@@ -62,9 +63,10 @@
             Скин игрока
         </div>
         <div class="panel-body">
+            <h4 style="text-align: center;margin-bottom: 20px">Позже вы сможете сменить его в профиле</h4>
             <div id="skin-container">
-                <img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="frontSkin" hidden="" />
-                <img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="backSkin" hidden="" />
+                <img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="frontSkin" hidden=""/>
+                <img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="backSkin" hidden=""/>
             </div>
         </div>
     </div>
@@ -75,6 +77,20 @@
 }
 
 <script type="text/javascript">
+    $('#show-pass').on("click", function() {
+        if ($('#pass').attr('type') === 'password') {
+            $('#pass').attr('type', 'text');
+            $('#conf-pass').attr('type', 'text');
+            $(this).attr('title', 'Скрыть пароль');
+            $(this).css('color', '#d6d6d6');
+        } else {
+            $('#pass').attr('type', 'password');
+            $('#conf-pass').attr('type', 'password');
+            $(this).css('color', '#000');
+            $(this).attr('title', 'Показать пароль');
+        }
+    });
+
     renderMCSkins('backSkin', 10);
     renderMCSkins('frontSkin', 10);
 

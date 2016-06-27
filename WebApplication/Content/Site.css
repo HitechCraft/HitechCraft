@@ -479,6 +479,13 @@ footer p {
     color: #000;
 }
 
+.show-reg-pass {
+    position: absolute;
+    padding: 39px 10px 0 243px;
+    cursor: pointer;
+    color: #000;
+}
+
 #skin-container {
     width: 324px;
     margin: 0 auto;
