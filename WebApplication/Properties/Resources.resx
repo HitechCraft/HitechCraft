@@ -190,7 +190,7 @@
     <value>Версия лаунчера валидная</value>
   </data>
   <data name="NickName" xml:space="preserve">
-    <value>Имя пользователя</value>
+    <value>Ник</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>

@@ -5,62 +5,68 @@
 @{
     ViewBag.Title = "Регистрация";
 }
+<div class="col-md-6">
 
-<h2>@ViewBag.Title.</h2>
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Создайте новую учетную запись.</h4>
-    @Html.ValidationSummary(true)
-    <hr />
-    <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            <div class="form-inline">
-                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @id = "user-name" })
-                <input type="button" id="check-username" class="btn btn-primary" value="Проверить имя" />
+    <div class="panel panel-primary panel-register">
+        <div class="panel-heading">
+            @ViewBag.Title
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal regForm", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName)
+                    <div class="form-inline">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @id = "user-name" })
+                        <a id="check-username" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </a>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Gender)
+                    @Html.EnumDropDownListFor(m => m.Gender, new { @class = "form-control", @id = "gender" })
+                    @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword)
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" class="btn btn-default" value="Регистрация" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="panel panel-primary panel-register">
+        <div class="panel-heading">
+            Скин игрока
+        </div>
+        <div class="panel-body">
+            <div id="skin-container">
+                <img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="frontSkin" hidden="" />
+                <img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="backSkin" hidden="" />
             </div>
-            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(m => m.Gender, new { @class = "form-control", @id = "gender" })
-            @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Регистрация" />
-        </div>
-    </div>
-}
-<div id="skin-container">
-    <img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="frontSkin" hidden="" />
-    <img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="backSkin" hidden="" />
 </div>
 
 @section Scripts {

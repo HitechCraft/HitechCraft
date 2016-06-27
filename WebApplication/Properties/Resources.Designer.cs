@@ -277,7 +277,7 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Имя пользователя.
+        ///   Ищет локализованную строку, похожую на Ник.
         /// </summary>
         public static string NickName {
             get {
