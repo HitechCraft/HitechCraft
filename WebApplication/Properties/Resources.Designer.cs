@@ -259,6 +259,15 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Скрыть пароль.
+        /// </summary>
+        public static string HidePassword {
+            get {
+                return ResourceManager.GetString("HidePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Информация.
         /// </summary>
         public static string Info {
@@ -322,6 +331,15 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Вход.
+        /// </summary>
+        public static string Logon {
+            get {
+                return ResourceManager.GetString("Logon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ник.
         /// </summary>
         public static string NickName {
@@ -376,6 +394,15 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Регистрация.
+        /// </summary>
+        public static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Рубли.
         /// </summary>
         public static string Rubles {
@@ -390,6 +417,15 @@ namespace WebApplication.Properties {
         public static string SetDafaultSkin {
             get {
                 return ResourceManager.GetString("SetDafaultSkin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Показать пароль.
+        /// </summary>
+        public static string ShowPassword {
+            get {
+                return ResourceManager.GetString("ShowPassword", resourceCulture);
             }
         }
         

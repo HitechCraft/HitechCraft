@@ -352,7 +352,7 @@ footer p {
 }
 
 .regForm {
-    width: 257px;
+    width: 250px;
     margin: 0 auto;
 }
 
@@ -373,6 +373,14 @@ footer p {
 
 #check-username {
     padding: 10px 21px;
+}
+
+@media(max-width: 768px) {
+    .form-inline .form-control {
+        display: inline-block;
+        width: auto;
+        vertical-align: middle;
+    }
 }
 
 @media(max-width: 992px) {
@@ -505,6 +513,11 @@ footer p {
     margin: 0 auto;
     padding: 36px 0;
     height: 392px;
+}
+
+.skin-register {
+    padding: 70px 0;
+    height: 451px;
 }
 
 .skin-uploader {
