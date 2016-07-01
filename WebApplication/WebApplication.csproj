@@ -317,23 +317,31 @@
       <DependentUpon>201606262138519_ServerImage.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
     <Compile Include="Models\Ban\BanUnbanViewModel.cs" />
     <Compile Include="Models\Ban\BanEditViewModel.cs" />
     <Compile Include="Models\Ban\BanViewModel.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\ModificationEditViewModel.cs" />
-    <Compile Include="Models\ModificationViewModel.cs" />
+    <Compile Include="Models\Player\Account\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="Models\Player\Account\ExternalLoginListViewModel.cs" />
+    <Compile Include="Models\Player\Account\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\Player\Account\ForgotViewModel.cs" />
+    <Compile Include="Models\Player\Account\LoginViewModel.cs" />
+    <Compile Include="Models\Player\Account\RegisterViewModel.cs" />
+    <Compile Include="Models\Player\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\Player\Account\SendCodeViewModel.cs" />
+    <Compile Include="Models\Player\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="Models\Player\ManageViewModels.cs" />
+    <Compile Include="Models\Modification\ModificationEditViewModel.cs" />
+    <Compile Include="Models\Modification\ModificationViewModel.cs" />
     <Compile Include="Models\News\CommentEditViewModel.cs" />
     <Compile Include="Models\News\CommentViewModel.cs" />
     <Compile Include="Models\News\NewsEditViewModel.cs" />
     <Compile Include="Models\News\NewsViewModel.cs" />
-    <Compile Include="Models\RoleViewModel.cs" />
+    <Compile Include="Models\Player\RoleViewModel.cs" />
     <Compile Include="Models\Server\ServerModificationViewModel.cs" />
     <Compile Include="Models\Server\ServerEditViewModel.cs" />
     <Compile Include="Models\Server\ServerViewModel.cs" />
-    <Compile Include="Models\UserSkinViewModel.cs" />
+    <Compile Include="Models\Player\UserSkinViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -448,6 +456,7 @@
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_ServerMonitoring.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Account\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
