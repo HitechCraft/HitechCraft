@@ -505,7 +505,7 @@ footer p {
 .skin-uploader {
     position: absolute;
     z-index: 999;
-    width: 147px;
+    width: 30%;
     height: 43px;
     cursor: pointer;
     opacity: 0;

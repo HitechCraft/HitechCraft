@@ -161,6 +161,11 @@
             return View();
         }
 
+        public ActionResult Profile()
+        {
+            return View();
+        }
+
         //todo: выполнить проверку на наличие аккаунта, сравнение паролей старого и нового
 
         //

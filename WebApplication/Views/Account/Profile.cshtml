@@ -1,0 +1,127 @@
+﻿@using WebApplication.Properties
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+@*<h2 class="page-title">@Resources.PlayerProfile</h2>*@
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">@Resources.PlayerView</div>
+            <div class="panel-body">
+                <div id="skin-container">
+                    <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name})" id="skin-image" class="frontSkin" hidden="" />
+                    <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name})" id="skin-image" class="backSkin" hidden="" />
+                </div>
+            </div>
+            <div class="panel-footer">
+                <input type="file" class="skin-uploader" accept="image/png" name="uploadSkinImage" id="file-upload" />
+                <div class="btn-group btn-group-justified">
+                    <a class="btn btn-primary">Выбрать образ</a>
+                    <a class="btn btn-default" id="skin-delete">@Resources.Delete</a>
+                    @Html.ActionLink("Каталог", "Index", "SkinLibrary", null, new {@class = "btn btn-info"})
+                </div>
+            </div>
+        </div>
+
+        @*<h4>@Resources.PlayerView</h4>
+
+            <div class="skin">
+                <div id="skin-container">
+                    <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name})" id="skin-image" class="frontSkin" hidden=""/>
+                    <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name})" id="skin-image" class="backSkin" hidden=""/>
+                </div>
+            </div>
+            <div class="btn-group skin-modification">
+                <input type="file" class="skin-uploader" accept="image/png" name="uploadSkinImage" id="file-upload"/>
+                <button class="btn btn-primary">Выбрать образ</button>
+                <input type="button" class="btn btn-default" id="skin-delete" value="@Resources.Delete"/>
+            </div>*@
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">@Resources.Info</div>
+            <div class="panel-body">
+                <p>
+                    <span>@Resources.Email</span>: denis-borisov2@rambler.ru
+                </p>
+                <br />
+                <p>
+                    <span>@Resources.Status</span>: Игрок
+                </p>
+                <br />
+                <p>
+                    <span>@Resources.PlayerBalance</span>:
+                    <br />
+                    <span>@Resources.Rubles</span>: 10 ед.
+                    <br />
+                    <span>@Resources.Gonts</span>: 100 ед.
+                </p>
+                <br />
+            </div>
+        </div>
+
+        @*<h4>@Resources.Info</h4>
+            <p><span>@Resources.Email</span>: denis-borisov2@rambler.ru
+            </p>
+            <br/>
+            <p><span>@Resources.Status</span>: Игрок
+            </p>
+            <br/>
+            <p>
+                <span>@Resources.PlayerBalance</span>:
+                <br/>
+                <span>@Resources.Rubles</span>: 10 ед.
+                <br/>
+                <span>@Resources.Gonts</span>: 100 ед.
+            </p>
+            <br/>*@
+        @*TODO: сделять изменение данных пользователя прямо в этом окне*@
+        <a href="javascript:manageUser()"></a>
+        @*TODO: запилить страницу с логами входа пользователя, изменением пароля и пр.*@
+        @Html.ActionLink("Безопасность", "Security", "Account")
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        renderMCSkins('frontSkin', 10);
+        renderMCSkins('backSkin', 10);
+
+        $('#file-upload').fileupload({
+            url: '@Url.Action("CheckSkinImage")',
+            type: 'POST',
+            autoUpload: true
+        }).on('fileuploaddone', function (e, data) {
+            if (!data.result.status) {
+                console.log(data.result);
+                $.each(data.result.data, function (i, object) {
+                    $.each(object.Errors, function (j, error) {
+                        growlError(error.ErrorMessage);
+                    });
+                });
+            }
+            else {
+                location.reload();
+            }
+        }).on('fileuploadprogressall', function (e, data) {
+
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+
+            $('.progress .progress-bar').css('visibility', 'visible');
+            $('.progress .progress-bar').css('width', progress + '%');
+            $('.progress .progress-bar').html(progress + '%');
+            $('#skin-image').attr("src", "");
+
+            if (progress >= 100) {
+                $('#skin-image').attr("src", "");
+                setTimeout(function () {
+                    location.reload();
+                }, 4000);
+            }
+        });
+    });
+</script>
