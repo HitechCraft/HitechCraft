@@ -296,6 +296,7 @@ footer p {
 
 .page-title {
     margin-top: 0;
+    margin-bottom: 30px;
 }
 
 .news-image {
@@ -517,4 +518,8 @@ footer p {
 
 .skin-modification {
     margin-top: 10px;
+}
+
+.player-info {
+    min-height: 422px;
 }

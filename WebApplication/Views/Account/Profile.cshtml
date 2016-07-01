@@ -4,7 +4,7 @@
     ViewBag.Title = "Profile";
 }
 
-@*<h2 class="page-title">@Resources.PlayerProfile</h2>*@
+<h2 class="page-title">@Resources.PlayerProfile</h2>
 <div class="row">
     <div class="col-md-6">
         <div class="panel panel-default">
@@ -20,7 +20,7 @@
                 <div class="btn-group btn-group-justified">
                     <a class="btn btn-primary">Выбрать образ</a>
                     <a class="btn btn-default" id="skin-delete">@Resources.Delete</a>
-                    @Html.ActionLink("Каталог", "Index", "SkinLibrary", null, new {@class = "btn btn-info"})
+                    @Html.ActionLink("Каталог", "Index", "SkinLibrary", null, new { @class = "btn btn-info" })
                 </div>
             </div>
         </div>
@@ -42,13 +42,17 @@
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">@Resources.Info</div>
-            <div class="panel-body">
+            <div class="panel-body player-info">
                 <p>
                     <span>@Resources.Email</span>: denis-borisov2@rambler.ru
                 </p>
                 <br />
                 <p>
                     <span>@Resources.Status</span>: Игрок
+                </p>
+                <br />
+                <p>
+                    <span>@Resources.Gender</span>: Мужской
                 </p>
                 <br />
                 <p>
@@ -59,6 +63,15 @@
                     <span>@Resources.Gonts</span>: 100 ед.
                 </p>
                 <br />
+            </div>
+
+            <div class="panel-footer">
+                <div class="btn-group btn-group-justified">
+                    @*TODO: сделять изменение данных пользователя прямо в этом окне*@
+                    <a href="javascript:manageUser()" class="btn btn-primary">Управление</a>
+                    @*TODO: запилить страницу с логами входа пользователя, изменением пароля и пр.*@
+                    @Html.ActionLink("Безопасность", "Security", "Account", null, new { @class = "btn btn-default" })
+                </div>
             </div>
         </div>
 
@@ -77,10 +90,6 @@
                 <span>@Resources.Gonts</span>: 100 ед.
             </p>
             <br/>*@
-        @*TODO: сделять изменение данных пользователя прямо в этом окне*@
-        <a href="javascript:manageUser()"></a>
-        @*TODO: запилить страницу с логами входа пользователя, изменением пароля и пр.*@
-        @Html.ActionLink("Безопасность", "Security", "Account")
     </div>
 </div>
 
