@@ -5,6 +5,9 @@
     ViewBag.Title = "Profile";
 }
 
+@{
+    Html.RenderPartial("ChangePasswordModal", new WebApplication.Models.ChangePasswordViewModel());
+}
 <h2 class="page-title">@Resources.PlayerProfile @Model.Name</h2>
 <div class="row profile-block">
     <div class="col-md-6">
@@ -20,8 +23,8 @@
                 <input type="file" class="skin-uploader" accept="image/png" name="uploadSkinImage" id="file-upload" />
                 <div class="btn-group btn-group-justified">
                     <a class="btn btn-primary">Выбрать образ</a>
-                    <a class="btn btn-default" id="skin-delete">@Resources.Delete</a>
-                    @Html.ActionLink("Каталог", "Index", "SkinLibrary", null, new { @class = "btn btn-info" })
+                    <a class="btn btn-default disabled" id="skin-delete">@Resources.Delete</a>
+                    @Html.ActionLink("Каталог", "Index", "SkinLibrary", null, new { @class = "btn btn-info disabled" })
                 </div>
             </div>
         </div>
@@ -40,7 +43,7 @@
                 <br />
                 <p>
                     <span>@Resources.Gender</span>: @Model.Gender
-                </p>
+</p>
                 <br />
                 <p>
                     <span>@Resources.PlayerBalance</span>:
@@ -55,9 +58,9 @@
             <div class="panel-footer">
                 <div class="btn-group btn-group-justified">
                     @*TODO: сделять изменение данных пользователя прямо в этом окне*@
-                    <a href="javascript:manageUser()" class="btn btn-primary">Управление</a>
+                    <a href="javascript:showChangePassword()" class="btn btn-primary">@Resources.ChangePassword</a>
                     @*TODO: запилить страницу с логами входа пользователя, изменением пароля и пр.*@
-                    @Html.ActionLink("Безопасность", "Security", "Account", null, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Безопасность", "Security", "Account", null, new { @class = "btn btn-default disabled" })
                 </div>
             </div>
         </div>
@@ -101,4 +104,8 @@
             }
         });
     });
+
+    function showChangePassword() {
+        $('#changePasswordModal').modal();
+    }
 </script>

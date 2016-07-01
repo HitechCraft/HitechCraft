@@ -79,11 +79,29 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Сменить пароль.
+        /// </summary>
+        public static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Проверить уникальность.
         /// </summary>
         public static string CheckUserName {
             get {
                 return ResourceManager.GetString("CheckUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Закрыть.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
             }
         }
         

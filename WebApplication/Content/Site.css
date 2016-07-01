@@ -381,6 +381,14 @@ footer p {
         width: auto;
         vertical-align: middle;
     }
+
+    .modal-sm {
+        width: 300px !important;
+    }
+    
+    .modal-dialog {
+        margin-left: 234px;
+    }
 }
 
 @media(max-width: 992px) {
@@ -543,4 +551,18 @@ footer p {
 
 .profile-block {
     margin-bottom: 30px;
+}
+
+.disabled {
+}
+
+#errors {
+    margin: 0;
+    margin-top: 12px;
+    padding: 0;
+    list-style: none;
+}
+
+#errors>li::not(first-child) {
+    margin-top: 7px;
 }

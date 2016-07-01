@@ -123,8 +123,14 @@
   <data name="Administration_AddRole_ErrorAlreadyExists" xml:space="preserve">
     <value>Роль с данным именем уже существует</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Сменить пароль</value>
+  </data>
   <data name="CheckUserName" xml:space="preserve">
     <value>Проверить уникальность</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Удалить</value>

@@ -1,4 +1,7 @@
-﻿namespace WebApplication.Controllers
+﻿using System.Text;
+using WebApplication.Areas.Launcher.Models.Json;
+
+namespace WebApplication.Controllers
 {
     #region Usings
 
@@ -232,6 +235,53 @@
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
         }
+        
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<JsonResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                //TODO: сделал фастом нифига не успеваю, переделать
+                var modelErrors = String.Empty;
+
+                foreach (var value in ModelState.Values)
+                {
+                    if (value.Errors.Any())
+                    {
+                        foreach (var error in value.Errors)
+                        {
+                            modelErrors += "<li>" + error.ErrorMessage + "</li>";
+                        }
+                    }
+                }
+
+                return Json(new { status = JsonStatus.NO, response = modelErrors }, JsonRequestBehavior.AllowGet);
+            }
+
+            var result = await UserManager.ChangePasswordAsync(this.User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+
+            if (result.Succeeded && !result.Errors.Any())
+            {
+                var user = await UserManager.FindByIdAsync(this.User.Identity.GetUserId());
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                //return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+            }
+            
+            //TODO: сделал фастом нифига не успеваю, переделать
+            var errors = String.Empty;
+
+            foreach (var error in result.Errors)
+            {
+                errors += "<li>" + error + "</li>";
+            }
+
+            return Json(new { status = JsonStatus.NO, response = errors }, JsonRequestBehavior.AllowGet);
+        }
+
 
         /// <summary>
         /// Method added player for plugin models relations
