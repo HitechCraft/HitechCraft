@@ -399,8 +399,8 @@ footer p {
         }
 
     .title-media {
-        width: 642px !important;
-        height: 361px !important;
+        width: 672px !important;
+        height: 378px !important;
     }
 
     .title-box {
@@ -455,6 +455,10 @@ footer p {
     #news .col-md-5,
     #news .col-md-7 {
         float: left;
+    }
+
+    .title-row {
+        margin: 0 -15px;
     }
 }
 
