@@ -481,7 +481,8 @@ footer p {
 
 .show-reg-pass {
     position: absolute;
-    padding: 39px 10px 0 243px;
+    right: 22px;
+    top: 39px;
     cursor: pointer;
     color: #000;
 }
