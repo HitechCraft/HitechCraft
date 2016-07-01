@@ -23,8 +23,8 @@
                 <input type="file" class="skin-uploader" accept="image/png" name="uploadSkinImage" id="file-upload" />
                 <div class="btn-group btn-group-justified">
                     <a class="btn btn-primary">Выбрать образ</a>
-                    <a class="btn btn-default disabled" id="skin-delete">@Resources.Delete</a>
-                    @Html.ActionLink("Каталог", "Index", "SkinLibrary", null, new { @class = "btn btn-info disabled" })
+                    <a class="btn btn-default" id="skin-delete">@Resources.Delete</a>
+                    @*@Html.ActionLink("Каталог", "Index", "SkinLibrary", null, new { @class = "btn btn-info disabled" })*@
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
                 <br />
                 <p>
                     <span>@Resources.Gender</span>: @Model.Gender
-</p>
+                </p>
                 <br />
                 <p>
                     <span>@Resources.PlayerBalance</span>:
@@ -74,6 +74,11 @@
         renderMCSkins('frontSkin', 10);
         renderMCSkins('backSkin', 10);
 
+        if ('@Html.Action("IsPlayerSkinExists")' === 'False') {
+            $('#skin-delete').attr('title', 'Скин не установлен');
+            $('#skin-delete').addClass('disabled');
+        }
+
         $('#file-upload').fileupload({
             url: '@Url.Action("CheckSkinImage")',
             type: 'POST',
@@ -103,6 +108,27 @@
                 $('#skin-image').attr("src", "");
             }
         });
+    });
+
+    $('#skin-delete').on('click', function() {
+        if (confirm('Вы действительно хотите вернуть стандартный скин?')) {
+            $.post('@Url.Action("RemovePlayerSkin")')
+                .done(function (data) {
+                    console.log(data);
+                    if (data.status === 1) {
+                        growlSuccess(data.message);
+                    } else {
+                        growlError(data.message);
+                    }
+
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000);
+                })
+                .fail(function(data) {
+                    growlError(data);
+                });
+        }
     });
 
     function showChangePassword() {

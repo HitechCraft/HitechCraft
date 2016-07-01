@@ -385,7 +385,7 @@ footer p {
     .modal-sm {
         width: 300px !important;
     }
-    
+
     .modal-dialog {
         margin-left: 234px;
     }
@@ -547,6 +547,7 @@ footer p {
 
 .player-info {
     min-height: 422px;
+    font-size: 24px;
 }
 
 .profile-block {
@@ -563,6 +564,6 @@ footer p {
     list-style: none;
 }
 
-#errors>li::not(first-child) {
-    margin-top: 7px;
-}
+    #errors > li::not(first-child) {
+        margin-top: 7px;
+    }

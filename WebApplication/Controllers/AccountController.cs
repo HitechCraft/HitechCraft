@@ -435,6 +435,55 @@ namespace WebApplication.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult RemovePlayerSkin()
+        {
+            try
+            {
+                if (!IsPlayerSkinExists())
+                {
+                    return Json(new
+                    {
+                        status = JsonStatus.NO,
+                        message = "Скин пользователя не загружен"
+                    }, JsonRequestBehavior.AllowGet);
+                }
+
+                var userSkin = this.context.UserSkins.First(us => us.UserId == this.CurrentUser.Id);
+
+                this.context.UserSkins.Remove(userSkin);
+                this.context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    status = JsonStatus.NO,
+                    message = e.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new
+            {
+                status = JsonStatus.YES,
+                message = "Скин успешно изменен на стандартный"
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public bool IsPlayerSkinExists()
+        {
+            try
+            {
+                this.context.UserSkins.First(us => us.UserId == this.CurrentUser.Id);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         [AllowAnonymous]
         [HttpPost]
         public JsonResult CheckSkinImage()
