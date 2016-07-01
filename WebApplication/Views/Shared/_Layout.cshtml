@@ -62,9 +62,11 @@
         $(document).ajaxStart(function () {
             $('.ajax-loader').show();
             $('.ajax-bg').show();
+            $('body').css('overflow', 'hidden');
         }).ajaxStop(function () {
             $('.ajax-loader').hide();
             $('.ajax-bg').hide();
+            $('body').css('overflow', 'visible');
         });
     </script>
     @Scripts.Render("~/bundles/bootstrap")
