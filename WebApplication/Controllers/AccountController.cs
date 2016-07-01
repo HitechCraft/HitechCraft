@@ -25,10 +25,17 @@
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        ApplicationDbContext context = new ApplicationDbContext();
 
         public AccountController()
         {
+            Mapper.CreateMap<Player, PlayerProfileViewModel>()
+                .ForMember(dst => dst.Name, ext => ext.MapFrom(src => src.Name))
+                .ForMember(dst => dst.Gender, ext => ext.MapFrom(src => src.User.Gender))
+                .ForMember(dst => dst.Email, ext => ext.MapFrom(src => src.User.Email))
+                .ForMember(dst => dst.Gonts, ext => ext.MapFrom(src => this.Gonts))
+                .ForMember(dst => dst.Rubles, ext => ext.MapFrom(src => this.Rubles))
+                //TODO: запилить статус игрока на основании AspNetRoles
+                .ForMember(dst => dst.Status, ext => ext.MapFrom(src => PlayerStatus.Player));
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -163,7 +170,19 @@
 
         public ActionResult Profile()
         {
-            return View();
+            try
+            {
+                var userId = this.User.Identity.GetUserId().ToString();
+                var player = this.context.Players.Include("User").First(p => p.UserId == userId);
+
+                var vm = Mapper.Map<Player, PlayerProfileViewModel>(player);
+
+                return View(vm);
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
         }
 
         //todo: выполнить проверку на наличие аккаунта, сравнение паролей старого и нового
@@ -276,10 +295,10 @@
 
         public ActionResult UploadSkin()
         {
-            var userId = User.Identity.GetUserId().ToString();
+            var userId = this.User.Identity.GetUserId().ToString();
             UserSkin userSkin = GetSkinByUserId(userId);
 
-            ViewBag.UserName = User.Identity.GetUserName();
+            ViewBag.UserName = this.User.Identity.GetUserName();
 
             Mapper.CreateMap<UserSkin, UserSkinViewModel>()
                     .ForMember(dst => dst.Id, exp => exp.MapFrom(src => src.Id))
@@ -353,7 +372,7 @@
 
             userSkin.Image = ImageManager.GetImageBytes(image);
 
-            userSkin.UserId = User.Identity.GetUserId();
+            userSkin.UserId = this.User.Identity.GetUserId();
 
             if (IsUserSkinExists(userSkin.UserId))
             {
@@ -570,7 +589,7 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
+            if (this.User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Manage");
             }

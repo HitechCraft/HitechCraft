@@ -1,10 +1,11 @@
 ﻿@using WebApplication.Properties
+@model WebApplication.Models.PlayerProfileViewModel
 
 @{
     ViewBag.Title = "Profile";
 }
 
-<h2 class="page-title">@Resources.PlayerProfile</h2>
+<h2 class="page-title">@Resources.PlayerProfile @Model.Name</h2>
 <div class="row profile-block">
     <div class="col-md-6">
         <div class="panel panel-default">
@@ -24,43 +25,29 @@
                 </div>
             </div>
         </div>
-
-        @*<h4>@Resources.PlayerView</h4>
-
-            <div class="skin">
-                <div id="skin-container">
-                    <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name})" id="skin-image" class="frontSkin" hidden=""/>
-                    <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name})" id="skin-image" class="backSkin" hidden=""/>
-                </div>
-            </div>
-            <div class="btn-group skin-modification">
-                <input type="file" class="skin-uploader" accept="image/png" name="uploadSkinImage" id="file-upload"/>
-                <button class="btn btn-primary">Выбрать образ</button>
-                <input type="button" class="btn btn-default" id="skin-delete" value="@Resources.Delete"/>
-            </div>*@
     </div>
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">@Resources.Info</div>
             <div class="panel-body player-info">
                 <p>
-                    <span>@Resources.Email</span>: denis-borisov2@rambler.ru
+                    <span>@Resources.Email</span>: @Model.Email
                 </p>
                 <br />
                 <p>
-                    <span>@Resources.Status</span>: Игрок
+                    <span>@Resources.Status</span>: @Model.Status
                 </p>
                 <br />
                 <p>
-                    <span>@Resources.Gender</span>: Мужской
+                    <span>@Resources.Gender</span>: @Model.Gender
                 </p>
                 <br />
                 <p>
                     <span>@Resources.PlayerBalance</span>:
                     <br />
-                    <span>@Resources.Rubles</span>: 10 ед.
+                    <span>@Resources.Rubles</span>: @Model.Rubles ед.
                     <br />
-                    <span>@Resources.Gonts</span>: 100 ед.
+                    <span>@Resources.Gonts</span>: @Model.Gonts ед.
                 </p>
                 <br />
             </div>
@@ -74,22 +61,6 @@
                 </div>
             </div>
         </div>
-
-        @*<h4>@Resources.Info</h4>
-            <p><span>@Resources.Email</span>: denis-borisov2@rambler.ru
-            </p>
-            <br/>
-            <p><span>@Resources.Status</span>: Игрок
-            </p>
-            <br/>
-            <p>
-                <span>@Resources.PlayerBalance</span>:
-                <br/>
-                <span>@Resources.Rubles</span>: 10 ед.
-                <br/>
-                <span>@Resources.Gonts</span>: 100 ед.
-            </p>
-            <br/>*@
     </div>
 </div>
 
@@ -106,7 +77,6 @@
             autoUpload: true
         }).on('fileuploaddone', function (e, data) {
             if (!data.result.status) {
-                console.log(data.result);
                 $.each(data.result.data, function (i, object) {
                     $.each(object.Errors, function (j, error) {
                         growlError(error.ErrorMessage);
@@ -115,6 +85,7 @@
             }
             else {
                 location.reload();
+                @*//TODO: сделать фикс для Mozila*@
             }
         }).on('fileuploadprogressall', function (e, data) {
 
@@ -127,9 +98,6 @@
 
             if (progress >= 100) {
                 $('#skin-image').attr("src", "");
-                setTimeout(function () {
-                    location.reload();
-                }, 4000);
             }
         });
     });

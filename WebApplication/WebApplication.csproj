@@ -337,6 +337,7 @@
     <Compile Include="Models\News\CommentViewModel.cs" />
     <Compile Include="Models\News\NewsEditViewModel.cs" />
     <Compile Include="Models\News\NewsViewModel.cs" />
+    <Compile Include="Models\Player\PlayerProfileViewModel.cs" />
     <Compile Include="Models\Player\RoleViewModel.cs" />
     <Compile Include="Models\Server\ServerModificationViewModel.cs" />
     <Compile Include="Models\Server\ServerEditViewModel.cs" />
