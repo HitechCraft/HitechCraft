@@ -523,3 +523,7 @@ footer p {
 .player-info {
     min-height: 422px;
 }
+
+.profile-block {
+    margin-bottom: 30px;
+}
