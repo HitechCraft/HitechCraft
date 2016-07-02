@@ -9,24 +9,6 @@
         {
             var serverStatus = new MinecraftServerStatusManager(server.IpAddress, server.Port);
 
-            if (!serverStatus.IsServerUp())
-            {
-                return new JsonServerData()
-                {
-                    Status = JsonServerStatus.Offline,
-                    Message = "Сервер выключен"
-                };
-            }
-
-            if (server.ClientVersion != serverStatus.GetVersion())
-            {
-                return new JsonServerData()
-                {
-                    Status = JsonServerStatus.Error,
-                    Message = "Версия клиента не совпадает с версией сервера"
-                };
-            }
-
             //TODO вывод дополнительных свойств типа Motd и пр.
             var serverData = new JsonServerData()
             {
@@ -35,6 +17,26 @@
                 PlayerCount = serverStatus.GetCurrentPlayers(),
                 MaxPlayerCount = serverStatus.GetMaximumPlayers()
             };
+
+            //дополнительная информация о сервере, необходима для лаунчера
+            serverData.ServerName = server.Name;
+            
+            if (!serverStatus.IsServerUp())
+            {
+                serverData.Status = JsonServerStatus.Offline;
+                serverData.Message = "Сервер выключен";
+
+                return serverData;
+            }
+
+            if (server.ClientVersion != serverStatus.GetVersion())
+            {
+                serverData.Status = JsonServerStatus.Error;
+                serverData.Message = "Версия клиента не совпадает с версией сервера";
+
+                return serverData;
+            }
+
 
             if (serverData.PlayerCount >= serverData.MaxPlayerCount && serverData.MaxPlayerCount != 0)
             {

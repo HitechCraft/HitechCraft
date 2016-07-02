@@ -211,6 +211,7 @@
     <Compile Include="Areas\Launcher\Models\Json\JsonClientFilesData.cs" />
     <Compile Include="Areas\Launcher\Models\Json\JsonClientFilesStatusData.cs" />
     <Compile Include="Areas\Launcher\Models\Json\JsonErrorFileData.cs" />
+    <Compile Include="Areas\Launcher\Models\Json\JsonServersInfo.cs" />
     <Compile Include="Areas\Launcher\Models\Json\JsonServerStatus.cs" />
     <Compile Include="Areas\Launcher\Models\Json\JsonServerData.cs" />
     <Compile Include="Areas\Launcher\Models\Json\JsonServerStatusData.cs" />

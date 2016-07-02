@@ -234,7 +234,31 @@
             Response.TransmitFile(fileServerPath);
             Response.End();
         }
-        
+
+        /// <summary>
+        /// Returns server info, from site context
+        /// </summary>
+        public JsonResult GetServersInfo()
+        {
+            var servers = this.context.Servers.ToList();
+
+            var serversData = servers.Select(x => x.GetServerData()).ToList();
+
+            if (!servers.Any())
+            {
+                return Json(new JsonServersInfo()
+                {
+                    ServerCount = 0
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new JsonServersInfo()
+            {
+                ServerData = serversData,
+                ServerCount = servers.Count()
+            }, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region Private Methods
