@@ -219,6 +219,7 @@
     <Compile Include="Areas\Launcher\Services\LauncherManager.cs" />
     <Compile Include="Context\Context.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BalanceController.cs" />
     <Compile Include="Controllers\BanSystemController.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -458,6 +459,7 @@
     <Content Include="Views\Shared\_ServerMonitoring.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
+    <Content Include="Views\Balance\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

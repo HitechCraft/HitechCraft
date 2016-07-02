@@ -77,7 +77,7 @@ namespace WebApplication.Controllers
 
                 try
                 {
-                    return context.Currencies.First(c => c.username == userName);
+                    return this.context.Currencies.First(c => c.username == userName);
                 }
                 catch (Exception)
                 {
