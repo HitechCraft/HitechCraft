@@ -324,6 +324,10 @@
     <Compile Include="Migrations\201607021841524_IKTransaction.Designer.cs">
       <DependentUpon>201607021841524_IKTransaction.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607021849567_IKTransactionNewProps.cs" />
+    <Compile Include="Migrations\201607021849567_IKTransactionNewProps.Designer.cs">
+      <DependentUpon>201607021849567_IKTransactionNewProps.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
     <Compile Include="Models\Ban\BanUnbanViewModel.cs" />
@@ -523,6 +527,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607021841524_IKTransaction.resx">
       <DependentUpon>201607021841524_IKTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607021849567_IKTransactionNewProps.resx">
+      <DependentUpon>201607021849567_IKTransactionNewProps.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
