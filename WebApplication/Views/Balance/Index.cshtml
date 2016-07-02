@@ -1,0 +1,173 @@
+﻿@using WebApplication.Core
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="page-title">Информация о балансе</h2>
+<div class="row profile-block">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Информация о валюте</div>
+            <div class="panel-body info-block currency-info">
+                <h3 class="info-title">Рубли</h3>
+                <p>
+                    <span>Кол-во:</span> <strong>@ViewBag.Rubles</strong> единиц
+                </p>
+                <p>
+                    <span>Курс к игровой валюте (Gont):</span>
+                    @*//TODO: возможно сделаю биржу где будет происходить смена курса*@
+                    <br /><strong>1 RUB = 1000 Gont</strong>
+                </p>
+                <h3 class="info-title">Gont</h3>
+                <p>
+                    <span>Кол-во:</span> <strong>@ViewBag.Gonts</strong> единиц
+                </p>
+                <p>
+                    <span>Курс к реальной валюте (RUB):</span>
+                    @*//TODO: возможно сделаю биржу где будет происходить смена курса*@
+                    <br /><strong>2500 Gont = 1 RUB</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Пополнить баланс</div>
+            <div class="panel-body info-block">
+                <div class="payment">
+                    <h3 class="info-title">Купить RUB</h3>
+                    <form name="payment" method="post" action="https://sci.interkassa.com/" accept-charset="UTF-8" id="buyRub">
+                        <input type="hidden" name="ik_co_id" value="@IKConfig.IKID" />
+                        <input type="hidden" name="ik_pm_no" value="@Html.Action("CreateOrGetTransaction")" />
+                        <div class="form-group">
+                            <input type="number" class="form-control" min="1" max="99999" name="ik_am" id="count" placeholder="Кол-во рублей" />
+                            <span>1 рубль ~= 1 реальному рублю</span>
+                        </div>
+                        <input type="hidden" name="ik_desc" value="Player account replenishment" />
+                        <div class="form-group">
+                            <input id="buy" class="btn btn-default buy-button" value="Купить">
+                        </div>
+                    </form>
+                    <p></p>
+                    <h3 class="info-title">Обменять RUB</h3>
+                    <div class="form-group">
+                        <div class="input-group exchange">
+                            <input type="number" class="form-control" step="0.01" min="1" id="RubExchangeFieldRubs" placeholder="RUB" value="0.00">
+                            <div class="input-group-addon">=</div>
+                            <input type="text" class="form-control" id="RubExchangeFieldGonts" disabled="disabled">
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary buy-button" id="exchangeRubToGont">Обменять</a>
+                    <p></p>
+                    <h3 class="info-title">Обменять Gont</h3>
+                    <div class="form-group">
+                        <div class="input-group exchange">
+                            <input type="number" class="form-control" step="1" min="13" id="GontExchangeFieldGonts" placeholder="Gont" value="0">
+                            <div class="input-group-addon">=</div>
+                            <input type="text" class="form-control" id="GontExchangeFieldRubs" disabled="disabled">
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-primary buy-button" id="exchangeGontToRub">Обменять</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //не трогать, магия!
+
+    $(function () {
+        $('#RubExchangeFieldGonts').val('0 Gont');
+        $('#GontExchangeFieldRubs').val('0 RUB');
+
+        if ('@(ViewBag.PaymentStatus)' !== '') {
+            if ('@(ViewBag.PaymentStatus)' === 'OK') {
+                growlSuccess('@(ViewBag.PaymentResult)');
+            } else {
+                growlWarning('@(ViewBag.PaymentResult)');
+            }
+        }
+    });
+
+    $('#buy').on('click', function () {
+        if ($('#count').val() <= 0) {
+            growlError("Минимальное значение платежа 1 рубль.");
+        } else {
+            $('#buyRub').submit();
+        }
+    });
+
+    $('#RubExchangeFieldRubs').on('input', function () {
+        var koef = 1000;
+        var value = parseFloat($(this).val());
+
+        if (!/^[1-9]{1}[0-9]+[\.]{0,1}[0-9]{0,2}$/.test(value)) {
+            $(this).val(value.toFixed(2));
+        }
+
+        if (!$(this).val()) {
+            $('#RubExchangeFieldGonts').val('0 Gont');
+        } else {
+            $('#RubExchangeFieldGonts').val(Math.round(parseFloat($(this).val()) * koef) + ' Gont');
+        }
+    });
+
+    $('#exchangeRubToGont').on('click', function () {
+        var value = $('#RubExchangeFieldRubs').val();
+
+        if (!value || parseFloat(value) <= 0) {
+            growlWarning("Значение не может быть меньше нуля");
+            $('#RubExchangeFieldRubs').val(1);
+        } else if (confirm("Действительно обменять " + value + " RUB на Gonts")) {
+            $.post('@Url.Action("ExchangeRubToGont")', { count: parseInt(value) })
+                .done(function (data) {
+                    if (data.status === 1) {
+                        location.reload();
+                        growlSuccess(data.message);
+                    } else {
+                        growlWarning(data.message);
+                    }
+                }).fail(function (data) {
+                    growlError(data);
+                });
+        }
+    });
+
+    $('#GontExchangeFieldGonts').on('input', function () {
+        var koef = 2500;
+        var value = parseFloat($(this).val());
+
+        if (!/^[1-9]{1}[0-9]+$/.test(value)) {
+            $(this).val(Math.round(value));
+        }
+
+        if (!$(this).val()) {
+            $('#GontExchangeFieldRubs').val('0 RUB');
+        } else {
+            $('#GontExchangeFieldRubs').val((parseFloat($(this).val()) / koef).toFixed(2) + ' RUB');
+        }
+    });
+
+    $('#exchangeGontToRub').on('click', function () {
+        var value = $('#GontExchangeFieldGonts').val();
+
+        if (!value || parseFloat(value) < 13 @* <---- псст магия!!!*@) {
+            $('#GontExchangeFieldGonts').val(13);
+            growlWarning("Значение не может быть меньше 13");
+        } else if (confirm("Действительно обменять " + value + " Gonts на RUB?")) {
+            $.post('@Url.Action("ExchangeGontToRub")', { count: parseInt(value) })
+                .done(function (data) {
+                    if (data.status === 1) {
+                        location.reload();
+                        growlSuccess(data.message);
+                    } else {
+                        growlWarning(data.message);
+                    }
+                }).fail(function (data) {
+                    growlError(data);
+                });
+        }
+    });
+</script>

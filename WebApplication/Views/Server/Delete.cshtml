@@ -1,0 +1,22 @@
+﻿@model WebApplication.Models.ServerEditViewModel
+@{
+    ViewBag.Title = "Редактирование";
+}
+
+<h2>Вы действительно хотите удалить сервер @(Model.Name)?</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <input type="submit" value="Delete" class="btn btn-default" />
+            @Html.ActionLink("Cancel", "Details", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

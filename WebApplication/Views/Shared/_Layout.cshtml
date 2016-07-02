@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – приложение ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="ajax-loader">
+        <img src="/Content/Images/loader.gif" />
+    </div>
+    <div class="ajax-bg"></div>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("HITECHCRAFT", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Главная", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Форум", "Forum", "Home")</li>
+                    <li>@Html.ActionLink("Начать игру", "GameStart", "Home")</li>
+                    <li>@Html.ActionLink("Магазин", "Shop", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Сервисы <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Топ игроков</a></li>
+                            <li><a href="#">Пополнить счет</a></li>
+                            <li><a href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="logo"></div>
+        <div class="game-start">
+            <a>Начать игру!</a>
+        </div>
+
+        <div class="row wrapper">
+            <div class="cont">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <div class="footer-content">
+        @Html.Partial("_Footer")
+    </div>
+    <script type="text/javascript">
+        $(document).ajaxStart(function () {
+            $('.ajax-loader').show();
+            $('.ajax-bg').show();
+            $('body').css('overflow', 'hidden');
+        }).ajaxStop(function () {
+            $('.ajax-loader').hide();
+            $('.ajax-bg').hide();
+            $('body').css('overflow', 'visible');
+        });
+    </script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

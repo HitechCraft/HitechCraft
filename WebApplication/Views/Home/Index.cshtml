@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="title-row">
+    <div class="title-box">
+        <div class="ztn-team">
+        </div>
+        <iframe class="title-media" width="537" height="303" src="https://www.youtube.com/embed/luktEUo4adQ" frameborder="0" allowfullscreen></iframe>
+        <div class="clear"></div>
+    </div>
+</div>
+
+@*<div class="monitoring">
+    <h2 class="overall">Общий онлайн 534 из 1000 игроков!</h2>
+    <div class="progress progress-striped active">
+        <div class="progress-bar progress-bar-success" style="width: 35%"></div>
+        <div class="progress-bar progress-bar-warning" style="width: 20%"></div>
+        <div class="progress-bar progress-bar-danger" style="width: 10%"></div>
+    </div>
+</div>*@
+
+<div class="content">
+    @Html.Partial("_Sidebar")
+
+    <div class="col-md-8">
+        <h1 class="news-title">
+            Новости проекта
+        </h1>
+        <div id="news"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        LoadNews(1);
+    });
+
+    function FilterNews(currentPage) {
+        LoadNews(currentPage);
+    }
+
+    function LoadNews(currentPage) {
+        $.get("@Url.Action("NewsPartialList", "News")", { page: currentPage })
+        .done(function (data) {
+            $('#news').html('');
+            $('#news').html(data);
+        });
+    }
+</script>
