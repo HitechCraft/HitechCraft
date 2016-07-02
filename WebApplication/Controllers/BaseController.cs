@@ -127,33 +127,5 @@ namespace WebApplication.Controllers
         public BaseController()
         {
         }
-
-        /// <summary>
-        /// Обновление осуществляется прибавлением (вычетом) значения. Указываем разницу, а не новое кол-во валюты!!!
-        /// </summary>
-        /// <param name="amount">Разница (например +10 или -10)</param>
-        public void UpdateGonts(double amount)
-        {
-            var currency = this.UserCurrency;
-
-            currency.balance += amount;
-
-            context.Entry(currency).State = EntityState.Modified;
-            context.SaveChanges();
-        }
-
-        /// <summary>
-        /// Обновление осуществляется прибавлением (вычетом) значения. Указываем разницу, а не новое кол-во валюты!!!
-        /// </summary>
-        /// <param name="amount">Разница (например +10 или -10)</param>
-        public void UpdateRubles(double amount)
-        {
-            var currency = this.UserCurrency;
-
-            currency.realmoney += amount;
-
-            context.Entry(currency).State = EntityState.Modified;
-            context.SaveChanges();
-        }
     }
 }

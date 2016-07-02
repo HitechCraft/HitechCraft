@@ -1,16 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using WebApplication.Core;
-using WebApplication.Models;
-
-namespace WebApplication.Controllers
+﻿namespace WebApplication.Controllers
 {
+    using System;
     using System.Web.Mvc;
+    using System.Data.Entity;
+    using System.Collections.Generic;
+    using Core;
+    using Managers;
+    using Models;
+    using Domain;
+
+    public enum CurrencyType
+    {
+        Gont,
+        Rub
+    }
 
     public class BalanceController : BaseController
     {
         public ActionResult Index()
         {
+            ViewBag.Rubles = this.UserCurrency.realmoney;
+            ViewBag.Gonts = this.UserCurrency.balance;
+
             return View();
         }
 
@@ -21,12 +32,13 @@ namespace WebApplication.Controllers
         /// </summary>
         /// <param name="pm">Payment params</param>
         /// <returns></returns>
+        [HttpPost]
         public ActionResult Payment(PaymentModel pm)
         {
             //TODO: add unick transaction ids
             if (this.IsValidTransaction(pm))
             {
-                //some action here
+                this.MoneyEnrollment(CurrencyType.Rub, float.Parse(pm.ik_am), pm.ik_pm_no);
             }
 
             return null;
@@ -56,7 +68,7 @@ namespace WebApplication.Controllers
 
         #endregion
 
-        #region Private Methods
+        #region Private Methods for IK
 
         /// <summary>
         /// Check if transaction values compair IKConfig.values
@@ -147,6 +159,66 @@ namespace WebApplication.Controllers
             return String.Join(separator, objects);
         }
 
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Enroll money to player balance
+        /// </summary>
+        /// <param name="currencyType">Type of currency (rub or gont)</param>
+        /// <param name="amount">Amount to enroll</param>
+        /// <param name="transactionID">IK Transaction ID</param>
+        private void MoneyEnrollment(CurrencyType currencyType, float amount, string transactionID)
+        {
+            switch (currencyType)
+            {
+                case CurrencyType.Rub:
+                    this.UpdateRubles(amount, transactionID);
+                    break;
+                case CurrencyType.Gont:
+                    this.UpdateGonts(amount, transactionID);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Returns Player currency object
+        /// </summary>
+        /// <param name="transactionID">IK Transaction ID</param>
+        /// <returns></returns>
+        private Currency GetPlayerCurrency(string transactionID)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Обновление осуществляется прибавлением (вычетом) значения. Указываем разницу, а не новое кол-во валюты!!!
+        /// </summary>
+        /// <param name="amount">Разница (например +10 или -10)</param>
+        private void UpdateGonts(double amount, string transactionID)
+        {
+            var currency = this.GetPlayerCurrency(transactionID);
+
+            currency.balance += amount;
+
+            context.Entry(currency).State = EntityState.Modified;
+            context.SaveChanges();
+        }
+
+        /// <summary>
+        /// Обновление осуществляется прибавлением (вычетом) значения. Указываем разницу, а не новое кол-во валюты!!!
+        /// </summary>
+        /// <param name="amount">Разница (например +10 или -10)</param>
+        private void UpdateRubles(double amount, string transactionID)
+        {
+            var currency = this.GetPlayerCurrency(transactionID);
+
+            currency.realmoney += amount;
+
+            context.Entry(currency).State = EntityState.Modified;
+            context.SaveChanges();
+        }
         #endregion
     }
 }
