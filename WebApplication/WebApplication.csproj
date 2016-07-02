@@ -232,6 +232,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Core\ImageManager.cs" />
+    <Compile Include="Core\IKConfig.cs" />
     <Compile Include="Core\JsonManager.cs" />
     <Compile Include="Core\MinecraftServerStatusManager.cs" />
     <Compile Include="Domain\Ban.cs" />
@@ -461,6 +462,8 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Balance\Index.cshtml" />
+    <Content Include="Views\Balance\Success.cshtml" />
+    <Content Include="Views\Balance\Fail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

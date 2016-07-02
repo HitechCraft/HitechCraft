@@ -567,3 +567,45 @@ footer p {
     #errors > li::not(first-child) {
         margin-top: 7px;
     }
+
+.info-title {
+    margin: 5px 0 12px 0px;
+}
+
+.info-block > p {
+    margin-bottom: 30px;
+}
+
+.exchange {
+    width: 280px;
+}
+
+.payment {
+    min-height: 326px;
+}
+
+.currency-info {
+    min-height: 504px;
+}
+
+.payment::after {
+    content: "";
+    display: block;
+    position: absolute;    
+    top: 175px;
+    right: 40px;
+    background: url("Images/Valute.png") no-repeat;
+    background-size: 100%;
+    width: 300px;
+    height: 270px;
+    opacity: 0.2;
+    z-index: 1;
+}
+
+.buy-button {
+    width: 280px;
+}
+
+#buyRub .form-group {
+    z-index: 2;
+}

@@ -32,19 +32,16 @@
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">@Resources.Info</div>
-            <div class="panel-body player-info">
+            <div class="panel-body player-info info-block">
                 <p>
                     <span>@Resources.Email</span>: @Model.Email
                 </p>
-                <br />
                 <p>
                     <span>@Resources.Status</span>: @Model.Status
                 </p>
-                <br />
                 <p>
                     <span>@Resources.Gender</span>: @Model.Gender
                 </p>
-                <br />
                 <p>
                     <span>@Resources.PlayerBalance (@Html.ActionLink("подробнее", "Index", "Balance"))</span>:
                     <br />
@@ -52,7 +49,6 @@
                     <br />
                     <span>@Resources.Gonts</span>: @Model.Gonts ед.
                 </p>
-                <br />
             </div>
 
             <div class="panel-footer">

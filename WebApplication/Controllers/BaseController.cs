@@ -78,6 +78,7 @@ namespace WebApplication.Controllers
                 try
                 {
                     return this.context.Currencies.First(c => c.username == userName);
+                    //TODO: посмотреть где удаляются значения баланса игроков
                 }
                 catch (Exception)
                 {
