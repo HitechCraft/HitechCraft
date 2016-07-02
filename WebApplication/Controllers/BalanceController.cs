@@ -1,6 +1,7 @@
 ﻿namespace WebApplication.Controllers
 {
     using System;
+    using System.Linq;
     using System.Web.Mvc;
     using System.Data.Entity;
     using System.Collections.Generic;
@@ -17,12 +18,52 @@
 
     public class BalanceController : BaseController
     {
+        /// <summary>
+        /// Life in seconds
+        /// </summary>
+        /// TODO:Подумать над временем существования транзакции
+        private int TransactionLife { get { return 30; } }
+
+        [Authorize]
         public ActionResult Index()
         {
             ViewBag.Rubles = this.UserCurrency.realmoney;
             ViewBag.Gonts = this.UserCurrency.balance;
 
+            ViewBag.PaymentResult = TempData["paymentResult"];
+            ViewBag.PaymentStatus = TempData["paymentStatus"];
+
             return View();
+        }
+
+        [Authorize]
+        public string CreateOrGetTransaction()
+        {
+            try
+            {
+                var transaction =
+                    this.context.IkTransactions.Include("Player")
+                    .First(tr => tr.Player.Name == this.CurrentPlayer.Name);
+
+                this.CheckTransactionTimeLife(transaction.Time, transaction.Id);
+
+                return transaction.Id;
+            }
+            catch (Exception)
+            {
+                var transaction = new IKTransaction()
+                {
+                    //TODO: generate here
+                    Id = this.GenerateTransactionID(),
+                    Player = this.CurrentPlayer,
+                    Time = DateTime.Now
+                };
+
+                this.context.IkTransactions.Add(transaction);
+                this.context.SaveChanges();
+
+                return transaction.Id;
+            }
         }
 
         #region IK Actions
@@ -49,10 +90,14 @@
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Success()
+        public ActionResult Success(string ik_pm_no)
         {
-            //redirect to some action
-            return this.Content("Ok");
+            this.RemoveTransaction(ik_pm_no);
+
+            TempData["paymentResult"] = "Счет успешно пополнен!";
+            TempData["paymentStatus"] = "OK";
+
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -60,10 +105,14 @@
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Fail()
+        public ActionResult Fail(string ik_pm_no)
         {
-            //redirect to some action
-            return this.Content("Fail");
+            this.RemoveTransaction(ik_pm_no);
+
+            TempData["paymentResult"] = "Ошибка пополнения счета!";
+            TempData["paymentStatus"] = "NO";
+
+            return RedirectToAction("Index");
         }
 
         #endregion
@@ -77,6 +126,11 @@
         /// <returns></returns>
         private bool IsValidTransaction(PaymentModel pm)
         {
+            if (!this.context.IkTransactions.Select(ikt => ikt.Id == pm.ik_pm_no).Any())
+            {
+                return false;
+            }
+
             string generatedSign;
 
             //generate sign from pm values
@@ -89,11 +143,11 @@
             {
                 generatedSign = this.IKSignBuilder(pm, IKConfig.IKSecret);
             }
-
+            
             return
                 //check by ids
                 pm.ik_co_id == IKConfig.IKID
-                && pm.ik_pm_no == IKConfig.TransactionID
+                //&& pm.ik_pm_no == IKConfig.TransactionID
                 && pm.ik_inv_st == "success"
                 //check by IK sign
                 && pm.ik_sign == generatedSign;
@@ -164,6 +218,31 @@
         #region Private Methods
 
         /// <summary>
+        /// Check time life of transaction
+        /// </summary>
+        /// <param name="time"></param>
+        /// <param name="id"></param>
+        private void CheckTransactionTimeLife(DateTime time, string id)
+        {
+            if (DateTime.Now > time.AddSeconds(TransactionLife))
+            {
+                this.RemoveTransaction(id);
+
+                throw new Exception();
+            }
+        }
+
+        /// <summary>
+        /// Generate random transaction id
+        /// </summary>
+        /// <returns></returns>
+        private string GenerateTransactionID()
+        {
+            return
+                HashManager.GetMd5Hash("h4432hhdshf8924ee320fvdkshgm5i9332" + DateTime.Now);
+        }
+
+        /// <summary>
         /// Enroll money to player balance
         /// </summary>
         /// <param name="currencyType">Type of currency (rub or gont)</param>
@@ -183,13 +262,25 @@
         }
 
         /// <summary>
+        /// Remove transaction after payment
+        /// </summary>
+        /// <param name="id"></param>
+        private void RemoveTransaction(string id)
+        {
+            this.context.IkTransactions.Remove(this.context.IkTransactions.First(ikt => ikt.Id == id));
+            this.context.SaveChanges();
+        }
+
+        /// <summary>
         /// Returns Player currency object
         /// </summary>
         /// <param name="transactionID">IK Transaction ID</param>
         /// <returns></returns>
         private Currency GetPlayerCurrency(string transactionID)
         {
-            return null;
+            var transaction = this.context.IkTransactions.Include("Player").FirstOrDefault(pc => pc.Id == transactionID);
+
+            return this.context.Currencies.FirstOrDefault(c => c.username == transaction.Player.Name);
         }
 
         /// <summary>
@@ -219,6 +310,7 @@
             context.Entry(currency).State = EntityState.Modified;
             context.SaveChanges();
         }
+
         #endregion
     }
 }

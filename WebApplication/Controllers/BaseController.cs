@@ -26,6 +26,10 @@ namespace WebApplication.Controllers
             }
         }
 
+        public BaseController()
+        {
+        }
+
         public IPrincipal User
         {
             get { return this.GetCurrentUser(); }
@@ -122,10 +126,14 @@ namespace WebApplication.Controllers
             }
         }
 
-        public Player CurrentPlayer { get; set; }
-
-        public BaseController()
+        public Player CurrentPlayer
         {
+            get { return GetCurrentPlayer(); }
+        }
+
+        private Player GetCurrentPlayer()
+        {
+            return this.context.Players.Include("User").FirstOrDefault(p => p.UserId == CurrentUser.Id);
         }
     }
 }

@@ -39,7 +39,7 @@
                     <h3 class="info-title">Купить RUB</h3>
                     <form name="payment" method="post" action="https://sci.interkassa.com/" accept-charset="UTF-8" id="buyRub">
                         <input type="hidden" name="ik_co_id" value="@IKConfig.IKID" />
-                        <input type="hidden" name="ik_pm_no" value="@IKConfig.TransactionID" />
+                        <input type="hidden" name="ik_pm_no" value="@Html.Action("CreateOrGetTransaction")" />
                         <div class="form-group">
                             <input type="number" class="form-control" min="1" max="99999" name="ik_am" id="count" placeholder="Кол-во рублей" />
                             <span>1 рубль ~= 1 реальному рублю</span>
@@ -81,6 +81,14 @@
     $(function () {
         $('#RubExchangeFieldGonts').val('0 Gont');
         $('#GontExchangeFieldRubs').val('0 RUB');
+
+        if ('@(ViewBag.PaymentStatus)' !== '') {
+            if ('@(ViewBag.PaymentStatus)' === 'OK') {
+                growlSuccess('@(ViewBag.PaymentResult)');
+            } else {
+                growlWarning('@(ViewBag.PaymentResult)');
+            }
+        }
     });
 
     $('#buy').on('click', function () {

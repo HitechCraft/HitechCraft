@@ -252,7 +252,7 @@
     <Compile Include="Domain\Comment.cs" />
     <Compile Include="Domain\Modification.cs" />
     <Compile Include="Domain\News.cs" />
-    <Compile Include="Domain\PermissionsEx\IKTransaction.cs" />
+    <Compile Include="Domain\IKTransaction.cs" />
     <Compile Include="Domain\PermissionsEx\PexEntity.cs" />
     <Compile Include="Domain\PermissionsEx\Pex.cs" />
     <Compile Include="Domain\PermissionsEx\PexInheritance.cs" />
@@ -327,6 +327,10 @@
     <Compile Include="Migrations\201607021849567_IKTransactionNewProps.cs" />
     <Compile Include="Migrations\201607021849567_IKTransactionNewProps.Designer.cs">
       <DependentUpon>201607021849567_IKTransactionNewProps.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607021938347_RemoveTransactionStatus.cs" />
+    <Compile Include="Migrations\201607021938347_RemoveTransactionStatus.Designer.cs">
+      <DependentUpon>201607021938347_RemoveTransactionStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
@@ -530,6 +534,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607021849567_IKTransactionNewProps.resx">
       <DependentUpon>201607021849567_IKTransactionNewProps.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607021938347_RemoveTransactionStatus.resx">
+      <DependentUpon>201607021938347_RemoveTransactionStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
