@@ -63,6 +63,8 @@
 
         public DbSet<PexInheritance> PexInheritances { get; set; }
 
+        public DbSet<IKTransaction> IkTransactions { get; set; }
+
         #endregion
     }
 }

@@ -252,6 +252,7 @@
     <Compile Include="Domain\Comment.cs" />
     <Compile Include="Domain\Modification.cs" />
     <Compile Include="Domain\News.cs" />
+    <Compile Include="Domain\PermissionsEx\IKTransaction.cs" />
     <Compile Include="Domain\PermissionsEx\PexEntity.cs" />
     <Compile Include="Domain\PermissionsEx\Pex.cs" />
     <Compile Include="Domain\PermissionsEx\PexInheritance.cs" />
@@ -318,6 +319,10 @@
     <Compile Include="Migrations\201606262138519_ServerImage.cs" />
     <Compile Include="Migrations\201606262138519_ServerImage.Designer.cs">
       <DependentUpon>201606262138519_ServerImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607021841524_IKTransaction.cs" />
+    <Compile Include="Migrations\201607021841524_IKTransaction.Designer.cs">
+      <DependentUpon>201607021841524_IKTransaction.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Domain\IdentityModels.cs" />
@@ -515,6 +520,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606262138519_ServerImage.resx">
       <DependentUpon>201606262138519_ServerImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607021841524_IKTransaction.resx">
+      <DependentUpon>201607021841524_IKTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
