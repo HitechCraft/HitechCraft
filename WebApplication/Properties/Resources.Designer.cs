@@ -61,6 +61,15 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Добавить.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Роль с данным именем уже существует.
         /// </summary>
         public static string Administration_AddRole_ErrorAlreadyExists {
@@ -70,11 +79,47 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Сменить пароль.
+        /// </summary>
+        public static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Проверить уникальность.
         /// </summary>
         public static string CheckUserName {
             get {
                 return ResourceManager.GetString("CheckUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Закрыть.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Удалить.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Изменить.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -223,6 +268,33 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Gonts.
+        /// </summary>
+        public static string Gonts {
+            get {
+                return ResourceManager.GetString("Gonts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Скрыть пароль.
+        /// </summary>
+        public static string HidePassword {
+            get {
+                return ResourceManager.GetString("HidePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Информация.
+        /// </summary>
+        public static string Info {
+            get {
+                return ResourceManager.GetString("Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Структура папок клиента проверена.
         /// </summary>
         public static string LauncherClientAllFolders {
@@ -277,6 +349,15 @@ namespace WebApplication.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Вход.
+        /// </summary>
+        public static string Logon {
+            get {
+                return ResourceManager.GetString("Logon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ник.
         /// </summary>
         public static string NickName {
@@ -300,6 +381,78 @@ namespace WebApplication.Properties {
         public static string PasswordConfirm {
             get {
                 return ResourceManager.GetString("PasswordConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Баланс.
+        /// </summary>
+        public static string PlayerBalance {
+            get {
+                return ResourceManager.GetString("PlayerBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Профиль игрока.
+        /// </summary>
+        public static string PlayerProfile {
+            get {
+                return ResourceManager.GetString("PlayerProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Внешний вид игрока.
+        /// </summary>
+        public static string PlayerView {
+            get {
+                return ResourceManager.GetString("PlayerView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Регистрация.
+        /// </summary>
+        public static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Рубли.
+        /// </summary>
+        public static string Rubles {
+            get {
+                return ResourceManager.GetString("Rubles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вернуть стандартный скин.
+        /// </summary>
+        public static string SetDafaultSkin {
+            get {
+                return ResourceManager.GetString("SetDafaultSkin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Показать пароль.
+        /// </summary>
+        public static string ShowPassword {
+            get {
+                return ResourceManager.GetString("ShowPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Статус.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
             }
         }
         

@@ -3,6 +3,14 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    public enum PlayerStatus
+    {
+        Player,
+        Helper,
+        Moderator,
+        Administrator
+    }
+
     public class Player
     {
         [Key]

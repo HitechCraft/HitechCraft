@@ -337,6 +337,7 @@
     <Compile Include="Models\News\CommentViewModel.cs" />
     <Compile Include="Models\News\NewsEditViewModel.cs" />
     <Compile Include="Models\News\NewsViewModel.cs" />
+    <Compile Include="Models\Player\PlayerProfileViewModel.cs" />
     <Compile Include="Models\Player\RoleViewModel.cs" />
     <Compile Include="Models\Server\ServerModificationViewModel.cs" />
     <Compile Include="Models\Server\ServerEditViewModel.cs" />
@@ -420,7 +421,7 @@
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordModal.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />

@@ -117,11 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
   <data name="Administration_AddRole_ErrorAlreadyExists" xml:space="preserve">
     <value>Роль с данным именем уже существует</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Сменить пароль</value>
+  </data>
   <data name="CheckUserName" xml:space="preserve">
     <value>Проверить уникальность</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Изменить</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -171,6 +186,15 @@
   <data name="GenderMale" xml:space="preserve">
     <value>Мужской</value>
   </data>
+  <data name="Gonts" xml:space="preserve">
+    <value>Gonts</value>
+  </data>
+  <data name="HidePassword" xml:space="preserve">
+    <value>Скрыть пароль</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Информация</value>
+  </data>
   <data name="LauncherClientAllFolders" xml:space="preserve">
     <value>Структура папок клиента проверена</value>
   </data>
@@ -189,6 +213,9 @@
   <data name="LauncherValidVersion" xml:space="preserve">
     <value>Версия лаунчера валидная</value>
   </data>
+  <data name="Logon" xml:space="preserve">
+    <value>Вход</value>
+  </data>
   <data name="NickName" xml:space="preserve">
     <value>Ник</value>
   </data>
@@ -197,6 +224,30 @@
   </data>
   <data name="PasswordConfirm" xml:space="preserve">
     <value>Подтверждение пароля</value>
+  </data>
+  <data name="PlayerBalance" xml:space="preserve">
+    <value>Баланс</value>
+  </data>
+  <data name="PlayerProfile" xml:space="preserve">
+    <value>Профиль игрока</value>
+  </data>
+  <data name="PlayerView" xml:space="preserve">
+    <value>Внешний вид игрока</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="Rubles" xml:space="preserve">
+    <value>Рубли</value>
+  </data>
+  <data name="SetDafaultSkin" xml:space="preserve">
+    <value>Вернуть стандартный скин</value>
+  </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>Показать пароль</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Статус</value>
   </data>
   <data name="SuccessClientFilesCheck" xml:space="preserve">
     <value>Файлы клиента прошли проверку</value>

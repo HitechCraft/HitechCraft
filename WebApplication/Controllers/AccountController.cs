@@ -1,4 +1,7 @@
-﻿namespace WebApplication.Controllers
+﻿using System.Text;
+using WebApplication.Areas.Launcher.Models.Json;
+
+namespace WebApplication.Controllers
 {
     #region Usings
 
@@ -25,10 +28,17 @@
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        ApplicationDbContext context = new ApplicationDbContext();
 
         public AccountController()
         {
+            Mapper.CreateMap<Player, PlayerProfileViewModel>()
+                .ForMember(dst => dst.Name, ext => ext.MapFrom(src => src.Name))
+                .ForMember(dst => dst.Gender, ext => ext.MapFrom(src => src.User.Gender))
+                .ForMember(dst => dst.Email, ext => ext.MapFrom(src => src.User.Email))
+                .ForMember(dst => dst.Gonts, ext => ext.MapFrom(src => this.Gonts))
+                .ForMember(dst => dst.Rubles, ext => ext.MapFrom(src => this.Rubles))
+                //TODO: запилить статус игрока на основании AspNetRoles
+                .ForMember(dst => dst.Status, ext => ext.MapFrom(src => PlayerStatus.Player));
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -161,6 +171,23 @@
             return View();
         }
 
+        public ActionResult Profile()
+        {
+            try
+            {
+                var userId = this.User.Identity.GetUserId().ToString();
+                var player = this.context.Players.Include("User").First(p => p.UserId == userId);
+
+                var vm = Mapper.Map<Player, PlayerProfileViewModel>(player);
+
+                return View(vm);
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+        }
+
         //todo: выполнить проверку на наличие аккаунта, сравнение паролей старого и нового
 
         //
@@ -208,6 +235,53 @@
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
         }
+        
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<JsonResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                //TODO: сделал фастом нифига не успеваю, переделать
+                var modelErrors = String.Empty;
+
+                foreach (var value in ModelState.Values)
+                {
+                    if (value.Errors.Any())
+                    {
+                        foreach (var error in value.Errors)
+                        {
+                            modelErrors += "<li>" + error.ErrorMessage + "</li>";
+                        }
+                    }
+                }
+
+                return Json(new { status = JsonStatus.NO, response = modelErrors }, JsonRequestBehavior.AllowGet);
+            }
+
+            var result = await UserManager.ChangePasswordAsync(this.User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+
+            if (result.Succeeded && !result.Errors.Any())
+            {
+                var user = await UserManager.FindByIdAsync(this.User.Identity.GetUserId());
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                //return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+            }
+            
+            //TODO: сделал фастом нифига не успеваю, переделать
+            var errors = String.Empty;
+
+            foreach (var error in result.Errors)
+            {
+                errors += "<li>" + error + "</li>";
+            }
+
+            return Json(new { status = JsonStatus.NO, response = errors }, JsonRequestBehavior.AllowGet);
+        }
+
 
         /// <summary>
         /// Method added player for plugin models relations
@@ -271,10 +345,10 @@
 
         public ActionResult UploadSkin()
         {
-            var userId = User.Identity.GetUserId().ToString();
+            var userId = this.User.Identity.GetUserId().ToString();
             UserSkin userSkin = GetSkinByUserId(userId);
 
-            ViewBag.UserName = User.Identity.GetUserName();
+            ViewBag.UserName = this.User.Identity.GetUserName();
 
             Mapper.CreateMap<UserSkin, UserSkinViewModel>()
                     .ForMember(dst => dst.Id, exp => exp.MapFrom(src => src.Id))
@@ -348,7 +422,7 @@
 
             userSkin.Image = ImageManager.GetImageBytes(image);
 
-            userSkin.UserId = User.Identity.GetUserId();
+            userSkin.UserId = this.User.Identity.GetUserId();
 
             if (IsUserSkinExists(userSkin.UserId))
             {
@@ -359,6 +433,55 @@
                 context.UserSkins.Add(userSkin);
                 context.SaveChanges();
             }
+        }
+
+        [HttpPost]
+        public JsonResult RemovePlayerSkin()
+        {
+            try
+            {
+                if (!IsPlayerSkinExists())
+                {
+                    return Json(new
+                    {
+                        status = JsonStatus.NO,
+                        message = "Скин пользователя не загружен"
+                    }, JsonRequestBehavior.AllowGet);
+                }
+
+                var userSkin = this.context.UserSkins.First(us => us.UserId == this.CurrentUser.Id);
+
+                this.context.UserSkins.Remove(userSkin);
+                this.context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    status = JsonStatus.NO,
+                    message = e.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new
+            {
+                status = JsonStatus.YES,
+                message = "Скин успешно изменен на стандартный"
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public bool IsPlayerSkinExists()
+        {
+            try
+            {
+                this.context.UserSkins.First(us => us.UserId == this.CurrentUser.Id);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         [AllowAnonymous]
@@ -565,7 +688,7 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
+            if (this.User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Manage");
             }

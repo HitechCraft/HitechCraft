@@ -143,7 +143,7 @@ namespace WebApplication.Controllers
                 try
                 {
                     vm.ActionTime = DateTime.Now;
-                    vm.BannedBy = User.Identity.Name;
+                    vm.BannedBy = this.User.Identity.Name;
 
                     Mapper.CreateMap<BanEditViewModel, Ban>()
                         .ForMember(dst => dst.name, exp => exp.MapFrom(src => src.PlayerName))

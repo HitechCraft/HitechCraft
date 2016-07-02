@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Security.Principal;
+using System.Web;
 
 namespace WebApplication.Controllers
 {
@@ -15,7 +17,28 @@ namespace WebApplication.Controllers
     public class BaseController : Controller
     {
         public ApplicationDbContext context = new ApplicationDbContext();
-        
+
+        public HttpContextBase HttpContext
+        {
+            get
+            {
+                return ControllerContext == null ? null : ControllerContext.HttpContext;
+            }
+        }
+
+        public IPrincipal User
+        {
+            get { return this.GetCurrentUser(); }
+        }
+
+        private IPrincipal GetCurrentUser()
+        {
+            if (ViewData["LoggedInUser"] == null)
+                ViewData["LoggedInUser"] = this.HttpContext.User;
+
+            return this.HttpContext == null || this.HttpContext.User == null ? (IPrincipal)ViewData["LoggedInUser"] : this.HttpContext.User;
+        }
+
         public string DefaultMaleUserId
         {
             get { return "882155f6-f5a9-4a26-a5dd-d51f58492906"; }
@@ -46,9 +69,11 @@ namespace WebApplication.Controllers
 
         private Currency GetUserCurrency()
         {
-            if (User.Identity.IsAuthenticated)
+            var user = this.User;
+
+            if (user != null && user.Identity.IsAuthenticated)
             {
-                var userName = User.Identity.GetUserName().ToString();
+                var userName = user.Identity.GetUserName().ToString();
 
                 try
                 {
@@ -78,7 +103,7 @@ namespace WebApplication.Controllers
             get { return UserCurrency != null ? UserCurrency.balance : -1; }
         }
 
-        public double Rubels
+        public double Rubles
         {
             get { return UserCurrency != null ? UserCurrency.realmoney : -1; }
         }
@@ -86,9 +111,9 @@ namespace WebApplication.Controllers
         public ApplicationUser CurrentUser {
             get
             {
-                if (User.Identity.IsAuthenticated)
+                if (this.User.Identity.IsAuthenticated)
                 {
-                    var userId = User.Identity.GetUserId();
+                    var userId = this.User.Identity.GetUserId();
                     return context.Users.First(c => c.Id == userId);
                 }
 
@@ -120,7 +145,7 @@ namespace WebApplication.Controllers
         /// Обновление осуществляется прибавлением (вычетом) значения. Указываем разницу, а не новое кол-во валюты!!!
         /// </summary>
         /// <param name="amount">Разница (например +10 или -10)</param>
-        public void UpdateRubels(double amount)
+        public void UpdateRubles(double amount)
         {
             var currency = this.UserCurrency;
 
