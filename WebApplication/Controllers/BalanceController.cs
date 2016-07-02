@@ -1,4 +1,6 @@
-﻿namespace WebApplication.Controllers
+﻿using WebApplication.Areas.Launcher.Models.Json;
+
+namespace WebApplication.Controllers
 {
     using System;
     using System.Linq;
@@ -22,7 +24,17 @@
         /// Life in seconds
         /// </summary>
         /// TODO:Подумать над временем существования транзакции
-        private int TransactionLife { get { return 30; } }
+        public int TransactionLife { get { return 30; } }
+
+        /// <summary>
+        /// Exchange rate of Rub to Gont (example 1 RUB = 1000 Gont means 0.001)
+        /// </summary>
+        public float RubToGont { get { return 0.001f; } }
+
+        /// <summary>
+        /// Exchange rate of Gont to Rub (example 2500 Gont = 1 RUB means 2500)
+        /// </summary>
+        public float GontToRub { get { return 2500f; } }
 
         [Authorize]
         public ActionResult Index()
@@ -64,6 +76,52 @@
 
                 return transaction.Id;
             }
+        }
+
+        [HttpPost]
+        public JsonResult ExchangeRubToGont(int count)
+        {
+            try
+            {
+                this.UpdateGonts(Math.Round(count / this.RubToGont, 2));
+                this.UpdateRubles(-count);
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    status = JsonStatus.NO, message = e.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new
+            {
+                status = JsonStatus.YES, message = "Обмен успешно осуществлен!"
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult ExchangeGontToRub(int count)
+        {
+            try
+            {
+                this.UpdateRubles(Math.Round(count / this.GontToRub, 2));
+                this.UpdateGonts(-count);
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    status = JsonStatus.NO,
+                    message = e.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new
+            {
+                status = JsonStatus.YES,
+                message = "Обмен успешно осуществлен!"
+            }, JsonRequestBehavior.AllowGet);
         }
 
         #region IK Actions
@@ -297,6 +355,16 @@
             context.SaveChanges();
         }
 
+        private void UpdateGonts(double amount)
+        {
+            var currency = this.UserCurrency;
+
+            currency.balance += amount;
+
+            context.Entry(currency).State = EntityState.Modified;
+            context.SaveChanges();
+        }
+
         /// <summary>
         /// Обновление осуществляется прибавлением (вычетом) значения. Указываем разницу, а не новое кол-во валюты!!!
         /// </summary>
@@ -304,6 +372,16 @@
         private void UpdateRubles(double amount, string transactionID)
         {
             var currency = this.GetPlayerCurrency(transactionID);
+
+            currency.realmoney += amount;
+
+            context.Entry(currency).State = EntityState.Modified;
+            context.SaveChanges();
+        }
+
+        private void UpdateRubles(double amount)
+        {
+            var currency = this.UserCurrency;
 
             currency.realmoney += amount;
 

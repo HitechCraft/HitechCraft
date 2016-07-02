@@ -12,21 +12,21 @@
             <div class="panel-body info-block currency-info">
                 <h3 class="info-title">Рубли</h3>
                 <p>
-                    <span>Кол-во:</span> @ViewBag.Rubles единиц
+                    <span>Кол-во:</span> <strong>@ViewBag.Rubles</strong> единиц
                 </p>
                 <p>
                     <span>Курс к игровой валюте (Gont):</span>
                     @*//TODO: возможно сделаю биржу где будет происходить смена курса*@
-                    <br />1 RUB = 1000 Gont
+                    <br /><strong>1 RUB = 1000 Gont</strong>
                 </p>
                 <h3 class="info-title">Gont</h3>
                 <p>
-                    <span>Кол-во:</span> @ViewBag.Gonts единиц
+                    <span>Кол-во:</span> <strong>@ViewBag.Gonts</strong> единиц
                 </p>
                 <p>
                     <span>Курс к реальной валюте (RUB):</span>
                     @*//TODO: возможно сделаю биржу где будет происходить смена курса*@
-                    <br />2500 Gont = 1 RUB
+                    <br /><strong>2500 Gont = 1 RUB</strong>
                 </p>
             </div>
         </div>
@@ -115,11 +115,23 @@
     });
 
     $('#exchangeRubToGont').on('click', function () {
-        if (!$('#RubExchangeFieldRubs').val() || parseFloat($('#RubExchangeFieldRubs').val()) <= 0) {
+        var value = $('#RubExchangeFieldRubs').val();
+
+        if (!value || parseFloat(value) <= 0) {
             growlWarning("Значение не может быть меньше нуля");
             $('#RubExchangeFieldRubs').val(1);
-        } else {
-            //exchange logic here
+        } else if (confirm("Действительно обменять " + value + " RUB на Gonts")) {
+            $.post('@Url.Action("ExchangeRubToGont")', { count: parseInt(value) })
+                .done(function (data) {
+                    if (data.status === 1) {
+                        location.reload();
+                        growlSuccess(data.message);
+                    } else {
+                        growlWarning(data.message);
+                    }
+                }).fail(function (data) {
+                    growlError(data);
+                });
         }
     });
 
@@ -139,11 +151,23 @@
     });
 
     $('#exchangeGontToRub').on('click', function () {
-        if (!$('#GontExchangeFieldGonts').val() || parseFloat($('#GontExchangeFieldGonts').val()) < 13 @* <---- псст магия!!!*@) {
+        var value = $('#GontExchangeFieldGonts').val();
+
+        if (!value || parseFloat(value) < 13 @* <---- псст магия!!!*@) {
             $('#GontExchangeFieldGonts').val(13);
             growlWarning("Значение не может быть меньше 13");
-        } else {
-            //exchange logic here
+        } else if (confirm("Действительно обменять " + value + " Gonts на RUB?")) {
+            $.post('@Url.Action("ExchangeGontToRub")', { count: parseInt(value) })
+                .done(function (data) {
+                    if (data.status === 1) {
+                        location.reload();
+                        growlSuccess(data.message);
+                    } else {
+                        growlWarning(data.message);
+                    }
+                }).fail(function (data) {
+                    growlError(data);
+                });
         }
     });
 </script>
