@@ -240,6 +240,11 @@ namespace WebApplication.Controllers
         [AllowAnonymous]
         public async Task<JsonResult> ChangePassword(ChangePasswordViewModel model)
         {
+            //if (model.OldPassword == model.NewPassword)
+            //{
+            //    ModelState.AddModelError(String.Empty, "Новый пароль совпадает со старым");
+            //}
+
             if (!ModelState.IsValid)
             {
                 //TODO: сделал фастом нифига не успеваю, переделать
@@ -268,7 +273,8 @@ namespace WebApplication.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                //return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+
+                return Json(new { status = JsonStatus.YES, response = "Success" }, JsonRequestBehavior.AllowGet);
             }
             
             //TODO: сделал фастом нифига не успеваю, переделать
