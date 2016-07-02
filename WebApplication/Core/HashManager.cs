@@ -1,12 +1,10 @@
-﻿using System.IO;
-
-namespace WebApplication.Managers
+﻿namespace WebApplication.Managers
 {
     using System;
     using System.Security.Cryptography;
     using System.Text;
 
-    public static class Md5Manager
+    public static class HashManager
     {
         /// <summary>
         /// Method returns hash md5
@@ -29,18 +27,36 @@ namespace WebApplication.Managers
         }
 
         /// <summary>
-        /// Method returns hash md5
+        /// Md5 bytes
         /// </summary>
-        /// <param name="inputStream">Input data stream</param>
+        /// <param name="inputString"></param>
         /// <returns></returns>
-        //public static string GetMd5Hash(Stream inputStream)
-        //{
-        //    var md5Hash = BuildMd5(MD5.Create().ComputeHash(inputStream));
+        internal static byte[] GetMd5Bites(string inputString)
+        {
+            return MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(inputString));
+        }
 
-        //    inputStream.Close();
+        /// <summary>
+        /// Returns base64 hash of string
+        /// </summary>
+        /// <param name="str">String</param>
+        /// <returns></returns>
+        internal static string GetBase64Hash(string str)
+        {
+            var bytes = Encoding.UTF8.GetBytes(str);
 
-        //    return md5Hash;
-        //}
+            return Convert.ToBase64String(bytes);
+        }
+
+        /// <summary>
+        /// Returns bas64 hash of bytes
+        /// </summary>
+        /// <param name="bytes">Byte array</param>
+        /// <returns></returns>
+        internal static string GetBase64Hash(byte[] bytes)
+        {
+            return Convert.ToBase64String(bytes);
+        }
 
         /// <summary>
         /// Get uuid from input string (ебать говнокод, но хуле делать?)

@@ -206,7 +206,7 @@
                         .Select(x => new JsonClientFilesData()
                         {
                             FilePath = FileManager.GetClientFilePath(x, clientName),
-                            HashSum = Md5Manager.GetMd5Hash(System.IO.File.ReadAllBytes(x))
+                            HashSum = HashManager.GetMd5Hash(System.IO.File.ReadAllBytes(x))
                         }));
                 }
             }
@@ -332,7 +332,7 @@
 
         private string UuidConvert(string username)
         {
-            return Md5Manager.StringFromUuid(Md5Manager.UuidFromString("OfflinePlayer:" + username));
+            return HashManager.StringFromUuid(HashManager.UuidFromString("OfflinePlayer:" + username));
         }
 
         private string GenerateKey(string keyWord, string userName)
@@ -354,7 +354,7 @@
                         .Select(x => new JsonClientFilesData()
                         {
                             FilePath = FileManager.GetClientFilePath(x, filesData.ClientName),
-                            HashSum = Md5Manager.GetMd5Hash(System.IO.File.ReadAllBytes(x))
+                            HashSum = HashManager.GetMd5Hash(System.IO.File.ReadAllBytes(x))
                         }));
                 }
             }
