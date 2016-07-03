@@ -1,4 +1,5 @@
-﻿@media (max-width: 768px) {
+﻿/*IMPORT*/
+@media (max-width: 768px) {
   .form-inline .form-control {
     display: inline-block;
     width: auto;
@@ -91,11 +92,9 @@
 .twitter {
   background-position: -105px -2px; }
 
-/*////////////////////////IMPORT/////////////////////////////////////*/
-/*/////////////////////////VARIBELS////////////////////////////////////*/
+/*VARIABLES*/
 html, body {
   padding: 0;
-  margin: 0;
   font-family: "Open Sans", sans-serif;
   min-width: 768px;
   height: 100%; }
@@ -201,7 +200,7 @@ footer {
 
 .social-icon {
   display: inline-block;
-  background: url("SCSS/Images/social-icons.png") no-repeat;
+  background: url("Images/social-icons.png") no-repeat;
   -ms-background-size: 460%;
   background-size: 460%;
   height: 30px;
@@ -213,7 +212,7 @@ footer {
 
 .logo {
   display: inline-block;
-  background: url("SCSS/Images/logo.png");
+  background: url("Images/logo.png");
   width: 465px;
   height: 66px;
   margin: 40px 0 40px -15px; }
@@ -222,7 +221,7 @@ footer {
   float: right;
   cursor: pointer; }
   .game-start a {
-    background: url("SCSS/Images/game-start.png") no-repeat;
+    background: url("Images/game-start.png") no-repeat;
     background-position: 0 10px;
     padding: 0 50px;
     float: right;
@@ -248,7 +247,7 @@ footer {
   border-radius: 4px; }
 
 .ztn-team {
-  background: url("SCSS/Images/ztn-logo.png") no-repeat;
+  background: url("Images/ZTNTeam.png") no-repeat;
   background-size: 100% 100%;
   width: 537px;
   height: 303px;
@@ -257,7 +256,7 @@ footer {
   margin-right: 45px; }
 
 .ztn-logo {
-  background: url("SCSS/Images/ztn-logo.png");
+  background: url("Images/ztn-logo.png");
   background-size: 100%;
   width: 150px;
   height: 150px; }
@@ -455,7 +454,7 @@ footer {
     position: absolute;
     top: 175px;
     right: 40px;
-    background: url("SCSS/Images/Valute.png") no-repeat;
+    background: url("Images/Valute.png") no-repeat;
     background-size: 100%;
     width: 300px;
     height: 270px;

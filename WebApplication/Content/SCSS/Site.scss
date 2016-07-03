@@ -1,19 +1,23 @@
-﻿@import 'media';
+﻿/*IMPORT*/
+
+@import 'media';
 @import 'mixins';
 @import 'fonts';
 @import 'socials';
-/*////////////////////////IMPORT/////////////////////////////////////*/
+
+/*VARIABLES*/
+    
 $main_font_family: "Open Sans", sans-serif;
-$social_background_url: url("Images/social-icons.png");
-$logo_bg_url: url("Images/logo.png");
-$game_start_a_bg: url("Images/game-start.png");
-$ztn_logo_url: url("Images/ztn-logo.png");
-$payment_bg_url: url("Images/Valute.png");
+$social_background_url: url("../Images/social-icons.png");
+$logo_bg_url: url("../Images/logo.png");
+$game_start_a_bg: url("../Images/game-start.png");
+$ztn_logo_url: url("../Images/ztn-logo.png");
+$ztn_team_url: url("../Images/ZTNTeam.png");
+$payment_bg_url: url("../Images/Valute.png");
 $a_hover_color: #ff7518;
-/*/////////////////////////VARIBELS////////////////////////////////////*/
+
 html, body {
     padding: 0;
-    margin: 0;
     font-family: $main_font_family;
     min-width: 768px;
     height: 100%;
@@ -238,7 +242,7 @@ footer {
 
 .ztn {
     &-team {
-        background: $ztn_logo_url no-repeat;
+        background: $ztn_team_url no-repeat;
         background-size: 100% 100%;
         width: 537px;
         height: 303px;
