@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{661AADA0-045E-42C3-BE7D-099A6BBEB358}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F2C7AB75-C2E2-4142-AAA9-188BF6706B2D} = {F2C7AB75-C2E2-4142-AAA9-188BF6706B2D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{F2C7AB75-C2E2-4142-AAA9-188BF6706B2D}"
 EndProject
