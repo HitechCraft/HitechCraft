@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="Domain\Ban.cs" />
     <Compile Include="Domain\BanIp.cs" />
-    <Compile Include="Domain\BanType.cs" />
     <Compile Include="Domain\Comment.cs" />
     <Compile Include="Domain\Currency.cs" />
     <Compile Include="Domain\Extentions\ServerExtentions.cs" />
@@ -77,7 +76,7 @@
     <Compile Include="Domain\ShopItem.cs" />
     <Compile Include="Domain\ShopItemCategory.cs" />
     <Compile Include="Domain\ShopSale.cs" />
-    <Compile Include="Domain\UserSkin.cs" />
+    <Compile Include="Domain\PlayerSkin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

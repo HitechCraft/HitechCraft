@@ -1,28 +1,32 @@
-﻿namespace WebApplication.Domain.PermissionsEx
+﻿namespace DAL.Domain.PermissionsEx
 {
     /// <summary>
     /// PermissionsEx Entity
     /// </summary>
     public class PexEntity
     {
+        #region Properties
+
         /// <summary>
         /// Obj id
         /// </summary>
-        public int id { get; set; }
+        public virtual int id { get; set; }
 
         /// <summary>
         /// Entity name
         /// </summary>
-        public string name { get; set; }
+        public virtual string name { get; set; }
 
         /// <summary>
         /// Entity type
         /// </summary>
-        public int type { get; set; }
+        public virtual int type { get; set; }
 
         /// <summary>
         /// Is entity default
         /// </summary>
-        public int isDefault { get { return 0; } set { } }
+        public virtual int isDefault { get { return 0; } set { } }
+
+        #endregion
     }
 }

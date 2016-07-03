@@ -1,33 +1,37 @@
-﻿namespace WebApplication.Domain.PermissionsEx
+﻿namespace DAL.Domain.PermissionsEx
 {
     /// <summary>
     /// PermissionsEx Inheritance
     /// </summary>
     public class PexInheritance
     {
+        #region Properties
+
         /// <summary>
         /// Obj id
         /// </summary>
-        public int id { get; set; }
+        public virtual int id { get; set; }
 
         /// <summary>
         /// Child entity
         /// </summary>
-        public string child { get; set; }
+        public virtual string child { get; set; }
 
         /// <summary>
         /// Parent entity
         /// </summary>
-        public string parent { get; set; }
+        public virtual string parent { get; set; }
 
         /// <summary>
         /// Inheritance type
         /// </summary>
-        public int type { get; set; }
+        public virtual int type { get; set; }
 
         /// <summary>
         /// World name
         /// </summary>
-        public string world { get; set; }
+        public virtual string world { get; set; }
+
+        #endregion
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace WebApplication.Domain
+﻿namespace DAL.Domain
 {
     #region Using Directives
 
@@ -8,25 +8,33 @@
 
     public class Comment
     {
+        #region Properties
+
         /// <summary>
         /// Object Id
         /// </summary>
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
+
         /// <summary>
         /// Comment text
         /// </summary>
-        public string Text { get; set; }
+        public virtual string Text { get; set; }
+
         /// <summary>
         /// Comment author
         /// </summary>
-        public ApplicationUser Author { get; set; }
+        public virtual Player Author { get; set; }
+
         /// <summary>
         /// Comment news
         /// </summary>
-        public News News { get; set; }
+        public virtual News News { get; set; }
+
         /// <summary>
         /// Comment time create
         /// </summary>
-        public DateTime TimeCreate { get; set; }
+        public virtual DateTime TimeCreate { get; set; }
+
+        #endregion
     }
 }

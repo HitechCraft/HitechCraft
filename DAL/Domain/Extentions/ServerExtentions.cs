@@ -1,18 +1,18 @@
-﻿namespace WebApplication.Domain
+﻿namespace DAL.Domain.Extentions
 {
-    using Core;
-    using Areas.Launcher.Models.Json;
+    using Json;
 
+    //TODO: Убрать отсюда!!!
     public static class ServerExtentions
     {
-        public static JsonServerData GetServerData(this Server server)
+        public static JsonMinecraftServerData GetServerData(this Server server)
         {
             var serverStatus = new MinecraftServerStatusManager(server.IpAddress, server.Port);
 
             //TODO вывод дополнительных свойств типа Motd и пр.
-            var serverData = new JsonServerData()
+            var serverData = new JsonMinecraftServerData()
             {
-                Status = JsonServerStatus.Online,
+                Status = JsonMinecraftServerStatus.Online,
                 Message = "Сервер онлайн",
                 PlayerCount = serverStatus.GetCurrentPlayers(),
                 MaxPlayerCount = serverStatus.GetMaximumPlayers()
@@ -23,7 +23,7 @@
             
             if (!serverStatus.IsServerUp())
             {
-                serverData.Status = JsonServerStatus.Offline;
+                serverData.Status = JsonMinecraftServerStatus.Offline;
                 serverData.Message = "Сервер выключен";
 
                 return serverData;
@@ -31,7 +31,7 @@
 
             if (server.ClientVersion != serverStatus.GetVersion())
             {
-                serverData.Status = JsonServerStatus.Error;
+                serverData.Status = JsonMinecraftServerStatus.Error;
                 serverData.Message = "Версия клиента не совпадает с версией сервера";
 
                 return serverData;
@@ -40,13 +40,13 @@
 
             if (serverData.PlayerCount >= serverData.MaxPlayerCount && serverData.MaxPlayerCount != 0)
             {
-                serverData.Status = JsonServerStatus.Full;
+                serverData.Status = JsonMinecraftServerStatus.Full;
                 serverData.Message = "Сервер полон";
             }
 
             if (serverData.PlayerCount == 0)
             {
-                serverData.Status = JsonServerStatus.Empty;
+                serverData.Status = JsonMinecraftServerStatus.Empty;
                 serverData.Message = "Сервер пуст";
             }
 
