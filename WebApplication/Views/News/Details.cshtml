@@ -31,7 +31,7 @@
                     {
                         <img alt="" class="news-image" src="~/Content/Images/no-image.jpg" />
                     }
-                    <div id="news-text">
+                    <div class="news-text" id="news-text">
                         
                     </div>
                 </div>
@@ -79,7 +79,7 @@
 
     function LoadNewsText() {
         //Темная магия
-        var text = "@Model.Text";
+        var text = "@Model.FullText";
         var tags = ['[p]', '[/p]', '[br]', '[ul]', '[/ul]', '[li]', '[/li]', '[b]', '[/b]', '[h5]', '[/h5]'];
 
         $.each(tags, function(index, value) {

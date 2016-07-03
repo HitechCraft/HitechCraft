@@ -288,6 +288,17 @@ footer {
     }
 }
 
+#avatar {
+    &-container {
+        width: 124px;
+        margin: 0 auto;
+
+        canvas {
+            border: 2px solid #ddd;
+        }
+    }
+}
+
 .monitoring {
     margin-bottom: 50px;
 }
@@ -339,6 +350,10 @@ footer {
         font-size: 21px;
     }
 
+    &-heading{
+        position: relative;
+    }
+
     &-footer {
         -ms-border-bottom-right-radius: 34px;
         border-bottom-right-radius: 34px;
@@ -374,6 +389,29 @@ footer {
         &:hover {
             border: 3px solid #d6d6d6;
             cursor: pointer;
+        }
+    }
+
+    &-text {
+        p {
+            text-align: justify;
+            text-indent: 20px;
+        }
+
+        ul {
+            padding-left: 40px;
+        }
+
+        h5 {
+            margin: 14px;
+            float: right;
+            font-family: "Arbat", sans-serif;
+            font-size: 25px;
+        }
+
+        &-container {
+            display: block;
+            min-height: 248px;
         }
     }
 
@@ -584,26 +622,6 @@ footer {
 #buyRub {
     .form-group {
         z-index: 2;
-    }
-}
-
-#news {
-    &-text {
-        p {
-            text-align: justify;
-            text-indent: 20px;
-        }
-
-        ul {
-            padding-left: 40px;
-        }
-
-        h5 {
-            margin: 14px;
-            float: right;
-            font-family: "Arbat", sans-serif;
-            font-size: 25px;
-        }
     }
 }
 

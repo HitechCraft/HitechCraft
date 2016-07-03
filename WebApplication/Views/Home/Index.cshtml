@@ -39,4 +39,29 @@
             $('#news').html(data);
         });
     }
+
+    function LoadNewsText(newsText, newsAuthor, newsId) {
+
+        //Темная магия
+        var text = newsText;
+        var tags = ['[p]', '[/p]', '[br]', '[ul]', '[/ul]', '[li]', '[/li]', '[b]', '[/b]', '[h5]', '[/h5]'];
+
+        $.each(tags, function (index, value) {
+            var tag = value.replace(/\[/gi, '<').replace(/\]/gi, '>');
+            value = value.replace(/\[/gi, '\\[').replace(/\]/gi, '\\]');
+
+            var regExp = new RegExp(value, "gi");
+
+            text = text.replace(regExp, tag);
+        });
+
+        text += '... <a href="@Url.Action("Details", "News")?id=' + newsId + '">Читать полностью</a>';
+
+        $('#news-text-' + newsId + ' .news-text-container').html('');
+        $('#news-text-' + newsId + ' .news-text-container').html(text);
+        //sign
+        $('#news-text-' + newsId + ' #news-sign-' + newsId).html('');
+        $('#news-text-' + newsId + ' #news-sign-' + newsId).html('<h5>' + newsAuthor + '</h5>');
+    }
+
 </script>

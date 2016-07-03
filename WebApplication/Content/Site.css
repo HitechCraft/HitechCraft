@@ -81,9 +81,7 @@
 
 @font-face {
   font-family: 'Arbat';
-  /*a name to be used later*/
-  src: url("fonts/arbat.ttf");
-  /*URL to font*/ }
+  src: url("../fonts/arbat.ttf"); }
 
 .vk {
   background-position: -70px -36px !important; }
@@ -283,6 +281,12 @@ footer {
 .user-menu {
   text-align: center; }
 
+#avatar-container {
+  width: 124px;
+  margin: 0 auto; }
+  #avatar-container canvas {
+    border: 2px solid #ddd; }
+
 .monitoring {
   margin-bottom: 50px; }
 
@@ -322,6 +326,8 @@ footer {
     border-top-left-radius: 34px;
     text-align: center;
     font-size: 21px; }
+  .panel-heading {
+    position: relative; }
   .panel-footer {
     -ms-border-bottom-right-radius: 34px;
     border-bottom-right-radius: 34px; }
@@ -347,6 +353,23 @@ footer {
     border: 3px solid #d6d6d6;
     cursor: pointer; }
 
+.news-text p {
+  text-align: justify;
+  text-indent: 20px; }
+
+.news-text ul {
+  padding-left: 40px; }
+
+.news-text h5 {
+  margin: 14px;
+  float: right;
+  font-family: "Arbat", sans-serif;
+  font-size: 25px; }
+
+.news-text-container {
+  display: block;
+  min-height: 248px; }
+
 .news-title {
   display: none;
   text-align: center;
@@ -361,21 +384,6 @@ footer {
     margin-right: 10px; }
     .news-modify span:hover {
       color: #2780e3; }
-
-.news-modify {
-    cursor: pointer;
-    position: absolute;
-    right: 18px;
-    top: 13px;
-}
-
-    .news-modify span {
-        margin-right: 10px;
-    }
-
-        .news-modify span:hover {
-            color: #2780e3;
-        }
 
 .circle-progress strong {
   position: absolute;
@@ -408,19 +416,6 @@ footer {
         padding: 10px 21px;
     }
 }*/
-
-    .news-image {
-        max-width: 280px;
-        display: block !important;
-    }
-
-    .comment-avatar {
-        width: 25% !important;
-    }
-
-    .comment-text {
-        width: 75% !important;
-    }
 .checkbox input[type="checkbox"] {
   margin-left: 0; }
 
@@ -508,19 +503,6 @@ footer {
 #buyRub .form-group {
   z-index: 2; }
 
-#news-text p {
-  text-align: justify;
-  text-indent: 20px; }
-
-#news-text ul {
-  padding-left: 40px; }
-
-#news-text h5 {
-  margin: 14px;
-  float: right;
-  font-family: "Arbat", sans-serif;
-  font-size: 25px; }
-
 #comments {
   margin-bottom: 50px; }
   #comments p {
@@ -568,19 +550,3 @@ footer {
 .comment-remove {
   color: #ff0039; }
 
-}
-
-.comment-modify {
-    cursor: pointer;
-    position: absolute;
-    right: 38px;
-    margin-top: -4px;
-    font-size: 22px;
-}
-
-    .comment-modify span:hover {
-        color: #2780e3;
-    }
-
-.comment-remove {
-    color: #ff0039;

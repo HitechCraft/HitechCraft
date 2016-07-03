@@ -397,6 +397,7 @@
     <Content Include="Content\SCSS\_socials.scss" />
     <Content Include="compilerconfig.json" />
     <Content Include="compilerconfig.json.defaults" />
+    <Content Include="fonts\arbat.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Content\Images\charRendered.png" />
     <Content Include="Scripts\circle-progress.js" />

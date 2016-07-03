@@ -11,7 +11,7 @@
             <div class="panel-heading">@(User.Identity.GetUserName())</div>
             <div class="panel-body">
                 <div class="user-menu">
-                    <div id="avatar-container" style="width: 120px; margin: 0 auto">
+                    <div id="avatar-container">
                         <img src="@Url.Action("GetSkinImage", "Account", new {userName = User.Identity.Name})" id="skin-image" class="avaSkin" hidden=""/>
                     </div>
 

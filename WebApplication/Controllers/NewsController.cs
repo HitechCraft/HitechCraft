@@ -21,11 +21,15 @@
 
         public int CommentsOnPage { get { return 10; } protected set { } }
 
+        public int NewsShortTextLength { get { return 500; } protected set { } }
+
         public NewsController()
         {
             Mapper.CreateMap<News, NewsViewModel>()
                 .ForMember(dst => dst.AuthorId, ext => ext.MapFrom(src => src.Author.Id))
-                .ForMember(dst => dst.AuthorName, ext => ext.MapFrom(src => src.Author.UserName));
+                .ForMember(dst => dst.AuthorName, ext => ext.MapFrom(src => src.Author.UserName))
+                .ForMember(dst => dst.ShortText, ext => ext.MapFrom(src => src.Text.Substring(0, this.NewsShortTextLength)))
+                .ForMember(dst => dst.FullText, ext => ext.MapFrom(src => src.Text));
 
             Mapper.CreateMap<Comment, CommentViewModel>()
                 .ForMember(dst => dst.AuthorId, ext => ext.MapFrom(src => src.Author.Id))
@@ -40,6 +44,7 @@
                 .ForMember(dst => dst.Image, ext => ext.MapFrom(src => src.Image));
         }
 
+        [Authorize(Roles = "Administrator")]
         public IPagedList<NewsViewModel> GetNewsList(int? page)
         {
             int currentPage = page ?? 1;
@@ -51,6 +56,7 @@
             return vm.ToPagedList(currentPage, this.NewsOnPage);
         }
 
+        [Authorize(Roles = "Administrator")]
         public IPagedList<CommentViewModel> GetCommentList(int? page, int newsId)
         {
             int currentPage = page ?? 1;
@@ -63,13 +69,14 @@
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create(NewsEditViewModel vm)
         {
             if (ModelState.IsValid)
@@ -120,6 +127,11 @@
             {
                 var news = this.context.News.Include("Author").First(n => n.Id == id);
 
+                news.ViewersCount++;
+
+                this.context.Entry(news).State = EntityState.Modified;
+                this.context.SaveChanges();
+
                 var vm = Mapper.Map<News, NewsViewModel>(news);
 
                 return View(vm);
@@ -131,6 +143,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
         {
             try
@@ -148,6 +161,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(NewsEditViewModel vm)
         {
             if (ModelState.IsValid)
@@ -169,6 +183,7 @@
             return View(vm);
         }
 
+        [Authorize(Roles = "Administrator")]
         public ContentResult RemoveNewImage(int newsId)
         {
             try
@@ -189,6 +204,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             try
@@ -208,6 +224,7 @@
         }
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Administrator")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -228,6 +245,7 @@
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         private void RemoveNewsComments(int newsId)
         {
             try
