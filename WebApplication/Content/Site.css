@@ -16,13 +16,13 @@
   #loginForm {
     margin-left: -67px; }
   .game-start {
-    float: none;
+    float: none !important;
     width: 383px;
     margin: 0 auto;
     padding-bottom: 3px; }
   .game-start a {
-    float: left;
-    margin-top: -22px;
+    float: left !important;
+    margin-top: -22px !important;
     margin-left: 20px; }
   .title-media {
     width: 672px !important;
@@ -54,8 +54,8 @@
     margin-right: 20px;
     margin-left: 20px; }
   .logo {
-    display: block;
-    margin: 30px auto; }
+    display: block !important;
+    margin: 30px auto !important; }
   #news .col-md-5,
   #news .col-md-7 {
     float: left; }
@@ -107,9 +107,9 @@ html, body {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: "Open Sans", sans-serif; }
 
-a :hover {
+a:hover {
   color: #ff7518;
-  text-decoration: none;
+  text-decoration: none !important;
   cursor: pointer; }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -131,7 +131,7 @@ textarea {
 
 .ban-row {
   display: table-row; }
-  .ban-row :hover {
+  .ban-row:hover {
     background: #000;
     cursor: pointer; }
 
@@ -159,10 +159,10 @@ select {
   z-index: 999;
   position: fixed; }
 
-.table-hover tr :hover {
+.table-hover tr:hover {
   cursor: pointer; }
 
-.table-hover tr td :hover {
+.table-hover tr td:hover {
   cursor: pointer; }
 
 .progress {
@@ -184,7 +184,6 @@ footer {
     margin-top: 10px; }
 
 .footer-content {
-  max-width: 1170px;
   margin: 0 auto; }
 
 .footer-col-title {
@@ -235,8 +234,8 @@ footer {
     color: #fff;
     text-transform: uppercase;
     text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; }
-    .game-start a :hover {
-      color: #ff7518; }
+    .game-start a:hover {
+      color: #ff8400; }
 
 .title-box {
   background: #f5f5f5;
@@ -341,7 +340,7 @@ footer {
   margin-right: 25px;
   margin-bottom: 23px;
   border: 3px solid #000; }
-  .news-image :hover {
+  .news-image:hover {
     border: 3px solid #d6d6d6;
     cursor: pointer; }
 
@@ -357,8 +356,8 @@ footer {
   top: 13px; }
   .news-modify span {
     margin-right: 10px; }
-  .news-modify span:hover {
-    color: #2780e3; }
+    .news-modify span:hover {
+      color: #2780e3; }
 
 .circle-progress strong {
   position: absolute;
@@ -528,7 +527,7 @@ footer {
   right: 38px;
   margin-top: -4px;
   font-size: 22px; }
-  .comment-modify span :hover {
+  .comment-modify span:hover {
     color: #2780e3; }
 
 .comment-remove {
