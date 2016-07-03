@@ -1,4 +1,9 @@
-﻿html, body {
+﻿@font-face {
+    font-family: 'Arbat'; /*a name to be used later*/
+    src: url('../fonts/arbat.ttf'); /*URL to font*/
+}
+
+html, body {
     padding: 0;
     margin: 0;
     font-family: "Open Sans", sans-serif;
@@ -300,15 +305,33 @@ footer p {
 }
 
 .news-image {
-    border: 1px solid #fff;
-    max-width: 200px;
-    height: 200px;
+    max-width: 280px;
+    height: auto;
+    float: left;
+    margin-right: 25px;
+    margin-bottom: 23px;
+    border: 3px solid #000;
 }
 
     .news-image:hover {
-        border: 1px solid #eee;
+        border: 3px solid #d6d6d6;
         cursor: pointer;
     }
+
+.news-modify {
+    cursor: pointer;
+    position: absolute;
+    right: 18px;
+    top: 13px;
+}
+
+    .news-modify span {
+        margin-right: 10px;
+    }
+
+        .news-modify span:hover {
+            color: #2780e3;
+        }
 
 .circle-progress strong {
     position: absolute;
@@ -476,6 +499,11 @@ footer p {
     .title-row {
         margin: 0 -15px;
     }
+
+    .news-image {
+        max-width: 280px;
+        display: block !important;
+    }
 }
 
 @media(max-width: 1200px) {
@@ -494,6 +522,14 @@ footer p {
 
     .footer-content {
         max-width: 1000px;
+    }
+
+    .comment-avatar {
+        width: 25% !important;
+    }
+
+    .comment-text {
+        width: 75% !important;
     }
 }
 
@@ -591,7 +627,7 @@ footer p {
 .payment::after {
     content: "";
     display: block;
-    position: absolute;    
+    position: absolute;
     top: 175px;
     right: 40px;
     background: url("Images/Valute.png") no-repeat;
@@ -608,4 +644,81 @@ footer p {
 
 #buyRub .form-group {
     z-index: 2;
+}
+
+#news-text p {
+    text-align: justify;
+    text-indent: 20px;
+}
+
+#news-text ul {
+    padding-left: 40px;
+}
+
+#news-text h5 {
+    margin: 14px;
+    float: right;
+    font-family: "Arbat", sans-serif;
+    font-size: 25px;
+}
+
+#comments {
+    margin-bottom: 50px;
+}
+
+    #comments p {
+        font-size: 24px;
+    }
+
+.comment-add h5 {
+    margin: 0;
+    margin-bottom: 18px;
+    font-size: 20px;
+}
+
+.comment-add textarea {
+    margin: 0px 450px 0px 0px;
+    width: 912px;
+    min-width: 100%;
+    height: 110px;
+    resize: none;
+}
+
+.comment h5 {
+    margin: 0;
+    margin-bottom: 18px;
+    font-size: 20px;
+}
+
+.comment-avatar {
+    float: left;
+    width: 20%;
+    padding: 0 10px;
+}
+
+    .comment-avatar canvas {
+        border: 2px solid #d6d6d6;
+    }
+
+.comment-text {
+    float: left;
+    width: 80%;
+    min-height: 128px;
+    box-shadow: none;
+}
+
+.comment-modify {
+    cursor: pointer;
+    position: absolute;
+    right: 38px;
+    margin-top: -4px;
+    font-size: 22px;
+}
+
+    .comment-modify span:hover {
+        color: #2780e3;
+    }
+
+.comment-remove {
+    color: #ff0039;
 }
