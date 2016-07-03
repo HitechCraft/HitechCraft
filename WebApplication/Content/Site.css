@@ -13,8 +13,9 @@
   .panel-login {
     max-width: 371px;
     margin: 0 auto; }
-  #loginForm {
-    margin-left: -67px; }
+  /*#loginForm {
+        margin-left: -67px;
+    }*/
   .game-start {
     float: none !important;
     width: 383px;
@@ -71,7 +72,8 @@
   .title-box {
     margin-bottom: 21px; }
   .footer-content {
-    max-width: 1000px; }
+    max-width: 1000px;
+    padding: 0 20px; }
   .comment-avatar {
     width: 25% !important; }
   .comment-text {
@@ -84,13 +86,13 @@
   /*URL to font*/ }
 
 .vk {
-  background-position: -70px -36px; }
+  background-position: -70px -36px !important; }
 
 .youtube {
-  background-position: -3px -36px; }
+  background-position: -3px -36px !important; }
 
 .twitter {
-  background-position: -105px -2px; }
+  background-position: -105px -2px !important; }
 
 /*VARIABLES*/
 html, body {
@@ -184,6 +186,7 @@ footer {
     margin-top: 10px; }
 
 .footer-content {
+  max-width: 1170px;
   margin: 0 auto; }
 
 .footer-col-title {
@@ -385,9 +388,11 @@ footer {
 .form-group {
   position: relative; }
 
-#check-username {
-  padding: 10px 21px; }
-
+/*#check {
+    &-username {
+        padding: 10px 21px;
+    }
+}*/
 .checkbox input[type="checkbox"] {
   margin-left: 0; }
 
@@ -443,7 +448,7 @@ footer {
 .info-title {
   margin: 5px 0 12px 0px; }
 
-.info-block > p {
+.info-block p {
   margin-bottom: 30px; }
 
 .exchange {
@@ -451,7 +456,9 @@ footer {
 
 .payment {
   min-height: 326px; }
-  .payment ::after {
+  .payment .form-group {
+    z-index: 2; }
+  .payment::after {
     content: "";
     display: block;
     position: absolute;
@@ -465,7 +472,7 @@ footer {
     z-index: 1; }
 
 .currency-info {
-  min-height: 504px; }
+  min-height: 550px; }
 
 .buy-button {
   width: 280px; }

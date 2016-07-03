@@ -153,7 +153,7 @@ footer {
 
 .footer {
     &-content {
-        //max-width: 1170px;
+        max-width: 1170px;
         margin: 0 auto;
     }
 
@@ -442,11 +442,11 @@ footer {
     }
 }
 
-#check {
+/*#check {
     &-username {
         padding: 10px 21px;
     }
-}
+}*/
 
 
 
@@ -537,7 +537,7 @@ footer {
     }
 
     &-block {
-        > p {
+        p {
             margin-bottom: 30px;
         }
     }
@@ -550,7 +550,11 @@ footer {
 .payment {
     min-height: 326px;
 
-    ::after {
+    .form-group {
+        z-index: 2;
+    }
+
+    &::after {
         content: "";
         display: block;
         position: absolute;
@@ -567,7 +571,7 @@ footer {
 
 .currency {
     &-info {
-        min-height: 504px;
+        min-height: 550px;
     }
 }
 
