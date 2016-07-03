@@ -6,7 +6,7 @@
 @import 'socials';
 
 /*VARIABLES*/
-    
+
 $main_font_family: "Open Sans", sans-serif;
 $social_background_url: url("../Images/social-icons.png");
 $logo_bg_url: url("../Images/logo.png");
@@ -75,6 +75,10 @@ textarea {
     }
 }
 
+.container {
+    min-width: 768px;
+    min-height: 100%;
+}
 
 select {
     color: #000;
@@ -472,7 +476,7 @@ footer {
 
 #skin {
     &-container {
-        width: 324px;
+        width: 330px;
         margin: 0 auto;
         padding: 36px 0;
         height: 392px;
