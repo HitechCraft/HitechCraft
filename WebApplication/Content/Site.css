@@ -273,7 +273,7 @@ footer {
   clear: both; }
 
 .wrapper {
-  margin-top: 50px;
+  margin-top: 20px;
   min-height: 100%; }
   .wrapper .content {
     margin: 0 -15px; }
@@ -341,6 +341,9 @@ footer {
   .panel .page-title {
     margin-top: 0;
     margin-bottom: 30px; }
+
+.sidebar {
+  margin-bottom: 50px; }
 
 .news-image {
   max-width: 280px;
