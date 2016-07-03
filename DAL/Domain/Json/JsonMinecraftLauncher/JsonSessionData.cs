@@ -1,4 +1,4 @@
-﻿namespace WebApplication.Areas.Launcher.Models.Json
+﻿namespace DAL.Domain.Json
 {
     public class JsonSessionData
     {
