@@ -83,7 +83,7 @@ namespace WebApplication.Controllers
         {
             try
             {
-                this.UpdateGonts(Math.Round(count / this.RubToGont, 2));
+                this.UpdateGonts(Math.Round(count / this.RubToGont));
                 this.UpdateRubles(-count);
             }
             catch (Exception e)
@@ -325,8 +325,17 @@ namespace WebApplication.Controllers
         /// <param name="id"></param>
         private void RemoveTransaction(string id)
         {
-            this.context.IkTransactions.Remove(this.context.IkTransactions.First(ikt => ikt.Id == id));
-            this.context.SaveChanges();
+            try
+            {
+                var transaction = this.context.IkTransactions.First(ikt => ikt.Id == id);
+
+                this.context.IkTransactions.Remove(transaction);
+                this.context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         /// <summary>
