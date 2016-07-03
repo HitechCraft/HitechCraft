@@ -5,19 +5,35 @@
     Layout = null;
 }
 
-@if (Model!= null && Model.Any())
+@if (Model != null && Model.Any())
 {
     foreach (var comment in Model)
     {
-        <div id="comment-text@(comment.Id)">
-            <p>@comment.Text</p>
-        </div>
-        <p>@comment.AuthorName</p>
+        <div class="well comment">
+            @if (comment.AuthorId == User.Identity.GetUserId())
+            {
+                <div class="comment-modify">
+                    <span class="glyphicon glyphicon-remove comment-remove" onclick="javascript:RemoveComment(@comment.Id);"></span>
+                </div>
+            }
 
-        if (comment.AuthorId == User.Identity.GetUserId())
-        {
-            <button class="btn btn-danger btn-sm" onclick="javascript:RemoveComment(@comment.Id);">Удалить</button>
-        }
+            <h5>@comment.AuthorName пишет...</h5>
+
+            <div class="comment-avatar">
+                <img src="@Url.Action("GetSkinImage", "Account", new {userName = comment.AuthorName})" id="skin-image@(comment.AuthorId)" class="avaSkin@(comment.AuthorId)" hidden=""/>
+            </div>
+            <div class="comment-text form-control">
+                @comment.Text
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                renderMCSkins('avaSkin@(comment.AuthorId)', 8);
+                $('.avaSkin@(comment.AuthorId)').css('height', '128px');
+            });
+        </script>
     }
 
     @Html.PagedListPager(Model, page => "javascript:FilterComments(" + page + ")")
@@ -26,3 +42,11 @@ else
 {
     <p>Нет комментариев</p>
 }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($('ul.pagination').children().length <= 1) {
+            $('ul.pagination').css('visibility', 'hidden');
+        }
+    });
+</script>

@@ -362,6 +362,21 @@ footer {
     .news-modify span:hover {
       color: #2780e3; }
 
+.news-modify {
+    cursor: pointer;
+    position: absolute;
+    right: 18px;
+    top: 13px;
+}
+
+    .news-modify span {
+        margin-right: 10px;
+    }
+
+        .news-modify span:hover {
+            color: #2780e3;
+        }
+
 .circle-progress strong {
   position: absolute;
   top: 44px;
@@ -393,6 +408,19 @@ footer {
         padding: 10px 21px;
     }
 }*/
+
+    .news-image {
+        max-width: 280px;
+        display: block !important;
+    }
+
+    .comment-avatar {
+        width: 25% !important;
+    }
+
+    .comment-text {
+        width: 75% !important;
+    }
 .checkbox input[type="checkbox"] {
   margin-left: 0; }
 
@@ -540,3 +568,19 @@ footer {
 .comment-remove {
   color: #ff0039; }
 
+}
+
+.comment-modify {
+    cursor: pointer;
+    position: absolute;
+    right: 38px;
+    margin-top: -4px;
+    font-size: 22px;
+}
+
+    .comment-modify span:hover {
+        color: #2780e3;
+    }
+
+.comment-remove {
+    color: #ff0039;

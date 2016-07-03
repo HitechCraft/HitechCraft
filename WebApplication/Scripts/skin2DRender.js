@@ -63,7 +63,7 @@
         canvas.width = 16 * scale;
         canvas.height = 32 * scale;
 
-        if (classname === "avaSkin") {
+        if (/avaSkin/.test(classname)) {
             canvas.width = 15 * scale;
             canvas.height = 15 * scale;
         }
@@ -75,7 +75,7 @@
         context.mozImageSmoothingEnabled = false;
         context.msImageSmoothingEnabled = false;
         context.imageSmoothingEnabled = false;
-        if (classname === "frontSkin") {
+        if (/frontSkin/.test(classname)) {
             //startFront
             context.scale(-1, 1);
             //draw the left leg
@@ -103,7 +103,7 @@
             }
 
             //endFront
-        } else if (classname === "backSkin") {
+        } else if (/backSkin/.test(classname)) {
             //startBack
             context.scale(-1, 1);
             //draw the right leg
@@ -131,7 +131,7 @@
             }
 
             //endBack
-        } else if (classname === "avaSkin") {
+        } else if (/avaSkin/.test(classname)) {
             //draw the head
             context.drawImage(skinImage, 8 * c, 8 * c, 8 * c, 8 * c, 0 * s, 0 * s, 15 * s, 15 * s);
             //draw the mask
