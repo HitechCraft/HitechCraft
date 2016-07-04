@@ -3,15 +3,10 @@
     /// <summary>
     /// Player session model (for online-mode=true)
     /// </summary>
-    public class PlayerSession
+    public class PlayerSession : BaseEntity<PlayerSession>
     {
         #region Properties
-
-        /// <summary>
-        /// Object id
-        /// </summary>
-        public virtual int Id { get; set; }
-
+        
         /// <summary>
         /// Minecraft client session
         /// </summary>

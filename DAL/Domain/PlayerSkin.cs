@@ -3,15 +3,10 @@
     /// <summary>
     /// Player texture (skin)
     /// </summary>
-    public class PlayerSkin
+    public class PlayerSkin : BaseEntity<PlayerSkin>
     {
         #region Properties
-
-        /// <summary>
-        /// Object id
-        /// </summary>
-        public virtual int Id { get; set; }
-
+        
         /// <summary>
         /// Byte array of file 
         /// </summary>

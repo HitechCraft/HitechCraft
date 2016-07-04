@@ -6,15 +6,10 @@
 
     #endregion
 
-    public class Comment
+    public class Comment : BaseEntity<Comment>
     {
         #region Properties
-
-        /// <summary>
-        /// Object Id
-        /// </summary>
-        public virtual int Id { get; set; }
-
+        
         /// <summary>
         /// Comment text
         /// </summary>

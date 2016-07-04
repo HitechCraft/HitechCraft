@@ -19,7 +19,7 @@
     /// <summary>
     /// Player model
     /// </summary>
-    public class Player
+    public class Player : BaseEntity<Player>
     {
         #region Properties
 

@@ -3,15 +3,10 @@
     /// <summary>
     /// BanIP action model
     /// </summary>
-    public class BanIp
+    public class BanIp : BaseEntity<BanIp>
     {
         #region Properties
-
-        /// <summary>
-        /// Object Id   
-        /// </summary>
-        public virtual int id { get; set; }
-
+        
         /// <summary>
         /// Player object
         /// </summary>

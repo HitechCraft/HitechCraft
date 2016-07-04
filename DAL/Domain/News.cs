@@ -10,15 +10,10 @@
     /// <summary>
     /// News model
     /// </summary>
-    public class News
+    public class News : BaseEntity<News>
     {
         #region Properties
         
-        /// <summary>
-        /// News id
-        /// </summary>
-        public virtual int Id { get; set; }
-
         /// <summary>
         /// News Title
         /// </summary>

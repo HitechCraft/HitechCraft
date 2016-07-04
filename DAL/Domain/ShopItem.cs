@@ -3,7 +3,7 @@
     /// <summary>
     /// Minecraft shop item
     /// </summary>
-    public class ShopItem
+    public class ShopItem : BaseEntity<ShopItem>
     {
         #region Properties
 

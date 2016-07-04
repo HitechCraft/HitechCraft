@@ -3,15 +3,10 @@
     /// <summary>
     /// Minecraft shop item category
     /// </summary>
-    public class ShopItemCategory
+    public class ShopItemCategory : BaseEntity<ShopItemCategory>
     {
         #region Properties
-
-        /// <summary>
-        /// Object id
-        /// </summary>
-        public virtual int Id { get; set; }
-
+        
         /// <summary>
         /// Category name
         /// </summary>

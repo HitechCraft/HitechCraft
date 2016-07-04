@@ -3,15 +3,10 @@
     /// <summary>
     /// PermissionsEx
     /// </summary>
-    public class Permission
+    public class Permission : BaseEntity<Permission>
     {
         #region Properties
-
-        /// <summary>
-        /// Obj id
-        /// </summary>
-        public virtual int id { get; set; }
-
+        
         /// <summary>
         /// Obj name
         /// </summary>

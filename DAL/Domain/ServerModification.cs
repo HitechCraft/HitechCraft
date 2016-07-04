@@ -3,15 +3,10 @@
     /// <summary>
     /// Relation model of Server and Modification
     /// </summary>
-    public class ServerModification
+    public class ServerModification : BaseEntity<ServerModification>
     {
         #region Properties
-
-        /// <summary>
-        /// Object id
-        /// </summary>
-        public virtual int Id { get; set; }
-
+        
         /// <summary>
         /// Server object
         /// </summary>

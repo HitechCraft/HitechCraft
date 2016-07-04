@@ -3,15 +3,10 @@
     /// <summary>
     /// Player currency model
     /// </summary>
-    public class Currency
+    public class Currency : BaseEntity<Currency>
     {
         #region Properties
-
-        /// <summary>
-        /// Object id
-        /// </summary>
-        public virtual int id { get; set; }
-
+        
         /// <summary>
         /// Player object
         /// </summary>

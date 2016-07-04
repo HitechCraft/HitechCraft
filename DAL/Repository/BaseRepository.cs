@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using DAL.Domain;
 using DAL.NHibernate;
 using NHibernate;
 using NHibernate.Linq;
 
-namespace DAL.Entity
+namespace DAL.Repository
 {
-    internal class BaseRepository<TEntity, TIdentifier>
-        where TIdentifier : new()
-        where TEntity : BaseEntity<TIdentifier>
+    public class BaseRepository<TEntity> : IRepository
+        where TEntity : BaseEntity<TEntity>
     {
         /// <summary>
         /// NHibernate ISession to be used to manipulate data in the

@@ -3,15 +3,10 @@
     /// <summary>
     /// PermissionsEx Entity
     /// </summary>
-    public class PexEntity
+    public class PexEntity : BaseEntity<PexEntity>
     {
         #region Properties
-
-        /// <summary>
-        /// Obj id
-        /// </summary>
-        public virtual int id { get; set; }
-
+        
         /// <summary>
         /// Entity name
         /// </summary>

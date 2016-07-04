@@ -3,15 +3,10 @@
     /// <summary>
     /// Player shop item
     /// </summary>
-    public class PlayerItem
+    public class PlayerItem : BaseEntity<PlayerItem>
     {
         #region Properties
-
-        /// <summary>
-        /// Object id
-        /// </summary>
-        public virtual int id { get; set; }
-
+        
         /// <summary>
         /// Player object
         /// </summary>

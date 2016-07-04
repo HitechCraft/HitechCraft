@@ -3,15 +3,10 @@
     /// <summary>
     /// Sale of some item in Minecraft Shop
     /// </summary>
-    public class ShopSale
+    public class ShopSale : BaseEntity<ShopSale>
     {
         #region Properties
-
-        /// <summary>
-        /// Object id
-        /// </summary>
-        public virtual int Id { get; set; }
-
+        
         /// <summary>
         /// Sale value (0.01 - 1)
         /// </summary>

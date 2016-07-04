@@ -9,15 +9,10 @@
     /// <summary>
     /// IKTransaction model
     /// </summary>
-    public class IKTransaction
+    public class IKTransaction : BaseEntity<IKTransaction>
     {
         #region Properties
-
-        /// <summary>
-        /// Object ID
-        /// </summary>
-        public virtual string Id { get; set; }
-
+        
         /// <summary>
         /// Player
         /// </summary>

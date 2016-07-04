@@ -1,11 +1,5 @@
 ﻿namespace DAL.Domain
 {
-    #region Using Directives
-    
-    using System.ComponentModel.DataAnnotations.Schema;
-
-    #endregion
-
     public enum BanType
     {
         #region Values
@@ -31,15 +25,10 @@
     /// <summary>
     /// Ban action model
     /// </summary>
-    public class Ban
+    public class Ban : BaseEntity<Ban>
     {
         #region Properties
-
-        /// <summary>
-        /// Object id
-        /// </summary>
-        public virtual int id { get; set; }
-
+        
         /// <summary>
         /// Player banned
         /// </summary>

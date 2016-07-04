@@ -9,15 +9,10 @@
     /// <summary>
     /// Minecraft modification model
     /// </summary>
-    public class Modification
+    public class Modification : BaseEntity<Modification>
     {
         #region Properties
-
-        /// <summary>
-        /// Object id
-        /// </summary>
-        public virtual int Id { get; set; }
-
+        
         /// <summary>
         /// Mode name
         /// </summary>

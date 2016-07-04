@@ -9,15 +9,10 @@
     /// <summary>
     /// Server model
     /// </summary>
-    public class Server
+    public class Server : BaseEntity<Server>
     {
         #region Properties
-
-        /// <summary>
-        /// Object Id
-        /// </summary>
-        public virtual int Id { get; set; }
-
+        
         /// <summary>
         /// Server name
         /// </summary>
