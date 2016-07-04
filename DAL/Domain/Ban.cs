@@ -36,6 +36,11 @@
         #region Properties
 
         /// <summary>
+        /// Object id
+        /// </summary>
+        public virtual int id { get; set; }
+
+        /// <summary>
         /// Player banned
         /// </summary>
         public virtual Player Player { get; set; }
@@ -69,11 +74,6 @@
         /// Time for tempbans (unix)
         /// </summary>
         public virtual int temptime { get; set; }
-
-        /// <summary>
-        /// Object id
-        /// </summary>
-        public virtual int id { get; set; }
 
         /// <summary>
         /// Type of ban
