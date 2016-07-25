@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNet.Identity
+@using PagedList.Mvc
+@model PagedList.IPagedList<HitechCraft.WebApplication.Models.CommentViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null && Model.Any())
+{
+    foreach (var comment in Model)
+    {
+        <div class="well comment">
+            @if (comment.AuthorName == User.Identity.GetUserName())
+            {
+                <div class="comment-modify">
+                    <span class="glyphicon glyphicon-remove comment-remove" onclick="javascript:RemoveComment(@comment.Id);"></span>
+                </div>
+            }
+
+            <h5>@comment.AuthorName пишет...</h5>
+
+            <div class="comment-avatar">
+                <img src="@Url.Action("GetSkinImage", "Player")" id="skin-image@(comment.Id)" class="avaSkin@(comment.Id)" hidden=""/>
+            </div>
+            <div class="comment-text form-control">
+                @comment.Text
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                renderMCSkins('avaSkin@(comment.Id)', 8);
+                $('.avaSkin@(comment.Id)').css('height', '128px');
+            });
+        </script>
+    }
+
+    @Html.PagedListPager(Model, page => "javascript:FilterComments(" + page + ")")
+}
+else
+{
+    <p>Нет комментариев</p>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($('ul.pagination').children().length <= 1) {
+            $('ul.pagination').css('visibility', 'hidden');
+        }
+    });
+</script>
