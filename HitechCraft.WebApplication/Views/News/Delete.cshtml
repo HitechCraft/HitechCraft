@@ -1,0 +1,18 @@
+﻿@model HitechCraft.WebApplication.Models.NewsViewModel
+@{
+    ViewBag.Title = "Удаление";
+}
+
+<h2>Вы действительно хотите удалить новость @(Model.Title)?</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <input type="submit" value="Delete" class="btn btn-default" />
+            @Html.ActionLink("Cancel", "Details", new { id = Model.Id }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}

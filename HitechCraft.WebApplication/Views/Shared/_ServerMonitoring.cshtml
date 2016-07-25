@@ -1,0 +1,47 @@
+﻿@using HitechCraft.Common.Models.Json.MinecraftServer
+@using HitechCraft.WebApplication.Models
+@model IEnumerable<HitechCraft.WebApplication.Models.ServerViewModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    if (Model.Any())
+    {
+        foreach (var server in Model)
+        {
+            <div class="server-title">@server.Name (@Html.ActionLink("?", "Details", "Server", new { id = @server.Id }, null))</div>
+            <div class="server-progress">
+                <div class="circle-progress @server.Id"><strong>0</strong></div>
+            </div>
+        }
+
+        <div class="server-title">Общий онлайн</div>
+            <div class="server-progress">
+                <div class="circle-progress 99999"><strong>0</strong></div>
+            </div>
+    }
+    else
+    {
+        <p style="text-align: center">Серверов нет</p>
+    }
+}
+
+@if (Model != null && Model.Any())
+{
+    foreach (var server in Model)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                setProgress('@server.Id', '@(server.Data.Status != JsonMinecraftServerStatus.Error && server.Data.Status != JsonMinecraftServerStatus.Offline ? server.Data.PlayerCount : -1)', '@server.Data.MaxPlayerCount');
+            });
+        </script>
+    }
+    
+    <script type="text/javascript">
+            $(document).ready(function () {
+                setProgress('99999', '@(Model.Aggregate<ServerViewModel, int>(0, (total, next) => total + next.Data.PlayerCount))', '@(Model.Aggregate<ServerViewModel, int>(0, (total, next) => total + next.Data.MaxPlayerCount))');
+            });
+    </script>
+}
