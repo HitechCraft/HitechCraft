@@ -1,28 +1,31 @@
-﻿using HitechCraft.Common.Models.Enum;
-
-namespace WebApplication.Areas.Launcher.Controllers
+﻿namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
 {
     #region Using Directives
 
     using System.Collections.Generic;
     using System;
-    using System.Data.Entity;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
-    using AutoMapper;
     using Microsoft.AspNet.Identity.Owin;
     using System.IO;
     using System.Text;
-    using HitechCraft.Common.Core;
-    using HitechCraft.Common.Models.Json.MinecraftLauncher;
-    using HitechCraft.DAL.Domain;
-    using HitechCraft.WebApplication;
-    using HitechCraft.WebApplication.Controllers;
-    using HitechCraft.WebApplication.Manager;
-    using HitechCraft.Common.DI;
-    using HitechCraft.WebApplication.Properties;
-    using HitechCraft.WebApplication.Areas.Launcher.Services;
+    using Common.Core;
+    using Common.Models.Json.MinecraftLauncher;
+    using WebApplication;
+    using WebApplication.Controllers;
+    using Manager;
+    using Common.DI;
+    using Properties;
+    using Services;
+    using BL.CQRS.Query;
+    using Common.Models.Enum;
+    using Common.Models.Json.MinecraftServer;
+    using Models;
+    using BL.CQRS.Command;
+    using Common.Projector;
+    using DAL.Domain;
+    using DAL.Repository.Specification;
 
     #endregion
 
@@ -30,11 +33,14 @@ namespace WebApplication.Areas.Launcher.Controllers
     {
         public ActionController(IContainer container) : base(container)
         {
+            //Для проверки логина и пароля пользователя при аутентификации в лаунчере
+            this._context = new ApplicationDbContext();
         }
 
         #region Private Fields
 
         private ApplicationUserManager _userManager;
+        private readonly ApplicationDbContext _context;
 
         #endregion
 
@@ -73,8 +79,7 @@ namespace WebApplication.Areas.Launcher.Controllers
                 {
                     Status = JsonStatus.YES,
                     Message = Resources.LauncherSuccessAuth,
-                    //TODO: Исправить
-                    //SessionData = this.GetUserSessionData(login)
+                    SessionData = this.GetUserSessionData(login)
                 },
                 JsonRequestBehavior.AllowGet);
             }
@@ -244,30 +249,28 @@ namespace WebApplication.Areas.Launcher.Controllers
             Response.End();
         }
 
-        //TODO: Исправить
         /// <summary>
         /// Returns server info, from site context
         /// </summary>
-        //public JsonResult GetServersInfo()
-        //{
-        //    var servers = this.context.Servers.ToList();
+        public JsonResult GetServersInfo()
+        {
+            var serversData = new ServerDataListQueryHandler(this.Container)
+                .Handle(new ServerDataListQuery());
+            
+            if (!serversData.Any())
+            {
+                return Json(new JsonMinecraftServersInfo()
+                {
+                    ServerCount = 0
+                }, JsonRequestBehavior.AllowGet);
+            }
 
-        //    var serversData = servers.Select(x => x.GetServerData()).ToList();
-
-        //    if (!servers.Any())
-        //    {
-        //        return System.Web.Helpers.Json(new JsonServersInfo()
-        //        {
-        //            ServerCount = 0
-        //        }, JsonRequestBehavior.AllowGet);
-        //    }
-
-        //    return System.Web.Helpers.Json(new JsonServersInfo()
-        //    {
-        //        ServerData = serversData,
-        //        ServerCount = servers.Count()
-        //    }, JsonRequestBehavior.AllowGet);
-        //}
+            return Json(new JsonMinecraftServersInfo()
+            {
+                ServerData = serversData,
+                ServerCount = serversData.Count()
+            }, JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
 
@@ -277,11 +280,8 @@ namespace WebApplication.Areas.Launcher.Controllers
         {
             try
             {
-                //TODO: Исправить
-                var isValid = false;
-                    //this.UserManager.CheckPasswordAsync(this.context.Users.First(u => u.UserName == login), password).Result;
-
-                return isValid;
+                return this.UserManager.CheckPasswordAsync(this._context.Users.First(u => u.UserName == login), password)
+                        .Result;
             }
             catch (Exception)
             {
@@ -289,59 +289,58 @@ namespace WebApplication.Areas.Launcher.Controllers
             }
         }
 
-        //TODO: Исправить
-        //private JsonSessionData GetUserSessionData(string login)
-        //{
-        //    this.ChangeOrSetPlayerSession(login);
+        private JsonSessionData GetUserSessionData(string login)
+        {
+            this.ChangeOrSetPlayerSession(login);
 
-        //    try
-        //    {
-        //        PlayerSession playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == login);
+            try
+            {
+                var playerSession = new EntityListQueryHandler<PlayerSession, JsonSessionData>(this.Container)
+                    .Handle(new EntityListQuery<PlayerSession, JsonSessionData>()
+                    {
+                        Specification = new PlayerSessionByPlayerNameSpec(login),
+                        Projector = this.Container.Resolve<IProjector<PlayerSession, JsonSessionData>>()
+                    }).First();
+                
+                return playerSession;
+            }
+            catch (Exception)
+            {
+                return new JsonSessionData();
+            }
+        }
 
-        //        Mapper.CreateMap<PlayerSession, JsonSessionData>()
-        //                .ForMember(dst => dst.PlayerName, exp => exp.MapFrom(src => src.PlayerName))
-        //                .ForMember(dst => dst.Md5, exp => exp.MapFrom(src => src.Md5))
-        //                .ForMember(dst => dst.ServerId, exp => exp.MapFrom(src => src.Server))
-        //                .ForMember(dst => dst.SessionId, exp => exp.MapFrom(src => src.Session))
-        //                .ForMember(dst => dst.Token, exp => exp.MapFrom(src => src.Token));
+        private void ChangeOrSetPlayerSession(string login)
+        {
+            var session = this.GenerateKey("Session", login);
+            var token = this.GenerateKey("Token", login);
 
-        //        return Mapper.Map<PlayerSession, JsonSessionData>(playerSession);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return new JsonSessionData();
-        //    }
-        //}
+            try
+            {
+                var playerSession = new EntityListQueryHandler<PlayerSession, PlayerSessionEditViewModel>(this.Container)
+                       .Handle(new EntityListQuery<PlayerSession, PlayerSessionEditViewModel>()
+                       {
+                           Specification = new PlayerSessionByPlayerNameSpec(login),
+                           Projector = this.Container.Resolve<IProjector<PlayerSession, PlayerSessionEditViewModel>>()
+                       }).First();
 
-        //private void ChangeOrSetPlayerSession(string login)
-        //{
-        //    var session = this.GenerateKey("Session", login);
-        //    var token = this.GenerateKey("Token", login);
+                playerSession.Session = session;
+                playerSession.Token = token;
 
-        //    try
-        //    {
-        //        var playerSession = this.context.PlayerSessions.First(ps => ps.PlayerName == login);
-
-        //        playerSession.Session = session;
-        //        playerSession.Token = token;
-
-        //        this.context.Entry(playerSession).State = EntityState.Modified;
-        //        this.context.SaveChanges();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        this.context.PlayerSessions.Add(new PlayerSession
-        //        {
-        //            PlayerName = login,
-        //            Session = session,
-        //            Server = null,
-        //            Token = token,
-        //            Md5 = this.UuidConvert(login)
-        //        });
-
-        //        this.context.SaveChanges();
-        //    }
-        //}
+                this.CommandExecutor.Execute(this.Project<PlayerSessionEditViewModel, PlayerSessionUpdateCommand>(playerSession));
+            }
+            catch (Exception)
+            {
+                this.CommandExecutor.Execute(new PlayerSessionCreateCommand()
+                {
+                    PlayerName = login,
+                    Server = null,
+                    Session = session,
+                    Token = token,
+                    Md5 = this.UuidConvert(login)
+                });
+            }
+        }
 
         private string UuidConvert(string username)
         {

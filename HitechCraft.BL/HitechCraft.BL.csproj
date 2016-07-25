@@ -70,6 +70,10 @@
     <Compile Include="CQRS\Command\News\NewsImageRemoveCommandHandler.cs" />
     <Compile Include="CQRS\Command\News\NewsViewsUpdateCommandHandler.cs" />
     <Compile Include="CQRS\Command\News\NewsCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\PlayerSession\PlayerSessionCreateCommand.cs" />
+    <Compile Include="CQRS\Command\PlayerSession\PlayerSessionUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\PlayerSession\PlayerSessionCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\PlayerSession\PlayerSessionUpdateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Player\PlayerSkinRemoveCommand.cs" />
     <Compile Include="CQRS\Command\Player\PlayerSkinCreateOrUpdateCommand.cs" />
     <Compile Include="CQRS\Command\Player\PlayerRegisterCreateCommand.cs" />
@@ -88,6 +92,8 @@
     <Compile Include="CQRS\Query\EntityListQueryHandler.cs" />
     <Compile Include="CQRS\Query\EntityQuery.cs" />
     <Compile Include="CQRS\Query\EntityQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Server\ServerDataListQuery.cs" />
+    <Compile Include="CQRS\Query\Server\ServerDataListQueryHandler.cs" />
     <Compile Include="CQRS\Query\Player\PlayerSkinExistsQuery.cs" />
     <Compile Include="CQRS\Query\Player\PlayerSkinQuery.cs" />
     <Compile Include="CQRS\Query\Player\PlayerByLoginQuery.cs" />

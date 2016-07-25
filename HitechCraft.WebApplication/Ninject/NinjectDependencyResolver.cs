@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebApplication.Ninject
+﻿using HitechCraft.Common.Models.Json.MinecraftLauncher;
+
+namespace HitechCraft.WebApplication.Ninject
 {
     #region Using Directives
 
@@ -79,6 +81,9 @@
 
             this._kernel.Bind(typeof(ICommandHandler<CurrencyCreateCommand>)).To(typeof(CurrencyCreateCommandHandler));
             this._kernel.Bind(typeof(ICommandHandler<CurrencyUpdateCommand>)).To(typeof(CurrencyUpdateCommandHandler));
+            
+            this._kernel.Bind(typeof(ICommandHandler<PlayerSessionUpdateCommand>)).To(typeof(PlayerSessionUpdateCommandHandler));
+            this._kernel.Bind(typeof(ICommandHandler<PlayerSessionCreateCommand>)).To(typeof(PlayerSessionCreateCommandHandler));
 
             this._kernel.Bind(typeof(ICommandExecutor)).To(typeof(CommandExecutor));
         
@@ -115,6 +120,9 @@
             this._kernel.Bind(typeof(IProjector<PlayerSkin, PlayerSkinViewModel>)).To(typeof(PlayerSkinToPlayerSkinViewModelMapper));
             
             this._kernel.Bind(typeof(IProjector<Player, PlayerProfileViewModel>)).To(typeof(PlayerToPlayerProfileViewModelMapper));
+            this._kernel.Bind(typeof(IProjector<PlayerSession, PlayerSessionEditViewModel>)).To(typeof(PlayerSessionToPlayerSessionEditViewModelMapper));
+            this._kernel.Bind(typeof(IProjector<PlayerSession, JsonSessionData>)).To(typeof(PlayerSessionToJsonSessionDataMapper));
+            this._kernel.Bind(typeof(IProjector<PlayerSessionEditViewModel, PlayerSessionUpdateCommand>)).To(typeof(PlayerSessionEditViewModelToPlayerSessionUpdateCommandMapper));
 
             this._kernel.Bind(typeof(IProjector<IKTransaction, IKTransactionViewModel>)).To(typeof(IKTransactionToIKTransactionViewModelMapper));
 

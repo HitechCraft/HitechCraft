@@ -1,8 +1,7 @@
-﻿using HitechCraft.Common.Models.Json.MinecraftServer;
-
-namespace HitechCraft.WebApplication.Models
+﻿namespace HitechCraft.WebApplication.Models
 {
     using System.Collections.Generic;
+    using Common.Models.Json.MinecraftServer;
 
     public class ServerViewModel
     {

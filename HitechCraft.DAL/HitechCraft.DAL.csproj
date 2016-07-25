@@ -101,6 +101,10 @@
     <Compile Include="Repository\Specification\IKTransaction\IKTransactionByTransactionIdSpec.cs" />
     <Compile Include="Repository\Specification\IKTransaction\IKTransactionByPlayerNameSpec.cs" />
     <Compile Include="Repository\Specification\News\CommentByNewsIdSpec.cs" />
+    <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByServerSpec.cs" />
+    <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByPlayerNameSpec.cs" />
+    <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByAccessTokenSpec.cs" />
+    <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByPlayerProfileSpec.cs" />
     <Compile Include="Repository\Specification\Player\PlayerSkinByUserNameSpec.cs" />
     <Compile Include="Repository\Specification\Player\PlayerByLoginSpec.cs" />
     <Compile Include="UnitOfWork\NHibernateUnitOfWork.cs" />
