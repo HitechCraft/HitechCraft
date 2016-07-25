@@ -7,7 +7,7 @@
 @if (User.IsInRole("Administrator"))
 {
     <div class="news-administration">
-        @Html.ActionLink("Создать", "Create", "News", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Добавить новость", "Create", "News", null, new { @class = "btn btn-primary" })
     </div>
 }
 

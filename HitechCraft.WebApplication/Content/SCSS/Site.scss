@@ -375,7 +375,10 @@ footer {
         margin-bottom: 25px;
     }
 
-    .page-title {
+}
+
+.page {
+    &-title{
         margin-top: 0;
         margin-bottom: 30px;
     }
@@ -446,7 +449,13 @@ footer {
 
     &-administration{
         background: #f5f5f5;
+        border: 1px solid #ddd;
         padding: 12px;
+        margin-bottom: 20px;
+
+        a{
+            width: 100%;
+        }
     }
 }
 
