@@ -1,8 +1,4 @@
-﻿using HitechCraft.DAL.Domain;
-using HitechCraft.WebApplication.Models;
-using HitechCraft.WebApplication.Ninject.Current;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -14,6 +10,8 @@ namespace HitechCraft.WebApplication.Controllers
     using Common.Entity;
     using Common.Projector;
     using Common.Repository.Specification;
+    using DAL.Domain;
+    using Ninject.Current;
 
     #endregion
 
