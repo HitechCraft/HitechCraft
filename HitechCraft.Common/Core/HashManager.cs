@@ -92,6 +92,27 @@
             return hex.Replace(@"-", String.Empty);
         }
 
+        /// <summary>
+        /// Returns sha1 hash
+        /// </summary>
+        /// <param name="inputString">String for hash</param>
+        /// <returns></returns>
+        public static string GetSha1Hash(string inputString)
+        {
+            using (SHA1Managed sha1 = new SHA1Managed())
+            {
+                var hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+                var sb = new StringBuilder(hash.Length * 2);
+
+                foreach (byte b in hash)
+                {
+                    sb.Append(b.ToString("x2"));
+                }
+
+                return sb.ToString();
+            }
+        }
+
         #region Private Methods
 
         private static string BuildMd5(byte[] data)
