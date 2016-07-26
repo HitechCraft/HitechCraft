@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Common.Core;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     using System.Web.Mvc;
     using Common.DI;
