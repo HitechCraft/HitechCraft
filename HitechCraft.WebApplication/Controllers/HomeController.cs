@@ -14,6 +14,16 @@
             return View();
         }
 
+        public ActionResult GameStart()
+        {
+            return View();
+        }
+
+        public ActionResult Vote()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

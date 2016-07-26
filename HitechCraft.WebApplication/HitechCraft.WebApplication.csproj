@@ -316,11 +316,16 @@
     <Content Include="Content\Images\banners\v_blue_on_white_ru.png" />
     <Content Include="Content\Images\charRendered.png" />
     <Content Include="Content\Images\game-start.png" />
+    <Content Include="Content\Images\launcher-linux.png" />
+    <Content Include="Content\Images\launcher-win.png" />
     <Content Include="Content\Images\loader.gif" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\no-image.jpg" />
     <Content Include="Content\Images\social-icons.png" />
     <Content Include="Content\Images\Valute.png" />
+    <Content Include="Content\Images\vote\mctop.png" />
+    <Content Include="Content\Images\vote\mctopsu.png" />
+    <Content Include="Content\Images\vote\topcraft.png" />
     <Content Include="Content\Images\ztn-logo.png" />
     <Content Include="Content\Images\ZTNTeam.png" />
     <Content Include="Content\jquery.jgrowl.css" />
@@ -434,6 +439,8 @@
     <Content Include="Views\Shared\_ServerMonitoring.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Shared\_TitleBox.cshtml" />
+    <Content Include="Views\Home\GameStart.cshtml" />
+    <Content Include="Views\Home\Vote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
