@@ -865,6 +865,31 @@ footer {
         margin-top: 30px;
         color: #ff0039;
     }
+
+    &-cart {
+        position: relative;
+        display: inline-block;
+        width: auto;
+        cursor: pointer;
+
+        &-image {
+            padding: 13px;
+            border: 1px solid #fff;
+
+            &:hover {
+                border: 1px solid #2780e3;
+            }
+        }
+
+        span {
+            position: absolute;
+            bottom: 15px;
+            right: 25px;
+            color: #fff;
+            font-size: 30px;
+            text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+        }
+    }
 }
 
 #slider {

@@ -14,6 +14,7 @@
     using BL.CQRS.Command;
     using Manager;
     using PagedList;
+    using DAL.Repository.Specification;
 
     #endregion
 
@@ -75,6 +76,19 @@
         public ActionResult ItemPartial(string gameId)
         {
             return PartialView("_ShopItemPartial", this.GetItem(gameId));
+        }
+
+        [Authorize]
+        public ActionResult Cart()
+        {
+            var items = new EntityListQueryHandler<PlayerItem, PlayerItemViewModel>(this.Container)
+                .Handle(new EntityListQuery<PlayerItem, PlayerItemViewModel>()
+                {
+                    Projector = this.Container.Resolve<IProjector<PlayerItem, PlayerItemViewModel>>(),
+                    Specification = new PlayerItemByPlayerNameSpec(this.Player.Name)
+                });
+
+            return View(items);
         }
 
         [Authorize(Roles = "Administrator")]

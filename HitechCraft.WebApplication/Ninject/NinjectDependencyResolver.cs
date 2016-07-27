@@ -140,6 +140,8 @@ namespace HitechCraft.WebApplication.Ninject
             this._kernel.Bind(typeof(IProjector<ShopItemEditViewModel, ShopItemUpdateCommand>)).To(typeof(ShopItemEditViewModelToShopItemUpdateCommandMapper));
             this._kernel.Bind(typeof(IProjector<ShopItemCategoryEditViewModel, ShopItemCategoryCreateCommand>)).To(typeof(ShopItemCategoryEditViewModelToShopItemCategoryCreateCommandMapper));
 
+            this._kernel.Bind(typeof(IProjector<PlayerItem, PlayerItemViewModel>)).To(typeof(PlayerItemToPlayerItemViewModelMapper));
+
             #endregion
 
             this._kernel.Bind(typeof(IUnitOfWork)).To(typeof(NHibernateUnitOfWork));

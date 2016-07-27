@@ -255,6 +255,7 @@
     <Compile Include="Mapper\News\NewsEditViewModelToNewsUpdateCommandMapper.cs" />
     <Compile Include="Mapper\News\NewsToNewsEditViewModelMapper.cs" />
     <Compile Include="Mapper\News\NewsToNewsViewModelMapper.cs" />
+    <Compile Include="Mapper\PlayerItem\PlayerItemToPlayerItemViewModelMapper.cs" />
     <Compile Include="Mapper\PlayerSession\PlayerSessionEditViewModelToPlayerSessionUpdateCommandMapper.cs" />
     <Compile Include="Mapper\PlayerSession\PlayerSessionToJsonSessionDataMapper.cs" />
     <Compile Include="Mapper\Player\PlayerSkinToPlayerSkinViewModelMapper.cs" />
@@ -305,6 +306,7 @@
     <Compile Include="Models\News\NewsViewModel.cs" />
     <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\PlayerSession\PlayerSessionEditViewModel.cs" />
+    <Compile Include="Models\PlayerItem\PlayerItemViewModel.cs" />
     <Compile Include="Models\Player\PlayerProfileViewModel.cs" />
     <Compile Include="Models\Player\RoleViewModel.cs" />
     <Compile Include="Models\Player\UserSkinViewModel.cs" />
@@ -471,6 +473,7 @@
     <Content Include="Views\Shop\_ShopItemPartial.cshtml" />
     <Content Include="Views\Shop\EditItem.cshtml" />
     <Content Include="Views\Shop\BuyItem.cshtml" />
+    <Content Include="Views\Shop\Cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
