@@ -82,7 +82,55 @@
                 return transactionId;
             }
         }
-        
+
+        [HttpPost]
+        public JsonResult ExchangeRubToGont(int count)
+        {
+            try
+            {
+                this.UpdateGonts(Math.Round(count / this.RubToGont));
+                this.UpdateRubles(-count);
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    status = JsonStatus.NO,
+                    message = e.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new
+            {
+                status = JsonStatus.YES,
+                message = "Обмен успешно осуществлен!"
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult ExchangeGontToRub(int count)
+        {
+            try
+            {
+                this.UpdateRubles(Math.Round(count / this.GontToRub, 2));
+                this.UpdateGonts(-count);
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    status = JsonStatus.NO,
+                    message = e.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new
+            {
+                status = JsonStatus.YES,
+                message = "Обмен успешно осуществлен!"
+            }, JsonRequestBehavior.AllowGet);
+        }
+
         #region IK Actions
 
         /// <summary>

@@ -293,7 +293,8 @@ footer {
 
 .wrapper {
   margin-top: 20px;
-  min-height: 100%; }
+  min-height: 100%;
+  margin-bottom: 50px; }
   .wrapper .content {
     margin: 0 -15px; }
 
@@ -591,4 +592,45 @@ footer {
   cursor: pointer; }
   .votes-tops img:hover {
     border: 1px solid #ddd; }
+
+.item {
+  border: 1px solid #ddd;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 30px; }
+  .item:hover {
+    border: 1px solid #2780e3; }
+  .item-info {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding-bottom: 25px; }
+    .item-info img {
+      max-width: 170px;
+      margin: 19px 0; }
+    .item-info p {
+      padding: 0 25px;
+      text-align: justify; }
+    .item-info a {
+      margin-bottom: 10px;
+      width: 75%; }
+    .item-info .price {
+      display: block;
+      margin: 14px 0;
+      font-size: 20px;
+      font-weight: bold; }
+  .item-filter {
+    margin-bottom: 45px; }
+  .item h3 {
+    margin: 0;
+    padding: 14px 0; }
+  .item img {
+    max-width: 100px; }
+  .item .price {
+    display: block;
+    margin: 18px 0; }
+  .item-administration {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin-bottom: 20px; }
 

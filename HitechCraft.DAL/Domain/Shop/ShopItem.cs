@@ -42,6 +42,11 @@
         /// <summary>
         /// Item category
         /// </summary>
+        public virtual Modification Modification { get; set; }
+
+        /// <summary>
+        /// Item category
+        /// </summary>
         public virtual ShopItemCategory ItemCategory { get; set; }
 
         #endregion

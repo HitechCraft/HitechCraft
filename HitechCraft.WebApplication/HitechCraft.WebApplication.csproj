@@ -230,6 +230,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\VoteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -261,6 +262,12 @@
     <Compile Include="Mapper\Server\ServerCreateCommandToServerMapper.cs" />
     <Compile Include="Mapper\Server\ServerToServerEditViewModelMapper.cs" />
     <Compile Include="Mapper\Server\ServerToServerViewModelMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemCategoryEditViewModelToShopItemCategoryCreateCommandMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemCategoryToShopItemCategoryViewModelMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemCategoryToShopItemCategoryEditViewModelMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemEditViewModelToShopItemCreateCommandMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemToShopItemViewModelMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemToShopItemEditViewModelMapper.cs" />
     <Compile Include="Models\Ban\BanEditViewModel.cs" />
     <Compile Include="Models\Ban\BanUnbanViewModel.cs" />
     <Compile Include="Models\Ban\BanViewModel.cs" />
@@ -299,6 +306,10 @@
     <Compile Include="Models\Server\ServerEditViewModel.cs" />
     <Compile Include="Models\Server\ServerModificationViewModel.cs" />
     <Compile Include="Models\Server\ServerViewModel.cs" />
+    <Compile Include="Models\Shop\ShopItemCategoryViewModel.cs" />
+    <Compile Include="Models\Shop\ShopItemCategoryEditViewModel.cs" />
+    <Compile Include="Models\Shop\ShopItemViewModel.cs" />
+    <Compile Include="Models\Shop\ShopItemEditViewModel.cs" />
     <Compile Include="Ninject\Current\CurrentUser.cs" />
     <Compile Include="Ninject\Current\ICurrentUser.cs" />
     <Compile Include="Ninject\NinjectDependencyResolver.cs" />
@@ -443,6 +454,9 @@
     <Content Include="Views\Home\GameStart.cshtml" />
     <Content Include="Views\Home\Vote.cshtml" />
     <Content Include="Views\Vote\Index.cshtml" />
+    <Content Include="Views\Shop\CreateItem.cshtml" />
+    <Content Include="Views\Shop\CreateItemCategory.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -497,7 +511,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58243</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:58243/</IISUrl>
+          <IISUrl>http://localhost:54345/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

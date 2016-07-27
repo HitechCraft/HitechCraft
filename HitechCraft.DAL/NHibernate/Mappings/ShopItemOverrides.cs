@@ -30,6 +30,9 @@
 
             mapping.Map(x => x.Image);
 
+            mapping.References(x => x.Modification)
+                .Column("Modification");
+
             mapping.References(x => x.ItemCategory)
                 .Column("Category");
         }
