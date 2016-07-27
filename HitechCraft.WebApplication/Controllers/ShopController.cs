@@ -1,4 +1,8 @@
-﻿using HitechCraft.BL.CQRS.Command;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Security;
+using HitechCraft.BL.CQRS.Command;
+using HitechCraft.WebApplication.Manager;
 
 namespace HitechCraft.WebApplication.Controllers
 {
@@ -23,22 +27,10 @@ namespace HitechCraft.WebApplication.Controllers
                 {
                     Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
                 });
+            
+            ViewBag.Mods = this.GetMods();
 
-            var mods = new EntityListQueryHandler<Modification, ModificationViewModel>(this.Container)
-                .Handle(new EntityListQuery<Modification, ModificationViewModel>()
-                {
-                    Projector = this.Container.Resolve<IProjector<Modification, ModificationViewModel>>()
-                });
-
-            ViewBag.Mods = mods;
-
-            var categories = new EntityListQueryHandler<ShopItemCategory, ShopItemCategoryViewModel>(this.Container)
-                .Handle(new EntityListQuery<ShopItemCategory, ShopItemCategoryViewModel>()
-                {
-                    Projector = this.Container.Resolve<IProjector<ShopItemCategory, ShopItemCategoryViewModel>>()
-                });
-
-            ViewBag.Categories = categories;
+            ViewBag.Categories = this.GetCategories();
 
             return View(vm);
         }
@@ -46,6 +38,18 @@ namespace HitechCraft.WebApplication.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult CreateItem()
         {
+            ViewBag.Mods = this.GetMods().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            });
+
+            ViewBag.Categories = this.GetCategories().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            });
+
             return View();
         }
 
@@ -55,10 +59,25 @@ namespace HitechCraft.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                var uploadImage = Request.Files["uploadNewsImage"];
+                vm.Image = ImageManager.GetImageBytes(uploadImage);
+
                 this.CommandExecutor.Execute(this.Project<ShopItemEditViewModel, ShopItemCreateCommand>(vm));
 
                 return RedirectToAction("Index");
             }
+
+            ViewBag.Mods = this.GetMods().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            });
+
+            ViewBag.Categories = this.GetCategories().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            });
 
             return View();
         }
@@ -91,5 +110,37 @@ namespace HitechCraft.WebApplication.Controllers
 
             return View();
         }
+
+        #region Private Methods
+
+        private ICollection<ModificationViewModel> GetMods()
+        {
+            return new EntityListQueryHandler<Modification, ModificationViewModel>(this.Container)
+                .Handle(new EntityListQuery<Modification, ModificationViewModel>()
+                {
+                    Projector = this.Container.Resolve<IProjector<Modification, ModificationViewModel>>()
+                });
+        }
+
+        private ICollection<ShopItemCategoryViewModel> GetCategories()
+        {
+            return new EntityListQueryHandler<ShopItemCategory, ShopItemCategoryViewModel>(this.Container)
+                .Handle(new EntityListQuery<ShopItemCategory, ShopItemCategoryViewModel>()
+                {
+                    Projector = this.Container.Resolve<IProjector<ShopItemCategory, ShopItemCategoryViewModel>>()
+                });
+        }
+
+
+        private ICollection<ShopItemViewModel> GetItems()
+        {
+            return new EntityListQueryHandler<ShopItem, ShopItemViewModel>(this.Container)
+                .Handle(new EntityListQuery<ShopItem, ShopItemViewModel>()
+                {
+                    Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
+                });
+        }
+
+        #endregion
     }
 }

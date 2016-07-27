@@ -16,7 +16,7 @@
 
         [Required]
         public int Price { get; set; }
-
+        
         public int ModificationId { get; set; }
 
         public int CategoryId { get; set; }
