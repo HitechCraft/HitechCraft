@@ -1,10 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web.Security;
-using HitechCraft.BL.CQRS.Command;
-using HitechCraft.WebApplication.Manager;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
     using System.Web.Mvc;
     using BL.CQRS.Query;
@@ -12,9 +6,16 @@ namespace HitechCraft.WebApplication.Controllers
     using Common.Projector;
     using DAL.Domain;
     using Models;
+    using System.Collections.Generic;
+    using System.Linq;
+    using BL.CQRS.Command;
+    using Manager;
+    using PagedList;
 
     public class ShopController : BaseController
     {
+        public int ItemsOnPage => 12;
+
         public ShopController(IContainer container) : base(container)
         {
         }
@@ -33,6 +34,13 @@ namespace HitechCraft.WebApplication.Controllers
             ViewBag.Categories = this.GetCategories();
 
             return View(vm);
+        }
+
+
+        [HttpGet]
+        public ActionResult ItemPartialList(int? page)
+        {
+            return PartialView("_ShopItemsPartial", this.GetItemList(page));
         }
 
         [Authorize(Roles = "Administrator")]
@@ -139,6 +147,19 @@ namespace HitechCraft.WebApplication.Controllers
                 {
                     Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
                 });
+        }
+
+        private IPagedList<ShopItemViewModel> GetItemList(int? page)
+        {
+            int currentPage = page ?? 1;
+
+            var vm = new EntityListQueryHandler<ShopItem, ShopItemViewModel>(this.Container)
+                .Handle(new EntityListQuery<ShopItem, ShopItemViewModel>()
+                {
+                    Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
+                }).OrderBy(x => x.GameId);
+
+            return vm.ToPagedList(currentPage, this.ItemsOnPage);
         }
 
         #endregion

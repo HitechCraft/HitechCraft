@@ -72,55 +72,20 @@
     </div>
     <div class="col-md-9">
         <div id="item-list">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="item">
-                        <h3>Item 1</h3>
-                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text" />
-                        <span class="price">Цена: 5435 Gonts</span>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="item">
-                        <h3>Item 2</h3>
-                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text" />
-                        <span class="price">Цена: 5435 Gonts</span>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="item">
-                        <h3>Item 3</h3>
-                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text" />
-                        <span class="price">Цена: 5435 Gonts</span>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="item">
-                        <h3>Item 4</h3>
-                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text" />
-                        <span class="price">Цена: 5435 Gonts</span>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="item">
-                        <h3>Item 3</h3>
-                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text" />
-                        <span class="price">Цена: 5435 Gonts</span>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="item">
-                        <h3>Item 4</h3>
-                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text" />
-                        <span class="price">Цена: 5435 Gonts</span>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
+    $(function() {
+        LoadItems(1);
+    });
+
+    function FilterItems(currentPage) {
+        LoadItems(currentPage);
+    }
+
     function setMod(id, name) {
         $('#mod').html('');
         $('#mod').html(name);
@@ -133,5 +98,13 @@
         $('#category').html(name);
 
         $('input#categoryId').val(id);
+    }
+
+    function LoadItems(currentPage) {
+        $.get("@Url.Action("ItemPartialList", "Shop")", { page: currentPage })
+        .done(function (data) {
+            $('#item-list').html('');
+            $('#item-list').html(data);
+        });
     }
 </script>

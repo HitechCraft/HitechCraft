@@ -1,0 +1,27 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<HitechCraft.WebApplication.Models.ShopItemViewModel>
+
+<div class="row">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div class="item">
+                    <h3>@item.Name</h3>
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.Image)" alt="@item.Description" />
+                    <span class="price">Цена: @item.Price Gont(s)</span>
+                </div>
+            </div>
+        }
+        <br/>
+        if (Model.Count > 12)
+        {
+            @Html.PagedListPager(Model, page => "javascript:FilterItems(" + page + ")")
+        }
+    }
+    else
+    {
+        <h3>Нет предметов</h3>
+    }
+</div>
