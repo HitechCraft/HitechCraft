@@ -1,5 +1,5 @@
 ﻿@model HitechCraft.WebApplication.Models.ShopItemViewModel
-    
+
 <h2>@Model.Name</h2>
 <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="@Model.Description" />
 <p>
@@ -13,8 +13,7 @@
 {
 
     @Html.ActionLink("Изменить", "EditItem", "Shop", null, new { @class = "btn btn-warning" })
-    @Html.ActionLink("Удалить", "DeleteItem", "Shop", null, new { @class = "btn btn-danger" })
-    <a onclick="deleteItem(@Model.GameId)">Удалить</a>
+    <a class="btn btn-danger" onclick="deleteItem(@Model.GameId)">Удалить</a>
 }
 
 @Html.ActionLink("Купить", "BuyItem", "Shop", null, new { @class = "btn btn-primary" })
@@ -31,6 +30,10 @@
                 } else {
                     growlError(data.message);
                 }
+
+                setTimeout(function() {
+                    location.reload();
+                }, 2000);
             });
         }
     }

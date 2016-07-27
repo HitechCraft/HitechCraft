@@ -87,8 +87,10 @@
     <Compile Include="CQRS\Command\Server\ServerUpdateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Server\ServerCreateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemCategoryCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemRemoveCommand.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemCreateCommand.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemCategoryCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemRemoveCommandHandler.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemCreateCommandHandler.cs" />
     <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQuery.cs" />
     <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQueryHandler.cs" />

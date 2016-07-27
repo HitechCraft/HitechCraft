@@ -97,14 +97,21 @@ namespace HitechCraft.WebApplication.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult CreateItem(ShopItemEditViewModel vm)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var uploadImage = Request.Files["uploadShopItemImage"];
-                vm.Image = ImageManager.GetImageBytes(uploadImage);
+                if (ModelState.IsValid)
+                {
+                    var uploadImage = Request.Files["uploadShopItemImage"];
+                    vm.Image = ImageManager.GetImageBytes(uploadImage);
 
-                this.CommandExecutor.Execute(this.Project<ShopItemEditViewModel, ShopItemCreateCommand>(vm));
+                    this.CommandExecutor.Execute(this.Project<ShopItemEditViewModel, ShopItemCreateCommand>(vm));
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.Message;
             }
 
             ViewBag.Mods = this.GetMods().Select(x => new SelectListItem()
@@ -119,7 +126,7 @@ namespace HitechCraft.WebApplication.Controllers
                 Value = x.Id.ToString()
             });
 
-            return View();
+            return View(vm);
         }
 
         [Authorize(Roles = "Administrator")]
@@ -146,7 +153,6 @@ namespace HitechCraft.WebApplication.Controllers
 
                 return RedirectToAction("CreateItemCategory");
             }
-
 
             return View();
         }

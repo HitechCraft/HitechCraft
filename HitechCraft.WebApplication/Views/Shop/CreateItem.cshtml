@@ -5,7 +5,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-    @using (Html.BeginForm("CreateItem", "Shop", FormMethod.Post, new { @class = "row", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("CreateItem", "Shop", FormMethod.Post, new { @class = "row", enctype = "multipart/form-data", id = "form-create-item" }))
     {
         <div class="col-md-6">
             @Html.AntiForgeryToken()
@@ -63,7 +63,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
+                        <input id="create-item" type="button" value="Create" class="btn btn-default" />
                     </div>
                 </div>
             </div>
@@ -84,6 +84,22 @@
 </div>
 
 <script type="text/javascript">
+    $(function() {
+        if ('@ViewBag.Error' !== '') {
+            growlError('@ViewBag.Error');
+        }
+    });
+
+    $('#create-item')
+        .on('click',
+            function () {
+                if ($('#uploadShopItemImage').val() !== '') {
+                    $('#form-create-item').submit();
+                } else {
+                    growlWarning("Необходимо выбрать изображение");
+                }
+            });
+
     function readURL(input) {
 
         if (input.files && input.files[0]) {
