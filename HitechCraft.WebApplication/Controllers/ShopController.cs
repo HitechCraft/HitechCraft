@@ -157,6 +157,80 @@ namespace HitechCraft.WebApplication.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
+        public ActionResult EditItem(string gameId)
+        {
+            ShopItemEditViewModel vm;
+
+            try
+            {
+                vm = new EntityQueryHandler<ShopItem, ShopItemEditViewModel>(this.Container)
+                   .Handle(new EntityQuery<ShopItem, ShopItemEditViewModel>()
+                   {
+                       Id = gameId,
+                       Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemEditViewModel>>()
+                   });
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+            
+            ViewBag.Mods = this.GetMods().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+                Selected = (x.Id == vm.ModificationId)
+            });
+
+            ViewBag.Categories = this.GetCategories().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+                Selected = (x.Id == vm.CategoryId)
+            });
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult EditItem(ShopItemEditViewModel vm)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var uploadImage = Request.Files["uploadShopItemImage"];
+                    if(uploadImage != null && uploadImage.ContentLength > 0) vm.Image = ImageManager.GetImageBytes(uploadImage);
+
+                    this.CommandExecutor.Execute(this.Project<ShopItemEditViewModel, ShopItemUpdateCommand>(vm));
+
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = e.Message;
+            }
+            
+            ViewBag.Mods = this.GetMods().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+                Selected = (x.Id == vm.ModificationId)
+            });
+
+            ViewBag.Categories = this.GetCategories().Select(x => new SelectListItem()
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+                Selected = (x.Id == vm.CategoryId)
+            });
+
+            return View(vm);
+        }
+
         [HttpPost]
         [Authorize(Roles = "Administrator")]
         public JsonResult DeleteItem(string gameId)

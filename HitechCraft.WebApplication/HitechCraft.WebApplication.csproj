@@ -269,6 +269,7 @@
     <Compile Include="Mapper\Shop\ShopItemCategoryEditViewModelToShopItemCategoryCreateCommandMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemCategoryToShopItemCategoryViewModelMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemCategoryToShopItemCategoryEditViewModelMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemEditViewModelToShopItemUpdateCommandMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemEditViewModelToShopItemCreateCommandMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemToShopItemViewModelMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemToShopItemEditViewModelMapper.cs" />
@@ -464,6 +465,7 @@
     <Content Include="Views\Base\DisplayTemplates\Double.cshtml" />
     <Content Include="Views\Shop\_ShopItemListPartial.cshtml" />
     <Content Include="Views\Shop\_ShopItemPartial.cshtml" />
+    <Content Include="Views\Shop\EditItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

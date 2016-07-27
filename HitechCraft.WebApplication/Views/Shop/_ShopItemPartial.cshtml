@@ -12,7 +12,7 @@
 @if (User.IsInRole("Administrator"))
 {
 
-    @Html.ActionLink("Изменить", "EditItem", "Shop", null, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Изменить", "EditItem", "Shop", new { gameId = Model.GameId }, new { @class = "btn btn-warning" })
     <a class="btn btn-danger" onclick="deleteItem(@Model.GameId)">Удалить</a>
 }
 

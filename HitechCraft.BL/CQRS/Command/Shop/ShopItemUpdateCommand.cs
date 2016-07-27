@@ -1,22 +1,23 @@
-﻿namespace HitechCraft.WebApplication.Models
+﻿namespace HitechCraft.BL.CQRS.Command
 {
-    using System.ComponentModel.DataAnnotations;
+    #region Using Directives
+    
+    using Common.Models.Enum;
 
-    public class ShopItemEditViewModel
+    #endregion
+
+    public class ShopItemUpdateCommand
     {
         public string GameId { get; set; }
-        
-        [Required]
+
         public string Name { get; set; }
 
-        [Required]
         public string Description { get; set; }
-        
+
         public byte[] Image { get; set; }
 
-        [Required]
         public float Price { get; set; }
-        
+
         public int ModificationId { get; set; }
 
         public int CategoryId { get; set; }
