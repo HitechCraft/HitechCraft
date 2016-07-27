@@ -13,6 +13,7 @@
         {
         }
         
+        [HttpPost]
         public ActionResult VoteOnTopcraft(string timestamp, string username, string signature)
         {
             if (signature.ToLower() == HashManager.GetSha1Hash(username + timestamp + this.TopCraftSecret))

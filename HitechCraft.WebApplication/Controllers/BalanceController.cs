@@ -1,12 +1,13 @@
 ﻿namespace HitechCraft.WebApplication.Controllers
 {
+    #region Using Directives
+
     using System.Web.Mvc;
     using Common.DI;
     using System;
     using Common.Models.Enum;
     using DAL.Domain;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using Common.Core;
     using Manager;
     using Models;
@@ -15,6 +16,8 @@
     using Common.Projector;
     using DAL.Repository.Specification;
     using BL.CQRS.Command;
+
+    #endregion
 
     public class BalanceController : BaseController
     {
@@ -38,6 +41,7 @@
         {
         }
 
+        [Authorize]
         // GET: Balance
         public ActionResult Index()
         {
@@ -50,7 +54,6 @@
             return View();
         }
 
-        [Authorize]
         public string CreateOrGetTransaction()
         {
             try
@@ -79,55 +82,7 @@
                 return transactionId;
             }
         }
-
-        [HttpPost]
-        public JsonResult ExchangeRubToGont(int count)
-        {
-            try
-            {
-                this.UpdateGonts(Math.Round(count / this.RubToGont));
-                this.UpdateRubles(-count);
-            }
-            catch (Exception e)
-            {
-                return Json(new
-                {
-                    status = JsonStatus.NO,
-                    message = e.Message
-                }, JsonRequestBehavior.AllowGet);
-            }
-
-            return Json(new
-            {
-                status = JsonStatus.YES,
-                message = "Обмен успешно осуществлен!"
-            }, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public JsonResult ExchangeGontToRub(int count)
-        {
-            try
-            {
-                this.UpdateRubles(Math.Round(count / this.GontToRub, 2));
-                this.UpdateGonts(-count);
-            }
-            catch (Exception e)
-            {
-                return Json(new
-                {
-                    status = JsonStatus.NO,
-                    message = e.Message
-                }, JsonRequestBehavior.AllowGet);
-            }
-
-            return Json(new
-            {
-                status = JsonStatus.YES,
-                message = "Обмен успешно осуществлен!"
-            }, JsonRequestBehavior.AllowGet);
-        }
-
+        
         #region IK Actions
 
         /// <summary>
@@ -143,7 +98,7 @@
             {
                 this.MoneyEnrollment(CurrencyType.Rub, float.Parse(pm.ik_am));
             }
-
+            
             return null;
         }
 
