@@ -284,6 +284,14 @@ footer {
   width: 150px;
   height: 150px; }
 
+.ztn-about img {
+  max-width: 100%;
+  margin-right: 11px; }
+
+.ztn-about p {
+  text-align: justify;
+  text-indent: 20px; }
+
 .overall {
   text-align: center;
   margin: 30px; }

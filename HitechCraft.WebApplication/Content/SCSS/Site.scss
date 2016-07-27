@@ -291,6 +291,18 @@ footer {
         width: 150px;
         height: 150px;
     }
+
+    &-about {
+        img {
+            max-width: 100%;
+            margin-right: 11px;
+        }
+
+        p {
+            text-align: justify;
+            text-indent: 20px;
+        }
+    }
 }
 
 
