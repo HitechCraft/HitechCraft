@@ -5,61 +5,69 @@
 
 <h2 class="page-title">@ViewBag.Title</h2>
 
-@using (Html.BeginForm())
-{
+<form action="" method="post" id="shop-item-filter">
     <div class="form-inline item-filter item-administration">
-        <input type="text" placeholder="Поиск предметов" class="form-control" style="width:50%"/>
+        <input type="text" name="text" id="text" placeholder="Поиск предметов" class="form-control" style="width:50%" />
         <div class="btn-group">
+            <input name="modId" id="modId" type="hidden" />
             <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                Модификация
+                <span id="mod">Модификация</span>
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="#">Vanil</a></li>
-                <li><a href="#">Industrial Craft 2</a></li>
-                <li><a href="#">Build Craft</a></li>
+                @if (ViewBag.Mods != null)
+                {
+                    foreach (var mod in ViewBag.Mods)
+                    {
+                        <li><a href="#" onclick="javascript:setMod(@mod.Id, '@mod.Name');">@mod.Name</a></li>
+                    }
+                }
             </ul>
         </div>
 
         <div class="btn-group">
+            <input name="categoryId" id="categoryId" type="hidden" />
             <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                Категория
+                <span id="category">Категория</span>
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a href="#">Блоки</a></li>
-                <li><a href="#">Предметы</a></li>
-                <li><a href="#">Инструменты</a></li>
-                <li><a href="#">Еда</a></li>
+                @if (ViewBag.Categories != null)
+                {
+                    foreach (var category in ViewBag.Categories)
+                    {
+                        <li><a href="#" onclick="javascript:setCategory(@category.Id, '@category.Name');">@category.Name</a></li>
+                    }
+                }
             </ul>
         </div>
 
         <a href="#" class="btn btn-primary">Поиск</a>
     </div>
-}
+</form>
 
 <div class="item-administration">
     <div class="btn-group-justified">
-        <a href="#" class="btn btn-success">Добавить предмет</a>
+        @Html.ActionLink("Добавить предмет", "CreateItem", "Shop", null, new { @class = "btn btn-success" })
         @Html.ActionLink("Добавить категорию", "CreateItemCategory", "Shop", null, new { @class = "btn btn-primary" })
-        <a href="#" class="btn btn-success">Добавить модификацию</a>
+        @Html.ActionLink("Добавить модификацию", "Create", "Modification", null, new { @class = "btn btn-success" })
     </div>
 </div>
 <div class="row">
     <div class="col-md-3">
         <div id="item" class="item-info">
             <h2>Item name</h2>
-            <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text"/>
+            <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text" />
             <p>
                 Item description. This is a best item in the world. Buy them for low price. U can craft something with that item. Good luck, have fun!)
             </p>
             <span class="price">
                 Цена: 5435 Gonts
             </span>
-            <a href="#" class="btn btn-warning">Изменить</a><br/>
-            <a href="#" class="btn btn-warning">Удалить</a><br/>
-            <a href="#" class="btn btn-primary">Купить</a><br/>
-            <a href="#" class="btn btn-default">Дерево крафтов</a><br/>
+            <a href="#" class="btn btn-warning">Изменить</a><br />
+            <a href="#" class="btn btn-warning">Удалить</a><br />
+            <a href="#" class="btn btn-primary">Купить</a><br />
+            <a href="#" class="btn btn-default">Дерево крафтов</a><br />
         </div>
     </div>
     <div class="col-md-9">
@@ -68,28 +76,28 @@
                 <div class="col-md-3">
                     <div class="item">
                         <h3>Item 1</h3>
-                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text"/>
+                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text" />
                         <span class="price">Цена: 5435 Gonts</span>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="item">
                         <h3>Item 2</h3>
-                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text"/>
+                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text" />
                         <span class="price">Цена: 5435 Gonts</span>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="item">
                         <h3>Item 3</h3>
-                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text"/>
+                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text" />
                         <span class="price">Цена: 5435 Gonts</span>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="item">
                         <h3>Item 4</h3>
-                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text"/>
+                        <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text" />
                         <span class="price">Цена: 5435 Gonts</span>
                     </div>
                 </div>
@@ -111,3 +119,19 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function setMod(id, name) {
+        $('#mod').html('');
+        $('#mod').html(name);
+
+        $('input#modId').val(id);
+    }
+
+    function setCategory(id, name) {
+        $('#category').html('');
+        $('#category').html(name);
+
+        $('input#categoryId').val(id);
+    }
+</script>
