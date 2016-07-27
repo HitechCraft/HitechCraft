@@ -19,6 +19,8 @@
         public static AutoMappingsContainer AutoMappings(this MappingConfiguration mapConfig, AutomappingHelper autoMapHelper)
         {
             return mapConfig.AutoMappings
+                .Add(AutoMap.AssemblyOf<AuthLog>(autoMapHelper)
+                    .UseOverridesFromAssemblyOf<AuthLogOverrides>())
                 .Add(AutoMap.AssemblyOf<Ban>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<BanOverrides>())
                 .Add(AutoMap.AssemblyOf<BanIp>(autoMapHelper)
