@@ -56,18 +56,7 @@
 <div class="row">
     <div class="col-md-3">
         <div id="item" class="item-info">
-            <h2>Item name</h2>
-            <img src="http://www.minecraftwiki.net/images/0/08/Iron_Block-Pre_Beta_1.9pre5.png" alt="Alternate Text" />
-            <p>
-                Item description. This is a best item in the world. Buy them for low price. U can craft something with that item. Good luck, have fun!)
-            </p>
-            <span class="price">
-                Цена: 5435 Gonts
-            </span>
-            <a href="#" class="btn btn-warning">Изменить</a><br />
-            <a href="#" class="btn btn-warning">Удалить</a><br />
-            <a href="#" class="btn btn-primary">Купить</a><br />
-            <a href="#" class="btn btn-default">Дерево крафтов</a><br />
+            <h3>Выберите<br/>предмет</h3>
         </div>
     </div>
     <div class="col-md-9">
@@ -105,6 +94,23 @@
         .done(function (data) {
             $('#item-list').html('');
             $('#item-list').html(data);
+        });
+    }
+
+    function LoadItem(id) {
+        $.get("@Url.Action("ItemPartial", "Shop")", { gameId: id })
+        .done(function (data) {
+            if (window.selectedItem) {
+                $('#' + window.selectedItem).removeClass('item-selected');
+            }
+
+            //Для отмены выбора предмета
+            window.selectedItem = 'item-' + id;
+
+            $('#item-' + id).addClass('item-selected');
+
+            $('#item').html('');
+            $('#item').html(data);
         });
     }
 </script>

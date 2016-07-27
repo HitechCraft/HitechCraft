@@ -35,12 +35,17 @@
 
             return View(vm);
         }
-
-
+        
         [HttpGet]
         public ActionResult ItemPartialList(int? page)
         {
-            return PartialView("_ShopItemsPartial", this.GetItemList(page));
+            return PartialView("_ShopItemListPartial", this.GetItemList(page));
+        }
+
+        [HttpGet]
+        public ActionResult ItemPartial(string gameId)
+        {
+            return PartialView("_ShopItemPartial", this.GetItem(gameId));
         }
 
         [Authorize(Roles = "Administrator")]
@@ -160,6 +165,16 @@
                 }).OrderBy(x => x.GameId);
 
             return vm.ToPagedList(currentPage, this.ItemsOnPage);
+        }
+
+        private ShopItemViewModel GetItem(string gameId)
+        {
+            return new EntityQueryHandler<ShopItem, ShopItemViewModel>(this.Container)
+                .Handle(new EntityQuery<ShopItem, ShopItemViewModel>()
+                {
+                    Id = gameId,
+                    Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
+                });
         }
 
         #endregion

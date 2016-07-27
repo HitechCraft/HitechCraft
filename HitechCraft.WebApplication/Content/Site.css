@@ -597,27 +597,36 @@ footer {
   border: 1px solid #ddd;
   text-align: center;
   cursor: pointer;
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  min-height: 230px; }
+  .item-selected {
+    border: 1px solid #3fb618 !important;
+    background-color: #caeabf; }
   .item:hover {
     border: 1px solid #2780e3; }
   .item-info {
     text-align: center;
     border: 1px solid #ddd;
-    padding-bottom: 25px; }
+    padding-bottom: 25px;
+    min-height: 520px;
+    margin-bottom: 30px; }
     .item-info img {
       max-width: 170px;
       margin: 19px 0; }
     .item-info p {
-      padding: 0 25px;
-      text-align: justify; }
+      padding: 0 25px; }
     .item-info a {
       margin-bottom: 10px;
       width: 75%; }
+    .item-info h3 {
+      margin-top: 200px; }
     .item-info .price {
       display: block;
       margin: 14px 0;
       font-size: 20px;
       font-weight: bold; }
+  .item h4 {
+    min-height: 40px; }
   .item-filter {
     margin-bottom: 45px; }
   .item h3 {

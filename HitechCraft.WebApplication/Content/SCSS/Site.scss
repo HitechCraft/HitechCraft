@@ -762,7 +762,13 @@ footer {
     border: 1px solid #ddd;
     text-align: center;
     cursor: pointer;
-    margin-bottom:30px;
+    margin-bottom: 30px;
+    min-height: 230px;
+
+    &-selected {
+        border: 1px solid #3fb618 !important;
+        background-color: #caeabf;
+    }
 
     &:hover {
         border: 1px solid #2780e3;
@@ -772,6 +778,8 @@ footer {
         text-align: center;
         border: 1px solid #ddd;
         padding-bottom: 25px;
+        min-height: 520px;
+        margin-bottom: 30px;
 
         img {
             max-width: 170px;
@@ -780,7 +788,6 @@ footer {
 
         p {
             padding: 0 25px;
-            text-align: justify;
         }
 
         a {
@@ -788,12 +795,21 @@ footer {
             width: 75%;
         }
 
+        h3 {
+            margin-top: 200px;
+        }
+
+
         .price {
             display: block;
             margin: 14px 0;
             font-size: 20px;
             font-weight: bold;
         }
+    }
+
+    h4 {
+        min-height: 40px;
     }
 
     &-filter {

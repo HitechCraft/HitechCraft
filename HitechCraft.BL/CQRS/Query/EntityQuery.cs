@@ -10,7 +10,7 @@
 
     public class EntityQuery<TEntity, TResult> : IQuery<TResult> where TEntity : BaseEntity<TEntity>
     {
-        public int Id { get; set; }
+        public object Id { get; set; }
 
         public IProjector<TEntity, TResult> Projector { get; set; }
     }

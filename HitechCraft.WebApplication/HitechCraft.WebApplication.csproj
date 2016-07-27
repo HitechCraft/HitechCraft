@@ -462,7 +462,8 @@
     <Content Include="Views\Shop\CreateItemCategory.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Base\DisplayTemplates\Double.cshtml" />
-    <Content Include="Views\Shop\_ShopItemsPartial.cshtml" />
+    <Content Include="Views\Shop\_ShopItemListPartial.cshtml" />
+    <Content Include="Views\Shop\_ShopItemPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
