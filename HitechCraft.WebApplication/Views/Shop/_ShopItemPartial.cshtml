@@ -14,8 +14,24 @@
 
     @Html.ActionLink("Изменить", "EditItem", "Shop", null, new { @class = "btn btn-warning" })
     @Html.ActionLink("Удалить", "DeleteItem", "Shop", null, new { @class = "btn btn-danger" })
+    <a onclick="deleteItem(@Model.GameId)">Удалить</a>
 }
 
 @Html.ActionLink("Купить", "BuyItem", "Shop", null, new { @class = "btn btn-primary" })
 
-<!--<a href="#" class="btn btn-default">Дерево крафтов</a><br />-->
+<!--<a href="#" class="btn btn-default">Дерево крафтов</a><br/>-->
+
+<script type="text/javascript">
+    function deleteItem(id) {
+        if (confirm("Вы уверены что хотите удалить предмет?")) {
+            $.post("@Url.Action("DeleteItem", "Shop")", { gameId : id })
+            .done(function (data) {
+                if (data.status === "OK") {
+                    growlSuccess(data.message);
+                } else {
+                    growlError(data.message);
+                }
+            });
+        }
+    }
+</script>

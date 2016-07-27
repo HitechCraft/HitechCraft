@@ -2,6 +2,8 @@
 
 namespace HitechCraft.WebApplication.Controllers
 {
+    #region Using Directives
+
     using System.Web.Mvc;
     using BL.CQRS.Query;
     using Common.DI;
@@ -14,6 +16,8 @@ namespace HitechCraft.WebApplication.Controllers
     using Manager;
     using PagedList;
 
+    #endregion
+
     public class ShopController : BaseController
     {
         public int ItemsOnPage => 12;
@@ -21,6 +25,8 @@ namespace HitechCraft.WebApplication.Controllers
         public ShopController(IContainer container) : base(container)
         {
         }
+
+        #region Shop Actions
 
         // GET: Shop
         public ActionResult Index()
@@ -30,14 +36,14 @@ namespace HitechCraft.WebApplication.Controllers
                 {
                     Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
                 });
-            
+
             ViewBag.Mods = this.GetMods();
 
             ViewBag.Categories = this.GetCategories();
 
             return View(vm);
         }
-        
+
         [HttpGet]
         public ActionResult ItemPartialList(int? page, int? modId, int? categoryId, string filterText = null)
         {
@@ -144,6 +150,32 @@ namespace HitechCraft.WebApplication.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public JsonResult DeleteItem(string gameId)
+        {
+            try
+            {
+                if (gameId != String.Empty)
+                {
+                    this.CommandExecutor.Execute(new ShopItemRemoveCommand()
+                    {
+                        GameId = gameId
+                    });
+
+                    return Json(new { status = "OK", message = "Предмет успешно удален" });
+                }
+
+                return Json(new { status = "NO", message = "Ошибка удаления предмета" });
+            }
+            catch (Exception)
+            {
+                return Json(new { status = "NO", message = "Ошибка удаления предмета" });
+            }
+        }
+
+        #endregion
 
         #region Private Methods
 
