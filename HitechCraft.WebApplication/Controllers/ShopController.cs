@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using System;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     using System.Web.Mvc;
     using BL.CQRS.Query;
@@ -37,9 +39,28 @@
         }
         
         [HttpGet]
-        public ActionResult ItemPartialList(int? page)
+        public ActionResult ItemPartialList(int? page, int? modId, int? categoryId, string filterText = null)
         {
-            return PartialView("_ShopItemListPartial", this.GetItemList(page));
+            int currentPage = page ?? 1;
+
+            var itemList = this.GetItemList(currentPage);
+
+            if (modId != null)
+            {
+                itemList = itemList.Where(x => x.ModificationId == modId).ToPagedList(currentPage, this.ItemsOnPage);
+            }
+
+            if (categoryId != null)
+            {
+                itemList = itemList.Where(x => x.CategoryId == categoryId).ToPagedList(currentPage, this.ItemsOnPage);
+            }
+
+            if (!string.IsNullOrEmpty(filterText))
+            {
+                itemList = itemList.Where(x => x.Name.Contains(filterText) || x.Description.Contains(filterText)).ToPagedList(currentPage, this.ItemsOnPage);
+            }
+
+            return PartialView("_ShopItemListPartial", itemList);
         }
 
         [HttpGet]
@@ -154,17 +175,15 @@
                 });
         }
 
-        private IPagedList<ShopItemViewModel> GetItemList(int? page)
+        private IPagedList<ShopItemViewModel> GetItemList(int page)
         {
-            int currentPage = page ?? 1;
-
             var vm = new EntityListQueryHandler<ShopItem, ShopItemViewModel>(this.Container)
                 .Handle(new EntityListQuery<ShopItem, ShopItemViewModel>()
                 {
                     Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
                 }).OrderBy(x => x.GameId);
 
-            return vm.ToPagedList(currentPage, this.ItemsOnPage);
+            return vm.ToPagedList(page, this.ItemsOnPage);
         }
 
         private ShopItemViewModel GetItem(string gameId)

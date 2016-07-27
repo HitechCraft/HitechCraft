@@ -7,42 +7,47 @@
 
 <form action="" method="post" id="shop-item-filter">
     <div class="form-inline item-filter item-administration">
-        <input type="text" name="text" id="text" placeholder="Поиск предметов" class="form-control" style="width:50%" />
+        <input type="text" name="text" id="text" placeholder="Поиск предметов" class="form-control" style="width: 50%"/>
+        <span>Модификация</span>
         <div class="btn-group">
             <input name="modId" id="modId" type="hidden" />
             <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span id="mod">Модификация</span>
+                <span id="mod">Не выбрано</span>
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
+                <li><a onclick="javascript:setMod(0, 'Не выбрано');">Не выбрано</a></li>
                 @if (ViewBag.Mods != null)
                 {
                     foreach (var mod in ViewBag.Mods)
                     {
-                        <li><a href="#" onclick="javascript:setMod(@mod.Id, '@mod.Name');">@mod.Name</a></li>
+                        <li><a onclick="javascript:setMod(@mod.Id, '@mod.Name');">@mod.Name</a></li>
                     }
                 }
             </ul>
         </div>
+
+        <span>Категория</span>
 
         <div class="btn-group">
             <input name="categoryId" id="categoryId" type="hidden" />
             <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span id="category">Категория</span>
+                <span id="category">Не выбрано</span>
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
+                <li><a onclick="javascript:setMod(0, 'Не выбрано');">Не выбрано</a></li>
                 @if (ViewBag.Categories != null)
                 {
                     foreach (var category in ViewBag.Categories)
                     {
-                        <li><a href="#" onclick="javascript:setCategory(@category.Id, '@category.Name');">@category.Name</a></li>
+                        <li><a onclick="javascript:setCategory(@category.Id, '@category.Name');">@category.Name</a></li>
                     }
                 }
             </ul>
         </div>
 
-        <a href="#" class="btn btn-primary">Поиск</a>
+        <a id="filter-items" class="btn btn-primary">Поиск</a>
     </div>
 </form>
 
@@ -67,12 +72,24 @@
 </div>
 
 <script type="text/javascript">
+    
     $(function() {
         LoadItems(1);
     });
 
+    $('#filter-items')
+        .on('click',
+            function() {
+                FilterItems(null);
+            });
+
     function FilterItems(currentPage) {
-        LoadItems(currentPage);
+
+        var text = $('input#text').val();
+        var mod = $('input#modId').val();
+        var category = $('input#categoryId').val();
+
+        LoadItems(currentPage, mod, category, text);
     }
 
     function setMod(id, name) {
@@ -89,28 +106,28 @@
         $('input#categoryId').val(id);
     }
 
-    function LoadItems(currentPage) {
-        $.get("@Url.Action("ItemPartialList", "Shop")", { page: currentPage })
-        .done(function (data) {
-            $('#item-list').html('');
-            $('#item-list').html(data);
-        });
+    function LoadItems(currentPage, modid, categoryid, text) {
+        $.get("@Url.Action("ItemPartialList", "Shop")", { page: currentPage, modId: modid, categoryId: categoryid, filterText: text })
+            .done(function (data) {
+                $('#item-list').html('');
+                $('#item-list').html(data);
+            });
     }
 
     function LoadItem(id) {
         $.get("@Url.Action("ItemPartial", "Shop")", { gameId: id })
-        .done(function (data) {
-            if (window.selectedItem) {
-                $('#' + window.selectedItem).removeClass('item-selected');
-            }
+            .done(function (data) {
+                if (window.selectedItem) {
+                    $('#' + window.selectedItem).removeClass('item-selected');
+                }
 
-            //Для отмены выбора предмета
-            window.selectedItem = 'item-' + id;
+                //Для отмены выбора предмета
+                window.selectedItem = 'item-' + id;
 
-            $('#item-' + id).addClass('item-selected');
+                $('#item-' + id).addClass('item-selected');
 
-            $('#item').html('');
-            $('#item').html(data);
-        });
+                $('#item').html('');
+                $('#item').html(data);
+            });
     }
 </script>

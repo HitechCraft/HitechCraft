@@ -629,6 +629,8 @@ footer {
     min-height: 40px; }
   .item-filter {
     margin-bottom: 45px; }
+    .item-filter span {
+      margin: 0 5px 0 20px; }
   .item h3 {
     margin: 0;
     padding: 14px 0; }
