@@ -14,6 +14,7 @@ namespace HitechCraft.WebApplication
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.fileupload*",
                         "~/Scripts/jquery.ui*",
+                        "~/Scripts/jquery-ui*",
                         "~/Scripts/jgrowl.alerts.js",
                         "~/Scripts/skin2DRender.js"));
 
@@ -35,7 +36,8 @@ namespace HitechCraft.WebApplication
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/jquery.jgrowl.css"));
+                      "~/Content/jquery.jgrowl.css",
+                      "~/Content/jquery-ui*"));
         }
     }
 }

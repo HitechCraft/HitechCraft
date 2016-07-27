@@ -1,9 +1,8 @@
-﻿using System;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
+    using System;
     using System.Web.Mvc;
     using BL.CQRS.Query;
     using Common.DI;
@@ -29,6 +28,7 @@ namespace HitechCraft.WebApplication.Controllers
         #region Shop Actions
 
         // GET: Shop
+        [Authorize]
         public ActionResult Index()
         {
             var vm = new EntityListQueryHandler<ShopItem, ShopItemViewModel>(this.Container)
@@ -45,6 +45,7 @@ namespace HitechCraft.WebApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult ItemPartialList(int? page, int? modId, int? categoryId, string filterText = null)
         {
             int currentPage = page ?? 1;
@@ -70,6 +71,7 @@ namespace HitechCraft.WebApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult ItemPartial(string gameId)
         {
             return PartialView("_ShopItemPartial", this.GetItem(gameId));
@@ -229,6 +231,51 @@ namespace HitechCraft.WebApplication.Controllers
             });
 
             return View(vm);
+        }
+
+        [Authorize]
+        public ActionResult BuyItem(string gameId)
+        {
+            ShopItemViewModel vm;
+
+            try
+            {
+                vm = new EntityQueryHandler<ShopItem, ShopItemViewModel>(this.Container)
+                   .Handle(new EntityQuery<ShopItem, ShopItemViewModel>()
+                   {
+                       Id = gameId,
+                       Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
+                   });
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.Balance = this.Currency.Gonts;
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public JsonResult BuyItem(string gameId, int count)
+        {
+            try
+            {
+                this.CommandExecutor.Execute(new ShopItemBuyCommand()
+                {
+                    Count = count,
+                    GameId = gameId,
+                    PlayerName = this.Player.Name
+                });
+
+                return Json(new { status = "OK", message = "Товар успешно приобретен" });
+            }
+            catch (Exception e)
+            {
+                return Json(new {status = "NO", message = "Ошибка покупки предмета. " + e.Message});
+            }
         }
 
         [HttpPost]

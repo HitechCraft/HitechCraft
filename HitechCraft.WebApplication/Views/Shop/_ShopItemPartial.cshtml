@@ -16,7 +16,7 @@
     <a class="btn btn-danger" onclick="deleteItem(@Model.GameId)">Удалить</a>
 }
 
-@Html.ActionLink("Купить", "BuyItem", "Shop", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Купить", "BuyItem", "Shop", new { gameId = Model.GameId }, new { @class = "btn btn-primary" })
 
 <!--<a href="#" class="btn btn-default">Дерево крафтов</a><br/>-->
 

@@ -644,4 +644,27 @@ footer {
     border: 1px solid #ddd;
     padding: 12px;
     margin-bottom: 20px; }
+  .item-buying {
+    border: 1px solid #ddd;
+    padding: 25px;
+    padding-top: 0px;
+    min-height: 520px;
+    margin-bottom: 30px; }
+    .item-buying p {
+      font-size: 21px;
+      margin-bottom: 20px; }
+  .item-counter p {
+    font-size: 20px; }
+  .item-error {
+    display: block;
+    margin-top: 30px;
+    color: #ff0039; }
+
+#slider {
+  width: 280px !important;
+  margin-bottom: 30px;
+  margin-top: 10px; }
+
+.ui-state-default:hover {
+  cursor: pointer; }
 

@@ -840,4 +840,45 @@ footer {
         padding: 12px;
         margin-bottom: 20px;
     }
+
+    &-buying {
+        border: 1px solid #ddd;
+        padding: 25px;
+        padding-top: 0px;
+        min-height: 520px;
+        margin-bottom: 30px;
+
+        p {
+            font-size: 21px;
+            margin-bottom: 20px;
+        }
+    }
+
+    &-counter {
+        p {
+            font-size: 20px;
+        }
+    }
+
+    &-error {
+        display: block;
+        margin-top: 30px;
+        color: #ff0039;
+    }
+}
+
+#slider {
+    width: 280px !important;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.ui {
+    &-state {
+        &-default {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
 }

@@ -345,6 +345,9 @@
     <Content Include="Content\Images\vote\topcraft.png" />
     <Content Include="Content\Images\ztn-logo.png" />
     <Content Include="Content\Images\ZTNTeam.png" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\jquery.jgrowl.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.min.css" />
@@ -371,6 +374,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.fileupload.js" />
     <Content Include="Scripts\jquery.jgrowl.js" />
     <Content Include="Scripts\jquery.ui.widget.js" />
@@ -466,6 +470,7 @@
     <Content Include="Views\Shop\_ShopItemListPartial.cshtml" />
     <Content Include="Views\Shop\_ShopItemPartial.cshtml" />
     <Content Include="Views\Shop\EditItem.cshtml" />
+    <Content Include="Views\Shop\BuyItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
