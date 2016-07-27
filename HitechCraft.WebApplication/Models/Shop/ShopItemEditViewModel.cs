@@ -15,7 +15,7 @@
         public byte[] Image { get; set; }
 
         [Required]
-        public int Price { get; set; }
+        public float Price { get; set; }
         
         public int ModificationId { get; set; }
 

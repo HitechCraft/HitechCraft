@@ -59,7 +59,7 @@ namespace HitechCraft.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var uploadImage = Request.Files["uploadNewsImage"];
+                var uploadImage = Request.Files["uploadShopItemImage"];
                 vm.Image = ImageManager.GetImageBytes(uploadImage);
 
                 this.CommandExecutor.Execute(this.Project<ShopItemEditViewModel, ShopItemCreateCommand>(vm));
