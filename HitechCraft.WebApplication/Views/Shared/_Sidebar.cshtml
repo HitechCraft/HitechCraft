@@ -1,0 +1,106 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    Layout = null;
+}
+
+<div class="col-md-4 sidebar">
+    @if (Request.IsAuthenticated)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">@(User.Identity.GetUserName())</div>
+            <div class="panel-body">
+                <div class="user-menu">
+                    <div id="avatar-container">
+                        <img src="@Url.Action("GetSkinImage", "Player")" id="skin-image" class="avaSkin" hidden=""/>
+                    </div>
+
+                    @Html.ActionLink("Перейти в профиль", "Profile", "Player", null, new {@class = "btn btn-primary", @style = "margin-top: 20px"})<br/>
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-primary" style="margin-top: 20px">Выйти</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">Меню пользователя</div>
+            <div class="panel-body">
+                <div class="user-menu">
+                    @Html.ActionLink("Войти", "Login", "Account", null, new {@class = "btn btn-primary", @style = "text-align: center"})
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div class="panel panel-default">
+        <div class="panel-heading">Мониторинг</div>
+        <div class="panel-body">
+            <div class="server">
+                <div id="servers"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/progress")
+
+@if (User.Identity.IsAuthenticated)
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            renderMCSkins('avaSkin', 8);
+            $('.avaSkin').css('border', '2px solid');
+        });
+    </script>
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $.get("@Url.Action("MonitoringList", "Server")")
+        .done(function (data) {
+            $('#servers').html('');
+            $('#servers').html(data);
+        });
+    });
+
+    //val offline is -1
+    function setProgress(objclass, val, maxval) {
+        $('.' + objclass).circleProgress({
+            value: (val <= 0 ? 1 : val / 100),
+            fill: {
+                color: getColor(val, maxval)
+            },
+            startAngle: -Math.PI / 2,
+            thickness: 7
+        }).on('circle-animation-progress', function (event, progress) {
+            var html = parseInt(val * progress);
+
+            if (val < 0) {
+                html = fixValue(val);
+            }
+
+            $(this).find('strong').html(html);
+        });
+    }
+
+    function getColor(value, maxvalue) {
+        //colors compare offline, online, empty, full
+        var colors = ['#ff0000', '#4fc500', '#0075ed', '#ff7200'];
+
+        value = parseInt(value);
+        maxvalue = parseInt(maxvalue);
+
+        if (value < 0) return colors[0];
+        if (value >= maxvalue) return colors[3];
+        if (value === 0) return colors[2];
+
+        return colors[1];
+    }
+
+    function fixValue(value) {
+        if (value < 0) return 'Offline';
+    }
+
+</script>

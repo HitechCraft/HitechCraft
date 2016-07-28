@@ -1,0 +1,122 @@
+﻿@model HitechCraft.WebApplication.Models.ShopItemViewModel
+@{
+    ViewBag.Title = "Купить предмет";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="item-info">
+            <h2>@Model.Name</h2>
+            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="@Model.Description" />
+            <p>
+                @Model.Description
+            </p>
+            <span class="price">
+                Цена: @Model.Price Gont(s)
+            </span>
+            @Html.ActionLink("Перейти в корзину", "Cart", "Shop", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="item-buying">
+            <h2>Покупка предмета</h2>
+
+            <p>
+                Ваш баланс: <span>@ViewBag.Balance</span> Gonts
+            </p>
+
+            <div class="item-counter">
+                Выбор количества:
+                <div id="slider"></div>
+                Свое количество:
+                <input id="count" type="number" class="form-control" min="1" max="999" step="1" placeholder="Кол-во" value="10" />
+
+                <span id="item-error" class="item-error"></span>
+                <p id="item-count" class="alert alert-success">
+                    Общая стоимость: <span id="item-summ">@Model.Price</span> Gonts
+                </p>
+            </div>
+
+            <a class="btn btn-primary" id="buy-item">Приобрести товар</a>
+        </div>
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#slider").slider({
+            range: "min",
+            value: 10,
+            min: 1,
+            max: 64,
+            slide: function (event, ui) {
+                $("input#count").val(ui.value);
+            },
+            change: function (event, ui) {
+                SetFullAmount(ui.value);
+                CheckValid();
+            }
+        });
+    });
+
+    $('#buy-item')
+        .on('click',
+            function () {
+                BuyItem('@Model.GameId');
+            });
+
+    $('#count')
+        .on('input',
+            function () {
+                SetFullAmount($(this).val());
+                CheckValid();
+            });
+
+    function BuyItem(id) {
+        CheckValid();
+
+        if (confirm("Вы подтверждаете покупку?")) {
+            $('#buy-item').addClass('disabled');
+            $.post("@Url.Action("BuyItem", "Shop")", { gameId: id, count: $("input#count").val() })
+            .done(function (data) {
+                if (data.status === "OK") {
+                    growlSuccess(data.message);
+                } else {
+                    growlError(data.message);
+                }
+                $('#buy-item').removeClass('disabled');
+
+                setTimeout(function () {
+                    document.location = '@Url.Action("Cart", "Shop")';
+                }, 2000);
+            });
+        }
+    }
+
+    function CheckValid() {
+        if ($("input#count").val() * parseFloat('@Model.Price'.replace(',', '.')) >
+            parseFloat('@ViewBag.Balance'.replace(',', '.'))) {
+            $('#item-count').removeClass('alert-success');
+            $('#item-count').addClass('alert-danger');
+
+            $('#buy-item').addClass('disabled');
+
+            $('#item-error').html('Запрос превышает ваш баланс!<br><a href="@Url.Action("Index", "Balance")">Пополните счет</a> или совершите покупку на наименьшую сумму.');
+        } else {
+            $('#item-count').removeClass('alert-danger');
+            $('#item-count').addClass('alert-success');
+
+            $('#buy-item').removeClass('disabled');
+
+            $('#item-error').html('');
+        }
+    }
+
+    function SetFullAmount(value) {
+        $("#item-summ").html('');
+        $("#item-summ").html((value * parseFloat('@Model.Price'.replace(',', '.'))).toFixed(2));
+    }
+</script>

@@ -1,0 +1,8 @@
+syntax: glob
+.vs/
+bin/
+obj/
+packages/
+Documentation/
+Documentation/
+Launcher/Clients/

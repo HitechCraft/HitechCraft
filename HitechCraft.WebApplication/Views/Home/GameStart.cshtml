@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Начало игры на проекте";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<p><h4><b>Для того чтобы начать игру необходимо выпонить пару условий:</b></h4></p>
+
+<ol class="game-start-list">
+    <li>Пройти @Html.ActionLink("регистрацию", "Register", "Account") на сайте (это быстро);</li>
+    @*TODO: Правила проекта*@
+    <li>Ознакомиться с @Html.ActionLink("правилами проекта", "Rules", "Home");</li>
+    <li>
+        Скачать лаунчер для игры:
+        <br/>
+        <img src="~/Content/Images/launcher-win.png"/>
+        <img src="~/Content/Images/launcher-linux.png"/>
+        <span class="clear" style="display: block"></span>
+    </li>
+    <li>Выбрать @Html.ActionLink("сервер", "Index", "Server") и начать игру!</li>
+    <li>Так же не забудьте @Html.ActionLink("поддержать", "Vote") наш проект!</li>
+</ol>

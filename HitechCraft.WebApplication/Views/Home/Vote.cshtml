@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Поддержи наш проект!";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+<h4>Не забудь проголосовать за наш сервер в топах!</h4>
+<p>
+    <h4>
+        За каждый голос вы получаете награду. Причем за голос на каждом из сервисов вы получаете уникальную награду. <br />
+    </h4>
+</p>
+<p><h4><b>Что можно получить, голосуя за нас:</b></h4></p>
+<ul class="votes-reward">
+    <li>Пополнение счета (Gonts или Рублей);</li>
+    <li>Случайный предмет из @Html.ActionLink("Магазина Ресурсов", "Index", "Shop").</li>
+</ul>
+<p>
+    <h4>
+        Где можно проголосовать за нас:
+    </h4>
+</p>
+<div class="votes-tops">
+    <div class="col-md-4">
+        <img src="~/Content/Images/vote/topcraft.png" title="За голосование на TopCraft вы получаете 250 Gont" onclick="document.location='http://topcraft.ru/servers/6456/'"/>
+    </div>
+    <div class="col-md-4">
+        <img src="~/Content/Images/vote/mctopsu.png" title="За голосование на MCTop.su вы получаете 2 Рубля" />
+    </div>
+    <div class="col-md-4">
+        <img src="~/Content/Images/vote/mctop.png" title="За голосование на MCtop вы получаете случайную вещь из Магазина Ресурсов" />
+    </div>
+</div>
