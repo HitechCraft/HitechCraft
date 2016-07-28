@@ -138,17 +138,22 @@
             <td>550 RUB</td>
         </tr>
     </tbody>
-    <tfoot>
-        <tr>
-            <th></th>
-            <td></td>
-            <td><a class="btn btn-default" onclick="BuyGroup('LightPro');">Купить</a></td>
-            <td><a class="btn btn-primary" onclick="BuyGroup('Pro');">Купить</a></td>
-            <td><a class="btn btn-success" onclick="BuyGroup('Vip');">Купить</a></td>
-            <td><a class="btn btn-warning" onclick="BuyGroup('Premium');">Купить</a></td>
-            <td><a class="btn btn-danger" onclick="BuyGroup('Ultra');">Купить</a></td>
-        </tr>
-    </tfoot>
+    @if (ViewBag.GroupStatus == null || ViewBag.GroupStatus == String.Empty)
+    {
+        <tfoot>
+            <tr>
+
+                <th></th>
+                <td></td>
+                <td><a class="btn btn-default" onclick="BuyGroup('LightPro');">Купить</a></td>
+                <td><a class="btn btn-primary" onclick="BuyGroup('Pro');">Купить</a></td>
+                <td><a class="btn btn-success" onclick="BuyGroup('Vip');">Купить</a></td>
+                <td><a class="btn btn-warning" onclick="BuyGroup('Premium');">Купить</a></td>
+                <td><a class="btn btn-danger" onclick="BuyGroup('Ultra');">Купить</a></td>
+
+            </tr>
+        </tfoot>
+    }
 </table>
 
 <script type="text/javascript">
