@@ -228,6 +228,7 @@
     <Compile Include="Controllers\BalanceController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
+    <Compile Include="Controllers\DonateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModificationController.cs" />
@@ -483,6 +484,8 @@
     <Content Include="Views\Top\Index.cshtml" />
     <Content Include="Views\Top\_TopGontsPartial.cshtml" />
     <Content Include="Views\Top\_TopRubsPartial.cshtml" />
+    <Content Include="Views\Donate\Groups.cshtml" />
+    <Content Include="Views\Donate\_GroupsIE.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

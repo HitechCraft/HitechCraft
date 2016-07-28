@@ -3,13 +3,14 @@
     #region Using Directives
 
     using Common.Entity;
+    using Common.Models.PermissionsEx;
 
     #endregion
 
     /// <summary>
     /// PermissionsEx Inheritance
     /// </summary>
-    public class PexInheritance : BaseEntity<PexInheritance>
+    public class PexInheritance : BaseEntity<PexInheritance>, IPexInheritance
     {
         #region Properties
         

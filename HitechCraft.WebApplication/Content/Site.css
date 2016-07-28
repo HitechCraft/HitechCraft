@@ -701,3 +701,42 @@ footer {
   .top-tabs li.active a {
     border: 1px solid #ddd !important; }
 
+.groups td {
+  text-align: center; }
+
+.groups .lightpro-prefix {
+  color: #42f751; }
+
+.groups .pro-prefix {
+  color: #259c2f; }
+
+.groups .pro-nickname {
+  color: #74f5d2; }
+
+.groups .vip-prefix {
+  color: #dab702; }
+
+.groups .vip-nickname {
+  color: #0e13c3; }
+
+.groups .vip-text {
+  color: #ff6c6c; }
+
+.groups .premium-prefix {
+  color: #6063da; }
+
+.groups .premium-nickname {
+  color: #edff00; }
+
+.groups .premium-text {
+  color: #b7b7b7; }
+
+.groups .ultra-prefix {
+  color: #656565; }
+
+.groups .ultra-nickname {
+  color: #ff6c6c; }
+
+.groups .ultra-text {
+  color: #6063e0; }
+

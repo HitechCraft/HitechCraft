@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.DAL.Domain
+﻿using HitechCraft.Common.Models.PermissionsEx;
+
+namespace HitechCraft.DAL.Domain
 {
     #region Using Directives
 
@@ -9,7 +11,7 @@
     /// <summary>
     /// PermissionsEx Entity
     /// </summary>
-    public class PexEntity : BaseEntity<PexEntity>
+    public class PexEntity : BaseEntity<PexEntity>, IPexEntity
     {
         #region Properties
         

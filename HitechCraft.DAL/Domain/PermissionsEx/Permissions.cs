@@ -3,13 +3,14 @@
     #region Using Directives
 
     using Common.Entity;
+    using Common.Models.PermissionsEx;
 
     #endregion
 
     /// <summary>
     /// PermissionsEx
     /// </summary>
-    public class Permissions : BaseEntity<Permissions>
+    public class Permissions : BaseEntity<Permissions>, IPermissions
     {
         #region Properties
         

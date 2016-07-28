@@ -76,6 +76,8 @@
     <Compile Include="CQRS\Command\PlayerSession\PlayerSessionUpdateCommand.cs" />
     <Compile Include="CQRS\Command\PlayerSession\PlayerSessionCreateCommandHandler.cs" />
     <Compile Include="CQRS\Command\PlayerSession\PlayerSessionUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\ServerGroups\DonateGroupIEBuyCommand.cs" />
+    <Compile Include="CQRS\Command\ServerGroups\DonateGroupIEBuyCommandHandler.cs" />
     <Compile Include="CQRS\Command\Player\PlayerSkinRemoveCommand.cs" />
     <Compile Include="CQRS\Command\Player\PlayerSkinCreateOrUpdateCommand.cs" />
     <Compile Include="CQRS\Command\Player\PlayerRegisterCreateCommand.cs" />

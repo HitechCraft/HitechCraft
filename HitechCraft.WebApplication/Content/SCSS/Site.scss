@@ -937,3 +937,67 @@ footer {
         }
     }
 }
+
+.groups {
+    td {
+        text-align: center;
+    }
+
+    .lightpro {
+        &-prefix {
+            color: #42f751;
+        }
+    }
+
+    .pro {
+        &-prefix {
+            color: #259c2f;
+        }
+
+        &-nickname {
+            color: #74f5d2;
+        }
+    }
+
+    .vip {
+        &-prefix {
+            color: #dab702;
+        }
+
+        &-nickname {
+            color: #0e13c3;
+        }
+
+        &-text {
+            color: #ff6c6c;
+        }
+    }
+
+    .premium {
+        &-prefix {
+            color: #6063da;
+        }
+
+        &-nickname {
+            color: #edff00;
+        }
+
+        &-text {
+            color: #b7b7b7;
+        }
+    }
+
+    .ultra {
+        &-prefix {
+            color: #656565;
+        }
+
+        &-nickname {
+            color: #ff6c6c;
+        }
+
+        &-text {
+            color: #6063e0;
+        }
+    }
+}
