@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using HitechCraft.DAL.Domain.Extentions;
-using HitechCraft.DAL.Repository.Specification;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -18,6 +14,9 @@ namespace HitechCraft.WebApplication.Controllers
     using BL.CQRS.Command;
     using Manager;
     using Common.Models.Enum;
+    using System.Linq;
+    using DAL.Domain.Extentions;
+    using DAL.Repository.Specification;
 
     #endregion
 
@@ -109,13 +108,13 @@ namespace HitechCraft.WebApplication.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult GetSkinImage()
+        public ActionResult GetSkinImage(Gender? gender)
         {
             var playerSkinVm = new PlayerSkinQueryHandler<PlayerSkinViewModel>(this.Container)
                 .Handle(new PlayerSkinQuery<PlayerSkinViewModel>()
                 {
-                    UserName = this.Player.Name,
-                    Gender = this.Player.Gender,
+                    UserName = this.Player != null ? this.Player.Name : String.Empty,
+                    Gender = (this.Player != null ? this.Player.Gender : gender.Value),
                     Projector = this.Container.Resolve<IProjector<PlayerSkin, PlayerSkinViewModel>>()
                 });
 

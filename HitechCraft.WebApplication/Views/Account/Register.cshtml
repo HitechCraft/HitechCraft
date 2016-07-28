@@ -66,8 +66,8 @@
         <div class="panel-body">
             <h4 style="text-align: center;margin-bottom: 20px">Позже вы сможете сменить его в профиле</h4>
             <div id="skin-container" class="skin-register">
-                <img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="frontSkin" hidden=""/>
-                <img src="@Url.Action("GetSkinImage", "Account", new {userName = ViewBag.UserName, gender = Gender.Male})" id="skin-image" class="backSkin" hidden=""/>
+                <img src="@Url.Action("GetSkinImage", "Player", new { gender = Gender.Male})" id="skin-image" class="frontSkin" hidden=""/>
+                <img src="@Url.Action("GetSkinImage", "Player", new { gender = Gender.Male})" id="skin-image" class="backSkin" hidden=""/>
             </div>
         </div>
     </div>
@@ -119,8 +119,8 @@
         if ($('#gender option:selected').val() != 0) {
             $(".frontSkin").replaceWith('<img src="" id="skin-image" class="frontSkin"/>');
             $(".backSkin").replaceWith('<img src="" id="skin-image" class="backSkin"/>');
-            $('.frontSkin').attr("src", "/Account/GetSkinImage?gender=" + "Female");
-            $('.frontSkin').attr("src", "/Account/GetSkinImage?gender=" + "Female");
+            $('.frontSkin').attr("src", "/Player/GetSkinImage?gender=" + "Female");
+            $('.frontSkin').attr("src", "/Player/GetSkinImage?gender=" + "Female");
             renderMCSkins('frontSkin', 10);
             renderMCSkins('backSkin', 10);
         }
@@ -136,8 +136,8 @@
         }
         $(".frontSkin").replaceWith('<img src="" id="skin-image" class="frontSkin"/>');
         $(".backSkin").replaceWith('<img src="" id="skin-image" class="backSkin"/>');
-        $('.frontSkin').attr("src", "/Account/GetSkinImage?gender=" + _gender);
-        $('.backSkin').attr("src", "/Account/GetSkinImage?gender=" + _gender);
+        $('.frontSkin').attr("src", "/Player/GetSkinImage?gender=" + _gender);
+        $('.backSkin').attr("src", "/Player/GetSkinImage?gender=" + _gender);
         renderMCSkins('frontSkin', 10);
         renderMCSkins('backSkin', 10);
     });
