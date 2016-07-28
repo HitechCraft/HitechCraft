@@ -108,13 +108,13 @@
 
         [AllowAnonymous]
         [HttpGet]
-        public ActionResult GetSkinImage(Gender? gender)
+        public ActionResult GetSkinImage(Gender? gender, string playerName = "")
         {
             var playerSkinVm = new PlayerSkinQueryHandler<PlayerSkinViewModel>(this.Container)
                 .Handle(new PlayerSkinQuery<PlayerSkinViewModel>()
                 {
-                    UserName = this.Player != null ? this.Player.Name : String.Empty,
-                    Gender = (this.Player != null ? this.Player.Gender : gender.Value),
+                    UserName = playerName != "" ? playerName : this.Player.Name,
+                    Gender = gender != null ? gender.Value : this.Player.Gender,
                     Projector = this.Container.Resolve<IProjector<PlayerSkin, PlayerSkinViewModel>>()
                 });
 

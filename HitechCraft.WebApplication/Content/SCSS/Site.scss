@@ -919,3 +919,21 @@ footer {
         }
     }
 }
+
+.top {
+    &-content {
+        margin-top: 30px;
+    }
+
+    &-tabs {
+        border-bottom: none !important;
+
+        li {
+            &.active {
+                a {
+                    border: 1px solid #ddd !important;
+                }
+            }
+        }
+    }
+}
