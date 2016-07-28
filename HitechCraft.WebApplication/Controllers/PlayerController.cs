@@ -113,8 +113,8 @@
             var playerSkinVm = new PlayerSkinQueryHandler<PlayerSkinViewModel>(this.Container)
                 .Handle(new PlayerSkinQuery<PlayerSkinViewModel>()
                 {
-                    UserName = playerName != "" ? playerName : this.Player.Name,
-                    Gender = gender != null ? gender.Value : this.Player.Gender,
+                    UserName = playerName != "" ? playerName : (this.Player != null ? this.Player.Name : ""),
+                    Gender = gender != null ? gender.Value : (this.Player != null ? this.Player.Gender : Gender.Male),
                     Projector = this.Container.Resolve<IProjector<PlayerSkin, PlayerSkinViewModel>>()
                 });
 
