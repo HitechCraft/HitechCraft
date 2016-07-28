@@ -1,4 +1,10 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using System.Linq;
+using HitechCraft.BL.CQRS.Query;
+using HitechCraft.Common.Projector;
+using HitechCraft.DAL.Repository.Specification;
+using HitechCraft.WebApplication.Models;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     using System.Web.Mvc;
     using Common.DI;
@@ -36,6 +42,10 @@
 
         public ActionResult GroupsIe()
         {
+            ViewBag.NickName = this.Player != null ? this.Player.Name : "NickName";
+            
+            ViewBag.GroupStatus = this.CheckAvailableGroups();
+
             return PartialView("_GroupsIE");
         }
 
@@ -101,6 +111,29 @@
             }
 
             return Json(new { status = "OK", message = "Группа успешно приоретена!" });
+        }
+
+        public string CheckAvailableGroups()
+        {
+            //TODO: да я упорот и вернул строку. Переделать! -_-
+            try
+            {
+                var group = new EntityListQueryHandler<Permissions, PermissionsViewModel>(this.Container)
+                    .Handle(new EntityListQuery<Permissions, PermissionsViewModel>()
+                    {
+                        Projector = this.Container.Resolve<IProjector<Permissions, PermissionsViewModel>>(),
+                        Specification =
+                        new PermissionsByNameSpec(HashManager.UuidFromString("OfflinePlayer:" + this.Player.Name)) & new PermissionsByGroupContainsSpec()
+                    }).First();
+
+                var datetime = new DateTime(1970, 1, 1).AddSeconds(int.Parse(group.Value));
+
+                return "Вы уже приобрели группу на данном сервере! У вас активная группа до " + datetime + ".";
+            }
+            catch (Exception e)
+            {
+                return String.Empty;
+            }
         }
 
         #endregion

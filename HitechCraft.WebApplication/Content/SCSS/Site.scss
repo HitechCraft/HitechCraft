@@ -939,6 +939,12 @@ footer {
 }
 
 .groups {
+
+    &-desc {
+        line-height: 30px;
+        margin-bottom: 30px;
+    }
+
     td {
         text-align: center;
     }

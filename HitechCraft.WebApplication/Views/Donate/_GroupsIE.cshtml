@@ -1,135 +1,142 @@
 ﻿@*TODO: В дальнейшем подумать над переносом всего этого в базу может быть*@
 
+@if (ViewBag.GroupStatus != null && ViewBag.GroupStatus != String.Empty)
+{
+    <div class="alert alert-danger">
+        <h4>Внимание</h4>
+        @ViewBag.GroupStatus
+    </div>
+}
 <table class="table groups">
     <thead>
-    <tr>
-        <th></th>
-        <td>Default</td>
-        <td>Light Pro</td>
-        <td>Pro</td>
-        <td>V.I.P.</td>
-        <td>Premium</td>
-        <td>Ultra</td>
-    </tr>
+        <tr>
+            <th></th>
+            <td>Default</td>
+            <td>Light Pro</td>
+            <td>Pro</td>
+            <td>V.I.P.</td>
+            <td>Premium</td>
+            <td>Ultra</td>
+        </tr>
     </thead>
     <tbody>
-    <tr>
-        <th>Префикс</th>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="lightpro-prefix">[Light Pro]</span></td>
-        <td><span class="pro-prefix">[Pro]</span></td>
-        <td><span class="vip-prefix">[V.I.P]</span></td>
-        <td><span class="premium-prefix">[Premium]</span></td>
-        <td><span class="ultra-prefix">[Ultra]</span></td>
-    </tr>
-    <tr>
-        <th>Цветной ник</th>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="pro-nickname">NickName</span></td>
-        <td><span class="vip-nickname">NickName</span></td>
-        <td><span class="premium-nickname">NickName</span></td>
-        <td><span class="ultra-nickname">NickName</span></td>
-    </tr>
-    <tr>
-        <th>Цветной текст</th>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="vip-text">Text</span></td>
-        <td><span class="premium-text">Text</span></td>
-        <td><span class="ultra-text">Text</span></td>
-    </tr>
-    <tr>
-        <th>Кол-во регионов</th>
-        <td>2</td>
-        <td>3</td>
-        <td>5</td>
-        <td>7</td>
-        <td>9</td>
-        <td>10</td>
-    </tr>
-    <tr>
-        <th>Кол-во точек /home</th>
-        <td>1</td>
-        <td>1</td>
-        <td>2</td>
-        <td>2</td>
-        <td>3</td>
-        <td>5</td>
-    </tr>
-    <tr>
-        <th>Наборы</th>
-        <td>start, eat, medic</td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-        <td>vip</td>
-        <td>premium</td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-    </tr>
-    <tr>
-        <th>Флаги на регионы</th>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-    </tr>
-    <tr>
-        <th>Регулировка дня/ночи</th>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-    </tr>
-    <tr>
-        <th>Регулировка погоды</th>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-    </tr>
-    <tr>
-        <th>Полет /fly</th>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-    </tr>
-    <tr>
-        <th>Создание точки /warp</th>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-    </tr>
-    <tr>
-        <th>Креатив</th>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-remove"></span></td>
-        <td><span class="glyphicon glyphicon-ok"></span></td>
-    </tr>
-    <tr>
-        <th>Цена</th>
-        <td>0 RUB</td>
-        <td>90 RUB</td>
-        <td>210 RUB</td>
-        <td>320 RUB</td>
-        <td>400 RUB</td>
-        <td>550 RUB</td>
-    </tr>
+        <tr>
+            <th>Префикс</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="lightpro-prefix">[Light Pro]</span></td>
+            <td><span class="pro-prefix">[Pro]</span></td>
+            <td><span class="vip-prefix">[V.I.P]</span></td>
+            <td><span class="premium-prefix">[Premium]</span></td>
+            <td><span class="ultra-prefix">[Ultra]</span></td>
+        </tr>
+        <tr>
+            <th>Цветной ник</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="pro-nickname">@ViewBag.NickName</span></td>
+            <td><span class="vip-nickname">@ViewBag.NickName</span></td>
+            <td><span class="premium-nickname">@ViewBag.NickName</span></td>
+            <td><span class="ultra-nickname">@ViewBag.NickName</span></td>
+        </tr>
+        <tr>
+            <th>Цветной текст</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="vip-text">Text</span></td>
+            <td><span class="premium-text">Text</span></td>
+            <td><span class="ultra-text">Text</span></td>
+        </tr>
+        <tr>
+            <th>Кол-во регионов</th>
+            <td>2</td>
+            <td>3</td>
+            <td>5</td>
+            <td>7</td>
+            <td>9</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <th>Кол-во точек /home</th>
+            <td>1</td>
+            <td>1</td>
+            <td>2</td>
+            <td>2</td>
+            <td>3</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <th>Наборы</th>
+            <td>start, eat, medic</td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td>vip</td>
+            <td>premium</td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+        </tr>
+        <tr>
+            <th>Флаги на регионы</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+        </tr>
+        <tr>
+            <th>Регулировка дня/ночи</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+        </tr>
+        <tr>
+            <th>Регулировка погоды</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+        </tr>
+        <tr>
+            <th>Полет /fly</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+        </tr>
+        <tr>
+            <th>Создание точки /warp</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+        </tr>
+        <tr>
+            <th>Креатив</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+        </tr>
+        <tr>
+            <th>Цена</th>
+            <td>0 RUB</td>
+            <td>90 RUB</td>
+            <td>210 RUB</td>
+            <td>320 RUB</td>
+            <td>400 RUB</td>
+            <td>550 RUB</td>
+        </tr>
     </tbody>
     <tfoot>
         <tr>
@@ -144,9 +151,9 @@
     </tfoot>
 </table>
 
-<script type="text/javascript"> 
+<script type="text/javascript">
     function BuyGroup(groupName) {
-        if (confirm("Вы подтверждаете покупку группы "+ groupName + "?")) {
+        if (confirm("Вы подтверждаете покупку группы " + groupName + "?")) {
             $.post("@Url.Action("BuyGroupIe", "Donate")", { group: groupName })
         .done(function (data) {
             if (data.status === "OK") {
@@ -159,6 +166,6 @@
                 document.location = '@Url.Action("Groups", "Donate")';
             }, 2000);
         });
-    }
+        }
     }
 </script>

@@ -701,6 +701,10 @@ footer {
   .top-tabs li.active a {
     border: 1px solid #ddd !important; }
 
+.groups-desc {
+  line-height: 30px;
+  margin-bottom: 30px; }
+
 .groups td {
   text-align: center; }
 

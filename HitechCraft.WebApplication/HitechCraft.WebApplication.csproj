@@ -259,6 +259,7 @@
     <Compile Include="Mapper\News\NewsEditViewModelToNewsUpdateCommandMapper.cs" />
     <Compile Include="Mapper\News\NewsToNewsEditViewModelMapper.cs" />
     <Compile Include="Mapper\News\NewsToNewsViewModelMapper.cs" />
+    <Compile Include="Mapper\Permissions\PermissionsToPermissionsViewModelMapper.cs" />
     <Compile Include="Mapper\PlayerItem\PlayerItemToPlayerItemViewModelMapper.cs" />
     <Compile Include="Mapper\PlayerSession\PlayerSessionEditViewModelToPlayerSessionUpdateCommandMapper.cs" />
     <Compile Include="Mapper\PlayerSession\PlayerSessionToJsonSessionDataMapper.cs" />
@@ -311,6 +312,7 @@
     <Compile Include="Models\News\NewsEditViewModel.cs" />
     <Compile Include="Models\News\NewsViewModel.cs" />
     <Compile Include="Models\PaymentModel.cs" />
+    <Compile Include="Models\Permissions\PermissionsViewModel.cs" />
     <Compile Include="Models\PlayerSession\PlayerSessionEditViewModel.cs" />
     <Compile Include="Models\PlayerItem\PlayerItemViewModel.cs" />
     <Compile Include="Models\Player\PlayerProfileViewModel.cs" />

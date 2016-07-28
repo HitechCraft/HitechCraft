@@ -149,6 +149,8 @@ namespace HitechCraft.WebApplication.Ninject
             this._kernel.Bind(typeof(IProjector<Currency, CurrencyEditViewModel>)).To(typeof(CurrencyToCurrencyEditViewModelMapper));
             this._kernel.Bind(typeof(IProjector<Currency, CurrencyTopViewModel>)).To(typeof(CurrencyToCurrencyTopViewModelMapper));
 
+            this._kernel.Bind(typeof(IProjector<Permissions, PermissionsViewModel>)).To(typeof(PermissionsToPermissionsViewModelMapper));
+
             this._kernel.Bind(typeof(IProjector<AuthLog, AuthLogViewModel>)).To(typeof(AuthLogToAuthLogViewModelMapper));
 
             #endregion
