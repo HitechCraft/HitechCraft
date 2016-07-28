@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS `AuthLog` (
   `Id` int(11) NOT NULL,
-  `Player` int(11) NOT NULL,
+  `Player` varchar(128) NOT NULL,
   `Ip` varchar(128) NOT NULL,
   `Browser` varchar(128) NOT NULL,
-  `Type` int(11) NOT NULL
+  `Time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `AuthLog`

@@ -55,10 +55,8 @@
 
             <div class="panel-footer">
                 <div class="btn-group btn-group-justified">
-                    @*TODO: сделять изменение данных пользователя прямо в этом окне*@
                     <a href="javascript:showChangePassword()" class="btn btn-primary">@Resources.ChangePassword</a>
-                    @*TODO: запилить страницу с логами входа пользователя, изменением пароля и пр.*@
-                    @Html.ActionLink("Безопасность", "Security", "Account", null, new { @class = "btn btn-default disabled" })
+                    @Html.ActionLink("Безопасность", "Security", "Profile", null, new { @class = "btn btn-default" })
                 </div>
             </div>
         </div>

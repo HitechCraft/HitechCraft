@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CQRS\Command\AuthLog\AuthLogCreateCommand.cs" />
+    <Compile Include="CQRS\Command\AuthLog\AuthLogCreateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Currency\CurrencyUpdateCommand.cs" />
     <Compile Include="CQRS\Command\Currency\CurrencyCreateCommand.cs" />
     <Compile Include="CQRS\Command\Currency\CurrencyUpdateCommandHandler.cs" />

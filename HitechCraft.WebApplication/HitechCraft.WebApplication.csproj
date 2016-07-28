@@ -242,6 +242,7 @@
     <Compile Include="Manager\FileManager.cs" />
     <Compile Include="Manager\IKConfig.cs" />
     <Compile Include="Manager\ImageManager.cs" />
+    <Compile Include="Mapper\AuthLog\AuthLogToAuthLogViewModelMapper.cs" />
     <Compile Include="Mapper\Ban\BanToBanViewModelMapper.cs" />
     <Compile Include="Mapper\BaseMapper.cs" />
     <Compile Include="Mapper\Comment\CommentToCommentViewModelMapper.cs" />
@@ -274,6 +275,7 @@
     <Compile Include="Mapper\Shop\ShopItemEditViewModelToShopItemCreateCommandMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemToShopItemViewModelMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemToShopItemEditViewModelMapper.cs" />
+    <Compile Include="Models\AuthLog\AuthLogViewModel.cs" />
     <Compile Include="Models\Ban\BanEditViewModel.cs" />
     <Compile Include="Models\Ban\BanUnbanViewModel.cs" />
     <Compile Include="Models\Ban\BanViewModel.cs" />
@@ -474,6 +476,7 @@
     <Content Include="Views\Shop\EditItem.cshtml" />
     <Content Include="Views\Shop\BuyItem.cshtml" />
     <Content Include="Views\Shop\Cart.cshtml" />
+    <Content Include="Views\Player\Security.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

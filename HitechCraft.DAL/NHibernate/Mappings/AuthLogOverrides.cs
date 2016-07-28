@@ -17,11 +17,7 @@
 
             mapping.Id(x => x.Id)
                 .GeneratedBy.Increment();
-
-            mapping.References(x => x.Player)
-                .Column("Player")
-                .Not.Nullable();
-
+            
             mapping.Map(x => x.Ip)
                 .Column("Ip")
                 .Length(128)
@@ -32,9 +28,8 @@
                 .Length(128)
                 .Not.Nullable();
 
-            mapping.Map(x => x.Type)
-                .CustomType<AuthLogType>();
-
+            mapping.References(x => x.Player)
+                .Column("Player");
         }
     }
 }

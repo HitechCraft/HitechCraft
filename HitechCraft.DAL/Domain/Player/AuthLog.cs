@@ -2,18 +2,15 @@
 {
     using Common.Entity;
     using System;
-    using Common.Models.Enum;
 
     public class AuthLog : BaseEntity<AuthLog>
     {
-        public Player Player { get; set; }
+        public virtual Player Player { get; set; }
 
-        public string Ip { get; set; }
+        public virtual string Ip { get; set; }
 
-        public string Browser { get; set; }
-
-        public AuthLogType Type { get; set; }
-
-        public DateTime Time { get; set; }
+        public virtual string Browser { get; set; }
+        
+        public virtual DateTime Time { get; set; }
     }
 }

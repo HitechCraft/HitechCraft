@@ -1,4 +1,8 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using System.Linq;
+using HitechCraft.DAL.Domain.Extentions;
+using HitechCraft.DAL.Repository.Specification;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -161,6 +165,19 @@
                 status = JsonStatus.YES,
                 message = "Скин успешно сменен на стандартный"
             }, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        public ActionResult Security()
+        {
+            var vm = new EntityListQueryHandler<AuthLog, AuthLogViewModel>(this.Container)
+                .Handle(new EntityListQuery<AuthLog, AuthLogViewModel>()
+                {
+                    Projector = this.Container.Resolve<IProjector<AuthLog, AuthLogViewModel>>(),
+                    Specification = new AuthLogByPlayerNameSpec(this.Player.Name)
+                }).OrderByDescending(x => x.Id).Limit(10);
+
+            return View(vm);
         }
 
         #endregion

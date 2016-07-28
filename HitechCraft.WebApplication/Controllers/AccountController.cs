@@ -110,6 +110,12 @@ namespace HitechCraft.WebApplication.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    this.CommandExecutor.Execute(new AuthLogCreateCommand()
+                    {
+                        PlayerName = user.UserName,
+                        Ip = Request.UserHostAddress,
+                        Browser = Request.UserAgent
+                    });
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

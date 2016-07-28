@@ -54,7 +54,9 @@
   <ItemGroup>
     <Compile Include="Domain\Ban\Ban.cs" />
     <Compile Include="Domain\Ban\BanIp.cs" />
+    <Compile Include="Domain\Extentions\IEnumerableExtentions.cs" />
     <Compile Include="Domain\News\Comment.cs" />
+    <Compile Include="Domain\Player\AuthLog.cs" />
     <Compile Include="Domain\Player\Currency.cs" />
     <Compile Include="Domain\Extentions\ServerExtentions.cs" />
     <Compile Include="Domain\IKTransaction.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="NHibernate\Mappings\PlayerItemOverrides.cs" />
     <Compile Include="NHibernate\Mappings\IKTransactionOverrides.cs" />
     <Compile Include="NHibernate\Mappings\PlayerInfoOverrides.cs" />
+    <Compile Include="NHibernate\Mappings\AuthLogOverrides.cs" />
     <Compile Include="NHibernate\Mappings\ShopSaleOverrides.cs" />
     <Compile Include="NHibernate\Mappings\ShopItemOverrides.cs" />
     <Compile Include="NHibernate\Mappings\ShopItemCategoryOverrides.cs" />
@@ -106,6 +109,7 @@
     <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByPlayerNameSpec.cs" />
     <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByAccessTokenSpec.cs" />
     <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByPlayerProfileSpec.cs" />
+    <Compile Include="Repository\Specification\Player\AuthLogByPlayerNameSpec.cs" />
     <Compile Include="Repository\Specification\Player\PlayerSkinByUserNameSpec.cs" />
     <Compile Include="Repository\Specification\Player\PlayerByLoginSpec.cs" />
     <Compile Include="UnitOfWork\NHibernateUnitOfWork.cs" />
