@@ -940,6 +940,22 @@ footer {
 
 .groups {
 
+    &-kits {
+        margin: 30px 0 20px 0;
+    }
+
+
+    &-kit {
+        &-list {
+            img {
+                border: 2px solid black;
+            }
+            th{
+                text-align: center;
+            }
+        }
+    }
+
     &-desc {
         line-height: 30px;
         margin-bottom: 30px;

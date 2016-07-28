@@ -701,6 +701,15 @@ footer {
   .top-tabs li.active a {
     border: 1px solid #ddd !important; }
 
+.groups-kits {
+  margin: 30px 0 20px 0; }
+
+.groups-kit-list img {
+  border: 2px solid black; }
+
+.groups-kit-list th {
+  text-align: center; }
+
 .groups-desc {
   line-height: 30px;
   margin-bottom: 30px; }
