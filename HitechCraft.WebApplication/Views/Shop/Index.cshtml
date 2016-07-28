@@ -36,7 +36,7 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a onclick="javascript:setMod(0, 'Не выбрано');">Не выбрано</a></li>
+                <li><a onclick="javascript:setCategory(0, 'Не выбрано');">Не выбрано</a></li>
                 @if (ViewBag.Categories != null)
                 {
                     foreach (var category in ViewBag.Categories)
@@ -48,6 +48,7 @@
         </div>
 
         <a id="filter-items" class="btn btn-primary">Поиск</a>
+        <a id="filter-clear" class="btn btn-primary">Очистить фильтры</a>
     </div>
 </form>
 
@@ -82,6 +83,16 @@
             function() {
                 FilterItems(null);
             });
+
+    $('#filter-clear').on('click', function() {
+        setMod(0, 'Не выбрано');
+        setCategory(0, 'Не выбрано');
+
+        $('#text').val('');
+        $('#text').attr('value', '');
+
+        FilterItems(null);
+    });
 
     function FilterItems(currentPage) {
 

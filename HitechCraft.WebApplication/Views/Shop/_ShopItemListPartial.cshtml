@@ -1,10 +1,10 @@
 ﻿@using PagedList.Mvc
 @model PagedList.IPagedList<HitechCraft.WebApplication.Models.ShopItemViewModel>
 
-<div class="row">
-    @if (Model != null && Model.Any())
-    {
-        foreach (var item in Model)
+@if (Model != null && Model.Any())
+{
+    <div class="row" style="min-height: 520px;">
+        @foreach (var item in Model)
         {
             <div class="col-md-3">
                 <div id="item-@item.GameId" class="item" onclick="LoadItem(@item.GameId)">
@@ -14,14 +14,14 @@
                 </div>
             </div>
         }
-        <br/>
-        if (Model.Count > 12)
-        {
-            @Html.PagedListPager(Model, page => "javascript:FilterItems(" + page + ")")
-        }
-    }
-    else
+        <br />
+    </div>
+    if (Model.Count >= ViewBag.ItemsOnPage || ViewBag.Page > 1)
     {
-        <h3>Нет предметов</h3>
+        @Html.PagedListPager(Model, page => "javascript:FilterItems(" + page + ")")
     }
-</div>
+}
+else
+{
+    <h3>Нет предметов</h3>
+}
