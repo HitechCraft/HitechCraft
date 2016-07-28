@@ -197,7 +197,7 @@ namespace HitechCraft.WebApplication.Controllers
                 if (result.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, "User");
-                    
+                    //TODO: убрать пока что подтверждение
                     //todo: реализовать ReCaptcha
                     this.CommandExecutor.Execute(new PlayerRegisterCreateCommand()
                     {
