@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using HitechCraft.Common.Models.Enum;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -71,7 +72,8 @@ namespace HitechCraft.WebApplication.Controllers
             
             return View();
         }
-
+        //TODO: восстановление пароля
+        //TODO: убрать проверку email
         //
         // POST: /Account/Login
         [HttpPost]
@@ -176,6 +178,22 @@ namespace HitechCraft.WebApplication.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+
+            ViewBag.Gender = new List<SelectListItem>()
+                    {
+                        new SelectListItem()
+                        {
+                            Text = "Мужской",
+                            Value = Gender.Male.ToString()
+                        },
+
+                        new SelectListItem()
+                        {
+                            Text = "Женский",
+                            Value = Gender.Female.ToString()
+                        }
+                    };
+
             return View();
         }
 
@@ -205,7 +223,6 @@ namespace HitechCraft.WebApplication.Controllers
                         Gender = model.Gender,
                         Email = model.Email
                     });
-                    
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
@@ -218,6 +235,22 @@ namespace HitechCraft.WebApplication.Controllers
                 }
                 AddErrors(result);
             }
+
+
+            ViewBag.Gender = new List<SelectListItem>()
+                    {
+                        new SelectListItem()
+                        {
+                            Text = "Мужской",
+                            Value = Gender.Male.ToString()
+                        },
+
+                        new SelectListItem()
+                        {
+                            Text = "Женский",
+                            Value = Gender.Female.ToString()
+                        }
+                    };
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
