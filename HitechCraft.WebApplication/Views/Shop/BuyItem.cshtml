@@ -71,6 +71,11 @@
     $('#count')
         .on('input',
             function () {
+                alert($(this).val());
+                if (!$(this).val() || parseInt($(this).val()) === 0) {
+                    $(this).val(1);
+                }
+
                 SetFullAmount($(this).val());
                 CheckValid();
             });
@@ -84,14 +89,15 @@
             .done(function (data) {
                 if (data.status === "OK") {
                     growlSuccess(data.message);
+
+                    setTimeout(function () {
+                        document.location = '@Url.Action("Cart", "Shop")';
+                    }, 2000);
                 } else {
                     growlError(data.message);
                 }
                 $('#buy-item').removeClass('disabled');
 
-                setTimeout(function () {
-                    document.location = '@Url.Action("Cart", "Shop")';
-                }, 2000);
             });
         }
     }

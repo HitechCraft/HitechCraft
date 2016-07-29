@@ -284,6 +284,8 @@
         {
             try
             {
+                if(count == 0) throw new Exception("Нельзя приобрести 0 кол-во ресурсов!");
+
                 this.CommandExecutor.Execute(new ShopItemBuyCommand()
                 {
                     Count = count,

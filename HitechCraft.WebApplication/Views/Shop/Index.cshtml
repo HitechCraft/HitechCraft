@@ -7,7 +7,7 @@
 
 <form action="" method="post" id="shop-item-filter">
     <div class="form-inline item-filter item-administration">
-        <input type="text" name="text" id="text" placeholder="Поиск предметов" class="form-control" style="width: 50%"/>
+        <input type="text" name="text" id="text" placeholder="Поиск предметов" class="form-control" style="width: 50%" />
         <span>Модификация</span>
         <div class="btn-group">
             <input name="modId" id="modId" type="hidden" />
@@ -52,39 +52,47 @@
     </div>
 </form>
 
+@if (User.IsInRole("Administrator"))
+{
+    <div class="item-administration">
+        <div class="btn-group-justified">
+            @Html.ActionLink("Добавить предмет", "CreateItem", "Shop", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("Добавить категорию", "CreateItemCategory", "Shop", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Добавить модификацию", "Create", "Modification", null, new { @class = "btn btn-success" })
+        </div>
+    </div>
+}
 <div class="item-administration">
     <div class="btn-group-justified">
-        @Html.ActionLink("Добавить предмет", "CreateItem", "Shop", null, new { @class = "btn btn-success" })
-        @Html.ActionLink("Добавить категорию", "CreateItemCategory", "Shop", null, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Добавить модификацию", "Create", "Modification", null, new { @class = "btn btn-success" })
+        @Html.ActionLink("Перейти в корзину", "Cart", null, new { @class = "btn btn-primary" })
     </div>
 </div>
 <div class="row">
     <div class="col-md-3">
         <div id="item" class="item-info">
-            <h3>Выберите<br/>предмет</h3>
+            <h3>Выберите<br />предмет</h3>
         </div>
     </div>
     <div class="col-md-9">
         <div id="item-list">
-            
+
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    
-    $(function() {
+
+    $(function () {
         LoadItems(1);
     });
 
     $('#filter-items')
         .on('click',
-            function() {
+            function () {
                 FilterItems(null);
             });
 
-    $('#filter-clear').on('click', function() {
+    $('#filter-clear').on('click', function () {
         setMod(0, 'Не выбрано');
         setCategory(0, 'Не выбрано');
 
