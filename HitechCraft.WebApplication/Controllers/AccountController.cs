@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using HitechCraft.Common.Models.Enum;
-using Microsoft.AspNet.Identity.EntityFramework;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -18,6 +13,10 @@ namespace HitechCraft.WebApplication.Controllers
     using Microsoft.Owin.Security;
     using Models;
     using Properties;
+    using System;
+    using System.Collections.Generic;
+    using Common.Models.Enum;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     #endregion
 
