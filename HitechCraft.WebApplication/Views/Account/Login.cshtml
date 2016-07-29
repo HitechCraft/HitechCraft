@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label>Пароль</label>
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id = "pass" })
-                @Html.ActionLink("Забыли пароль?", "ForgotPassword", new { @class = "pass-forgotten" })
+                @Html.ActionLink("Забыли пароль?", "ForgotPassword")
                 <span class="glyphicon glyphicon-eye-open show-pass" title="Показать пароль"></span>
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
             </div>
