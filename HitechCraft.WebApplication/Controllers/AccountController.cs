@@ -72,8 +72,8 @@ namespace HitechCraft.WebApplication.Controllers
             
             return View();
         }
+
         //TODO: восстановление пароля
-        //TODO: убрать проверку email
         //
         // POST: /Account/Login
         [HttpPost]
@@ -178,21 +178,21 @@ namespace HitechCraft.WebApplication.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-
             ViewBag.Gender = new List<SelectListItem>()
-                    {
-                        new SelectListItem()
-                        {
-                            Text = "Мужской",
-                            Value = Gender.Male.ToString()
-                        },
+            {
+                new SelectListItem()
+                {
+                    Text = Resources.GenderMale,
+                    Value = ((int)Gender.Male).ToString(),
+                    Selected = true
+                },
 
-                        new SelectListItem()
-                        {
-                            Text = "Женский",
-                            Value = Gender.Female.ToString()
-                        }
-                    };
+                new SelectListItem()
+                {
+                    Text = Resources.GenderFemale,
+                    Value = ((int)Gender.Female).ToString()
+                }
+            };
 
             return View();
         }
@@ -209,13 +209,18 @@ namespace HitechCraft.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    EmailConfirmed = true //TODO: возможно потом сделать проверку
+                };
+
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, "User");
-                    //TODO: убрать пока что подтверждение
                     //todo: реализовать ReCaptcha
                     this.CommandExecutor.Execute(new PlayerRegisterCreateCommand()
                     {
@@ -223,6 +228,7 @@ namespace HitechCraft.WebApplication.Controllers
                         Gender = model.Gender,
                         Email = model.Email
                     });
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
@@ -235,22 +241,22 @@ namespace HitechCraft.WebApplication.Controllers
                 }
                 AddErrors(result);
             }
-
-
+            
             ViewBag.Gender = new List<SelectListItem>()
-                    {
-                        new SelectListItem()
-                        {
-                            Text = "Мужской",
-                            Value = Gender.Male.ToString()
-                        },
+            {
+                new SelectListItem()
+                {
+                    Text = Resources.GenderMale,
+                    Value = ((int)Gender.Male).ToString(),
+                    Selected = true
+                },
 
-                        new SelectListItem()
-                        {
-                            Text = "Женский",
-                            Value = Gender.Female.ToString()
-                        }
-                    };
+                new SelectListItem()
+                {
+                    Text = Resources.GenderFemale,
+                    Value = ((int)Gender.Female).ToString()
+                }
+            };
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
