@@ -27,12 +27,14 @@ namespace HitechCraft.WebApplication.Controllers
         public DonateController(IContainer container) : base(container)
         {
         }
-        
+
+        [Authorize]
         public ActionResult Groups()
         {
             return View();
         }
-        
+
+        [Authorize]
         public ActionResult Kits()
         {
             return View();
