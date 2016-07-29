@@ -51,6 +51,7 @@ namespace HitechCraft.WebApplication.Controllers
             return PartialView("_GroupsIE");
         }
 
+        //TODO: сделать дополнительную проверку о покупке (есть ли активные группы), во избежании внедрения html
         public JsonResult BuyGroupIe(IEGroup group)
         {
             //hash игрока

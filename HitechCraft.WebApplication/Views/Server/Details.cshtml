@@ -21,6 +21,7 @@
         <div class="col-md-7">
             <p>Статус: @Html.ServerStatusLabel(Model.Data.Status, Model.Data.Message)</p>
 
+            @*TODO: при ошибке или выключенном сервере не показывать*@
             <p>Игроки: @(Model.Data.PlayerCount) из @(Model.Data.MaxPlayerCount)</p>
 
             <p>Версия @Model.ClientVersion</p>

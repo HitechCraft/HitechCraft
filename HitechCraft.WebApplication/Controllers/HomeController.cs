@@ -12,6 +12,8 @@ namespace HitechCraft.WebApplication.Controllers
         {
         }
 
+        //TODO: custom 404 pls
+
         public ActionResult Index()
         {
             return View();
