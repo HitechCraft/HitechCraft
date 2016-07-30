@@ -495,13 +495,13 @@
     <Content Include="Views\Donate\_GroupsIE.cshtml" />
     <Content Include="Views\Account\Mail.cshtml" />
     <Content Include="Views\Home\Rules.cshtml" />
+    <Content Include="Views\Rule\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Launcher\Models\" />
     <Folder Include="Areas\Launcher\Views\Shared\" />
     <Folder Include="Views\Comment\" />
-    <Folder Include="Views\Rule\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

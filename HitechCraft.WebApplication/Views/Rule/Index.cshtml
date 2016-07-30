@@ -1,0 +1,27 @@
+﻿@model IEnumerable<HitechCraft.WebApplication.Models.RulePointViewModel>
+@{
+    ViewBag.Title = "Правила проекта";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+<h4 style="line-height: 32px;">Правила составлялись при содействии с Администрацией проекта. Не знание правил не освобождает игрока от ответственности!</h4>
+
+@if (Model != null && Model.Any())
+{
+    <div class="rules">
+        @foreach (var rulePoint in Model)
+        {
+            <ol>
+                <h4>@rulePoint.Name</h4>
+                @foreach (var rule in rulePoint.Rules)
+                {
+                    <li>@rule.Text</li>
+                }
+            </ol>
+        }
+    </div>
+}
+else
+{
+    <h3>Правил нет</h3>
+}

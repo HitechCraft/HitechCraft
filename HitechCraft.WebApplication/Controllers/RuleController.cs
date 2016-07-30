@@ -1,4 +1,9 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.BL.CQRS.Query;
+using HitechCraft.Common.Projector;
+using HitechCraft.DAL.Domain;
+using HitechCraft.WebApplication.Models;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     using System.Web.Mvc;
     using Common.DI;
@@ -12,7 +17,13 @@
         // GET: Rule
         public ActionResult Index()
         {
-            return View();
+            var rules = new EntityListQueryHandler<RulePoint, RulePointViewModel>(this.Container)
+                .Handle(new EntityListQuery<RulePoint, RulePointViewModel>()
+                {
+                    Projector = this.Container.Resolve<IProjector<RulePoint, RulePointViewModel>>()
+                });
+
+            return View(rules);
         }
     }
 }
