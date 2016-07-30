@@ -22,6 +22,10 @@
                 .Column("Email")
                 .Length(128)
                 .Not.Nullable();
+
+            mapping.References(x => x.Refer)
+                .Column("Refer")
+                .Nullable();
         }
     }
 }
