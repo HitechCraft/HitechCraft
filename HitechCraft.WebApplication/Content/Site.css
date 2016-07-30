@@ -349,6 +349,9 @@ footer {
   border-top-left-radius: 34px;
   -ms-border-bottom-right-radius: 34px;
   border-bottom-right-radius: 34px; }
+  .panel-body {
+    background: #fbfbfb;
+    border-bottom-right-radius: 32px; }
   .panel-heading {
     -ms-border-top-left-radius: 34px;
     border-top-left-radius: 34px;
@@ -477,13 +480,13 @@ footer {
 #skin-container {
   width: 330px;
   margin: 0 auto;
-  padding: 75px 0;
+  padding: 36px 0;
   height: 392px; }
 
 .skin {
   border: 2px solid #ddd; }
   .skin-register {
-    padding: 70px 0;
+    padding: 75px 0;
     height: 451px; }
   .skin-uploader {
     position: absolute;

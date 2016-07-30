@@ -71,7 +71,6 @@
     $('#count')
         .on('input',
             function () {
-                alert($(this).val());
                 if (!$(this).val() || parseInt($(this).val()) === 0) {
                     $(this).val(1);
                 }

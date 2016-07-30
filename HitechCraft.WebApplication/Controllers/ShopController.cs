@@ -105,7 +105,8 @@
             ViewBag.Mods = this.GetMods().Select(x => new SelectListItem()
             {
                 Text = x.Name,
-                Value = x.Id.ToString()
+                Value = x.Id.ToString(),
+                Selected = x.Name == "Vanil"
             });
 
             ViewBag.Categories = this.GetCategories().Select(x => new SelectListItem()
@@ -130,7 +131,7 @@
 
                     this.CommandExecutor.Execute(this.Project<ShopItemEditViewModel, ShopItemCreateCommand>(vm));
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("CreateItem");
                 }
             }
             catch (Exception e)
