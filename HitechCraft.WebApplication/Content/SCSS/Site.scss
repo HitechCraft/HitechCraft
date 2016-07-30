@@ -1024,3 +1024,13 @@ footer {
         }
     }
 }
+
+.validation{
+    &-summary{
+        &-errors{
+            ul{
+                padding: 0;
+            }
+        }
+    }
+}

@@ -4,10 +4,7 @@
 
     public class ResetPasswordViewModel
     {
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Адрес электронной почты")]
-        public string Email { get; set; }
+        public string UserId { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Значение {0} должно содержать не менее {2} символов.", MinimumLength = 6)]

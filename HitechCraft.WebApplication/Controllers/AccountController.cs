@@ -23,20 +23,10 @@
     [Authorize]
     public class AccountController : BaseController
     {
+        #region Properties
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-        public AccountController(IContainer container) 
-            : base(container)
-        {
-        }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IContainer container) 
-            : base(container)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
 
         public ApplicationSignInManager SignInManager
         {
@@ -44,9 +34,9 @@
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -61,6 +51,44 @@
                 _userManager = value;
             }
         }
+
+        #endregion
+
+        #region Constructors / Deconstructors
+
+        public AccountController(IContainer container)
+            : base(container)
+        {
+        }
+
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IContainer container)
+            : base(container)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_userManager != null)
+                {
+                    _userManager.Dispose();
+                    _userManager = null;
+                }
+
+                if (_signInManager != null)
+                {
+                    _signInManager.Dispose();
+                    _signInManager = null;
+                }
+            }
+
+            base.Dispose(disposing);
+        }
+
+        #endregion
 
         #region Account Actions
 
@@ -288,7 +316,7 @@
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Не показывать, что пользователь не существует или не подтвержден
@@ -300,9 +328,10 @@
 
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
                 await UserManager.SendEmailAsync(user.Id, "Сброс пароля", "Сбросьте ваш пароль, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
 
-                return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account", new { email = user.Email });
             }
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
@@ -312,16 +341,20 @@
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
+        public ActionResult ForgotPasswordConfirmation(string email)
         {
+            ViewBag.Email = email ?? String.Empty;
+
             return View();
         }
 
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public ActionResult ResetPassword(string userId, string code)
         {
+            ViewBag.UserId = userId ?? "";
+
             return code == null ? View("Error") : View();
         }
 
@@ -336,17 +369,21 @@
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+
+            var user = await UserManager.FindByIdAsync(model.UserId);
+
             if (user == null)
             {
                 // Не показывать, что пользователь не существует
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+
             if (result.Succeeded)
             {
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
+
             AddErrors(result);
             return View();
         }
@@ -552,26 +589,6 @@
 
         #endregion
         
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
-
-                if (_signInManager != null)
-                {
-                    _signInManager.Dispose();
-                    _signInManager = null;
-                }
-            }
-
-            base.Dispose(disposing);
-        }
-
         #region Вспомогательные приложения
         // Используется для защиты от XSRF-атак при добавлении внешних имен входа
         private const string XsrfKey = "XsrfId";
