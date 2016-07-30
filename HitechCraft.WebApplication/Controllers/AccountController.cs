@@ -193,6 +193,8 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            if(!model.RulesAgree) ModelState.AddModelError(String.Empty, "Вы должны быть согласны с правилами проекта");
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser

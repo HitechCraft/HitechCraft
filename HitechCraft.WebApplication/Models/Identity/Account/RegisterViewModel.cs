@@ -32,5 +32,9 @@
         [Display(Name = "PasswordConfirm", ResourceType = typeof(Resources))]
         [Compare("Password", ErrorMessageResourceName = "ErrorPasswordsCompare", ErrorMessageResourceType = typeof(Resources))]
         public string ConfirmPassword { get; set; }
+        
+        [DataType(DataType.Password)]
+        [Display(Name = "Согласен с правилами проекта")]
+        public bool RulesAgree { get; set; }
     }
 }

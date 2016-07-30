@@ -28,6 +28,7 @@
 
         #region Shop Actions
 
+        //TODO: общую скидку засчет каких нибудь достижений
         // GET: Shop
         [Authorize]
         public ActionResult Index()

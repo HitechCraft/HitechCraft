@@ -471,10 +471,13 @@ footer {
   cursor: pointer;
   color: #000; }
 
+#skin-panel {
+  min-height: 555px; }
+
 #skin-container {
   width: 330px;
   margin: 0 auto;
-  padding: 36px 0;
+  padding: 75px 0;
   height: 392px; }
 
 .skin {
