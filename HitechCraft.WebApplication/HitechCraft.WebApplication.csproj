@@ -269,6 +269,7 @@
     <Compile Include="Mapper\Player\PlayerToPlayerProfileViewModelMapper.cs" />
     <Compile Include="Mapper\IKTransaction\IKTransactionToIKTransactionViewModelMapper.cs" />
     <Compile Include="Mapper\PlayerSession\PlayerSessionToPlayerSessionEditViewModelMapper.cs" />
+    <Compile Include="Mapper\Rule\RuleToRuleViewModelMapper.cs" />
     <Compile Include="Mapper\Server\ServerEditViewModelToServerUpdateCommandMapper.cs" />
     <Compile Include="Mapper\Server\ServerEditViewModelToServerCreateCommandMapper.cs" />
     <Compile Include="Mapper\Server\ServerCreateCommandToServerMapper.cs" />
@@ -320,6 +321,8 @@
     <Compile Include="Models\Player\PlayerProfileViewModel.cs" />
     <Compile Include="Models\Player\RoleViewModel.cs" />
     <Compile Include="Models\Player\UserSkinViewModel.cs" />
+    <Compile Include="Models\Rule\RuleViewModel.cs" />
+    <Compile Include="Models\Rule\RulePointViewModel.cs" />
     <Compile Include="Models\Server\ServerEditViewModel.cs" />
     <Compile Include="Models\Server\ServerModificationViewModel.cs" />
     <Compile Include="Models\Server\ServerViewModel.cs" />

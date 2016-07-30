@@ -22,6 +22,8 @@
                 .Column("Name")
                 .Length(128)
                 .Not.Nullable();
+
+            mapping.HasMany(x => x.Rules);
         }
     }
 }
