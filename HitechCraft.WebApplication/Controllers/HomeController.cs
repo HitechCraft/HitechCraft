@@ -14,8 +14,10 @@ namespace HitechCraft.WebApplication.Controllers
 
         //TODO: custom 404 pls
 
-        public ActionResult Index()
+        public ActionResult Index(int? refer)
         {
+            //TODO: придумать как запоминать id реферала для текущей сессии!!!
+
             return View();
         }
 
