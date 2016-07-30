@@ -60,7 +60,11 @@
                 .Add(AutoMap.AssemblyOf<PexEntity>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<PexEntityOverrides>())
                 .Add(AutoMap.AssemblyOf<PexInheritance>(autoMapHelper)
-                    .UseOverridesFromAssemblyOf<PexInheritanceOverrides>());
+                    .UseOverridesFromAssemblyOf<PexInheritanceOverrides>())
+                .Add(AutoMap.AssemblyOf<Rule>(autoMapHelper)
+                    .UseOverridesFromAssemblyOf<RuleOverrides>())
+                .Add(AutoMap.AssemblyOf<RulePoint>(autoMapHelper)
+                    .UseOverridesFromAssemblyOf<RulePointOverrides>());
         }
     }
 }
