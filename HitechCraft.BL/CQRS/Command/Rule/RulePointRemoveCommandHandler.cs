@@ -6,6 +6,7 @@
     using Common.DI;
     using DAL.Domain;
     using System;
+    using System.Linq;
 
     #endregion
 
@@ -18,6 +19,9 @@
         public override void Handle(RulePointRemoveCommand command)
         {
             var rulePointRep = this.GetRepository<RulePoint>();
+
+            if(rulePointRep.GetEntity(command.Id).Rules.Any())
+                throw new Exception("Пункт правил содержит правила!");
 
             rulePointRep.Delete(command.Id);
 

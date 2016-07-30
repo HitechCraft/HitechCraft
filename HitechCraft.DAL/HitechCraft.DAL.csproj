@@ -118,6 +118,7 @@
     <Compile Include="Repository\Specification\Player\AuthLogByPlayerNameSpec.cs" />
     <Compile Include="Repository\Specification\Player\PlayerSkinByUserNameSpec.cs" />
     <Compile Include="Repository\Specification\Player\PlayerByLoginSpec.cs" />
+    <Compile Include="Repository\Specification\Rule\RulePointByNameSpec.cs" />
     <Compile Include="UnitOfWork\NHibernateUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup />
