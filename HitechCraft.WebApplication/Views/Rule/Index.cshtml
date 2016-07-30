@@ -12,12 +12,42 @@
         @foreach (var rulePoint in Model)
         {
             <ol>
-                <h4>@rulePoint.Name</h4>
+                <h4>
+                    @rulePoint.Name
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a onclick="DeletePoint(@rulePoint.Id)"><span class="glyphicon glyphicon-remove"></span></a>
+                    }
+                </h4>
+
                 @foreach (var rule in rulePoint.Rules)
                 {
-                    <li>@rule.Text</li>
+                    <li>
+                        @rule.Text
+
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <a onclick="DeleteRule(@rule.Id)"><span class="glyphicon glyphicon-remove"></span></a>
+                        }
+                    </li>
                 }
             </ol>
+            if (User.IsInRole("Administrator"))
+            {
+                <div class="form-inline rule-add" id="add-rule-@rulePoint.Id" style="display: none">
+                    <div class="form-group">
+                        <textarea class="form-control" id="ruleText-@rulePoint.Id" style="min-height: 100px;resize: both"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="btn-group">
+                            <a class="btn btn-success" onclick="SubmitRule(@rulePoint.Id)">Добавить правило</a>
+                            <a class="btn btn-default" onclick="CancelRule(@rulePoint.Id)">Отмена</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="btn btn-primary btn-sm" onclick="AddRule(@rulePoint.Id)">Добавить правило</a>
+            }
         }
     </div>
 }
@@ -25,3 +55,104 @@ else
 {
     <h3>Правил нет</h3>
 }
+<br/>
+<br />
+@if (User.IsInRole("Administrator"))
+{
+    <div class="form-inline rule-point-add" id="add-point" style="display: none">
+        <div class="form-group">
+            <input type="text" id="rulePointName" class="form-control" placeholder="Введите название пункта" />
+        </div>
+        <div class="form-group">
+            <div class="btn-group">
+                <a class="btn btn-success" onclick="SubmitPoint()">Добавить пункт</a>
+                <a class="btn btn-default" onclick="CancelPoint()">Отмена</a>
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" onclick="AddPoint()">Добавить пункт правил</a>
+}
+
+<script type="text/javascript">
+    function AddPoint() {
+        $('#add-point').css('display', 'block');
+    }
+
+    function CancelPoint() {
+        $('#add-point').css('display', 'none');
+    }
+
+    function AddRule(id) {
+        $('#add-rule-'+id).css('display', 'block');
+    }
+
+    function CancelRule(id) {
+        $('#add-rule-'+id).css('display', 'none');
+    }
+
+    function SubmitPoint() {
+        $.post("@Url.Action("CreateRulePoint")", { name: $("input#rulePointName").val() })
+            .done(function (data) {
+                if (data.status === "OK") {
+                    growlSuccess(data.message);
+
+                    setTimeout(function () {
+                        document.location = '@Url.Action("Index")';
+                    }, 2000);
+                } else {
+                    growlError(data.message);
+                }
+            });
+    }
+
+    function DeletePoint(rulePointId) {
+        if (confirm("Вы действительно хотите удалить пункт правил?")) {
+            $.post("@Url.Action("DeleteRulePoint")", { id: rulePointId })
+            .done(function (data) {
+                if (data.status === "OK") {
+                    growlSuccess(data.message);
+
+                    setTimeout(function () {
+                        document.location = '@Url.Action("Index")';
+                    }, 2000);
+                } else {
+                    growlError(data.message);
+                }
+            });
+        }
+    }
+
+    function SubmitRule(id) {
+        $.post("@Url.Action("CreateRule")", { pointId: id, text: $("#ruleText-"+id).val() })
+        .done(function (data) {
+            if (data.status === "OK") {
+                growlSuccess(data.message);
+
+                setTimeout(function () {
+                    document.location = '@Url.Action("Index")';
+                }, 2000);
+            } else {
+                growlError(data.message);
+            }
+        });
+    }
+
+    function DeleteRule(ruleId) {
+        if (confirm("Вы действительно хотите удалить правило?")) {
+            $.post("@Url.Action("DeleteRule")", { id: ruleId })
+            .done(function (data) {
+                if (data.status === "OK") {
+                    growlSuccess(data.message);
+
+                    setTimeout(function () {
+                        document.location = '@Url.Action("Index")';
+                    }, 2000);
+                } else {
+                    growlError(data.message);
+                }
+            });
+        }
+    }
+
+</script>
