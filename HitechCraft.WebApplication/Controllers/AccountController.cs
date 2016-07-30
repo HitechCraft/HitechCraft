@@ -329,7 +329,7 @@
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
 
-                await UserManager.SendEmailAsync(user.Id, "Сброс пароля", "Сбросьте ваш пароль, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
+                await UserManager.SendEmailAsync(user.Id, "Сброс пароля", "Для сброса пароля перейдите по <a href=\"" + callbackUrl + "\">ссылке</a>");
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account", new { email = user.Email });
             }

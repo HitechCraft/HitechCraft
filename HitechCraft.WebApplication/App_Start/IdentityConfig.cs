@@ -1,21 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-using Microsoft.Owin.Security;
-using HitechCraft.WebApplication.Models;
-
-namespace HitechCraft.WebApplication
+﻿namespace HitechCraft.WebApplication
 {
+    #region Using Directives
+
+    using System;
+    using System.Net;
+    using System.Net.Mail;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using Manager;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin;
+    using Microsoft.Owin.Security;
+    using Models;
+
+    #endregion
+
     public class EmailService : IIdentityMessageService
     {
         private SmtpClient GetSmtpClient()
@@ -44,7 +45,7 @@ namespace HitechCraft.WebApplication
             var mail = new MailMessage("hitechcraft.ru@gmail.com", message.Destination)
             {
                 Subject = message.Subject,
-                Body = message.Body,
+                Body = MailManager.GetMail(message.Body),
                 IsBodyHtml = true
             };
             

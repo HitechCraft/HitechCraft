@@ -244,6 +244,7 @@
     <Compile Include="Manager\FileManager.cs" />
     <Compile Include="Manager\IKConfig.cs" />
     <Compile Include="Manager\ImageManager.cs" />
+    <Compile Include="Manager\MailManager.cs" />
     <Compile Include="Mapper\AuthLog\AuthLogToAuthLogViewModelMapper.cs" />
     <Compile Include="Mapper\Ban\BanToBanViewModelMapper.cs" />
     <Compile Include="Mapper\BaseMapper.cs" />
@@ -488,6 +489,7 @@
     <Content Include="Views\Top\_TopRubsPartial.cshtml" />
     <Content Include="Views\Donate\Groups.cshtml" />
     <Content Include="Views\Donate\_GroupsIE.cshtml" />
+    <Content Include="Views\Account\Mail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
