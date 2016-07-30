@@ -214,7 +214,8 @@
                     {
                         Name = model.UserName,
                         Gender = model.Gender,
-                        Email = model.Email
+                        Email = model.Email,
+                        ReferId = Session["ReferalId"].ToString()
                     });
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

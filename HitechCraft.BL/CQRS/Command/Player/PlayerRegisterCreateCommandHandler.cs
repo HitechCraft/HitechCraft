@@ -25,9 +25,21 @@
                 Email = command.Email
             };
 
+            try
+            {
+                var refPlayer = playerRep.GetEntity(command.ReferId);
+                playerInfo.Refer = refPlayer;  
+            }
+            catch
+            {
+
+            }
+
             var player = new Player()
             {
-                Name = command.Name, Gender = command.Gender, Info = playerInfo
+                Name = command.Name,
+                Gender = command.Gender,
+                Info = playerInfo
             };
 
             var currency = new Currency()

@@ -10,10 +10,10 @@
         }
 
         //TODO: custom 404 pls
-        public ActionResult Index(int? refer)
+        public ActionResult Index(string refer="")
         {
             //TODO: придумать как запоминать id реферала для текущей сессии!!!
-
+            Session["ReferalId"] = refer;
             return View();
         }
 
