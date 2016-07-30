@@ -234,6 +234,7 @@
     <Compile Include="Controllers\ModificationController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\RuleController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\TopController.cs" />
@@ -497,6 +498,7 @@
     <Folder Include="Areas\Launcher\Models\" />
     <Folder Include="Areas\Launcher\Views\Shared\" />
     <Folder Include="Views\Comment\" />
+    <Folder Include="Views\Rule\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

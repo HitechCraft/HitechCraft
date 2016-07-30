@@ -54,6 +54,8 @@ namespace HitechCraft.WebApplication.Ninject
 
             this._kernel.Bind(typeof(ICurrentUser)).To(typeof(CurrentUser));
 
+            #region Command Bindings
+
             this._kernel.Bind(typeof(ICommandHandler<>)).To(typeof(BaseCommandHandler<>));
             this._kernel.Bind(typeof(ICommandHandler<PlayerRegisterCreateCommand>)).To(typeof(PlayerRegisterCreateCommandHandler));
             this._kernel.Bind(typeof(ICommandHandler<PlayerSkinCreateOrUpdateCommand>)).To(typeof(PlayerSkinCreateOrUpdateCommandHandler));
@@ -81,7 +83,7 @@ namespace HitechCraft.WebApplication.Ninject
 
             this._kernel.Bind(typeof(ICommandHandler<CurrencyCreateCommand>)).To(typeof(CurrencyCreateCommandHandler));
             this._kernel.Bind(typeof(ICommandHandler<CurrencyUpdateCommand>)).To(typeof(CurrencyUpdateCommandHandler));
-            
+
             this._kernel.Bind(typeof(ICommandHandler<PlayerSessionUpdateCommand>)).To(typeof(PlayerSessionUpdateCommandHandler));
             this._kernel.Bind(typeof(ICommandHandler<PlayerSessionCreateCommand>)).To(typeof(PlayerSessionCreateCommandHandler));
 
@@ -94,6 +96,8 @@ namespace HitechCraft.WebApplication.Ninject
             this._kernel.Bind(typeof(ICommandHandler<DonateGroupIEBuyCommand>)).To(typeof(DonateGroupIEBuyCommandHandler));
 
             this._kernel.Bind(typeof(ICommandHandler<AuthLogCreateCommand>)).To(typeof(AuthLogCreateCommandHandler));
+
+            #endregion
 
             this._kernel.Bind(typeof(ICommandExecutor)).To(typeof(CommandExecutor));
         
