@@ -141,9 +141,9 @@
                 }
 
                 //Для отмены выбора предмета
-                window.selectedItem = 'item-' + id;
+                window.selectedItem = 'item-' + id.replace(':', '-');
 
-                $('#item-' + id).addClass('item-selected');
+                $('#item-' + id.replace(':', '-')).addClass('item-selected');
 
                 $('#item').html('');
                 $('#item').html(data);
