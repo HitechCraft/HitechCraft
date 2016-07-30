@@ -490,6 +490,7 @@
     <Content Include="Views\Donate\Groups.cshtml" />
     <Content Include="Views\Donate\_GroupsIE.cshtml" />
     <Content Include="Views\Account\Mail.cshtml" />
+    <Content Include="Views\Home\Rules.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

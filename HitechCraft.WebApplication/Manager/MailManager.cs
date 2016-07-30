@@ -34,7 +34,7 @@ namespace HitechCraft.WebApplication.Manager
 
             sb.Append("</p>");
             sb.Append("<p style='position: absolute; text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; color: #fff; text-align: justify; margin: 25px; bottom: 0;'>");
-            sb.Append("Данное письмо было отправлено с проекта HitechCraft - Multiserver Complex, так как вы указали свой email. Если это не имеет к вам никакого отношения - просто проигнорируйте это письмо!");
+            sb.Append("Данное письмо было отправлено с проекта HitechCraft - Multiserver Complex, так как вы указали свой E-mail при регистрации. Если это не имеет к вам никакого отношения - просто проигнорируйте это письмо!");
             sb.Append("</p>");
             sb.Append("</div>");
             sb.Append("</div>");

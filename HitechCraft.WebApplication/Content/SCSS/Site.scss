@@ -1025,11 +1025,35 @@ footer {
     }
 }
 
-.validation{
-    &-summary{
-        &-errors{
-            ul{
+.validation {
+    &-summary {
+        &-errors {
+            ul {
                 padding: 0;
+            }
+        }
+    }
+}
+
+.rules {
+    margin-top: 10px;
+
+    h4 {
+        margin: 21px 0px;
+        font-weight: bold;
+    }
+
+    ol {
+        padding: 0;
+
+        li {
+            margin-left: 18px;
+            line-height: 30px;
+            margin-bottom: 10px;
+
+            ul {
+                padding-left: 0;
+                margin: 20px;
             }
         }
     }

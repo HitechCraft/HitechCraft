@@ -756,3 +756,18 @@ footer {
 .validation-summary-errors ul {
   padding: 0; }
 
+.rules {
+  margin-top: 10px; }
+  .rules h4 {
+    margin: 21px 0px;
+    font-weight: bold; }
+  .rules ol {
+    padding: 0; }
+    .rules ol li {
+      margin-left: 18px;
+      line-height: 30px;
+      margin-bottom: 10px; }
+      .rules ol li ul {
+        padding-left: 0;
+        margin: 20px; }
+

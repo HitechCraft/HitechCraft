@@ -24,6 +24,12 @@ namespace HitechCraft.WebApplication.Controllers
             return View();
         }
 
+        //TODO: возможно перенести правила в базу, т.к. данные будут динамически изменяться
+        public ActionResult Rules()
+        {
+            return View();
+        }
+
         public ActionResult Vote()
         {
             return View();
