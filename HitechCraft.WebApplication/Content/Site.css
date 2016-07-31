@@ -112,6 +112,10 @@ a:hover {
   text-decoration: none !important;
   cursor: pointer; }
 
+a:focus {
+  text-decoration: none !important;
+  cursor: pointer; }
+
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -150,16 +154,23 @@ select {
   display: none; }
   .ajax-loader img {
     left: 42.8086%;
-    top: 46.0195%;
+    top: 38.0195%;
     z-index: 1000;
     position: fixed; }
+  .ajax-loader span {
+    display: block;
+    position: absolute;
+    z-index: 1000;
+    left: 42%;
+    top: 513px;
+    font-size: 30px;
+    font-weight: bold; }
 
 .ajax-bg {
   display: none;
   width: 100%;
   height: 100%;
-  /*background: rgba(0, 0, 0, 0.16);*/
-  background: #fff;
+  background: url("Images/loader-bg.png");
   z-index: 999;
   position: fixed; }
 
@@ -240,6 +251,8 @@ footer {
     text-transform: uppercase;
     text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; }
     .game-start a:hover {
+      color: #ff8400; }
+    .game-start a:focus {
       color: #ff8400; }
   .game-start-list {
     padding-left: 20px;

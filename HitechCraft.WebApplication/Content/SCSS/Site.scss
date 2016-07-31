@@ -41,6 +41,11 @@ a {
         text-decoration: none !important;
         cursor: pointer;
     }
+
+    &:focus {
+        text-decoration: none !important;
+        cursor: pointer;
+    }
 }
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -95,9 +100,19 @@ select {
 
         img {
             left: 42.8086%;
-            top: 46.0195%;
+            top: 38.0195%;
             z-index: 1000;
             position: fixed;
+        }
+
+        span {
+            display: block;
+            position: absolute;
+            z-index: 1000;
+            left: 42%;
+            top: 513px;
+            font-size: 30px;
+            font-weight: bold;
         }
     }
 
@@ -105,8 +120,7 @@ select {
         display: none;
         width: 100%;
         height: 100%;
-        /*background: rgba(0, 0, 0, 0.16);*/
-        background: #fff;
+        background: url("../Images/loader-bg.png");
         z-index: 999;
         position: fixed;
     }
@@ -225,6 +239,10 @@ footer {
             text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
 
             &:hover {
+                color: #ff8400;
+            }
+
+            &:focus {
                 color: #ff8400;
             }
         }
