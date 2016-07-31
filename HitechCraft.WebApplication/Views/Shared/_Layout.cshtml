@@ -31,7 +31,7 @@
                     @*<li>@Html.ActionLink("Форум", "Forum", "Home")</li>*@
                     <li>@Html.ActionLink("Начать игру", "GameStart", "Home")</li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="color: yellow">Магазин</span> <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" id="dd-shop" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="color: yellow">Магазин</span> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Блоки и предметы", "Index", "Shop")</li>
                             <li>@Html.ActionLink("Vip-Статусы", "Groups", "Donate")</li>
@@ -74,6 +74,13 @@
             $('.ajax-loader').hide();
             $('.ajax-bg').hide();
             $('body').css('overflow', 'visible');
+        });
+
+        $('.dropdown-toggle').on('mouseenter', function () {
+            $(this).dropdown('toggle');
+        });
+
+        $('.dropdown-toggle').on('mouseleave', function () {
         });
     </script>
     @Scripts.Render("~/bundles/bootstrap")
