@@ -102,6 +102,8 @@
     <Compile Include="CQRS\Command\Server\ServerCreateCommand.cs" />
     <Compile Include="CQRS\Command\Server\ServerUpdateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Server\ServerCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemAddRandomCommand.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemAddRandomCommandHandler.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemCategoryCreateCommand.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemBuyCommand.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemBuyCommandHandler.cs" />

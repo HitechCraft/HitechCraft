@@ -1,4 +1,8 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using System.Linq;
+using HitechCraft.Common.Projector;
+using HitechCraft.DAL.Repository.Specification;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     using Common.DI;
     using System.Web.Mvc;
@@ -6,6 +10,10 @@
     using BL.CQRS.Command;
     using System;
     using System.Collections.Generic;
+    using BL.CQRS.Query;
+    using Manager;
+    using Models;
+    using DAL.Domain;
 
     public class VoteController : BaseController
     {
@@ -14,32 +22,52 @@
         public string MCTopSecret => "h5h43hrehfdse7we2rujdjfvz";
 
         public string MCTopSuSecret => "3j4j34jfdsf9e932kjfdksjgdssepe3l2k";
-
+        
         public VoteController(IContainer container) : base(container)
         {
         }
-        
+
         [HttpPost]
         public ActionResult VoteOnTopcraft(string timestamp, string username, string signature)
         {
             if (signature.ToLower() == HashManager.GetSha1Hash(username + timestamp + this.TopCraftSecret))
             {
-                this.CommandExecutor.Execute(new CurrencyUpdateCommand()
+                try
                 {
-                    Id = this.Currency.Id,
-                    Gonts = 250,
-                    Rubles = 0
-                });
+                    var currency = new EntityListQueryHandler<Currency, CurrencyEditViewModel>(this.Container)
+                        .Handle(new EntityListQuery<Currency, CurrencyEditViewModel>()
+                        {
+                            Specification = new CurrencyByPlayerNameSpec(username),
+                            Projector = this.Container.Resolve<IProjector<Currency, CurrencyEditViewModel>>()
+                        }).First();
 
-                ViewBag.VoteOn = "Topcraft.ru";
-                ViewBag.VoteReward = "250 Gonts на счет";
+                    this.CommandExecutor.Execute(new CurrencyUpdateCommand()
+                    {
+                        Id = currency.Id,
+                        Gonts = 250,
+                        Rubles = 0
+                    });
+
+                    LogManager.Info(currency.PlayerName + ": голосование на Topcraft. Награда - 250 Gonts");
+
+                    ViewBag.VoteOn = "Topcraft.ru";
+                    ViewBag.VoteReward = "250 Gonts на счет";
+
+                    return this.Content("OK");
+                }
+                catch (Exception e)
+                {
+                    ViewBag.VoteError = "Ошибка голосования";
+
+                    LogManager.Error(username + ": Ошибка голосования. " + e.Message);
+                }
             }
             else
             {
                 ViewBag.VoteError = "Ошибка голосования";
             }
 
-            return View("Index");
+            return this.Content("NO");
         }
 
         [HttpGet]
@@ -47,22 +75,42 @@
         {
             if (token == HashManager.GetMd5Hash(nickname + this.MCTopSuSecret))
             {
-                this.CommandExecutor.Execute(new CurrencyUpdateCommand()
+                try
                 {
-                    Id = this.Currency.Id,
-                    Gonts = 0,
-                    Rubles = 2
-                });
+                    var currency = new EntityListQueryHandler<Currency, CurrencyEditViewModel>(this.Container)
+                        .Handle(new EntityListQuery<Currency, CurrencyEditViewModel>()
+                        {
+                            Specification = new CurrencyByPlayerNameSpec(nickname),
+                            Projector = this.Container.Resolve<IProjector<Currency, CurrencyEditViewModel>>()
+                        }).First();
 
-                ViewBag.VoteOn = "McTop.su";
-                ViewBag.VoteReward = "2 RUB на счет";
+                    this.CommandExecutor.Execute(new CurrencyUpdateCommand()
+                    {
+                        Id = currency.Id,
+                        Gonts = 0,
+                        Rubles = 2
+                    });
+
+                    LogManager.Info(currency.PlayerName + ": голосование на MCtopSU. Награда - 2 RUB");
+
+                    ViewBag.VoteOn = "McTop.su";
+                    ViewBag.VoteReward = "2 RUB на счет";
+
+                    return this.Content("OK");
+                }
+                catch (Exception e)
+                {
+                    ViewBag.VoteError = "Ошибка голосования";
+
+                    LogManager.Error(nickname + ": Ошибка голосования. " + e.Message);
+                }
             }
             else
             {
                 ViewBag.VoteError = "Ошибка голосования";
             }
 
-            return View("Index");
+            return this.Content("NO");
         }
 
         [HttpGet]
@@ -77,10 +125,24 @@
 
             if (sign == this.McTopSignBuilder(objects))
             {
-                //TODO: сделать выдачу приза (товар из магазина ресурсов)
+                try
+                {
+                    this.CommandExecutor.Execute(new ShopItemAddRandomCommand()
+                    {
+                        PlayerName = username
+                    });
 
-                ViewBag.VoteOn = "McTop";
-                ViewBag.VoteReward = "[наименование вещи]";
+                    LogManager.Info(username + ": голосование на MCtop. Награда - случайный предмет из магазина");
+
+                    ViewBag.VoteOn = "McTop";
+                    ViewBag.VoteReward = "случайный предмет из Магазина Ресурсов. Проверьте <a href='" + Url.Action("Cart", "Shop") + "'>корзину</a>";
+                }
+                catch (Exception e)
+                {
+                    ViewBag.VoteError = "Ошибка голосования";
+
+                    LogManager.Error(username + ": Ошибка голосования. " + e.Message);
+                }
             }
             else
             {

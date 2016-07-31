@@ -93,6 +93,8 @@ namespace HitechCraft.WebApplication.Ninject
             this._kernel.Bind(typeof(ICommandHandler<ShopItemBuyCommand>)).To(typeof(ShopItemBuyCommandHandler));
             this._kernel.Bind(typeof(ICommandHandler<ShopItemCategoryCreateCommand>)).To(typeof(ShopItemCategoryCreateCommandHandler));
 
+            this._kernel.Bind(typeof(ICommandHandler<ShopItemAddRandomCommand>)).To(typeof(ShopItemAddRandomCommandHandler));
+
             this._kernel.Bind(typeof(ICommandHandler<DonateGroupIEBuyCommand>)).To(typeof(DonateGroupIEBuyCommandHandler));
 
             this._kernel.Bind(typeof(ICommandHandler<AuthLogCreateCommand>)).To(typeof(AuthLogCreateCommandHandler));

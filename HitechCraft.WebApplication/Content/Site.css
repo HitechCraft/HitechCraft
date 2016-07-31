@@ -649,7 +649,8 @@ footer {
     margin: 0;
     padding: 14px 0; }
   .item img {
-    max-width: 100px; }
+    max-width: 100px;
+    max-height: 100px; }
   .item .price {
     display: block;
     margin: 18px 0; }
@@ -662,7 +663,7 @@ footer {
     border: 1px solid #ddd;
     padding: 25px;
     padding-top: 0px;
-    min-height: 520px;
+    min-height: 490px;
     margin-bottom: 30px; }
     .item-buying p {
       font-size: 21px;
