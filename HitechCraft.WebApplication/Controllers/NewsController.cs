@@ -82,10 +82,12 @@ namespace HitechCraft.WebApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             try
             {
+                if (id == 0 || id == null) throw new Exception();
+
                 var vm = new EntityQueryHandler<News, NewsViewModel>(this.Container)
                     .Handle(new EntityQuery<News, NewsViewModel>()
                     {
@@ -95,7 +97,7 @@ namespace HitechCraft.WebApplication.Controllers
 
                 this.CommandExecutor.Execute(new NewsViewsUpdateCommand()
                 {
-                    NewsId = id
+                    NewsId = (int)id
                 });
 
                 return View(vm);
@@ -108,10 +110,12 @@ namespace HitechCraft.WebApplication.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Administrator")]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             try
             {
+                if (id == 0 || id == null) throw new Exception();
+
                 var vm = new EntityQueryHandler<News, NewsEditViewModel>(this.Container)
                     .Handle(new EntityQuery<News, NewsEditViewModel>()
                     {
@@ -165,10 +169,12 @@ namespace HitechCraft.WebApplication.Controllers
 
         [HttpGet]
         [Authorize(Roles = "Administrator")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
             try
             {
+                if (id == 0 || id == null) throw new Exception();
+
                 var vm = new EntityQueryHandler<News, NewsViewModel>(this.Container)
                     .Handle(new EntityQuery<News, NewsViewModel>()
                     {
@@ -180,9 +186,7 @@ namespace HitechCraft.WebApplication.Controllers
             }
             catch (Exception)
             {
-                ViewBag.Error = "Новости не существует";
-
-                return View();
+                return HttpNotFound("LOL");
             }
         }
 

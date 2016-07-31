@@ -55,10 +55,12 @@ namespace HitechCraft.WebApplication.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
             try
             {
+                if (id == 0 || id == null) throw new Exception();
+
                 var vm = new EntityQueryHandler<Modification, ModificationEditViewModel>(this.Container)
                     .Handle(new EntityQuery<Modification, ModificationEditViewModel>()
                     {
@@ -70,9 +72,7 @@ namespace HitechCraft.WebApplication.Controllers
             }
             catch (Exception e)
             {
-                ViewBag.Error = "Сервера не существует";
-
-                return View();
+                return HttpNotFound();
             }
         }
 
@@ -116,8 +116,10 @@ namespace HitechCraft.WebApplication.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
+            if (id == 0 || id == null) throw new Exception();
+
             try
             {
                 var vm = new EntityQueryHandler<Modification, ModificationEditViewModel>(this.Container)
@@ -131,9 +133,7 @@ namespace HitechCraft.WebApplication.Controllers
             }
             catch (Exception)
             {
-                ViewBag.Error = "Сервера не существует";
-
-                return View();
+                return HttpNotFound();
             }
         }
 

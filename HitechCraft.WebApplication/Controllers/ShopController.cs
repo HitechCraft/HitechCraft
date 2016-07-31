@@ -189,6 +189,8 @@
 
             try
             {
+                if(String.IsNullOrEmpty(gameId)) throw new Exception();
+
                 vm = new EntityQueryHandler<ShopItem, ShopItemEditViewModel>(this.Container)
                    .Handle(new EntityQuery<ShopItem, ShopItemEditViewModel>()
                    {
@@ -264,6 +266,8 @@
 
             try
             {
+                if (String.IsNullOrEmpty(gameId)) throw new Exception();
+
                 vm = new EntityQueryHandler<ShopItem, ShopItemViewModel>(this.Container)
                    .Handle(new EntityQuery<ShopItem, ShopItemViewModel>()
                    {
