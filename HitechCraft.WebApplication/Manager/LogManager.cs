@@ -9,7 +9,7 @@
 
         static LogManager()
         {
-            _logger = NLog.LogManager.GetLogger("Test");
+            _logger = NLog.LogManager.GetLogger("Log");
         }
 
         /// <summary>

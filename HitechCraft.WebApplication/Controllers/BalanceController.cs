@@ -91,7 +91,7 @@ namespace HitechCraft.WebApplication.Controllers
             try
             {
                 this.UpdateGonts(Math.Round(count / this.RubToGont));
-                this.UpdateRubles(-count);
+                this.UpdateRubles(-count, "");
             }
             catch (Exception e)
             {
@@ -114,7 +114,7 @@ namespace HitechCraft.WebApplication.Controllers
         {
             try
             {
-                this.UpdateRubles(Math.Round(count / this.GontToRub, 2));
+                this.UpdateRubles(Math.Round(count / this.GontToRub, 2), "");
                 this.UpdateGonts(-count);
             }
             catch (Exception e)
@@ -143,12 +143,15 @@ namespace HitechCraft.WebApplication.Controllers
         [HttpPost]
         public ActionResult Payment(PaymentModel pm)
         {
-            //TODO: add unick transaction ids
             if (this.IsValidTransaction(pm))
             {
-                this.MoneyEnrollment(CurrencyType.Rub, float.Parse(pm.ik_am));
+                this.MoneyEnrollment(CurrencyType.Rub, float.Parse(pm.ik_am), pm.ik_pm_no);
+
+                LogManager.Info(this.Player.Name + ": оплата совершена. Сумма " + pm.ik_am, "IK");
             }
-            
+
+            LogManager.Error(this.Player.Name + ": ошибка совершения оплаты. Невалидная транзакция " + pm.ik_pm_no, "IK");
+
             return null;
         }
 
@@ -159,6 +162,8 @@ namespace HitechCraft.WebApplication.Controllers
         [HttpGet]
         public ActionResult Success(string ik_pm_no)
         {
+            if (ik_pm_no == null) return RedirectToAction("Index");
+            
             this.UpdateTransaction(ik_pm_no);
 
             TempData["paymentResult"] = "Счет успешно пополнен!";
@@ -174,6 +179,8 @@ namespace HitechCraft.WebApplication.Controllers
         [HttpGet]
         public ActionResult Fail(string ik_pm_no)
         {
+            if (ik_pm_no == null) return RedirectToAction("Index");
+
             this.UpdateTransaction(ik_pm_no);
 
             TempData["paymentResult"] = "Ошибка пополнения счета!";
@@ -196,7 +203,8 @@ namespace HitechCraft.WebApplication.Controllers
             var transactions = new EntityListQueryHandler<IKTransaction, IKTransactionViewModel>(this.Container)
                 .Handle(new EntityListQuery<IKTransaction, IKTransactionViewModel>()
                 {
-                    Specification = new IKTransactionByTransactionIdSpec(pm.ik_pm_no)
+                    Specification = new IKTransactionByTransactionIdSpec(pm.ik_pm_no),
+                    Projector = this.Container.Resolve<IProjector<IKTransaction, IKTransactionViewModel>>()
                 });
 
             if (!transactions.Any())
@@ -323,12 +331,12 @@ namespace HitechCraft.WebApplication.Controllers
         /// <param name="currencyType">Type of currency (rub or gont)</param>
         /// <param name="amount">Amount to enroll</param>
         /// <param name="transactionID">IK Transaction ID</param>
-        private void MoneyEnrollment(CurrencyType currencyType, float amount)
+        private void MoneyEnrollment(CurrencyType currencyType, float amount, string transactionId)
         {
             switch (currencyType)
             {
                 case CurrencyType.Rub:
-                    this.UpdateRubles(amount);
+                    this.UpdateRubles(amount, transactionId);
                     break;
                 case CurrencyType.Gont:
                     this.UpdateGonts(amount);
@@ -371,11 +379,13 @@ namespace HitechCraft.WebApplication.Controllers
         /// Обновление осуществляется прибавлением (вычетом) значения. Указываем разницу, а не новое кол-во валюты!!!
         /// </summary>
         /// <param name="amount">Разница (например +10 или -10)</param>
-        private void UpdateRubles(double amount)
+        /// <param name="transactionId">Id of IK transaction</param>
+        private void UpdateRubles(double amount, string transactionId)
         {
             this.CommandExecutor.Execute(new CurrencyUpdateCommand()
             {
-                Id = this.Currency.Id,
+                Id = this.Currency != null ? this.Currency.Id : 0,
+                TransactionId = transactionId,
                 Gonts = 0,
                 Rubles = amount
             });

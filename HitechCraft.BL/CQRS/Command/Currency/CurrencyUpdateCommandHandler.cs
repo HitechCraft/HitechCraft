@@ -5,6 +5,9 @@
     using Common.CQRS.Command;
     using Common.DI;
     using DAL.Domain;
+    using System;
+    using System.Linq;
+    using DAL.Repository.Specification;
 
     #endregion
 
@@ -17,8 +20,20 @@
         public override void Handle(CurrencyUpdateCommand command)
         {
             var currencyRep = this.GetRepository<Currency>();
+            var transactionRep = this.GetRepository<IKTransaction>();
 
-            var currency = currencyRep.GetEntity(command.Id);
+            Currency currency;
+
+            if (command.Id != 0 && String.IsNullOrEmpty(command.TransactionId))
+            {
+                currency = currencyRep.GetEntity(command.Id);
+            }
+            else
+            {
+                var transaction = transactionRep.GetEntity(command.TransactionId);
+
+                currency = currencyRep.Query(new CurrencyByPlayerNameSpec(transaction.Player.Name)).First();
+            }
 
             if (command.Gonts != 0)
             {
