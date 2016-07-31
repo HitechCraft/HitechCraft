@@ -23,7 +23,8 @@
             {
                 Name = command.Name,
                 Description = command.Description,
-                Version = command.Version
+                Version = command.Version,
+                Image = command.Image
             };
 
             modRep.Add(mod);

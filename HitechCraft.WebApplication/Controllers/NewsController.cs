@@ -135,7 +135,7 @@ namespace HitechCraft.WebApplication.Controllers
             {
                 var uploadImage = Request.Files["uploadNewsImage"];
                 
-                if (uploadImage.ContentLength > 0) vm.Image = ImageManager.GetImageBytes(uploadImage);
+                if (uploadImage != null && uploadImage.ContentLength > 0) vm.Image = ImageManager.GetImageBytes(uploadImage);
 
                 this.CommandExecutor.Execute(this.Project<NewsEditViewModel, NewsUpdateCommand>(vm));
 

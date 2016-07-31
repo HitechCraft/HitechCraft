@@ -11,7 +11,9 @@
 
         [Required]
         public string Version { get; set; }
-        
+
+        public byte[] Image { get; set; }
+
         public string Description { get; set; }
 
     }

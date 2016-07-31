@@ -11,7 +11,8 @@
                 .ForMember(dst => dst.Id, ext => ext.MapFrom(src => src.Id))
                 .ForMember(dst => dst.Name, ext => ext.MapFrom(src => src.Name))
                 .ForMember(dst => dst.Description, ext => ext.MapFrom(src => src.Description))
-                .ForMember(dst => dst.Version, ext => ext.MapFrom(src => src.Version));
+                .ForMember(dst => dst.Version, ext => ext.MapFrom(src => src.Version))
+                .ForMember(dst => dst.Image, ext => ext.MapFrom(src => src.Image));
         }
     }
 }

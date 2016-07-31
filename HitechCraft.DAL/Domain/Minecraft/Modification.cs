@@ -30,6 +30,11 @@
         public virtual string Description { get; set; }
 
         /// <summary>
+        /// Mod image
+        /// </summary>
+        public virtual byte[] Image { get; set; }
+
+        /// <summary>
         /// ServerModification collection
         /// </summary>
         public virtual ISet<ServerModification> ServerModifications { get; set; }

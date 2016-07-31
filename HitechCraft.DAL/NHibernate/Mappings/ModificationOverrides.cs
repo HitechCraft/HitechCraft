@@ -27,6 +27,9 @@
                 .Column("Description")
                 .Length(2000);
 
+            mapping.Map(x => x.Image)
+                .Column("Image");
+
             mapping.Map(x => x.Version)
                 .Column("Version")
                 .Length(32)

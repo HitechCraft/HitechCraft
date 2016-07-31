@@ -12,6 +12,8 @@
 
         public string Description { get; set; }
 
+        public byte[] Image { get; set; }
+
         public IEnumerable<ModificationServerViewModel> Servers { get; set; }
     }
 }

@@ -25,6 +25,7 @@
             mod.Name = command.Name;
             mod.Description = command.Description;
             mod.Version = command.Version;
+            mod.Image = command.Image;
 
             modRep.Update(mod);
             modRep.Dispose();

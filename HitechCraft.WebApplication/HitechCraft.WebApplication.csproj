@@ -511,6 +511,8 @@
     <Content Include="Views\Account\Mail.cshtml" />
     <Content Include="Views\Home\Rules.cshtml" />
     <Content Include="Views\Rule\Index.cshtml" />
+    <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

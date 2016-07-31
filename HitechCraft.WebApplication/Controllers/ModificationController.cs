@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.WebApplication.Manager;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     using System.Web.Mvc;
     using BL.CQRS.Query;
@@ -39,6 +41,10 @@
         {
             if (ModelState.IsValid)
             {
+                var uploadImage = Request.Files["uploadModImage"];
+
+                vm.Image = ImageManager.GetImageBytes(uploadImage);
+
                 this.CommandExecutor.Execute(this.Project<ModificationEditViewModel, ModificationCreateCommand>(vm));
 
                 //TODO: redirect to details by id
@@ -76,6 +82,10 @@
         {
             if (ModelState.IsValid)
             {
+                var uploadImage = Request.Files["uploadModImage"];
+
+                if (uploadImage != null && uploadImage.ContentLength > 0) vm.Image = ImageManager.GetImageBytes(uploadImage);
+
                 this.CommandExecutor.Execute(this.Project<ModificationEditViewModel, ModificationUpdateCommand>(vm));
 
                 return RedirectToAction("Details", new { id = vm.Id });
