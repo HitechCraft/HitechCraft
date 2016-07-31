@@ -798,6 +798,21 @@ footer {
     }
 }
 
+.vote {
+    text-align: center;
+
+    img {
+        max-width: 145px;
+        max-height: 145px;
+        cursor: pointer;
+        border: 2px solid #fff;
+
+        &:hover{
+            border: 2px solid;
+        }
+    }
+}
+
 .item {
     border: 1px solid #ddd;
     text-align: center;

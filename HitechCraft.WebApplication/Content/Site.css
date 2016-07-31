@@ -621,6 +621,16 @@ footer {
   .votes-tops img:hover {
     border: 1px solid #ddd; }
 
+.vote {
+  text-align: center; }
+  .vote img {
+    max-width: 145px;
+    max-height: 145px;
+    cursor: pointer;
+    border: 2px solid #fff; }
+    .vote img:hover {
+      border: 2px solid; }
+
 .item {
   border: 1px solid #ddd;
   text-align: center;
