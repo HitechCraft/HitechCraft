@@ -18,6 +18,13 @@
     </div>
     if (Model.Count >= ViewBag.ItemsOnPage || ViewBag.Page > 1)
     {
+        <div class="form-inline">
+            <div class="form-group">
+                <label>Предметов на странице</label>
+                <input type="text" class="form-control" id="itemsOnPage" value="@ViewBag.ItemsOnPage" />
+                <a class="btn btn-success" onclick="FilterItems(null)">Применить</a>
+            </div>
+        </div>
         @Html.PagedListPager(Model, page => "javascript:FilterItems(" + page + ")")
     }
 }

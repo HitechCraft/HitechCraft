@@ -107,8 +107,9 @@
         var text = $('input#text').val();
         var mod = $('input#modId').val();
         var category = $('input#categoryId').val();
+        var itemsOnPage = $('input#itemsOnPage').val();
 
-        LoadItems(currentPage, mod, category, text);
+        LoadItems(currentPage, mod, category, itemsOnPage, text);
     }
 
     function setMod(id, name) {
@@ -125,8 +126,8 @@
         $('input#categoryId').val(id);
     }
 
-    function LoadItems(currentPage, modid, categoryid, text) {
-        $.get("@Url.Action("ItemPartialList", "Shop")", { page: currentPage, modId: modid, categoryId: categoryid, filterText: text })
+    function LoadItems(currentPage, modid, categoryid, itemsOnPage, text) {
+        $.get("@Url.Action("ItemPartialList", "Shop")", { page: currentPage, modId: modid, categoryId: categoryid, itemOnPage: itemsOnPage, filterText: text })
             .done(function (data) {
                 $('#item-list').html('');
                 $('#item-list').html(data);

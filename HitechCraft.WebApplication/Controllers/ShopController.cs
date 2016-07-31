@@ -20,7 +20,7 @@
 
     public class ShopController : BaseController
     {
-        public int ItemsOnPage => 8;
+        public int ItemsOnPage => 12;
 
         public ShopController(IContainer container) : base(container)
         {
@@ -48,7 +48,7 @@
 
         [HttpGet]
         [Authorize]
-        public ActionResult ItemPartialList(int? page, int? modId, int? categoryId, string filterText = null)
+        public ActionResult ItemPartialList(int? page, int? modId, int? categoryId, int? itemOnPage, string filterText = null)
         {
             int currentPage = page ?? 1;
             
@@ -73,10 +73,10 @@
                 itemList = itemList.Where(x => x.Name.Contains(filterText) || x.Description.Contains(filterText));
             }
             
-            ViewBag.ItemsOnPage = this.ItemsOnPage;
+            ViewBag.ItemsOnPage = itemOnPage ?? this.ItemsOnPage;
             ViewBag.Page = currentPage;
 
-            return PartialView("_ShopItemListPartial", itemList.ToPagedList(currentPage, this.ItemsOnPage));
+            return PartialView("_ShopItemListPartial", itemList.ToPagedList(currentPage, itemOnPage ?? this.ItemsOnPage));
         }
 
         [HttpGet]
