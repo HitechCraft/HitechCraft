@@ -1,0 +1,39 @@
+﻿<div class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("HITECHCRAFT", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Главная", "Index", "Home")</li>
+                <li>@Html.ActionLink("Правила", "Rules", "Home")</li>
+                @*<li>@Html.ActionLink("Форум", "Forum", "Home")</li>*@
+                <li>@Html.ActionLink("Начать игру", "GameStart", "Home")</li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" id="dd-shop" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="color: yellow">Магазин</span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Блоки и предметы", "Index", "Shop")</li>
+                        <li>@Html.ActionLink("Vip-Статусы", "Groups", "Donate")</li>
+                        @*<li>@Html.ActionLink("Наборы ресурсов", "Kits", "Donate")</li>*@
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Дополнительно <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Топ игроков", "Index", "Top")</li>
+                        <li role="separator" class="divider"></li>
+                        <li>@Html.ActionLink("Сервера", "Index", "Server")</li>
+                        <li>@Html.ActionLink("Модификации", "Index", "Modification")</li>
+                    </ul>
+                </li>
+                <li>@Html.ActionLink("О нас", "About", "Home")</li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
