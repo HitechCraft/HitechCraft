@@ -20,7 +20,7 @@
             <h5>@comment.AuthorName пишет...</h5>
 
             <div class="comment-avatar">
-                <img src="@Url.Action("GetSkinImage", "Player")" id="skin-image@(comment.Id)" class="avaSkin@(comment.Id)" hidden=""/>
+                <img src="@Url.Action("GetSkinImage", "Player", new { playerName = comment.AuthorName })" id="skin-image@(comment.Id)" class="avaSkin@(comment.Id)" hidden=""/>
             </div>
             <div class="comment-text form-control">
                 @comment.Text

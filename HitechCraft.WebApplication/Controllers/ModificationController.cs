@@ -94,10 +94,12 @@ namespace HitechCraft.WebApplication.Controllers
             return View(vm);
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             try
             {
+                if(id == 0 || id == null) throw new Exception();
+
                 var vm = new EntityQueryHandler<Modification, ModificationViewModel>(this.Container)
                     .Handle(new EntityQuery<Modification, ModificationViewModel>()
                     {
@@ -109,9 +111,7 @@ namespace HitechCraft.WebApplication.Controllers
             }
             catch (Exception e)
             {
-                ViewBag.Error = e.Message;
-
-                return View();
+                return HttpNotFound();
             }
         }
 
