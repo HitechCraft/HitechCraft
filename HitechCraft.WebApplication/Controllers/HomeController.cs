@@ -13,6 +13,7 @@
         public ActionResult Index(string refer="")
         {
             Session["ReferalId"] = refer;
+            
             return View();
         }
 
