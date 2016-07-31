@@ -12,7 +12,6 @@
         //TODO: custom 404 pls
         public ActionResult Index(string refer="")
         {
-            //TODO: придумать как запоминать id реферала для текущей сессии!!!
             Session["ReferalId"] = refer;
             return View();
         }
@@ -21,11 +20,10 @@
         {
             return View();
         }
-
-        //TODO: возможно перенести правила в базу, т.к. данные будут динамически изменяться
+        
         public ActionResult Rules()
         {
-            return View();
+            return RedirectToAction("Index", "Rule");
         }
 
         public ActionResult Vote()
