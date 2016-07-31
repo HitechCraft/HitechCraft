@@ -618,7 +618,7 @@ footer {
     &-uploader {
         position: absolute;
         z-index: 999;
-        width: 30%;
+        width: 45%;
         height: 43px;
         cursor: pointer;
         opacity: 0;
@@ -993,6 +993,7 @@ footer {
 
     td {
         text-align: center;
+        font-weight: bold;
     }
 
     .lightpro {

@@ -19,7 +19,7 @@ namespace HitechCraft.WebApplication.Controllers
         Pro = 210,
         Vip = 320,
         Premium = 400,
-        Ultra = 550
+        Ultra = 620
     }
 
     public class DonateController : BaseController

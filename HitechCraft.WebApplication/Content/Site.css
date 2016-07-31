@@ -505,7 +505,7 @@ footer {
   .skin-uploader {
     position: absolute;
     z-index: 999;
-    width: 30%;
+    width: 45%;
     height: 43px;
     cursor: pointer;
     opacity: 0; }
@@ -736,7 +736,8 @@ footer {
   margin-bottom: 30px; }
 
 .groups td {
-  text-align: center; }
+  text-align: center;
+  font-weight: bold; }
 
 .groups .lightpro-prefix {
   color: #42f751; }
