@@ -1,6 +1,7 @@
 ﻿@model HitechCraft.WebApplication.Models.ShopItemViewModel
 @{
     ViewBag.Title = "Купить предмет";
+    int defaultValue = 10;
 }
 
 <h2 class="page-title">@ViewBag.Title</h2>
@@ -35,7 +36,7 @@
 
                 <span id="item-error" class="item-error"></span>
                 <p id="item-count" class="alert alert-success">
-                    Общая стоимость: <span id="item-summ">@Model.Price</span> Gonts
+                    Общая стоимость: <span id="item-summ">@(Model.Price * defaultValue)</span> Gonts
                 </p>
             </div>
 
@@ -47,9 +48,11 @@
 
 <script type="text/javascript">
     $(function () {
+        CheckValid();
+
         $("#slider").slider({
             range: "min",
-            value: 10,
+            value: @defaultValue,
             min: 1,
             max: 64,
             slide: function (event, ui) {
