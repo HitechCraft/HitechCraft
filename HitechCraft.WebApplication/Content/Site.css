@@ -122,6 +122,13 @@
 .server-description {
   text-align: justify; }
 
+.modification-panel {
+  height: 314px; }
+
+.modification-image {
+  max-height: 113px;
+  max-width: 463px; }
+
 /*VARIABLES*/
 html, body {
   padding: 0;
