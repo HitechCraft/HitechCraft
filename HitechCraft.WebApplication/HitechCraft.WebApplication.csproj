@@ -359,6 +359,15 @@
     <Content Include="Content\Images\banners\acc_blue_on_white_ru.png" />
     <Content Include="Content\Images\banners\v_blue_on_white_ru.png" />
     <Content Include="Content\Images\charRendered.png" />
+    <Content Include="Content\Images\kits\ie_kit_eat.png" />
+    <Content Include="Content\Images\kits\ie_kit_medic.png" />
+    <Content Include="Content\Images\kits\ie_kit_premium.png" />
+    <Content Include="Content\Images\kits\ie_kit_start.png" />
+    <Content Include="Content\Images\kits\ie_kit_ultra.png" />
+    <Content Include="Content\Images\kits\ie_kit_vip.png" />
+    <Content Include="Content\Images\loader-bg.png" />
+    <Content Include="Content\Images\mailbg.jpg" />
+    <Content Include="favicon.png" />
     <Content Include="Content\Images\game-start.png" />
     <Content Include="Content\Images\launcher-linux.png" />
     <Content Include="Content\Images\launcher-win.png" />
@@ -378,7 +387,6 @@
     <Content Include="Content\jquery.jgrowl.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.min.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -402,6 +410,7 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\HitechCraft.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\circle-progress.js" />
     <Content Include="Scripts\jgrowl.alerts.js" />
