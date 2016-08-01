@@ -4,43 +4,41 @@
     ViewBag.Title = "Список серверов";
 }
 
-<h2 class="text-center">@ViewBag.Title</h2>
+<h2 class="page-title">@ViewBag.Title</h2>
+
 @if (Model != null && Model.Any())
 {
-    foreach (var server in Model)
-    {
+    <div class="row">
+        @foreach (var server in Model)
+        {
         <div class="col-md-6">
             <div class="panel panel-default server-info-panel">
                 <div class="panel-heading">
                     <a href="@Url.Action("Details", "Server", new {id = server.Id})">@server.Name</a>
                 </div>
                 <div class="panel-body text-center">
-                    <img class="server-image" src="data:image/jpeg;base64,@Convert.ToBase64String(server.Image)" alt="">
-                    <div class="col-md-6">
-                        <p class="server-description text-left">
-                            @server.Description
-                        </p>
-                    </div>
-                    <div class="col-md-6">
-                        <ul class="server-info text-left">
-                            <li class="server-info-item"><span>Версия: </span>@server.ClientVersion</li>
-                            <li class="server-info-item"><span>Адрес: </span>@(server.Address)</li>
-                            @if (server.Data.Status == 0)
-                            {
-                                <li class="server-info-item server-info-item-online"><span>Статус: </span>@Enum.GetName(typeof(JsonMinecraftServerStatus), server.Data.Status)</li>
-                            }
-                            else
-                            {
-                                <li class="server-info-item server-info-item-offline"><span>Статус: </span>@Enum.GetName(typeof(JsonMinecraftServerStatus), server.Data.Status)</li>
-                            }
+                    <img class="server-image" src="data:image/jpeg;base64,@Convert.ToBase64String(server.Image)" alt="" onclick="document.location = '@Url.Action("Details", "Server", new { id = @server.Id })'">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="server-description text-left">
+                                @server.Description
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="server-info text-left">
+                                <li><span>Версия: </span>@server.ClientVersion</li>
+                                <li><span>Адрес: </span>@(server.Address)</li>
+                                <li><span>Статус: </span>@Html.ServerStatusLabel(server.Data.Status, server.Data.Message)</li>
 
-                            <li class="server-info-item"><span>Игроки: </span>@server.Data.MaxPlayerCount из @server.Data.PlayerCount</li>
-                        </ul>
+                                <li><span>Игроки: </span>@server.Data.MaxPlayerCount из @server.Data.PlayerCount</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    }
+        }
+    </div>
 }
 else
 {

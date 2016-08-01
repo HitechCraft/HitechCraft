@@ -1,5 +1,5 @@
 ﻿@using HitechCraft.Common.Models.Json.MinecraftServer
-@model HitechCraft.WebApplication.Models.ServerViewModel
+@model HitechCraft.WebApplication.Models.ServerDetailViewModel
 @{
     ViewBag.Title = "Подробно";
 }
@@ -21,8 +21,10 @@
         <div class="col-md-7">
             <p>Статус: @Html.ServerStatusLabel(Model.Data.Status, Model.Data.Message)</p>
 
-            @*TODO: при ошибке или выключенном сервере не показывать*@
-            <p>Игроки: @(Model.Data.PlayerCount) из @(Model.Data.MaxPlayerCount)</p>
+            @if (Model.Data.Status == JsonMinecraftServerStatus.Empty || Model.Data.Status == JsonMinecraftServerStatus.Full || Model.Data.Status == JsonMinecraftServerStatus.Online)
+            {
+                <p>Игроки: @(Model.Data.PlayerCount) из @(Model.Data.MaxPlayerCount)</p>
+            }
 
             <p>Версия @Model.ClientVersion</p>
 

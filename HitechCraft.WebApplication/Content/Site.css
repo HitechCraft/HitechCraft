@@ -97,28 +97,30 @@
 
 .server-image {
   width: 100%;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  border: 1px solid #fff;
+  cursor: pointer; }
+  .server-image:hover {
+    border: 1px solid #000; }
 
 .server-info {
   list-style: none;
   border: 1px solid rgba(0, 0, 0, 0.41);
   padding: 0;
   margin-top: 15px; }
-  .server-info-panel {
-    box-shadow: 6px 6px 12px -6px #777777; }
-  .server-info-item {
+  .server-info li {
     border: 1px solid rgba(0, 0, 0, 0.41);
     padding: 11px; }
-    .server-info-item span {
+    .server-info li span:first-child {
       font-weight: bold;
-      color: #333333 !important; }
-    .server-info-item-offline {
+      color: #333333; }
+    .server-info li-offline {
       color: red; }
-    .server-info-item-online {
+    .server-info li-online {
       color: lawngreen; }
 
 .server-description {
-  word-break: break-all; }
+  text-align: justify; }
 
 /*VARIABLES*/
 html, body {
