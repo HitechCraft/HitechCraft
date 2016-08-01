@@ -1,0 +1,57 @@
+﻿@model IEnumerable<HitechCraft.WebApplication.Models.ModificationViewModel>
+
+@{
+    ViewBag.Title = "Список модификаций";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            @*TODO: move to Resources*@
+            <th>Наименование</th>
+            <th>Описание</th>
+            <th>Версия</th>
+            <th>Используется в серверах</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var mod in Model)
+        {
+            <tr>
+                <td><a href="@Url.Action("Details", new {id = mod.Id})">@mod.Name</a></td>
+                <td>@mod.Description</td>
+                <td>@mod.Version</td>
+                <td>
+                    @if (mod != null && mod.Servers.Any())
+                    {
+                        foreach (var server in mod.Servers)
+                        {
+                            @Html.ActionLink(server.Name, "Details", "Server", new {id = server.Id})<br/>
+                        }
+                    }
+                    else
+                    {
+                        <p>Не используется</p>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    if (User.IsInRole("Administrator"))
+    {
+
+        <div>
+            @Html.ActionLink("Добавить", "Create", "Modification", null, new { @class = "btn btn-success" })
+        </div>
+    }
+}
+else
+{
+    <p>Модификаций не найдено</p>
+}

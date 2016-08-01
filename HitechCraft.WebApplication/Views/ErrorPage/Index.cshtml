@@ -1,0 +1,6 @@
+﻿@{
+    ViewBag.Title = "Ошибка " + ViewBag.ErrorCode ?? "500";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+<h3>@(ViewBag.ErrorMessage ?? "Ошибка сервера")</h3>

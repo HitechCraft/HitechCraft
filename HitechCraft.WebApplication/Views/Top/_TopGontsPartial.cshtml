@@ -1,0 +1,42 @@
+﻿@model IEnumerable<HitechCraft.WebApplication.Models.CurrencyTopViewModel>
+@{
+    int i = 0;
+}
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Никнэйм</td>
+                <td>Аватар</td>
+                <td>Сумма Gonts</td>
+            </tr>
+        </thead>
+        @foreach (var player in Model)
+        {
+            i++;
+            <tr>
+                <td>@i</td>
+                <td>@player.PlayerName</td>
+                <td>
+                    <img src="@Url.Action("GetSkinImage", "Player", new {gender = player.PlayerGender, playerName = player.PlayerName})" id="skin-image" class="avaSkinGont@(player.PlayerName)" hidden=""/></td>
+                <td>@player.Gonts</td>
+            </tr>
+
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    renderMCSkins('avaSkinGont@(player.PlayerName)', 8);
+                    $('.avaSkinGont@(player.PlayerName)').css('height', '128px');
+                });
+            </script>
+        }
+    </table>
+
+    <h4 style="margin-top: 20px">Хотите занять свое место в топе? Пополните ваш @Html.ActionLink("счет", "Index", "Balance")!</h4>
+}
+else
+{
+    <h3>Записей не найдено</h3>
+}

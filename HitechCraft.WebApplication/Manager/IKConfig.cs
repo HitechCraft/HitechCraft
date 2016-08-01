@@ -1,0 +1,37 @@
+﻿namespace HitechCraft.WebApplication.Manager
+{
+    public static class IKConfig
+    {
+        public static bool TestMode
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public static string IKID
+        {
+            get
+            {
+                return "5294ac1ebf4efc2519330a7a";
+            }
+        }
+
+        public static string IKSecret
+        {
+            get
+            {
+                return "gwAKGFVvx5Cu4gjj";
+            }
+        }
+
+        public static string IKSecretTest
+        {
+            get
+            {
+                return "u7xRbNdRXlCDweu3";
+            }
+        }
+    }
+}

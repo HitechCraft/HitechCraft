@@ -1,0 +1,44 @@
+﻿@using WebApplication.Domain
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="form-inline">
+    <div class="form-group">
+        <label for="Player">Игрок</label>
+        @Html.DropDownList("Player", null, "None", new { @class = "form-control input-sm" })
+    </div>
+    <div class="form-group">
+        <label for="Type">Тип наказания</label>
+        @Html.DropDownList("Type", EnumHelper.GetSelectList(typeof(BanType)), "None", new { @class = "form-control input-sm" })
+    </div>
+    <button class="btn btn-default btn-sm" id="filter">Отфильтровать</button>
+</div>
+
+<br/>
+
+<div id="ban-list">
+    @Html.Action("BanListPartial")
+</div>
+
+<script type="text/javascript">
+    function redirectToBanAction(actionId) {
+        location.replace('@Url.Action("BanAction")?actionId=' + actionId);
+    }
+
+    $('#filter').click(function () {
+        console.log($('#Type').val());
+        $.ajax({
+            url: '@Url.Action("BanListPartial")',
+            data: {
+                banType: $('#Type').val(),
+                playerId: $('#Player').val(),
+            }
+        }).done(function(response) {
+            $('#ban-list').html("");
+            $('#ban-list').html(response);
+        });
+    });
+</script>

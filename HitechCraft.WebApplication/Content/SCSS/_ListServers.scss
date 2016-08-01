@@ -1,0 +1,48 @@
+﻿.server {
+
+    &-page-title {
+        margin-bottom: 40px;
+    }
+
+    &-image {
+        width: 100%;
+        margin-bottom: 10px;
+        border: 1px solid #fff;
+        cursor: pointer;
+
+        &:hover{
+            border: 1px solid #000;
+        }
+    }
+
+    &-info {
+        list-style: none;
+        border: 1px solid rgba(0, 0, 0, 0.41);
+        padding: 0;
+        margin-top: 15px;
+
+        li {
+            border: 1px solid rgba(0, 0, 0, 0.41);
+            padding: 11px;
+
+            span {
+                &:first-child {
+                    font-weight: bold;
+                    color: #333333;
+                }
+            }
+
+            &-offline {
+                color: red;
+            }
+
+            &-online {
+                color: lawngreen;
+            }
+        }
+    }
+
+    &-description {
+        text-align: justify;
+    }
+}

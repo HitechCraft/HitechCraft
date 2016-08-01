@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "Магазин ресурсов";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<form action="" method="post" id="shop-item-filter">
+    <div class="form-inline item-filter item-administration">
+        <input type="text" name="text" id="text" placeholder="Поиск предметов" class="form-control" style="width: 50%" />
+        <span>Модификация</span>
+        <div class="btn-group">
+            <input name="modId" id="modId" type="hidden" />
+            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span id="mod">Не выбрано</span>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a onclick="javascript:setMod(0, 'Не выбрано');">Не выбрано</a></li>
+                @if (ViewBag.Mods != null)
+                {
+                    foreach (var mod in ViewBag.Mods)
+                    {
+                        <li><a onclick="javascript:setMod(@mod.Id, '@mod.Name');">@mod.Name</a></li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <span>Категория</span>
+
+        <div class="btn-group">
+            <input name="categoryId" id="categoryId" type="hidden" />
+            <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                <span id="category">Не выбрано</span>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a onclick="javascript:setCategory(0, 'Не выбрано');">Не выбрано</a></li>
+                @if (ViewBag.Categories != null)
+                {
+                    foreach (var category in ViewBag.Categories)
+                    {
+                        <li><a onclick="javascript:setCategory(@category.Id, '@category.Name');">@category.Name</a></li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <a id="filter-items" class="btn btn-primary">Поиск</a>
+        <a id="filter-clear" class="btn btn-primary">Очистить фильтры</a>
+    </div>
+</form>
+
+@if (User.IsInRole("Administrator"))
+{
+    <div class="item-administration">
+        <div class="btn-group-justified">
+            @Html.ActionLink("Добавить предмет", "CreateItem", "Shop", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("Добавить категорию", "CreateItemCategory", "Shop", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Добавить модификацию", "Create", "Modification", null, new { @class = "btn btn-success" })
+        </div>
+    </div>
+}
+<div class="item-administration">
+    <div class="btn-group-justified">
+        @Html.ActionLink("Перейти в корзину", "Cart", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div id="item" class="item-info">
+            <h3>Выберите<br />предмет</h3>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div id="item-list">
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        LoadItems(1);
+    });
+
+    $('#filter-items')
+        .on('click',
+            function () {
+                FilterItems(null);
+            });
+
+    $('#filter-clear').on('click', function () {
+        setMod(0, 'Не выбрано');
+        setCategory(0, 'Не выбрано');
+
+        $('#text').val('');
+        $('#text').attr('value', '');
+
+        FilterItems(null);
+    });
+
+    function FilterItems(currentPage) {
+
+        var text = $('input#text').val();
+        var mod = $('input#modId').val();
+        var category = $('input#categoryId').val();
+        var itemsOnPage = $('input#itemsOnPage').val();
+
+        LoadItems(currentPage, mod, category, itemsOnPage, text);
+    }
+
+    function setMod(id, name) {
+        $('#mod').html('');
+        $('#mod').html(name);
+
+        $('input#modId').val(id);
+    }
+
+    function setCategory(id, name) {
+        $('#category').html('');
+        $('#category').html(name);
+
+        $('input#categoryId').val(id);
+    }
+
+    function LoadItems(currentPage, modid, categoryid, itemsOnPage, text) {
+        $.get("@Url.Action("ItemPartialList", "Shop")", { page: currentPage, modId: modid, categoryId: categoryid, itemOnPage: itemsOnPage, filterText: text })
+            .done(function (data) {
+                $('#item-list').html('');
+                $('#item-list').html(data);
+            });
+    }
+
+    function LoadItem(id) {
+        $.get("@Url.Action("ItemPartial", "Shop")", { gameId: id })
+            .done(function (data) {
+                if (window.selectedItem) {
+                    $('#' + window.selectedItem).removeClass('item-selected');
+                }
+
+                //Для отмены выбора предмета
+                window.selectedItem = 'item-' + id.replace(':', '-');
+
+                $('#item-' + id.replace(':', '-')).addClass('item-selected');
+
+                $('#item').html('');
+                $('#item').html(data);
+            });
+    }
+</script>

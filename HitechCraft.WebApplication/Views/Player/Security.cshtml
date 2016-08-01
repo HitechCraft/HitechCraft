@@ -1,0 +1,37 @@
+﻿@model IEnumerable<HitechCraft.WebApplication.Models.AuthLogViewModel>
+@{
+    ViewBag.Title = "Безопасность";
+    int i = 0;
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <td>#</td>
+            <td>IP</td>
+            <td>Клиент</td>
+            <td>Дата захода</td>
+        </tr>
+        </thead>
+        @foreach (var log in Model)
+        {
+            i++;
+            <tr>
+                <td>@i</td>
+                <td>@log.Ip</td>
+                <td>@log.Browser</td>
+                <td>@log.Time</td>
+            </tr>
+        }
+    </table>
+
+    <h4 style="margin-top: 20px">Нашли подозрительные заходы с вашего аккаунта? Незамедлительно смените пароль в вашем @Html.ActionLink("профиле", "Profile")!</h4>
+}
+else
+{
+    <h3>Записей не найдено</h3>
+}                                                                                                                                                                   

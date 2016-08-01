@@ -1,0 +1,133 @@
+﻿@using HitechCraft.Common.Models.Enum
+@using HitechCraft.WebApplication.Properties
+@using HitechCraft.WebApplication.Models
+@model HitechCraft.WebApplication.Models.PlayerProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+@{
+    Html.RenderPartial("ChangePasswordModal", new ChangePasswordViewModel());
+}
+<h2 class="page-title">@Resources.PlayerProfile <strong>@Model.Name</strong></h2>
+<div class="row profile-block">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">@Resources.PlayerView</div>
+            <div class="panel-body">
+                <div id="skin-container">
+                    <img src="@Url.Action("GetSkinImage", "Player")" id="skin-image" class="frontSkin" hidden="" />
+                    <img src="@Url.Action("GetSkinImage", "Player")" id="skin-image" class="backSkin" hidden="" />
+                </div>
+            </div>
+            <div class="panel-footer">
+                <input type="file" class="skin-uploader" accept="image/png" name="uploadSkinImage" id="file-upload" />
+                <div class="btn-group btn-group-justified">
+                    <a class="btn btn-primary">Выбрать образ</a>
+                    <a class="btn btn-default" id="skin-delete">@Resources.Delete</a>
+                    @*@Html.ActionLink("Каталог", "Index", "SkinLibrary", null, new { @class = "btn btn-info disabled" })*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">@Resources.Info</div>
+            <div class="panel-body player-info info-block">
+                <p>
+                    <span>@Resources.Email</span>: @Model.Email
+                </p>
+                @*<p>
+                    <span>@Resources.Status</span>: @Model.Status
+                </p>*@
+                <p>
+                    <span>@Resources.Gender</span>: @(Model.Gender == Gender.Male ? Resources.GenderMale : Resources.GenderFemale)
+                </p>
+                <p>
+                    <span>@Resources.PlayerBalance [@Html.ActionLink("пополнить", "Index", "Balance")]</span>:
+                    <br />
+                    <span>@Resources.Rubles</span>: @ViewBag.Rubels ед.
+                    <br />
+                    <span>@Resources.Gonts</span>: @ViewBag.Gonts ед.
+                </p>
+            </div>
+
+            <div class="panel-footer">
+                <div class="btn-group btn-group-justified">
+                    <a href="javascript:showChangePassword()" class="btn btn-primary">@Resources.ChangePassword</a>
+                    @Html.ActionLink("Безопасность", "Security", "Player", null, new { @class = "btn btn-default" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        renderMCSkins('frontSkin', 10);
+        renderMCSkins('backSkin', 10);
+
+        if ('@Html.Action("IsPlayerSkinExists")' === 'False') {
+            $('#skin-delete').attr('title', 'Скин не установлен');
+            $('#skin-delete').addClass('disabled');
+        }
+
+        $('#file-upload').fileupload({
+            url: '@Url.Action("UploadSkinImage")',
+            type: 'POST',
+            autoUpload: true
+        }).on('fileuploaddone', function (e, data) {
+            if (!data.result.status) {
+                $.each(data.result.data, function (i, object) {
+                    $.each(object.Errors, function (j, error) {
+                        growlError(error.ErrorMessage);
+                    });
+                });
+            }
+            else {
+                location.reload();
+                @*//TODO: сделать фикс для Mozila*@
+            }
+        }).on('fileuploadprogressall', function (e, data) {
+
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+
+            $('.progress .progress-bar').css('visibility', 'visible');
+            $('.progress .progress-bar').css('width', progress + '%');
+            $('.progress .progress-bar').html(progress + '%');
+            $('#skin-image').attr("src", "");
+
+            if (progress >= 100) {
+                $('#skin-image').attr("src", "");
+            }
+        });
+    });
+
+    $('#skin-delete').on('click', function() {
+        if (confirm('Вы действительно хотите вернуть стандартный скин?')) {
+            $.post('@Url.Action("RemovePlayerSkin")')
+                .done(function (data) {
+                    console.log(data);
+                    if (data.status === 1) {
+                        growlSuccess(data.message);
+                    } else {
+                        growlError(data.message);
+                    }
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
+                })
+                .fail(function(data) {
+                    growlError(data);
+                });
+        }
+    });
+
+    function showChangePassword() {
+        $('#changePasswordModal').modal();
+    }
+</script>
