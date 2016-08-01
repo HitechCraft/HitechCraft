@@ -17,10 +17,13 @@
             </div>
         }
 
-        <div class="server-title">Общий онлайн</div>
+        if (Model.Count() > 1)
+        {
+            <div class="server-title">Общий онлайн</div>
             <div class="server-progress">
                 <div class="circle-progress 99999"><strong>0</strong></div>
             </div>
+        }
     }
     else
     {
