@@ -9,7 +9,6 @@
     #endregion
 
     //Я понятия не имею какого *** не работает с ICollection
-    //Возможно это показывает какой я пока что неумный
     public static class ProjectorQueryExtentions
     {
         public static IQueryable<TResult> Project<TSource, TResult>(this IQueryable<TSource> collection, IProjector<TSource, TResult> projector)

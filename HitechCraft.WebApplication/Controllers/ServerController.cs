@@ -113,11 +113,11 @@
         {
             try
             {
-                var vm = new EntityQueryHandler<Server, ServerViewModel>(this.Container)
-                    .Handle(new EntityQuery<Server, ServerViewModel>()
+                var vm = new EntityQueryHandler<Server, ServerDetailViewModel>(this.Container)
+                    .Handle(new EntityQuery<Server, ServerDetailViewModel>()
                     {
                         Id = id,
-                        Projector = this.Container.Resolve<IProjector<Server, ServerViewModel>>()
+                        Projector = this.Container.Resolve<IProjector<Server, ServerDetailViewModel>>()
                     });
 
                 return View(vm);
