@@ -10,7 +10,7 @@
         border: 1px solid #fff;
         cursor: pointer;
 
-        &:hover{
+        &:hover {
             border: 1px solid #000;
         }
     }
@@ -44,5 +44,15 @@
 
     &-description {
         text-align: justify;
+    }
+}
+
+.modification {
+    &-panel{
+        height: 314px;
+    }
+    &-image {
+        max-height: 113px;
+        max-width: 463px;
     }
 }
