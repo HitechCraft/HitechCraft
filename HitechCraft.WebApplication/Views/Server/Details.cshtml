@@ -23,7 +23,7 @@
 
             @if (Model.Data.Status == JsonMinecraftServerStatus.Empty || Model.Data.Status == JsonMinecraftServerStatus.Full || Model.Data.Status == JsonMinecraftServerStatus.Online)
             {
-                <p>Игроки: @(Model.Data.MaxPlayerCount) из @(Model.Data.PlayerCount)</p>
+                <p>Игроки: @(Model.Data.PlayerCount) из @(Model.Data.MaxPlayerCount)</p>
             }
 
             <p>Версия @Model.ClientVersion</p>

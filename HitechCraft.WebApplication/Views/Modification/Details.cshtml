@@ -26,9 +26,9 @@
                 Используется на серверах:<br />
                 @if (Model.Servers != null && Model.Servers.Any())
                 {
-                    foreach (var mod in Model.Servers)
+                    foreach (var server in Model.Servers)
                     {
-                        <a href="@Url.Action("Details", "Modification", new {id = mod.Id})">@mod.Name</a><br />
+                        <a href="@Url.Action("Details", "Server", new {id = server.Id})">@server.Name</a><br />
                     }
                 }
                 else
