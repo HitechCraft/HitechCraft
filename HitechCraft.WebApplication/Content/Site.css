@@ -839,3 +839,8 @@ footer {
 .rule-point-add {
   margin: 27px 0; }
 
+.mod-image {
+  max-width: 480px;
+  max-height: 480px;
+  margin: 30px 0; }
+
