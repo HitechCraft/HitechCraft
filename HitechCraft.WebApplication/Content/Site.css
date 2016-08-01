@@ -108,6 +108,13 @@
   border: 1px solid rgba(0, 0, 0, 0.41);
   padding: 0;
   margin-top: 15px; }
+  .server-info-panel {
+    border-radius: 0 !important; }
+    .server-info-panel .panel-heading {
+      border-radius: 0 !important; }
+    .server-info-panel .panel-body {
+      min-height: 296px;
+      border-radius: 0 !important; }
   .server-info li {
     border: 1px solid rgba(0, 0, 0, 0.41);
     padding: 11px; }
@@ -123,11 +130,19 @@
   text-align: justify; }
 
 .modification-panel {
-  height: 314px; }
+  min-height: 348px;
+  border-radius: 0 !important; }
+  .modification-panel .panel-heading {
+    border-radius: 0 !important; }
+  .modification-panel .panel-body {
+    min-height: 296px;
+    border-radius: 0 !important; }
 
 .modification-image {
-  max-height: 113px;
-  max-width: 463px; }
+  max-width: 100%;
+  max-height: 125px;
+  margin-bottom: 25px;
+  cursor: pointer; }
 
 /*VARIABLES*/
 html, body {

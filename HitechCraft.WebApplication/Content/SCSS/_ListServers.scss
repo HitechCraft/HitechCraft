@@ -21,6 +21,19 @@
         padding: 0;
         margin-top: 15px;
 
+        &-panel {
+            border-radius: 0 !important;
+
+            .panel-heading {
+                border-radius: 0 !important;
+            }
+
+            .panel-body {
+                min-height: 296px;
+                border-radius: 0 !important;
+            }
+        }
+
         li {
             border: 1px solid rgba(0, 0, 0, 0.41);
             padding: 11px;
@@ -48,11 +61,24 @@
 }
 
 .modification {
-    &-panel{
-        height: 314px;
+    &-panel {
+        min-height: 348px;
+        border-radius: 0 !important;
+
+        .panel-heading {
+            border-radius: 0 !important;
+        }
+
+        .panel-body {
+            min-height: 296px;
+            border-radius: 0 !important;
+        }
     }
+
     &-image {
-        max-height: 113px;
-        max-width: 463px;
+        max-width: 100%;
+        max-height: 125px;
+        margin-bottom: 25px;
+        cursor: pointer;
     }
 }
