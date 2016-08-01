@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using System;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
@@ -25,16 +27,19 @@
                 Email = command.Email
             };
 
-            try
+            if (!String.IsNullOrEmpty(command.ReferId))
             {
-                var refPlayer = playerRep.GetEntity(command.ReferId);
-                playerInfo.Refer = refPlayer;  
-            }
-            catch
-            {
+                try
+                {
+                    var refPlayer = playerRep.GetEntity(command.ReferId);
+                    playerInfo.Refer = refPlayer;
+                }
+                catch
+                {
 
+                }
             }
-
+            
             var player = new Player()
             {
                 Name = command.Name,
