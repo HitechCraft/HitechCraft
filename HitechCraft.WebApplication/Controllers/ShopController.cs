@@ -106,7 +106,7 @@
             {
                 Text = x.Name,
                 Value = x.Id.ToString(),
-                Selected = x.Name == "Vanil"
+                Selected = x.Name == "Vanilla"
             });
 
             ViewBag.Categories = this.GetCategories().Select(x => new SelectListItem()
