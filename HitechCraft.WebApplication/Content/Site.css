@@ -576,7 +576,7 @@ footer {
   margin: 0px 450px 0px 0px;
   width: 912px;
   min-width: 100%;
-  height: 110px;
+  min-height: 130px;
   resize: none; }
 
 .comment h5 {
@@ -608,6 +608,9 @@ footer {
 
 .comment-remove {
   color: #ff0039; }
+
+#error-alert {
+  color: red; }
 
 .votes-reward {
   padding-left: 25px;

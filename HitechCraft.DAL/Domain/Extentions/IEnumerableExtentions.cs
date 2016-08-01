@@ -10,12 +10,14 @@
         /// Returns the last of [count] elements
         /// </summary>
         /// <typeparam name="T">Type</typeparam>
-        /// <param name="enumerable">IEnumerable</param>
+        /// <param name="list">IEnumerable</param>
         /// <param name="count">Count of elements</param>
         /// <returns></returns>
-        public static IEnumerable<T> Limit<T>(this IEnumerable<T> enumerable, int count)
+        public static IEnumerable<T> Limit<T>(this IEnumerable<T> list, int count)
         {
-            return enumerable.Skip(Math.Max(0, enumerable.Count() - count));
+            var limitedList = list.Take(Math.Max(0, list.Count() - count));
+
+            return limitedList;
         }
     }
 }

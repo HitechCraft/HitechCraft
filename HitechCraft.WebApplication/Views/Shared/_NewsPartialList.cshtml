@@ -30,11 +30,11 @@
                 <div class="col-md-12" style="min-height: 250px">
                     @if (Convert.ToBase64String(news.Image) != String.Empty)
                     {
-                        <img alt="" class="news-image" src="data:image/jpeg;base64,@Convert.ToBase64String(news.Image)" />
+                        <img alt="" class="news-image" src="data:image/jpeg;base64,@Convert.ToBase64String(news.Image)" onclick="document.location = '@Url.Action("Details", "News", new { id = news.Id })'"/>
                     }
                     else
                     {
-                        <img alt="" class="news-image" src="~/Content/Images/no-image.jpg" />
+                        <img alt="" class="news-image" src="~/Content/Images/no-image.jpg"  onclick="document.location = '@Url.Action("Details", "News", new { id = news.Id })'"/>
                     }
                     <div class="news-text" id="news-text-@news.Id">
                         <span class="news-text-container">
