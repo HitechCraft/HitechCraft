@@ -291,7 +291,9 @@
         {
             try
             {
-                if(count == 0) throw new Exception("Нельзя приобрести 0 кол-во ресурсов!");
+                if(count < 1) throw new Exception("Нельзя приобрести " + count + " ресурсa(ов)!");
+
+                if (count > 576) throw new Exception("Нельзя приобретать больше 576 (9 стаков) за раз!");
 
                 this.CommandExecutor.Execute(new ShopItemBuyCommand()
                 {

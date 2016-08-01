@@ -105,6 +105,14 @@
     }
 
     function CheckValid() {
+
+        var maxCount = 576;
+
+        if (parseInt($("input#count").val()) > maxCount) {
+            $("input#count").val(maxCount);
+            SetFullAmount(maxCount);
+        }
+
         if ($("input#count").val() * parseFloat('@Model.Price'.replace(',', '.')) >
             parseFloat('@ViewBag.Balance'.replace(',', '.'))) {
             $('#item-count').removeClass('alert-success');
