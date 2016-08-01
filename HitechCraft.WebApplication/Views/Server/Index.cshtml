@@ -4,52 +4,43 @@
     ViewBag.Title = "Список серверов";
 }
 
-<h2>@ViewBag.Title</h2>
-
+<h2 class="text-center">@ViewBag.Title</h2>
 @if (Model != null && Model.Any())
 {
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            @*TODO: в Resources*@
-            <th>Наименование</th>
-            <th>Описание</th>
-            <th>Версия</th>
-            <th>Адрес</th>
-            <th>Модификации</th>
-            <th>Информация</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var server in Model)
-        {
-            <tr>
-                <td><a href="@Url.Action("Details", new {id = server.Id})">@server.Name</a></td>
-                <td>@server.Description</td>
-                <td>@server.ClientVersion</td>
-                <td>@(server.IpAddress + ":" + server.Port)</td>
-                <td>
-                    @if (server.Modifications != null && server.Modifications.Any())
-                    {
-                        foreach (var mod in server.Modifications)
-                        {
-                            @mod.Name<br/>
-                        }
-                    }
-                    else
-                    {
-                        <p>Нет установленных модов</p>
-                    }
-                </td>
-                <td>
-                    <p>Статус @Enum.GetName(typeof(JsonMinecraftServerStatus), server.Data.Status)</p>
-                    <p>Игроков всего @server.Data.MaxPlayerCount</p>
-                    <p>Сейчас играют @server.Data.PlayerCount</p>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
+    foreach (var server in Model)
+    {
+        <div class="col-md-6">
+            <div class="panel panel-default server-info-panel">
+                <div class="panel-heading">
+                    <a href="@Url.Action("Details", new {id = server.Id})">@server.Name</a>
+                </div>
+                <div class="panel-body text-center">
+                    <img class="server-image" src="data:image/jpeg;base64,@Convert.ToBase64String(server.Image)" alt="">
+                    <div class="col-md-6">
+                        <p class="server-description text-left">
+                            @server.Description
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="server-info text-left">
+                            <li class="server-info-item"><span>Версия: </span>@server.ClientVersion</li>
+                            <li class="server-info-item"><span>Адрес: </span>@(server.IpAddress + ":" + server.Port)</li>
+                            @if (server.Data.Status == 0)
+                            {
+                                <li class="server-info-item server-info-item-online"><span>Статус: </span>@Enum.GetName(typeof(JsonMinecraftServerStatus), server.Data.Status)</li>
+                            }
+                            else
+                            {
+                                <li class="server-info-item server-info-item-offline"><span>Статус: </span>@Enum.GetName(typeof(JsonMinecraftServerStatus), server.Data.Status)</li>
+                            }
+
+                            <li class="server-info-item"><span>Игроки: </span>@server.Data.MaxPlayerCount из @server.Data.PlayerCount</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 }
 else
 {

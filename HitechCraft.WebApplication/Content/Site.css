@@ -92,6 +92,34 @@
 .twitter {
   background-position: -105px -2px !important; }
 
+.server-page-title {
+  margin-bottom: 40px; }
+
+.server-image {
+  width: 100%;
+  margin-bottom: 10px; }
+
+.server-info {
+  list-style: none;
+  border: 1px solid rgba(0, 0, 0, 0.41);
+  padding: 0;
+  margin-top: 15px; }
+  .server-info-panel {
+    box-shadow: 6px 6px 12px -6px #777777; }
+  .server-info-item {
+    border: 1px solid rgba(0, 0, 0, 0.41);
+    padding: 11px; }
+    .server-info-item span {
+      font-weight: bold;
+      color: #333333 !important; }
+    .server-info-item-offline {
+      color: red; }
+    .server-info-item-online {
+      color: lawngreen; }
+
+.server-description {
+  word-break: break-all; }
+
 /*VARIABLES*/
 html, body {
   padding: 0;
