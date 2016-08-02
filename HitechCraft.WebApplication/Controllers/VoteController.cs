@@ -1,9 +1,7 @@
-﻿using System.Linq;
-using HitechCraft.Common.Projector;
-using HitechCraft.DAL.Repository.Specification;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
+    #region Using Directives
+
     using Common.DI;
     using System.Web.Mvc;
     using Common.Core;
@@ -14,6 +12,11 @@ namespace HitechCraft.WebApplication.Controllers
     using Manager;
     using Models;
     using DAL.Domain;
+    using System.Linq;
+    using Common.Projector;
+    using DAL.Repository.Specification;
+
+    #endregion
 
     public class VoteController : BaseController
     {

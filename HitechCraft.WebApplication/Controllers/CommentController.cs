@@ -16,6 +16,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public ContentResult Create(int newsId, string text)
         {
             if (text.Length <= 0) return this.Content("Поле не может быть пустым");
@@ -37,6 +38,7 @@
             }
         }
 
+        [Authorize]
         public ContentResult Edit(int id, string text)
         {
             if (text.Length <= 0) return this.Content("Поле не может быть пустым");
@@ -58,6 +60,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public ContentResult Delete(int id)
         {
             try

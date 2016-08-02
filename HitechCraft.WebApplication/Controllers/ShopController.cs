@@ -257,8 +257,7 @@
 
             return View(vm);
         }
-
-        //TODO: сделать проверку стоимости и баланса на Onload
+        
         [Authorize]
         public ActionResult BuyItem(string gameId)
         {

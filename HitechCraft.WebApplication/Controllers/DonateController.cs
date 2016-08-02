@@ -1,17 +1,20 @@
-﻿using System.Linq;
-using HitechCraft.BL.CQRS.Query;
-using HitechCraft.Common.Projector;
-using HitechCraft.DAL.Repository.Specification;
-using HitechCraft.WebApplication.Models;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
+    #region Using Directives
+
     using System.Web.Mvc;
     using Common.DI;
     using System;
     using BL.CQRS.Command;
     using Common.Core;
     using DAL.Domain;
+    using System.Linq;
+    using BL.CQRS.Query;
+    using Common.Projector;
+    using DAL.Repository.Specification;
+    using Models;
+
+    #endregion
 
     public enum IEGroup
     {

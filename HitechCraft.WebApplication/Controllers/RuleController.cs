@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HitechCraft.BL.CQRS.Command;
-using HitechCraft.BL.CQRS.Query;
-using HitechCraft.Common.Projector;
-using HitechCraft.Common.Repository.Specification;
-using HitechCraft.DAL.Domain;
-using HitechCraft.DAL.Repository.Specification;
-using HitechCraft.WebApplication.Models;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
     using System.Web.Mvc;
     using Common.DI;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using BL.CQRS.Command;
+    using BL.CQRS.Query;
+    using Common.Projector;
+    using Common.Repository.Specification;
+    using DAL.Domain;
+    using DAL.Repository.Specification;
+    using Models;
 
     public class RuleController : BaseController
     {
