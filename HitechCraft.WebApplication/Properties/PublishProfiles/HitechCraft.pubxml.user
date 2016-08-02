@@ -37,7 +37,7 @@
       <publishTime>08/02/2016 18:24:56</publishTime>
     </File>
     <File Include="bin/HitechCraft.WebApplication.dll">
-      <publishTime>08/02/2016 20:32:42</publishTime>
+      <publishTime>08/02/2016 21:22:59</publishTime>
     </File>
     <File Include="bin/Iesi.Collections.dll">
       <publishTime>08/01/2016 23:14:20</publishTime>
@@ -724,7 +724,7 @@
       <publishTime>07/25/2016 23:38:22</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/08/2016 19:59:19</publishTime>
+      <publishTime>08/02/2016 21:22:59</publishTime>
     </File>
   </ItemGroup>
 </Project>

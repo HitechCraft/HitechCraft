@@ -85,22 +85,35 @@
         {
             var uploadImage = Request.Files["uploadSkinImage"];
 
+            var bytes = ImageManager.GetImageBytes(uploadImage);
+
+            var image = System.Drawing.Image.FromStream(new System.IO.MemoryStream(bytes));
+
             var success = true;
 
-            if (uploadImage == null || uploadImage.ContentType != "image/png")
+            if (image.Width > 64 && image.Width / image.Height != 2)
             {
-                ModelState.AddModelError("", Resources.ErrorSkinFormat);
+                ModelState.AddModelError("", Resources.ErrorSkinSize);
 
                 success = false;
             }
             else
             {
-                this.CommandExecutor.Execute(new PlayerSkinCreateOrUpdateCommand()
+                if (uploadImage == null || uploadImage.ContentType != "image/png")
                 {
-                    PlayerId = this.Player.Id,
-                    PlayerName = this.Player.Name,
-                    Image = ImageManager.GetImageBytes(uploadImage)
-                });
+                    ModelState.AddModelError("", Resources.ErrorSkinFormat);
+
+                    success = false;
+                }
+                else
+                {
+                    this.CommandExecutor.Execute(new PlayerSkinCreateOrUpdateCommand()
+                    {
+                        PlayerId = this.Player.Id,
+                        PlayerName = this.Player.Name,
+                        Image = bytes
+                    });
+                }
             }
 
             return Json(new { status = success, data = ModelState.Values });

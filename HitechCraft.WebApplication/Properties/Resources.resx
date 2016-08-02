@@ -165,6 +165,9 @@
   <data name="ErrorSkinFormat" xml:space="preserve">
     <value>Скин должен быть формата png</value>
   </data>
+  <data name="ErrorSkinSize" xml:space="preserve">
+    <value>Размер скина должен быть 1 к 2м (ширина 1:2 высота)</value>
+  </data>
   <data name="ErrorStringMinLength" xml:space="preserve">
     <value>Минимальная длина {2}</value>
   </data>
