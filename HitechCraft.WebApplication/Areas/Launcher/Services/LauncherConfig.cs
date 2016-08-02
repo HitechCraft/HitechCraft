@@ -41,7 +41,7 @@
         /// </summary>
         public static string SkinsUrlString
         {
-            get { return WebConfigurationManager.AppSettings["BaseUrl"] + "Account/GetSkinImage?userName="; }
+            get { return WebConfigurationManager.AppSettings["BaseUrl"] + "Launcher/ClientServer/GetSkinImage?playerName="; }
         }
 
         /// <summary>

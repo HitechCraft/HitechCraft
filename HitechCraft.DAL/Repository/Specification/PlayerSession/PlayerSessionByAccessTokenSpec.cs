@@ -30,7 +30,7 @@
 
         public override Expression<Func<PlayerSession, bool>> IsSatisfiedBy()
         {
-            return playerSession => playerSession.Token == this._accessTocken;
+            return playerSession => playerSession.Session == this._accessTocken;
         }
 
         #endregion
