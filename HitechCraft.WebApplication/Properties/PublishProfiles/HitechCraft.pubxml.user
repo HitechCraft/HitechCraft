@@ -28,16 +28,16 @@
       <publishTime>08/01/2016 23:14:20</publishTime>
     </File>
     <File Include="bin/HitechCraft.BL.dll">
-      <publishTime>08/03/2016 15:51:55</publishTime>
+      <publishTime>08/03/2016 16:53:05</publishTime>
     </File>
     <File Include="bin/HitechCraft.Common.dll">
       <publishTime>08/03/2016 15:51:54</publishTime>
     </File>
     <File Include="bin/HitechCraft.DAL.dll">
-      <publishTime>08/03/2016 15:51:55</publishTime>
+      <publishTime>08/03/2016 16:53:04</publishTime>
     </File>
     <File Include="bin/HitechCraft.WebApplication.dll">
-      <publishTime>08/03/2016 15:51:58</publishTime>
+      <publishTime>08/03/2016 16:53:08</publishTime>
     </File>
     <File Include="bin/Iesi.Collections.dll">
       <publishTime>08/01/2016 23:14:20</publishTime>
@@ -352,7 +352,7 @@
       <publishTime>07/25/2016 23:38:22</publishTime>
     </File>
     <File Include="Content/SCSS/_ListServers.scss">
-      <publishTime>08/01/2016 20:13:19</publishTime>
+      <publishTime>03/08/2016 15:53:25</publishTime>
     </File>
     <File Include="Content/SCSS/_media.scss">
       <publishTime>08/02/2016 02:18:06</publishTime>
@@ -364,10 +364,10 @@
       <publishTime>07/25/2016 23:38:22</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>08/02/2016 02:18:07</publishTime>
+      <publishTime>03/08/2016 15:53:25</publishTime>
     </File>
     <File Include="Content/Site.min.css">
-      <publishTime>08/02/2016 02:18:07</publishTime>
+      <publishTime>03/08/2016 15:53:25</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>07/25/2016 23:38:22</publishTime>
@@ -601,7 +601,7 @@
       <publishTime>08/01/2016 00:21:53</publishTime>
     </File>
     <File Include="Views/Modification/Index.cshtml">
-      <publishTime>08/01/2016 20:09:27</publishTime>
+      <publishTime>03/08/2016 15:53:25</publishTime>
     </File>
     <File Include="Views/News/Create.cshtml">
       <publishTime>07/25/2016 23:38:22</publishTime>
@@ -622,7 +622,7 @@
       <publishTime>07/30/2016 22:25:24</publishTime>
     </File>
     <File Include="Views/Player/Security.cshtml">
-      <publishTime>07/29/2016 00:42:15</publishTime>
+      <publishTime>08/03/2016 16:34:29</publishTime>
     </File>
     <File Include="Views/Player/UploadSkin.cshtml">
       <publishTime>07/25/2016 23:38:22</publishTime>
@@ -643,7 +643,7 @@
       <publishTime>07/25/2016 23:38:22</publishTime>
     </File>
     <File Include="Views/Server/Index.cshtml">
-      <publishTime>08/02/2016 14:00:57</publishTime>
+      <publishTime>03/08/2016 15:53:25</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>07/30/2016 11:13:12</publishTime>
@@ -724,7 +724,7 @@
       <publishTime>07/25/2016 23:38:22</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/03/2016 15:51:58</publishTime>
+      <publishTime>08/03/2016 16:53:08</publishTime>
     </File>
   </ItemGroup>
 </Project>

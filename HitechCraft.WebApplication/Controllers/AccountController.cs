@@ -114,7 +114,7 @@
             {
                 return View(model);
             }
-
+            
             ApplicationUser user = null;
 
             if (model.EmailOrNickName.Contains('@'))
@@ -145,7 +145,7 @@
                     {
                         PlayerName = user.UserName,
                         Ip = Request.UserHostAddress,
-                        Browser = Request.UserAgent
+                        Browser = Request.Browser.Browser
                     });
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
