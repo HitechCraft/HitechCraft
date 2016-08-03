@@ -130,12 +130,12 @@
   text-align: justify; }
 
 .modification-panel {
-  min-height: 348px;
+  min-height: 370px;
   border-radius: 0 !important; }
   .modification-panel .panel-heading {
     border-radius: 0 !important; }
   .modification-panel .panel-body {
-    min-height: 296px;
+    min-height: 317px;
     border-radius: 0 !important; }
 
 .modification-image {

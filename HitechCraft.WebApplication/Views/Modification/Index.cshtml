@@ -1,4 +1,5 @@
-﻿@model IEnumerable<HitechCraft.WebApplication.Models.ModificationViewModel>
+﻿@using HitechCraft.DAL.Domain.Extentions
+@model IEnumerable<HitechCraft.WebApplication.Models.ModificationViewModel>
 
 @{
     ViewBag.Title = "Список модификаций";
@@ -23,12 +24,12 @@
                                 <p class="server-description text-left">
                                     @if (mod.Description.Length >= 130)
                                     {
-                                        @mod.Description.Substring(0, 130)
+                                        @mod.Description.Limit(130)
                                     }
                                     else
                                     {
                                        @mod.Description
-                                    }
+                                    }<span>... @Html.ActionLink("подробнее", "Details", new { id = mod.Id })</span>
                                 </p>
                             </div>
                             <div class="col-md-6">
