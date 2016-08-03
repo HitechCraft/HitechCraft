@@ -1,7 +1,7 @@
-﻿namespace HitechCraft.WebApplication.Manager
+﻿namespace HitechCraft.Common.Core
 {
-    using NLog;
     using System;
+    using NLog;
 
     public static class LogManager
     {

@@ -1,6 +1,4 @@
-﻿using HitechCraft.WebApplication.Manager;
-
-namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
+﻿namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
 {
     #region Using Directives
 
@@ -19,6 +17,7 @@ namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
     using DAL.Repository.Specification;
     using Models;
     using BL.CQRS.Command;
+    using Common.Core;
 
     #endregion
 

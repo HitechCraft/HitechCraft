@@ -1,12 +1,12 @@
-﻿using System;
-
-namespace HitechCraft.BL.CQRS.Command
+﻿namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
     using Common.CQRS.Command;
     using Common.DI;
     using DAL.Domain;
+    using System;
+    using HitechCraft.Common.Core;
 
     #endregion
 
@@ -27,16 +27,20 @@ namespace HitechCraft.BL.CQRS.Command
                 Email = command.Email
             };
 
+            LogManager.Info("[Player Register] NickName:" + command.Name);
+
             if (!String.IsNullOrEmpty(command.ReferId))
             {
                 try
                 {
                     var refPlayer = playerRep.GetEntity(command.ReferId);
                     playerInfo.Refer = refPlayer;
+
+                    LogManager.Info("[Player Register] Refer:" + refPlayer.Name);
                 }
                 catch
                 {
-
+                    LogManager.Info("[Player Register] Refer none");
                 }
             }
             
@@ -55,12 +59,21 @@ namespace HitechCraft.BL.CQRS.Command
                 Status = 0
             };
 
-            playerInfoRep.Add(playerInfo);
+            try
+            {
+                playerInfoRep.Add(playerInfo);
 
-            playerRep.Add(player);
+                playerRep.Add(player);
 
-            currencyRep.Add(currency);
+                currencyRep.Add(currency);
+            }
+            catch (Exception e)
+            {
 
+                LogManager.Error("[Player Register] Error: " + e.Message);
+                throw;
+            }
+            
             playerInfoRep.Dispose();
             playerRep.Dispose();
             currencyRep.Dispose();
