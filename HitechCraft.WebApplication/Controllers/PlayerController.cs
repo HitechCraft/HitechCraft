@@ -17,6 +17,8 @@
     using System.Linq;
     using DAL.Domain.Extentions;
     using DAL.Repository.Specification;
+    using System.Collections.Generic;
+    using System.Web;
 
     #endregion
 
@@ -84,39 +86,25 @@
         public JsonResult UploadSkinImage()
         {
             var uploadImage = Request.Files["uploadSkinImage"];
+            var errors = this.CheckPlayerSkin(uploadImage);
 
             var bytes = ImageManager.GetImageBytes(uploadImage);
 
-            var image = System.Drawing.Image.FromStream(new System.IO.MemoryStream(bytes));
-
-            var success = true;
-
-            if (image.Width > 64 && image.Width / image.Height != 2)
+            if (!errors.Any())
             {
-                ModelState.AddModelError("", Resources.ErrorSkinSize);
+                this.CommandExecutor.Execute(new PlayerSkinCreateOrUpdateCommand()
+                {
+                    PlayerId = this.Player.Id,
+                    PlayerName = this.Player.Name,
+                    Image = bytes
+                });
 
-                success = false;
+                return Json(new { status = "OK", data = "" });
             }
             else
             {
-                if (uploadImage == null || uploadImage.ContentType != "image/png")
-                {
-                    ModelState.AddModelError("", Resources.ErrorSkinFormat);
-
-                    success = false;
-                }
-                else
-                {
-                    this.CommandExecutor.Execute(new PlayerSkinCreateOrUpdateCommand()
-                    {
-                        PlayerId = this.Player.Id,
-                        PlayerName = this.Player.Name,
-                        Image = bytes
-                    });
-                }
+                return Json(new { status = "NO", data = errors });
             }
-
-            return Json(new { status = success, data = ModelState.Values });
         }
 
         [AllowAnonymous]
@@ -214,7 +202,53 @@
             
             if(players.Any()) throw new Exception(Resources.ErrorUserNameExists);
         }
-        
+
+        private List<string> CheckPlayerSkin(HttpPostedFileBase skinFile)
+        {
+            var errors = new List<string>();
+
+            if (skinFile == null)
+            {
+                errors.Add("Файл скина не выбран");
+
+                return errors;
+            }
+
+            var fileType = skinFile.ContentType;
+            var allowedTypes = new List<string>() {"image/png", "image/jpg", "image/jpeg"};
+
+            if (!allowedTypes.Contains(fileType))
+            {
+                errors.Add("Скин может быть в формате: png, jpg/jpeg");
+
+                return errors;
+            }
+            
+            var image = System.Drawing.Image.FromStream(new System.IO.MemoryStream(ImageManager.GetImageBytes(skinFile)));
+
+            if (image.Width <= 64 && (image.Width / image.Height != 2 || image.Width / image.Height != 1))
+            {
+                errors.Add("Скины должны быть формата 1:1 или 2:1 (например, 64x64 или 64x32)");
+            }
+
+            if (image.Width > 64 && image.Width/image.Height != 2)
+            {
+                errors.Add("HD скины должны быть формата 2:1 (например, 1024x512)");
+            }
+
+            if (image.Width > 1024)
+            {
+                errors.Add("Максимальный размер скина - 1024x512");
+            }
+            
+            if (skinFile.ContentLength / 1048576 > 1)
+            {
+                errors.Add("Максимальный размер файла - 1 МБ");
+            }
+            
+            return errors;
+        }
+
         #endregion
     }
 }

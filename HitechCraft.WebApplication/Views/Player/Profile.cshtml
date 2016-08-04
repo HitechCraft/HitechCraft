@@ -19,7 +19,7 @@
                 <div id="skin-container">
                     @*<img src="@Url.Action("GetSkinImage", "Player")" id="skin-image" class="frontSkin" hidden="" />
                     <img src="@Url.Action("GetSkinImage", "Player")" id="skin-image" class="backSkin" hidden=""/>*@
-                    <div id="skinpreview" class="skinpreview" height="300" width="200"></div>
+                    <div id="skinpreview" class="skinpreview" height="100%" width="100%"></div>
                 </div>
             </div>
             <div class="panel-footer">
@@ -89,11 +89,9 @@
             type: 'POST',
             autoUpload: true
         }).on('fileuploaddone', function (e, data) {
-            if (!data.result.status) {
-                $.each(data.result.data, function (i, object) {
-                    $.each(object.Errors, function (j, error) {
-                        growlError(error.ErrorMessage);
-                    });
+            if (data.result.status !== "OK") {
+                $.each(data.result.data, function (j, error) {
+                    growlError(error);
                 });
             }
             else {

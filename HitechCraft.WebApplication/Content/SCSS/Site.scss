@@ -601,11 +601,15 @@ footer {
     }
 
     &-container {
-        width: 230px;
+        width: 450px;
         margin: 0 auto;
-        padding: 36px 0;
         height: 392px;
         cursor: move;
+    }
+
+    &preview {
+        position: absolute;
+        margin-top: -34px;
     }
 }
 
