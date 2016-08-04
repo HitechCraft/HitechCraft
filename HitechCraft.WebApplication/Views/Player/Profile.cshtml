@@ -17,8 +17,9 @@
             <div class="panel-heading">@Resources.PlayerView</div>
             <div class="panel-body">
                 <div id="skin-container">
-                    <img src="@Url.Action("GetSkinImage", "Player")" id="skin-image" class="frontSkin" hidden="" />
-                    <img src="@Url.Action("GetSkinImage", "Player")" id="skin-image" class="backSkin" hidden="" />
+                    @*<img src="@Url.Action("GetSkinImage", "Player")" id="skin-image" class="frontSkin" hidden="" />
+                    <img src="@Url.Action("GetSkinImage", "Player")" id="skin-image" class="backSkin" hidden=""/>*@
+                    <div id="skinpreview" class="skinpreview" height="300" width="200"></div>
                 </div>
             </div>
             <div class="panel-footer">
@@ -67,8 +68,16 @@
 
     $(document).ready(function () {
 
-        renderMCSkins('frontSkin', 10);
-        renderMCSkins('backSkin', 10);
+        //renderMCSkins('frontSkin', 10);
+        //renderMCSkins('backSkin', 10);
+        var P0 = new MSP({
+            showcape: true,
+            running: false,
+            spin: false,
+            freezecamera: true,
+            container: "#skinpreview"
+        });
+        P0.changeSkin('@Url.Action("GetSkinImage", "Player")');
 
         if ('@Html.Action("IsPlayerSkinExists")' === 'False') {
             $('#skin-delete').attr('title', 'Скин не установлен');

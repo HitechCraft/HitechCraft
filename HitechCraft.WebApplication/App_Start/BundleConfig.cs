@@ -16,7 +16,9 @@ namespace HitechCraft.WebApplication
                         "~/Scripts/jquery.ui*",
                         "~/Scripts/jquery-ui*",
                         "~/Scripts/jgrowl.alerts.js",
-                        "~/Scripts/skin2DRender.js"));
+                        "~/Scripts/skin2DRender.js",
+                        "~/Scripts/tree.js",
+                        "~/Scripts/MSP.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

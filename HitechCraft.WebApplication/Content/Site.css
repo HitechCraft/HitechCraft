@@ -544,10 +544,11 @@ footer {
   min-height: 555px; }
 
 #skin-container {
-  width: 330px;
+  width: 230px;
   margin: 0 auto;
   padding: 36px 0;
-  height: 392px; }
+  height: 392px;
+  cursor: move; }
 
 .skin {
   border: 2px solid #ddd; }
