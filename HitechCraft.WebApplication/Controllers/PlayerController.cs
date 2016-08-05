@@ -67,20 +67,7 @@
                 return Json(new { message = e.Message, status = "error" }, JsonRequestBehavior.AllowGet);
             }
         }
-
-        public ActionResult UploadSkin()
-        {
-            var vm = new PlayerSkinQueryHandler<PlayerSkinViewModel>(this.Container)
-                .Handle(new PlayerSkinQuery<PlayerSkinViewModel>()
-                {
-                    UserName = this.Player.Name,
-                    Gender = this.Player.Gender,
-                    Projector = this.Container.Resolve<IProjector<PlayerSkin, PlayerSkinViewModel>>()
-                });
-
-            return View(vm);
-        }
-
+        
         [AllowAnonymous]
         [HttpPost]
         public JsonResult UploadSkinImage()

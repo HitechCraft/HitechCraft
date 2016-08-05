@@ -1,9 +1,9 @@
 ﻿@model HitechCraft.WebApplication.Models.NewsEditViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Создать новость";
 }
 
-<h2>Create</h2>
+<h2 class="page-title">@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Create", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {

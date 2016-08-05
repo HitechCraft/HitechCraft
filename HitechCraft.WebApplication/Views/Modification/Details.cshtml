@@ -1,11 +1,11 @@
 ﻿@model HitechCraft.WebApplication.Models.ModificationViewModel
 @{
-    ViewBag.Title = "Подробно";
+    ViewBag.Title = "Мод " + Model.Name;
 }
 
 @if (Model != null)
 {
-    <h2>Мод @Model.Name</h2>
+    <h2 class="page-title">@ViewBag.Title</h2>
 
     <div class="row">
         <div class="col-md-6">

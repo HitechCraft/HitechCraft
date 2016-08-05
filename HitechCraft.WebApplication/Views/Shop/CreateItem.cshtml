@@ -3,7 +3,7 @@
     ViewBag.Title = "Добавить предмет в магазин";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 class="page-title">@ViewBag.Title</h2>
 
     @using (Html.BeginForm("CreateItem", "Shop", FormMethod.Post, new { @class = "row", enctype = "multipart/form-data", id = "form-create-item" }))
     {

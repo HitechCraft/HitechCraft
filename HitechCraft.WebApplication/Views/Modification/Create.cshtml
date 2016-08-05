@@ -3,7 +3,7 @@
     ViewBag.Title = "Добавить модификацию";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 class="page-title">@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Create", "Modification", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
