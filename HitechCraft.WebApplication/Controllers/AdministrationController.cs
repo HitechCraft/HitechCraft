@@ -47,13 +47,15 @@
         [HttpPost]
         public ActionResult AddUserToRole(UserRoleViewModel userRole)
         {
+            if(String.IsNullOrEmpty(userRole.UserName)) ModelState.AddModelError(string.Empty, "Введите имя пользователя");
+
             if (ModelState.IsValid)
             {
                 var user = this._userManager.FindByNameAsync(userRole.UserName);
 
                 if(user.Result == null) ModelState.AddModelError(string.Empty, "Пользователя не существует");
                 else
-                    if (!this._userManager.IsInRole(user.Result.Id, userRole.RoleId))
+                    if (!this._userManager.IsInRole(user.Result.Id, this._roleManager.Roles.First(x => x.Id == userRole.RoleId).Name))
                     {
                         try
                         {
