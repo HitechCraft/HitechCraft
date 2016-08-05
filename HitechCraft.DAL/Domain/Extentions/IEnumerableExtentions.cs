@@ -15,7 +15,7 @@
         /// <returns></returns>
         public static IEnumerable<T> Limit<T>(this IEnumerable<T> list, int count)
         {
-            var limitedList = list.Take(Math.Max(list.Count(), list.Count() - count));
+            var limitedList = list.Take(count >= 0 ? count : 0);
 
             return limitedList;
         }

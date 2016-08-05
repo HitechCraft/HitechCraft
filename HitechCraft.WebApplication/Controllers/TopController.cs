@@ -10,6 +10,7 @@
     using DAL.Domain;
     using Models;
     using DAL.Domain.Extentions;
+    using Manager;
 
     #endregion
 
@@ -34,7 +35,8 @@
                 .Handle(new EntityListQuery<Currency, CurrencyTopViewModel>()
                 {
                     Projector = this.Container.Resolve<IProjector<Currency, CurrencyTopViewModel>>()
-                }).OrderByDescending(x => x.Gonts).Limit(10);
+                })
+                .OrderByDescending(x => x.Gonts).Limit(10);
 
             return PartialView("_TopGontsPartial", vm);
         }
@@ -45,7 +47,8 @@
                 .Handle(new EntityListQuery<Currency, CurrencyTopViewModel>()
                 {
                     Projector = this.Container.Resolve<IProjector<Currency, CurrencyTopViewModel>>()
-                }).OrderByDescending(x => x.Rubles).Limit(10);
+                })
+                .OrderByDescending(x => x.Gonts).Limit(10);
 
             return PartialView("_TopRubsPartial", vm);
         }
