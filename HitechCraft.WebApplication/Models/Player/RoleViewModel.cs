@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace HitechCraft.WebApplication.Models
+﻿namespace HitechCraft.WebApplication.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class RoleViewModel
     {
         [Display(Name = "Имя роли")]

@@ -1,8 +1,7 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Администрирование";
 }
 
-<h2>Index</h2>
+<h2 class="page-title">@ViewBag.Title</h2>
 
-<a href="@Url.Action("AddUserRole")">Добавить роль пользователя</a>
+<a class="btn btn-primary" href="@Url.Action("AddUserToRole")">Добавить роль пользователя</a>

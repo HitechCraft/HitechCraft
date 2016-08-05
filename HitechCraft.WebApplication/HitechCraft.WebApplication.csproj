@@ -233,13 +233,13 @@
     <Compile Include="Areas\Launcher\Services\LauncherConfig.cs" />
     <Compile Include="Areas\Launcher\Services\LauncherManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BalanceController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\DonateController.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ModificationController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
@@ -330,6 +330,7 @@
     <Compile Include="Models\PlayerSession\PlayerSessionEditViewModel.cs" />
     <Compile Include="Models\PlayerItem\PlayerItemViewModel.cs" />
     <Compile Include="Models\Player\PlayerProfileViewModel.cs" />
+    <Compile Include="Models\Player\UserRoleViewModel.cs" />
     <Compile Include="Models\Player\RoleViewModel.cs" />
     <Compile Include="Models\Player\UserSkinViewModel.cs" />
     <Compile Include="Models\Rule\RuleViewModel.cs" />
@@ -476,7 +477,7 @@
     <Content Include="Views\Account\ConfirmEmailInfo.cshtml" />
     <Content Include="Views\Player\Profile.cshtml" />
     <Content Include="Views\Player\UploadSkin.cshtml" />
-    <Content Include="Views\Administration\AddUserRole.cshtml" />
+    <Content Include="Views\Administration\AddUserToRole.cshtml" />
     <Content Include="Views\Administration\Index.cshtml" />
     <Content Include="Views\Balance\Fail.cshtml" />
     <Content Include="Views\Balance\Index.cshtml" />
