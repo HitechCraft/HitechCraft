@@ -845,7 +845,8 @@ footer {
   color: #6063e0; }
 
 .validation-summary-errors ul {
-  padding: 0; }
+  padding: 0;
+  list-style: none; }
 
 .rules {
   margin-top: 10px; }
