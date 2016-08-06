@@ -204,11 +204,11 @@
             }
 
             var fileType = skinFile.ContentType;
-            var allowedTypes = new List<string>() {"image/png"};
+            var allowedTypes = new List<string>() {"image/png", "image/jpg" };
 
             if (!allowedTypes.Contains(fileType))
             {
-                errors.Add("Скин может быть в формате: .png");
+                errors.Add("Скин может быть в формате: .png или .jpg");
 
                 return errors;
             }
