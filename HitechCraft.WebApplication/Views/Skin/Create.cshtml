@@ -1,0 +1,28 @@
+﻿@model HitechCraft.WebApplication.Models.SkinEditViewModel
+@{
+    ViewBag.Title = "Добавить скин";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Create", "Skin", FormMethod.Post, new {@enctype = "multipart/data"}))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Image)
+                <input type="file" name="uploadSkinImage" id="uploadSkinImage"/>
+            </div>
+        }
+    </div>
+    <div class="col-md-6">
+        <img src="" id="skin-image" class="frontSkin" hidden="" />
+        <img src="" id="skin-image" class="backSkin" hidden=""/>
+        @*TODO: Тут выводить скин при выборе файла*@
+        @*TODO: находить в базе скины с подобным разрешением и размером. Чтобы избежать возможность создать уже имеющийся скин*@
+    </div>
+</div>

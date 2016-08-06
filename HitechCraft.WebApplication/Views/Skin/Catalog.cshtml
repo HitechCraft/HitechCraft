@@ -1,0 +1,20 @@
+﻿@model IEnumerable<HitechCraft.WebApplication.Models.SkinViewModel>
+@{
+    ViewBag.Title = "Каталог скинов";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+@if (Model != null && Model.Any())
+{
+
+}
+else
+{
+    <h3>Скинов нет!</h3>
+}
+
+@if (User != null && User.IsInRole("Administrator"))
+{
+    @Html.ActionLink("Добавить скин", "Create", null, new { @class = "btn btn-success" })
+}
