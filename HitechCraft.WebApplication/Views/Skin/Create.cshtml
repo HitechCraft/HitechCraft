@@ -6,7 +6,7 @@
 <h2 class="page-title">@ViewBag.Title</h2>
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         @using (Html.BeginForm("Create", "Skin", FormMethod.Post, new {@enctype = "multipart/data"}))
         {
             <div class="form-group">
@@ -19,10 +19,42 @@
             </div>
         }
     </div>
-    <div class="col-md-6">
-        <img src="" id="skin-image" class="frontSkin" hidden="" />
-        <img src="" id="skin-image" class="backSkin" hidden=""/>
-        @*TODO: Тут выводить скин при выборе файла*@
-        @*TODO: находить в базе скины с подобным разрешением и размером. Чтобы избежать возможность создать уже имеющийся скин*@
+    <div class="col-md-4">
+        <div id="skinpreview" class="skinpreview" height="100%" width="100%"></div>
+        <img src="" id="skin-image" hidden=""/>
+    </div>
+
+    <div class="col-md-4">
+         @*TODO: находить в базе скины с подобным разрешением и размером. Чтобы избежать возможность создать уже имеющийся скин*@
     </div>
 </div>
+
+<script type="text/javascript">
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#skin-image').attr('src', e.target.result);
+                $('#skinpreview canvas').remove();
+
+                var P0 = new MSP({
+                    showcape: true,
+                    running: false,
+                    spin: false,
+                    freezecamera: true,
+                    container: "#skinpreview"
+                });
+
+                P0.changeSkin($('#skin-image').attr('src'));
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#uploadSkinImage").change(function () {
+        readURL(this);
+    });
+</script>
