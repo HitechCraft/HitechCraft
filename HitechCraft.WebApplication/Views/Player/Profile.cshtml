@@ -25,9 +25,9 @@
             <div class="panel-footer">
                 <input type="file" class="skin-uploader" accept="image/png" name="uploadSkinImage" id="file-upload" />
                 <div class="btn-group btn-group-justified">
-                    <a class="btn btn-primary">Выбрать образ</a>
-                    <a class="btn btn-default" id="skin-delete">@Resources.Delete</a>
-                    @*@Html.ActionLink("Каталог", "Index", "SkinLibrary", null, new { @class = "btn btn-info disabled" })*@
+                    <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-upload"></span> Выбрать образ</a>
+                    <a href="@Url.Action("Catalog", "Skin")"class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span> Каталог</a>
+                    <a class="btn btn-default" id="skin-delete"><span class="glyphicon glyphicon-trash"></span> @Resources.Delete</a>
                 </div>
             </div>
         </div>
