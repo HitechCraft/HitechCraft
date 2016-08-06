@@ -1,53 +1,30 @@
-﻿@model IEnumerable<HitechCraft.WebApplication.Models.SkinViewModel>
-@{
+﻿@{
     ViewBag.Title = "Каталог скинов";
 }
 
 <h2 class="page-title">@ViewBag.Title</h2>
 
-@if (Model != null && Model.Any())
-{
-    <div class="row">
-        @foreach (var skin in Model)
-        {
-            <div class="col-md-3">
-                <div class="panel panel-default skin-panel">
-                    <div class="panel-heading">@skin.Name</div>
-                    <div class="panel-body">
-                        <div id="@("skinpreview" + skin.Id)" class="skinpreview" height="100%" width="100%"></div>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-}
-else
-{
-    <h3>Скинов нет!</h3>
-}
+<div id="skins"></div>
 
 @if (User != null && User.IsInRole("Administrator"))
 {
-    @Html.ActionLink("Добавить скин", "Create", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("Добавить скин", "Create", null, new {@class = "btn btn-success"})
 }
 
-<script>
-    @if (Model != null && Model.Any())
-    {
-        foreach (var skin in Model)
-        {
-            <text>
-                var @("P" + skin.Id) = new MSP({
-                    showcape: true,
-                    running: false,
-                    spin: false,
-                    freezecamera: true,
-                    container: "#@("skinpreview" + skin.Id)",
-                    width: 200,
-                    height: 300
-                });
-                @("P" + skin.Id).changeSkin('data:image/jpeg;base64,@Convert.ToBase64String(skin.Image)');
-            </text>
-        }
+<script type="text/javascript">
+    $(document).ready(function() {
+        LoadSkins(1);
+    });
+
+    function GetSkins(currentPage) {
+        LoadSkins(currentPage);
+    }
+
+    function LoadSkins(currentPage) {
+        $.get("@Url.Action("SkinPartialList", "Skin")", { page: currentPage })
+            .done(function(data) {
+                $('#skins').html('');
+                $('#skins').html(data);
+            });
     }
 </script>

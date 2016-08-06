@@ -635,8 +635,25 @@ footer {
     }
 
     &-panel {
+        border-radius: 0 !important;
+
         .panel-heading {
             min-height: 80px;
+            border-radius: 0 !important;
+
+            span {
+                max-height: 59px;
+                display: block;
+            }
+        }
+
+        .panel-body {
+            border-radius: 0 !important;
+
+            .skinpreview {
+                width: 200px;
+                margin: 0 auto;
+            }
         }
     }
 }

@@ -532,6 +532,7 @@
     <Content Include="Views\ErrorPage\Index.cshtml" />
     <Content Include="Views\Skin\Catalog.cshtml" />
     <Content Include="Views\Skin\Create.cshtml" />
+    <Content Include="Views\Skin\_SkinPartialList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,6 @@
 ﻿namespace HitechCraft.WebApplication.Controllers
 {
-    using System.Collections.Generic;
+    using PagedList;
     using BL.CQRS.Query;
     using Common.DI;
     using Common.Projector;
@@ -13,18 +13,23 @@
 
     public class SkinController : BaseController
     {
+        public int SkinsOnPage => 8;
+
         public SkinController(IContainer container) : base(container)
         {
         }
 
         #region Actions
 
+        public ActionResult SkinPartialList(int? page)
+        {
+            return PartialView("_SkinPartialList", this.GetSkins(page));
+        }
+
         [Authorize]
         public ActionResult Catalog()
         {
-            var vm = GetSkins();
-
-            return View(vm);
+            return View();
         }
 
         [HttpGet]
@@ -60,13 +65,17 @@
 
         #region Private Methods
 
-        private IEnumerable<SkinViewModel> GetSkins()
+        private IPagedList<SkinViewModel> GetSkins(int? page)
         {
-            return new EntityListQueryHandler<Skin, SkinViewModel>(Container)
+            int currentPage = page ?? 1;
+
+            var vm = new EntityListQueryHandler<Skin, SkinViewModel>(Container)
                 .Handle(new EntityListQuery<Skin, SkinViewModel>()
                 {
                     Projector = Container.Resolve<IProjector<Skin, SkinViewModel>>()
                 });
+
+            return vm.ToPagedList(currentPage, this.SkinsOnPage);
         }
 
         #endregion
