@@ -73,10 +73,11 @@
         public JsonResult UploadSkinImage()
         {
             var uploadImage = Request.Files["uploadSkinImage"];
-            var errors = this.CheckPlayerSkin(uploadImage);
 
-            var bytes = ImageManager.GetImageBytes(uploadImage);
+            byte[] bytes;
 
+            var errors = this.CheckPlayerSkin(uploadImage, out bytes);
+            
             if (!errors.Any())
             {
                 this.CommandExecutor.Execute(new PlayerSkinCreateOrUpdateCommand()
@@ -190,9 +191,10 @@
             if(players.Any()) throw new Exception(Resources.ErrorUserNameExists);
         }
 
-        private List<string> CheckPlayerSkin(HttpPostedFileBase skinFile)
+        private List<string> CheckPlayerSkin(HttpPostedFileBase skinFile, out byte[] bytes)
         {
             var errors = new List<string>();
+            bytes = ImageManager.GetImageBytes(skinFile);
 
             if (skinFile == null)
             {
@@ -211,7 +213,7 @@
                 return errors;
             }
             
-            var image = System.Drawing.Image.FromStream(new System.IO.MemoryStream(ImageManager.GetImageBytes(skinFile)));
+            var image = System.Drawing.Image.FromStream(new System.IO.MemoryStream(bytes));
 
             if (image.Width <= 64 && (image.Width / image.Height != 2 || image.Width / image.Height != 1))
             {

@@ -6,7 +6,7 @@
     var CAPE_WIDTH = 64;
     var CAPE_HEIGHT = 32;
     var cape_scale = 1;
-
+    //TODO: повернуть область шеи на 180 градусов
     // shim layer with setTimeout fallback
     window.requestAnimFrame = (function () {
         return window.requestAnimationFrame ||
