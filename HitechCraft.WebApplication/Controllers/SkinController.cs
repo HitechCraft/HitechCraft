@@ -88,6 +88,27 @@ namespace HitechCraft.WebApplication.Controllers
             return this.Content("OK");
         }
 
+        [HttpPost]
+        public JsonResult SetPlayerSkin(int? skinId)
+        {
+            try
+            {
+                if(skinId == null) throw new Exception("Не передан ID скина!");
+
+                this.CommandExecutor.Execute(new SkinInstallCommand()
+                {
+                    PlayerName = this.Player.Name,
+                    SkinId = skinId.Value
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new {status = "NO", message = "Ошибка установки скина: " + e.Message});
+            }
+
+            return Json(new { status = "OK", message = "Скин успешно установлен!" });
+        }
+
         #endregion
 
         #region Private Methods

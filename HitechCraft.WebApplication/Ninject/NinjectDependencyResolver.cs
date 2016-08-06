@@ -109,6 +109,8 @@ namespace HitechCraft.WebApplication.Ninject
 
             this._kernel.Bind(typeof(ICommandHandler<SkinCreateCommand>)).To(typeof(SkinCreateCommandHandler));
 
+            this._kernel.Bind(typeof(ICommandHandler<SkinInstallCommand>)).To(typeof(SkinInstallCommandHandler));
+
             #endregion
 
             this._kernel.Bind(typeof(ICommandExecutor)).To(typeof(CommandExecutor));

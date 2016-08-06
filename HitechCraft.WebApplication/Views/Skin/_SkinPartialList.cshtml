@@ -14,7 +14,7 @@
                     </div>
                     <div class="panel-footer">
                         <div class="btn-group-justified">
-                            <a href="javascript:setSkin" class="btn btn-info">Установить скин</a>
+                            <a href="javascript:installSkin(@skin.Id)" class="btn btn-info">Установить скин</a>
                         </div>
                     </div>
                 </div>
@@ -34,18 +34,34 @@ else
         foreach (var skin in Model)
         {
             <text>
-                var @("P" + skin.Id) = new MSP({
-                    showcape: true,
-                    running: false,
-                    spin: false,
-                    freezecamera: true,
-                    container: "#@("skinpreview" + skin.Id)",
-                    width: 200,
-                    height: 300
-                });
-                @("P" + skin.Id).changeSkin('data:image/jpeg;base64,@Convert.ToBase64String(skin.Image)');
-            </text>
+    var @("P" + skin.Id) = new MSP({
+        showcape: true,
+        running: false,
+        spin: false,
+        freezecamera: true,
+        container: "#@("skinpreview" + skin.Id)",
+        width: 200,
+        height: 300
+    });
+    @("P" + skin.Id).changeSkin('data:image/jpeg;base64,@Convert.ToBase64String(skin.Image)');
+    </text>
         }
     }
 
+    function installSkin(id) {
+        if (confirm("Вы действительно хотите сменить скин?")) {
+            $.post("@Url.Action("SetPlayerSkin")", { skinId: parseInt(id) })
+                .done(function (data) {
+                    if (data.status === "OK") {
+                        growlSuccess(data.message);
+
+                        setTimeout(function () {
+                            document.location = '@Url.Action("Profile", "Player")';
+                        }, 2000);
+                    } else {
+                        growlError(data.message);
+                    }
+                });
+        }
+    }
 </script>
