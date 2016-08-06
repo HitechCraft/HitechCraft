@@ -107,6 +107,8 @@ namespace HitechCraft.WebApplication.Ninject
             this._kernel.Bind(typeof(ICommandHandler<RulePointUpdateCommand>)).To(typeof(RulePointUpdateCommandHandler));
             this._kernel.Bind(typeof(ICommandHandler<RulePointRemoveCommand>)).To(typeof(RulePointRemoveCommandHandler));
 
+            this._kernel.Bind(typeof(ICommandHandler<SkinCreateCommand>)).To(typeof(SkinCreateCommandHandler));
+
             #endregion
 
             this._kernel.Bind(typeof(ICommandExecutor)).To(typeof(CommandExecutor));

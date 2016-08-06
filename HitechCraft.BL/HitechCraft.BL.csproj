@@ -114,6 +114,8 @@
     <Compile Include="CQRS\Command\Shop\ShopItemUpdateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemRemoveCommandHandler.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Skin\SkinCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Skin\SkinCreateCommandHandler.cs" />
     <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQuery.cs" />
     <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQueryHandler.cs" />
     <Compile Include="CQRS\Query\EntityListQuery.cs" />

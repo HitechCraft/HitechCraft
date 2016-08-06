@@ -7,9 +7,10 @@
         public int Id { get; set; }
 
         [Display(Name = "Наименование")]
+        [Required]
         public string Name { get; set; }
 
         [Display(Name = "Изображение")]
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
     }
 }

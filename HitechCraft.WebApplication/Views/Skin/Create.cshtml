@@ -7,25 +7,31 @@
 
 <div class="row">
     <div class="col-md-4">
-        @using (Html.BeginForm("Create", "Skin", FormMethod.Post, new {@enctype = "multipart/data"}))
+        @using (Html.BeginForm("Create", "Skin", FormMethod.Post, new { enctype = "multipart/form-data", @id = "uploadSkin" }))
         {
+            @Html.ValidationSummaryStyled(true)
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Name)
-                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.Image)
-                <input type="file" name="uploadSkinImage" id="uploadSkinImage" accept=".png"/>
+                <input type="file" name="uploadSkinImage" id="uploadSkinImage" accept=".png" />
+            </div>
+            <div class="form-group">
+                <a href="javascript:submit()" class="btn btn-success">Добавить</a>
             </div>
         }
     </div>
     <div class="col-md-4">
         <div id="skinpreview" class="skinpreview" height="100%" width="100%"></div>
-        <img src="" id="skin-image" hidden=""/>
+        <img src="" id="skin-image" hidden="" />
     </div>
 
     <div class="col-md-4">
-         @*TODO: находить в базе скины с подобным разрешением и размером. Чтобы избежать возможность создать уже имеющийся скин*@
+        @*TODO: находить в базе скины с подобным разрешением и размером. Чтобы избежать возможность создать уже имеющийся скин*@
     </div>
 </div>
 
@@ -57,4 +63,8 @@
     $("#uploadSkinImage").change(function () {
         readURL(this);
     });
+
+    function submit() {
+        $('#uploadSkin').submit();
+    }
 </script>

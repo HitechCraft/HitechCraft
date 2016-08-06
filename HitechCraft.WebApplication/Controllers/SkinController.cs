@@ -7,6 +7,9 @@
     using DAL.Domain;
     using Models;
     using System.Web.Mvc;
+    using System;
+    using BL.CQRS.Command;
+    using Manager;
 
     public class SkinController : BaseController
     {
@@ -24,9 +27,32 @@
             return View(vm);
         }
 
+        [HttpGet]
         [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Create(SkinEditViewModel vm)
+        {
+            var uploadFile = Request.Files["uploadSkinImage"];
+
+            if(uploadFile == null) ModelState.AddModelError(String.Empty, "Выберите изображение");
+
+            if (ModelState.IsValid)
+            {
+                this.CommandExecutor.Execute(new SkinCreateCommand()
+                {
+                    Name = vm.Name,
+                    Image = ImageManager.GetImageBytes(uploadFile)
+                });
+
+                return RedirectToAction("Create");
+            }
+
             return View();
         }
 
