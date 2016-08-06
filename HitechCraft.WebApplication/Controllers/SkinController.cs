@@ -79,8 +79,11 @@ namespace HitechCraft.WebApplication.Controllers
                 {
                     Projector = this.Container.Resolve<IProjector<Skin, SkinViewModel>>()
                 }).Where(x => x.Image.IsEquals(bytes));
-            
-            if(skins.Any()) return Json(new { status = "NO", message = "Скин уже существует" });
+
+            if (skins.Any())
+            {
+                return Json(new { status = "NO", message = "Есть похожие скины!" });
+            }
 
             return Json(new { status = "OK", message = "" });
         }
