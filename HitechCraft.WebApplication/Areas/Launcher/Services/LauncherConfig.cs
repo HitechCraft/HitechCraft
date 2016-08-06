@@ -33,7 +33,7 @@
         /// </summary>
         public static string DataDir
         {
-            get { return /*"/" + "Areas" +*/ "/" + "Launcher"; }
+            get { return "/" + "Areas" + "/" + "Launcher"; }
         }
 
         /// <summary>
