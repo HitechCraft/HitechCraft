@@ -204,18 +204,18 @@
             }
 
             var fileType = skinFile.ContentType;
-            var allowedTypes = new List<string>() {"image/png", "image/jpg", "image/jpeg"};
+            var allowedTypes = new List<string>() {"image/png"};
 
             if (!allowedTypes.Contains(fileType))
             {
-                errors.Add("Скин может быть в формате: png, jpg/jpeg");
+                errors.Add("Скин может быть в формате: .png");
 
                 return errors;
             }
             
             var image = System.Drawing.Image.FromStream(new System.IO.MemoryStream(bytes));
 
-            if (image.Width <= 64 && (image.Width / image.Height != 2 || image.Width / image.Height != 1))
+            if (image.Width <= 64 && (image.Width / image.Height != 2 && image.Width / image.Height != 1))
             {
                 errors.Add("Скины должны быть формата 1:1 или 2:1 (например, 64x64 или 64x32)");
             }
