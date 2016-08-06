@@ -7,10 +7,19 @@
 
 @if (Model != null && Model.Any())
 {
-    foreach (var skin in Model)
-    {
-        <div id="@("skinpreview" + skin.Id)" class="skinpreview" height="100%" width="100%"></div>
-    }
+    <div class="row">
+        @foreach (var skin in Model)
+        {
+            <div class="col-md-3">
+                <div class="panel panel-default skin-panel">
+                    <div class="panel-heading">@skin.Name</div>
+                    <div class="panel-body">
+                        <div id="@("skinpreview" + skin.Id)" class="skinpreview" height="100%" width="100%"></div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 }
 else
 {
@@ -33,7 +42,9 @@ else
                     running: false,
                     spin: false,
                     freezecamera: true,
-                    container: "#@("skinpreview" + skin.Id)"
+                    container: "#@("skinpreview" + skin.Id)",
+                    width: 200,
+                    height: 300
                 });
                 @("P" + skin.Id).changeSkin('data:image/jpeg;base64,@Convert.ToBase64String(skin.Image)');
             </text>

@@ -633,6 +633,12 @@ footer {
     &-modification {
         margin-top: 10px;
     }
+
+    &-panel {
+        .panel-heading {
+            min-height: 80px;
+        }
+    }
 }
 
 

@@ -567,6 +567,8 @@ footer {
     opacity: 0; }
   .skin-modification {
     margin-top: 10px; }
+  .skin-panel .panel-heading {
+    min-height: 80px; }
 
 .player-info {
   min-height: 422px;
