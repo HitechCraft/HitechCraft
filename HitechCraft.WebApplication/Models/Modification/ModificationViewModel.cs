@@ -11,6 +11,8 @@
         public string Version { get; set; }
 
         public string Description { get; set; }
+        
+        public string GuideVideoCode { get; set; }
 
         public byte[] Image { get; set; }
 

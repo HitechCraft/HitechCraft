@@ -30,6 +30,11 @@
             mapping.Map(x => x.Image)
                 .Column("Image");
 
+            mapping.Map(x => x.GuideVideo)
+                .Column("GuideVideo")
+                .Length(128)
+                .Nullable();
+
             mapping.Map(x => x.Version)
                 .Column("Version")
                 .Length(32)

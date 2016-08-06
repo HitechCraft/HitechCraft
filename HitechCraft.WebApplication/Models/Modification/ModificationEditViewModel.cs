@@ -16,5 +16,7 @@
 
         public string Description { get; set; }
 
+        [Display(Name = "Видео на Youtube")]
+        public string GuideVideoCode { get; set; }
     }
 }

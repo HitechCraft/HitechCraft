@@ -8,6 +8,7 @@
 @using (Html.BeginForm("Edit", "Modification", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Image)
 
     <div class="form-horizontal">
         <h4>Сервер @Model.Name</h4>
@@ -28,6 +29,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="guide" class="form-group">
+            @Html.LabelFor(model => model.GuideVideoCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GuideVideoCode, new { htmlAttributes = new { @class = "form-control", id = "guideVideo" } })
+                @Html.ValidationMessageFor(model => model.GuideVideoCode, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -73,6 +82,23 @@
 }
 
 <script type="text/javascript">
+    $('#guideVideo').on('input', function () {
+
+        var regExp = /^(https:\/\/[w{3}\.]{0,})(\byoutube.com\/watch\?v=\b){0,}[youtu.be]{0,}([A-Za-z0-9-_]+)[&feature=youtu.be]{0,}$/;
+
+        if (regExp.test($(this).val())) {
+            var matches = regExp.exec($(this).val());
+
+            $(this).val(matches[3]);
+
+            $('#guide').addClass('has-success');
+            $('#guide').removeClass('has-error');
+        } else {
+            $('#guide').addClass('has-error');
+            $('#guide').removeClass('has-success');
+        }
+    });
+
     function readURL(input) {
 
         if (input.files && input.files[0]) {

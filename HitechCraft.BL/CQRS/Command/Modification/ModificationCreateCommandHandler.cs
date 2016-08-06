@@ -24,8 +24,9 @@
                 Name = command.Name,
                 Description = command.Description,
                 Version = command.Version,
-                Image = command.Image
-            };
+                Image = command.Image,
+                GuideVideo = command.GuideVideo
+        };
 
             modRep.Add(mod);
             modRep.Dispose();

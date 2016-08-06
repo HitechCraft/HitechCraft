@@ -1,6 +1,4 @@
-﻿using HitechCraft.WebApplication.Manager;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
     using System.Web.Mvc;
     using BL.CQRS.Query;
@@ -10,6 +8,7 @@ namespace HitechCraft.WebApplication.Controllers
     using Common.Projector;
     using System;
     using BL.CQRS.Command;
+    using Manager;
 
     public class ModificationController : BaseController
     {

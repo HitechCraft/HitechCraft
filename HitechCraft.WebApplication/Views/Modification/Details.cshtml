@@ -22,21 +22,28 @@
             <p>@Model.Description</p>
         </div>
         <div class="col-md-6">
+            
+            @if (!String.IsNullOrEmpty(Model.GuideVideoCode))
+            {
+                <h3>Гайд на мод</h3>
+                <iframe width="560" height="315" src="@("https://www.youtube.com/embed/" + @Model.GuideVideoCode)" frameborder="0" allowfullscreen></iframe>
+            }
+
             <p>
-                Используется на серверах:<br />
+                Используется на серверах:<br/>
                 @if (Model.Servers != null && Model.Servers.Any())
                 {
                     foreach (var server in Model.Servers)
                     {
-                        <a href="@Url.Action("Details", "Server", new {id = server.Id})">@server.Name</a><br />
+                        <a href="@Url.Action("Details", "Server", new {id = server.Id})">@server.Name</a><br/>
                     }
                 }
                 else
                 {
-                <p>Модификаций нет (ванильный сервер)</p>
+                    <p>В данное время модификация не используется!</p>
                 }
-                </p>
-            </div>
+            </p>
+        </div>
         </div>
 
     if (User.IsInRole("Administrator"))

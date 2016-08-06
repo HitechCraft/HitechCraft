@@ -15,5 +15,7 @@
         public byte[] Image { get; set; }
 
         public string Version { get; set; }
+
+        public string GuideVideo { get; set; }
     }
 }

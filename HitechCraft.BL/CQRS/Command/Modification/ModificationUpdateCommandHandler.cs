@@ -26,6 +26,7 @@
             mod.Description = command.Description;
             mod.Version = command.Version;
             mod.Image = command.Image;
+            mod.GuideVideo = command.GuideVideo;
 
             modRep.Update(mod);
             modRep.Dispose();
