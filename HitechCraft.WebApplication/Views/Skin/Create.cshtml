@@ -22,7 +22,13 @@
                 <input type="file" name="uploadSkinImage" id="uploadSkinImage" accept=".png"/>
             </div>
             <div class="form-group">
-                <a href="javascript:submit()" class="btn btn-success">Добавить</a>
+                <a href="javascript:submitAndContinue()" class="btn btn-success">Добавить и продолжить создание</a>
+                <br/>   
+                <br />   
+                <a href="javascript:submitAndReturn()" class="btn btn-success">Добавить и вернуться в каталог</a>
+                <br />
+                <br />
+                <a href="@Url.Action("Catalog")" class="btn btn-primary">Вернуться в каталог</a>
             </div>
         }
     </div>
@@ -69,6 +75,15 @@
     $("#uploadSkinImage").change(function () {
         readURL(this);
     });
+
+    function submitAndContinue() {
+        submit();
+    }
+
+    function submitAndReturn() {
+        submit();
+        document.location = '@Url.Action("Catalog")';
+    }
 
     function submit() {
         $('#uploadSkin').submit();
