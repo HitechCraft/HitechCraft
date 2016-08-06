@@ -34,8 +34,8 @@
         container.appendChild(noWebGL);
     }
     var length = WIDTH;
-    var cw = 450,
-      ch = 450;
+    var cw = json.width,
+      ch = json.height;
     var tileUvWidth = 1 / WIDTH;
     var tileUvHeight = 1 / HEIGHT;
 

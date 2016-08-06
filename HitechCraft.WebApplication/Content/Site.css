@@ -567,6 +567,19 @@ footer {
     opacity: 0; }
   .skin-modification {
     margin-top: 10px; }
+  .skin-panel {
+    border-radius: 0 !important; }
+    .skin-panel .panel-heading {
+      min-height: 80px;
+      border-radius: 0 !important; }
+      .skin-panel .panel-heading span {
+        max-height: 59px;
+        display: block; }
+    .skin-panel .panel-body {
+      border-radius: 0 !important; }
+      .skin-panel .panel-body .skinpreview {
+        width: 200px;
+        margin: 0 auto; }
 
 .player-info {
   min-height: 422px;

@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Каталог скинов";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<div id="skins"></div>
+
+@if (User != null && User.IsInRole("Administrator"))
+{
+    @Html.ActionLink("Добавить скин", "Create", null, new {@class = "btn btn-success"})
+}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        LoadSkins(1);
+    });
+
+    function GetSkins(currentPage) {
+        LoadSkins(currentPage);
+    }
+
+    function LoadSkins(currentPage) {
+        $.get("@Url.Action("SkinPartialList", "Skin")", { page: currentPage })
+            .done(function(data) {
+                $('#skins').html('');
+                $('#skins').html(data);
+            });
+    }
+</script>

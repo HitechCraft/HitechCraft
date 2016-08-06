@@ -246,6 +246,7 @@
     <Compile Include="Controllers\RuleController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\SkinController.cs" />
     <Compile Include="Controllers\TopController.cs" />
     <Compile Include="Controllers\VoteController.cs" />
     <Compile Include="Global.asax.cs">
@@ -293,6 +294,8 @@
     <Compile Include="Mapper\Shop\ShopItemEditViewModelToShopItemCreateCommandMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemToShopItemViewModelMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemToShopItemEditViewModelMapper.cs" />
+    <Compile Include="Mapper\Skin\SkinToSkinEditViewModelMapper.cs" />
+    <Compile Include="Mapper\Skin\SkinToSkinViewModelMapper.cs" />
     <Compile Include="Models\AuthLog\AuthLogViewModel.cs" />
     <Compile Include="Models\Ban\BanEditViewModel.cs" />
     <Compile Include="Models\Ban\BanUnbanViewModel.cs" />
@@ -343,6 +346,8 @@
     <Compile Include="Models\Shop\ShopItemCategoryEditViewModel.cs" />
     <Compile Include="Models\Shop\ShopItemViewModel.cs" />
     <Compile Include="Models\Shop\ShopItemEditViewModel.cs" />
+    <Compile Include="Models\Skin\SkinEditViewModel.cs" />
+    <Compile Include="Models\Skin\SkinViewModel.cs" />
     <Compile Include="Ninject\Current\CurrentUser.cs" />
     <Compile Include="Ninject\Current\ICurrentUser.cs" />
     <Compile Include="Ninject\NinjectDependencyResolver.cs" />
@@ -525,6 +530,9 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\ErrorPage\Index.cshtml" />
+    <Content Include="Views\Skin\Catalog.cshtml" />
+    <Content Include="Views\Skin\Create.cshtml" />
+    <Content Include="Views\Skin\_SkinPartialList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

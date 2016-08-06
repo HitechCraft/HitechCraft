@@ -39,6 +39,8 @@
                     .UseOverridesFromAssemblyOf<CurrencyOverrides>())
                 .Add(AutoMap.AssemblyOf<Player>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<PlayerOverrides>())
+                .Add(AutoMap.AssemblyOf<Skin>(autoMapHelper)
+                    .UseOverridesFromAssemblyOf<SkinOverrides>())
                 .Add(AutoMap.AssemblyOf<PlayerInfo>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<PlayerInfoOverrides>())
                 .Add(AutoMap.AssemblyOf<PlayerSession>(autoMapHelper)

@@ -1,0 +1,95 @@
+﻿@model HitechCraft.WebApplication.Models.SkinEditViewModel
+@{
+    ViewBag.Title = "Добавить скин";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm("Create", "Skin", FormMethod.Post, new { enctype = "multipart/form-data", @id = "uploadSkin" }))
+        {
+            @Html.ValidationSummaryStyled(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Image)
+                <input type="file" name="uploadSkinImage" id="uploadSkinImage" accept=".png" />
+            </div>
+            <div class="form-group">
+                <a href="javascript:submit()" class="btn btn-success">Добавить</a>
+            </div>
+        }
+    </div>
+    <div class="col-md-4">
+        <div id="skinpreview" class="skinpreview" height="100%" width="100%"></div>
+        <img src="" id="skin-image" hidden="" />
+    </div>
+
+    <div class="col-md-4">
+        @*TODO: находить в базе скины с подобным разрешением и размером. Чтобы избежать возможность создать уже имеющийся скин*@
+    </div>
+</div>
+
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            getSimilarSkins(input.files[0]);
+
+            reader.onload = function (e) {
+                $('#skin-image').attr('src', e.target.result);
+                $('#skinpreview canvas').remove();
+
+                var P0 = new MSP({
+                    showcape: true,
+                    running: false,
+                    spin: false,
+                    freezecamera: true,
+                    container: "#skinpreview",
+                    width: 450,
+                    height: 450
+                });
+
+                P0.changeSkin($('#skin-image').attr('src'));
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#uploadSkinImage").change(function () {
+        readURL(this);
+    });
+
+    function submit() {
+        $('#uploadSkin').submit();
+    }
+
+    function getSimilarSkins(files) {
+        var form_data = new FormData();                  // Creating object of FormData class
+
+        form_data.append("uploadSkinImage", files);      // Appending parameter named file with properties of file_field to form_data
+
+        $.ajax({
+            url: "@Url.Action("CheckExistingSkin")",
+            dataType: 'script',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data, // Setting the data attribute of ajax with file_data
+            type: 'post'
+        })
+        .done(function (data)
+        {
+            if (data.status === "NO") {
+                growlError(data.message);
+            }
+        });
+    }
+</script>

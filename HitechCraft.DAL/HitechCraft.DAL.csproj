@@ -54,7 +54,9 @@
   <ItemGroup>
     <Compile Include="Domain\Ban\Ban.cs" />
     <Compile Include="Domain\Ban\BanIp.cs" />
+    <Compile Include="Domain\Extentions\ByteExtentions.cs" />
     <Compile Include="Domain\Extentions\IEnumerableExtentions.cs" />
+    <Compile Include="Domain\Minecraft\Skin.cs" />
     <Compile Include="Domain\News\Comment.cs" />
     <Compile Include="Domain\Player\AuthLog.cs" />
     <Compile Include="Domain\Player\Currency.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="NHibernate\Helper\AutomappingHelper.cs" />
     <Compile Include="NHibernate\Helper\NHibernateHelper.cs" />
     <Compile Include="NHibernate\MappingConfig.cs" />
+    <Compile Include="NHibernate\Mappings\SkinOverrides.cs" />
     <Compile Include="NHibernate\Mappings\RulePoint.cs" />
     <Compile Include="NHibernate\Mappings\Rule.cs" />
     <Compile Include="NHibernate\Mappings\PlayerItemOverrides.cs" />
