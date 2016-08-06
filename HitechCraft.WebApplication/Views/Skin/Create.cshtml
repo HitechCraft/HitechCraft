@@ -7,18 +7,19 @@
 
 <div class="row">
     <div class="col-md-4">
-        @using (Html.BeginForm("Create", "Skin", FormMethod.Post, new { enctype = "multipart/form-data", @id = "uploadSkin" }))
+        <h4 class="skin-title"><strong>Выбрать образ скина</strong></h4>
+        @using (Html.BeginForm("Create", "Skin", FormMethod.Post, new {enctype = "multipart/form-data", @id = "uploadSkin"}))
         {
             @Html.ValidationSummaryStyled(true)
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Name)
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(m => m.Name, "", new {@class = "text-danger"})
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.Image)
-                <input type="file" name="uploadSkinImage" id="uploadSkinImage" accept=".png" />
+                <input type="file" name="uploadSkinImage" id="uploadSkinImage" accept=".png"/>
             </div>
             <div class="form-group">
                 <a href="javascript:submit()" class="btn btn-success">Добавить</a>
@@ -26,12 +27,13 @@
         }
     </div>
     <div class="col-md-4">
-        <div id="skinpreview" class="skinpreview" height="100%" width="100%"></div>
+        <h4 class="skin-title"><strong>Предпросмотр</strong></h4>
+        <div id="skinpreviewcreate" class="skinpreview" height="100%" width="100%"></div>
         <img src="" id="skin-image" hidden="" />
     </div>
 
-    <div class="col-md-4">
-        @*TODO: находить в базе скины с подобным разрешением и размером. Чтобы избежать возможность создать уже имеющийся скин*@
+    <div id="skin-duplicate" class="col-md-4">
+        
     </div>
 </div>
 
@@ -44,16 +46,17 @@
 
             reader.onload = function (e) {
                 $('#skin-image').attr('src', e.target.result);
-                $('#skinpreview canvas').remove();
+                $('#skinpreviewcreate canvas').remove();
+                $('#skin-duplicate').html('');
 
                 var P0 = new MSP({
                     showcape: true,
                     running: false,
                     spin: false,
                     freezecamera: true,
-                    container: "#skinpreview",
-                    width: 450,
-                    height: 450
+                    container: "#skinpreviewcreate",
+                    width: 200,
+                    height: 300
                 });
 
                 P0.changeSkin($('#skin-image').attr('src'));
@@ -83,12 +86,13 @@
             contentType: false,
             processData: false,
             data: form_data, // Setting the data attribute of ajax with file_data
-            type: 'post'
-        })
-        .done(function (data)
-        {
-            if (data.status === "NO") {
-                growlError(data.message);
+            type: 'post',
+            error: function (data) {
+                console.log(data);
+                if (data.responseText !== "OK") {
+                    $('#skin-duplicate').html('');
+                    $('#skin-duplicate').html(data.responseText);
+                }
             }
         });
     }

@@ -552,9 +552,15 @@ footer {
 #skinpreview {
   position: absolute;
   margin-top: -34px; }
+  #skinpreviewduplicated {
+    margin-top: -34px; }
+  #skinpreviewcreate {
+    margin-top: -34px; }
 
 .skin {
   border: 2px solid #ddd; }
+  .skin-title {
+    margin-bottom: 20px; }
   .skin-register {
     padding: 75px 0;
     height: 451px; }

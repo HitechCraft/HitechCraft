@@ -82,10 +82,10 @@ namespace HitechCraft.WebApplication.Controllers
 
             if (skins.Any())
             {
-                return Json(new { status = "NO", message = "Есть похожие скины!" });
+                return PartialView("_SkinDuplicatedPartial", skins.First());
             }
 
-            return Json(new { status = "OK", message = "" });
+            return this.Content("OK");
         }
 
         #endregion

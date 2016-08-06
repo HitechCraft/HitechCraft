@@ -533,6 +533,7 @@
     <Content Include="Views\Skin\Catalog.cshtml" />
     <Content Include="Views\Skin\Create.cshtml" />
     <Content Include="Views\Skin\_SkinPartialList.cshtml" />
+    <Content Include="Views\Skin\_SkinDuplicatedPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
