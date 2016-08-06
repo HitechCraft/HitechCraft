@@ -37,9 +37,10 @@
 
 <script type="text/javascript">
     function readURL(input) {
-
         if (input.files && input.files[0]) {
             var reader = new FileReader();
+
+            getSimilarSkins(input.files[0]);
 
             reader.onload = function (e) {
                 $('#skin-image').attr('src', e.target.result);
@@ -68,5 +69,27 @@
 
     function submit() {
         $('#uploadSkin').submit();
+    }
+
+    function getSimilarSkins(files) {
+        var form_data = new FormData();                  // Creating object of FormData class
+
+        form_data.append("uploadSkinImage", files);      // Appending parameter named file with properties of file_field to form_data
+
+        $.ajax({
+            url: "@Url.Action("CheckExistingSkin")",
+            dataType: 'script',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data, // Setting the data attribute of ajax with file_data
+            type: 'post'
+        })
+        .done(function (data)
+        {
+            if (data.status === "NO") {
+                growlError(data.message);
+            }
+        });
     }
 </script>

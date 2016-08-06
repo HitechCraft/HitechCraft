@@ -1,4 +1,10 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using HitechCraft.DAL.Domain.Extentions;
+using HitechCraft.DAL.Repository.Specification;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     using PagedList;
     using BL.CQRS.Query;
@@ -61,6 +67,24 @@
             return View();
         }
 
+        [HttpPost]
+        public ActionResult CheckExistingSkin()
+        {
+            var uploadedFile = Request.Files["uploadSkinImage"];
+
+            var bytes = ImageManager.GetImageBytes(uploadedFile);
+
+            var skins = new EntityListQueryHandler<Skin, SkinViewModel>(this.Container)
+                .Handle(new EntityListQuery<Skin, SkinViewModel>()
+                {
+                    Projector = this.Container.Resolve<IProjector<Skin, SkinViewModel>>()
+                }).Where(x => x.Image.IsEquals(bytes));
+            
+            if(skins.Any()) return Json(new { status = "NO", message = "Скин уже существует" });
+
+            return Json(new { status = "OK", message = "" });
+        }
+
         #endregion
 
         #region Private Methods
@@ -77,7 +101,7 @@
 
             return vm.ToPagedList(currentPage, this.SkinsOnPage);
         }
-
+        
         #endregion
     }
 }

@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Domain\Ban\Ban.cs" />
     <Compile Include="Domain\Ban\BanIp.cs" />
+    <Compile Include="Domain\Extentions\ByteExtentions.cs" />
     <Compile Include="Domain\Extentions\IEnumerableExtentions.cs" />
     <Compile Include="Domain\Minecraft\Skin.cs" />
     <Compile Include="Domain\News\Comment.cs" />
@@ -123,7 +124,9 @@
     <Compile Include="Repository\Specification\Rule\RulePointByNameSpec.cs" />
     <Compile Include="UnitOfWork\NHibernateUnitOfWork.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Repository\Specification\Skin\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HitechCraft.Common\HitechCraft.Common.csproj">
       <Project>{7e3103fd-8f77-49b8-ba12-0250ceff3f25}</Project>
