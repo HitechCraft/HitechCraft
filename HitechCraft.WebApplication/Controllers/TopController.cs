@@ -36,7 +36,8 @@
                 {
                     Projector = this.Container.Resolve<IProjector<Currency, CurrencyTopViewModel>>()
                 })
-                .OrderByDescending(x => x.Gonts).Limit(10);
+                .Limit(10)
+                .OrderByDescending(x => x.Gonts);
 
             return PartialView("_TopGontsPartial", vm);
         }
@@ -48,7 +49,8 @@
                 {
                     Projector = this.Container.Resolve<IProjector<Currency, CurrencyTopViewModel>>()
                 })
-                .OrderByDescending(x => x.Gonts).Limit(10);
+                .Limit(10)
+                .OrderByDescending(x => x.Rubles);
 
             return PartialView("_TopRubsPartial", vm);
         }
