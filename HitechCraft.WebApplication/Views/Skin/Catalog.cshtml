@@ -7,7 +7,10 @@
 
 @if (Model != null && Model.Any())
 {
-    
+    foreach (var skin in Model)
+    {
+        <div id="@("skinpreview" + skin.Id)" class="skinpreview" height="100%" width="100%"></div>
+    }
 }
 else
 {
@@ -18,3 +21,22 @@ else
 {
     @Html.ActionLink("Добавить скин", "Create", null, new { @class = "btn btn-success" })
 }
+
+<script>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var skin in Model)
+        {
+            <text>
+                var @("P" + skin.Id) = new MSP({
+                    showcape: true,
+                    running: false,
+                    spin: false,
+                    freezecamera: true,
+                    container: "#@("skinpreview" + skin.Id)"
+                });
+                @("P" + skin.Id).changeSkin('data:image/jpeg;base64,@Convert.ToBase64String(skin.Image)');
+            </text>
+        }
+    }
+</script>
