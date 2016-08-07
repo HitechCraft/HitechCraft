@@ -17,6 +17,11 @@
         /// </summary>
         public string HashSum { get; set; }
 
+        /// <summary>
+        /// File size (in bytes)
+        /// </summary>
+        public int FileSize { get; set; }
+
         #endregion
     }
 }

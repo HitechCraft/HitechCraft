@@ -220,7 +220,8 @@
                         .Select(x => new JsonClientFilesData()
                         {
                             FilePath = FileManager.GetClientFilePath(x, clientName),
-                            HashSum = HashManager.GetMd5Hash(System.IO.File.ReadAllBytes(x))
+                            HashSum = HashManager.GetMd5Hash(System.IO.File.ReadAllBytes(x)),
+                            FileSize = (int)new FileInfo(x).Length
                         }));
                 }
             }
