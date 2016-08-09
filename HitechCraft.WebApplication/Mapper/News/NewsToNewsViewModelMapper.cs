@@ -15,7 +15,8 @@
                 .ForMember(dst => dst.Image, ext => ext.MapFrom(src => src.Image))
                 .ForMember(dst => dst.Title, ext => ext.MapFrom(src => src.Title))
                 .ForMember(dst => dst.TimeCreate, ext => ext.MapFrom(src => src.TimeCreate))
-                .ForMember(dst => dst.ViewersCount, ext => ext.MapFrom(src => src.ViewersCount));
+                .ForMember(dst => dst.ViewersCount, ext => ext.MapFrom(src => src.ViewersCount))
+                .ForMember(dst => dst.CommentsCount, ext => ext.MapFrom(src => src.Comments.Count));
         }
     }
 }

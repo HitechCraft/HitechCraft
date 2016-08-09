@@ -23,5 +23,7 @@
         public string AuthorName { get; set; }
         
         public int ViewersCount { get; set; }
+
+        public int CommentsCount { get; set; }
     }
 }

@@ -81,7 +81,7 @@
 
 @font-face {
   font-family: 'Arbat';
-  src: url("../fonts/arbat.ttf"); }
+  src: url("fonts/arbat.ttf"); }
 
 .vk {
   background-position: -70px -36px !important; }
@@ -263,9 +263,23 @@ footer {
 
 .footer-left {
   float: left; }
+  .footer-left span {
+    font-weight: bold;
+    margin-right: 7px;
+    line-height: 0.5; }
+    .footer-left span .value {
+      margin-left: -7px;
+      font-size: 20px; }
 
 .footer-right {
   float: right; }
+  .footer-right span {
+    font-weight: bold;
+    margin-right: 7px;
+    line-height: 0.5; }
+    .footer-right span .value {
+      margin-left: -7px;
+      font-size: 20px; }
 
 .email {
   color: #13baab; }
@@ -411,23 +425,20 @@ footer {
   margin-bottom: 30px; }
 
 .panel {
-  -ms-border-top-left-radius: 34px;
-  border-top-left-radius: 34px;
-  -ms-border-bottom-right-radius: 34px;
-  border-bottom-right-radius: 34px; }
+  /*@include border-radius-top-left-bottom-right(34px, 34px);*/ }
   .panel-body {
     background: #fbfbfb;
-    border-bottom-right-radius: 32px; }
+    /*border-bottom-right-radius: 32px;*/ }
   .panel-heading {
-    -ms-border-top-left-radius: 34px;
-    border-top-left-radius: 34px;
+    /*-ms-border-top-left-radius: 34px;
+        border-top-left-radius: 34px;*/
     text-align: center;
     font-size: 21px; }
   .panel-heading {
     position: relative; }
   .panel-footer {
-    -ms-border-bottom-right-radius: 34px;
-    border-bottom-right-radius: 34px; }
+    /*-ms-border-bottom-right-radius: 34px;
+        border-bottom-right-radius: 34px;*/ }
   .panel-login {
     max-width: 371px;
     margin: 0 auto; }

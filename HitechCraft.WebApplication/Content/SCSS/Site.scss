@@ -187,10 +187,32 @@ footer {
 
     &-left {
         float: left;
+
+        span {
+            font-weight: bold;
+            margin-right: 7px;
+            line-height: 0.5;
+
+            .value {
+                margin-left: -7px;
+                font-size: 20px;
+            }
+        }
     }
 
     &-right {
         float: right;
+        
+        span {
+            font-weight: bold;
+            margin-right: 7px;
+            line-height: 0.5;
+
+            .value {
+                margin-left: -7px;
+                font-size: 20px;
+            }
+        }
     }
 }
 
@@ -404,16 +426,16 @@ footer {
 }
 
 .panel {
-    @include border-radius-top-left-bottom-right(34px, 34px);
+    /*@include border-radius-top-left-bottom-right(34px, 34px);*/
 
     &-body {
         background: rgb(251, 251, 251);
-        border-bottom-right-radius: 32px;
+        /*border-bottom-right-radius: 32px;*/
     }
 
     &-heading {
-        -ms-border-top-left-radius: 34px;
-        border-top-left-radius: 34px;
+        /*-ms-border-top-left-radius: 34px;
+        border-top-left-radius: 34px;*/
         text-align: center;
         font-size: 21px;
     }
@@ -423,8 +445,8 @@ footer {
     }
 
     &-footer {
-        -ms-border-bottom-right-radius: 34px;
-        border-bottom-right-radius: 34px;
+        /*-ms-border-bottom-right-radius: 34px;
+        border-bottom-right-radius: 34px;*/
     }
 
     &-login {
