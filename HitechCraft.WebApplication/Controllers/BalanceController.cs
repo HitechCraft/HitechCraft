@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 

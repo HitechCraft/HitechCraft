@@ -63,6 +63,16 @@
         }
 
         /// <summary>
+        /// Returns byte array from base64 string
+        /// </summary>
+        /// <param name="bytes">Byte array</param>
+        /// <returns></returns>
+        public static byte[] GetBase64Bytes(string base64)
+        {
+            return Convert.FromBase64String(base64);
+        }
+
+        /// <summary>
         /// Get uuid from input string (ебать говнокод, но хуле делать?)
         /// </summary>
         /// <param name="input">Input string</param>

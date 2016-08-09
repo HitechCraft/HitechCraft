@@ -10,7 +10,6 @@
     using DAL.Domain;
     using Models;
     using DAL.Domain.Extentions;
-    using Manager;
 
     #endregion
 

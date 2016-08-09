@@ -1,7 +1,6 @@
 ﻿namespace HitechCraft.WebApplication.Controllers
 {
     using System.Web.Mvc;
-    using System;
 
     public class ErrorPageController : Controller
     {

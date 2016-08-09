@@ -80,6 +80,19 @@
             return GetClientPath(serverPath, clientName).Replace("\\", "/");
         }
 
+        /// <summary>
+        /// Returns byte[] of downloaded file
+        /// </summary>
+        /// <param name="absoluteUrl">File url</param>
+        /// <returns></returns>
+        public static byte[] DownloadFile(string absoluteUrl)
+        {
+            using (var client = new System.Net.WebClient())
+            {
+                return client.DownloadData(absoluteUrl);
+            }
+        }
+
         #region Private Methods
 
         private static bool IsFileExists(string path)

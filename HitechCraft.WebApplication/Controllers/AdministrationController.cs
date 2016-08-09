@@ -7,8 +7,6 @@
     using Microsoft.AspNet.Identity.EntityFramework;
     using Common.DI;
     using Models;
-    using System.Web;
-    using Microsoft.AspNet.Identity.Owin;
 
     [Authorize(Roles = "Administrator")]
     public class AdministrationController : BaseController

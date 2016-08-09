@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using HitechCraft.DAL.Domain.Extentions;
-using HitechCraft.DAL.Repository.Specification;
+﻿using System.Net;
+using HitechCraft.Common.Core;
 
 namespace HitechCraft.WebApplication.Controllers
 {
@@ -16,7 +13,9 @@ namespace HitechCraft.WebApplication.Controllers
     using System;
     using BL.CQRS.Command;
     using Manager;
-
+    using System.Linq;
+    using DAL.Domain.Extentions;
+    
     public class SkinController : BaseController
     {
         public int SkinsOnPage => 8;
@@ -89,6 +88,25 @@ namespace HitechCraft.WebApplication.Controllers
         }
 
         [HttpPost]
+        public ActionResult CheckExistingSkinByBase64(string base64)
+        {
+            var bytes = HashManager.GetBase64Bytes(base64);
+
+            var skins = new EntityListQueryHandler<Skin, SkinViewModel>(this.Container)
+                .Handle(new EntityListQuery<Skin, SkinViewModel>()
+                {
+                    Projector = this.Container.Resolve<IProjector<Skin, SkinViewModel>>()
+                }).Where(x => x.Image.IsEquals(bytes));
+
+            if (skins.Any())
+            {
+                return PartialView("_SkinDuplicatedPartial", skins.First());
+            }
+
+            return this.Content("OK");
+        }
+
+        [HttpPost]
         public JsonResult SetPlayerSkin(int? skinId)
         {
             try
@@ -107,6 +125,22 @@ namespace HitechCraft.WebApplication.Controllers
             }
 
             return Json(new { status = "OK", message = "Скин успешно установлен!" });
+        }
+
+
+        [HttpPost]
+        public JsonResult DownloadSkin(string url)
+        {
+            try
+            {
+                var image = HashManager.GetBase64Hash(FileManager.DownloadFile(url));
+
+                return Json(new { status = "OK", message = @"data:image/jpeg;base64," + image, img = image });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { status = "NO", message = "Error: " + ex.Message });
+            }
         }
 
         #endregion

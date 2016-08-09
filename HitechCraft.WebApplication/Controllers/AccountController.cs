@@ -16,7 +16,6 @@
     using System;
     using System.Collections.Generic;
     using Common.Models.Enum;
-    using Microsoft.AspNet.Identity.EntityFramework;
 
     #endregion
 
@@ -99,7 +98,7 @@
         {
             //проверяем если пользователь уже авторизован не пускать на страницу авторизации
             //TODO: если у пользователя нет прав на просмотр страницы, то перенаправлять на специальную страницу ошибки
-            if (User != null)
+            if (User.Identity.Name != String.Empty)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -171,7 +170,7 @@
         public ActionResult Register()
         {
             //проверяем если пользователь уже авторизован не пускать на страницу регистрации
-            if (User != null)
+            if (User.Identity.Name != String.Empty)
             {
                 return RedirectToAction("Index", "Home");
             }

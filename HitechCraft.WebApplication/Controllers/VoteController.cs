@@ -9,7 +9,6 @@
     using System;
     using System.Collections.Generic;
     using BL.CQRS.Query;
-    using Manager;
     using Models;
     using DAL.Domain;
     using System.Linq;
