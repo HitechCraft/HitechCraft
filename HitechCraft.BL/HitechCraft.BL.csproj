@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{65B57FDC-C32E-4907-86C2-9489F2643A0F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HitechCraft.BL</RootNamespace>
+    <AssemblyName>HitechCraft.BL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CQRS\Command\AuthLog\AuthLogCreateCommand.cs" />
+    <Compile Include="CQRS\Command\AuthLog\AuthLogCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Currency\CurrencyUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\Currency\CurrencyCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Currency\CurrencyUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Currency\CurrencyCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\IKTransaction\IKTransactionUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\IKTransaction\IKTransactionCreateCommand.cs" />
+    <Compile Include="CQRS\Command\IKTransaction\IKTransactionUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\IKTransaction\IKTransactionCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Modification\ModificationRemoveCommand.cs" />
+    <Compile Include="CQRS\Command\Modification\ModificationRemoveCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Modification\ModificationUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\Modification\ModificationCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Modification\ModificationUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Modification\ModificationCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\News\Comment\CommentRemoveCommand.cs" />
+    <Compile Include="CQRS\Command\News\Comment\CommentUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\News\Comment\CommentCreateCommand.cs" />
+    <Compile Include="CQRS\Command\News\Comment\CommentRemoveCommandHandler.cs" />
+    <Compile Include="CQRS\Command\News\Comment\CommentUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\News\Comment\CommentCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\News\NewsRemoveCommand.cs" />
+    <Compile Include="CQRS\Command\News\NewsRemoveCommandHandler.cs" />
+    <Compile Include="CQRS\Command\News\NewsUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\News\NewsUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\News\NewsImageRemoveCommand.cs" />
+    <Compile Include="CQRS\Command\News\NewsViewsUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\News\NewsCreateCommand.cs" />
+    <Compile Include="CQRS\Command\News\NewsImageRemoveCommandHandler.cs" />
+    <Compile Include="CQRS\Command\News\NewsViewsUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\News\NewsCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\PlayerSession\PlayerSessionCreateCommand.cs" />
+    <Compile Include="CQRS\Command\PlayerSession\PlayerSessionUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\PlayerSession\PlayerSessionCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\PlayerSession\PlayerSessionUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Rule\RulePointRemoveCommand.cs" />
+    <Compile Include="CQRS\Command\Rule\RuleRemoveCommand.cs" />
+    <Compile Include="CQRS\Command\Rule\RulePointRemoveCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Rule\RuleRemoveCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Rule\RulePointUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\Rule\RulePointCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Rule\RulePointUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Rule\RulePointCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Rule\RuleUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\Rule\RuleCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Rule\RuleUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Rule\RuleCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\ServerGroups\DonateGroupIEBuyCommand.cs" />
+    <Compile Include="CQRS\Command\ServerGroups\DonateGroupIEBuyCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Player\PlayerSkinRemoveCommand.cs" />
+    <Compile Include="CQRS\Command\Player\PlayerSkinCreateOrUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\Player\PlayerRegisterCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Player\PlayerSkinRemoveCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Player\PlayerSkinCreateOrUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Player\PlayerRegisterCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Server\ServerRemoveCommand.cs" />
+    <Compile Include="CQRS\Command\Server\ServerRemoveCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Server\ServerUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\Server\ServerCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Server\ServerUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Server\ServerCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemAddRandomCommand.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemAddRandomCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemCategoryCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemBuyCommand.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemBuyCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemRemoveCommand.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemCategoryCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemRemoveCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Skin\SkinInstallCommand.cs" />
+    <Compile Include="CQRS\Command\Skin\SkinCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Skin\SkinInstallCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Skin\SkinCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQuery.cs" />
+    <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQueryHandler.cs" />
+    <Compile Include="CQRS\Query\EntityListQuery.cs" />
+    <Compile Include="CQRS\Query\EntityListQueryHandler.cs" />
+    <Compile Include="CQRS\Query\EntityQuery.cs" />
+    <Compile Include="CQRS\Query\EntityQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Server\ServerDataListQuery.cs" />
+    <Compile Include="CQRS\Query\Server\ServerDataListQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Player\PlayerSkinExistsQuery.cs" />
+    <Compile Include="CQRS\Query\Player\PlayerSkinQuery.cs" />
+    <Compile Include="CQRS\Query\Player\PlayerByLoginQuery.cs" />
+    <Compile Include="CQRS\Query\Player\PlayerSkinExistsQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Player\PlayerSkinQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Player\PlayerByLoginQueryHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HitechCraft.Common\HitechCraft.Common.csproj">
+      <Project>{7e3103fd-8f77-49b8-ba12-0250ceff3f25}</Project>
+      <Name>HitechCraft.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HitechCraft.DAL\HitechCraft.DAL.csproj">
+      <Project>{61bb4d2b-a80d-4c3c-822e-ad0aa3735873}</Project>
+      <Name>HitechCraft.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,11 @@
+syntax: glob
+.vs/
+bin/
+obj/
+packages/
+Documentation/
+Documentation/
+Launcher/Clients/
+HitechCraft.WebApplication/Content/logs/
+HitechCraft.WebApplication\Areas\Clients\ParallelWorlds\mods\ironchest-1.7.10-6.0.62.742-universal.jar
+HitechCraft.WebApplication/Areas/Clients/
