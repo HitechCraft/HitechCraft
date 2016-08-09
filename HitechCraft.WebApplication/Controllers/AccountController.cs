@@ -97,12 +97,18 @@
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            //проверяем если пользователь уже авторизован не пускать на страницу авторизации
+            //TODO: если у пользователя нет прав на просмотр страницы, то перенаправлять на специальную страницу ошибки
+            if (User != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ViewBag.ReturnUrl = returnUrl;
 
             return View();
         }
-
-        //TODO: восстановление пароля
+        
         //
         // POST: /Account/Login
         [HttpPost]
@@ -164,6 +170,12 @@
         [AllowAnonymous]
         public ActionResult Register()
         {
+            //проверяем если пользователь уже авторизован не пускать на страницу регистрации
+            if (User != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ViewBag.Gender = new List<SelectListItem>()
             {
                 new SelectListItem()
