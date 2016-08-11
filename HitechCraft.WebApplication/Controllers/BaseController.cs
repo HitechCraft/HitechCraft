@@ -19,9 +19,9 @@
     {
         #region Private Fields
 
-        private Player CurrentPlayer;
+        private Player _currentPlayer;
 
-        private Currency CurrentCurrency;
+        private Currency _currentCurrency;
 
         #endregion
 
@@ -31,9 +31,31 @@
 
         public ICurrentUser CurrentUser { get; set; }
 
-        public Player Player { get; }
+        public Player Player
+        {
+            get
+            {
+                if(this._currentPlayer == null)
+                {
+                    this._currentPlayer = this.GetCurrentPlayer();
+                }
 
-        public Currency Currency { get; }
+                return this._currentPlayer;
+            }
+        }
+
+        public Currency Currency
+        {
+            get
+            {
+                if (this._currentCurrency == null)
+                {
+                    this._currentCurrency = this.GetCurrency();
+                }
+
+                return this._currentCurrency;
+            }
+        }
 
         public BaseController(IContainer container)
         {
@@ -41,10 +63,6 @@
             this.CommandExecutor = this.Container.Resolve<ICommandExecutor>();
 
             this.CurrentUser = this.Container.Resolve<ICurrentUser>();
-
-            this.Player = this.GetCurrentPlayer();
-
-            this.Currency = this.GetCurrency();
         }
 
         public TResult Project<TSource, TResult>(TSource source)
