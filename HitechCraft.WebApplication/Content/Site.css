@@ -601,6 +601,19 @@ footer {
 .player-info {
   min-height: 422px;
   font-size: 24px; }
+  .player-info .nav-tabs {
+    margin: 0px;
+    border-bottom: none; }
+    .player-info .nav-tabs li a {
+      border: 1px solid #d6d6d6;
+      cursor: pointer !important; }
+      .player-info .nav-tabs li a:hover {
+        border: 1px solid #d6d6d6 !important; }
+      .player-info .nav-tabs li a:focus {
+        border: 1px solid #d6d6d6 !important; }
+  .player-info .tab-content {
+    margin: 0px;
+    margin-top: 25px; }
 
 .profile-block {
   margin-bottom: 30px; }

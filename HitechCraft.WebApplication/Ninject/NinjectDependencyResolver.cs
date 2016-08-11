@@ -177,6 +177,8 @@ namespace HitechCraft.WebApplication.Ninject
 
             this._kernel.Bind(typeof(IProjector<AuthLog, AuthLogViewModel>)).To(typeof(AuthLogToAuthLogViewModelMapper));
 
+            this._kernel.Bind(typeof(IProjector<Job, JobViewModel>)).To(typeof(JobToJobViewModelMapper));
+
             #endregion
 
             this._kernel.Bind(typeof(IUnitOfWork)).To(typeof(NHibernateUnitOfWork));

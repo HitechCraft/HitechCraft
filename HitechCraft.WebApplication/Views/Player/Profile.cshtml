@@ -36,22 +36,34 @@
         <div class="panel panel-default">
             <div class="panel-heading">@Resources.Info</div>
             <div class="panel-body player-info info-block">
-                <p>
-                    <span>@Resources.Email</span>: @Model.Email
-                </p>
-                @*<p>
-                    <span>@Resources.Status</span>: @Model.Status
-                </p>*@
-                <p>
-                    <span>@Resources.Gender</span>: @(Model.Gender == Gender.Male ? Resources.GenderMale : Resources.GenderFemale)
-                </p>
-                <p>
-                    <span>@Resources.PlayerBalance [@Html.ActionLink("пополнить", "Index", "Balance")]</span>:
-                    <br />
-                    <span>@Resources.Rubles</span>: @ViewBag.Rubels ед.
-                    <br />
-                    <span>@Resources.Gonts</span>: @ViewBag.Gonts ед.
-                </p>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Инфо</a></li>
+                    <li role="presentation"><a href="#jobs" aria-controls="jobs" role="tab" data-toggle="tab">Профессии</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="info">
+                        <p>
+                            <span>@Resources.Email</span>: @Model.Email
+                        </p>
+                        @*<p>
+                            <span>@Resources.Status</span>: @Model.Status
+                        </p>*@
+                        <p>
+                            <span>@Resources.Gender</span>: @(Model.Gender == Gender.Male ? Resources.GenderMale : Resources.GenderFemale)
+                        </p>
+                        <p>
+                            <span>@Resources.PlayerBalance [@Html.ActionLink("пополнить", "Index", "Balance")]</span>:
+                            <br/>
+                            <span>@Resources.Rubles</span>: @ViewBag.Rubels ед.
+                            <br/>
+                            <span>@Resources.Gonts</span>: @ViewBag.Gonts ед.
+                        </p>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="jobs">
+                        @Html.Action("RenderJobs")
+                    </div>
+                </div>
             </div>
 
             <div class="panel-footer">

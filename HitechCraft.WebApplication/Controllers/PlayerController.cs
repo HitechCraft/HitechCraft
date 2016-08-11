@@ -1,4 +1,7 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using System.Text;
+using HitechCraft.Common.Core;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -166,6 +169,21 @@
                 }).OrderByDescending(x => x.Id).Limit(10);
 
             return View(vm);
+        }
+
+        [Authorize]
+        public ActionResult RenderJobs()
+        {
+            var jobs = new EntityListQueryHandler<Job, JobViewModel>(this.Container)
+                .Handle(new EntityListQuery<Job, JobViewModel>()
+                {
+                    //Specification = new JobByUuidSpec(HashManager.UuiBytes("OfflinePlayer:" + this.Player.Name)),
+                    Projector = this.Container.Resolve<IProjector<Job, JobViewModel>>()
+                })
+                //Перенести в спецификацию
+                .Where(x => x.Uuid == HashManager.UuiBytes("OfflinePlayer:" + this.Player.Name));
+
+            return PartialView("_JobsPartial", jobs);
         }
 
         #endregion

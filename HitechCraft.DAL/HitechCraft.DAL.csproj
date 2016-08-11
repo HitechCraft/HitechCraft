@@ -56,6 +56,7 @@
     <Compile Include="Domain\Ban\BanIp.cs" />
     <Compile Include="Domain\Extentions\ByteExtentions.cs" />
     <Compile Include="Domain\Extentions\IEnumerableExtentions.cs" />
+    <Compile Include="Domain\Minecraft\Job.cs" />
     <Compile Include="Domain\Minecraft\Skin.cs" />
     <Compile Include="Domain\News\Comment.cs" />
     <Compile Include="Domain\Player\AuthLog.cs" />
@@ -82,13 +83,14 @@
     <Compile Include="NHibernate\Helper\AutomappingHelper.cs" />
     <Compile Include="NHibernate\Helper\NHibernateHelper.cs" />
     <Compile Include="NHibernate\MappingConfig.cs" />
+    <Compile Include="NHibernate\Mappings\AuthLogOverrides.cs" />
     <Compile Include="NHibernate\Mappings\SkinOverrides.cs" />
     <Compile Include="NHibernate\Mappings\RulePoint.cs" />
     <Compile Include="NHibernate\Mappings\Rule.cs" />
     <Compile Include="NHibernate\Mappings\PlayerItemOverrides.cs" />
     <Compile Include="NHibernate\Mappings\IKTransactionOverrides.cs" />
     <Compile Include="NHibernate\Mappings\PlayerInfoOverrides.cs" />
-    <Compile Include="NHibernate\Mappings\AuthLogOverrides.cs" />
+    <Compile Include="NHibernate\Mappings\JobOverrides.cs" />
     <Compile Include="NHibernate\Mappings\ShopSaleOverrides.cs" />
     <Compile Include="NHibernate\Mappings\ShopItemOverrides.cs" />
     <Compile Include="NHibernate\Mappings\ShopItemCategoryOverrides.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByPlayerNameSpec.cs" />
     <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByAccessTokenSpec.cs" />
     <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByPlayerProfileSpec.cs" />
+    <Compile Include="Repository\Specification\Player\JobByUuidSpec.cs" />
     <Compile Include="Repository\Specification\Player\AuthLogByPlayerNameSpec.cs" />
     <Compile Include="Repository\Specification\Player\PlayerSkinByUserNameSpec.cs" />
     <Compile Include="Repository\Specification\Player\PlayerByLoginSpec.cs" />

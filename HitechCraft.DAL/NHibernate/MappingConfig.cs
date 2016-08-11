@@ -35,6 +35,8 @@
                     .UseOverridesFromAssemblyOf<NewsOverrides>())
                 .Add(AutoMap.AssemblyOf<Comment>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<CommentOverrides>())
+                .Add(AutoMap.AssemblyOf<Job>(autoMapHelper)
+                    .UseOverridesFromAssemblyOf<JobOverrides>())
                 .Add(AutoMap.AssemblyOf<Currency>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<CurrencyOverrides>())
                 .Add(AutoMap.AssemblyOf<Player>(autoMapHelper)

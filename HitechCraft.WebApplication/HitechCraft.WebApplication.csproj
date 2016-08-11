@@ -276,6 +276,7 @@
     <Compile Include="Mapper\PlayerItem\PlayerItemToPlayerItemViewModelMapper.cs" />
     <Compile Include="Mapper\PlayerSession\PlayerSessionEditViewModelToPlayerSessionUpdateCommandMapper.cs" />
     <Compile Include="Mapper\PlayerSession\PlayerSessionToJsonSessionDataMapper.cs" />
+    <Compile Include="Mapper\Player\JobToJobViewModelMapper.cs" />
     <Compile Include="Mapper\Player\PlayerSkinToPlayerSkinViewModelMapper.cs" />
     <Compile Include="Mapper\Player\PlayerToPlayerProfileViewModelMapper.cs" />
     <Compile Include="Mapper\IKTransaction\IKTransactionToIKTransactionViewModelMapper.cs" />
@@ -338,6 +339,7 @@
     <Compile Include="Models\Player\UserSkinViewModel.cs" />
     <Compile Include="Models\Rule\RuleViewModel.cs" />
     <Compile Include="Models\Rule\RulePointViewModel.cs" />
+    <Compile Include="Models\Player\JobViewModel.cs" />
     <Compile Include="Models\Server\ServerEditViewModel.cs" />
     <Compile Include="Models\Server\ServerModificationViewModel.cs" />
     <Compile Include="Models\Server\ServerDetailViewModel.cs" />
@@ -537,6 +539,7 @@
     <Content Include="Views\Skin\Create.cshtml" />
     <Content Include="Views\Skin\_SkinPartialList.cshtml" />
     <Content Include="Views\Skin\_SkinDuplicatedPartial.cshtml" />
+    <Content Include="Views\Player\_JobsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

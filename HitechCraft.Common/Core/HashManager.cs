@@ -73,11 +73,20 @@
         }
 
         /// <summary>
-        /// Get uuid from input string (ебать говнокод, но хуле делать?)
+        /// Get uuid from input string
         /// </summary>
         /// <param name="input">Input string</param>
         /// <returns></returns>
         public static string UuidFromString(string input)
+        {
+            var hash = UuiBytes(input);
+
+            string hex = BitConverter.ToString(hash).Replace("-", string.Empty).ToLower();
+
+            return hex.Insert(8, "-").Insert(13, "-").Insert(18, "-").Insert(23, "-");
+        }
+
+        public static byte[] UuiBytes(string input)
         {
             MD5 md5 = MD5.Create();
             byte[] hash = md5.ComputeHash(Encoding.UTF8.GetBytes(input));
@@ -87,11 +96,9 @@
             hash[8] &= 0x3f;
             hash[8] |= 0x80;
 
-            string hex = BitConverter.ToString(hash).Replace("-", string.Empty).ToLower();
-
-            return hex.Insert(8, "-").Insert(13, "-").Insert(18, "-").Insert(23, "-");
+            return hash;
         }
-        
+
         /// <summary>
         /// Get hex string without "-" chars
         /// </summary>

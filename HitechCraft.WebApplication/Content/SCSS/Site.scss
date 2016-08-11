@@ -202,7 +202,7 @@ footer {
 
     &-right {
         float: right;
-        
+
         span {
             font-weight: bold;
             margin-right: 7px;
@@ -427,7 +427,6 @@ footer {
 
 .panel {
     /*@include border-radius-top-left-bottom-right(34px, 34px);*/
-
     &-body {
         background: rgb(251, 251, 251);
         /*border-bottom-right-radius: 32px;*/
@@ -698,6 +697,31 @@ footer {
     &-info {
         min-height: 422px;
         font-size: 24px;
+
+        .nav-tabs {
+            margin: 0px;
+            border-bottom: none;
+
+            li {
+                a {
+                    border: 1px solid #d6d6d6;
+                    cursor: pointer !important;
+
+                    &:hover {
+                        border: 1px solid #d6d6d6 !important;
+                    }
+                    
+                    &:focus {
+                        border: 1px solid #d6d6d6 !important;
+                    }
+                }
+            }
+        }
+
+        .tab-content {
+            margin: 0px;
+            margin-top: 25px;
+        }
     }
 }
 
