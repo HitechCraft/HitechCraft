@@ -21,7 +21,8 @@
             var skin = new Skin()
             {
                 Name = command.Name,
-                Image = command.Image
+                Image = command.Image,
+                Gender = command.Gender
             };
 
             skinRep.Add(skin);

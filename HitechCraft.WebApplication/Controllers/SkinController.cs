@@ -1,8 +1,7 @@
-﻿using System.Net;
-using HitechCraft.Common.Core;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
+    #region Using Directives
+
     using PagedList;
     using BL.CQRS.Query;
     using Common.DI;
@@ -15,7 +14,13 @@ namespace HitechCraft.WebApplication.Controllers
     using Manager;
     using System.Linq;
     using DAL.Domain.Extentions;
-    
+    using System.Collections.Generic;
+    using Common.Core;
+    using Common.Models.Enum;
+    using Properties;
+
+    #endregion
+
     public class SkinController : BaseController
     {
         public int SkinsOnPage => 8;
@@ -41,6 +46,22 @@ namespace HitechCraft.WebApplication.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
+            ViewBag.Gender = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Text = Resources.GenderMale,
+                    Value = ((int)Gender.Male).ToString(),
+                    Selected = true
+                },
+
+                new SelectListItem()
+                {
+                    Text = Resources.GenderFemale,
+                    Value = ((int)Gender.Female).ToString()
+                }
+            };
+
             return View();
         }
 
@@ -57,11 +78,28 @@ namespace HitechCraft.WebApplication.Controllers
                 this.CommandExecutor.Execute(new SkinCreateCommand()
                 {
                     Name = vm.Name,
-                    Image = ImageManager.GetImageBytes(uploadFile)
+                    Image = ImageManager.GetImageBytes(uploadFile),
+                    Gender = vm.Gender
                 });
 
                 return RedirectToAction("Create");
             }
+
+            ViewBag.Gender = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Text = Resources.GenderMale,
+                    Value = ((int)Gender.Male).ToString(),
+                    Selected = true
+                },
+
+                new SelectListItem()
+                {
+                    Text = Resources.GenderFemale,
+                    Value = ((int)Gender.Female).ToString()
+                }
+            };
 
             return View();
         }

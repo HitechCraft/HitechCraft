@@ -26,6 +26,10 @@
             mapping.Map(x => x.Image)
                 .Column("Image")
                 .Not.Nullable();
+
+            mapping.Map(x => x.Gender)
+                .Column("Gender")
+                .CustomType<Gender>();
         }
     }
 }
