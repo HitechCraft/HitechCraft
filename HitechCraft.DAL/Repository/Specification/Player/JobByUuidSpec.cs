@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using HitechCraft.DAL.Domain.Extentions;
 
 namespace HitechCraft.DAL.Repository.Specification
 {
@@ -32,10 +33,8 @@ namespace HitechCraft.DAL.Repository.Specification
 
         public Expression<Func<Job, bool>> IsSatisfiedBy()
         {
-            var uuid = Encoding.UTF8.GetString(this._uuid);
-            
             //Вот какого фига разработчикам плагина понадобился тип byte[] в базе, ума не приложу!
-            return job => Encoding.UTF8.GetString(job.Uuid) == uuid;
+            return job => job.Uuid.IsEquals(this._uuid);
         }
 
         #endregion

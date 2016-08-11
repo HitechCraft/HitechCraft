@@ -179,9 +179,7 @@ namespace HitechCraft.WebApplication.Controllers
                 {
                     //Specification = new JobByUuidSpec(HashManager.UuiBytes("OfflinePlayer:" + this.Player.Name)),
                     Projector = this.Container.Resolve<IProjector<Job, JobViewModel>>()
-                })
-                //Перенести в спецификацию
-                .Where(x => x.Uuid == HashManager.UuiBytes("OfflinePlayer:" + this.Player.Name));
+                }).Where(x => x.Uuid.IsEquals(HashManager.UuiBytes("OfflinePlayer:" + this.Player.Name)));
 
             return PartialView("_JobsPartial", jobs);
         }
