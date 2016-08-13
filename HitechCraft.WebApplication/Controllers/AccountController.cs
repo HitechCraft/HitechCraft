@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using System.Text.RegularExpressions;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -204,8 +206,9 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if(!model.RulesAgree) ModelState.AddModelError(String.Empty, "Вы должны быть согласны с правилами проекта");
-
+            if(!model.RulesAgree)
+                ModelState.AddModelError(String.Empty, "Вы должны быть согласны с правилами проекта");
+            
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
