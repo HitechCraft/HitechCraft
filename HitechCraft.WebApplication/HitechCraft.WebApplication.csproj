@@ -326,6 +326,7 @@
     <Compile Include="Models\Modification\ModificationEditViewModel.cs" />
     <Compile Include="Models\Modification\ModificationViewModel.cs" />
     <Compile Include="Models\Modification\ModificationServerViewModel.cs" />
+    <Compile Include="Models\News\CommentCreateViewModel.cs" />
     <Compile Include="Models\News\CommentEditViewModel.cs" />
     <Compile Include="Models\News\CommentViewModel.cs" />
     <Compile Include="Models\News\NewsEditViewModel.cs" />

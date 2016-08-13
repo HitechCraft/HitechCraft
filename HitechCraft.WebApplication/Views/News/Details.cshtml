@@ -48,11 +48,13 @@
             {
                 <div class="comment-add">
                     <h5>Добавить комментарий</h5>
+                    <input type="hidden" id="newsId" value="@Model.Id"/>
                     <div class="form-group">
                         <label>Текст комментария</label>
                         <textarea id="ncomment-text" class="form-control"></textarea>
                         <span id="error-alert"></span>
                     </div>
+                    <div name="Recaptcha" id="Recaptcha" class="g-recaptcha" data-sitekey="6LcdfycTAAAAAM0Ug6A-0YdyR4VcbSPolCIz3raD"></div>
                     <div class="form-group">
                         <button class="btn btn-default" onclick="javascript:AddComment();">Опубликовать</button>
                     </div>
@@ -111,11 +113,17 @@
     }
 
     function AddComment() {
-        $.post("@Url.Action("Create", "Comment")", { newsId : @Model.Id, text: $('#ncomment-text').val() })
+
+        var captchaInfo = grecaptcha.getResponse();
+
+        $.post("@Url.Action("Create", "Comment")", { newsId: parseInt($('#newsId').val()), text: $('#ncomment-text').val(), recaptcha: captchaInfo })
         .done(function (data) {
             if (data == "OK") {
-                LoadComments(1);
-                $('#ncomment-text').val('');
+                growlSuccess("Комментарий добавлен!");
+
+                setTimeout(function() {
+                    location.reload();
+                }, 2000);
             } else {
                 $('#error-alert').html('');
                 $('#error-alert').html(data);

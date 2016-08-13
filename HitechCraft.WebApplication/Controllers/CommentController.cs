@@ -1,4 +1,8 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Common.Models.Enum;
+using HitechCraft.WebApplication.Manager;
+using HitechCraft.WebApplication.Models;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -17,9 +21,11 @@
 
         [HttpPost]
         [Authorize]
-        public ContentResult Create(int newsId, string text)
+        public ContentResult Create(int newsId, string text, string recaptcha)
         {
             if (text.Length <= 0) return this.Content("Поле не может быть пустым");
+            
+            if(ReCaptchaManager.ValidateReCaptcha(recaptcha).Status == JsonStatus.NO) return this.Content("Вы не подтвердили, что вы не робот!");
 
             try
             {

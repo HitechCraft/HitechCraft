@@ -8,6 +8,7 @@
     <link rel="icon" type="image/png" href="../../favicon.png" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -28,7 +29,6 @@
     <div class="footer-content">
         @Html.Partial("_Footer")
     </div>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script type="text/javascript">
         $(document).ajaxStart(function () {
             $('.ajax-loader').show();
