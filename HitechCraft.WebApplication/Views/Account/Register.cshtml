@@ -50,8 +50,11 @@
                     @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new {@class = "text-danger"})
                 </div>
                 <div class="checkbox" style="margin-bottom: 16px; margin-left: -14px;">
-                    @Html.CheckBoxFor(m => m.RulesAgree, new { @checked = "checked" })
+                    @Html.CheckBoxFor(m => m.RulesAgree, new {@checked = "checked"})
                     <label>Согласен с @Html.ActionLink("правилами", "Rules", "Home") проекта</label>
+                </div>
+                <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="6LcdfycTAAAAAM0Ug6A-0YdyR4VcbSPolCIz3raD"></div>
                 </div>
                 <div class="form-group">
                     <div class="btn-group btn-group-justified">
