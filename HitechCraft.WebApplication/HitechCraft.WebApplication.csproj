@@ -256,6 +256,7 @@
     <Compile Include="Manager\IKConfig.cs" />
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Manager\MailManager.cs" />
+    <Compile Include="Manager\ReCaptchaManager.cs" />
     <Compile Include="Manager\StringManager.cs" />
     <Compile Include="Mapper\AuthLog\AuthLogToAuthLogViewModelMapper.cs" />
     <Compile Include="Mapper\Ban\BanToBanViewModelMapper.cs" />

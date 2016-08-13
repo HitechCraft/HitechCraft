@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using HitechCraft.Common.Models.Json;
 using HitechCraft.Common.Models.Json.MinecraftLauncher;
+using HitechCraft.WebApplication.Manager;
 using Newtonsoft.Json;
 
 namespace HitechCraft.WebApplication.Controllers
@@ -213,7 +214,7 @@ namespace HitechCraft.WebApplication.Controllers
             if(!model.RulesAgree)
                 ModelState.AddModelError(String.Empty, "Вы должны быть согласны с правилами проекта");
 
-            var captchaResponse = this.ValidateReCaptcha(Request["g-recaptcha-response"]);
+            var captchaResponse = ReCaptchaManager.ValidateReCaptcha(Request["g-recaptcha-response"]);
 
             if(captchaResponse.Status == JsonStatus.NO)
                 ModelState.AddModelError(String.Empty, "Не верный ответ в ReCaptcha");
@@ -272,34 +273,6 @@ namespace HitechCraft.WebApplication.Controllers
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
-        }
-
-        //TODO: перенести webrequest в отдельную либу
-        private JsonStatusData ValidateReCaptcha(string response)
-        {
-            const string secret = "6LcdfycTAAAAAE1D3Kn3lhmZVptvI3TwbJM3Vfxo";
-
-            var client = new WebClient();
-            var reply =
-                client.DownloadString(
-                    string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secret, response));
-
-            var captchaResponse = JsonConvert.DeserializeObject<JsonCaptchaResponse>(reply);
-
-            if (!captchaResponse.Success)
-            {
-                return new JsonStatusData()
-                {
-                    Message = "Ошибка валидации ReCaptcha",
-                    Status = JsonStatus.NO
-                };
-            }
-
-            return new JsonStatusData()
-            {
-                Message = "Успешно",
-                Status = JsonStatus.YES
-            };
         }
 
         [HttpPost]
