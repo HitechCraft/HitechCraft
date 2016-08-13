@@ -38,12 +38,13 @@
     }
 
     .title-media {
-        width: 672px !important;
-        height: 378px !important;
+        width: 728px !important;
+        height: 411px !important;
     }
 
     .title-box {
         margin-bottom: 21px;
+        padding: 0 !important;
     }
 
     footer {
@@ -101,22 +102,27 @@
     }
 }
 
-@media(max-width: 1200px) {
+@media (max-width: 1200px) {
     .ztn-team {
         display: none;
     }
+}
+
+@media(min-width: 993px) and (max-width: 1200px) {
 
     .title-media {
-        width: 914px;
-        height: 514px;
+        width: 970px;
+        height: 547px;
+        border: 1px solid #ddd !important;
     }
 
     .title-box {
         margin-bottom: 21px;
+        padding-left: 0 !important;
     }
 
     .footer-content {
-        max-width: 1000px;
+        max-width: 1000px !important;
         padding: 0 20px;
     }
 

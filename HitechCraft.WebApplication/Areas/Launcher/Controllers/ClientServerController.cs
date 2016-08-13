@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
+﻿using System.Text.RegularExpressions;
+
+namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
 {
     #region Using Directives
 
@@ -102,7 +104,7 @@
                     }).First();
 
                 var unixTimeNow = ((int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
-                var userSkinUrl = LauncherConfig.SkinsUrlString + playerSession.PlayerName;
+                var userSkinUrl = LauncherConfig.SkinsUrlString + "/" + playerSession.PlayerName + ".png";
 
                 LogManager.Info("[Checkserver] Переданные параметры игрока "
                     + playerSession.PlayerName + " (" + playerSession.Md5 + "): " +
@@ -122,7 +124,7 @@
                         }
                     }
                 }, JsonRequestBehavior.AllowGet);
-
+                
                 return Json(new JsonClientResponseData
                 {
                     id = playerSession.Md5,
@@ -155,6 +157,8 @@
         [HttpGet]
         public ActionResult GetSkinImage(string playerName)
         {
+            if (!Regex.IsMatch(playerName, "/[A-Za-z0-9-_]+.png")) playerName = "/" + playerName + ".png";
+
             //Minecraft кэширует скины, имя файла строит по первым 2м буквам 
             //от имени url после последнего слэша
             //Поэтому вставил вот такой костыль, извините уж

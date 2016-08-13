@@ -10,17 +10,21 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Главная", "Index", "Home")</li>
-                <li><a href="http://forum.hitechcraft.ru">Форум</a></li>
+                <li class="dropdown">
+                    <a href="/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Главная <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="http://forum.hitechcraft.ru">Форум</a></li>
+                    </ul>
+                </li>
                 <li>@Html.ActionLink("Правила", "Rules", "Home")</li>
-                <li>@Html.ActionLink("Начать игру", "GameStart", "Home")</li>
+                @*<li>@Html.ActionLink("Начать игру", "GameStart", "Home")</li>*@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" id="dd-shop" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="color: yellow">Магазин</span> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Блоки и предметы", "Index", "Shop")</li>
                         <li>@Html.ActionLink("Корзина", "Cart", "Shop")</li>
                         <li role="separator" class="divider"></li>
-                        <li>@Html.ActionLink("Vip-Статусы", "Groups", "Donate", null, new { @style = "color: red; font-weight: bold" })</li>
+                        <li>@Html.ActionLink("Vip-Статусы", "Groups", "Donate", null, new {@style = "color: red; font-weight: bold"})</li>
                         <li role="separator" class="divider"></li>
                         <li>@Html.ActionLink("Пополнить счет", "Index", "Balance")</li>
                         @*<li>@Html.ActionLink("Наборы ресурсов", "Kits", "Donate")</li>*@
@@ -36,9 +40,9 @@
                         <li>@Html.ActionLink("Модификации", "Index", "Modification")</li>
                         <li role="separator" class="divider"></li>
                         <li>@Html.ActionLink("Голосуй за нас!", "Vote", "Home")</li>
+                        <li>@Html.ActionLink("О компании", "About", "Home")</li>
                     </ul>
                 </li>
-                <li>@Html.ActionLink("О нас", "About", "Home")</li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
