@@ -27,6 +27,17 @@
                 Email = command.Email
             };
 
+            try
+            {
+                playerInfoRep.Add(playerInfo);
+
+                LogManager.Info("[Player Register] PlayerInfoAdded: " + playerInfo.Email + "; " + playerInfo.Refer + "; ");
+            }
+            catch (Exception e)
+            {
+                LogManager.Error("[Player Register] PlayerInfo Not added: " + e.Message);
+            }
+
             LogManager.Info("[Player Register] NickName:" + command.Name);
 
             if (!String.IsNullOrEmpty(command.ReferId))
@@ -43,35 +54,40 @@
                     LogManager.Info("[Player Register] Refer none");
                 }
             }
-            
-            var player = new Player()
-            {
-                Name = command.Name,
-                Gender = command.Gender,
-                Info = playerInfo
-            };
-
-            var currency = new Currency()
-            {
-                Gonts = 100.00,
-                Rubels = 10.00,
-                Player = player,
-                Status = 0
-            };
 
             try
             {
-                playerInfoRep.Add(playerInfo);
+                var player = new Player()
+                {
+                    Name = command.Name,
+                    Gender = command.Gender,
+                    Info = playerInfo
+                };
 
                 playerRep.Add(player);
-
-                currencyRep.Add(currency);
             }
             catch (Exception e)
             {
+                LogManager.Info("[Player Register] Player adding error: " + e.Message);
+            }
 
-                LogManager.Error("[Player Register] Error: " + e.Message);
-                throw;
+            try
+            {
+                var currency = new Currency()
+                {
+                    Gonts = 100.00,
+                    Rubels = 10.00,
+                    Player = playerRep.GetEntity(command.Name),
+                    Status = 0
+                };
+
+                currencyRep.Add(currency);
+
+                LogManager.Info("[Player Register] Currency created: " + currency.Player.Name);
+            }
+            catch (Exception e)
+            {
+                LogManager.Error("[Player Register] Error creating currency: " + e.Message);
             }
             
             playerInfoRep.Dispose();
