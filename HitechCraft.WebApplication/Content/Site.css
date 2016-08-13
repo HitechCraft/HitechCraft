@@ -611,7 +611,8 @@ footer {
     border-bottom: none; }
     .player-info .nav-tabs li a {
       border: 1px solid #d6d6d6;
-      cursor: pointer !important; }
+      cursor: pointer !important;
+      border-radius: 0px !important; }
       .player-info .nav-tabs li a:hover {
         border: 1px solid #d6d6d6 !important; }
       .player-info .nav-tabs li a:focus {
@@ -822,6 +823,13 @@ footer {
       color: #fff;
       font-size: 30px;
       text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000; }
+  .item-margin {
+    margin-left: 25%; }
+  .item-fixed {
+    position: fixed;
+    top: 10px;
+    width: 24.32%;
+    max-width: 305px; }
 
 #slider {
   width: 280px !important;
@@ -924,4 +932,21 @@ footer {
   -webkit-transform: scale(0.925);
   transform-origin: 0 0;
   -webkit-transform-origin: 0 0; }
+
+.pagination li a {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #ddd; }
+  .pagination li a:hover {
+    color: #000;
+    background-color: #ddd; }
+
+.pagination li.active a {
+  color: #000;
+  background-color: #ddd; }
+
+.pagination .disabled a {
+  color: #000;
+  background-color: #fff;
+  border-color: #ddd; }
 

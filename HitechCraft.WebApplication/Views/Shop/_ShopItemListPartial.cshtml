@@ -9,22 +9,24 @@
             <div class="col-md-3">
                 <div id="item-@item.GameId.Replace(":", "-")" class="item" onclick="LoadItem('@item.GameId')">
                     <h4>@item.Name</h4>
-                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.Image)" alt="@item.Description" />
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.Image)" alt="@item.Description"/>
                     <span class="price">Цена: @item.Price Gont(s)</span>
                 </div>
             </div>
         }
-        <br />
+        <br/>
     </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <label>Предметов на странице</label>
+            <input type="text" class="form-control" id="itemsOnPage" value="@ViewBag.ItemsOnPage"/>
+            <a class="btn btn-success" onclick="FilterItems(null)">Применить</a>
+        </div>
+    </div>
+
     if (Model.Count >= ViewBag.ItemsOnPage || ViewBag.Page > 1)
     {
-        <div class="form-inline">
-            <div class="form-group">
-                <label>Предметов на странице</label>
-                <input type="text" class="form-control" id="itemsOnPage" value="@ViewBag.ItemsOnPage" />
-                <a class="btn btn-success" onclick="FilterItems(null)">Применить</a>
-            </div>
-        </div>
         @Html.PagedListPager(Model, page => "javascript:FilterItems(" + page + ")")
     }
 }

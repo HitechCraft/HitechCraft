@@ -8,15 +8,14 @@
 <form action="" method="post" id="shop-item-filter">
     <div class="form-inline item-filter item-administration">
         <input type="text" name="text" id="text" placeholder="Поиск предметов" class="form-control" style="width: 50%" />
-        <span>Модификация</span>
         <div class="btn-group">
             <input name="modId" id="modId" type="hidden" />
             <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span id="mod">Не выбрано</span>
+                <span id="mod">Модификация</span>
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a onclick="javascript:setMod(0, 'Не выбрано');">Не выбрано</a></li>
+                <li><a onclick="javascript:setMod(0, 'Модификация');">Модификация</a></li>
                 @if (ViewBag.Mods != null)
                 {
                     foreach (var mod in ViewBag.Mods)
@@ -27,16 +26,14 @@
             </ul>
         </div>
 
-        <span>Категория</span>
-
         <div class="btn-group">
             <input name="categoryId" id="categoryId" type="hidden" />
             <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <span id="category">Не выбрано</span>
+                <span id="category">Категория</span>
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a onclick="javascript:setCategory(0, 'Не выбрано');">Не выбрано</a></li>
+                <li><a onclick="javascript: setCategory(0, 'Категория');">Категория</a></li>
                 @if (ViewBag.Categories != null)
                 {
                     foreach (var category in ViewBag.Categories)
@@ -68,12 +65,12 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-3">
+    <div id="item-col" class="col-md-3">
         <div id="item" class="item-info">
             <h3>Выберите<br />предмет</h3>
         </div>
     </div>
-    <div class="col-md-9">
+    <div id="items-col" class="col-md-9">
         <div id="item-list">
 
         </div>
@@ -81,6 +78,18 @@
 </div>
 
 <script type="text/javascript">
+
+    $(window).scroll(function () {
+        if ($(window).width() > 993) {
+            if ($(window).scrollTop() > 600) {
+                $('#item-col').addClass('item-fixed');
+                $('#items-col').addClass('item-margin');
+            } else {
+                $('#item-col').removeClass('item-fixed');
+                $('#items-col').removeClass('item-margin');
+            }
+        }
+    });
 
     $(function () {
         LoadItems(1);
