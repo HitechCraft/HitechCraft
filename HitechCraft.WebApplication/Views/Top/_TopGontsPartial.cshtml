@@ -21,16 +21,10 @@
                 <td>@i</td>
                 <td>@player.PlayerName</td>
                 <td>
-                    <img src="@Url.Action("GetSkinImage", "Player", new {gender = player.PlayerGender, playerName = player.PlayerName})" id="skin-image" class="avaSkinGont@(player.PlayerName)" hidden=""/></td>
+                    <img src="@Url.Action("GetSkinImage", "Player", new {gender = player.PlayerGender, playerName = player.PlayerName})" id="skin-image" class="avaSkinGont@(player.PlayerName)" hidden="" />
+                </td>
                 <td>@player.Gonts</td>
             </tr>
-
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    renderMCSkins('avaSkinGont@(player.PlayerName)', 8);
-                    $('.avaSkinGont@(player.PlayerName)').css('height', '128px');
-                });
-            </script>
         }
     </table>
 
@@ -40,3 +34,16 @@ else
 {
     <h3>Записей не найдено</h3>
 }
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        @foreach (var player in Model)
+        {
+            <text>
+            renderMCSkins('avaSkinGont@(player.PlayerName)', 8);
+            $('.avaSkinGont@(player.PlayerName)').css('height', '128px');
+            </text>
+        }
+    });
+</script>
