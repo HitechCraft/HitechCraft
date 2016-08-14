@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
+﻿using HitechCraft.DAL.Domain.Extentions;
+
+namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
 {
     #region Using Directives
 
@@ -273,9 +275,42 @@
             }, JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// Returns project news
+        /// </summary>
+        /// <returns></returns>
+        public JsonResult GetLauncherNews()
+        {
+            var news =  new EntityListQueryHandler<News, JsonLauncherNews>(this.Container)
+                .Handle(new EntityListQuery<News, JsonLauncherNews>()
+                {
+                    Projector = this.Container.Resolve<IProjector<News, JsonLauncherNews>>()
+                }).OrderByDescending(x => x.Id).Limit(2);
+
+            this.FixNewsTags(ref news);
+
+            return Json(news, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region Private Methods
+
+        private void FixNewsTags(ref IEnumerable<JsonLauncherNews> newsList)
+        {
+            foreach (var news in newsList)
+            {
+                news.Text = news.Text
+                    .Replace("[p]", "")
+                    .Replace("[/p]", "")
+                    .Replace("[b]", "")
+                    .Replace("[/b]", "")
+                    .Replace("[ul]", "")
+                    .Replace("[/ul]", "")
+                    .Replace("[li]", "")
+                    .Replace("[/li]", "");
+            }
+        }
 
         private bool IsValidAuth(string login, string password)
         {

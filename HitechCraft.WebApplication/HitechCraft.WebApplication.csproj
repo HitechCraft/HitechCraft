@@ -271,6 +271,7 @@
     <Compile Include="Mapper\Modification\ModificationToModificationEditViewModelMappe.cs" />
     <Compile Include="Mapper\Modification\ModificationToModificationViewModelMapper.cs" />
     <Compile Include="Mapper\News\NewsEditViewModelToNewsUpdateCommandMapper.cs" />
+    <Compile Include="Mapper\News\NewsToJsonLauncherNewsMapper.cs" />
     <Compile Include="Mapper\News\NewsToNewsEditViewModelMapper.cs" />
     <Compile Include="Mapper\News\NewsToNewsViewModelMapper.cs" />
     <Compile Include="Mapper\Permissions\PermissionsToPermissionsViewModelMapper.cs" />

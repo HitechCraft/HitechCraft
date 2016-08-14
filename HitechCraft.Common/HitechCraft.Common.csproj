@@ -85,6 +85,7 @@
     <Compile Include="Models\Json\MinecraftClient\JsonTextureData.cs" />
     <Compile Include="Models\Json\MinecraftClient\JsonUserSkinData.cs" />
     <Compile Include="Models\Json\MinecraftClient\JsonUserUuidData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonLauncherNews.cs" />
     <Compile Include="Models\Json\MinecraftLauncher\JsonClientData.cs" />
     <Compile Include="Models\Json\MinecraftLauncher\JsonClientFilesData.cs" />
     <Compile Include="Models\Json\MinecraftLauncher\JsonClientFilesStatusData.cs" />
