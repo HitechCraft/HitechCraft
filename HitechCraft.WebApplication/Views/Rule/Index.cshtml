@@ -39,7 +39,7 @@
                 if (User.IsInRole("Administrator"))
                 {
                     <div class="form-inline rule-add" id="add-rule-@rulePoint.Id" style="display: none">
-                        <input type="text" class="form-control" id="ruleText-@rulePoint.Id" style="width: 100%"/>
+                        <input type="text" class="form-control" id="ruleText-@rulePoint.Id" style="width: 100%" />
                         <div class="form-group rule-add-buttons">
                             <div class="btn-group">
                                 <a class="btn btn-success" onclick="SubmitRule(@rulePoint.Id)">Добавить правило</a>
@@ -58,7 +58,7 @@ else
 {
     <h3>Правил нет</h3>
 }
-<br/>
+<br />
 <br />
 @if (User.IsInRole("Administrator"))
 {
@@ -77,46 +77,51 @@ else
     <a class="btn btn-primary" onclick="AddPoint()">Добавить пункт правил</a>
 }
 
-<script type="text/javascript">
+@if (User.IsInRole("Administrator"))
+{
+    <script type="text/javascript">
+        window.ruleEdited = undefined;
+        window.ruleId = 0;
 
-    window.ruleEdited = undefined;
-    window.ruleId = 0;
+        $(document).mouseup(function (e) {
+            if (window.ruleEdited !== undefined && !$('#' + $(window.ruleEdited).attr('id')).is(e.target)) {
 
-    $(document).mouseup(function (e) {
-        if (window.ruleEdited !== undefined && !$('#' + $(window.ruleEdited).attr('id')).is(e.target)) {
+                if ($('#' + $(window.ruleEdited).attr('id')).val() !== '' && window.ruleId !== 0) {
 
-            if ($('#' + $(window.ruleEdited).attr('id')).val() !== '' && window.ruleId !== 0) {
+                    UpdateRule(window.ruleId, $('#' + $(window.ruleEdited).attr('id')).val());
 
-                UpdateRule(window.ruleId, $('#' + $(window.ruleEdited).attr('id')).val());
+                    $('#' + $(window.ruleEdited).attr('id')).replaceWith('<span id="' + $(window.ruleEdited).attr('id') + '" onclick="EditRule(' + window.ruleId + ')">' + $('#' + $(window.ruleEdited).attr('id')).val() + '</span>');
 
-                $('#' + $(window.ruleEdited).attr('id')).replaceWith('<span id="' + $(window.ruleEdited).attr('id') + '" onclick="EditRule(' + window.ruleId + ')">' + $('#' + $(window.ruleEdited).attr('id')).val() + '</span>');
-
-                window.ruleEdited = undefined;
-            } else {
-                growlWarning('Текст правила не может быть пустым!');
+                    window.ruleEdited = undefined;
+                } else {
+                    growlWarning('Текст правила не может быть пустым!');
+                }
             }
-        }
-    });
+        });
 
-    function EditRule(id) {
-        window.ruleId = id;
-        window.ruleEdited = '<input type="text" id="rule-' + id + '" class="form-control rule-edit" value="' + $("#rule-" + id).html() + '"/>';
+        function EditRule(id) {
+            window.ruleId = id;
+            window.ruleEdited = '<input type="text" id="rule-' + id + '" class="form-control rule-edit" value="' + $("#rule-" + id).html() + '"/>';
 
-        $("#rule-" + id).replaceWith(window.ruleEdited);
-    };
+            $("#rule-" + id).replaceWith(window.ruleEdited);
+        };
 
-    function UpdateRule(ruleId, ruleText) {
-        if (confirm("Правило будет изменено!")) {
-            $.post("@Url.Action("EditRule")", { id: ruleId, text: ruleText })
-                .done(function (data) {
-                    if (data.status === "OK") {
-                        growlSuccess(data.message);
-                    } else {
-                        growlError(data.message);
-                    }
-                });
+        function UpdateRule(ruleId, ruleText) {
+            if (confirm("Правило будет изменено!")) {
+                $.post("@Url.Action("EditRule")", { id: ruleId, text: ruleText })
+            .done(function (data) {
+                if (data.status === "OK") {
+                    growlSuccess(data.message);
+                } else {
+                    growlError(data.message);
+                }
+            });
         }
     }
+    </script>
+}
+
+<script type="text/javascript">
 
     function AddPoint() {
         $('#add-point').css('display', 'block');
@@ -127,13 +132,13 @@ else
     }
 
     function AddRule(id) {
-        $('#add-rule-'+id).css('display', 'block');
-        $('#add-rule-button-'+id).css('display', 'none');
+        $('#add-rule-' + id).css('display', 'block');
+        $('#add-rule-button-' + id).css('display', 'none');
     }
 
     function CancelRule(id) {
-        $('#add-rule-'+id).css('display', 'none');
-        $('#add-rule-button-'+id).removeAttr('style');
+        $('#add-rule-' + id).css('display', 'none');
+        $('#add-rule-button-' + id).removeAttr('style');
     }
 
     function SubmitPoint() {
@@ -171,11 +176,11 @@ else
     function SubmitRule(id) {
         if ($("#ruleText-" + id).val() !== "") {
             $.post("@Url.Action("CreateRule")", { pointId: id, text: $("#ruleText-" + id).val() })
-                .done(function(data) {
+                .done(function (data) {
                     if (data.status === "OK") {
                         growlSuccess(data.message);
 
-                        setTimeout(function() {
+                        setTimeout(function () {
                             document.location = '@Url.Action("Index")';
                         }, 2000);
                     } else {

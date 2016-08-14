@@ -27,7 +27,7 @@
             return View(rules);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public JsonResult CreateRulePoint(string name)
         {
             try
@@ -47,7 +47,7 @@
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public JsonResult CreateRule(int pointId, string text)
         {
             try
@@ -66,7 +66,7 @@
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public JsonResult DeleteRulePoint(int id)
         {
             try
@@ -84,7 +84,7 @@
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator")]
         public JsonResult DeleteRule(int id)
         {
             try
@@ -103,6 +103,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public JsonResult EditRule(int id, string text)
         {
             try

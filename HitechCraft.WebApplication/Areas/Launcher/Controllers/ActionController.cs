@@ -1,6 +1,4 @@
-﻿using HitechCraft.DAL.Domain.Extentions;
-
-namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
+﻿namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
 {
     #region Using Directives
 
@@ -28,6 +26,7 @@ namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
     using Common.Projector;
     using DAL.Domain;
     using DAL.Repository.Specification;
+    using DAL.Domain.Extentions;
 
     #endregion
 
