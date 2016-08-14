@@ -247,14 +247,20 @@ namespace HitechCraft.WebApplication.Controllers
 
                     LogManager.Info("Роль пользоватея " + user.UserName + " установлена!", "AccountRegister");
 
-                    //todo: реализовать ReCaptcha
-                    this.CommandExecutor.Execute(new PlayerRegisterCreateCommand()
+                    try
                     {
-                        Name = model.UserName,
-                        Gender = model.Gender,
-                        Email = model.Email,
-                        ReferId = Session["ReferalId"].ToString()
-                    });
+                        this.CommandExecutor.Execute(new PlayerRegisterCreateCommand()
+                        {
+                            Name = model.UserName,
+                            Gender = model.Gender,
+                            Email = model.Email,
+                            ReferId = Session["ReferalId"] != null ? Session["ReferalId"].ToString() : String.Empty
+                        });
+                    }
+                    catch (Exception e)
+                    {
+                        LogManager.Error(e.Message, "AccountRegister");
+                    }
 
                     LogManager.Info("Игрок " + user.UserName + " зарегистрирован!", "AccountRegister");
 
