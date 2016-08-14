@@ -9,46 +9,49 @@
 @if (Model != null && Model.Any())
 {
     <div class="rules">
-        @foreach (var rulePoint in Model)
-        {
-            <ol>
-                <h4>
-                    @rulePoint.Name
-                    @if (User.IsInRole("Administrator"))
-                    {
-                        <a onclick="DeletePoint(@rulePoint.Id)"><span class="glyphicon glyphicon-remove"></span></a>
-                    }
-                </h4>
-
-                @foreach (var rule in rulePoint.Rules)
-                {
-                    <li>
-                        @rule.Text
-
+        <ol>
+            @foreach (var rulePoint in Model)
+            {
+                <li>
+                    <h4>
+                        @rulePoint.Name
                         @if (User.IsInRole("Administrator"))
                         {
-                            <a onclick="DeleteRule(@rule.Id)"><span class="glyphicon glyphicon-remove"></span></a>
+                            <a onclick="DeletePoint(@rulePoint.Id)"><span class="glyphicon glyphicon-remove"></span></a>
                         }
-                    </li>
-                }
-            </ol>
-            if (User.IsInRole("Administrator"))
-            {
-                <div class="form-inline rule-add" id="add-rule-@rulePoint.Id" style="display: none">
-                    <div class="form-group">
-                        <textarea class="form-control" id="ruleText-@rulePoint.Id" style="min-height: 100px;resize: both"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <div class="btn-group">
-                            <a class="btn btn-success" onclick="SubmitRule(@rulePoint.Id)">Добавить правило</a>
-                            <a class="btn btn-default" onclick="CancelRule(@rulePoint.Id)">Отмена</a>
+                    </h4>
+
+                    <ol>
+                        @foreach (var rule in rulePoint.Rules)
+                        {
+                            <li>
+                                <span id="rule-@rule.Id" onclick="EditRule(@rule.Id)">@rule.Text</span>
+
+                                @if (User.IsInRole("Administrator"))
+                                {
+                                    <a onclick="DeleteRule(@rule.Id)"><span class="glyphicon glyphicon-remove"></span></a>
+                                }
+                            </li>
+                        }
+                    </ol>
+                </li>
+
+                if (User.IsInRole("Administrator"))
+                {
+                    <div class="form-inline rule-add" id="add-rule-@rulePoint.Id" style="display: none">
+                        <input type="text" class="form-control" id="ruleText-@rulePoint.Id" style="width: 100%"/>
+                        <div class="form-group rule-add-buttons">
+                            <div class="btn-group">
+                                <a class="btn btn-success" onclick="SubmitRule(@rulePoint.Id)">Добавить правило</a>
+                                <a class="btn btn-default" onclick="CancelRule(@rulePoint.Id)">Отмена</a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <a class="btn btn-primary btn-sm" onclick="AddRule(@rulePoint.Id)">Добавить правило</a>
+                    <a id="add-rule-button-@rulePoint.Id" class="btn btn-primary btn-sm" onclick="AddRule(@rulePoint.Id)">Добавить правило</a>
+                }
             }
-        }
+        </ol>
     </div>
 }
 else
@@ -75,6 +78,46 @@ else
 }
 
 <script type="text/javascript">
+
+    window.ruleEdited = undefined;
+    window.ruleId = 0;
+
+    $(document).mouseup(function (e) {
+        if (window.ruleEdited !== undefined && !$('#' + $(window.ruleEdited).attr('id')).is(e.target)) {
+
+            if ($('#' + $(window.ruleEdited).attr('id')).val() !== '' && window.ruleId !== 0) {
+
+                UpdateRule(window.ruleId, $('#' + $(window.ruleEdited).attr('id')).val());
+
+                $('#' + $(window.ruleEdited).attr('id')).replaceWith('<span id="' + $(window.ruleEdited).attr('id') + '" onclick="EditRule(' + window.ruleId + ')">' + $('#' + $(window.ruleEdited).attr('id')).val() + '</span>');
+
+                window.ruleEdited = undefined;
+            } else {
+                growlWarning('Текст правила не может быть пустым!');
+            }
+        }
+    });
+
+    function EditRule(id) {
+        window.ruleId = id;
+        window.ruleEdited = '<input type="text" id="rule-' + id + '" class="form-control rule-edit" value="' + $("#rule-" + id).html() + '"/>';
+
+        $("#rule-" + id).replaceWith(window.ruleEdited);
+    };
+
+    function UpdateRule(ruleId, ruleText) {
+        if (confirm("Правило будет изменено!")) {
+            $.post("@Url.Action("EditRule")", { id: ruleId, text: ruleText })
+                .done(function (data) {
+                    if (data.status === "OK") {
+                        growlSuccess(data.message);
+                    } else {
+                        growlError(data.message);
+                    }
+                });
+        }
+    }
+
     function AddPoint() {
         $('#add-point').css('display', 'block');
     }
@@ -85,10 +128,12 @@ else
 
     function AddRule(id) {
         $('#add-rule-'+id).css('display', 'block');
+        $('#add-rule-button-'+id).css('display', 'none');
     }
 
     function CancelRule(id) {
         $('#add-rule-'+id).css('display', 'none');
+        $('#add-rule-button-'+id).removeAttr('style');
     }
 
     function SubmitPoint() {
@@ -109,49 +154,53 @@ else
     function DeletePoint(rulePointId) {
         if (confirm("Вы действительно хотите удалить пункт правил?")) {
             $.post("@Url.Action("DeleteRulePoint")", { id: rulePointId })
-            .done(function (data) {
-                if (data.status === "OK") {
-                    growlSuccess(data.message);
+                .done(function (data) {
+                    if (data.status === "OK") {
+                        growlSuccess(data.message);
 
-                    setTimeout(function () {
-                        document.location = '@Url.Action("Index")';
-                    }, 2000);
-                } else {
-                    growlError(data.message);
-                }
-            });
+                        setTimeout(function () {
+                            document.location = '@Url.Action("Index")';
+                        }, 2000);
+                    } else {
+                        growlError(data.message);
+                    }
+                });
         }
     }
 
     function SubmitRule(id) {
-        $.post("@Url.Action("CreateRule")", { pointId: id, text: $("#ruleText-"+id).val() })
-        .done(function (data) {
-            if (data.status === "OK") {
-                growlSuccess(data.message);
+        if ($("#ruleText-" + id).val() !== "") {
+            $.post("@Url.Action("CreateRule")", { pointId: id, text: $("#ruleText-" + id).val() })
+                .done(function(data) {
+                    if (data.status === "OK") {
+                        growlSuccess(data.message);
 
-                setTimeout(function () {
-                    document.location = '@Url.Action("Index")';
-                }, 2000);
-            } else {
-                growlError(data.message);
-            }
-        });
+                        setTimeout(function() {
+                            document.location = '@Url.Action("Index")';
+                        }, 2000);
+                    } else {
+                        growlError(data.message);
+                    }
+                });
+        } else {
+            growlWarning("Введите текст правила");
+        }
     }
 
     function DeleteRule(ruleId) {
         if (confirm("Вы действительно хотите удалить правило?")) {
             $.post("@Url.Action("DeleteRule")", { id: ruleId })
-            .done(function (data) {
-                if (data.status === "OK") {
-                    growlSuccess(data.message);
+                .done(function (data) {
+                    if (data.status === "OK") {
+                        growlSuccess(data.message);
 
-                    setTimeout(function () {
-                        document.location = '@Url.Action("Index")';
-                    }, 2000);
-                } else {
-                    growlError(data.message);
-                }
-            });
+                        setTimeout(function () {
+                            document.location = '@Url.Action("Index")';
+                        }, 2000);
+                    } else {
+                        growlError(data.message);
+                    }
+                });
         }
     }
 

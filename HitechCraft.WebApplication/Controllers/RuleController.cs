@@ -102,6 +102,25 @@
             }
         }
 
+        [HttpPost]
+        public JsonResult EditRule(int id, string text)
+        {
+            try
+            {
+                this.CommandExecutor.Execute(new RuleUpdateCommand()
+                {
+                    Id = id,
+                    Text = text
+                });
+
+                return Json(new {status = "OK", message = "Правило обновлено!"});
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "NO", message = "Ошибка обновления правила: " + e.Message });
+            }
+        }
+
         #region Private Methods
 
         private IEnumerable<RulePointViewModel> GetRules(ISpecification<RulePoint> spec = null)

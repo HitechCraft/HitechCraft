@@ -1193,19 +1193,27 @@ footer {
     h4 {
         margin: 21px 0px;
         font-weight: bold;
+        display: inline-block;
     }
 
     ol {
         padding: 0;
+        counter-reset: item;
 
         li {
-            margin-left: 18px;
             line-height: 30px;
             margin-bottom: 10px;
+            display: block;
 
             ul {
                 padding-left: 0;
                 margin: 20px;
+            }
+
+            &:before {
+                content: counters(item, ".") " ";
+                counter-increment: item;
+                font-size: 18px;
             }
         }
     }
@@ -1216,6 +1224,24 @@ footer {
         &-add {
             margin: 27px 0;
         }
+    }
+
+    &-add {
+        input {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        &-buttons {
+            margin-top: 15px;
+            margin-bottom: 15px !important;
+        }
+    }
+
+    &-edit {
+        width: 90%;
+        max-width: 100%;
+        display: inline-block;
     }
 }
 

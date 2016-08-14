@@ -908,19 +908,38 @@ footer {
   margin-top: 10px; }
   .rules h4 {
     margin: 21px 0px;
-    font-weight: bold; }
+    font-weight: bold;
+    display: inline-block; }
   .rules ol {
-    padding: 0; }
+    padding: 0;
+    counter-reset: item; }
     .rules ol li {
-      margin-left: 18px;
       line-height: 30px;
-      margin-bottom: 10px; }
+      margin-bottom: 10px;
+      display: block; }
       .rules ol li ul {
         padding-left: 0;
         margin: 20px; }
+      .rules ol li:before {
+        content: counters(item, ".") " ";
+        counter-increment: item;
+        font-size: 18px; }
 
 .rule-point-add {
   margin: 27px 0; }
+
+.rule-add input {
+  width: 100%;
+  max-width: 100%; }
+
+.rule-add-buttons {
+  margin-top: 15px;
+  margin-bottom: 15px !important; }
+
+.rule-edit {
+  width: 90%;
+  max-width: 100%;
+  display: inline-block; }
 
 .mod-image {
   max-width: 480px;
