@@ -234,8 +234,7 @@
             }, 
             JsonRequestBehavior.AllowGet);
         }
-
-
+        
         /// <summary>
         /// Feature for file download (from launcher client site folder)
         /// </summary>
@@ -247,6 +246,13 @@
             string fileServerPath = (serverClientPath + filePath.Replace("/", "\\")).Replace("\\\\", "\\"); //fix
             
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(fileServerPath));
+
+            using (var fileContent = System.IO.File.Open(FileManager.GetServerPath(fileServerPath), FileMode.Open))
+            {
+                Response.AddHeader("Content-Length", fileContent.Length.ToString());
+                fileContent.Close();
+            }
+
             Response.TransmitFile(fileServerPath);
             Response.End();
         }

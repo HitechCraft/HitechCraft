@@ -105,7 +105,7 @@
             return Directory.Exists(path);
         }
 
-        private static string GetServerPath(string path)
+        public static string GetServerPath(string path)
         {
             var serverPath = HttpContext.Current.Server.MapPath(path);
 
