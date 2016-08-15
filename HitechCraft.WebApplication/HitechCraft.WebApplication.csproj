@@ -379,7 +379,7 @@
     <Content Include="Content\Images\kits\ie_kit_vip.png" />
     <Content Include="Content\Images\loader-bg.png" />
     <Content Include="Content\Images\mailbg.jpg" />
-    <Content Include="favicon.png" />
+    <Content Include="favicon.ico" />
     <Content Include="Content\Images\game-start.png" />
     <Content Include="Content\Images\launcher-linux.png" />
     <Content Include="Content\Images\launcher-win.png" />
@@ -580,6 +580,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
