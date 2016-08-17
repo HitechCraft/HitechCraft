@@ -7,7 +7,7 @@
 
 <form action="" method="post" id="shop-item-filter">
     <div class="form-inline item-filter item-administration">
-        <input type="text" name="text" id="text" placeholder="Поиск предметов" class="form-control" style="width: 50%" />
+        <input type="text" name="text" id="text" placeholder="Поиск предметов" class="form-control" style="width: 50%; max-width: auto" />
         <div class="btn-group">
             <input name="modId" id="modId" type="hidden" />
             <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -80,7 +80,7 @@
 <script type="text/javascript">
 
     $(window).scroll(function () {
-        if ($(window).width() > 993) {
+        if ($(window).width() > 993 && $(window).height() > 750) {
             if ($(window).scrollTop() > 600) {
                 $('#item-col').addClass('item-fixed');
                 $('#items-col').addClass('item-margin');
@@ -92,6 +92,7 @@
     });
 
     $(function () {
+        console.log($(window).height());
         LoadItems(1);
     });
 
