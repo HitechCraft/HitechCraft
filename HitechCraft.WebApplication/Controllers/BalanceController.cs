@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using System.Globalization;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -24,7 +26,6 @@
         /// <summary>
         /// Life in seconds
         /// </summary>
-        /// TODO:Подумать над временем существования транзакции
         public int TransactionLife => 30;
 
         /// <summary>
@@ -64,15 +65,15 @@
                         Specification = new IKTransactionByPlayerNameSpec(this.Player.Name),
                         Projector = this.Container.Resolve<IProjector<IKTransaction, IKTransactionViewModel>>()
                     }).First();
-
+                
                 var newTransactionId = this.CheckTransactionTimeLife(transaction.Time, transaction.TransactionId);
-
+                
                 return newTransactionId != String.Empty ? newTransactionId : transaction.TransactionId;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 var transactionId = this.GenerateTransactionID();
-
+                
                 this.CommandExecutor.Execute(new IKTransactionCreateCommand()
                 {
                     PlayerName = this.Player.Name,
@@ -141,14 +142,19 @@
         [HttpPost]
         public ActionResult Payment(PaymentModel pm)
         {
-            if (this.IsValidTransaction(pm))
+            try
             {
-                this.MoneyEnrollment(CurrencyType.Rub, float.Parse(pm.ik_am), pm.ik_pm_no);
+                if (this.IsValidTransaction(pm))
+                {
+                    this.MoneyEnrollment(CurrencyType.Rub, float.Parse(pm.ik_am, CultureInfo.InvariantCulture), pm.ik_pm_no);
+                }
 
-                LogManager.Info(this.Player.Name + ": оплата совершена. Сумма " + pm.ik_am, "IK");
+                LogManager.Error(this.Player.Name + ": ошибка совершения оплаты. Невалидная транзакция " + pm.ik_pm_no, "IKPayment");
             }
-
-            LogManager.Error(this.Player.Name + ": ошибка совершения оплаты. Невалидная транзакция " + pm.ik_pm_no, "IK");
+            catch (Exception e)
+            {
+                LogManager.Error(this.Player.Name + ": ошибка совершения оплаты: " + e.Message, "IKPayment");
+            }
 
             return null;
         }
@@ -204,14 +210,14 @@
                     Specification = new IKTransactionByTransactionIdSpec(pm.ik_pm_no),
                     Projector = this.Container.Resolve<IProjector<IKTransaction, IKTransactionViewModel>>()
                 });
-
+            
             if (!transactions.Any())
             {
                 return false;
             }
 
             string generatedSign;
-
+            
             //generate sign from pm values
             //check if test - take test key
             if (pm.ik_pw_via == "test_interkassa_test_xts")
@@ -380,13 +386,20 @@
         /// <param name="transactionId">Id of IK transaction</param>
         private void UpdateRubles(double amount, string transactionId)
         {
-            this.CommandExecutor.Execute(new CurrencyUpdateCommand()
+            try
             {
-                Id = this.Currency != null ? this.Currency.Id : 0,
-                TransactionId = transactionId,
-                Gonts = 0,
-                Rubles = amount
-            });
+                this.CommandExecutor.Execute(new CurrencyUpdateCommand()
+                {
+                    Id = this.Currency != null ? this.Currency.Id : 0,
+                    TransactionId = transactionId,
+                    Gonts = 0,
+                    Rubles = amount
+                });
+            }
+            catch (Exception e)
+            {
+                LogManager.Error("Ошибка обновления счета! " + e.Message, "IKPayment");
+            }
         }
 
         #endregion

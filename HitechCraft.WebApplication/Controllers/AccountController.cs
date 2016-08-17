@@ -219,15 +219,7 @@ namespace HitechCraft.WebApplication.Controllers
 
             if(captchaResponse.Status == JsonStatus.NO)
                 ModelState.AddModelError(String.Empty, "Не верный ответ в ReCaptcha");
-
-            LogManager.Info(
-                "Username: " + model.UserName + "; " + 
-                "Email: " + model.Email + "; " +
-                "Gender: " + model.Gender + ";" +
-                "Password: " + model.Password + ";" +
-                "PasswordConfirm: " + model.ConfirmPassword + ";" +
-                "RuleAgree: " + model.RulesAgree, "AccountRegister");
-
+            
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -241,12 +233,8 @@ namespace HitechCraft.WebApplication.Controllers
                 
                 if (result.Succeeded)
                 {
-                    LogManager.Info("Аккаунт " + user.UserName + " создан!", "AccountRegister");
-
                     UserManager.AddToRole(user.Id, "User");
-
-                    LogManager.Info("Роль пользоватея " + user.UserName + " установлена!", "AccountRegister");
-
+                    
                     try
                     {
                         this.CommandExecutor.Execute(new PlayerRegisterCreateCommand()
@@ -259,15 +247,11 @@ namespace HitechCraft.WebApplication.Controllers
                     }
                     catch (Exception e)
                     {
-                        LogManager.Error(e.Message, "AccountRegister");
+                        LogManager.Error(e.Message, "Account Register");
                     }
-
-                    LogManager.Info("Игрок " + user.UserName + " зарегистрирован!", "AccountRegister");
-
+                    
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    LogManager.Info("Игрок " + user.UserName + " вошел на сайт!", "AccountRegister");
-
+                    
                     // Дополнительные сведения о том, как включить подтверждение учетной записи и сброс пароля, см. по адресу: http://go.microsoft.com/fwlink/?LinkID=320771
                     // Отправка сообщения электронной почты с этой ссылкой
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -276,7 +260,6 @@ namespace HitechCraft.WebApplication.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                LogManager.Error("Аккаунт " + user.UserName + " не создан!", "AccountRegister");
 
                 AddErrors(result);
             }

@@ -41,10 +41,6 @@ namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
         {
             try
             {
-                LogManager.Info("[Joinserver] Полученные параметры: profile " + selectedProfile
-                    + ", token: " + accessToken
-                    + ", server session: " + serverId);
-
                 var playerSession = new EntityListQueryHandler<PlayerSession, PlayerSessionEditViewModel>(this.Container)
                     .Handle(new EntityListQuery<PlayerSession, PlayerSessionEditViewModel>()
                     {
@@ -55,13 +51,7 @@ namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
                 playerSession.Server = serverId;
 
                 this.CommandExecutor.Execute(this.Project<PlayerSessionEditViewModel, PlayerSessionUpdateCommand>(playerSession));
-
-                LogManager.Info("[Joinserver] Переданные параметры игрока "
-                    + playerSession.PlayerName + " (" + selectedProfile + "): " +
-                    "ceccия клиента" + playerSession +
-                    ", сессия сервера " + serverId +
-                    ", md5 хэш " + playerSession.Md5);
-
+                
                 return Json(new
                 {
                     id = playerSession.Md5,
@@ -71,8 +61,6 @@ namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
             }
             catch (Exception e)
             {
-                LogManager.Error("[Joinserver] Ошибка передачи параметров клиенту: " + e.Message);
-
                 return Json(new JsonErrorData
                 {
                     error = "Bad login",
@@ -93,9 +81,6 @@ namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
         {
             try
             {
-                LogManager.Info("[Checkserver] Полученные параметры: User Name " + username
-                    + ", server session: " + serverId);
-
                 var playerSession = new EntityListQueryHandler<PlayerSession, PlayerSessionEditViewModel>(this.Container)
                     .Handle(new EntityListQuery<PlayerSession, PlayerSessionEditViewModel>()
                     {
@@ -105,12 +90,7 @@ namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
 
                 var unixTimeNow = ((int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
                 var userSkinUrl = LauncherConfig.SkinsUrlString + "/" + playerSession.PlayerName + ".png";
-
-                LogManager.Info("[Checkserver] Переданные параметры игрока "
-                    + playerSession.PlayerName + " (" + playerSession.Md5 + "): " +
-                    " скин игрока " + userSkinUrl +
-                    ", md5 хэш " + playerSession.Md5);
-
+                
                 var userData = Json(new JsonClientUserData
                 {
                     timestamp = unixTimeNow,
@@ -143,7 +123,7 @@ namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
             }
             catch (Exception e)
             {
-                LogManager.Error("[Checkserevr] Ошибка передачи параметров серверу: " + e.Message);
+                LogManager.Error("Ошибка передачи параметров серверу: " + e.Message, "CheckServer");
 
                 return Json(new JsonErrorData
                 {
@@ -163,18 +143,14 @@ namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
             //от имени url после последнего слэша
             //Поэтому вставил вот такой костыль, извините уж
             playerName = playerName.Split('/')[1].Split('.')[0];
-
-            LogManager.Info("Попытка получить скин " + playerName, "MinecraftSkinGet");
-
+            
             var playerSkinVm = new PlayerSkinQueryHandler<PlayerSkinViewModel>(this.Container)
                 .Handle(new PlayerSkinQuery<PlayerSkinViewModel>()
                 {
                     UserName = playerName,
                     Projector = this.Container.Resolve<IProjector<PlayerSkin, PlayerSkinViewModel>>()
                 });
-
-            LogManager.Info((playerSkinVm != null) + " " + (playerSkinVm.Image != null) + " Скин получен " + playerName, "MinecraftSkinGet");
-
+            
             return File(playerSkinVm.Image, "image/png");
         }
 
@@ -188,8 +164,6 @@ namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
         {
             try
             {
-                LogManager.Info("Получение профиля игрока " + user, "PlayerProfile");
-
                 var playerSession = new EntityListQueryHandler<PlayerSession, PlayerSessionEditViewModel>(this.Container)
                     .Handle(new EntityListQuery<PlayerSession, PlayerSessionEditViewModel>()
                     {
@@ -199,9 +173,7 @@ namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
                 
                 var unixTimeNow = ((int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
                 var userSkinUrl = LauncherConfig.SkinsUrlString + "/" + playerSession.PlayerName + ".png";
-
-                LogManager.Info("Скин Url " + userSkinUrl, "PlayerProfile");
-
+                
                 var userData = Json(new JsonClientUserData
                 {
                     timestamp = unixTimeNow,
@@ -234,7 +206,7 @@ namespace HitechCraft.WebApplication.Areas.Launcher.Controllers
             }
             catch (Exception e)
             {
-                LogManager.Info("Ошибка получения профиля игрока." + e.Message, "PlayerProfile");
+                LogManager.Error("Ошибка получения профиля игрока." + e.Message, "PlayerProfile");
 
                 return null;
             }
