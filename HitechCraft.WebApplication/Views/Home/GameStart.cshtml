@@ -13,12 +13,17 @@
     <li>
         Скачать лаунчер для игры:
         <br/>
-        <img src="~/Content/Images/launcher-win.png" onclick="downloadWin()"/>
-        <span class="clear" style="display: block"></span>
+        <div class="btn-group launchers">
+            <a href="javascript:downloadWin()" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-th-large"></span> Скачать для Windows</a>
+            <a class="btn btn-info btn-lg" data-toggle="modal" data-target="#winReq"><span class="glyphicon glyphicon-exclamation-sign"></span> Системные требования</a>
+        </div>
     </li>
     <li>Выбрать @Html.ActionLink("сервер", "Index", "Server") и начать игру!</li>
     <li>Так же не забудьте @Html.ActionLink("поддержать", "Vote") наш проект!</li>
 </ol>
+
+@Html.Partial("_LauncherWinReq")
+
 <script type="text/javascript">
     function downloadWin() {
         document.location = "/Content/Launcher/LauncherSetup.exe";

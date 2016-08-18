@@ -377,7 +377,6 @@
     <Content Include="Content\Images\kits\ie_kit_start.png" />
     <Content Include="Content\Images\kits\ie_kit_ultra.png" />
     <Content Include="Content\Images\kits\ie_kit_vip.png" />
-    <Content Include="Content\Images\loader-bg.png" />
     <Content Include="Content\Images\mailbg.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Content\Images\game-start.png" />
@@ -545,6 +544,7 @@
     <Content Include="Views\Skin\_SkinPartialList.cshtml" />
     <Content Include="Views\Skin\_SkinDuplicatedPartial.cshtml" />
     <Content Include="Views\Player\_JobsPartial.cshtml" />
+    <Content Include="Views\Home\_LauncherWinReq.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -594,7 +594,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58243</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
