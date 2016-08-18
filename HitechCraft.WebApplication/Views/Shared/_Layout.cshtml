@@ -14,7 +14,7 @@
 <body>
     <div class="ajax-loader">
         <img src="/Content/Images/loader.gif" />
-        <span>Загрузка...</span>
+        <span></span>
     </div>
     <div class="ajax-bg"></div>
     @Html.Partial("_NavBar")
@@ -29,24 +29,41 @@
     <div class="footer-content">
         @Html.Partial("_Footer")
     </div>
-    <script type="text/javascript">
-        $(document).ajaxStart(function () {
-            $('.ajax-loader').show();
-            $('.ajax-bg').show();
-            $('body').css('overflow', 'hidden');
-        }).ajaxStop(function () {
-            $('.ajax-loader').hide();
-            $('.ajax-bg').hide();
-            $('body').css('overflow', 'visible');
-        });
+<script type="text/javascript">
 
-        //$('.dropdown-toggle').on('mouseenter', function () {
-        //    $(this).dropdown('toggle');
-        //});
+    $.AjaxLoaderSetText = function (text) {
 
-        //$('.dropdown-toggle').on('mouseleave', function () {
-        //});
-    </script>
+        $('.ajax-loader>span').text('');
+        $('.ajax-loader>span').text(text);
+
+        $('.ajax-loader>span').css('left', ($(window).width() / 2 - $('.ajax-loader>span').width() / 2 - 20));
+    }
+
+    $(document).ajaxStart(function () {
+        if (window.ajaxLoaderText === undefined) {
+            window.ajaxLoaderText = "Загрузка...";
+        }
+
+        $.AjaxLoaderSetText(window.ajaxLoaderText);
+
+        $('.ajax-loader').show();
+        $('.ajax-bg').show();
+        $('body').css('overflow', 'hidden');
+    }).ajaxStop(function () {
+        window.ajaxLoaderText = undefined;
+
+        $('.ajax-loader').hide();
+        $('.ajax-bg').hide();
+        $('body').css('overflow', 'visible');
+    });
+
+    //$('.dropdown-toggle').on('mouseenter', function () {
+    //    $(this).dropdown('toggle');
+    //});
+
+    //$('.dropdown-toggle').on('mouseleave', function () {
+    //});
+</script>
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

@@ -33,6 +33,8 @@
     }
 
     function LoadNews(currentPage) {
+        $.AjaxLoaderSetText("Загрузка новостей...");
+
         $.get("@Url.Action("NewsPartialList", "News")", { page: currentPage })
         .done(function (data) {
             $('#news').html('');
@@ -44,7 +46,6 @@
 
         //Темная магия
         var text = newsText;
-        console.log(text);
         var tags = ['[p]', '[/p]', '[br]', '[ul]', '[/ul]', '[li]', '[/li]', '[b]', '[/b]', '[h5]', '[/h5]'];
 
         $.each(tags, function (index, value) {
