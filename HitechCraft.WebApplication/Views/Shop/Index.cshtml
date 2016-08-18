@@ -92,7 +92,6 @@
     });
 
     $(function () {
-        console.log($(window).height());
         LoadItems(1);
     });
 
@@ -137,6 +136,8 @@
     }
 
     function LoadItems(currentPage, modid, categoryid, itemsOnPage, text) {
+        window.ajaxLoaderText = "Загрузка предметов...";
+
         $.get("@Url.Action("ItemPartialList", "Shop")", { page: currentPage, modId: modid, categoryId: categoryid, itemOnPage: itemsOnPage, filterText: text })
             .done(function (data) {
                 $('#item-list').html('');
@@ -145,6 +146,9 @@
     }
 
     function LoadItem(id) {
+
+        $.AjaxLoaderSetText("Грузим предмет...");
+
         $.get("@Url.Action("ItemPartial", "Shop")", { gameId: id })
             .done(function (data) {
                 if (window.selectedItem) {

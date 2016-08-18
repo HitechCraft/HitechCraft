@@ -87,7 +87,7 @@
 
     $(document)
         .ready(function () {
-            $.AjaxLoaderSetText("Загрузка серверов...");
+            window.ajaxLoaderText = "Загрузка серверов...";
 
             $.get("@Url.Action("MonitoringList", "Server")")
                 .done(function (data) {

@@ -33,7 +33,7 @@
     }
 
     function LoadNews(currentPage) {
-        $.AjaxLoaderSetText("Загрузка новостей...");
+        window.ajaxLoaderText = "Загрузка новостей...";
 
         $.get("@Url.Action("NewsPartialList", "News")", { page: currentPage })
         .done(function (data) {
