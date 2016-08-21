@@ -68,7 +68,11 @@
                 .Add(AutoMap.AssemblyOf<Rule>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<RuleOverrides>())
                 .Add(AutoMap.AssemblyOf<RulePoint>(autoMapHelper)
-                    .UseOverridesFromAssemblyOf<RulePointOverrides>());
+                    .UseOverridesFromAssemblyOf<RulePointOverrides>())
+                .Add(AutoMap.AssemblyOf<PrivateMessage>(autoMapHelper)
+                    .UseOverridesFromAssemblyOf<PrivateMessageOverrides>())
+                .Add(AutoMap.AssemblyOf<PMPlayer>(autoMapHelper)
+                    .UseOverridesFromAssemblyOf<PMPlayerOverrides>());
         }
     }
 }
