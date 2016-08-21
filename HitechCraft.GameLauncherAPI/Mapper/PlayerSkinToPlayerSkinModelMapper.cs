@@ -4,12 +4,11 @@
     using GameLauncherAPI.Mapper;
     using GameLauncherAPI.Models;
 
-    public class PlayerSkinToPlayerSkinModelMapper : BaseMapper<Skin, PlayerSkinModel>
+    public class PlayerSkinToPlayerSkinModelMapper : BaseMapper<PlayerSkin, PlayerSkinModel>
     {
         public PlayerSkinToPlayerSkinModelMapper()
         {
-            this.ConfigurationStore.CreateMap<Skin, PlayerSkinModel>()
-                .ForMember(dst => dst.Id, ext => ext.MapFrom(src => src.Id))
+            this.ConfigurationStore.CreateMap<PlayerSkin, PlayerSkinModel>()
                 .ForMember(dst => dst.Image, ext => ext.MapFrom(src => src.Image));
         }
     }
