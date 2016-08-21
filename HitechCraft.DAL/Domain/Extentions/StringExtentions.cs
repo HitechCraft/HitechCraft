@@ -1,13 +1,9 @@
 ﻿namespace HitechCraft.DAL.Domain.Extentions
 {
-    #region Using Directives
-
     using System;
     using System.Linq;
 
-    #endregion
-
-    public static class StringManager
+    public static class StringExtentions
     {
         public static string Limit(this string str, int stringLength)
         {
