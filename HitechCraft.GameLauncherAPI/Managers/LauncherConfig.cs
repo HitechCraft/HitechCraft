@@ -27,21 +27,13 @@
         {
             get { return "abcdefghijklmnopqrstuvwxyz1234567890"; }
         }
-
-        /// <summary>
-        /// Launcher site folder
-        /// </summary>
-        public static string DataDir
-        {
-            get { return "/" + "Areas" + "/" + "Launcher"; }
-        }
-
+        
         /// <summary>
         /// Player skin url
         /// </summary>
         public static string SkinsUrlString
         {
-            get { return WebConfigurationManager.AppSettings["BaseUrl"] + "Launcher/ClientServer/GetSkinImage?playerName="; }
+            get { return WebConfigurationManager.AppSettings["BaseUrl"] + "ClientServer/GetSkinImage?playerName="; }
         }
 
         /// <summary>
@@ -49,7 +41,7 @@
         /// </summary>
         public static string ClientsDir
         {
-            get { return DataDir + "/" + "Clients"; }
+            get { return "Clients"; }
         }
     }
 }

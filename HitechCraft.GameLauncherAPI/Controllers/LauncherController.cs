@@ -28,15 +28,10 @@
 
     public class LauncherController : BaseController
     {
-        public LauncherController(IContainer container) : base(container)
-        {
-        }
-
-
         #region Private Fields
 
         private ApplicationUserManager _userManager;
-        private readonly ApplicationDbContext _context;
+        private ApplicationDbContext _context;
 
         #endregion
 
@@ -54,7 +49,24 @@
             }
         }
 
+        public ApplicationDbContext Context
+        {
+            get
+            {
+                return _context ?? new ApplicationDbContext();
+            }
+            private set
+            {
+                _context = value;
+            }
+        }
+
         #endregion
+
+        public LauncherController(IContainer container) : base(container)
+        {
+        }
+
 
         #region Actions
 
@@ -144,55 +156,7 @@
             },
             JsonRequestBehavior.AllowGet);
         }
-
-        /// <summary>
-        /// Check client files
-        /// </summary>
-        /// <param name="base64Hash">Base64 hash of clients file data</param>
-        /// <returns></returns>
-        public JsonResult CheckClientFiles(string base64Hash)
-        {
-            var errorFileList = new List<JsonErrorFileData>();
-
-            try
-            {
-                var clientFilesData = Convert.FromBase64String(base64Hash);
-
-                var filesFromClient = JsonSerializer.Deserialize<JsonClientData>(Encoding.UTF8.GetString(clientFilesData));
-
-                var clientFolders = LauncherManager.GetRequiredFolderList(filesFromClient.ClientName);
-
-                var filesFromApp = GetJsonClientFilesData(clientFolders, filesFromClient);
-
-                errorFileList = GetErrorFileList(filesFromClient, filesFromApp, errorFileList);
-
-                if (!errorFileList.Any())
-                {
-                    return Json(new JsonClientFilesStatusData()
-                    {
-                        Status = JsonStatus.YES,
-                        Message = String.Format(Resource.SuccessClientFilesCheck, filesFromClient.ClientName)
-                    }, JsonRequestBehavior.AllowGet);
-                }
-
-                return Json(new JsonClientFilesStatusData()
-                {
-                    FileData = errorFileList,
-                    Status = JsonStatus.NO,
-                    Message = String.Format(Resource.ErrorClientFilesCheck, filesFromClient.ClientName)
-                }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception e)
-            {
-                return Json(new JsonClientFilesStatusData()
-                {
-                    FileData = errorFileList,
-                    Status = JsonStatus.NO,
-                    Message = e.Message
-                }, JsonRequestBehavior.AllowGet);
-            }
-        }
-
+        
         /// <summary>
         /// Returns Client file paths from server
         /// </summary>
@@ -236,7 +200,7 @@
         /// <param name="filePath">File Path with client name</param>
         public void DownloadClientFile(string filePath)
         {
-            string serverClientPath = "\\Areas\\Launcher\\Clients\\";
+            string serverClientPath = "\\Launcher\\Clients\\";
 
             string fileServerPath = (serverClientPath + filePath.Replace("/", "\\")).Replace("\\\\", "\\"); //fix
 
@@ -316,11 +280,12 @@
         {
             try
             {
-                return UserManager.CheckPasswordAsync(_context.Users.First(u => u.UserName == login), password)
+                return UserManager.CheckPasswordAsync(this.Context.Users.First(u => u.UserName == login), password)
                         .Result;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                var message = e.Message;
                 return false;
             }
         }
