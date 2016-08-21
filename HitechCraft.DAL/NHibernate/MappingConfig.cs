@@ -71,8 +71,8 @@
                     .UseOverridesFromAssemblyOf<RulePointOverrides>())
                 .Add(AutoMap.AssemblyOf<PrivateMessage>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<PrivateMessageOverrides>())
-                .Add(AutoMap.AssemblyOf<PMPlayer>(autoMapHelper)
-                    .UseOverridesFromAssemblyOf<PMPlayerOverrides>());
+                .Add(AutoMap.AssemblyOf<PMPlayerBox>(autoMapHelper)
+                    .UseOverridesFromAssemblyOf<PMPlayerBoxOverrides>());
         }
     }
 }

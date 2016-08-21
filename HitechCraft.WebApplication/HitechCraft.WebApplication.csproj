@@ -240,6 +240,7 @@
     <Compile Include="Controllers\DonateController.cs" />
     <Compile Include="Controllers\ErrorPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\ModificationController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
@@ -339,6 +340,7 @@
     <Compile Include="Models\Player\UserRoleViewModel.cs" />
     <Compile Include="Models\Player\RoleViewModel.cs" />
     <Compile Include="Models\Player\UserSkinViewModel.cs" />
+    <Compile Include="Models\PrivateMessageViewModel.cs" />
     <Compile Include="Models\Rule\RuleViewModel.cs" />
     <Compile Include="Models\Rule\RulePointViewModel.cs" />
     <Compile Include="Models\Player\JobViewModel.cs" />
@@ -544,6 +546,7 @@
     <Content Include="Views\Skin\_SkinDuplicatedPartial.cshtml" />
     <Content Include="Views\Player\_JobsPartial.cshtml" />
     <Content Include="Views\Home\_LauncherWinReq.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,11 +9,11 @@
 
     #endregion
 
-    public class PMPlayerOverrides : IAutoMappingOverride<PMPlayer>
+    public class PMPlayerBoxOverrides : IAutoMappingOverride<PMPlayerBox>
     {
-        public void Override(AutoMapping<PMPlayer> mapping)
+        public void Override(AutoMapping<PMPlayerBox> mapping)
         {
-            mapping.Table("PMPlayer");
+            mapping.Table("PMPlayerBox");
 
             mapping.Id(x => x.Id)
                 .GeneratedBy.Increment();

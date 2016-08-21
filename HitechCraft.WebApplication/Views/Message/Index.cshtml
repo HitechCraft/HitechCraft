@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Личные сообщения";
+}
+
+<h2 class="page-title">@ViewBag.Title <span class="alert alert-danger alert-beta">beta</span></h2>
+
+<div class="row message">
+
+    <div class="col-md-4 message-types">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#inbox" aria-controls="home" role="tab" data-toggle="tab">
+                    Входящие <span class="alert alert-warning message-inbox-new" title="Новые сообщения!">3</span>
+                </a>
+            </li>
+            <li role="presentation">
+                <a href="#sended" aria-controls="profile" role="tab" data-toggle="tab">
+                    Отправленные
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-8 message-content">
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="inbox"></div>
+            <div role="tabpanel" class="tab-pane" id="sended"></div>
+        </div>
+    </div>
+</div>

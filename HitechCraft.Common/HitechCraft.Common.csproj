@@ -78,6 +78,8 @@
     <Compile Include="Models\Enum\Gender.cs" />
     <Compile Include="Models\Enum\JsonStatus.cs" />
     <Compile Include="Models\Enum\PlayerGroup.cs" />
+    <Compile Include="Models\Enum\PMPlayerType.cs" />
+    <Compile Include="Models\Enum\PMType.cs" />
     <Compile Include="Models\Json\MinecraftClient\JsonClientPropertiesData.cs" />
     <Compile Include="Models\Json\MinecraftClient\JsonClientResponseData.cs" />
     <Compile Include="Models\Json\MinecraftClient\JsonClientUserData.cs" />

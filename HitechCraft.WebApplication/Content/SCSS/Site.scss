@@ -1322,3 +1322,50 @@ footer {
         }
     }
 }
+
+.alert {
+    &-beta {
+        font-size: 20px;
+        padding: 5px 20px;
+    }
+}
+
+.message {
+    min-height: 400px;
+    margin-top: 70px;
+
+    &-inbox {
+        &-new {
+            font-size: 18px;
+            padding: 1px 22px;
+            float: right;
+        }
+    }
+
+    &-types {
+        ul {
+            li {
+                float: none;
+                font-weight: bold;
+                font-size: 20px;
+
+                a {
+                    border-color: #fff !important;
+                }
+            }
+
+            li.active {
+                a:first-child {
+                    color: #fff;
+                    background: #2c3e50;
+                    border-color: #2c3e50 !important;
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+
+    &-content {
+        padding: 25px;
+    }
+}

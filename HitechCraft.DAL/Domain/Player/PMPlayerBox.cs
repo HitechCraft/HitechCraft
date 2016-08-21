@@ -3,7 +3,7 @@
     using Common.Models.Enum;
     using Common.Entity;
 
-    public class PMPlayer : BaseEntity<PMPlayer>
+    public class PMPlayerBox : BaseEntity<PMPlayerBox>
     {
         public virtual PrivateMessage Message { get; set; }
 

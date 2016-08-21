@@ -71,6 +71,8 @@
     <Compile Include="Domain\PermissionsEx\PexInheritance.cs" />
     <Compile Include="Domain\Player\Player.cs" />
     <Compile Include="Domain\Player\PlayerInfo.cs" />
+    <Compile Include="Domain\Player\PrivateMessage.cs" />
+    <Compile Include="Domain\Player\PMInfo.cs" />
     <Compile Include="Domain\Services\Rule.cs" />
     <Compile Include="Domain\Services\RulePoint.cs" />
     <Compile Include="Domain\Shop\PlayerItem.cs" />
@@ -85,6 +87,8 @@
     <Compile Include="NHibernate\Helper\NHibernateHelper.cs" />
     <Compile Include="NHibernate\MappingConfig.cs" />
     <Compile Include="NHibernate\Mappings\AuthLogOverrides.cs" />
+    <Compile Include="NHibernate\Mappings\PMPlayerOverrides.cs" />
+    <Compile Include="NHibernate\Mappings\PrivateMessageOverrides.cs" />
     <Compile Include="NHibernate\Mappings\SkinOverrides.cs" />
     <Compile Include="NHibernate\Mappings\RulePoint.cs" />
     <Compile Include="NHibernate\Mappings\Rule.cs" />

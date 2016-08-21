@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.DAL.Domain
+﻿using System.Collections.Generic;
+
+namespace HitechCraft.DAL.Domain
 {
     #region Using Directives
 
@@ -15,5 +17,7 @@
         public virtual string Text { get; set; }
         
         public virtual DateTime TimeCreate { get; set; }
+
+        public virtual ISet<PMPlayerBox> PmPlayerBox { get; set; }
     }
 }

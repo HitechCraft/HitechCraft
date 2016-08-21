@@ -181,6 +181,8 @@ namespace HitechCraft.WebApplication.Ninject
 
             this._kernel.Bind(typeof(IProjector<News, JsonLauncherNews>)).To(typeof(NewsToJsonLauncherNewsMapper));
 
+            this._kernel.Bind(typeof(IProjector<PrivateMessage, PrivateMessageViewModel>)).To(typeof(PrivateMessageToPrivateMessageViewModelMapper));
+
             #endregion
 
             this._kernel.Bind(typeof(IUnitOfWork)).To(typeof(NHibernateUnitOfWork));

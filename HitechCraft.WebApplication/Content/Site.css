@@ -992,3 +992,28 @@ footer {
   .req p strong {
     color: #161f28; }
 
+.alert-beta {
+  font-size: 20px;
+  padding: 5px 20px; }
+
+.message {
+  min-height: 400px;
+  margin-top: 70px; }
+  .message-inbox-new {
+    font-size: 18px;
+    padding: 1px 22px;
+    float: right; }
+  .message-types ul li {
+    float: none;
+    font-weight: bold;
+    font-size: 20px; }
+    .message-types ul li a {
+      border-color: #fff !important; }
+  .message-types ul li.active a:first-child {
+    color: #fff;
+    background: #2c3e50;
+    border-color: #2c3e50 !important;
+    border-radius: 4px; }
+  .message-content {
+    padding: 25px; }
+
