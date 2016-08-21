@@ -1,12 +1,13 @@
-﻿using System;
-using System.Linq.Expressions;
-using HitechCraft.Common.Projector;
-
-namespace HitechCraft.GameLauncherAPI.Mapper
+﻿namespace HitechCraft.GameLauncherAPI.Mapper
 {
     #region Using Directives
 
-    
+    using System;
+    using System.Linq.Expressions;
+    using AutoMapper;
+    using AutoMapper.Mappers;
+    using AutoMapper.QueryableExtensions;
+    using Common.Projector;
 
     #endregion
 

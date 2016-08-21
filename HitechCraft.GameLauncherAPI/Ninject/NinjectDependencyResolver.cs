@@ -54,7 +54,10 @@ namespace HitechCraft.GameLauncherAPI.Ninject
             #region Command Bindings
 
             _kernel.Bind(typeof(ICommandHandler<>)).To(typeof(BaseCommandHandler<>));
+
             _kernel.Bind(typeof(ICommandHandler<PlayerSessionUpdateCommand>)).To(typeof(PlayerSessionUpdateCommandHandler));
+            _kernel.Bind(typeof(ICommandHandler<PlayerSessionCreateCommand>)).To(typeof(PlayerSessionCreateCommandHandler));
+
             #endregion
 
             _kernel.Bind(typeof(ICommandExecutor)).To(typeof(CommandExecutor));
