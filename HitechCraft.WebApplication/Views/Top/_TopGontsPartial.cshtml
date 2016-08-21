@@ -41,8 +41,7 @@ else
         @foreach (var player in Model)
         {
             <text>
-            renderMCSkins('avaSkinGont@(player.PlayerName)', 8);
-            $('.avaSkinGont@(player.PlayerName)').css('height', '128px');
+                renderMCSkins('avaSkinGont@(player.PlayerName)', 8);
             </text>
         }
     });

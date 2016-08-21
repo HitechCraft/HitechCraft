@@ -220,11 +220,11 @@ namespace HitechCraft.WebApplication.Controllers
             }
 
             var fileType = skinFile.ContentType;
-            var allowedTypes = new List<string>() {"image/png", "image/jpg" };
+            var allowedTypes = new List<string>() { "image/png" };
 
             if (!allowedTypes.Contains(fileType))
             {
-                errors.Add("Скин может быть в формате: .png или .jpg");
+                errors.Add("Скин может быть в формате .png");
 
                 return errors;
             }
