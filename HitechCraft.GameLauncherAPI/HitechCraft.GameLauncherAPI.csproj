@@ -262,14 +262,11 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Base\" />
-    <Folder Include="Views\ClientServer\" />
-    <Folder Include="Views\Launcher\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+    <None Include="Properties\PublishProfiles\DevHitechCraftApi.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HitechCraft.BL\HitechCraft.BL.csproj">
