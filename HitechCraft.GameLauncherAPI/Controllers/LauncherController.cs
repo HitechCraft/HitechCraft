@@ -1,7 +1,4 @@
-﻿using HitechCraft.GameLauncherAPI.Managers;
-using HitechCraft.GameLauncherAPI.Properties;
-
-namespace HitechCraft.GameLauncherAPI.Controllers
+﻿namespace HitechCraft.GameLauncherAPI.Controllers
 {
     #region Using Directives
 
@@ -25,6 +22,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
     using DAL.Repository.Specification;
     using Models;
     using Microsoft.AspNet.Identity.Owin;
+    using Managers;
 
     #endregion
 
@@ -111,7 +109,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
             return Json(new JsonStatusData()
             {
                 Status = JsonStatus.NO,
-                Message = Resource.InvalidVersion
+                Message = String.Format(Resource.InvalidVersion, LauncherConfig.MasterVersion)
             },
             JsonRequestBehavior.AllowGet);
         }
@@ -133,7 +131,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                     return Json(new JsonStatusData()
                     {
                         Status = JsonStatus.NO,
-                        Message = Resource.ClientNoFolders
+                        Message = String.Format(Resource.ClientNoFolder, clientName, folder)
                     },
                     JsonRequestBehavior.AllowGet);
                 }
@@ -173,7 +171,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                     return Json(new JsonClientFilesStatusData()
                     {
                         Status = JsonStatus.YES,
-                        Message = Resource.SuccessClientFilesCheck
+                        Message = String.Format(Resource.SuccessClientFilesCheck, filesFromClient.ClientName)
                     }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -181,7 +179,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                 {
                     FileData = errorFileList,
                     Status = JsonStatus.NO,
-                    Message = Resource.ErrorClientFilesCheck
+                    Message = String.Format(Resource.ErrorClientFilesCheck, filesFromClient.ClientName)
                 }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -329,7 +327,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
 
         private JsonSessionData GetUserSessionData(string login)
         {
-            ChangeOrSetPlayerSession(login);
+            this.ChangeOrSetPlayerSession(login);
 
             try
             {
@@ -355,21 +353,21 @@ namespace HitechCraft.GameLauncherAPI.Controllers
 
             try
             {
-                var playerSession = new EntityListQueryHandler<PlayerSession, PlayerSessionEditViewModel>(Container)
-                       .Handle(new EntityListQuery<PlayerSession, PlayerSessionEditViewModel>()
+                var playerSession = new EntityListQueryHandler<PlayerSession, PlayerSessionModel>(Container)
+                       .Handle(new EntityListQuery<PlayerSession, PlayerSessionModel>()
                        {
                            Specification = new PlayerSessionByPlayerNameSpec(login),
-                           Projector = Container.Resolve<IProjector<PlayerSession, PlayerSessionEditViewModel>>()
+                           Projector = Container.Resolve<IProjector<PlayerSession, PlayerSessionModel>>()
                        }).First();
 
                 playerSession.Session = session;
                 playerSession.Token = token;
 
-                CommandExecutor.Execute(Project<PlayerSessionEditViewModel, PlayerSessionUpdateCommand>(playerSession));
+                this.CommandExecutor.Execute(Project<PlayerSessionModel, PlayerSessionUpdateCommand>(playerSession));
             }
             catch (Exception)
             {
-                CommandExecutor.Execute(new PlayerSessionCreateCommand()
+                this.CommandExecutor.Execute(new PlayerSessionCreateCommand()
                 {
                     PlayerName = login,
                     Server = null,

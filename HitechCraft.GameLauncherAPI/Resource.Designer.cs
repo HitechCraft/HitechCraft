@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HitechCraft.GameLauncherAPI.Properties {
+namespace HitechCraft.GameLauncherAPI {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace HitechCraft.GameLauncherAPI.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("HitechCraft.GameLauncherAPI.Properties.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("HitechCraft.GameLauncherAPI.Resource", typeof(Resource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,25 @@ namespace HitechCraft.GameLauncherAPI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ошибка авторизации. Неверные данные.
+        ///   Looks up a localized string similar to Структура клиента прошла проверку!.
+        /// </summary>
+        internal static string ClientAllFolders {
+            get {
+                return ResourceManager.GetString("ClientAllFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Клиент {0} не содержит папку {1}. Исправьте структуру клиента!.
+        /// </summary>
+        internal static string ClientNoFolder {
+            get {
+                return ResourceManager.GetString("ClientNoFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка авторизации. Неверные данные!.
         /// </summary>
         internal static string ErrorAuth {
             get {
@@ -70,7 +88,16 @@ namespace HitechCraft.GameLauncherAPI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Версия не прошла проверку. Скачайте новый лаунчер.
+        ///   Looks up a localized string similar to Некоторые файлы клиента {0} не прошли проверку и будут перезакачаны!.
+        /// </summary>
+        internal static string ErrorClientFilesCheck {
+            get {
+                return ResourceManager.GetString("ErrorClientFilesCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Версия лаунчера устарела! Новая версия {0}. Перезакачайте лаунчер!.
         /// </summary>
         internal static string InvalidVersion {
             get {
@@ -79,7 +106,7 @@ namespace HitechCraft.GameLauncherAPI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Авторизация прошла успешно.
+        ///   Looks up a localized string similar to Авторизация прошла успешно!.
         /// </summary>
         internal static string SuccessAuth {
             get {
@@ -88,7 +115,16 @@ namespace HitechCraft.GameLauncherAPI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Версия прошла проверку.
+        ///   Looks up a localized string similar to Все файлы клиента {0} прошли проверку!.
+        /// </summary>
+        internal static string SuccessClientFilesCheck {
+            get {
+                return ResourceManager.GetString("SuccessClientFilesCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Версия лаунчера прошла проверку..
         /// </summary>
         internal static string ValidVersion {
             get {

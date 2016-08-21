@@ -117,16 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ClientAllFolders" xml:space="preserve">
+    <value>Структура клиента прошла проверку!</value>
+  </data>
+  <data name="ClientNoFolder" xml:space="preserve">
+    <value>Клиент {0} не содержит папку {1}. Исправьте структуру клиента!</value>
+  </data>
   <data name="ErrorAuth" xml:space="preserve">
-    <value>Ошибка авторизации. Неверные данные</value>
+    <value>Ошибка авторизации. Неверные данные!</value>
+  </data>
+  <data name="ErrorClientFilesCheck" xml:space="preserve">
+    <value>Некоторые файлы клиента {0} не прошли проверку и будут перезакачаны!</value>
   </data>
   <data name="InvalidVersion" xml:space="preserve">
-    <value>Версия не прошла проверку. Скачайте новый лаунчер</value>
+    <value>Версия лаунчера устарела! Новая версия {0}. Перезакачайте лаунчер!</value>
   </data>
   <data name="SuccessAuth" xml:space="preserve">
-    <value>Авторизация прошла успешно</value>
+    <value>Авторизация прошла успешно!</value>
+  </data>
+  <data name="SuccessClientFilesCheck" xml:space="preserve">
+    <value>Все файлы клиента {0} прошли проверку!</value>
   </data>
   <data name="ValidVersion" xml:space="preserve">
-    <value>Версия прошла проверку</value>
+    <value>Версия лаунчера прошла проверку.</value>
   </data>
 </root>
