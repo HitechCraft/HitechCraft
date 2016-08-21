@@ -1,3 +1,6 @@
+using System.Web.Mvc;
+using HitechCraft.GameLauncherAPI.Ninject;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(HitechCraft.GameLauncherAPI.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(HitechCraft.GameLauncherAPI.App_Start.NinjectWebCommon), "Stop")]
 
@@ -61,6 +64,7 @@ namespace HitechCraft.GameLauncherAPI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }        
     }
 }
