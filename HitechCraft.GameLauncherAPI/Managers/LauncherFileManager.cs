@@ -1,11 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Web;
-using HitechCraft.WebApplication.Areas.Launcher.Services;
 
-namespace HitechCraft.WebApplication.Manager
+namespace HitechCraft.GameLauncherAPI.Managers
 {
-    public static class FileManager
+    public static class LauncherFileManager
     {
         /// <summary>
         /// Check is valid file or dir path
