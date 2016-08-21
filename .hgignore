@@ -3,8 +3,6 @@ syntax: glob
 bin/
 obj/
 packages/
-Documentation/
-Documentation/
 Launcher/Clients/
 HitechCraft.WebApplication/Content/logs/
 HitechCraft.WebApplication/Areas/Clients/
