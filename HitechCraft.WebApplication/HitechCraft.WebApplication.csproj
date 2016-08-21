@@ -341,6 +341,7 @@
     <Compile Include="Models\Player\UserRoleViewModel.cs" />
     <Compile Include="Models\Player\RoleViewModel.cs" />
     <Compile Include="Models\Player\UserSkinViewModel.cs" />
+    <Compile Include="Models\PrivateMessage\PMPlayerViewModel.cs" />
     <Compile Include="Models\PrivateMessage\PrivateMessageViewModel.cs" />
     <Compile Include="Models\Rule\RuleViewModel.cs" />
     <Compile Include="Models\Rule\RulePointViewModel.cs" />
