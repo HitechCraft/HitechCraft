@@ -105,37 +105,5 @@
                 return null;
             }
         }
-
-        #region Entity Queries
-
-        public TResult EntityQuery<TEntity, TResult>(int entityId, IProjector<TEntity, TResult> projector)
-            where TEntity : BaseEntity<TEntity>
-        {
-            return new EntityQueryHandler<TEntity, TResult>(this.Container)
-                .Handle(new EntityQuery<TEntity, TResult>()
-                {
-                    Id = entityId,
-                    Projector = projector
-                });
-        }
-
-        public ICollection<TResult> EntityListQuery<TEntity, TResult>(IProjector<TEntity, TResult> projector)
-            where TEntity : BaseEntity<TEntity>
-        {
-            return this.EntityListQuery(null, projector);
-        }
-
-        public ICollection<TResult> EntityListQuery<TEntity, TResult>(ISpecification<TEntity> specification, IProjector<TEntity, TResult> projector)
-            where TEntity : BaseEntity<TEntity>
-        {
-            return new EntityListQueryHandler<TEntity, TResult>(this.Container)
-                .Handle(new EntityListQuery<TEntity, TResult>()
-                {
-                    Specification = specification,
-                    Projector = projector
-                });
-        }
-
-        #endregion
     }
 }
