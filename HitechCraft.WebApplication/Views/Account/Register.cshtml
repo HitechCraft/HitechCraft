@@ -1,0 +1,151 @@
+﻿@using HitechCraft.WebApplication.Models
+@using HitechCraft.Common.Models.Enum;
+@using HitechCraft.WebApplication.Properties;
+
+@model RegisterViewModel
+
+@{
+    ViewBag.Title = "Регистрация";
+}
+<div class="col-md-6">
+    <div class="panel panel-primary panel-register">
+        <div class="panel-heading">
+            @ViewBag.Title
+        </div>
+        <div class="panel-body">
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal regForm", role = "form", @id = "regForm" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName)
+                    <div class="form-inline">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @id = "user-name" })
+                        <a id="check-username" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                        </a>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Gender)
+                    @Html.DropDownListFor(model => model.Gender, ViewBag.Gender as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "gender" })
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @id="pass" })
+                    <span id="show-pass" class="glyphicon glyphicon-eye-open show-reg-pass" title="@Resources.ShowPassword"></span>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword)
+                    @Html.PasswordFor(m => m.ConfirmPassword, new {@class = "form-control", @id = "conf-pass"})
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new {@class = "text-danger"})
+                </div>
+                <div class="checkbox" style="margin-bottom: 16px; margin-left: -14px;">
+                    @Html.CheckBoxFor(m => m.RulesAgree, new {@checked = "checked"})
+                    <label>Согласен с @Html.ActionLink("правилами", "Rules", "Home") проекта</label>
+                </div>
+                <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="6LcdfycTAAAAAM0Ug6A-0YdyR4VcbSPolCIz3raD"></div>
+                </div>
+                <div class="form-group">
+                    <div class="btn-group btn-group-justified">
+                        <a href="javascript:formSubmit()" class="btn btn-success">@Resources.Register</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="panel panel-primary panel-register">
+        <div class="panel-heading">
+            Скин игрока
+        </div>
+        <div class="panel-body" id="skin-panel">
+            <h4 style="text-align: center;margin-bottom: 20px">Позже вы сможете сменить его в профиле</h4>
+            <div id="skin-container" class="skin-register">
+                <img src="@Url.Action("GetSkinImage", "Player", new { gender = Gender.Male })" id="skin-image" class="frontSkin" hidden=""/>
+                <img src="@Url.Action("GetSkinImage", "Player", new { gender = Gender.Male })" id="skin-image" class="backSkin" hidden=""/>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+
+    function formSubmit() {
+        $('#regForm').submit();
+    }
+
+    $('#show-pass').on("click", function() {
+        if ($('#pass').attr('type') === 'password') {
+            $('#pass').attr('type', 'text');
+            $('#conf-pass').attr('type', 'text');
+            $(this).attr('title', '@Resources.HidePassword');
+            $(this).css('color', '#d6d6d6');
+        } else {
+            $('#pass').attr('type', 'password');
+            $('#conf-pass').attr('type', 'password');
+            $(this).css('color', '#000');
+            $(this).attr('title', '@Resources.ShowPassword');
+        }
+    });
+
+    renderMCSkins('backSkin', 10);
+    renderMCSkins('frontSkin', 10);
+
+    $('#check-username').click(function () {
+        $.post('@Url.Action("IsUserExists", "Player")',
+            {
+                userName: $('#user-name').val()
+            })
+            .done(function (data) {
+                if (data.status === "success") {
+                    growlSuccess(data.message);
+                } else {
+                    growlError(data.message);
+                }
+            });
+    });
+
+    //for Firefox update page
+    $(document).ready(function () {
+        if (parseInt($('#gender option:selected').val()) !== 0) {
+            $(".frontSkin").replaceWith('<img src="" id="skin-image" class="frontSkin"/>');
+            $(".backSkin").replaceWith('<img src="" id="skin-image" class="backSkin"/>');
+            $('.frontSkin').attr("src", "/Player/GetSkinImage?gender=" + "Female");
+            $('.frontSkin').attr("src", "/Player/GetSkinImage?gender=" + "Female");
+            renderMCSkins('frontSkin', 10);
+            renderMCSkins('backSkin', 10);
+        }
+    });
+
+    $('#gender').change(function () {
+        var _gender = $('#gender option:selected').val();
+
+        if (_gender == 0) {
+            _gender = "Male";
+        } else {
+            _gender = "Female";
+        }
+        $(".frontSkin").replaceWith('<img src="" id="skin-image" class="frontSkin"/>');
+        $(".backSkin").replaceWith('<img src="" id="skin-image" class="backSkin"/>');
+        $('.frontSkin').attr("src", "/Player/GetSkinImage?gender=" + _gender);
+        $('.backSkin').attr("src", "/Player/GetSkinImage?gender=" + _gender);
+        renderMCSkins('frontSkin', 10);
+        renderMCSkins('backSkin', 10);
+    });
+</script>

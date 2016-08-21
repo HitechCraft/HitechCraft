@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7E3103FD-8F77-49B8-BA12-0250CEFF3F25}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HitechCraft.Common</RootNamespace>
+    <AssemblyName>HitechCraft.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.6\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\HashManager.cs" />
+    <Compile Include="Core\JsonSerializer.cs" />
+    <Compile Include="Core\LogManager.cs" />
+    <Compile Include="Core\MinecraftServerManager.cs" />
+    <Compile Include="CQRS\Command\BaseCommandHandler.cs" />
+    <Compile Include="CQRS\Command\CommandExecutor.cs" />
+    <Compile Include="CQRS\Command\ICommandExecutor.cs" />
+    <Compile Include="CQRS\Command\ICommandHandler.cs" />
+    <Compile Include="CQRS\Extentions\ProjectorQueryExtentions.cs" />
+    <Compile Include="CQRS\Query\IQuery.cs" />
+    <Compile Include="CQRS\Query\IQueryExecutor.cs" />
+    <Compile Include="CQRS\Query\IQueryHandler.cs" />
+    <Compile Include="DI\BaseContainer.cs" />
+    <Compile Include="DI\IContainer.cs" />
+    <Compile Include="Entity\BaseEntity.cs" />
+    <Compile Include="Models\Enum\BanType.cs" />
+    <Compile Include="Models\Enum\CurrencyType.cs" />
+    <Compile Include="Models\Enum\Gender.cs" />
+    <Compile Include="Models\Enum\JsonStatus.cs" />
+    <Compile Include="Models\Enum\PlayerGroup.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonClientPropertiesData.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonClientResponseData.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonClientUserData.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonErrorData.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonTextureData.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonUserSkinData.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonUserUuidData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonLauncherNews.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonClientData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonClientFilesData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonClientFilesStatusData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonErrorFileData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonSessionData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonStatusData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonUserAuthData.cs" />
+    <Compile Include="Models\Json\MinecraftServer\JsonMinecraftServerData.cs" />
+    <Compile Include="Models\Json\MinecraftServer\JsonMinecraftServersInfo.cs" />
+    <Compile Include="Models\Json\MinecraftServer\JsonMinecraftServerStatusData.cs" />
+    <Compile Include="Models\Json\WebRequest\JsonCaptchaResponse.cs" />
+    <Compile Include="Models\PermissionsEx\IPermissions.cs" />
+    <Compile Include="Models\PermissionsEx\IPexEntity.cs" />
+    <Compile Include="Models\PermissionsEx\IPexInheritance.cs" />
+    <Compile Include="Projector\BaseProjector.cs" />
+    <Compile Include="Projector\IProjector.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BaseRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\Specification\BaseSpecification.cs" />
+    <Compile Include="Repository\Specification\Composite\AndSpecification.cs" />
+    <Compile Include="Repository\Specification\Composite\OrSpecification.cs" />
+    <Compile Include="Repository\Specification\ISpecification.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,25 @@
+CREATE TABLE IF NOT EXISTS `RulePoint` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `Rule` (
+  `Id` int(11) NOT NULL,
+  `Text` varchar(2000) NOT NULL,
+  `Point` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `RulePoint`
+  ADD PRIMARY KEY (`Id`);
+
+ALTER TABLE `Rule`
+  ADD PRIMARY KEY (`Id`);
+
+ALTER TABLE `RulePoint`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `Rule`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `Rule`
+  ADD CONSTRAINT `FK_Rule_RulePoint` FOREIGN KEY (`Point`) REFERENCES `RolePuint` (`Id`);

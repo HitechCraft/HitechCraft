@@ -1,0 +1,40 @@
+﻿@model HitechCraft.WebApplication.Models.ShopItemViewModel
+
+<h2>@Model.Name</h2>
+<img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="@Model.Description" />
+<p>
+    @Model.Description
+</p>
+<span class="price">
+    Цена: @Model.Price Gont(s)
+</span>
+
+@if (User.IsInRole("Administrator"))
+{
+
+    @Html.ActionLink("Изменить", "EditItem", "Shop", new { gameId = Model.GameId }, new { @class = "btn btn-warning" })
+    <a class="btn btn-danger" onclick="deleteItem(@Model.GameId)">Удалить</a>
+}
+
+@Html.ActionLink("Купить", "BuyItem", "Shop", new { gameId = Model.GameId }, new { @class = "btn btn-primary" })
+
+<!--<a href="#" class="btn btn-default">Дерево крафтов</a><br/>-->
+
+<script type="text/javascript">
+    function deleteItem(id) {
+        if (confirm("Вы уверены что хотите удалить предмет?")) {
+            $.post("@Url.Action("DeleteItem", "Shop")", { gameId : id })
+            .done(function (data) {
+                if (data.status === "OK") {
+                    growlSuccess(data.message);
+                } else {
+                    growlError(data.message);
+                }
+
+                setTimeout(function() {
+                    location.reload();
+                }, 2000);
+            });
+        }
+    }
+</script>

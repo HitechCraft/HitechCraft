@@ -1,0 +1,8 @@
+syntax: glob
+.vs/
+bin/
+obj/
+packages/
+Launcher/Clients/
+HitechCraft.WebApplication/Content/logs/
+HitechCraft.WebApplication/Areas/Clients/

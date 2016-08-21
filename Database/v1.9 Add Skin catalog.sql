@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS `Skin` (
+  `Id` int(11) NOT NULL,
+  `Name` varchar(128) NOT NULL,
+  `Image` longblob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `Skin`
+  ADD PRIMARY KEY (`Id`);
+
+ALTER TABLE `Skin`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;

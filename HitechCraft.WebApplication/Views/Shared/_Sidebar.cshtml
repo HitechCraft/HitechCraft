@@ -1,0 +1,144 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    Layout = null;
+}
+<style>
+    #ts3v_1088418 :last-child a {
+        display: none;
+    }
+</style>
+
+<div class="col-md-4 sidebar">
+    @if (Request.IsAuthenticated)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">@(User.Identity.GetUserName())</div>
+            <div class="panel-body">
+                <div class="user-menu">
+                    <div id="avatar-container">
+                        <img src="@Url.Action("GetSkinImage", "Player")" id="skin-image" class="avaSkin" hidden="" />
+                    </div>
+
+                    @Html.ActionLink("Перейти в профиль", "Profile", "Player", null, new { @class = "btn btn-primary", @style = "margin-top: 20px" })<br />
+                    <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-primary" style="margin-top: 20px">Выйти</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">Меню пользователя</div>
+            <div class="panel-body">
+                <div class="user-menu">
+                    @Html.ActionLink("Войти", "Login", "Account", null, new { @class = "btn btn-primary", @style = "text-align: center" })
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Мониторинг</div>
+        <div class="panel-body">
+            <div class="server">
+                <div id="servers"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Голосуй за проект!</div>
+        <div class="panel-body">
+            <div class="vote">
+                <p>За голосование вы получаете поощрения! Это может быть валюта или предметы из @Html.ActionLink("Магазина Ресурсов", "Index", "Shop").
+                <p>
+                    <img src="~/Content/Images/vote/topcraft.png" title="За голосование на TopCraft вы получаете 250 Gont" onclick="window.open('http://topcraft.ru/servers/6456/', '_blank');" />
+                    <img src="~/Content/Images/vote/mctopsu.png" title="За голосование на MCTop.su вы получаете 2 Рубля" onclick="window
+    .open('https://mctop.su/rating/project/3528', '_blank');" />
+                    <img src="~/Content/Images/vote/mctop.png" title="За голосование на MCtop вы получаете случайную вещь из Магазина Ресурсов" onclick="window.open('http://mctop.pro/683-hitechcraft-multiserver-complex.html', '_blank');" />
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Team Speak</div>
+        <div class="panel-body">
+            <div id="ts3viewer_1088418" style=""> </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/progress")
+
+@if (User.Identity.IsAuthenticated)
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            renderMCSkins('avaSkin', 8);
+            $('.avaSkin').css('border', '2px solid');
+        });
+    </script>
+}
+
+<script src="https://static.tsviewer.com/short_expire/js/ts3viewer_loader.js"></script>
+
+<script type="text/javascript">
+
+    $(document)
+        .ready(function () {
+            window.ajaxLoaderText = "Загрузка серверов...";
+
+            $.get("@Url.Action("MonitoringList", "Server")")
+                .done(function (data) {
+                    $('#servers').html('');
+                    $('#servers').html(data);
+                });
+        });
+
+    //val offline is -1
+    function setProgress(objclass, val, maxval) {
+        $('.' + objclass)
+            .circleProgress({
+                value: (val <= 0 ? 1 : val / 100),
+                fill: {
+                    color: getColor(val, maxval)
+                },
+                startAngle: -Math.PI / 2,
+                thickness: 7
+            })
+            .on('circle-animation-progress',
+                function (event, progress) {
+                    var html = parseInt(val * progress);
+
+                    if (val < 0) {
+                        html = fixValue(val);
+                    }
+
+                    $(this).find('strong').html(html);
+                });
+    }
+
+    function getColor(value, maxvalue) {
+        //colors compare offline, online, empty, full
+        var colors = ['#ff0000', '#4fc500', '#0075ed', '#ff7200'];
+
+        value = parseInt(value);
+        maxvalue = parseInt(maxvalue);
+
+        if (value < 0) return colors[0];
+        if (value >= maxvalue) return colors[3];
+        if (value === 0) return colors[2];
+
+        return colors[1];
+    }
+
+    function fixValue(value) {
+        if (value < 0) return 'Offline';
+    }
+
+    var ts3v_url_1 =
+        "https://www.tsviewer.com/ts3viewer.php?ID=1088418&text=757575&text_size=12&text_family=1&text_s_color=000000&text_s_weight=normal&text_s_style=normal&text_s_variant=normal&text_s_decoration=none&text_i_color=&text_i_weight=normal&text_i_style=normal&text_i_variant=normal&text_i_decoration=none&text_c_color=&text_c_weight=normal&text_c_style=normal&text_c_variant=normal&text_c_decoration=none&text_u_color=000000&text_u_weight=normal&text_u_style=normal&text_u_variant=normal&text_u_decoration=none&text_s_color_h=&text_s_weight_h=bold&text_s_style_h=normal&text_s_variant_h=normal&text_s_decoration_h=none&text_i_color_h=000000&text_i_weight_h=bold&text_i_style_h=normal&text_i_variant_h=normal&text_i_decoration_h=none&text_c_color_h=&text_c_weight_h=normal&text_c_style_h=normal&text_c_variant_h=normal&text_c_decoration_h=none&text_u_color_h=&text_u_weight_h=bold&text_u_style_h=normal&text_u_variant_h=normal&text_u_decoration_h=none&iconset=default";
+
+    ts3v_display.init(ts3v_url_1, 1088418, 100);
+</script>
