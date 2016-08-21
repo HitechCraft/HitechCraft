@@ -1,4 +1,5 @@
 ﻿using HitechCraft.GameLauncherAPI.Managers;
+using HitechCraft.GameLauncherAPI.Properties;
 
 namespace HitechCraft.GameLauncherAPI.Controllers
 {
@@ -24,7 +25,6 @@ namespace HitechCraft.GameLauncherAPI.Controllers
     using DAL.Repository.Specification;
     using Models;
     using Microsoft.AspNet.Identity.Owin;
-    using Properties;
 
     #endregion
 
@@ -128,12 +128,12 @@ namespace HitechCraft.GameLauncherAPI.Controllers
 
             foreach (string folder in folders)
             {
-                if (!FileManager.IsDirOrFileExists(folder))
+                if (!LauncherFileManager.IsDirOrFileExists(folder))
                 {
                     return Json(new JsonStatusData()
                     {
                         Status = JsonStatus.NO,
-                        Message = Resources.LauncherClientNoFolders
+                        Message = Resource.ClientNoFolders
                     },
                     JsonRequestBehavior.AllowGet);
                 }
@@ -142,7 +142,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
             return Json(new JsonStatusData()
             {
                 Status = JsonStatus.YES,
-                Message = Resources.LauncherClientAllFolders
+                Message = Resource.ClientAllFolders
             },
             JsonRequestBehavior.AllowGet);
         }
@@ -173,7 +173,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                     return Json(new JsonClientFilesStatusData()
                     {
                         Status = JsonStatus.YES,
-                        Message = Resources.SuccessClientFilesCheck
+                        Message = Resource.SuccessClientFilesCheck
                     }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -181,7 +181,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                 {
                     FileData = errorFileList,
                     Status = JsonStatus.NO,
-                    Message = Resources.ErrorClientFilesCheck
+                    Message = Resource.ErrorClientFilesCheck
                 }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -210,14 +210,14 @@ namespace HitechCraft.GameLauncherAPI.Controllers
 
             foreach (var folder in clientFolders)
             {
-                if (FileManager.IsDirectory(folder))
+                if (LauncherFileManager.IsDirectory(folder))
                 {
-                    var files = FileManager.GetFiles(folder, "*", SearchOption.AllDirectories);
+                    var files = LauncherFileManager.GetFiles(folder, "*", SearchOption.AllDirectories);
 
                     clientFiles.AddRange(files
                         .Select(x => new JsonClientFilesData()
                         {
-                            FilePath = FileManager.GetClientFilePath(x, clientName),
+                            FilePath = LauncherFileManager.GetClientFilePath(x, clientName),
                             HashSum = HashManager.GetMd5Hash(System.IO.File.ReadAllBytes(x)),
                             FileSize = (int)new FileInfo(x).Length
                         }));
@@ -244,7 +244,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
 
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(fileServerPath));
 
-            using (var fileContent = System.IO.File.Open(FileManager.GetServerPath(fileServerPath), FileMode.Open))
+            using (var fileContent = System.IO.File.Open(LauncherFileManager.GetServerPath(fileServerPath), FileMode.Open))
             {
                 Response.AddHeader("Content-Length", fileContent.Length.ToString());
                 fileContent.Close();
@@ -396,14 +396,14 @@ namespace HitechCraft.GameLauncherAPI.Controllers
 
             foreach (var folder in clientFolders)
             {
-                if (FileManager.IsDirectory(folder))
+                if (LauncherFileManager.IsDirectory(folder))
                 {
-                    var files = FileManager.GetFiles(folder, "*", SearchOption.AllDirectories);
+                    var files = LauncherFileManager.GetFiles(folder, "*", SearchOption.AllDirectories);
 
                     clientFiles.AddRange(files
                         .Select(x => new JsonClientFilesData()
                         {
-                            FilePath = FileManager.GetClientFilePath(x, filesData.ClientName),
+                            FilePath = LauncherFileManager.GetClientFilePath(x, filesData.ClientName),
                             HashSum = HashManager.GetMd5Hash(System.IO.File.ReadAllBytes(x))
                         }));
                 }

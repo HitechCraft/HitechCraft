@@ -171,7 +171,7 @@
         {
             try
             {
-                var image = HashManager.GetBase64Hash(FileManager.DownloadFile(url));
+                var image = HashManager.GetBase64Hash(Manager.FileManager.DownloadFile(url));
 
                 return Json(new { status = "OK", message = @"data:image/jpeg;base64," + image, img = image });
             }
