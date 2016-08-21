@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebApplication.Models
+﻿using System.Collections.Generic;
+
+namespace HitechCraft.WebApplication.Models
 {
     using System;
 
@@ -10,9 +12,7 @@
 
         public string Text { get; set; }
 
-        public string AuthorName { get; set; }
-
-        public string RecipientName { get; set; }
+        public IEnumerable<PMPlayerViewModel> Players { get; set; }
 
         public DateTime TimeCreate { get; set; }
     }

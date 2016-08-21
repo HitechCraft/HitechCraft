@@ -278,6 +278,7 @@
     <Compile Include="Mapper\PlayerItem\PlayerItemToPlayerItemViewModelMapper.cs" />
     <Compile Include="Mapper\PlayerSession\PlayerSessionEditViewModelToPlayerSessionUpdateCommandMapper.cs" />
     <Compile Include="Mapper\PlayerSession\PlayerSessionToJsonSessionDataMapper.cs" />
+    <Compile Include="Mapper\Player\PrivateMessageToPrivateMessageViewModelMapper.cs" />
     <Compile Include="Mapper\Player\JobToJobViewModelMapper.cs" />
     <Compile Include="Mapper\Player\PlayerSkinToPlayerSkinViewModelMapper.cs" />
     <Compile Include="Mapper\Player\PlayerToPlayerProfileViewModelMapper.cs" />
@@ -340,7 +341,7 @@
     <Compile Include="Models\Player\UserRoleViewModel.cs" />
     <Compile Include="Models\Player\RoleViewModel.cs" />
     <Compile Include="Models\Player\UserSkinViewModel.cs" />
-    <Compile Include="Models\PrivateMessageViewModel.cs" />
+    <Compile Include="Models\PrivateMessage\PrivateMessageViewModel.cs" />
     <Compile Include="Models\Rule\RuleViewModel.cs" />
     <Compile Include="Models\Rule\RulePointViewModel.cs" />
     <Compile Include="Models\Player\JobViewModel.cs" />
@@ -547,6 +548,7 @@
     <Content Include="Views\Player\_JobsPartial.cshtml" />
     <Content Include="Views\Home\_LauncherWinReq.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Message\_InboxMessages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

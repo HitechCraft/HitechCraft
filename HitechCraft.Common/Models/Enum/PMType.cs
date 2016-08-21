@@ -2,6 +2,6 @@
 {
     public enum PMType
     {
-        New, Read
+        New, Read, Deleted
     }
 }

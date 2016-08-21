@@ -31,6 +31,8 @@
             mapping.Map(x => x.TimeCreate)
                 .Column("TimeCreate")
                 .Not.Nullable();
+
+            mapping.HasMany(x => x.PmPlayerBox);
         }
     }
 }

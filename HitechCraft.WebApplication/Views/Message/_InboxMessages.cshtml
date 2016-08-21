@@ -1,0 +1,19 @@
+﻿@using HitechCraft.Common.Models.Enum
+@model IEnumerable<HitechCraft.WebApplication.Models.PrivateMessageViewModel>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var message in Model)
+    {
+        <div>
+            <p>@message.Title</p>
+            <p>@message.Text</p>
+            <p>@message.Players.First(x => x.PlayerType == PMPlayerType.Author).PlayerName</p>
+            <p>@message.TimeCreate</p>
+        </div>
+    }
+}
+else
+{
+    <h3>Папка пуста</h3>
+}
