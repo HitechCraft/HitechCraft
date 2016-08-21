@@ -1,19 +1,15 @@
-using System;
-using System.Web;
-using System.Web.Mvc;
-using HitechCraft.GameLauncherAPI;
-using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(HitechCraft.GameLauncherAPI.App_Start.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(HitechCraft.GameLauncherAPI.App_Start.NinjectWebCommon), "Stop")]
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
-
-namespace HitechCraft.GameLauncherAPI
+namespace HitechCraft.GameLauncherAPI.App_Start
 {
-    #region Using Directives
+    using System;
+    using System.Web;
 
-    
+    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
-    #endregion
+    using global::Ninject;
+    using global::Ninject.Web.Common;
 
     public static class NinjectWebCommon 
     {
@@ -65,7 +61,6 @@ namespace HitechCraft.GameLauncherAPI
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }        
     }
 }
