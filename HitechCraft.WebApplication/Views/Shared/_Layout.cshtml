@@ -35,8 +35,8 @@
         @if (ViewBag.NewMessages != null && ViewBag.NewMessages > 0)
         {
             <text>
-            growlWarning("У вас " + @ViewBag.NewMessages + " новых сообщения! <a href='@Url.Action("Index", "Message")'>Перейти</a>", "Оповещение");
-            newMessageSound();
+                growlWarning("У вас есть непрочитанные сообщения! <a href='@Url.Action("Index", "Message")'>Перейти в ЛС</a>", "Оповещение");
+                newMessageSound();
             </text>
         }
     });
