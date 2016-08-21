@@ -10,13 +10,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
-      <publishTime>08/21/2016 10:03:36</publishTime>
+      <publishTime>08/21/2016 12:18:43</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>02/22/2013 08:43:40</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
-      <publishTime>08/21/2016 10:03:36</publishTime>
+      <publishTime>08/21/2016 12:18:43</publishTime>
     </File>
     <File Include="bin/AutoMapper.dll">
       <publishTime>10/26/2015 21:51:50</publishTime>
@@ -31,16 +31,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/07/2015 00:34:24</publishTime>
     </File>
     <File Include="bin/HitechCraft.BL.dll">
-      <publishTime>08/21/2016 12:16:16</publishTime>
+      <publishTime>08/21/2016 12:57:59</publishTime>
     </File>
     <File Include="bin/HitechCraft.Common.dll">
       <publishTime>08/21/2016 12:16:15</publishTime>
     </File>
     <File Include="bin/HitechCraft.DAL.dll">
-      <publishTime>08/21/2016 12:16:16</publishTime>
+      <publishTime>08/21/2016 12:57:58</publishTime>
     </File>
     <File Include="bin/HitechCraft.GameLauncherAPI.dll">
-      <publishTime>08/21/2016 12:16:22</publishTime>
+      <publishTime>08/21/2016 13:21:39</publishTime>
     </File>
     <File Include="bin/Iesi.Collections.dll">
       <publishTime>10/27/2012 18:50:12</publishTime>
@@ -256,13 +256,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/17/2013 17:03:52</publishTime>
     </File>
     <File Include="Global.asax">
-      <publishTime>08/21/2016 10:10:18</publishTime>
+      <publishTime>08/21/2016 12:18:43</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>08/21/2016 12:05:05</publishTime>
+      <publishTime>08/21/2016 12:18:44</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/21/2016 12:16:22</publishTime>
+      <publishTime>08/21/2016 12:58:08</publishTime>
     </File>
   </ItemGroup>
 </Project>

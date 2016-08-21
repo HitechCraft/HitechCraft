@@ -71,6 +71,7 @@ namespace HitechCraft.GameLauncherAPI.Ninject
             
             _kernel.Bind(typeof(IProjector<PlayerSkin, PlayerSkinModel>)).To(typeof(PlayerSkinToPlayerSkinModelMapper));
             _kernel.Bind(typeof(IProjector<PlayerSession, PlayerSessionModel>)).To(typeof(PlayerSessionToPlayerSessionModelMapper));
+            _kernel.Bind(typeof(IProjector<PlayerSession, JsonSessionData>)).To(typeof(PlayerSessionToJsonSessionDataMapper));
             _kernel.Bind(typeof(IProjector<PlayerSessionModel, PlayerSessionUpdateCommand>)).To(typeof(PlayerSessionModelToPlayerSessionUpdateCommandMapper));
             _kernel.Bind(typeof(IProjector<News, JsonLauncherNews>)).To(typeof(NewsToJsonLauncherNewsMapper));
 

@@ -235,6 +235,7 @@
     <Compile Include="Managers\LauncherPathManager.cs" />
     <Compile Include="Mapper\BaseMapper.cs" />
     <Compile Include="Mapper\CommonMapper.cs" />
+    <Compile Include="Mapper\PlayerSessionModelToPlayerSessionUpdateCommandMapper.cs" />
     <Compile Include="Mapper\NewsToJsonLauncherNewsMapper.cs" />
     <Compile Include="Mapper\PlayerSessionToJsonSessionDataMapper.cs" />
     <Compile Include="Mapper\PlayerSessionToPlayerSessionModelMapper.cs" />
