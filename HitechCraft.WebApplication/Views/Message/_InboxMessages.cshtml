@@ -8,10 +8,16 @@
     {
         <div class="message-box">
             <div class="message-player">
-                <img src="@Url.Action("GetSkinImage", "Player", new {playerName = message.Players.First(x => x.PlayerType == PMPlayerType.Author).PlayerName})" id="skin-image@(message.Id)" class="avaSkin@(message.Id)" hidden=""/>
+                <img src="@Url.Action("GetSkinImage", "Player", new {playerName = message.Players.First(x => x.PlayerType == PMPlayerType.Author).PlayerName})" id="skin-image@(message.Id)" class="avaSkin@(message.Id)" hidden="" />
             </div>
             <div class="message-content">
-                <p class="message-title">@message.Title</p>
+                <p class="message-title">
+                    @message.Title 
+                    @if (message.Players.First(x => x.PlayerType == PMPlayerType.Recipient).MessageType == PMType.New)
+                    {
+                        <span class="alert alert-warning message-inbox-new" style="margin-top: 4px;" title="Новое сообщения!">New</span>
+                    }
+                </p>
                 <p>@message.Text.Limit(120)</p>
                 <p class="message-player-sign">@message.Players.First(x => x.PlayerType == PMPlayerType.Author).PlayerName</p>
                 <div class="clear"></div>
@@ -24,7 +30,7 @@
         </div>
 
         <script type="text/javascript">
-            $(document).ready(function() {
+            $(document).ready(function () {
                 renderMCSkins('avaSkin@(message.Id)', 8);
                 $('.avaSkin@(message.Id)').css('height', '128px');
             });
