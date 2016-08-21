@@ -13,7 +13,9 @@
         public ActionResult Index(string refer="")
         {
             Session["ReferalId"] = refer;
-            
+
+            ViewBag.NewMessages = this.NewMessagesCount;
+
             return View();
         }
 

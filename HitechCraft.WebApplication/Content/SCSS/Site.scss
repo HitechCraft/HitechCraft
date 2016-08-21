@@ -1324,6 +1324,12 @@ footer {
 }
 
 .alert {
+
+    a{
+        font-weight: bold;
+        color: #ff0000;
+    }
+
     &-beta {
         font-size: 20px;
         padding: 5px 20px;

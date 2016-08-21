@@ -992,6 +992,10 @@ footer {
   .req p strong {
     color: #161f28; }
 
+.alert a {
+  font-weight: bold;
+  color: #ff0000; }
+
 .alert-beta {
   font-size: 20px;
   padding: 5px 20px; }

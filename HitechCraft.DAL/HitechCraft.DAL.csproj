@@ -129,6 +129,7 @@
     <Compile Include="Repository\Specification\Player\AuthLogByPlayerNameSpec.cs" />
     <Compile Include="Repository\Specification\Player\PlayerSkinByUserNameSpec.cs" />
     <Compile Include="Repository\Specification\Player\PlayerByLoginSpec.cs" />
+    <Compile Include="Repository\Specification\PrivateMessage\PrivateMessageByTypeSpec.cs" />
     <Compile Include="Repository\Specification\PrivateMessage\PrivateMessageByRecipientSpec.cs" />
     <Compile Include="Repository\Specification\PrivateMessage\PrivateMessageByAuthorSpec.cs" />
     <Compile Include="Repository\Specification\Rule\RulePointByNameSpec.cs" />

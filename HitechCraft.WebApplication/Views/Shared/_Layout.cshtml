@@ -30,7 +30,17 @@
         @Html.Partial("_Footer")
     </div>
 <script type="text/javascript">
-    
+
+    $(document).on('ready', function() {
+        @if (ViewBag.NewMessages != null && ViewBag.NewMessages > 0)
+        {
+            <text>
+            growlWarning("У вас " + @ViewBag.NewMessages + " новых сообщения! <a href='@Url.Action("Index", "Message")'>Перейти</a>", "Оповещение");
+            newMessageSound();
+            </text>
+        }
+    });
+
     $.fn.textWidth = function () {
         var text = $(this).html();
         $(this).html('<span>' + text + '</span>');
@@ -60,6 +70,18 @@
         $('.ajax-bg').hide();
         $('body').css('overflow', 'visible');
     });
+
+    function newMessageSound() {
+
+        var audioElement = document.createElement('audio');
+        audioElement.setAttribute('src', './Content/Sounds/newMessage.mp3');
+        audioElement.setAttribute('autoplay', 'autoplay');
+        $.get();
+
+        audioElement.addEventListener("load", function () {
+            audioElement.play();
+        }, true);
+    };
 
     //$('.dropdown-toggle').on('mouseenter', function () {
     //    $(this).dropdown('toggle');

@@ -18,9 +18,11 @@ namespace HitechCraft.WebApplication.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.NewMessagesCount = this.NewMessagesCount;
+
             return View();
         }
-
+        
         [HttpGet]
         public ActionResult GetInboxMessages()
         {
@@ -44,7 +46,7 @@ namespace HitechCraft.WebApplication.Controllers
                     Projector = this.Container.Resolve<IProjector<PrivateMessage, PrivateMessageViewModel>>()
                 });
 
-            return PartialView("_InboxMessages", messages);
+            return PartialView("_SendedMessages", messages);
         }
     }
 }

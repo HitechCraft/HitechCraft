@@ -381,6 +381,7 @@
     <Content Include="Content\Images\kits\ie_kit_ultra.png" />
     <Content Include="Content\Images\kits\ie_kit_vip.png" />
     <Content Include="Content\Images\mailbg.jpg" />
+    <Content Include="Content\Sounds\newMessage.mp3" />
     <Content Include="favicon.ico" />
     <Content Include="Content\Images\game-start.png" />
     <Content Include="Content\Images\launcher-linux.png" />
@@ -401,6 +402,7 @@
     <Content Include="Content\jquery.jgrowl.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.min.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="robots.txt" />
@@ -424,6 +426,12 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\arbat.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -550,6 +558,7 @@
     <Content Include="Views\Home\_LauncherWinReq.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\Message\_InboxMessages.cshtml" />
+    <Content Include="Views\Message\_SendedMessages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

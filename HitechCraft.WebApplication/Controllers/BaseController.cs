@@ -1,4 +1,8 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Common.Models.Enum;
+using HitechCraft.DAL.Repository.Specification;
+using HitechCraft.WebApplication.Models;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -22,6 +26,8 @@
         private Player _currentPlayer;
 
         private Currency _currentCurrency;
+
+        private int? _newMessagesCount;
 
         #endregion
 
@@ -57,6 +63,19 @@
             }
         }
 
+        public int NewMessagesCount
+        {
+            get
+            {
+                if (this._newMessagesCount == null)
+                {
+                    this._newMessagesCount = this.GetNewMessagesCount();
+                }
+
+                return this._newMessagesCount.Value;
+            }
+        }
+        
         public BaseController(IContainer container)
         {
             this.Container = container;
@@ -104,6 +123,16 @@
             {
                 return null;
             }
+        }
+
+        private int GetNewMessagesCount()
+        {
+            return new EntityListQueryHandler<PrivateMessage, PrivateMessageViewModel>(this.Container)
+                .Handle(new EntityListQuery<PrivateMessage, PrivateMessageViewModel>()
+                {
+                    Specification = new RecipientPrivateMessageByTypeSpec(this.Player.Name, PMType.New),
+                    Projector = this.Container.Resolve<IProjector<PrivateMessage, PrivateMessageViewModel>>()
+                }).Count;
         }
     }
 }

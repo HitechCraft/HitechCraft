@@ -11,7 +11,11 @@
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
                 <a href="#inbox" aria-controls="home" role="tab" data-toggle="tab">
-                    Входящие <span class="alert alert-warning message-inbox-new" title="Новые сообщения!">3</span>
+                    Входящие
+                    @if (ViewBag.NewMessagesCount != null && ViewBag.NewMessagesCount > 0)
+                    {
+                        <span class="alert alert-warning message-inbox-new" title="Новые сообщения!">@ViewBag.NewMessagesCount</span>
+                    }
                 </a>
             </li>
             <li role="presentation">
@@ -25,8 +29,8 @@
     <div class="col-md-8 message-list">
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="inbox"></div>
-            <div role="tabpanel" class="tab-pane" id="sended"></div>
+            <div role="tabpanel" class="tab-pane active" id="inbox">@Html.Action("GetInboxMessages")</div>
+            <div role="tabpanel" class="tab-pane" id="sended">@Html.Action("GetSendedMessages")</div>
         </div>
     </div>
 </div>
@@ -36,5 +40,11 @@
         function(data) {
             $('#inbox').html('');
             $('#inbox').html(data);
+        });
+
+    $.get('@Url.Action("GetSendedMessages")',
+        function (data) {
+            $('#sended').html('');
+            $('#sended').html(data);
         });
 </script>

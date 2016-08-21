@@ -4,32 +4,31 @@ var options = {
     closer: false
 }
 
-function growlInfo (message) {
-    this.options.header = 'Инфо';
+function growlInfo(message, header) {
+    this.options.header = header != null ? header : 'Инфо';
     this.options.group = 'alert alert-info';
 
     $.jGrowl(message, this.options);
 }
 
-function growlSuccess (message) {
+function growlSuccess(message, header) {
 
-    this.options.header = 'Успешно';
+    this.options.header = header != null ? header : 'Успешно';
     this.options.group = 'alert alert-success';
 
     $.jGrowl(message, options);
 }
 
-function growlWarning (message) {
-
-    this.options.header = 'Предупреждение';
+function growlWarning (message, header) {
+    this.options.header = header != null ? header : 'Предупреждение';
     this.options.group = 'alert alert-warning';
 
     $.jGrowl(message, options);
 }
 
-function growlError (message) {
+function growlError(message, header) {
 
-    this.options.header = 'Ошибка';
+    this.options.header = header != null ? header : 'Ошибка';
     this.options.group = 'alert alert-danger';
 
     $.jGrowl(message, options);
