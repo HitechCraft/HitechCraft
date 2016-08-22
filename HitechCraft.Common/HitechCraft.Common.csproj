@@ -109,6 +109,7 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Specification\BaseSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\AndSpecification.cs" />
+    <Compile Include="Repository\Specification\Composite\NotSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\OrSpecification.cs" />
     <Compile Include="Repository\Specification\ISpecification.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />

@@ -29,5 +29,10 @@
         {
             return new OrSpecification<TEntity>(specLeft, specRight);
         }
+
+        public static ISpecification<TEntity> operator !(BaseSpecification<TEntity> wrapped)
+        {
+            return new NotSpecification<TEntity>(wrapped);
+        }
     }
 }
