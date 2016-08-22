@@ -1,17 +1,28 @@
-﻿using System;
-using System.Linq;
-using HitechCraft.BL.CQRS.Command;
-using HitechCraft.Common.Models.Enum;
-using HitechCraft.Common.Projector;
-using HitechCraft.DAL.Repository.Specification;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
+    #region Using Directives
+
     using System.Web.Mvc;
     using BL.CQRS.Query;
     using Common.DI;
     using DAL.Domain;
     using Models;
+    using System;
+    using System.Linq;
+    using BL.CQRS.Command;
+    using Common.Models.Enum;
+    using Common.Projector;
+    using DAL.Repository.Specification;
+
+    #endregion
+
+    //TODO beta2.0: отправка сообщений
+    //TODO beta2.0: ответ на входящие сообщения
+    //TODO beta2.0: операции с отправленными сообщениями
+    //TODO beta2.0: удаление сообещний прямо со страницы с подробным текстом
+
+    //TODO release2.1: перессыл сообщения текущему/другому пользователям
+    //TODO release2.1: отправка сообщений нескольких пользователям (массовая рассылка)
 
     [Authorize]
     public class MessageController : BaseController
