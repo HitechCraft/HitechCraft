@@ -42,7 +42,9 @@
         <div class="panel-heading">Мониторинг</div>
         <div class="panel-body">
             <div class="server">
-                <div id="servers"></div>
+                <div id="servers">
+                    @Html.Action("MonitoringList", "Server")
+                </div>
             </div>
         </div>
     </div>
@@ -84,17 +86,6 @@
 <script src="https://static.tsviewer.com/short_expire/js/ts3viewer_loader.js"></script>
 
 <script type="text/javascript">
-
-    $(document)
-        .ready(function () {
-            window.ajaxLoaderText = "Загрузка серверов...";
-
-            $.get("@Url.Action("MonitoringList", "Server")")
-                .done(function (data) {
-                    $('#servers').html('');
-                    $('#servers').html(data);
-                });
-        });
 
     //val offline is -1
     function setProgress(objclass, val, maxval) {

@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `PMPlayerBox` (
 CREATE TABLE IF NOT EXISTS `PrivateMessage` (
   `Id` int(11) NOT NULL,
   `Title` varchar(128) NOT NULL,
-  `Text` varchar(128) NOT NULL,
+  `Text` varchar(1000) NOT NULL,
   `TimeCreate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

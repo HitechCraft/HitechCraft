@@ -1372,6 +1372,11 @@ footer {
         border: 1px solid #d6d6d6;
         padding: 8px 13px 10px 3px;
         margin-bottom: 20px;
+        cursor: pointer;
+
+        &:hover {
+            border: 1px solid #2c3e50;
+        }
     }
 
     &-content {

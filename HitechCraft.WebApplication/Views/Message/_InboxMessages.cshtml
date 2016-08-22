@@ -6,7 +6,7 @@
 {
     foreach (var message in Model)
     {
-        <div class="message-box">
+        <div onclick="javascript:LoadInboxMessage(@message.Id);" class="message-box">
             <div class="message-player">
                 <img src="@Url.Action("GetSkinImage", "Player", new {playerName = message.Players.First(x => x.PlayerType == PMPlayerType.Author).PlayerName})" id="skin-image@(message.Id)" class="avaSkin@(message.Id)" hidden="" />
             </div>
@@ -40,3 +40,17 @@ else
 {
     <h3>Папка пуста</h3>
 }
+
+<script type="text/javascript">
+    function LoadInboxMessage(id) {
+        $.get('@Url.Action("GetInboxMessage")', { messageId: parseInt(id) },
+        function (data) {
+            if (data !== "NO") {
+                $('#inbox').html('');
+                $('#inbox').html(data);
+            } else {
+                growlError("Это сообщение недоступно вам во вкладке Входящие!");
+            }
+        });
+    }
+</script>

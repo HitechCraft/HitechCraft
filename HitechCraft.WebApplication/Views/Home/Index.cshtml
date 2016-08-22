@@ -19,15 +19,13 @@
         <h1 class="news-title">
             Новости проекта
         </h1>
-        <div id="news"></div>
+        <div id="news">
+            @Html.Action("NewsPartialList", "News", new { page = 1 })
+        </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        LoadNews(1);
-    });
-
     function FilterNews(currentPage) {
         LoadNews(currentPage);
     }

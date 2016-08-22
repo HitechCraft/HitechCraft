@@ -10,7 +10,7 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
-                <a href="#inbox" aria-controls="home" role="tab" data-toggle="tab">
+                <a href="#inbox" onclick="javascript:LoadInbox();" aria-controls="home" role="tab" data-toggle="tab">
                     Входящие
                     @if (ViewBag.NewMessagesCount != null && ViewBag.NewMessagesCount > 0)
                     {
@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li role="presentation">
-                <a href="#sended" aria-controls="profile" role="tab" data-toggle="tab">
+                <a href="#sended" onclick="javascript:LoadSended();" aria-controls="profile" role="tab" data-toggle="tab">
                     Отправленные
                 </a>
             </li>
@@ -36,15 +36,20 @@
 </div>
 
 <script type="text/javascript">
-    $.get('@Url.Action("GetInboxMessages")',
-        function(data) {
+
+    function LoadInbox() {
+        $.get('@Url.Action("GetInboxMessages")',
+        function (data) {
             $('#inbox').html('');
             $('#inbox').html(data);
         });
+    }
 
-    $.get('@Url.Action("GetSendedMessages")',
-        function (data) {
-            $('#sended').html('');
-            $('#sended').html(data);
-        });
+    function LoadSended() {
+        $.get('@Url.Action("GetSendedMessages")',
+            function (data) {
+                $('#sended').html('');
+                $('#sended').html(data);
+            });
+    }
 </script>
