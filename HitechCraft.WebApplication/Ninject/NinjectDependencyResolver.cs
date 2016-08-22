@@ -110,8 +110,9 @@ namespace HitechCraft.WebApplication.Ninject
             this._kernel.Bind(typeof(ICommandHandler<SkinCreateCommand>)).To(typeof(SkinCreateCommandHandler));
 
             this._kernel.Bind(typeof(ICommandHandler<SkinInstallCommand>)).To(typeof(SkinInstallCommandHandler));
-
+            
             this._kernel.Bind(typeof(ICommandHandler<PMInboxReadCommand>)).To(typeof(PMInboxReadCommandHandler));
+            this._kernel.Bind(typeof(ICommandHandler<PMInboxRemoveCommand>)).To(typeof(PMInboxRemoveCommandHandler));
 
             #endregion
 

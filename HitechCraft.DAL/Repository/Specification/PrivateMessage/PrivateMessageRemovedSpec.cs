@@ -11,30 +11,28 @@
 
     #endregion
 
-    public class RecipientPrivateMessageByTypeSpec : ISpecification<PrivateMessage>
+    public class PrivateMessageRemovedSpec : BaseSpecification<PrivateMessage>
     {
         #region Private Fields
 
         private readonly string _playerName;
-        private readonly PMType _type;
 
         #endregion
 
         #region Constructor
 
-        public RecipientPrivateMessageByTypeSpec(string playerName, PMType type)
+        public PrivateMessageRemovedSpec(string playerName)
         {
             this._playerName = playerName;
-            this._type = type;
         }
 
         #endregion
 
         #region Expression
 
-        public Expression<Func<PrivateMessage, bool>> IsSatisfiedBy()
+        public override Expression<Func<PrivateMessage, bool>> IsSatisfiedBy()
         {
-            return privateMessage => privateMessage.PmPlayerBox.Any(x => x.Player.Name == _playerName && x.PlayerType == PMPlayerType.Recipient && x.PmType == this._type);
+            return privateMessage => privateMessage.PmPlayerBox.Any(x => x.Player.Name == _playerName && x.PmType == PMType.Deleted);
         }
 
         #endregion

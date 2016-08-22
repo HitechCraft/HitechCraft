@@ -1,9 +1,4 @@
-﻿using System.Linq;
-using System.Text;
-using HitechCraft.Common.Models.Enum;
-using HitechCraft.DAL.Domain.Extentions;
-
-namespace HitechCraft.DAL.Repository.Specification
+﻿namespace HitechCraft.DAL.Repository.Specification
 {
     #region Using Directives
 
@@ -11,10 +6,12 @@ namespace HitechCraft.DAL.Repository.Specification
     using System.Linq.Expressions;
     using Common.Repository.Specification;
     using Domain;
+    using System.Linq;
+    using Common.Models.Enum;
 
     #endregion
 
-    public class PrivateMessageByRecipientSpec : ISpecification<PrivateMessage>
+    public class PrivateMessageByRecipientSpec : BaseSpecification<PrivateMessage>
     {
         #region Private Fields
 
@@ -33,7 +30,7 @@ namespace HitechCraft.DAL.Repository.Specification
 
         #region Expression
 
-        public Expression<Func<PrivateMessage, bool>> IsSatisfiedBy()
+        public override Expression<Func<PrivateMessage, bool>> IsSatisfiedBy()
         {
             return privateMessage => privateMessage.PmPlayerBox.Any(x => x.Player.Name == _playerName && x.PlayerType == PMPlayerType.Recipient);
         }

@@ -560,6 +560,7 @@
     <Content Include="Views\Message\_InboxMessages.cshtml" />
     <Content Include="Views\Message\_SendedMessages.cshtml" />
     <Content Include="Views\Message\_Message.cshtml" />
+    <Content Include="Views\Message\_MessageOptions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

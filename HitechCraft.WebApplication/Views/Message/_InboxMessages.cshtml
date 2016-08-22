@@ -4,15 +4,21 @@
 
 @if (Model != null && Model.Any())
 {
+    <div id="message-options">
+        <div class="message-options">
+            <h3>Выберите сообщение</h3>
+        </div>
+    </div>
+
     foreach (var message in Model)
     {
-        <div onclick="javascript:LoadInboxMessage(@message.Id);" class="message-box">
+        <div onclick="javascript:LoadInboxMessageOptions(@message.Id);" class="message-box">
             <div class="message-player">
                 <img src="@Url.Action("GetSkinImage", "Player", new {playerName = message.Players.First(x => x.PlayerType == PMPlayerType.Author).PlayerName})" id="skin-image@(message.Id)" class="avaSkin@(message.Id)" hidden="" />
             </div>
             <div class="message-content">
                 <p class="message-title">
-                    @message.Title 
+                    @message.Title
                     @if (message.Players.First(x => x.PlayerType == PMPlayerType.Recipient).MessageType == PMType.New)
                     {
                         <span class="alert alert-warning message-inbox-new" style="margin-top: 4px;" title="Новое сообщения!">New</span>
@@ -59,6 +65,14 @@ else
             });
     }
 
+    function LoadInboxMessageOptions(id) {
+        $.get('@Url.Action("GetMessageOptions")', { messageId: parseInt(id) },
+        function (data) {
+            $('#message-options').html('');
+            $('#message-options').html(data);
+        });
+    }
+
     function LoadInboxMessage(id) {
         $.get('@Url.Action("GetInboxMessage")', { messageId: parseInt(id) },
         function (data) {
@@ -66,9 +80,24 @@ else
                 GetNewMessagesCount();
                 $('#inbox').html('');
                 $('#inbox').html(data);
+                $('#message-options').html('');
             } else {
-                growlError("Это сообщение недоступно вам во вкладке Входящие!");
+                growlError("Это сообщение недоступно!");
             }
         });
+    }
+
+    function DeleteInboxMessage(id) {
+        if (confirm("Вы действительно хотите удалить сообщение?")) {
+            $.post('@Url.Action("DeleteMessage")', { messageId: parseInt(id) },
+                function (data) {
+                    if (data === "OK") {
+                        GetNewMessagesCount();
+                        LoadInbox();
+                    } else {
+                        growlError(data);
+                    }
+                });
+        }
     }
 </script>

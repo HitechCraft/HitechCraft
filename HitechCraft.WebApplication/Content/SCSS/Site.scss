@@ -1377,11 +1377,18 @@ footer {
         &:hover {
             border: 1px solid #2c3e50;
         }
+
+        &-full {
+            margin-top: 20px;
+            border: 1px solid #d6d6d6;
+            padding: 12px 20px 24px 6px;
+        }
     }
 
     &-content {
         float: left;
         width: 77%;
+        padding-left: 15px;
     }
 
     &-title {
@@ -1400,24 +1407,55 @@ footer {
         }
     }
 
+    &-options {
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        padding: 12px;
+        margin-bottom: 20px;
+
+        h3 {
+            margin: 0;
+            text-align: center;
+        }
+    }
+
     &-types {
         ul {
+            border-bottom: none !important;
+
             li {
                 float: none;
                 font-weight: bold;
                 font-size: 20px;
 
                 a {
-                    border-color: #fff !important;
+                    margin-bottom: 20px;
+                    border: 1px solid #d6d6d6;
+                    border-radius: 4px !important;
+
+                    &:hover {
+                        border-color: #fff !important;
+                    }
                 }
             }
 
             li.active {
-                a:first-child {
+                a {
                     color: #fff;
                     background: #2c3e50;
                     border-color: #2c3e50 !important;
                     border-radius: 4px;
+                    cursor: pointer !important;
+
+                    &:hover {
+                        color: #fff;
+                        background: #2c3e50;
+                    }
+
+                    &:focus {
+                        color: #fff;
+                        background: #2c3e50;
+                    }
                 }
             }
         }

@@ -1,9 +1,4 @@
-﻿using System.Linq;
-using System.Text;
-using HitechCraft.Common.Models.Enum;
-using HitechCraft.DAL.Domain.Extentions;
-
-namespace HitechCraft.DAL.Repository.Specification
+﻿namespace HitechCraft.DAL.Repository.Specification
 {
     #region Using Directives
 
@@ -11,6 +6,8 @@ namespace HitechCraft.DAL.Repository.Specification
     using System.Linq.Expressions;
     using Common.Repository.Specification;
     using Domain;
+    using System.Linq;
+    using Common.Models.Enum;
 
     #endregion
 
