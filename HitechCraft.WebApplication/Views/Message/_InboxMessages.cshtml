@@ -12,7 +12,7 @@
 
     foreach (var message in Model)
     {
-        <div onclick="javascript:LoadInboxMessageOptions(@message.Id);" class="message-box">
+        <div id="message-@message.Id" onclick="javascript:LoadInboxMessageOptions(@message.Id);" class="message-box">
             <div class="message-player">
                 <img src="@Url.Action("GetSkinImage", "Player", new {playerName = message.Players.First(x => x.PlayerType == PMPlayerType.Author).PlayerName})" id="skin-image@(message.Id)" class="avaSkin@(message.Id)" hidden="" />
             </div>
@@ -68,10 +68,17 @@ else
     }
 
     function LoadInboxMessageOptions(id) {
+
+        if (window.currentSelection !== undefined) {
+            $(window.currentSelection).removeClass('message-selected');
+        }
+
         $.get('@Url.Action("GetMessageOptions")', { messageId: parseInt(id) },
         function (data) {
             $('#message-options').html('');
             $('#message-options').html(data);
+            window.currentSelection = '#message-' + id;
+            $(window.currentSelection).addClass('message-selected');
         });
     }
 

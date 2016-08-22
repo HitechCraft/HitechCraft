@@ -1419,6 +1419,11 @@ footer {
         }
     }
 
+    &-selected {
+        border: 1px solid #3fb618 !important;
+        background-color: #caeabf;
+    }
+
     &-types {
         ul {
             border-bottom: none !important;

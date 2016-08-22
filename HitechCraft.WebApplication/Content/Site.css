@@ -1052,6 +1052,9 @@ footer {
     .message-options h3 {
       margin: 0;
       text-align: center; }
+  .message-selected {
+    border: 1px solid #3fb618 !important;
+    background-color: #caeabf; }
   .message-types ul {
     border-bottom: none !important; }
     .message-types ul li {

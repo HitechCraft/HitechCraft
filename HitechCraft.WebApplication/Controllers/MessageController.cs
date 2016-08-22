@@ -46,7 +46,7 @@ namespace HitechCraft.WebApplication.Controllers
             var messages = new EntityListQueryHandler<PrivateMessage, PrivateMessageViewModel>(this.Container)
                 .Handle(new EntityListQuery<PrivateMessage, PrivateMessageViewModel>()
                 {
-                    Specification = new PrivateMessageByAuthorSpec(this.Player.Name),
+                    Specification = !new PrivateMessageRemovedSpec(this.Player.Name) & new PrivateMessageByAuthorSpec(this.Player.Name),
                     Projector = this.Container.Resolve<IProjector<PrivateMessage, PrivateMessageViewModel>>()
                 });
 

@@ -11,7 +11,7 @@
 
     #endregion
 
-    public class PrivateMessageByAuthorSpec : ISpecification<PrivateMessage>
+    public class PrivateMessageByAuthorSpec : BaseSpecification<PrivateMessage>
     {
         #region Private Fields
 
@@ -30,7 +30,7 @@
 
         #region Expression
 
-        public Expression<Func<PrivateMessage, bool>> IsSatisfiedBy()
+        public override Expression<Func<PrivateMessage, bool>> IsSatisfiedBy()
         {
             return privateMessage => privateMessage.PmPlayerBox.Any(x => x.Player.Name == _playerName && x.PlayerType == PMPlayerType.Author);
         }
