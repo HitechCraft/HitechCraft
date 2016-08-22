@@ -76,6 +76,8 @@
     <Compile Include="CQRS\Command\PlayerSession\PlayerSessionUpdateCommand.cs" />
     <Compile Include="CQRS\Command\PlayerSession\PlayerSessionCreateCommandHandler.cs" />
     <Compile Include="CQRS\Command\PlayerSession\PlayerSessionUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\PrivateMessage\PMInboxReadCommand.cs" />
+    <Compile Include="CQRS\Command\PrivateMessage\PMInboxReadCommandHandler.cs" />
     <Compile Include="CQRS\Command\Rule\RulePointRemoveCommand.cs" />
     <Compile Include="CQRS\Command\Rule\RuleRemoveCommand.cs" />
     <Compile Include="CQRS\Command\Rule\RulePointRemoveCommandHandler.cs" />

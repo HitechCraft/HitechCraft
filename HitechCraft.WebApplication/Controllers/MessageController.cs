@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using HitechCraft.BL.CQRS.Command;
 using HitechCraft.Common.Models.Enum;
 using HitechCraft.Common.Projector;
 using HitechCraft.DAL.Repository.Specification;
@@ -60,17 +61,33 @@ namespace HitechCraft.WebApplication.Controllers
                     Id = messageId,
                     Projector = this.Container.Resolve<IProjector<PrivateMessage, PrivateMessageViewModel>>()
                 });
-
+            
             //проверка на внедрение в html Id недоступного входяшего сообщения при запросе
             if (!message.Players.Any(x => x.PlayerName == this.Player.Name && x.PlayerType == PMPlayerType.Recipient))
                 return this.Content("NO");
+
+            if (
+                message.Players.First(x => x.PlayerName == this.Player.Name && x.PlayerType == PMPlayerType.Recipient)
+                    .MessageType == PMType.New)
+            {
+                this.CommandExecutor.Execute(new PMInboxReadCommand()
+                {
+                    PMId = messageId,
+                    PlayerName = this.Player.Name
+                });
+            }
 
             return PartialView("_Message", message);
         }
 
         public int GetNewMessagesCount()
         {
-            return this.NewMessagesCount;
+            return new EntityListQueryHandler<PrivateMessage, PrivateMessageViewModel>(this.Container)
+                .Handle(new EntityListQuery<PrivateMessage, PrivateMessageViewModel>()
+                {
+                    Specification = new RecipientPrivateMessageByTypeSpec(this.Player.Name, PMType.New),
+                    Projector = this.Container.Resolve<IProjector<PrivateMessage, PrivateMessageViewModel>>()
+                }).Count; ;
         }
     }
 }
