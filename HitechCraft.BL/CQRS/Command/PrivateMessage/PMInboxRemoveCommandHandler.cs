@@ -25,6 +25,8 @@ namespace HitechCraft.BL.CQRS.Command
 
             var pm = pmRep.GetEntity(command.PMId);
 
+            if(pm == null) throw new Exception("Данного сообщения не существует!");
+
             if (!pm.PmPlayerBox.Any(x => x.Player.Name == command.PlayerName && x.PlayerType == PMPlayerType.Recipient))
                 throw new Exception("У вас нет доступа к данному сообщению!");
             
