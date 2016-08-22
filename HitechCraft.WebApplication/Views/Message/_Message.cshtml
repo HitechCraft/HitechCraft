@@ -10,11 +10,11 @@
         <p class="message-title">
             @Model.Title
         </p>
-        <p>@Model.Text</p>
+        <p class="message-text">@Model.Text</p>
         <p class="message-player-sign">@Model.Players.First(x => x.PlayerType == PMPlayerType.Author).PlayerName</p>
         <div class="clear"></div>
         <div class="message-footer">
-            <p>@Model.TimeCreate</p>
+            <p>Дата отправки: @Model.TimeCreate</p>
             <div class="clear"></div>
         </div>
     </div>

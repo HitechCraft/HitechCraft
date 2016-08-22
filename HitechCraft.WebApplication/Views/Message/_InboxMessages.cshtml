@@ -18,7 +18,7 @@
                         <span class="alert alert-warning message-inbox-new" style="margin-top: 4px;" title="Новое сообщения!">New</span>
                     }
                 </p>
-                <p>@message.Text.Limit(120)</p>
+                <p>@message.Text.Limit(120)...</p>
                 <p class="message-player-sign">@message.Players.First(x => x.PlayerType == PMPlayerType.Author).PlayerName</p>
                 <div class="clear"></div>
                 <div class="message-footer">
@@ -42,10 +42,28 @@ else
 }
 
 <script type="text/javascript">
+
+    function GetNewMessagesCount() {
+        $.get('@Url.Action("GetNewMessagesCount")',
+            function (data) {
+                if (parseInt(data) > 0) {
+                    $('#new-messages').html('');
+                    $('#new-messages').html(data);
+
+                    $('#new-inbox-messages').html('');
+                    $('#new-inbox-messages').html(data);
+                } else {
+                    $('#new-messages').css('display', 'none');
+                    $('#new-inbox-messages').css('display', 'none');
+                }
+            });
+    }
+
     function LoadInboxMessage(id) {
         $.get('@Url.Action("GetInboxMessage")', { messageId: parseInt(id) },
         function (data) {
             if (data !== "NO") {
+                GetNewMessagesCount();
                 $('#inbox').html('');
                 $('#inbox').html(data);
             } else {

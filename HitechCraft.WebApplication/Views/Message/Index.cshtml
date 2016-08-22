@@ -12,9 +12,9 @@
             <li role="presentation" class="active">
                 <a href="#inbox" onclick="javascript:LoadInbox();" aria-controls="home" role="tab" data-toggle="tab">
                     Входящие
-                    @if (ViewBag.NewMessagesCount != null && ViewBag.NewMessagesCount > 0)
+                    @if (int.Parse(Html.Action("GetNewMessagesCount").ToString()) > 0)
                     {
-                        <span class="alert alert-warning message-inbox-new" id="new-messages" title="Новые сообщения!">@ViewBag.NewMessagesCount</span>
+                        <span class="alert alert-warning message-inbox-new" id="new-inbox-messages" title="Новые сообщения!">@Html.Action("GetNewMessagesCount")</span>
                     }
                 </a>
             </li>

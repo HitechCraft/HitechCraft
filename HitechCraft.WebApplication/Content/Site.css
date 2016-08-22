@@ -1033,6 +1033,9 @@ footer {
     width: 77%; }
   .message-title {
     font-size: 26px; }
+  .message-text {
+    text-align: justify;
+    line-height: 26px; }
   .message-footer p {
     padding-top: 14px;
     font-weight: bold; }
