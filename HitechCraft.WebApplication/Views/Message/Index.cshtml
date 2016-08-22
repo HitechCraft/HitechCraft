@@ -14,7 +14,7 @@
                     Входящие
                     @if (ViewBag.NewMessagesCount != null && ViewBag.NewMessagesCount > 0)
                     {
-                        <span class="alert alert-warning message-inbox-new" title="Новые сообщения!">@ViewBag.NewMessagesCount</span>
+                        <span class="alert alert-warning message-inbox-new" id="new-messages" title="Новые сообщения!">@ViewBag.NewMessagesCount</span>
                     }
                 </a>
             </li>

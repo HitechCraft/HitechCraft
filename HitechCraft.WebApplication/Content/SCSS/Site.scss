@@ -1325,7 +1325,7 @@ footer {
 
 .alert {
 
-    a{
+    a {
         font-weight: bold;
         color: #ff0000;
     }
@@ -1345,6 +1345,14 @@ footer {
             font-size: 18px;
             padding: 1px 22px;
             float: right;
+        }
+
+        &-nav {
+            font-size: 12px !important;
+            font-weight: bold;
+            padding: 2px 8px !important;
+            margin: 0 !important;
+            margin-left: 20px !important;
         }
     }
 

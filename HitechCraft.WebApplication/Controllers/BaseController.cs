@@ -63,19 +63,8 @@ namespace HitechCraft.WebApplication.Controllers
             }
         }
 
-        public int NewMessagesCount
-        {
-            get
-            {
-                if (this._newMessagesCount == null)
-                {
-                    this._newMessagesCount = this.GetNewMessagesCount();
-                }
+        public int NewMessagesCount => this.GetNewMessagesCount();
 
-                return this._newMessagesCount.Value;
-            }
-        }
-        
         public BaseController(IContainer container)
         {
             this.Container = container;

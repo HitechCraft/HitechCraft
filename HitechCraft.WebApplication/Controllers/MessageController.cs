@@ -48,5 +48,10 @@ namespace HitechCraft.WebApplication.Controllers
 
             return PartialView("_SendedMessages", messages);
         }
+
+        public int GetNewMessagesCount()
+        {
+            return this.NewMessagesCount;
+        }
     }
 }

@@ -10,6 +10,16 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name <span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li>@Html.ActionLink("Профиль", "Profile", "Player")</li>
+                <li>
+                    <a href="/Message">
+                        ЛС 
+                        @if (int.Parse(Html.Action("GetNewMessagesCount", "Message").ToString()) > 0)
+                        {
+                            <span class="alert alert-warning message-inbox-nav" id="new-messages" title="Новые сообщения!">@Html.Action("GetNewMessagesCount", "Message")</span>
+                        }
+                    </a>
+
+                </li>
                 <li>@Html.ActionLink("Безопасность", "Security", "Player")</li>
                 <li role="separator" class="divider"></li>
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Выйти</a></li>
