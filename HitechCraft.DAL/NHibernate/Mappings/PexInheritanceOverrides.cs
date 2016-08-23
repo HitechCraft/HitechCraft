@@ -7,8 +7,7 @@
     using FluentNHibernate.Automapping.Alterations;
 
     #endregion
-
-    //TODO: поработать позже с разрешениями
+    
     public class PexInheritanceOverrides : IAutoMappingOverride<PexInheritance>
     {
         public void Override(AutoMapping<PexInheritance> mapping)

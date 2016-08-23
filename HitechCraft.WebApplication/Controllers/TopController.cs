@@ -18,8 +18,7 @@
         public TopController(IContainer container) : base(container)
         {
         }
-
-        //TODO: убрать из топа игроков администрации и дефолтные аккаунты
+        
         //TODO: добавить топы по профессиям и пр.
         
         // GET: Top

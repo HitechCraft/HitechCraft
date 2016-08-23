@@ -110,7 +110,6 @@ namespace HitechCraft.WebApplication.Manager
 
         private static string GetClientPath(string serverPath, string clientName)
         {
-            //TODO переписать!!!
             var clientPath = (HttpRuntime.AppDomainAppPath + LauncherConfig.ClientsDir.Replace("/", "\\")) + "\\" + clientName;
 
             var path = serverPath.Replace(clientPath.Replace("\\\\", "\\"), "");

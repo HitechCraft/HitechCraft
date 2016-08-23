@@ -7,8 +7,7 @@
     using FluentNHibernate.Automapping.Alterations;
 
     #endregion
-
-    //TODO: поработать позже с разрешениями
+    
     public class PermissionsOverrides : IAutoMappingOverride<Permissions>
     {
         public void Override(AutoMapping<Permissions> mapping)

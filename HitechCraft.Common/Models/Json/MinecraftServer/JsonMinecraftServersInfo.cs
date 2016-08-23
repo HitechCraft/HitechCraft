@@ -21,7 +21,6 @@
         /// <summary>
         /// Count of servers
         /// </summary>
-        //TODO: убрать?
         public int ServerCount { get; set; }
 
         #endregion

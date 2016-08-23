@@ -121,7 +121,6 @@
 
         public string CheckAvailableGroups()
         {
-            //TODO: да я упорот и вернул строку. Переделать! -_-
             try
             {
                 var group = new EntityListQueryHandler<Permissions, PermissionsViewModel>(this.Container)

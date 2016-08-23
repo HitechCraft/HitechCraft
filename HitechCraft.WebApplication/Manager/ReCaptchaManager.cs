@@ -8,7 +8,6 @@
 
     public static class ReCaptchaManager
     {
-        //TODO: перенести webrequest в отдельную либу
         public static JsonStatusData ValidateReCaptcha(string response)
         {
             //ReCaptcha secret key

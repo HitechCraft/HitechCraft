@@ -8,8 +8,7 @@
         public HomeController(IContainer container) : base(container)
         {
         }
-
-        //TODO: custom 404 pls
+        
         public ActionResult Index(string refer="")
         {
             Session["ReferalId"] = refer;

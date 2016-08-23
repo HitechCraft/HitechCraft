@@ -295,7 +295,6 @@ namespace HitechCraft.WebApplication.Controllers
 
             if (!ModelState.IsValid)
             {
-                //TODO: сделал фастом нифига не успеваю, переделать потом
                 var modelErrors = String.Empty;
 
                 foreach (var value in ModelState.Values)
@@ -324,8 +323,7 @@ namespace HitechCraft.WebApplication.Controllers
 
                 return Json(new { status = JsonStatus.YES, response = "Success" }, JsonRequestBehavior.AllowGet);
             }
-
-            //TODO: сделал фастом нифига не успеваю, переделать
+            
             var errors = String.Empty;
 
             foreach (var error in result.Errors)
