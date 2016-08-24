@@ -31,7 +31,7 @@
     </div>
 <script type="text/javascript">
 
-    $(document).on('ready', function() {
+    @*$(document).on('ready', function() {
         @if (ViewBag.NewMessages != null && ViewBag.NewMessages > 0)
         {
             <text>
@@ -39,7 +39,7 @@
                 newMessageSound();
             </text>
         }
-    });
+    });*@
 
     $.fn.textWidth = function () {
         var text = $(this).html();
@@ -71,16 +71,16 @@
         $('body').css('overflow', 'visible');
     });
 
-    function newMessageSound() {
+    //function newMessageSound() {
 
-        var audioElement = document.createElement('audio');
-        audioElement.setAttribute('src', './Content/Sounds/newMessage.mp3');
-        audioElement.setAttribute('autoplay', 'autoplay');
+    //    var audioElement = document.createElement('audio');
+    //    audioElement.setAttribute('src', './Content/Sounds/newMessage.mp3');
+    //    audioElement.setAttribute('autoplay', 'autoplay');
 
-        audioElement.addEventListener("load", function () {
-            audioElement.play();
-        }, true);
-    };
+    //    audioElement.addEventListener("load", function () {
+    //        audioElement.play();
+    //    }, true);
+    //};
 
     //$('.dropdown-toggle').on('mouseenter', function () {
     //    $(this).dropdown('toggle');
