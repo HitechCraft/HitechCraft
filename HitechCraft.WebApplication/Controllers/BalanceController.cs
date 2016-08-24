@@ -31,7 +31,7 @@ namespace HitechCraft.WebApplication.Controllers
         /// <summary>
         /// Exchange rate of Rub to Gont (example 1 RUB = 1000 Gont means 0.001)
         /// </summary>
-        public float RubToGont => 0.001f;
+        public float RubToGont => 0.002f;
 
         /// <summary>
         /// Exchange rate of Gont to Rub (example 2500 Gont = 1 RUB means 2500)
@@ -48,6 +48,9 @@ namespace HitechCraft.WebApplication.Controllers
         {
             ViewBag.Rubles = this.Currency.Rubels;
             ViewBag.Gonts = this.Currency.Gonts;
+
+            ViewBag.RublesToGonts = 1 / RubToGont;
+            ViewBag.GontsToRubles = GontToRub;
 
             ViewBag.PaymentResult = TempData["paymentResult"];
             ViewBag.PaymentStatus = TempData["paymentStatus"];

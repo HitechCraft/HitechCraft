@@ -123,11 +123,6 @@ namespace HitechCraft.WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            var captchaResponse = ReCaptchaManager.ValidateReCaptcha(Request["g-recaptcha-response"]);
-
-            if (captchaResponse.Status == JsonStatus.NO)
-                ModelState.AddModelError(String.Empty, "Не верный ответ в ReCaptcha");
-
             if (!ModelState.IsValid)
             {
                 return View(model);

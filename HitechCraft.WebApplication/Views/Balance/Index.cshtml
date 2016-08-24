@@ -17,7 +17,7 @@
                 <p>
                     <span>Курс к игровой валюте (Gont):</span>
                     @*//TODO: возможно сделаю биржу где будет происходить смена курса*@
-                    <br /><strong>1 RUB = 1000 Gont</strong>
+                    <br /><strong>1 RUB = @ViewBag.RublesToGonts Gont</strong>
                 </p>
                 <h3 class="info-title">Gont</h3>
                 <p>
@@ -26,7 +26,7 @@
                 <p>
                     <span>Курс к реальной валюте (RUB):</span>
                     @*//TODO: возможно сделаю биржу где будет происходить смена курса*@
-                    <br /><strong>2500 Gont = 1 RUB</strong>
+                    <br /><strong>@ViewBag.GontsToRubles Gont = 1 RUB</strong>
                 </p>
             </div>
         </div>
@@ -104,7 +104,7 @@
     });
 
     $('#RubExchangeFieldRubs').on('input', function () {
-        var koef = 1000;
+        var koef = parseInt('@ViewBag.RublesToGonts');
         var value = parseFloat($(this).val());
 
         if (!/^[1-9]{1}[0-9]+[\.]{0,1}[0-9]{0,2}$/.test(value)) {
@@ -140,7 +140,7 @@
     });
 
     $('#GontExchangeFieldGonts').on('input', function () {
-        var koef = 2500;
+        var koef = parseInt('@ViewBag.GontsToRubles');
         var value = parseFloat($(this).val());
 
         if (!/^[1-9]{1}[0-9]+$/.test(value)) {
