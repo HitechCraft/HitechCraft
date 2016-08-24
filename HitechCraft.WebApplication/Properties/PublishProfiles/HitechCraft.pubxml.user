@@ -28,16 +28,16 @@
       <publishTime>10/07/2015 00:34:24</publishTime>
     </File>
     <File Include="bin/HitechCraft.BL.dll">
-      <publishTime>08/17/2016 22:39:49</publishTime>
+      <publishTime>08/24/2016 20:34:03</publishTime>
     </File>
     <File Include="bin/HitechCraft.Common.dll">
-      <publishTime>08/16/2016 01:46:48</publishTime>
+      <publishTime>08/24/2016 20:34:02</publishTime>
     </File>
     <File Include="bin/HitechCraft.DAL.dll">
-      <publishTime>08/16/2016 01:46:48</publishTime>
+      <publishTime>08/24/2016 20:34:03</publishTime>
     </File>
     <File Include="bin/HitechCraft.WebApplication.dll">
-      <publishTime>08/18/2016 20:02:37</publishTime>
+      <publishTime>08/24/2016 20:34:10</publishTime>
     </File>
     <File Include="bin/Iesi.Collections.dll">
       <publishTime>10/27/2012 18:50:12</publishTime>
@@ -253,10 +253,10 @@
       <publishTime>07/17/2013 17:03:52</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>08/16/2016 01:44:31</publishTime>
+      <publishTime>08/24/2016 20:32:24</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>08/16/2016 01:44:31</publishTime>
+      <publishTime>08/24/2016 20:32:24</publishTime>
     </File>
     <File Include="Content/fonts/arbat.ttf">
       <publishTime>07/28/2016 03:47:48</publishTime>
@@ -272,6 +272,9 @@
     </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.woff">
       <publishTime>07/28/2016 03:47:48</publishTime>
+    </File>
+    <File Include="Content/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>08/09/2016 15:23:58</publishTime>
     </File>
     <File Include="Content/Images/banners/acc_blue_on_white_ru.png">
       <publishTime>07/28/2016 03:47:45</publishTime>
@@ -361,7 +364,7 @@
       <publishTime>07/28/2016 03:47:45</publishTime>
     </File>
     <File Include="Content/SCSS/Site.scss">
-      <publishTime>08/18/2016 20:12:24</publishTime>
+      <publishTime>08/24/2016 20:32:24</publishTime>
     </File>
     <File Include="Content/SCSS/_fonts.scss">
       <publishTime>08/09/2016 15:23:03</publishTime>
@@ -379,10 +382,13 @@
       <publishTime>07/28/2016 03:47:45</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>08/18/2016 20:12:25</publishTime>
+      <publishTime>08/24/2016 20:32:24</publishTime>
     </File>
     <File Include="Content/Site.min.css">
-      <publishTime>08/18/2016 20:12:26</publishTime>
+      <publishTime>08/24/2016 20:32:24</publishTime>
+    </File>
+    <File Include="Content/Sounds/newMessage.mp3">
+      <publishTime>08/24/2016 20:32:24</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>08/16/2016 02:08:17</publishTime>
@@ -391,19 +397,22 @@
       <publishTime>05/08/2016 19:45:56</publishTime>
     </File>
     <File Include="fonts/arbat.ttf">
-      <publishTime>08/05/2016 19:45:56</publishTime>
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.eot">
-      <publishTime>08/05/2016 19:45:56</publishTime>
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.svg">
-      <publishTime>08/05/2016 19:45:56</publishTime>
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.ttf">
-      <publishTime>08/05/2016 19:45:56</publishTime>
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="fonts/glyphicons-halflings-regular.woff">
-      <publishTime>08/05/2016 19:45:56</publishTime>
+      <publishTime>08/24/2016 20:32:25</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>07/28/2016 03:47:45</publishTime>
@@ -412,7 +421,7 @@
       <publishTime>08/03/2016 13:09:14</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>08/03/2016 13:09:14</publishTime>
+      <publishTime>08/24/2016 20:33:50</publishTime>
     </File>
     <File Include="robots.txt">
       <publishTime>08/16/2016 01:48:11</publishTime>
@@ -427,7 +436,7 @@
       <publishTime>07/28/2016 03:47:47</publishTime>
     </File>
     <File Include="Scripts/jgrowl.alerts.js">
-      <publishTime>07/28/2016 03:47:47</publishTime>
+      <publishTime>08/24/2016 20:32:24</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
       <publishTime>07/28/2016 03:47:47</publishTime>
@@ -472,7 +481,7 @@
       <publishTime>07/28/2016 03:47:47</publishTime>
     </File>
     <File Include="Scripts/MSP.js">
-      <publishTime>08/06/2016 16:58:03</publishTime>
+      <publishTime>08/08/2016 22:24:03</publishTime>
     </File>
     <File Include="Scripts/respond.js">
       <publishTime>07/28/2016 03:47:47</publishTime>
@@ -511,7 +520,7 @@
       <publishTime>08/03/2016 13:09:14</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>07/30/2016 01:03:06</publishTime>
+      <publishTime>08/24/2016 20:32:24</publishTime>
     </File>
     <File Include="Views/Account/Mail.cshtml">
       <publishTime>08/03/2016 13:09:14</publishTime>
@@ -577,13 +586,13 @@
       <publishTime>07/28/2016 23:38:48</publishTime>
     </File>
     <File Include="Views/Donate/_GroupsIE.cshtml">
-      <publishTime>08/19/2016 17:06:18</publishTime>
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="Views/ErrorPage/Index.cshtml">
       <publishTime>08/03/2016 13:09:14</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
-      <publishTime>07/28/2016 03:47:48</publishTime>
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
       <publishTime>07/28/2016 03:47:48</publishTime>
@@ -592,7 +601,7 @@
       <publishTime>08/18/2016 20:01:32</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>08/18/2016 03:55:33</publishTime>
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="Views/Home/Rules.cshtml">
       <publishTime>08/03/2016 13:09:14</publishTime>
@@ -620,6 +629,21 @@
     </File>
     <File Include="Views/Manage/VerifyPhoneNumber.cshtml">
       <publishTime>07/25/2016 23:38:22</publishTime>
+    </File>
+    <File Include="Views/Message/Index.cshtml">
+      <publishTime>08/24/2016 20:32:25</publishTime>
+    </File>
+    <File Include="Views/Message/_InboxMessages.cshtml">
+      <publishTime>08/24/2016 20:32:25</publishTime>
+    </File>
+    <File Include="Views/Message/_Message.cshtml">
+      <publishTime>08/24/2016 20:32:25</publishTime>
+    </File>
+    <File Include="Views/Message/_MessageOptions.cshtml">
+      <publishTime>08/24/2016 20:32:25</publishTime>
+    </File>
+    <File Include="Views/Message/_SendedMessages.cshtml">
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="Views/Modification/Create.cshtml">
       <publishTime>08/08/2016 22:24:03</publishTime>
@@ -673,7 +697,7 @@
       <publishTime>08/05/2016 17:09:35</publishTime>
     </File>
     <File Include="Views/Server/Details.cshtml">
-      <publishTime>08/05/2016 17:09:19</publishTime>
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="Views/Server/Edit.cshtml">
       <publishTime>08/05/2016 17:09:00</publishTime>
@@ -697,10 +721,10 @@
       <publishTime>08/03/2016 13:09:14</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/18/2016 04:15:40</publishTime>
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>08/03/2016 13:09:14</publishTime>
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="Views/Shared/_NavBar.cshtml">
       <publishTime>08/16/2016 01:44:31</publishTime>
@@ -712,7 +736,7 @@
       <publishTime>08/03/2016 13:09:14</publishTime>
     </File>
     <File Include="Views/Shared/_Sidebar.cshtml">
-      <publishTime>08/18/2016 03:55:09</publishTime>
+      <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="Views/Shared/_TitleBox.cshtml">
       <publishTime>08/03/2016 13:09:14</publishTime>
@@ -742,7 +766,7 @@
       <publishTime>07/28/2016 03:47:48</publishTime>
     </File>
     <File Include="Views/Skin/Catalog.cshtml">
-      <publishTime>08/06/2016 16:58:03</publishTime>
+      <publishTime>08/08/2016 22:24:03</publishTime>
     </File>
     <File Include="Views/Skin/Create.cshtml">
       <publishTime>08/11/2016 10:36:21</publishTime>
@@ -757,7 +781,7 @@
       <publishTime>07/28/2016 15:54:20</publishTime>
     </File>
     <File Include="Views/Top/_TopGontsPartial.cshtml">
-      <publishTime>08/16/2016 01:44:31</publishTime>
+      <publishTime>08/21/2016 19:47:46</publishTime>
     </File>
     <File Include="Views/Top/_TopRubsPartial.cshtml">
       <publishTime>07/28/2016 15:55:38</publishTime>
@@ -772,7 +796,7 @@
       <publishTime>07/28/2016 03:47:48</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/10/2016 11:11:41</publishTime>
+      <publishTime>08/24/2016 20:34:11</publishTime>
     </File>
   </ItemGroup>
 </Project>

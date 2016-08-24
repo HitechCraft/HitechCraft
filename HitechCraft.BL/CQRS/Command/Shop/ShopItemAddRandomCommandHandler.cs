@@ -30,8 +30,15 @@ namespace HitechCraft.BL.CQRS.Command
             Random randForItem = new Random();
             Random randForCount = new Random();
 
-            var randItem = itemList[randForItem.Next(1, itemList.Count) - 1];
-            var randCount = randForCount.Next(1, 64);
+            ShopItem randItem = itemList[randForItem.Next(1, itemList.Count) - 1];
+            int randCount = randForCount.Next(1, 64);
+
+            //фикс для рандомной выдачи предмета. лимит 10к Gont
+            while (randItem.Price * randCount > 10000)
+            {
+                randItem = itemList[randForItem.Next(1, itemList.Count) - 1];
+                randCount = randForCount.Next(1, 64);
+            }
 
             var playerItem = new PlayerItem()
             {

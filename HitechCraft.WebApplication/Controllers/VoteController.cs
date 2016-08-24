@@ -36,21 +36,7 @@
             {
                 try
                 {
-                    var currency = new EntityListQueryHandler<Currency, CurrencyEditViewModel>(this.Container)
-                        .Handle(new EntityListQuery<Currency, CurrencyEditViewModel>()
-                        {
-                            Specification = new CurrencyByPlayerNameSpec(username),
-                            Projector = this.Container.Resolve<IProjector<Currency, CurrencyEditViewModel>>()
-                        }).First();
-
-                    this.CommandExecutor.Execute(new CurrencyUpdateCommand()
-                    {
-                        Id = currency.Id,
-                        Gonts = 250,
-                        Rubles = 0
-                    });
-
-                    LogManager.Info(currency.PlayerName + ": голосование на Topcraft. Награда - 250 Gonts");
+                    this.PayVoteGonts(username);
 
                     ViewBag.VoteOn = "Topcraft.ru";
                     ViewBag.VoteReward = "250 Gonts на счет";
@@ -79,21 +65,7 @@
             {
                 try
                 {
-                    var currency = new EntityListQueryHandler<Currency, CurrencyEditViewModel>(this.Container)
-                        .Handle(new EntityListQuery<Currency, CurrencyEditViewModel>()
-                        {
-                            Specification = new CurrencyByPlayerNameSpec(nickname),
-                            Projector = this.Container.Resolve<IProjector<Currency, CurrencyEditViewModel>>()
-                        }).First();
-
-                    this.CommandExecutor.Execute(new CurrencyUpdateCommand()
-                    {
-                        Id = currency.Id,
-                        Gonts = 0,
-                        Rubles = 2
-                    });
-
-                    LogManager.Info(currency.PlayerName + ": голосование на MCtopSU. Награда - 2 RUB");
+                    this.PayVoteRubles(nickname);
 
                     ViewBag.VoteOn = "McTop.su";
                     ViewBag.VoteReward = "2 RUB на счет";
@@ -129,15 +101,7 @@
             {
                 try
                 {
-                    this.CommandExecutor.Execute(new ShopItemAddRandomCommand()
-                    {
-                        PlayerName = username
-                    });
-
-                    LogManager.Info(username + ": голосование на MCtop. Награда - случайный предмет из магазина");
-
-                    ViewBag.VoteOn = "McTop";
-                    ViewBag.VoteReward = "случайный предмет из Магазина Ресурсов. Проверьте <a href='" + Url.Action("Cart", "Shop") + "'>корзину</a>";
+                    this.GetVoteShopItem(username);
                 }
                 catch (Exception e)
                 {
@@ -168,6 +132,54 @@
         private string Implode(List<string> objects, string separator)
         {
             return String.Join(separator, objects);
+        }
+
+        private void PayVoteGonts(string userName)
+        {
+            var currency = new EntityListQueryHandler<Currency, CurrencyEditViewModel>(this.Container)
+                .Handle(new EntityListQuery<Currency, CurrencyEditViewModel>()
+                {
+                    Specification = new CurrencyByPlayerNameSpec(userName),
+                    Projector = this.Container.Resolve<IProjector<Currency, CurrencyEditViewModel>>()
+                }).First();
+
+            this.CommandExecutor.Execute(new CurrencyUpdateCommand()
+            {
+                Id = currency.Id,
+                Gonts = 250,
+                Rubles = 0
+            });
+
+            LogManager.Info(currency.PlayerName + ": голосование на Topcraft. Награда - 250 Gonts");
+        }
+
+        private void PayVoteRubles(string userName)
+        {
+            var currency = new EntityListQueryHandler<Currency, CurrencyEditViewModel>(this.Container)
+                        .Handle(new EntityListQuery<Currency, CurrencyEditViewModel>()
+                        {
+                            Specification = new CurrencyByPlayerNameSpec(userName),
+                            Projector = this.Container.Resolve<IProjector<Currency, CurrencyEditViewModel>>()
+                        }).First();
+
+            this.CommandExecutor.Execute(new CurrencyUpdateCommand()
+            {
+                Id = currency.Id,
+                Gonts = 0,
+                Rubles = 2
+            });
+
+            LogManager.Info(currency.PlayerName + ": голосование на MCtopSU. Награда - 2 RUB");
+        }
+
+        private void GetVoteShopItem(string userName)
+        {
+            this.CommandExecutor.Execute(new ShopItemAddRandomCommand()
+            {
+                PlayerName = userName
+            });
+
+            LogManager.Info(userName + ": голосование на MCtop. Награда - случайный предмет из магазина");
         }
 
         #endregion
