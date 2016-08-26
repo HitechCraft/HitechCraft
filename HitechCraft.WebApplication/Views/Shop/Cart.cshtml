@@ -1,0 +1,25 @@
+﻿@model IEnumerable<HitechCraft.WebApplication.Models.PlayerItemViewModel>
+@{
+    ViewBag.Title = "Корзина";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+<h4 style="line-height: 30px;">Для того чтобы вывести предметы в игру, необходимо прописать <span class="label label-primary">/shop</span> на сервере!</h4>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row" style="margin: 40px 0;">
+        @foreach (var item in Model)
+        {
+            <div class="item-cart" onclick="document.location='@Url.Action("BuyItem", new { gameId = item.ItemGameId })'">
+                <span>x@(item.Count)</span>
+                <img class="item-cart-image" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Image)"/>
+            </div>
+        }
+    </div>
+    @Html.ActionLink("Перейти в магазин", "Index", "Shop", null, new { @class = "btn btn-primary" })
+}
+else
+{
+    <h3>Нет предметов [@Html.ActionLink("перейти в магазин", "Index", "Shop")]</h3>
+}

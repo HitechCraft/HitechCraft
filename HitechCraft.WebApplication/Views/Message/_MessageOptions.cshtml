@@ -1,0 +1,15 @@
+﻿@model int
+
+@if (Model > 0)
+{
+    <div class="message-options">
+        <a href="javascript:LoadInboxMessage(@Model)" class="btn btn-primary">Прочесть</a>
+        <a href="javascript:DeleteInboxMessage(@Model)" class="btn btn-danger">Удалить</a>
+    </div>
+}
+else
+{
+    <div class="message-options">
+        <h3>Выберите сообщение</h3>
+    </div>
+}

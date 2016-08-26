@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "V.I.P Группы игроков";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+<h4 class="groups-desc">Действие услуги - ровно 1 месяц. После покупки обязательно перезайдите на сервер (если вы online)!</h4>
+
+<div>
+    <ul class="nav nav-tabs top-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#server-ie" aria-controls="rich-gonts" role="tab" data-toggle="tab">Сервер Industrial Extentions</a></li>
+    </ul>
+
+    <div class="tab-content top-content">
+        <div role="tabpanel" class="tab-pane active" id="server-ie">
+            @Html.Action("GroupsIE")
+        </div>
+    </div>
+</div>

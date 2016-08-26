@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Топы игроков";
+}
+
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<div>
+
+    <ul class="nav nav-tabs top-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#rich-gonts" aria-controls="rich-gonts" role="tab" data-toggle="tab">Топ 10 богачей (Gonts)</a></li>
+        <li role="presentation"><a href="#rich-rubs" aria-controls="rich-rubs" role="tab" data-toggle="tab">Топ 10 богачей (RUB)</a></li>
+    </ul>
+
+    <div class="tab-content top-content">
+        <div role="tabpanel" class="tab-pane active" id="rich-gonts">
+            @Html.Action("TopGonts")
+        </div>
+        <div role="tabpanel" class="tab-pane" id="rich-rubs">
+            @Html.Action("TopRubs")
+        </div>
+    </div>
+</div>
