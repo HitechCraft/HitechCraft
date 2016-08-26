@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Web;
-using HitechCraft.WebApplication.Areas.Launcher.Services;
 
 namespace HitechCraft.WebApplication.Manager
 {
@@ -64,18 +63,7 @@ namespace HitechCraft.WebApplication.Manager
         {
             return Directory.GetFiles(GetServerPath(path), searchPattern, searchOption);
         }
-
-        /// <summary>
-        /// Returns site client path
-        /// </summary>
-        /// <param name="serverPath">Server path</param>
-        /// <param name="clientName">Client name</param>
-        /// <returns></returns>
-        public static string GetClientFilePath(string serverPath, string clientName)
-        {
-            return GetClientPath(serverPath, clientName).Replace("\\", "/");
-        }
-
+        
         /// <summary>
         /// Returns byte[] of downloaded file
         /// </summary>
@@ -106,15 +94,6 @@ namespace HitechCraft.WebApplication.Manager
             var serverPath = HttpContext.Current.Server.MapPath(path);
 
             return serverPath;
-        }
-
-        private static string GetClientPath(string serverPath, string clientName)
-        {
-            var clientPath = (HttpRuntime.AppDomainAppPath + LauncherConfig.ClientsDir.Replace("/", "\\")) + "\\" + clientName;
-
-            var path = serverPath.Replace(clientPath.Replace("\\\\", "\\"), "");
-
-            return path;
         }
 
         #endregion

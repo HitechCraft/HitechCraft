@@ -9,7 +9,7 @@
         /// </summary>
         public static string MasterVersion
         {
-            get { return "v1.0beta"; }
+            get { return WebConfigurationManager.AppSettings["LauncherMasterVersion"]; }
         }
 
         /// <summary>

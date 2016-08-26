@@ -212,11 +212,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\Launcher\Controllers\ActionController.cs" />
-    <Compile Include="Areas\Launcher\Controllers\ClientServerController.cs" />
-    <Compile Include="Areas\Launcher\LauncherAreaRegistration.cs" />
-    <Compile Include="Areas\Launcher\Services\LauncherConfig.cs" />
-    <Compile Include="Areas\Launcher\Services\LauncherManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BalanceController.cs" />
@@ -393,7 +388,6 @@
     <Content Include="robots.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\Launcher\Views\web.config" />
     <Content Include="Content\SCSS\Site.scss" />
     <Content Include="Content\SCSS\_fonts.scss" />
     <Content Include="Content\SCSS\_media.scss" />
@@ -549,8 +543,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Launcher\Models\" />
-    <Folder Include="Areas\Launcher\Views\Shared\" />
     <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
