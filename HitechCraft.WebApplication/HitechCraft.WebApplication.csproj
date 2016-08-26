@@ -415,7 +415,6 @@
     <Content Include="Content\fonts\headplane.TTF" />
     <Content Include="Content\fonts\opensans-bold.TTF" />
     <Content Include="Content\fonts\opensans-regular.TTF" />
-    <Content Include="Content\fonts\Molot.otf" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
