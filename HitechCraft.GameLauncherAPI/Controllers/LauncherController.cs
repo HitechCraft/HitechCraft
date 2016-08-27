@@ -214,28 +214,7 @@
             Response.TransmitFile(fileServerPath);
             Response.End();
         }
-
-        /// <summary>
-        /// Feature for file download (from launcher client site folder)
-        /// </summary>
-        /// <param name="filePath">File Path with client name</param>
-        public void DownloadJava(SystemBit systemBit)
-        {
-            var javaFullPath = FileManager.GetJavaPath(systemBit);
-
-            var javaFile = javaFullPath + "/" + (systemBit == SystemBit.X64 ? "jre64.tar.gz" : "jre32.tar.gz");
-
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(javaFile));
-
-            using (var fileContent = System.IO.File.Open(javaFile, FileMode.Open))
-            {
-                Response.AppendHeader("Content-Length", fileContent.Length.ToString());
-            }
-
-            Response.TransmitFile(javaFile);
-            Response.End();
-        }
-
+        
         /// <summary>
         /// Feature for file download (from launcher client site folder)
         /// </summary>

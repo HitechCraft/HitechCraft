@@ -49,7 +49,7 @@
         /// </summary>
         public static string JavaDir
         {
-            get { return "Java"; }
+            get { return ClientsDir + "/" + "Java"; }
         }
     }
 }
