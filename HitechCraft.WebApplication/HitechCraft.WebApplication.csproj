@@ -361,6 +361,7 @@
     <Content Include="Content\Images\kits\ie_kit_ultra.png" />
     <Content Include="Content\Images\kits\ie_kit_vip.png" />
     <Content Include="Content\Images\mailbg.jpg" />
+    <Content Include="Content\Images\world.jpg" />
     <Content Include="Content\Sounds\newMessage.mp3" />
     <Content Include="favicon.ico" />
     <Content Include="Content\Images\game-start.png" />
@@ -411,6 +412,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\headplane.TTF" />
+    <Content Include="Content\fonts\opensans-bold.TTF" />
+    <Content Include="Content\fonts\opensans-regular.TTF" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -540,6 +544,8 @@
     <Content Include="Views\Message\_SendedMessages.cshtml" />
     <Content Include="Views\Message\_Message.cshtml" />
     <Content Include="Views\Message\_MessageOptions.cshtml" />
+    <Content Include="Views\Home\NewIndex.cshtml" />
+    <Content Include="Views\Shared\_NewTitleBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,6 +18,11 @@
             return View();
         }
 
+        public ActionResult NewIndex()
+        {
+            return View();
+        }
+
         public ActionResult GameStart()
         {
             return View();
