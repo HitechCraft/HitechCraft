@@ -207,7 +207,7 @@
 
             using (var fileContent = System.IO.File.Open(FileManager.GetServerPath(fileServerPath), FileMode.Open))
             {
-                Response.AddHeader("Content-Length", fileContent.Length.ToString());
+                Response.AppendHeader("Content-Length", fileContent.Length.ToString());
                 fileContent.Close();
             }
 
@@ -227,10 +227,9 @@
 
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(javaFile));
 
-            using (var fileContent = System.IO.File.Open(FileManager.GetServerPath(javaFile), FileMode.Open))
+            using (var fileContent = System.IO.File.Open(javaFile, FileMode.Open))
             {
-                Response.AddHeader("Content-Length", fileContent.Length.ToString());
-                fileContent.Close();
+                Response.AppendHeader("Content-Length", fileContent.Length.ToString());
             }
 
             Response.TransmitFile(javaFile);
