@@ -136,3 +136,26 @@
         width: 75% !important;
     }
 }
+
+/*New design extentions*/
+
+@media (min-width: 1200px) {
+
+    .wrapper {
+        width: 1170px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+    .wrapper {
+        width: 970px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    .wrapper {
+        width: 750px;
+    }
+}
