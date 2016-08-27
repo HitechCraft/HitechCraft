@@ -43,5 +43,13 @@
         {
             get { return "Clients"; }
         }
+
+        /// <summary>
+        /// Java folder
+        /// </summary>
+        public static string JavaDir
+        {
+            get { return "Java"; }
+        }
     }
 }

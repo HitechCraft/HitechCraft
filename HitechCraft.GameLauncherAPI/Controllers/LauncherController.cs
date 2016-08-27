@@ -216,6 +216,61 @@
         }
 
         /// <summary>
+        /// Feature for file download (from launcher client site folder)
+        /// </summary>
+        /// <param name="filePath">File Path with client name</param>
+        public void DownloadJava(SystemBit systemBit)
+        {
+            var javaFullPath = FileManager.GetJavaPath(systemBit);
+
+            var javaFile = javaFullPath + "/" + (systemBit == SystemBit.X64 ? "jre64.tar.gz" : "jre32.tar.gz");
+
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(javaFile));
+
+            using (var fileContent = System.IO.File.Open(FileManager.GetServerPath(javaFile), FileMode.Open))
+            {
+                Response.AddHeader("Content-Length", fileContent.Length.ToString());
+                fileContent.Close();
+            }
+
+            Response.TransmitFile(javaFile);
+            Response.End();
+        }
+
+        /// <summary>
+        /// Feature for file download (from launcher client site folder)
+        /// </summary>
+        /// <param name="filePath">File Path with client name</param>
+        public JsonResult CheckJavaHash(string md5Hash, SystemBit systemBit)
+        {
+            try
+            {
+                var javaFullPath = FileManager.GetJavaPath(systemBit);
+
+                var javaFile = javaFullPath + "/" + (systemBit == SystemBit.X64 ? "jre64.md5" : "jre32.md5");
+
+                using (StreamReader sr = new StreamReader(System.IO.File.Open(javaFile, FileMode.Open)))
+                {
+                    if (sr.ReadToEnd() != md5Hash) throw new Exception("");
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(new JsonStatusData()
+                {
+                    Status = JsonStatus.NO,
+                    Message = "Java не прошла проверку. " + e.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new JsonStatusData()
+            {
+                Status = JsonStatus.YES,
+                Message = "Java прошла проверку"
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
         /// Returns server info, from site context
         /// </summary>
         public JsonResult GetServersInfo()

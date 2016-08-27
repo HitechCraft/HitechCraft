@@ -8,3 +8,5 @@ HitechCraft.WebApplication/Content/logs/
 HitechCraft.WebApplication/Areas/Clients/
 HitechCraft.GameLauncherAPI\Properties\PublishProfiles\DevHitechCraftApi.pubxml.user
 HitechCraft.WebApplication\Properties\PublishProfiles\HitechCraft.pubxml.user
+HitechCraft.GameLauncherAPI\Launcher\Java\jre32.tar.gz
+HitechCraft.GameLauncherAPI\Launcher\Java\jre64.tar.gz

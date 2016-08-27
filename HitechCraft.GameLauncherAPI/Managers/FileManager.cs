@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Web;
+using HitechCraft.Common.Models.Enum;
 
 namespace HitechCraft.GameLauncherAPI.Managers
 {
@@ -109,6 +110,18 @@ namespace HitechCraft.GameLauncherAPI.Managers
             };
         }
 
+        /// <summary>
+        /// Returns Java path by system bit
+        /// </summary>
+        /// <param name="systemBit"></param>
+        /// <returns></returns>
+        public static string GetJavaPath(SystemBit systemBit)
+        {
+            string javaFilesPath = FileManager.GetServerPath(Config.JavaDir).Replace("\\", "/");
+
+            return javaFilesPath;
+        }
+        
         #region Private Methods
 
         private static bool IsFileExists(string path)
