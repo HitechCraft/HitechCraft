@@ -1,0 +1,186 @@
+﻿@model HitechCraft.WebApplication.Models.SkinEditViewModel
+@{
+    ViewBag.Title = "Добавить скин";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <h4 class="skin-title"><strong>Выбрать образ скина</strong></h4>
+        @using (Html.BeginForm("Create", "Skin", FormMethod.Post, new {enctype = "multipart/form-data", @id = "uploadSkin"}))
+        {
+        @Html.ValidationSummaryStyled(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name)
+            @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(m => m.Name, "", new {@class = "text-danger"})
+        </div>
+        <div id="fromPC" class="form-group">
+            @Html.LabelFor(model => model.Image)
+            <input type="file" name="uploadSkinImage" id="uploadSkinImage" accept=".png"/>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender)
+            @Html.DropDownListFor(model => model.Gender, ViewBag.Gender as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "gender" })
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </div>
+        @*<div id="fromUrl" class="form-group">
+            Ссылка @Html.LabelFor(model => model.Image)
+            <input type="text" name="uploadSkinImageUrl" id="uploadSkinImageUrl" class="form-control" />
+        </div>
+            <div class="form-group">
+                <input id="loadFromUrl" type="checkbox" checked="checked"/><label>Загрузить с url</label>
+            </div>*@
+        <div class="form-group">
+            <a href="javascript:submitAndContinue()" class="btn btn-success">Добавить и продолжить создание</a>
+            <br />
+            <br />
+            <a href="javascript:submitAndReturn()" class="btn btn-success">Добавить и вернуться в каталог</a>
+            <br />
+            <br />
+            <a href="@Url.Action("Catalog")" class="btn btn-primary">Вернуться в каталог</a>
+        </div>
+        }
+    </div>
+    <div class="col-md-4">
+        <h4 class="skin-title"><strong>Предпросмотр</strong></h4>
+        <div id="skinpreviewcreate" class="skinpreview" height="100%" width="100%"></div>
+        <img src="" id="skin-image" hidden=""/>
+        <input type="text" id="image-b64" hidden=""/>
+    </div>
+
+    <div id="skin-duplicate" class="col-md-4">
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('input#loadFromUrl')
+        .on('click',
+            function () {
+                if ($(this).is(':checked')) {
+                    $('#fromPC').css('display', 'none');
+                    $('#fromUrl').css('display', 'block');
+                } else {
+                    $('#fromPC').css('display', 'block');
+                    $('#fromUrl').css('display', 'none');
+                }
+            });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            getSimilarSkins(input.files[0]);
+
+            reader.onload = function (e) {
+                $('#skin-image').attr('src', e.target.result);
+                $('#skinpreviewcreate canvas').remove();
+                $('#skin-duplicate').html('');
+
+                var P0 = new MSP({
+                    showcape: true,
+                    running: false,
+                    spin: false,
+                    freezecamera: true,
+                    container: "#skinpreviewcreate",
+                    width: 200,
+                    height: 300
+                });
+
+                P0.changeSkin($('#skin-image').attr('src'));
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#uploadSkinImage").change(function () {
+        readURL(this);
+    });
+
+    $("#uploadSkinImageUrl").on('input', function () {
+
+        $.ajax({
+            url: '@Url.Action("DownloadSkin")',
+            data: { url: $(this).val() },
+            type: 'post',
+            success: function (data) {
+                if (data.status === "OK") {
+                    var P0 = new MSP({
+                        showcape: true,
+                        running: false,
+                        spin: false,
+                        freezecamera: true,
+                        container: "#skinpreviewcreate",
+                        width: 200,
+                        height: 300
+                    });
+
+                    P0.changeSkin(data.message);
+
+                    $('#image-b64').val(data.img);
+
+                } else {
+                    growlError(data.message);
+                }
+            },
+            error: function(data) {
+                growlError(data.message);
+            }
+        });
+    });
+
+    function submitAndContinue() {
+        submit();
+    }
+
+    function submitAndReturn() {
+        submit();
+        document.location = '@Url.Action("Catalog")';
+    }
+
+    function submit() {
+        $('#uploadSkin').submit();
+    }
+
+    function getSimilarSkins(files) {
+        var form_data = new FormData();                  // Creating object of FormData class
+
+        form_data.append("uploadSkinImage", files);      // Appending parameter named file with properties of file_field to form_data
+
+        $.ajax({
+            url: "@Url.Action("CheckExistingSkin")",
+            dataType: 'script',
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data, // Setting the data attribute of ajax with file_data
+            type: 'post',
+            error: function (data) {
+                console.log(data);
+                if (data.responseText !== "OK") {
+                    $('#skin-duplicate').html('');
+                    $('#skin-duplicate').html(data.responseText);
+                }
+            }
+        });
+    }
+
+    function getSimilarSkinsByImage() {
+        $.ajax({
+            url: "@Url.Action("CheckExistingSkinByBase64")",
+            data: { base64: $('#image-b64').val() },
+            type: 'post',
+            error: function (data) {
+                console.log(data);
+                if (data.responseText !== "OK") {
+                    $('#skin-duplicate').html('');
+                    $('#skin-duplicate').html(data.responseText);
+                }
+            }
+        });
+    }
+</script>

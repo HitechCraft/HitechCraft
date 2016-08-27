@@ -1,0 +1,36 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<HitechCraft.WebApplication.Models.ShopItemViewModel>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row" style="min-height: 520px;">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <div id="item-@item.GameId.Replace(":", "-")" class="item" onclick="LoadItem('@item.GameId')">
+                    <h4>@item.Name</h4>
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.Image)" alt="@item.Description"/>
+                    <span class="price">Цена: @item.Price Gont(s)</span>
+                </div>
+            </div>
+        }
+        <br/>
+    </div>
+
+    <div class="form-inline">
+        <div class="form-group">
+            <label>Предметов на странице</label>
+            <input type="text" class="form-control" id="itemsOnPage" value="@ViewBag.ItemsOnPage"/>
+            <a class="btn btn-success" onclick="FilterItems(null)">Применить</a>
+        </div>
+    </div>
+
+    if (Model.Count >= ViewBag.ItemsOnPage || ViewBag.Page > 1)
+    {
+        @Html.PagedListPager(Model, page => "javascript:FilterItems(" + page + ")")
+    }
+}
+else
+{
+    <h3>Нет предметов</h3>
+}

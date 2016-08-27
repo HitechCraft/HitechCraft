@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Голосование завершено. Спасибо!";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+@if (ViewBag.VoteError == null)
+{
+    <p>
+        <h4>
+            За голос на <b>@ViewBag.VoteOn</b> вы получаете <b>@ViewBag.VoteReward</b><br/>
+        </h4>
+    </p>
+}
+else
+{
+    <p>Произошла ошибка при отправке награды! Обратитесь к Администрации - support@hitechcraft.ru</p>
+}

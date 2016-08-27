@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Начало игры на проекте";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<p><h4><b>Для того чтобы начать игру необходимо выпонить пару условий:</b></h4></p>
+
+<ol class="game-start-list">
+    @*TODO: Правила проекта*@
+    <li>Ознакомиться с @Html.ActionLink("правилами проекта", "Rules", "Home");</li>
+    <li>Пройти @Html.ActionLink("регистрацию", "Register", "Account") на сайте (это быстро);</li>
+    <li>
+        Скачать лаунчер для игры:
+        <br/>
+        <div class="btn-group launchers">
+            <a href="javascript:downloadWin()" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-th-large"></span> Скачать для Windows</a>
+            <a class="btn btn-info btn-lg" data-toggle="modal" data-target="#winReq"><span class="glyphicon glyphicon-exclamation-sign"></span> Системные требования</a>
+        </div>
+    </li>
+    <li>Выбрать @Html.ActionLink("сервер", "Index", "Server") и начать игру!</li>
+    <li>Так же не забудьте @Html.ActionLink("поддержать", "Vote") наш проект!</li>
+</ol>
+
+@Html.Partial("_LauncherWinReq")
+
+<script type="text/javascript">
+    function downloadWin() {
+        document.location = "/Content/Launcher/LauncherSetup.exe";
+    }
+</script>

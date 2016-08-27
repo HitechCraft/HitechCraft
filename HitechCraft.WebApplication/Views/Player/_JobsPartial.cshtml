@@ -1,0 +1,15 @@
+﻿@model IEnumerable<HitechCraft.WebApplication.Models.JobViewModel>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var job in Model)
+    {
+        <p>@job.JobName (<span>Уровень: @job.Level</span>; <span>Опыт: @job.Experiance</span>)</p>
+    }
+}
+else
+{
+    <h3>Вы не устраивались на работу</h3>
+    <p>Устроиться на работу можно на сервере, набрав команду <span class="label label-primary">/jobs join [название]</span></p>
+    <p>Чтобы узнать информацию о профессиях наберите <span class="label label-primary">/jobs browse</span></p>
+}

@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Личные сообщения";
+}
+
+<h2 class="page-title">@ViewBag.Title <span class="alert alert-danger alert-beta">beta</span></h2>
+
+<div class="row message">
+
+    <div class="col-md-4 message-types">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#inbox" onclick="javascript:LoadInbox();" aria-controls="home" role="tab" data-toggle="tab">
+                    Входящие
+                    @if (int.Parse(Html.Action("GetNewMessagesCount").ToString()) > 0)
+                    {
+                        <span class="alert alert-warning message-inbox-new" id="new-inbox-messages" title="Новые сообщения!">@Html.Action("GetNewMessagesCount")</span>
+                    }
+                </a>
+            </li>
+            <li role="presentation">
+                <a href="#sended" onclick="javascript:LoadSended();" aria-controls="profile" role="tab" data-toggle="tab">
+                    Отправленные
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-md-8 message-list">
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="inbox">@Html.Action("GetInboxMessages")</div>
+            <div role="tabpanel" class="tab-pane" id="sended">@Html.Action("GetSendedMessages")</div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function LoadInbox() {
+        $.get('@Url.Action("GetInboxMessages")',
+        function (data) {
+            $('#inbox').html('');
+            $('#inbox').html(data);
+        });
+    }
+
+    function LoadSended() {
+        $.get('@Url.Action("GetSendedMessages")',
+            function (data) {
+                $('#sended').html('');
+                $('#sended').html(data);
+            });
+    }
+</script>
