@@ -1,0 +1,218 @@
+﻿@*TODO: В дальнейшем подумать над переносом всего этого в базу может быть*@
+
+@if (ViewBag.GroupStatus != null && ViewBag.GroupStatus != String.Empty)
+{
+    <div class="alert alert-danger">
+        <h4>Внимание</h4>
+        @ViewBag.GroupStatus
+    </div>
+}
+<table class="table groups">
+    <thead>
+        <tr>
+            <td></td>
+            <td>Default</td>
+            <td>Light Pro</td>
+            <td>Pro</td>
+            <td>V.I.P.</td>
+            <td>Premium</td>
+            <td>Ultra</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>Префикс</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="lightpro-prefix">Light Pro</span></td>
+            <td><span class="pro-prefix">Pro</span></td>
+            <td><span class="vip-prefix">V.I.P</span></td>
+            <td><span class="premium-prefix">Premium</span></td>
+            <td><span class="ultra-prefix">Ultra</span></td>
+        </tr>
+        <tr>
+            <th>Цветной ник</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="pro-nickname">@ViewBag.NickName</span></td>
+            <td><span class="vip-nickname">@ViewBag.NickName</span></td>
+            <td><span class="premium-nickname">@ViewBag.NickName</span></td>
+            <td><span class="ultra-nickname">@ViewBag.NickName</span></td>
+        </tr>
+        <tr>
+            <th>Цветной текст</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="vip-text">Text</span></td>
+            <td><span class="premium-text">Text</span></td>
+            <td><span class="ultra-text">Text</span></td>
+        </tr>
+        <tr>
+            <th>Кол-во регионов</th>
+            <td>2</td>
+            <td>3</td>
+            <td>5</td>
+            <td>7</td>
+            <td>9</td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <th>Кол-во точек /home</th>
+            <td>1</td>
+            <td>1</td>
+            <td>2</td>
+            <td>2</td>
+            <td>3</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <th>Кол-во точек /warp (public/private)</th>
+            <td>1/1</td>
+            <td>1/2</td>
+            <td>2/2</td>
+            <td>2/3</td>
+            <td>3/3</td>
+            <td>4/4</td>
+        </tr>
+        <tr>
+            <th>Наборы *</th>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td>vip</td>
+            <td>premium</td>
+            <td>ultra</td>
+        </tr>
+        <tr>
+            <th>Флаги на регионы</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+        </tr>
+        <tr>
+            <th>Регулировка дня/ночи</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+        </tr>
+        <tr>
+            <th>Регулировка погоды</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+        </tr>
+        <tr>
+            <th>Полет /fly</th>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+        </tr>
+        <tr>
+            <th>Цена</th>
+            <td>0 RUB</td>
+            <td>90 RUB</td>
+            <td>210 RUB</td>
+            <td>320 RUB</td>
+            <td>400 RUB</td>
+            <td>620 RUB</td>
+        </tr>
+    </tbody>
+    @if (ViewBag.GroupStatus == null || ViewBag.GroupStatus == String.Empty)
+    {
+        <tfoot>
+            <tr>
+                <th></th>
+                <td></td>
+                <td><a class="btn btn-default" onclick="BuyGroup('LightPro');">Купить</a></td>
+                <td><a class="btn btn-primary" onclick="BuyGroup('Pro');">Купить</a></td>
+                <td><a class="btn btn-success" onclick="BuyGroup('Vip');">Купить</a></td>
+                <td><a class="btn btn-warning" onclick="BuyGroup('Premium');">Купить</a></td>
+                <td><a class="btn btn-danger" onclick="BuyGroup('Ultra');">Купить</a></td>
+
+            </tr>
+        </tfoot>
+    }
+</table>
+<h3 class="groups-kits">Используемые наборы *:</h3>
+
+<p><strong>Группы Default, Light Pro и Pro имеют по дефолту только стартовые наборы - start, eat и medic.</strong></p>
+
+<table class="table groups-kit-list">
+    <thead>
+    <tr>
+        <td>Набор</td>
+        <td>Команда</td>
+        <td>Описание</td>
+        <td>Использование</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th><img src="~/Content/Images/kits/ie_kit_start.png"/></th>
+        <td>/kit start</td>
+        <td>Стартовый набор игрока. Можно вызвать только 1 раз при заходе на сервер. Содержит в себе все необходимое для начала развития на сервере.</td>
+        <td>Только 1 раз</td>
+    </tr>
+        <tr>
+            <th><img src="~/Content/Images/kits/ie_kit_eat.png" /></th>
+            <td>/kit eat</td>
+            <td>Набор еды. Содержит в себе достаточно еды для выживания в последующий час.</td>
+            <td>Раз в час</td>
+        </tr>
+        <tr>
+            <th><img src="~/Content/Images/kits/ie_kit_medic.png" /></th>
+            <td>/kit medic</td>
+            <td>Набор медикаментов. Содержит в себе достаточно хилок для выживания в последующий час.</td>
+            <td>Раз в час</td>
+        </tr>
+        <tr>
+            <th><img src="~/Content/Images/kits/ie_kit_vip.png" /></th>
+            <td>/kit vip</td>
+            <td>Набор для группы игроков V.I.P. Содержит в себе нано сет, а также хорошие инструменты для развития.</td>
+            <td>Раз в неделю</td>
+        </tr>
+        <tr>
+            <th><img src="~/Content/Images/kits/ie_kit_premium.png" /></th>
+            <td>/kit premium</td>
+            <td>Набор для группы игроков Premium. Содержит в себе лучшие предметы, которые дадут вам отличный скачок в развитии.</td>
+            <td>Раз в 2 недели</td>
+        </tr>
+        <tr>
+            <th><img src="~/Content/Images/kits/ie_kit_ultra.png" /></th>
+            <td>/kit ultra</td>
+            <td>Набор для группы игроков Ultra. Содержит в себе наилучший сет игрока.</td>
+            <td>Раз в месяц</td>
+        </tr>
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    function BuyGroup(groupName) {
+        if (confirm("Вы подтверждаете покупку группы " + groupName + "?")) {
+            $.post("@Url.Action("BuyGroupIe", "Donate")", { group: groupName })
+        .done(function (data) {
+            if (data.status === "OK") {
+                growlSuccess(data.message);
+            } else {
+                growlError(data.message);
+            }
+
+            setTimeout(function () {
+                document.location = '@Url.Action("Groups", "Donate")';
+            }, 2000);
+        });
+        }
+    }
+</script>

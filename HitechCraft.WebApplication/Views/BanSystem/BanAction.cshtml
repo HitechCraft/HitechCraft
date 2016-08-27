@@ -1,0 +1,39 @@
+﻿@model WebApplication.Models.BanViewModel
+@{
+    ViewBag.Title = "BanAction";
+}
+
+<h2>BanAction</h2>
+
+<div class="form-group">
+    <label>Player Name:</label>
+    @Html.DisplayFor(model => model.PlayerName)
+</div>
+<div class="form-group">
+    <label>Action Type:</label>
+    @Html.DisplayFor(model => model.Type)
+</div>
+<div class="form-group">
+    <label>Reason:</label>
+    @Html.DisplayFor(model => model.Reason)
+</div>
+<div class="form-group">
+    <label>Banned by:</label>
+    @Html.DisplayFor(model => model.BannedBy)
+</div>
+<div class="form-group">
+    <label>Action Time:</label>
+    @Html.DisplayFor(model => model.ActionTime)
+</div>
+
+@if (Model.TempTime.Date != new DateTime(1970, 1, 1))
+{
+    <div class="form-group">
+        <label>Banned Before:</label>
+        @Html.DisplayFor(model => model.TempTime)
+    </div>
+}
+
+<a class="btn btn-default" href="@Url.Action("Index")">BanSystem</a>
+
+<a class="btn btn-primary" href="@Url.Action("PlayerBanList", "BanSystem", new { playerName = Model.PlayerName })">BanLogs of @Html.DisplayFor(model => model.PlayerName)</a>

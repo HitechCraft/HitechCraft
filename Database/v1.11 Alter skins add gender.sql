@@ -1,0 +1,2 @@
+ALTER TABLE `Skin`
+  ADD COLUMN `Gender` int(11) NOT NULL DEFAULT 0;

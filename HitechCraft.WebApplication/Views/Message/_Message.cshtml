@@ -1,0 +1,31 @@
+﻿@using HitechCraft.Common.Models.Enum
+@using HitechCraft.DAL.Domain.Extentions
+@model HitechCraft.WebApplication.Models.PrivateMessageViewModel
+
+<div class="btn-group-justified">
+    <a href="javascript:LoadInbox()" class="btn btn-primary" style="font-size: 18px;"><span class="glyphicon glyphicon-arrow-left"></span> В папку Входящие</a>
+</div>
+<div class="message-box-full">
+    <div class="message-player">
+        <img src="@Url.Action("GetSkinImage", "Player", new {playerName = Model.Players.First(x => x.PlayerType == PMPlayerType.Author).PlayerName})" id="skin-image@(Model.Id)" class="avaSkin@(Model.Id)" hidden="" />
+    </div>
+    <div class="message-content">
+        <p class="message-title">
+            @Model.Title
+        </p>
+        <p class="message-text">@Model.Text</p>
+        <p class="message-player-sign" style="float:right">@Model.Players.First(x => x.PlayerType == PMPlayerType.Author).PlayerName</p>
+        <div class="clear"></div>
+        <div class="message-footer">
+            <p style="float:right">Дата: @Model.TimeCreate.ToString("dd-MM-yyyy")</p>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        renderMCSkins('avaSkin@(Model.Id)', 9);
+    });
+</script>
