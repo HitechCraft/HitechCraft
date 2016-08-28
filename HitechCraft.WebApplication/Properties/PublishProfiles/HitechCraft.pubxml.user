@@ -28,16 +28,16 @@
       <publishTime>07/10/2015 00:34:24</publishTime>
     </File>
     <File Include="bin/HitechCraft.BL.dll">
-      <publishTime>08/24/2016 21:06:41</publishTime>
+      <publishTime>08/27/2016 20:13:35</publishTime>
     </File>
     <File Include="bin/HitechCraft.Common.dll">
-      <publishTime>08/24/2016 20:34:02</publishTime>
+      <publishTime>08/27/2016 20:13:35</publishTime>
     </File>
     <File Include="bin/HitechCraft.DAL.dll">
-      <publishTime>08/24/2016 20:34:03</publishTime>
+      <publishTime>08/27/2016 20:13:35</publishTime>
     </File>
     <File Include="bin/HitechCraft.WebApplication.dll">
-      <publishTime>08/24/2016 21:06:50</publishTime>
+      <publishTime>08/28/2016 00:13:22</publishTime>
     </File>
     <File Include="bin/Iesi.Collections.dll">
       <publishTime>10/27/2012 18:50:12</publishTime>
@@ -276,6 +276,15 @@
     <File Include="Content/fonts/glyphicons-halflings-regular.woff2">
       <publishTime>09/08/2016 15:23:58</publishTime>
     </File>
+    <File Include="Content/fonts/headplane.TTF">
+      <publishTime>08/27/2016 19:54:57</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-bold.TTF">
+      <publishTime>08/27/2016 19:54:57</publishTime>
+    </File>
+    <File Include="Content/fonts/opensans-regular.TTF">
+      <publishTime>08/27/2016 19:54:57</publishTime>
+    </File>
     <File Include="Content/Images/banners/acc_blue_on_white_ru.png">
       <publishTime>07/28/2016 03:47:45</publishTime>
     </File>
@@ -342,6 +351,9 @@
     <File Include="Content/Images/vote/topcraft.png">
       <publishTime>07/28/2016 03:47:45</publishTime>
     </File>
+    <File Include="Content/Images/world.jpg">
+      <publishTime>08/27/2016 19:54:57</publishTime>
+    </File>
     <File Include="Content/Images/ztn-logo.png">
       <publishTime>07/28/2016 03:47:45</publishTime>
     </File>
@@ -364,16 +376,16 @@
       <publishTime>07/28/2016 03:47:45</publishTime>
     </File>
     <File Include="Content/SCSS/Site.scss">
-      <publishTime>08/24/2016 20:32:24</publishTime>
+      <publishTime>08/27/2016 20:03:29</publishTime>
     </File>
     <File Include="Content/SCSS/_fonts.scss">
-      <publishTime>08/09/2016 15:23:03</publishTime>
+      <publishTime>08/27/2016 20:03:29</publishTime>
     </File>
     <File Include="Content/SCSS/_ListServers.scss">
       <publishTime>03/08/2016 13:34:20</publishTime>
     </File>
     <File Include="Content/SCSS/_media.scss">
-      <publishTime>08/18/2016 19:50:56</publishTime>
+      <publishTime>08/27/2016 20:03:29</publishTime>
     </File>
     <File Include="Content/SCSS/_mixins.scss">
       <publishTime>07/28/2016 03:47:45</publishTime>
@@ -382,10 +394,10 @@
       <publishTime>07/28/2016 03:47:45</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>08/24/2016 20:32:24</publishTime>
+      <publishTime>08/27/2016 20:03:29</publishTime>
     </File>
     <File Include="Content/Site.min.css">
-      <publishTime>08/24/2016 20:32:24</publishTime>
+      <publishTime>08/27/2016 20:03:29</publishTime>
     </File>
     <File Include="Content/Sounds/newMessage.mp3">
       <publishTime>08/24/2016 20:32:24</publishTime>
@@ -601,7 +613,10 @@
       <publishTime>08/18/2016 20:01:32</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>08/24/2016 20:32:25</publishTime>
+      <publishTime>08/27/2016 20:03:29</publishTime>
+    </File>
+    <File Include="Views/Home/NewIndex.cshtml">
+      <publishTime>08/27/2016 19:54:57</publishTime>
     </File>
     <File Include="Views/Home/Rules.cshtml">
       <publishTime>03/08/2016 13:09:14</publishTime>
@@ -610,7 +625,7 @@
       <publishTime>03/08/2016 13:09:14</publishTime>
     </File>
     <File Include="Views/Home/_LauncherWinReq.cshtml">
-      <publishTime>08/18/2016 19:56:08</publishTime>
+      <publishTime>08/28/2016 11:41:16</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
       <publishTime>07/25/2016 23:38:22</publishTime>
@@ -718,19 +733,22 @@
       <publishTime>08/08/2016 22:24:03</publishTime>
     </File>
     <File Include="Views/Shared/_Header.cshtml">
-      <publishTime>03/08/2016 13:09:14</publishTime>
+      <publishTime>08/27/2016 20:03:29</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/24/2016 20:32:25</publishTime>
+      <publishTime>08/27/2016 20:03:29</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>08/24/2016 20:32:25</publishTime>
     </File>
     <File Include="Views/Shared/_NavBar.cshtml">
-      <publishTime>08/16/2016 01:44:31</publishTime>
+      <publishTime>08/27/2016 20:03:29</publishTime>
     </File>
     <File Include="Views/Shared/_NewsPartialList.cshtml">
       <publishTime>08/09/2016 15:14:42</publishTime>
+    </File>
+    <File Include="Views/Shared/_NewTitleBox.cshtml">
+      <publishTime>08/27/2016 19:54:57</publishTime>
     </File>
     <File Include="Views/Shared/_ServerMonitoring.cshtml">
       <publishTime>03/08/2016 13:09:14</publishTime>

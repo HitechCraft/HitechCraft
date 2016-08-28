@@ -22,6 +22,11 @@
         /// </summary>
         public int MaxPlayerCount { get; set; }
 
+        /// <summary>
+        /// Server image
+        /// </summary>
+        public byte[] Image { get; set; }
+
         #endregion
     }
 }

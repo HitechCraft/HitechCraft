@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.DAL.Domain.Extentions
+﻿using HitechCraft.Common.DI;
+
+namespace HitechCraft.DAL.Domain.Extentions
 {
     #region Using Directives
 
@@ -9,17 +11,24 @@
     
     public static class ServerExtentions
     {
-        public static JsonMinecraftServerData GetServerData(this Server server)
+        /// <summary>
+        /// Getting info from server
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="image"></param>
+        /// <returns></returns>
+        public static JsonMinecraftServerData GetServerData(this Server server, byte[] image)
         {
             var serverStatus = new MinecraftServerManager(server.IpAddress, server.Port);
-
+            
             //TODO вывод дополнительных свойств типа Motd и пр.
             var serverData = new JsonMinecraftServerData()
             {
                 Status = JsonMinecraftServerStatus.Online,
                 Message = "Сервер онлайн",
                 PlayerCount = serverStatus.GetCurrentPlayers(),
-                MaxPlayerCount = serverStatus.GetMaximumPlayers()
+                MaxPlayerCount = serverStatus.GetMaximumPlayers(),
+                Image = image
             };
 
             //дополнительная информация о сервере, необходима для лаунчера

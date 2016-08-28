@@ -27,7 +27,9 @@
         {
             var serverRep = this._container.Resolve<IRepository<Server>>();
             
-            return ((IEnumerable<Server>)serverRep.Query()).Select(x => x.GetServerData()).ToList();
+
+
+            return ((IEnumerable<Server>)serverRep.Query()).Select(x => x.GetServerData(x.Image)).ToList();
         }
     }
 }
