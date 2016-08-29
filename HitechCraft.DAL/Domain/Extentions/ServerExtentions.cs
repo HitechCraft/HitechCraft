@@ -24,6 +24,7 @@ namespace HitechCraft.DAL.Domain.Extentions
             //TODO вывод дополнительных свойств типа Motd и пр.
             var serverData = new JsonMinecraftServerData()
             {
+                ServerId = server.Id,
                 Status = JsonMinecraftServerStatus.Online,
                 Message = "Сервер онлайн",
                 PlayerCount = serverStatus.GetCurrentPlayers(),

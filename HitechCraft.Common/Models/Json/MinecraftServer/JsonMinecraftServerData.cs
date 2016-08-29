@@ -8,6 +8,11 @@
         #region Properties
 
         /// <summary>
+        /// Server id
+        /// </summary>
+        public int ServerId { get; set; }
+
+        /// <summary>
         /// Server (client) name
         /// </summary>
         public string ServerName { get; set; }
