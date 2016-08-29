@@ -78,15 +78,25 @@
         [HttpGet]
         public JsonResult CheckPlayerData(string login, string password)
         {
-            //TODO: сделать отправку пароля хэшем
-
-            if (IsValidAuth(login, password))
+            try
+            {
+                if (IsValidAuth(login, password))
+                {
+                    return Json(new JsonUserAuthData()
+                    {
+                        Status = JsonStatus.YES,
+                        Message = Resource.SuccessAuth,
+                        SessionData = GetUserSessionData(login)
+                    },
+                    JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception e)
             {
                 return Json(new JsonUserAuthData()
                 {
-                    Status = JsonStatus.YES,
-                    Message = Resource.SuccessAuth,
-                    SessionData = GetUserSessionData(login)
+                    Status = JsonStatus.NO,
+                    Message = "Ошибка проверки данных пользователя: " + e.Message
                 },
                 JsonRequestBehavior.AllowGet);
             }
@@ -107,12 +117,24 @@
         [HttpGet]
         public JsonResult CheckMasterVersion(string masterVersion)
         {
-            if (Config.MasterVersion.Equals(masterVersion))
+            try
+            {
+                if (Config.MasterVersion.Equals(masterVersion))
+                {
+                    return Json(new JsonStatusData()
+                    {
+                        Status = JsonStatus.YES,
+                        Message = Resource.ValidVersion
+                    },
+                    JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception e)
             {
                 return Json(new JsonStatusData()
                 {
-                    Status = JsonStatus.YES,
-                    Message = Resource.ValidVersion
+                    Status = JsonStatus.NO,
+                    Message = "Ошибка проверки версии лаунчера: " + e.Message
                 },
                 JsonRequestBehavior.AllowGet);
             }
@@ -133,19 +155,31 @@
         [HttpGet]
         public JsonResult CheckRequredFolders(string clientName)
         {
-            var folders = FileManager.GetRequiredFolderList(clientName);
-
-            foreach (string folder in folders)
+            try
             {
-                if (!FileManager.IsDirOrFileExists(folder))
+                var folders = FileManager.GetRequiredFolderList(clientName);
+
+                foreach (string folder in folders)
                 {
-                    return Json(new JsonStatusData()
+                    if (!FileManager.IsDirOrFileExists(folder))
                     {
-                        Status = JsonStatus.NO,
-                        Message = String.Format(Resource.ClientNoFolder, clientName, folder)
-                    },
-                    JsonRequestBehavior.AllowGet);
+                        return Json(new JsonStatusData()
+                        {
+                            Status = JsonStatus.NO,
+                            Message = String.Format(Resource.ClientNoFolder, clientName, folder)
+                        },
+                        JsonRequestBehavior.AllowGet);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                return Json(new JsonStatusData()
+                {
+                    Status = JsonStatus.NO,
+                    Message = "Ошибка проверки обязательных папок клиента: " + e.Message
+                },
+                JsonRequestBehavior.AllowGet);
             }
 
             return Json(new JsonStatusData()
@@ -287,7 +321,7 @@
 
             return Json(news, JsonRequestBehavior.AllowGet);
         }
-
+        
         #endregion
 
         #region Private Methods
@@ -384,81 +418,7 @@
         {
             return UuidConvert(keyWord + userName + DateTime.Now);
         }
-
-        private List<JsonClientFilesData> GetJsonClientFilesData(List<string> clientFolders, JsonClientData filesData)
-        {
-            List<JsonClientFilesData> clientFiles = new List<JsonClientFilesData>();
-
-            foreach (var folder in clientFolders)
-            {
-                if (FileManager.IsDirectory(folder))
-                {
-                    var files = FileManager.GetFiles(folder, "*", SearchOption.AllDirectories);
-
-                    clientFiles.AddRange(files
-                        .Select(x => new JsonClientFilesData()
-                        {
-                            FilePath = FileManager.GetClientFilePath(x, filesData.ClientName),
-                            HashSum = HashManager.GetMd5Hash(System.IO.File.ReadAllBytes(x))
-                        }));
-                }
-            }
-
-            return clientFiles;
-        }
-
-        private List<JsonErrorFileData> GetErrorFileList(JsonClientData filesFromClient, List<JsonClientFilesData> filesFromApp, List<JsonErrorFileData> errorFileList)
-        {
-            var fixedFiles = FixPathString(filesFromClient.FilesData);
-
-            //Check client files contains on server (if contains - check hashsum)
-            foreach (var clientFile in fixedFiles)
-            {
-                if (filesFromApp.Any(f => f.FilePath == clientFile.FilePath))
-                {
-                    var existingFile = filesFromApp.First(f => f.FilePath == clientFile.FilePath);
-
-                    if (existingFile.HashSum != clientFile.HashSum)
-                    {
-                        errorFileList.Add(new JsonErrorFileData()
-                        {
-                            FilePath = clientFile.FilePath,
-                            FileAction = FileAction.Reload
-                        });
-                    }
-
-                    filesFromApp.Remove(existingFile);
-                }
-                else
-                {
-                    errorFileList.Add(new JsonErrorFileData()
-                    {
-                        FilePath = clientFile.FilePath,
-                        FileAction = FileAction.Remove
-                    });
-                }
-            }
-
-            //Add remaining files to upload
-            if (filesFromApp.Any())
-                errorFileList.AddRange(filesFromApp.Select(f => new JsonErrorFileData()
-                {
-                    FilePath = f.FilePath,
-                    FileAction = FileAction.Load
-                }));
-
-            return errorFileList;
-        }
-
-        private IEnumerable<JsonClientFilesData> FixPathString(ICollection<JsonClientFilesData> filesData)
-        {
-            return filesData.Select(fd => new JsonClientFilesData()
-            {
-                FilePath = fd.FilePath.Replace("\\", "/"),
-                HashSum = fd.HashSum
-            });
-        }
-
+        
         #endregion
     }
 }
