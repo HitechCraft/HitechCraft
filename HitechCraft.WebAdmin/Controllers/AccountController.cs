@@ -1,13 +1,20 @@
-﻿using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using HitechCraft.WebAdmin.Models;
+﻿using System;
+using System.Linq;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
+    #region Using Directives
+
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
+    using Models;
+
+    #endregion
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -64,14 +71,23 @@ namespace HitechCraft.WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            if (IsUserExists(model.Email))
+            {
+                ModelState.AddModelError(String.Empty, "Пользователь не найден");
+            }
+            
+            if (IsAdmin(model.Email))
+            {
+                ModelState.AddModelError(String.Empty, "Пользователь не является администратором");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -82,6 +98,32 @@ namespace HitechCraft.WebAdmin.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
+        }
+
+        private bool IsAdmin(string email)
+        {
+            if (!IsUserExists(email)) return false;
+
+            var userId = this.GetUserByEmail(email).Id;
+            var userRoles = this.UserManager.GetRolesAsync(userId);
+
+            if(userRoles.IsCompleted)
+                return this.UserManager.GetRolesAsync(userId).Result.Contains("Administrator");
+
+            return false;
+        }
+
+        private bool IsUserExists(string email)
+        {
+            var user = GetUserByEmail(email);
+
+            if (user != null) return true;
+                return false;
+        }
+
+        private ApplicationUser GetUserByEmail(string email)
+        {
+            return this.UserManager.Users.FirstOrDefault(x => x.Email == email);
         }
 
         #region Deleted
@@ -397,7 +439,7 @@ namespace HitechCraft.WebAdmin.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login");
         }
         
         protected override void Dispose(bool disposing)
@@ -446,7 +488,7 @@ namespace HitechCraft.WebAdmin.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
