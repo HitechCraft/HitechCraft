@@ -17,12 +17,18 @@ namespace HitechCraft.WebAdmin.Models
             return userIdentity;
         }
     }
-
+    
+    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("MySQLConnection", throwIfV1Schema: false)
         {
+        }
+
+        static ApplicationDbContext()
+        {
+            DbConfiguration.SetConfiguration(new MySql.Data.Entity.MySqlEFConfiguration());
         }
 
         public static ApplicationDbContext Create()
