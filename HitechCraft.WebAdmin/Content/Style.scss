@@ -1,5 +1,4 @@
 ﻿body {
-    padding-top: 50px;
     padding-bottom: 20px;
 }
 
@@ -21,4 +20,42 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.logo {
+    background: url("Images/logo.png");
+    width: 465px;
+    height: 66px;
+    margin: 45px 70px;
+}
+
+.admin {
+    &-category {
+        width: 200px;
+        margin: 0 auto;
+        margin-bottom: 15px;
+        border: 1px solid;
+        border-radius: 4px;
+        padding: 8px 13px 13px 13px;
+        text-align: center;
+        cursor: pointer;
+
+        h2 {
+            span {
+                font-size: 46px;
+            }
+        }
+
+        span {
+            display: block;
+            font-size: 21px;
+            min-height: 51px;
+            font-weight: bold;
+        }
+
+        &:hover {
+            background: #2c3e50;
+            color: #fff;
+        }
+    }
 }

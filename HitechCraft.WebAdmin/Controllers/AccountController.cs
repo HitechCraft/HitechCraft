@@ -20,12 +20,13 @@ namespace HitechCraft.WebAdmin.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _context;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -55,6 +56,18 @@ namespace HitechCraft.WebAdmin.Controllers
             }
         }
 
+        public ApplicationDbContext Context
+        {
+            get
+            {
+                return _context ?? new ApplicationDbContext();
+            }
+            private set
+            {
+                _context = value;
+            }
+        }
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -69,16 +82,20 @@ namespace HitechCraft.WebAdmin.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
-            if (IsUserExists(model.Email))
+            if (!UserManager.CheckPassword(this.Context.Users.First(u => u.Email == model.Email), model.Password))
             {
-                ModelState.AddModelError(String.Empty, "Пользователь не найден");
+                ModelState.AddModelError(String.Empty, "Данные не верные");
+
+                return View(model);
             }
-            
-            if (IsAdmin(model.Email))
+
+            if (!IsAdmin(model.Email))
             {
-                ModelState.AddModelError(String.Empty, "Пользователь не является администратором");
+                ModelState.AddModelError(String.Empty, "Пользователь не является администратором!");
+
+                return View(model);
             }
 
             if (!ModelState.IsValid)
@@ -86,7 +103,7 @@ namespace HitechCraft.WebAdmin.Controllers
                 return View(model);
             }
 
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = SignInManager.PasswordSignIn(this.GetUserByEmail(model.Email).UserName, model.Password, model.RememberMe, shouldLockout: false);
 
             switch (result)
             {
@@ -102,23 +119,13 @@ namespace HitechCraft.WebAdmin.Controllers
 
         private bool IsAdmin(string email)
         {
-            if (!IsUserExists(email)) return false;
-
             var userId = this.GetUserByEmail(email).Id;
             var userRoles = this.UserManager.GetRolesAsync(userId);
 
-            if(userRoles.IsCompleted)
+            if (userRoles.IsCompleted)
                 return this.UserManager.GetRolesAsync(userId).Result.Contains("Administrator");
 
             return false;
-        }
-
-        private bool IsUserExists(string email)
-        {
-            var user = GetUserByEmail(email);
-
-            if (user != null) return true;
-                return false;
         }
 
         private ApplicationUser GetUserByEmail(string email)
