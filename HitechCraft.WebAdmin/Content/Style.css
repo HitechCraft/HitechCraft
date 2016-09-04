@@ -38,7 +38,7 @@ textarea {
   .admin-category span {
     display: block;
     font-size: 21px;
-    min-height: 51px;
+    min-height: 60px;
     font-weight: bold; }
   .admin-category:hover {
     background: #2c3e50;

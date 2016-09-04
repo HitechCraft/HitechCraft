@@ -1,0 +1,56 @@
+﻿@model IEnumerable<HitechCraft.WebAdmin.Models.ApplicationUser>
+
+@{
+    var i = 0;
+}
+
+@Html.Partial("_PlayerInfoModal")
+
+<table class="table table-bordered">
+    <tr>
+        <td>#</td>
+        <td>User Id</td>
+        <td>Email</td>
+        <td>Никнэйм</td>
+        <td>Действия</td>
+    </tr>
+    @foreach (var user in Model)
+    {
+        i++;
+        <tr>
+            <td>@i</td>
+            <td>@user.Id</td>
+            <td>@user.Email</td>
+            <td>@user.UserName</td>
+            <td>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:LoadPlayerInfo('@user.UserName')">Инфо</a></li>
+                        <li><a href="javascript:LoadPlayerInfo('@user.UserName')">Роли</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Заблокировать</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+
+<script type="text/javascript">
+    function LoadPlayerInfo(user) {
+        $.ajax({
+            url: '@Url.Action("PlayerInfoPartial")',
+            data: {
+                userName: user
+            }
+            })
+            .done(function (data) {
+
+                $('#playerInfo').html('');
+                $('#playerInfo').html(data);
+
+                $('#playerInfoModal').modal();
+            });
+    }
+</script>

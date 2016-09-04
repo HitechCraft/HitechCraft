@@ -28,7 +28,8 @@
                 .Column("status");
 
             mapping.References(x => x.Player)
-                .Column("username");
+                .Column("username")
+                .Unique();
         }
     }
 }
