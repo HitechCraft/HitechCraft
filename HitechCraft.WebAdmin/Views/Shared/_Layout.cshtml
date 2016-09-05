@@ -6,16 +6,51 @@
     <title>@ViewBag.Title - HitechCraft Administration</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
+    <div class="ajax-loader">
+        <img src="/Content/Images/loader.gif" />
+        <div class="ajax-loader-text"><span>Загрузка...</span></div>
+    </div>
+    <div class="ajax-bg"></div>
 @{
     Html.RenderPartial("_NavBar");
 }
 <div class="container body-content">
     @RenderBody()
 </div>
+    <script type="text/javascript">
+        $.fn.textWidth = function () {
+            var text = $(this).html();
+            $(this).html('<span>' + text + '</span>');
+            var width = $(this).find('span:first').width();
+            $(this).html(text);
+            return width;
+        };
 
-@Scripts.Render("~/bundles/jquery")
+        $.AjaxLoaderSetText = function (text) {
+            $('.ajax-loader>span').html(text);
+        }
+
+        $(document).ajaxStart(function () {
+            if (window.ajaxLoaderText === undefined) {
+                window.ajaxLoaderText = "Загрузка...";
+            }
+
+            $.AjaxLoaderSetText(window.ajaxLoaderText);
+
+            $('.ajax-loader').show();
+            $('.ajax-bg').show();
+            $('body').css('overflow', 'hidden');
+        }).ajaxStop(function () {
+            window.ajaxLoaderText = undefined;
+
+            $('.ajax-loader').hide();
+            $('.ajax-bg').hide();
+            $('body').css('overflow', 'visible');
+        });
+    </script>
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
 </body>
