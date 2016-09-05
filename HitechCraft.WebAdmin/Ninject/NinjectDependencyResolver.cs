@@ -63,7 +63,7 @@ namespace HitechCraft.WebAdmin.Ninject
             #region Projector Ninjects
 
             _kernel.Bind(typeof(IProjector<,>)).To(typeof(BaseMapper<,>));
-            _kernel.Bind(typeof(IProjector<Player, PlayerInfoViewModel>)).To(typeof(PlayerToPlayerInfoViewModelMapper));
+            _kernel.Bind(typeof(IProjector<Currency, PlayerInfoViewModel>)).To(typeof(CurrencyToPlayerInfoViewModelMapper));
 
             #endregion
 

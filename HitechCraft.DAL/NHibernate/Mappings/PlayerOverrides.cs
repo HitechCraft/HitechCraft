@@ -29,9 +29,6 @@
             mapping.References(x => x.Info)
                 .Column("PlayerInfo")
                 .Cascade.All();
-
-            mapping.HasOne(x => x.Currency)
-                .PropertyRef(x => x.Player);
         }
     }
 }

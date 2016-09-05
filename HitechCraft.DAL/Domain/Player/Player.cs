@@ -28,12 +28,7 @@
         /// Info about player
         /// </summary>
         public virtual PlayerInfo Info { get; set; }
-
-        /// <summary>
-        /// Player currency
-        /// </summary>
-        public virtual Currency Currency { get; set; }
-
+        
         #endregion
     }
 }

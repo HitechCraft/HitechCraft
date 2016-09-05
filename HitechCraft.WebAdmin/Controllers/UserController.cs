@@ -48,14 +48,14 @@ namespace HitechCraft.WebAdmin.Controllers
         {
             try
             {
-                var player = new EntityListQueryHandler<Player, PlayerInfoViewModel>(this.Container)
-                    .Handle(new EntityListQuery<Player, PlayerInfoViewModel>()
+                var playerInfo = new EntityListQueryHandler<Currency, PlayerInfoViewModel>(this.Container)
+                    .Handle(new EntityListQuery<Currency, PlayerInfoViewModel>()
                     {
-                        Projector = this.Container.Resolve<IProjector<Player, PlayerInfoViewModel>>(),
-                        Specification = new PlayerByLoginSpec(userName)
+                        Projector = this.Container.Resolve<IProjector<Currency, PlayerInfoViewModel>>(),
+                        Specification = new CurrencyByPlayerNameSpec(userName)
                     });
 
-                return PartialView("_PlayerInfoPartial", player.First());
+                return PartialView("_PlayerInfoPartial", playerInfo.First());
             }
             catch (Exception e)
             {

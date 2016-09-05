@@ -219,7 +219,7 @@
     </Compile>
     <Compile Include="Mapper\BaseMapper.cs" />
     <Compile Include="Mapper\CommonMapper.cs" />
-    <Compile Include="Mapper\User\PlayerToPlayerInfoViewModelMapper.cs" />
+    <Compile Include="Mapper\User\CurrencyToPlayerInfoViewModelMapper.cs" />
     <Compile Include="Mapper\User\UserToUserViewModelMapper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
