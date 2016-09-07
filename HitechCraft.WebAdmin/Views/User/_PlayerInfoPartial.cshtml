@@ -31,21 +31,22 @@
     </div>
 
     <script type="text/javascript">
-    $(document)
-        .ready(function() {
+        $(document)
+            .ready(function() {
 
-            var P0 = new MSP({
-                showcape: true,
-                running: false,
-                spin: false,
-                freezecamera: true,
-                container: "#skinpreview",
-                width: 450,
-                height: 450
-            });
-            P0.changeSkin('@Url.Action("GetSkinImage", "User", new { gender = Model.Gender, userName = Model != null ? Model.Name : String.Empty })');
+                var P0 = new MSP({
+                    showcape: true,
+                    running: false,
+                    spin: false,
+                    freezecamera: true,
+                    container: "#skinpreview",
+                    width: 200,
+                    height: 300
+                });
+
+                P0.changeSkin('@Url.Action("GetSkinImage", "User", new { gender = Model.Gender, userName = "Admin111" })');
         });
-        </script>
+    </script>
 }
 else
 {

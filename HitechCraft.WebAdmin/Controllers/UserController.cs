@@ -45,10 +45,8 @@ namespace HitechCraft.WebAdmin.Controllers
 
             return PartialView("_UserPartialList", users);
         }
-
-        [AllowAnonymous]
-        [HttpGet]
-        public ActionResult GetSkinImage(Gender? gender, string userName = "")
+        
+        public ActionResult GetSkinImage(Gender? gender, string userName)
         {
             var playerSkinVm = new PlayerSkinQueryHandler<PlayerSkinViewModel>(this.Container)
                 .Handle(new PlayerSkinQuery<PlayerSkinViewModel>()
