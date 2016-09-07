@@ -16,7 +16,7 @@
                 .ForMember(dst => dst.Description, ext => ext.MapFrom(src => src.Description))
                 .ForMember(dst => dst.Image, ext => ext.MapFrom(src => src.Image))
                 .ForMember(dst => dst.Address, ext => ext.MapFrom(src => src.IpAddress + ":" + src.Port))
-                .ForMember(dst => dst.Data, ext => ext.MapFrom(src => src.GetServerData()));
+                .ForMember(dst => dst.Data, ext => ext.MapFrom(src => src.GetServerData(src.Image)));
         }
     }
 }

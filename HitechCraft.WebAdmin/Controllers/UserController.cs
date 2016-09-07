@@ -1,8 +1,10 @@
 ﻿using System;
 using HitechCraft.BL.CQRS.Query;
+using HitechCraft.Common.Models.Enum;
 using HitechCraft.Common.Projector;
 using HitechCraft.DAL.Domain;
 using HitechCraft.DAL.Repository.Specification;
+using HitechCraft.WebAdmin.Models.User;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
@@ -42,6 +44,21 @@ namespace HitechCraft.WebAdmin.Controllers
             var users = this.Context.Users.ToList();
 
             return PartialView("_UserPartialList", users);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult GetSkinImage(Gender? gender, string userName = "")
+        {
+            var playerSkinVm = new PlayerSkinQueryHandler<PlayerSkinViewModel>(this.Container)
+                .Handle(new PlayerSkinQuery<PlayerSkinViewModel>()
+                {
+                    UserName = userName,
+                    Gender = gender != null ? gender.Value : Gender.Male,
+                    Projector = this.Container.Resolve<IProjector<PlayerSkin, PlayerSkinViewModel>>()
+                });
+
+            return File(playerSkinVm.Image, "image/png");
         }
 
         public ActionResult PlayerInfoPartial(string userName = "")

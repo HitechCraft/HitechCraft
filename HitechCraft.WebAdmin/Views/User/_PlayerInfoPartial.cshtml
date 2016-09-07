@@ -6,22 +6,46 @@
 
 @if (Model != null)
 {
-    <p>
-        <strong>Никнэйм: </strong>
-        @Model.Name
-    </p>
-    <p>
-        <strong>Пол: </strong>
-        @Model.Gender
-    </p>
-    <p>
-        <strong>Gonts: </strong>
-        @Model.Gonts
-    </p>
-    <p>
-        <strong>Рубли: </strong>
-        @Model.Rubles
-    </p>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                <strong>Никнэйм: </strong>
+                @Model.Name
+            </p>
+            <p>
+                <strong>Пол: </strong>
+                @Model.Gender
+            </p>
+            <p>
+                <strong>Gonts: </strong>
+                @Model.Gonts
+            </p>
+            <p>
+                <strong>Рубли: </strong>
+                @Model.Rubles
+            </p>
+        </div>
+        <div class="col-md-6">
+            <div id="skinpreview" class="skinpreview" height="100%" width="100%"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    $(document)
+        .ready(function() {
+
+            var P0 = new MSP({
+                showcape: true,
+                running: false,
+                spin: false,
+                freezecamera: true,
+                container: "#skinpreview",
+                width: 450,
+                height: 450
+            });
+            P0.changeSkin('@Url.Action("GetSkinImage", "User", new { gender = Model.Gender, userName = Model != null ? Model.Name : String.Empty })');
+        });
+        </script>
 }
 else
 {

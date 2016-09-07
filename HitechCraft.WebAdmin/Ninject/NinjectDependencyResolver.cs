@@ -1,6 +1,7 @@
 ﻿using HitechCraft.DAL.Domain;
 using HitechCraft.WebAdmin.Mapper.User;
 using HitechCraft.WebAdmin.Models;
+using HitechCraft.WebAdmin.Models.User;
 
 namespace HitechCraft.WebAdmin.Ninject
 {
@@ -64,6 +65,7 @@ namespace HitechCraft.WebAdmin.Ninject
 
             _kernel.Bind(typeof(IProjector<,>)).To(typeof(BaseMapper<,>));
             _kernel.Bind(typeof(IProjector<Currency, PlayerInfoViewModel>)).To(typeof(CurrencyToPlayerInfoViewModelMapper));
+            _kernel.Bind(typeof(IProjector<PlayerSkin, PlayerSkinViewModel>)).To(typeof(PlayerSkinToPlayerSkinViewModelMapper));
 
             #endregion
 
