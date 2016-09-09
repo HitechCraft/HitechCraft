@@ -15,10 +15,13 @@
     using DAL.Repository.Specification;
     using Manager;
     using Models.User;
+    using PagedList;
 
     public class UserController : BaseController
     {
         private ApplicationDbContext _context;
+
+        public int UsersOnPage => 10;
 
         public ApplicationDbContext Context
         {
@@ -39,18 +42,22 @@
         // GET: User
         public ActionResult Index()
         {
+            ViewBag.UsersOnPage = this.UsersOnPage;
+
             return View();
         }
         
-        public ActionResult UserPartialList(string userNameFilter = "")
+        public ActionResult UserPartialList(int? page, string userNameFilter = "")
         {
+            int currentPage = page ?? 1;
+
             var users = Context.Users.ToList();
 
             if (!String.IsNullOrEmpty(userNameFilter))
                 users =
                     users.Where(x => x.UserName.Contains(userNameFilter) || x.Email.Contains(userNameFilter)).ToList();
 
-            return PartialView("_UserPartialList", users);
+            return PartialView("_UserPartialList", users.ToPagedList(currentPage, this.UsersOnPage));
         }
         
         public string GetSkinImage(Gender? gender, string userName)
@@ -235,6 +242,28 @@
                 status = JsonStatus.YES,
                 message = "Скин успешно сменен на стандартный"
             }, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// Только для получения аватара в списке
+        /// </summary>
+        /// <param name="playerName">Имя игрока</param>
+        /// <returns></returns>
+        public Gender GetPlayerGender(string playerName)
+        {
+            try
+            {
+                return new EntityListQueryHandler<Currency, PlayerInfoViewModel>(this.Container)
+                    .Handle(new EntityListQuery<Currency, PlayerInfoViewModel>()
+                    {
+                        Projector = this.Container.Resolve<IProjector<Currency, PlayerInfoViewModel>>(),
+                        Specification = new CurrencyByPlayerNameSpec(playerName)
+                    }).First().Gender;
+            }
+            catch (Exception)
+            {
+                return Gender.Male;
+            }
         }
 
         private List<string> CheckPlayerSkin(HttpPostedFileBase skinFile, out byte[] bytes)

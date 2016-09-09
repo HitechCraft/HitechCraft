@@ -137,3 +137,42 @@
         opacity: 0;
     }
 }
+
+.pagination {
+    .active {
+        a {
+            background-color: #1a242f !important;
+        }
+    }
+
+    li {
+        a {
+            background-color: #2c3e50 !important;
+            &:hover {
+                background-color: #1a242f !important;
+            }
+            &:focus{
+                background-color: #1a242f !important;
+            }
+        }
+    }
+}
+
+.user{
+    &-list{
+        &-avatar{
+            text-align: center;
+        }
+    }
+}
+
+.table{
+    &-centered{
+        tr{
+            td{
+                text-align: center;
+                vertical-align: middle !important;
+            }
+        }
+    }
+}

@@ -1,33 +1,32 @@
-﻿@model IEnumerable<HitechCraft.WebAdmin.Models.ApplicationUser>
-
-@{
-    var i = 0;
-}
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<HitechCraft.WebAdmin.Models.ApplicationUser>
 
 @Html.Partial("_PlayerInfoModal")
 
-<table class="table table-bordered">
+<table class="table table-bordered table-centered">
     <tr>
-        <td>#</td>
-        <td>User Id</td>
-        <td>Email</td>
-        <td>Никнэйм</td>
-        <td>Действия</td>
+        <th>Игрок</th>
+        <th>Email</th>
+        <th>User Id</th>
+        <th>User Roles</th>
+        <th>Действия</th>
     </tr>
     @foreach (var user in Model)
     {
-        i++;
         <tr>
-            <td>@i</td>
-            <td>@user.Id</td>
+            <td>
+                <p>@user.UserName</p>
+                <img src="data:image/jpeg;base64,@Html.Action("GetSkinImage", "User", new {gender = Html.Action("GetPlayerGender"), userName = user.UserName})" id="skin-image" class="@("avaSkin" + user.Id)" hidden=""/>
+            </td>
             <td>@user.Email</td>
-            <td>@user.UserName</td>
+            <td>@user.Id</td>
+            <td>@Html.Action("GetUserRoles", )</td>
             <td>
                 <div class="btn-group">
                     <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="javascript:LoadPlayerInfo('@user.UserName')">Инфо</a></li>
-                        <li><a href="javascript:LoadPlayerInfo('@user.UserName')">Роли</a></li>
+                        <li><a href="#">Изменить роли</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Заблокировать</a></li>
                     </ul>
@@ -37,14 +36,27 @@
     }
 </table>
 
+@Html.PagedListPager(Model, page => "javascript:FilterUsers(" + page + ")")
+
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        @foreach (var user in Model)
+        {
+            <text>
+                renderMCSkins('@("avaSkin" + user.Id)', 4);
+                $('.@("avaSkin" + user.Id)').css('border', '2px solid');
+            </text>
+        }
+    });
+
     function LoadPlayerInfo(user) {
         $.ajax({
             url: '@Url.Action("PlayerInfoPartial")',
             data: {
                 userName: user
             }
-            })
+        })
             .done(function (data) {
 
                 $('#playerInfo').html('');

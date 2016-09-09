@@ -101,6 +101,14 @@
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -237,6 +245,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Style.css">
       <DependentUpon>Style.scss</DependentUpon>
     </Content>
@@ -275,6 +284,7 @@
     <Content Include="Scripts\MSP.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\skin2DRender.js" />
     <Content Include="Scripts\tree.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -299,6 +309,7 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\_PlayerInfoPartial.cshtml" />
     <Content Include="Views\User\_PlayerInfoModal.cshtml" />
+    <Content Include="Views\User\_UserRolesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
