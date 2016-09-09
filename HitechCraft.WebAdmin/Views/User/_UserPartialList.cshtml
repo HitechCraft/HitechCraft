@@ -16,7 +16,7 @@
         <tr@(Html.Action("CheckUserGameAccount", new { userName = user.UserName }).ToString() == "False" ? " class=accountError" : String.Empty)>
             <td>
                 <p>@user.UserName</p>
-                <img src="data:image/jpeg;base64,@Html.Action("GetSkinImage", "User", new {gender = Html.Action("GetPlayerGender"), userName = user.UserName})" id="skin-image" class="@("avaSkin" + user.Id)" hidden=""/>
+                <img src="data:image/jpeg;base64,@Html.Action("GetSkinImage", "User", new {gender = Html.Action("GetPlayerGender", new {playerName = user.UserName}), userName = user.UserName})" id="skin-image" class="@("avaSkin" + user.Id)" hidden=""/>
             </td>
             <td>@user.Email</td>
             <td>@user.Id</td>
@@ -34,7 +34,7 @@
                         }
                         else
                         {
-                            <li><a href="#" id="fixAccount">Исправить!!!</a></li>
+                            <li><a href="@Url.Action("FixUserAccount", new { userName = user.UserName, gender = Html.Action("GetPlayerGender", new {playerName = user.UserName}), email = user.Email})" id="fixAccount">Исправить!!!</a></li>
                         }
                     </ul>
                 </div>

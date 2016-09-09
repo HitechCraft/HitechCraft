@@ -93,7 +93,7 @@ namespace HitechCraft.WebAdmin.Controllers
 
             if (!IsAdmin(model.Email))
             {
-                ModelState.AddModelError(String.Empty, "Пользователь не является администратором!");
+                ModelState.AddModelError(String.Empty, "Ошибка авторизации!");
 
                 return View(model);
             }

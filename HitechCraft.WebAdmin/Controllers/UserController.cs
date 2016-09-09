@@ -294,6 +294,33 @@ namespace HitechCraft.WebAdmin.Controllers
             }
         }
 
+        public ActionResult FixUserAccount(string userName, Gender gender, string email)
+        {
+            try
+            {
+                if (!new EntityListQueryHandler<Currency, PlayerInfoViewModel>(this.Container)
+                    .Handle(new EntityListQuery<Currency, PlayerInfoViewModel>()
+                    {
+                        Projector = this.Container.Resolve<IProjector<Currency, PlayerInfoViewModel>>(),
+                        Specification = new CurrencyByPlayerNameSpec(userName)
+                    }).Any())
+                {
+                    this.CommandExecutor.Execute(new PlayerRegisterCreateCommand()
+                    {
+                        Name = userName,
+                        Gender = gender,
+                        Email = email,
+                        ReferId = String.Empty
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public bool CheckUserGameAccount(string userName)
         {
             return new EntityListQueryHandler<Currency, PlayerInfoViewModel>(Container)
