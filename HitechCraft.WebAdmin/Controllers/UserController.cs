@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using HitechCraft.BL.CQRS.Command;
 using HitechCraft.BL.CQRS.Query;
 using HitechCraft.Common.Models.Enum;
 using HitechCraft.Common.Projector;
@@ -39,14 +41,18 @@ namespace HitechCraft.WebAdmin.Controllers
             return View();
         }
         
-        public ActionResult UserPartialList()
+        public ActionResult UserPartialList(string userNameFilter = "")
         {
             var users = this.Context.Users.ToList();
+
+            if (!String.IsNullOrEmpty(userNameFilter))
+                users =
+                    users.Where(x => x.UserName.Contains(userNameFilter) || x.Email.Contains(userNameFilter)).ToList();
 
             return PartialView("_UserPartialList", users);
         }
         
-        public ActionResult GetSkinImage(Gender? gender, string userName)
+        public string GetSkinImage(Gender? gender, string userName)
         {
             var playerSkinVm = new PlayerSkinQueryHandler<PlayerSkinViewModel>(this.Container)
                 .Handle(new PlayerSkinQuery<PlayerSkinViewModel>()
@@ -56,7 +62,7 @@ namespace HitechCraft.WebAdmin.Controllers
                     Projector = this.Container.Resolve<IProjector<PlayerSkin, PlayerSkinViewModel>>()
                 });
 
-            return File(playerSkinVm.Image, "image/png");
+            return Convert.ToBase64String(playerSkinVm.Image);
         }
 
         public ActionResult PlayerInfoPartial(string userName = "")
@@ -79,9 +85,84 @@ namespace HitechCraft.WebAdmin.Controllers
             }
         }
 
-        public ActionResult Edit(string userId)
+        public ActionResult Edit(string playerName)
         {
-            return View();
+            try
+            {
+                var vm = new EntityListQueryHandler<Currency, PlayerInfoViewModel>(this.Container)
+                .Handle(new EntityListQuery<Currency, PlayerInfoViewModel>()
+                {
+                    Specification = new CurrencyByPlayerNameSpec(playerName),
+                    Projector = this.Container.Resolve<IProjector<Currency, PlayerInfoViewModel>>()
+                }).First();
+
+                ViewBag.Gender = new List<SelectListItem>()
+                {
+                    new SelectListItem()
+                    {
+                        Text = "Мужской",
+                        Value = ((int)Gender.Male).ToString(),
+                        Selected = true
+                    },
+
+                    new SelectListItem()
+                    {
+                        Text = "Женский",
+                        Value = ((int)Gender.Female).ToString()
+                    }
+                };
+
+                return View(vm);
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(PlayerInfoViewModel vm)
+        {
+            if(vm.Gonts < 0 || vm.Rubles < 0) ModelState.AddModelError(String.Empty, "Величина валюты должна быть больше 0!");
+
+            ViewBag.Gender = new List<SelectListItem>()
+            {
+                new SelectListItem()
+                {
+                    Text = "Мужской",
+                    Value = ((int)Gender.Male).ToString(),
+                    Selected = true
+                },
+
+                new SelectListItem()
+                {
+                    Text = "Женский",
+                    Value = ((int)Gender.Female).ToString()
+                }
+            };
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    this.CommandExecutor.Execute(new PlayerInfoUpdateCommand()
+                    {
+                        Name = vm.Name,
+                        Gonts = vm.Gonts,
+                        Rubles = vm.Rubles,
+                        Gender = vm.Gender
+                    });
+
+                    return RedirectToAction("Edit", new { playerName = vm.Name });
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError(String.Empty, e.Message);
+                    return View(vm);
+                }
+            }
+
+            return View(vm);
         }
     }
 }

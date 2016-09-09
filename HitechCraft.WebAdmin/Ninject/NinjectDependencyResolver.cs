@@ -1,4 +1,5 @@
-﻿using HitechCraft.DAL.Domain;
+﻿using HitechCraft.BL.CQRS.Command;
+using HitechCraft.DAL.Domain;
 using HitechCraft.WebAdmin.Mapper.User;
 using HitechCraft.WebAdmin.Models;
 using HitechCraft.WebAdmin.Models.User;
@@ -53,6 +54,8 @@ namespace HitechCraft.WebAdmin.Ninject
             #region Command Bindings
 
             _kernel.Bind(typeof(ICommandHandler<>)).To(typeof(BaseCommandHandler<>));
+            _kernel.Bind(typeof(ICommandHandler<PlayerInfoUpdateCommand>)).To(typeof(PlayerInfoUpdateCommandHandler));
+
             #endregion
 
             _kernel.Bind(typeof(ICommandExecutor)).To(typeof(CommandExecutor));

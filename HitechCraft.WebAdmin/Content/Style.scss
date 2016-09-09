@@ -1,5 +1,6 @@
 ﻿body {
     padding-bottom: 20px;
+    min-width: 760px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -15,18 +16,17 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
 .logo {
     background: url("Images/logo.png");
     width: 465px;
     height: 66px;
     margin: 45px 70px;
+}
+
+.page {
+    &-title {
+        margin: 50px 0;
+    }
 }
 
 .admin {
@@ -99,4 +99,12 @@ textarea {
         z-index: 999;
         position: fixed;
     }
+}
+
+#playerInfo {
+    font-size: 22px;
+}
+
+#filterUsers {
+    margin-bottom: 15px;
 }

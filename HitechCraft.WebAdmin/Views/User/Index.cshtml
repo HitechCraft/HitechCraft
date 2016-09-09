@@ -5,4 +5,24 @@
 
 <h2>@ViewBag.Title</h2>
 
-@Html.Action("UserPartialList")
+<input id="filterUsers" class="form-control" placeholder="Поиск по имени и email" />
+
+<div id="userList">
+    @Html.Action("UserPartialList")
+</div>
+
+<script type="text/javascript">
+    $('#filterUsers')
+        .on('input',
+            function() {
+                $.ajax({
+                    url: '@Url.Action("UserPartialList", "User")',
+                    data: {
+                        userNameFilter: $('#filterUsers').val()
+                    }
+                }).done(function (data) {
+                    $('#userList').html('');
+                    $('#userList').html(data);
+                });
+    });
+</script>

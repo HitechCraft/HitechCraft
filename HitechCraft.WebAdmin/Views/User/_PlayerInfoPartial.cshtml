@@ -18,17 +18,19 @@
             </p>
             <p>
                 <strong>Gonts: </strong>
-                @Model.Gonts
+                <span id="gonts">@Model.Gonts</span>
             </p>
             <p>
                 <strong>Рубли: </strong>
-                @Model.Rubles
+                <span id="rubles">@Model.Rubles</span>
             </p>
         </div>
         <div class="col-md-6">
             <div id="skinpreview" class="skinpreview" height="100%" width="100%"></div>
         </div>
     </div>
+
+    <a href="@Url.Action("Edit", new { playerName = Model.Name })" class="btn btn-info">Изменить</a>
 
     <script type="text/javascript">
         $(document)
@@ -44,8 +46,8 @@
                     height: 300
                 });
 
-                P0.changeSkin('@Url.Action("GetSkinImage", "User", new { gender = Model.Gender, userName = "Admin111" })');
-        });
+                P0.changeSkin('data:image/jpeg;base64,@Html.Action("GetSkinImage", "User", new { gender = Model.Gender, userName = Model.Name })');
+            });
     </script>
 }
 else

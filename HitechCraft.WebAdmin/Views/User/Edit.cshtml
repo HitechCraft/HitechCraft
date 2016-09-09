@@ -1,8 +1,51 @@
-﻿@model HitechCraft.WebAdmin.Models.UserViewModel
+﻿@model HitechCraft.WebAdmin.Models.PlayerInfoViewModel
 @{
-    ViewBag.Title = "Пользователи";
+    ViewBag.Title = "Игрок " + Model.Name;
 }
 
 <h2>@ViewBag.Title</h2>
 
-@Html.Action("UserPartialList")
+@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.Name)
+    <div class="col-md-6">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Gender)
+            @Html.DropDownListFor(model => model.Gender, ViewBag.Gender as IEnumerable<SelectListItem>, new {@class = "form-control", @id = "gender"})
+            @Html.ValidationMessageFor(model => model.Gender, "", new {@class = "text-danger"})
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Gonts)
+            @Html.TextBoxFor(m => m.Gonts, new {@class = "form-control", @type = "number"})
+            @Html.ValidationMessageFor(m => m.Gonts, "", new {@class = "text-danger"})
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Rubles)
+            @Html.TextBoxFor(m => m.Rubles, new {@class = "form-control", @type = "number"})
+            @Html.ValidationMessageFor(m => m.Rubles, "", new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div id="skinpreview" class="skinpreview" height="100%" width="100%" style="text-align: center;"></div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Сохранить"/>
+}
+
+<script type="text/javascript">
+        $(document)
+            .ready(function() {
+
+                var P0 = new MSP({
+                    showcape: true,
+                    running: false,
+                    spin: false,
+                    freezecamera: true,
+                    container: "#skinpreview",
+                    width: 450,
+                    height: 450
+                });
+
+                P0.changeSkin('data:image/jpeg;base64,@Html.Action("GetSkinImage", "User", new { gender = Model.Gender, userName = Model.Name })');
+            });
+</script>
