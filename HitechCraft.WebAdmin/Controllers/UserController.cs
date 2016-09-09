@@ -294,6 +294,16 @@ namespace HitechCraft.WebAdmin.Controllers
             }
         }
 
+        public bool CheckUserGameAccount(string userName)
+        {
+            return new EntityListQueryHandler<Currency, PlayerInfoViewModel>(Container)
+                .Handle(new EntityListQuery<Currency, PlayerInfoViewModel>()
+                {
+                    Specification = new CurrencyByPlayerNameSpec(userName),
+                    Projector = Container.Resolve<IProjector<Currency, PlayerInfoViewModel>>()
+                }).Any();
+        }
+
         public ActionResult UserRoles(string userName)
         {
             IEnumerable<string> roleNames = null;
