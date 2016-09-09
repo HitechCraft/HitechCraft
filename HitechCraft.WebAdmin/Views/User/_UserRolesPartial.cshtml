@@ -1,4 +1,15 @@
-﻿
+﻿@model IEnumerable<string>
 @{
     Layout = null;
+}
+@if (Model != null)
+{
+    foreach (var role in Model)
+    {
+        <p>@role</p>
+    }
+}
+else
+{
+    <p>Ролей нет</p>
 }

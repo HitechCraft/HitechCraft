@@ -1,4 +1,8 @@
-﻿namespace HitechCraft.WebAdmin.Controllers
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
+
+namespace HitechCraft.WebAdmin.Controllers
 {
     using System.Web.Mvc;
     using Common.DI;
@@ -20,6 +24,30 @@
     public class UserController : BaseController
     {
         private ApplicationDbContext _context;
+        private RoleManager<IdentityRole> _roleManager;
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        public RoleManager<IdentityRole> RoleManager
+        {
+            get
+            {
+                if (_roleManager == null)
+                    _roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(this.Context));
+                return _roleManager;
+            }
+        }
 
         public int UsersOnPage => 10;
 
@@ -264,6 +292,22 @@
             {
                 return Gender.Male;
             }
+        }
+
+        public ActionResult UserRoles(string userName)
+        {
+            IEnumerable<string> roleNames = null;
+
+            try
+            {
+                roleNames = this.Context.Users.First(x => x.UserName == userName).Roles.Select(x => this.Context.Roles.First(y => y.Id == x.RoleId).Name);
+            }
+            catch (Exception)
+            {
+                return PartialView("_UserRolesPartial", roleNames);
+            }
+
+            return PartialView("_UserRolesPartial", roleNames);
         }
 
         private List<string> CheckPlayerSkin(HttpPostedFileBase skinFile, out byte[] bytes)
