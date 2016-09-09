@@ -3,7 +3,7 @@
     ViewBag.Title = "Игрок " + Model.Name;
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 class="page-title">@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -25,11 +25,20 @@
             @Html.TextBoxFor(m => m.Rubles, new {@class = "form-control", @type = "number"})
             @Html.ValidationMessageFor(m => m.Rubles, "", new {@class = "text-danger"})
         </div>
+        <div class="form-group">
+            <label>Скин</label>
+            <input type="file" class="skin-uploader" accept="image/png" name="uploadSkinImage" id="file-upload" />
+            <div class="btn-group-justified">
+                <a href="#" class="btn btn-primary">Установить</a>
+                <a href="#" class="btn btn-primary" id="skin-delete">Вернуть стандартный</a>
+            </div>
+        </div>
     </div>
     <div class="col-md-6">
         <div id="skinpreview" class="skinpreview" height="100%" width="100%" style="text-align: center;"></div>
     </div>
     <input type="submit" class="btn btn-primary" value="Сохранить"/>
+    <a href="@Url.Action("Index")" class="btn btn-primary">Отмена</a>
 }
 
 <script type="text/javascript">
@@ -48,4 +57,58 @@
 
                 P0.changeSkin('data:image/jpeg;base64,@Html.Action("GetSkinImage", "User", new { gender = Model.Gender, userName = Model.Name })');
             });
+
+    if ('@Html.Action("IsPlayerSkinExists", new { playerName = Model.Name })' === 'False') {
+        $('#skin-delete').attr('title', 'Скин не установлен');
+        $('#skin-delete').addClass('disabled');
+    }
+
+    $('#file-upload').fileupload({
+        url: '@Url.Action("UploadSkinImage", new { playerName = Model.Name })',
+        type: 'POST',
+        autoUpload: true
+    }).on('fileuploaddone', function (e, data) {
+        if (data.result.status !== "OK") {
+            $.each(data.result.data, function (j, error) {
+                growlError(error);
+            });
+        }
+        else {
+            location.reload();
+            @*//TODO: сделать фикс для Mozila*@
+            }
+    }).on('fileuploadprogressall', function (e, data) {
+
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+
+        $('.progress .progress-bar').css('visibility', 'visible');
+        $('.progress .progress-bar').css('width', progress + '%');
+        $('.progress .progress-bar').html(progress + '%');
+        $('#skin-image').attr("src", "");
+
+        if (progress >= 100) {
+            $('#skin-image').attr("src", "");
+        }
+    });
+
+    $('#skin-delete').on('click', function () {
+        if (confirm('Вы действительно хотите вернуть стандартный скин?')) {
+            $.post('@Url.Action("RemovePlayerSkin", new { playerName = Model.Name })')
+                .done(function (data) {
+                    console.log(data);
+                    if (data.status === 1) {
+                        growlSuccess(data.message);
+                    } else {
+                        growlError(data.message);
+                    }
+
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000);
+                })
+                .fail(function (data) {
+                    growlError(data);
+                });
+        }
+    });
 </script>

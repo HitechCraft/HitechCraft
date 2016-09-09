@@ -9,7 +9,14 @@ namespace HitechCraft.WebAdmin
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/jquery-1.*",
+                        "~/Scripts/jquery.jgrowl*",
                         "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.unobtrusive*",
+                        "~/Scripts/jquery.fileupload*",
+                        "~/Scripts/jquery.ui*",
+                        "~/Scripts/jquery-ui*",
+                        "~/Scripts/jgrowl.alerts.js",
                         "~/Scripts/MSP.js",
                         "~/Scripts/tree.js"));
 

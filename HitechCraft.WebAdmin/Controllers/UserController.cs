@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using HitechCraft.BL.CQRS.Command;
-using HitechCraft.BL.CQRS.Query;
-using HitechCraft.Common.Models.Enum;
-using HitechCraft.Common.Projector;
-using HitechCraft.DAL.Domain;
-using HitechCraft.DAL.Repository.Specification;
-using HitechCraft.WebAdmin.Models.User;
-
-namespace HitechCraft.WebAdmin.Controllers
+﻿namespace HitechCraft.WebAdmin.Controllers
 {
     using System.Web.Mvc;
     using Common.DI;
     using System.Linq;
     using Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Web;
+    using BL.CQRS.Command;
+    using BL.CQRS.Query;
+    using Common.Models.Enum;
+    using Common.Projector;
+    using DAL.Domain;
+    using DAL.Repository.Specification;
+    using Manager;
+    using Models.User;
 
     public class UserController : BaseController
     {
@@ -43,7 +44,7 @@ namespace HitechCraft.WebAdmin.Controllers
         
         public ActionResult UserPartialList(string userNameFilter = "")
         {
-            var users = this.Context.Users.ToList();
+            var users = Context.Users.ToList();
 
             if (!String.IsNullOrEmpty(userNameFilter))
                 users =
@@ -54,12 +55,12 @@ namespace HitechCraft.WebAdmin.Controllers
         
         public string GetSkinImage(Gender? gender, string userName)
         {
-            var playerSkinVm = new PlayerSkinQueryHandler<PlayerSkinViewModel>(this.Container)
+            var playerSkinVm = new PlayerSkinQueryHandler<PlayerSkinViewModel>(Container)
                 .Handle(new PlayerSkinQuery<PlayerSkinViewModel>()
                 {
                     UserName = userName,
                     Gender = gender != null ? gender.Value : Gender.Male,
-                    Projector = this.Container.Resolve<IProjector<PlayerSkin, PlayerSkinViewModel>>()
+                    Projector = Container.Resolve<IProjector<PlayerSkin, PlayerSkinViewModel>>()
                 });
 
             return Convert.ToBase64String(playerSkinVm.Image);
@@ -69,10 +70,10 @@ namespace HitechCraft.WebAdmin.Controllers
         {
             try
             {
-                var playerInfo = new EntityListQueryHandler<Currency, PlayerInfoViewModel>(this.Container)
+                var playerInfo = new EntityListQueryHandler<Currency, PlayerInfoViewModel>(Container)
                     .Handle(new EntityListQuery<Currency, PlayerInfoViewModel>()
                     {
-                        Projector = this.Container.Resolve<IProjector<Currency, PlayerInfoViewModel>>(),
+                        Projector = Container.Resolve<IProjector<Currency, PlayerInfoViewModel>>(),
                         Specification = new CurrencyByPlayerNameSpec(userName)
                     });
 
@@ -89,11 +90,11 @@ namespace HitechCraft.WebAdmin.Controllers
         {
             try
             {
-                var vm = new EntityListQueryHandler<Currency, PlayerInfoViewModel>(this.Container)
+                var vm = new EntityListQueryHandler<Currency, PlayerInfoViewModel>(Container)
                 .Handle(new EntityListQuery<Currency, PlayerInfoViewModel>()
                 {
                     Specification = new CurrencyByPlayerNameSpec(playerName),
-                    Projector = this.Container.Resolve<IProjector<Currency, PlayerInfoViewModel>>()
+                    Projector = Container.Resolve<IProjector<Currency, PlayerInfoViewModel>>()
                 }).First();
 
                 ViewBag.Gender = new List<SelectListItem>()
@@ -145,7 +146,7 @@ namespace HitechCraft.WebAdmin.Controllers
             {
                 try
                 {
-                    this.CommandExecutor.Execute(new PlayerInfoUpdateCommand()
+                    CommandExecutor.Execute(new PlayerInfoUpdateCommand()
                     {
                         Name = vm.Name,
                         Gonts = vm.Gonts,
@@ -163,6 +164,124 @@ namespace HitechCraft.WebAdmin.Controllers
             }
 
             return View(vm);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult UploadSkinImage(string playerName)
+        {
+            var uploadImage = Request.Files["uploadSkinImage"];
+
+            byte[] bytes;
+
+            var errors = CheckPlayerSkin(uploadImage, out bytes);
+
+            if (!errors.Any())
+            {
+                CommandExecutor.Execute(new PlayerSkinCreateOrUpdateCommand()
+                {
+                    PlayerName = playerName,
+                    Image = bytes
+                });
+
+                return Json(new { status = "OK", data = "" });
+            }
+            else
+            {
+                return Json(new { status = "NO", data = errors });
+            }
+        }
+
+        public bool IsPlayerSkinExists(string playerName)
+        {
+            return new PlayerSkinExistsQueryHandler(this.Container)
+                .Handle(new PlayerSkinExistsQuery()
+                {
+                    UserName = playerName
+                });
+        }
+
+        [HttpPost]
+        public JsonResult RemovePlayerSkin(string playerName)
+        {
+            try
+            {
+                if (!IsPlayerSkinExists(playerName))
+                {
+                    return Json(new
+                    {
+                        status = JsonStatus.NO,
+                        message = "Скин пользователя не загружен"
+                    }, JsonRequestBehavior.AllowGet);
+                }
+
+                new PlayerSkinRemoveCommandHandler(this.Container)
+                    .Handle(new PlayerSkinRemoveCommand()
+                    {
+                        PlayerName = playerName
+                    });
+            }
+            catch (Exception e)
+            {
+                return Json(new
+                {
+                    status = JsonStatus.NO,
+                    message = e.Message
+                }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new
+            {
+                status = JsonStatus.YES,
+                message = "Скин успешно сменен на стандартный"
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        private List<string> CheckPlayerSkin(HttpPostedFileBase skinFile, out byte[] bytes)
+        {
+            var errors = new List<string>();
+            bytes = ImageManager.GetImageBytes(skinFile);
+
+            if (skinFile == null)
+            {
+                errors.Add("Файл скина не выбран");
+
+                return errors;
+            }
+
+            var fileType = skinFile.ContentType;
+            var allowedTypes = new List<string>() { "image/png" };
+
+            if (!allowedTypes.Contains(fileType))
+            {
+                errors.Add("Скин может быть в формате .png");
+
+                return errors;
+            }
+
+            var image = System.Drawing.Image.FromStream(new System.IO.MemoryStream(bytes));
+
+            if (image.Width <= 64 && (image.Width / image.Height != 2 && image.Width / image.Height != 1))
+            {
+                errors.Add("Скины должны быть формата 1:1 или 2:1 (например, 64x64 или 64x32)");
+            }
+
+            if (image.Width > 64 && image.Width / image.Height != 2)
+            {
+                errors.Add("HD скины должны быть формата 2:1 (например, 1024x512)");
+            }
+
+            if (image.Width > 1024)
+            {
+                errors.Add("Максимальный размер скина - 1024x512");
+            }
+
+            if (skinFile.ContentLength / 1048576 > 1)
+            {
+                errors.Add("Максимальный размер файла - 1 МБ");
+            }
+
+            return errors;
         }
     }
 }
