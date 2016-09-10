@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Новости";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<input id="filterNews" class="form-control" placeholder="Поиск по названию и тексту" />
+
+<div id="newsList">
+    @Html.Action("NewsPartialList")
+</div>
+
+<script type="text/javascript">
+    $('#filterNews')
+        .on('input',
+            function() {
+                LoadNews(null);
+            });
+
+    function FilterNews(page) {
+        LoadNews(page);
+    }
+
+    function LoadNews(pageNumber) {
+        $.ajax({
+            url: '@Url.Action("NewsPartialList")',
+            data: {
+                page: pageNumber,
+                newsTitleFilter: $('#filterNews').val()
+            }
+        }).done(function (data) {
+            $('#newsList').html('');
+            $('#newsList').html(data);
+        });
+    }
+</script>

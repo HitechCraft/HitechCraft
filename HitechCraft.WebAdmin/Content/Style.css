@@ -86,6 +86,9 @@ textarea {
 #filterUsers {
   margin-bottom: 15px; }
 
+#filterNews {
+  margin-bottom: 15px; }
+
 .btn-group-justified .btn {
   border-radius: 0; }
   .btn-group-justified .btn:first-child {
@@ -140,4 +143,8 @@ textarea {
   cursor: pointer; }
   .role-remove:hover {
     color: #d62c1a; }
+
+.news-image {
+  max-width: 100px;
+  max-height: 100px; }
 

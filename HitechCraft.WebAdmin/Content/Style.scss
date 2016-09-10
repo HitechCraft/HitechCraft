@@ -117,6 +117,11 @@ textarea {
     margin-bottom: 15px;
 }
 
+#filterNews {
+    margin-bottom: 15px;
+}
+
+
 .btn-group-justified {
     .btn {
         border-radius: 0;
@@ -210,11 +215,18 @@ textarea {
         margin: 17px 0;
     }
 
-    &-remove{
+    &-remove {
         cursor: pointer;
 
-        &:hover{
+        &:hover {
             color: #d62c1a;
         }
+    }
+}
+
+.news {
+    &-image {
+        max-width: 100px;
+        max-height: 100px;
     }
 }
