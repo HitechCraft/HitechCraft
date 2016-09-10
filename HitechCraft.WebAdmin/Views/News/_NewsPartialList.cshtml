@@ -13,7 +13,7 @@
     {
         <tr>
             <td>
-                <img src="data:image/jpeg;base64,@Convert.ToBase64String(news.Image)" class="news-image"/>
+                <img src="data:image/jpeg;base64,@Convert.ToBase64String(news.Image)" class="news-image" />
             </td>
             <td>@news.Title</td>
             <td>@news.ShortText</td>
@@ -22,8 +22,10 @@
                 <div class="btn-group">
                     <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Инфо</a></li>
+                        <li><a href="@Url.Action("Details", "News", new { id = news.Id })">Инфо</a></li>
                         <li><a href="#">Комментарии</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:DeleteNews('@news.Id')">Удалить</a></li>
                     </ul>
                 </div>
             </td>
@@ -32,3 +34,28 @@
 </table>
 
 @Html.PagedListPager(Model, page => "javascript:FilterNews(" + page + ")")
+
+<script type="text/javascript">
+
+    function DeleteNews(newsId) {
+        if (confirm('Вы действительно хотите удалить новость?')) {
+            $.post('@Url.Action("Delete", "News")',
+                {
+                    id: parseInt(newsId)
+
+
+                },
+                function (responce) {
+                    if (responce.status === 'OK') {
+                        growlSuccess(responce.message);
+                        setTimeout(function () {
+                            document.location.reload();
+                        },
+                                2000);
+                    } else {
+                        growlError(responce.message);
+                    }
+                });
+        }
+    }
+</script>

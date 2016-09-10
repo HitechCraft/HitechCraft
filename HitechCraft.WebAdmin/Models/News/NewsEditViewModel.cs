@@ -6,9 +6,11 @@
     {
         public int Id { get; set; }
 
+        [Display(Name = "Заголовок")]
         [Required(ErrorMessage = "Обязательное поле")]
         public string Title { get; set; }
 
+        [Display(Name = "Текст")]
         [Required(ErrorMessage = "Обязательное поле")]
         public string Text { get; set; }
 
