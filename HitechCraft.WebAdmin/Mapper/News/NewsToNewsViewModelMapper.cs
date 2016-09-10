@@ -1,4 +1,5 @@
-﻿using HitechCraft.WebAdmin.Models;
+﻿using HitechCraft.DAL.Domain.Extentions;
+using HitechCraft.WebAdmin.Models;
 
 namespace HitechCraft.WebAdmin.Mapper
 {
@@ -9,7 +10,7 @@ namespace HitechCraft.WebAdmin.Mapper
             this.ConfigurationStore.CreateMap<DAL.Domain.News, NewsViewModel>()
                 .ForMember(dst => dst.Id, ext => ext.MapFrom(src => src.Id))
                 .ForMember(dst => dst.AuthorName, ext => ext.MapFrom(src => src.Author.Name))
-                .ForMember(dst => dst.ShortText, ext => ext.MapFrom(src => src.Text.Substring(0, 500) + "..."))
+                .ForMember(dst => dst.ShortText, ext => ext.MapFrom(src => src.Text.Limit(500) + "..."))
                 .ForMember(dst => dst.FullText, ext => ext.MapFrom(src => src.Text))
                 .ForMember(dst => dst.Image, ext => ext.MapFrom(src => src.Image))
                 .ForMember(dst => dst.Title, ext => ext.MapFrom(src => src.Title))

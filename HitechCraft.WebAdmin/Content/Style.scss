@@ -224,13 +224,32 @@ textarea {
     }
 }
 
+#news-image {
+    max-width: 256px;
+}
+
 .news {
     &-image {
         max-width: 100px;
         max-height: 100px;
-        &-full{
+
+        &-full {
             max-width: 220px;
             max-height: 220px;
+        }
+
+        &-changer {
+            margin-top: 20px;
+            position: relative;
+
+            input[type="file"] {
+                position: absolute;
+                top: 0px;
+                width: 200px;
+                height: 45px;
+                opacity: 0;
+                cursor: pointer;
+            }
         }
     }
 }

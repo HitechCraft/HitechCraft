@@ -5,16 +5,16 @@
 
 <h2 class="page-title">@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Edit", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <div class="col-md-6">
-        @Html.AntiForgeryToken()
+<div class="row">
+    @using (Html.BeginForm("Edit", "News", FormMethod.Post, new {enctype = "multipart/form-data"}))
+    {
+        <div class="col-md-6">
+            @Html.AntiForgeryToken()
 
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.Image)
-        @Html.HiddenFor(model => model.AuthorName)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Image)
+            @Html.HiddenFor(model => model.AuthorName)
 
-        <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
             <div class="form-group">
@@ -30,29 +30,29 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Edit" class="btn btn-default"/>
+                <input type="submit" value="Изменить" class="btn btn-primary"/>
+                <a href="@Url.Action("Details", new {id = Model.Id})" class="btn btn-primary">Отмена</a>
             </div>
         </div>
-    </div>
 
-    <div class="col-md-6">
-        @if (Model.Image != null && Convert.ToBase64String(Model.Image) != String.Empty)
-        {
-            <img alt="" id="news-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" style="max-width: 200px" />
-        }
-        else
-        {
-            <img alt="" id="news-image" src="~/Content/Images/no-image.jpg" style="max-width: 200px" />
-        }
+        <div class="col-md-6">
+            <label>Изображение</label>
+            <br/>
+            @if (Model.Image != null && Convert.ToBase64String(Model.Image) != String.Empty)
+            {
+                <img alt="" id="news-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)"/>
+            }
+            else
+            {
+                <img alt="" id="news-image" src="~/Content/Images/no-image.jpg"/>
+            }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Image)
-            <input type="file" name="uploadNewsImage" id="uploadNewsImage" />
+            <div class="form-group news-image-changer">
+                <a href="#" class="btn btn-primary">Выбрать изображение</a>
+                <input type="file" name="uploadNewsImage" id="uploadNewsImage"/>
+            </div>
         </div>
-    </div>
-}
-<div>
-    @Html.ActionLink("Back", "Details", new { id = Model.Id })
+    }
 </div>
 
 <script type="text/javascript">

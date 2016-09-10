@@ -24,8 +24,8 @@
                     <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="@Url.Action("Details", "News", new { id = news.Id })">Инфо</a></li>
-                        <li><a href="#">Комментарии</a></li>
                         <li role="separator" class="divider"></li>
+                        <li><a href="@Url.Action("Edit", "News", new { id = news.Id })">Изменить</a></li>
                         <li><a href="javascript:DeleteNews('@news.Id')">Удалить</a></li>
                     </ul>
                 </div>

@@ -54,6 +54,7 @@
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Create(NewsEditViewModel vm)
         {
             if (ModelState.IsValid)
