@@ -19,7 +19,8 @@ namespace HitechCraft.WebAdmin
                         "~/Scripts/jgrowl.alerts.js",
                         "~/Scripts/skin2DRender.js",
                         "~/Scripts/MSP.js",
-                        "~/Scripts/tree.js"));
+                        "~/Scripts/tree.js",
+                        "~/Scripts/tinymce/tinymce.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

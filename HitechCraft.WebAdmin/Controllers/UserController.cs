@@ -27,8 +27,7 @@
     public class UserController : BaseController
     {
         #region Properties
-
-        private ApplicationDbContext _context;
+        
         private RoleManager<IdentityRole> _roleManager;
         private ApplicationUserManager _userManager;
 
@@ -57,20 +56,7 @@
         public int UsersOnPage => 10;
 
         public string DefaultRoleName => "User";
-
-        public ApplicationDbContext Context
-        {
-            get
-            {
-                if (_context == null)
-                {
-                    _context = new ApplicationDbContext();
-                }
-
-                return _context;
-            }
-        }
-
+        
         #endregion
 
         #region Constructors

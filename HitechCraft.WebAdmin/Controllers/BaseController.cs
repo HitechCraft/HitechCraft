@@ -1,4 +1,7 @@
-﻿namespace HitechCraft.WebAdmin.Controllers
+﻿using HitechCraft.WebAdmin.Models;
+using Microsoft.AspNet.Identity;
+
+namespace HitechCraft.WebAdmin.Controllers
 {
     #region Using Directives
 
@@ -18,18 +21,18 @@
     {
         #region Private Fields
 
-        private Player _currentPlayer;
-
-        private Currency _currentCurrency;
-
-        private int? _newMessagesCount;
+        private ApplicationDbContext _context;
 
         #endregion
-
+        
         public IContainer Container { get; set; }
 
         public ICommandExecutor CommandExecutor { get; set; }
-        
+
+        public ApplicationDbContext Context => _context ?? (_context = new ApplicationDbContext());
+
+        public ApplicationUser Admin => this.Context.Users.Find(User.Identity.GetUserId());
+
         public BaseController(IContainer container)
         {
             this.Container = container;
