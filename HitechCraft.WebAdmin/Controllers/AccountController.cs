@@ -84,16 +84,23 @@ namespace HitechCraft.WebAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
+            if (!this.Context.Users.Any(u => u.Email == model.Email))
+            {
+                ModelState.AddModelError(String.Empty, "Данные не верные. Сосите лапу!");
+
+                return View(model);
+            }
+
             if (!UserManager.CheckPassword(this.Context.Users.First(u => u.Email == model.Email), model.Password))
             {
-                ModelState.AddModelError(String.Empty, "Данные не верные");
+                ModelState.AddModelError(String.Empty, "Данные не верные. Сосите лапу!");
 
                 return View(model);
             }
 
             if (!IsAdmin(model.Email))
             {
-                ModelState.AddModelError(String.Empty, "Ошибка авторизации!");
+                ModelState.AddModelError(String.Empty, "Ошибка авторизации. Сосите лапу!");
 
                 return View(model);
             }
@@ -108,7 +115,7 @@ namespace HitechCraft.WebAdmin.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Home");
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 default:

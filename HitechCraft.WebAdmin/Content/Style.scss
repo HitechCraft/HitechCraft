@@ -253,3 +253,27 @@ textarea {
         }
     }
 }
+
+.lol-title {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    font-size: 10px;
+    text-align: right;
+}
+
+#loginForm {
+    max-width: 285px;
+    margin: 0 auto;
+
+    h2 {
+        text-align: center;
+    }
+}
+
+.validation-summary-errors{
+    ul{
+        list-style: none;
+        padding: 0;
+    }
+}
