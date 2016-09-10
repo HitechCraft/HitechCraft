@@ -20,7 +20,7 @@
             </td>
             <td>@user.Email</td>
             <td>@user.Id</td>
-            <td>@Html.Action("UserRoles", new { userName = user.UserName})</td>
+            <td>@Html.Action("UserRolesPartial", new { userName = user.UserName})</td>
             <td>
                 <div class="btn-group">
                     <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
@@ -28,7 +28,7 @@
                         @if (Html.Action("CheckUserGameAccount", new {userName = user.UserName}).ToString() != "False")
                         {
                             <li><a href="javascript:LoadPlayerInfo('@user.UserName')">Инфо</a></li>
-                            <li><a href="#">Изменить роли</a></li>
+                            <li><a href="@Url.Action("Roles", new { userName = user.UserName })">Изменить роли</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">Заблокировать</a></li>
                         }

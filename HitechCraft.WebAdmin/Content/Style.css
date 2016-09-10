@@ -14,6 +14,12 @@
 .dl-horizontal dt {
   white-space: normal; }
 
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+  max-width: 280px; }
+
 .logo {
   background: url("Images/logo.png");
   width: 465px;
@@ -120,4 +126,18 @@
 
 #fixAccount {
   color: #d62c1a; }
+
+#userroles {
+  font-size: 25px; }
+
+#roles {
+  font-size: 25px; }
+
+.role-new {
+  margin: 17px 0; }
+
+.role-remove {
+  cursor: pointer; }
+  .role-remove:hover {
+    color: #d62c1a; }
 

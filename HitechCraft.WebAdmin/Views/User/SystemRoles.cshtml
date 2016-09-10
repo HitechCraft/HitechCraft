@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Системные роли";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<div class="row">
+    <div id="roles" class="col-md-6">
+        <p>Имеющиеся роли:</p><br/>
+        @Html.Action("RolesPartial")
+        <div class="form-group">
+            <label for="roleName">Новая роль:</label>
+            <input type="text" class="form-control role-new" id="roleName" placeholder="Имя новой роли">
+            <a class="btn btn-primary" href="javascript:CreateRole()">Добавить роль</a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function CreateRole() {
+        $.post('@Url.Action("CreateRole")',
+        { role: $('#roleName').val() },
+        function (responce) {
+
+            if (responce.status === 'OK') {
+                growlSuccess(responce.message);
+                setTimeout(function() {
+                        document.location.reload();
+                    },
+                    2000);
+            } else {
+                growlError(responce.message);
+            }
+        });
+    }
+</script>

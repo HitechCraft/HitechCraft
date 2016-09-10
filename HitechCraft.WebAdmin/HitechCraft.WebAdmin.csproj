@@ -245,6 +245,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\jquery.jgrowl.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Style.css">
       <DependentUpon>Style.scss</DependentUpon>
@@ -310,6 +314,9 @@
     <Content Include="Views\User\_PlayerInfoPartial.cshtml" />
     <Content Include="Views\User\_PlayerInfoModal.cshtml" />
     <Content Include="Views\User\_UserRolesPartial.cshtml" />
+    <Content Include="Views\User\Roles.cshtml" />
+    <Content Include="Views\User\_SystemRolesPartial.cshtml" />
+    <Content Include="Views\User\SystemRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

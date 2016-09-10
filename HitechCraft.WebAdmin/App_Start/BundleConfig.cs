@@ -35,7 +35,9 @@ namespace HitechCraft.WebAdmin
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/Style.css"));
+                      "~/Content/Style.css",
+                      "~/Content/jquery-ui*",
+                      "~/Content/jquery.jgrowl.css"));
         }
     }
 }

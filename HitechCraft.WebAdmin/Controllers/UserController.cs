@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-
-namespace HitechCraft.WebAdmin.Controllers
+﻿namespace HitechCraft.WebAdmin.Controllers
 {
+    #region Using Directives
+
     using System.Web.Mvc;
     using Common.DI;
     using System.Linq;
@@ -20,9 +18,16 @@ namespace HitechCraft.WebAdmin.Controllers
     using Manager;
     using Models.User;
     using PagedList;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity.Owin;
 
+    #endregion
+    
     public class UserController : BaseController
     {
+        #region Properties
+
         private ApplicationDbContext _context;
         private RoleManager<IdentityRole> _roleManager;
         private ApplicationUserManager _userManager;
@@ -51,6 +56,8 @@ namespace HitechCraft.WebAdmin.Controllers
 
         public int UsersOnPage => 10;
 
+        public string DefaultRoleName => "User";
+
         public ApplicationDbContext Context
         {
             get
@@ -63,18 +70,26 @@ namespace HitechCraft.WebAdmin.Controllers
                 return _context;
             }
         }
+
+        #endregion
+
+        #region Constructors
+
         public UserController(IContainer container) : base(container)
         {
         }
 
-        // GET: User
+        #endregion
+
+        #region Actions
+
         public ActionResult Index()
         {
             ViewBag.UsersOnPage = this.UsersOnPage;
 
             return View();
         }
-        
+
         public ActionResult UserPartialList(int? page, string userNameFilter = "")
         {
             int currentPage = page ?? 1;
@@ -87,7 +102,7 @@ namespace HitechCraft.WebAdmin.Controllers
 
             return PartialView("_UserPartialList", users.ToPagedList(currentPage, this.UsersOnPage));
         }
-        
+
         public string GetSkinImage(Gender? gender, string userName)
         {
             var playerSkinVm = new PlayerSkinQueryHandler<PlayerSkinViewModel>(Container)
@@ -159,7 +174,7 @@ namespace HitechCraft.WebAdmin.Controllers
         [HttpPost]
         public ActionResult Edit(PlayerInfoViewModel vm)
         {
-            if(vm.Gonts < 0 || vm.Rubles < 0) ModelState.AddModelError(String.Empty, "Величина валюты должна быть больше 0!");
+            if (vm.Gonts < 0 || vm.Rubles < 0) ModelState.AddModelError(String.Empty, "Величина валюты должна быть больше 0!");
 
             ViewBag.Gender = new List<SelectListItem>()
             {
@@ -331,9 +346,56 @@ namespace HitechCraft.WebAdmin.Controllers
                 }).Any();
         }
 
-        public ActionResult UserRoles(string userName)
+
+        public ActionResult Roles(string userName)
+        {
+            try
+            {
+                var applicationUser = this.Context.Users.First(x => x.UserName == userName);
+
+                ViewBag.UserName = userName;
+            }
+            catch (Exception)
+            {
+                return HttpNotFound();
+            }
+
+            var userRoles = this.Context.Users.First(u => u.UserName == userName).Roles.Select(r => r.RoleId).ToList();
+
+            ViewBag.RoleList =
+                this.Context.Roles
+                    .Where(x => x.Name != this.DefaultRoleName &&
+                        !userRoles.Contains(x.Id))
+                        .Select(x => new SelectListItem()
+                        {
+                            Text = x.Name,
+                            Value = x.Id
+                        }).ToList();
+
+            return View();
+        }
+
+        public ActionResult RolesPartial(string userName)
         {
             IEnumerable<string> roleNames = null;
+
+            try
+            {
+                roleNames = this.Context.Roles.Select(x => x.Name);
+            }
+            catch (Exception)
+            {
+                return PartialView("_SystemRolesPartial", roleNames);
+            }
+
+            return PartialView("_SystemRolesPartial", roleNames);
+        }
+
+        public ActionResult UserRolesPartial(string userName)
+        {
+            IEnumerable<string> roleNames = null;
+
+            ViewBag.UserName = userName;
 
             try
             {
@@ -346,6 +408,121 @@ namespace HitechCraft.WebAdmin.Controllers
 
             return PartialView("_UserRolesPartial", roleNames);
         }
+
+        [HttpPost]
+        public JsonResult CreateRole(string role)
+        {
+            if (!this.Context.Roles.Any(r => r.Name == role))
+            {
+                try
+                {
+                    this.RoleManager.Create(new IdentityRole(role));
+                }
+                catch (Exception e)
+                {
+                    return Json(new { status = "NO", message = e.Message });
+                }
+            }
+            else
+            {
+                return Json(new { status = "NO", message = "Роль с таким именем уже существует" });
+            }
+
+            return Json(new { status = "OK", message = "Роль успешно добавлена" });
+        }
+
+
+        [HttpPost]
+        public JsonResult DeleteRole(string role)
+        {
+            if(role == this.DefaultRoleName) return Json(new { status = "NO", message = "Нельзя удалить дефолтную роль!" });
+
+            try
+            {
+                var roleId = this.Context.Roles.First(rl => rl.Name == role).Id;
+
+                if (
+                    !this.Context.Users.Any(
+                        x => x.Roles.Select(r => r.RoleId).Contains(roleId)))
+                {
+                    this.RoleManager.Delete(this.Context.Roles.First(rl => rl.Name == role));
+                    
+                    return Json(new { status = "OK", message = "Роль успешно удалена!" });
+                }
+                else
+                {
+                    return Json(new { status = "NO", message = "Данную роль используют пользователи. Удаление невозможно!" });
+                }
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "NO", message = e.Message });
+            }
+        }
+        
+        [HttpPost]
+        public JsonResult SetUserRole(string userName, string roleId)
+        {
+            var user = this.UserManager.FindByName(userName);
+
+            if (user == null) return Json(new { status = "NO", message = "Пользователя не существует" });
+            else
+                if (!this.UserManager.IsInRole(user.Id, this.RoleManager.Roles.First(x => x.Id == roleId).Name))
+            {
+                try
+                {
+                    this.UserManager.AddToRole(user.Id,
+                        this.RoleManager.Roles.First(x => x.Id == roleId).Name);
+
+                    return Json(new { status = "OK", message = "Роль успешно установлена!" });;
+                }
+                catch (Exception e)
+                {
+                    return Json(new { status = "NO", message = "Ошибка установки роли: " + e.Message });
+                }
+            }
+            else
+            {
+                return Json(new { status = "NO", message = "Пользователь уже имеет такую роль" });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult DeleteUserRole(string userName, string role)
+        {
+            if (role == this.DefaultRoleName) return Json(new { status = "NO", message = "Нельзя снять дефолтную роль!" });
+
+            var user = this.UserManager.FindByName(userName);
+
+            if (user == null) return Json(new { status = "NO", message = "Пользователя не существует" });
+            else
+                if (this.UserManager.IsInRole(user.Id, role))
+            {
+                try
+                {
+                    this.UserManager.RemoveFromRole(user.Id, role);
+
+                    return Json(new { status = "OK", message = "Роль успешно снята с пользователя!" }); ;
+                }
+                catch (Exception e)
+                {
+                    return Json(new { status = "NO", message = "Ошибка снятия роли: " + e.Message });
+                }
+            }
+            else
+            {
+                return Json(new { status = "NO", message = "Пользователь не состоит в этой роли" });
+            }
+        }
+
+        public ActionResult SystemRoles()
+        {
+            return View();
+        }
+
+        #endregion
+
+        #region Private Methods
 
         private List<string> CheckPlayerSkin(HttpPostedFileBase skinFile, out byte[] bytes)
         {
@@ -393,5 +570,7 @@ namespace HitechCraft.WebAdmin.Controllers
 
             return errors;
         }
+
+        #endregion
     }
 }
