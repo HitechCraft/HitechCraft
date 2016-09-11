@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Предметы магазина";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+
+<input id="filter" class="form-control" placeholder="Поиск по названию" />
+
+<div id="itemsList">
+    @Html.Action("ItemsPartialList")
+</div>
+
+<script type="text/javascript">
+    $('#filter')
+        .on('input',
+            function() {
+                LoadItems(null);
+            });
+
+    function FilterItems(page) {
+        LoadItems(page);
+    }
+
+    function LoadItems(pageNumber) {
+        $.ajax({
+            url: '@Url.Action("ItemsPartialList")',
+            data: {
+                page: pageNumber,
+                itemTitleFilter: $('#filter').val()
+            }
+        }).done(function (data) {
+            $('#itemsList').html('');
+            $('#itemsList').html(data);
+        });
+    }
+</script>

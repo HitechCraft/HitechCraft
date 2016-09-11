@@ -1,0 +1,118 @@
+﻿@model HitechCraft.WebAdmin.Models.Modification.ModificationEditViewModel
+@{
+    ViewBag.Title = "Редактирование";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Edit", "Modification", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Image)
+
+    <div class="form-horizontal">
+        <h4>Сервер @Model.Name</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="guide" class="form-group">
+            @Html.LabelFor(model => model.GuideVideoCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GuideVideoCode, new { htmlAttributes = new { @class = "form-control", id = "guideVideo" } })
+                @Html.ValidationMessageFor(model => model.GuideVideoCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Version, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Version, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Version, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (Model.Image != null && Convert.ToBase64String(Model.Image) != String.Empty)
+        {
+            //todo: профиксить изображение, при повторном выборе - отмене выбора изображение остается прежним
+            <img alt="" id="mod-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" style="max-width: 200px" />
+        }
+        else
+        {
+            <img alt="" id="mod-image" src="~/Content/Images/no-image.jpg" style="max-width: 200px" />
+        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="uploadModImage" id="uploadModImage" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back", "Details", new { id = Model.Id })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    $('#guideVideo').on('input', function () {
+
+        var regExp = /^(https:\/\/[w{3}\.]{0,})(\byoutube.com\/watch\?v=\b){0,}[youtu.be]{0,}([A-Za-z0-9-_]+)[&feature=youtu.be]{0,}$/;
+
+        if (regExp.test($(this).val())) {
+            var matches = regExp.exec($(this).val());
+
+            $(this).val(matches[3]);
+
+            $('#guide').addClass('has-success');
+            $('#guide').removeClass('has-error');
+        } else {
+            $('#guide').addClass('has-error');
+            $('#guide').removeClass('has-success');
+        }
+    });
+
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#mod-image').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#uploadModImage").change(function () {
+        readURL(this);
+    });
+</script>

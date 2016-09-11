@@ -223,6 +223,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\ShopItemController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -230,16 +231,34 @@
     <Compile Include="Manager\ImageManager.cs" />
     <Compile Include="Mapper\BaseMapper.cs" />
     <Compile Include="Mapper\CommonMapper.cs" />
+    <Compile Include="Mapper\Modification\ModificationEditViewModelToModificationCreateCommandMapper.cs" />
+    <Compile Include="Mapper\Modification\ModificationEditViewModelToModificationUpdateCommandMapper.cs" />
+    <Compile Include="Mapper\Modification\ModificationToModificationEditViewModelMappe.cs" />
+    <Compile Include="Mapper\Modification\ModificationToModificationViewModelMapper.cs" />
     <Compile Include="Mapper\News\NewsEditViewModelToNewsUpdateCommandMapper.cs" />
     <Compile Include="Mapper\News\NewsToNewsEditViewModelMapper.cs" />
     <Compile Include="Mapper\News\NewsToNewsViewModelMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemCategoryEditViewModelToShopItemCategoryCreateCommandMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemCategoryToShopItemCategoryEditViewModelMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemCategoryToShopItemCategoryViewModelMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemEditViewModelToShopItemCreateCommandMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemEditViewModelToShopItemUpdateCommandMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemToShopItemEditViewModelMapper.cs" />
+    <Compile Include="Mapper\Shop\ShopItemToShopItemViewModelMapper.cs" />
     <Compile Include="Mapper\User\CurrencyToPlayerInfoViewModelMapper.cs" />
     <Compile Include="Mapper\User\PlayerSkinToPlayerSkinViewModelMapper.cs" />
     <Compile Include="Mapper\User\UserToUserViewModelMapper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Modification\ModificationEditViewModel.cs" />
+    <Compile Include="Models\Modification\ModificationServerViewModel.cs" />
+    <Compile Include="Models\Modification\ModificationViewModel.cs" />
     <Compile Include="Models\News\NewsEditViewModel.cs" />
     <Compile Include="Models\News\NewsViewModel.cs" />
+    <Compile Include="Models\Shop\ShopItemCategoryEditViewModel.cs" />
+    <Compile Include="Models\Shop\ShopItemCategoryViewModel.cs" />
+    <Compile Include="Models\Shop\ShopItemEditViewModel.cs" />
+    <Compile Include="Models\Shop\ShopItemViewModel.cs" />
     <Compile Include="Models\User\PlayerInfoViewModel.cs" />
     <Compile Include="Models\User\PlayerSkinViewModel.cs" />
     <Compile Include="Models\User\UserViewModel.cs" />
@@ -417,6 +436,16 @@
     <Content Include="Views\News\Create.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\ShopItem\_ShopItemListPartial.cshtml" />
+    <Content Include="Views\ShopItem\CreateItem.cshtml" />
+    <Content Include="Views\ShopItem\CreateItemCategory.cshtml" />
+    <Content Include="Views\ShopItem\EditItem.cshtml" />
+    <Content Include="Views\ShopItem\Index.cshtml" />
+    <Content Include="Views\Modification\Create.cshtml" />
+    <Content Include="Views\Modification\Delete.cshtml" />
+    <Content Include="Views\Modification\Details.cshtml" />
+    <Content Include="Views\Modification\Edit.cshtml" />
+    <Content Include="Views\Modification\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

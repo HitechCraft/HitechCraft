@@ -5,14 +5,14 @@
 
 <h2 class="page-title">@ViewBag.Title</h2>
 
-<input id="filterUsers" class="form-control" placeholder="Поиск по имени и email" />
+<input id="filter" class="form-control" placeholder="Поиск по имени и email" />
 
 <div id="userList">
     @Html.Action("UserPartialList")
 </div>
 
 <script type="text/javascript">
-    $('#filterUsers')
+    $('#filter')
         .on('input',
             function() {
                 LoadUsers(null);
@@ -27,7 +27,7 @@
             url: '@Url.Action("UserPartialList", "User")',
             data: {
                 page: pageNumber,
-                userNameFilter: $('#filterUsers').val()
+                userNameFilter: $('#filter').val()
             }
         }).done(function (data) {
             $('#userList').html('');

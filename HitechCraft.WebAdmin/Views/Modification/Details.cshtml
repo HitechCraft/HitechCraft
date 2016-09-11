@@ -1,0 +1,61 @@
+﻿@model HitechCraft.WebAdmin.Models.Modification.ModificationViewModel
+@{
+    ViewBag.Title = "Мод " + Model.Name;
+}
+
+@if (Model != null)
+{
+    <h2 class="page-title">@ViewBag.Title</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            @if (Model.Image != null && Convert.ToBase64String(Model.Image) != String.Empty)
+            {
+                <img alt="" class="mod-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" />
+            }
+            else
+            {
+                <img alt="" class="mod-image" src="~/Content/Images/no-image.jpg" />
+            }
+
+            <p>Версия мода: @Model.Version</p>
+            <p>@Model.Description</p>
+        </div>
+        <div class="col-md-6">
+            
+            @if (!String.IsNullOrEmpty(Model.GuideVideoCode))
+            {
+                <h3>Гайд на мод</h3>
+                <iframe width="560" height="315" src="@("https://www.youtube.com/embed/" + @Model.GuideVideoCode)" frameborder="0" allowfullscreen></iframe>
+            }
+
+            <p>
+                Используется на серверах:<br/>
+                @if (Model.Servers != null && Model.Servers.Any())
+                {
+                    foreach (var server in Model.Servers)
+                    {
+                        <a href="@Url.Action("Details", "Server", new {id = server.Id})">@server.Name</a><br/>
+                    }
+                }
+                else
+                {
+                    <p>В данное время модификация не используется!</p>
+                }
+            </p>
+        </div>
+        </div>
+
+    if (User.IsInRole("Administrator"))
+    {
+        <div class="btn-group">
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+        </div>
+    }
+}
+else
+{
+    <h2>Ошибка</h2>
+    <p>@ViewBag.Error</p>
+}

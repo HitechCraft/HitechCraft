@@ -113,14 +113,9 @@ textarea {
     font-size: 22px;
 }
 
-#filterUsers {
+#filter {
     margin-bottom: 15px;
 }
-
-#filterNews {
-    margin-bottom: 15px;
-}
-
 
 .btn-group-justified {
     .btn {
@@ -271,9 +266,15 @@ textarea {
     }
 }
 
-.validation-summary-errors{
-    ul{
+.validation-summary-errors {
+    ul {
         list-style: none;
         padding: 0;
+    }
+}
+
+.item {
+    &-image {
+        max-width: 100px;
     }
 }

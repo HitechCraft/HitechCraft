@@ -83,10 +83,7 @@ textarea {
 #playerInfo {
   font-size: 22px; }
 
-#filterUsers {
-  margin-bottom: 15px; }
-
-#filterNews {
+#filter {
   margin-bottom: 15px; }
 
 .btn-group-justified .btn {
@@ -180,4 +177,7 @@ textarea {
 .validation-summary-errors ul {
   list-style: none;
   padding: 0; }
+
+.item-image {
+  max-width: 100px; }
 
