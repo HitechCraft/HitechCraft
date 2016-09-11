@@ -8,6 +8,10 @@
 
 <input id="filter" class="form-control" placeholder="Поиск по названию" />
 
+@Html.ActionLink("Добавить предмет", "CreateItem", "ShopItem", null, new { @class = "btn btn-primary" })
+
+@Html.ActionLink("Добавить категорию", "CreateItemCategory", "ShopItem", null, new { @class = "btn btn-primary" })
+<br/><br />
 <div id="itemsList">
     @Html.Action("ItemsPartialList")
 </div>

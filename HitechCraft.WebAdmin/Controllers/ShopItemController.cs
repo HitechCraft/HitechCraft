@@ -28,7 +28,7 @@ namespace HitechCraft.WebAdmin.Controllers
         {
             return View();
         }
-        public ActionResult ItemsPartialList(int? page, string newsTitleFilter = "")
+        public ActionResult ItemsPartialList(int? page, string itemTitleFilter = "")
         {
             int currentPage = page ?? 1;
 
@@ -38,9 +38,9 @@ namespace HitechCraft.WebAdmin.Controllers
                     Projector = Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
                 });
 
-            if (!String.IsNullOrEmpty(newsTitleFilter))
+            if (!String.IsNullOrEmpty(itemTitleFilter))
                 items =
-                    items.Where(x => x.Name.Contains(newsTitleFilter)).ToList();
+                    items.Where(x => x.Name.Contains(itemTitleFilter)).ToList();
 
             return PartialView("_ShopItemListPartial", items.ToPagedList(currentPage, ItemsOnPage));
         }

@@ -1,6 +1,6 @@
 ﻿@using PagedList.Mvc
 @model PagedList.IPagedList<HitechCraft.WebAdmin.Models.ShopItemViewModel>
-<table class="table table-bordered">
+<table class="table table-bordered table-centered">
     <tr>
         <th></th>
         <th>Название</th>
@@ -8,6 +8,7 @@
         <th>Цена</th>
         <th>Категория</th>
         <th>Модификация</th>
+        <th>Действия</th>
     </tr>
     @if (Model != null && Model.Any())
     {
@@ -15,6 +16,7 @@
         {
             <tr>
                 <td>
+                    <p>@item.GameId</p>
                     <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.Image)" class="item-image"/>
                 </td>
                 <td>@item.Name</td>
@@ -22,9 +24,41 @@
                 <td>@item.Price</td>
                 <td>@item.CategoryName</td>
                 <td>@item.ModificationName</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("EditItem", "ShopItem", new { id = item.GameId })">Изменить</a></li>
+                            <li><a href="javascript:DeleteItem('@item.GameId')">Удалить</a></li>
+                        </ul>
+                    </div>
+                </td>
             </tr>
         }
     }
 
 </table>
 @Html.PagedListPager(Model, page => "javascript:FilterItems(" + page + ")")
+
+<script type="text/javascript">
+
+    function DeleteItem(itemId) {
+        if (confirm('Вы действительно хотите удалить предмет?')) {
+            $.post('@Url.Action("DeleteItem", "ShopItem")',
+                {
+                    gameId: itemId
+                },
+                function (responce) {
+                    if (responce.status === 'OK') {
+                        growlSuccess(responce.message);
+                        setTimeout(function () {
+                            document.location.reload();
+                        },
+                                2000);
+                    } else {
+                        growlError(responce.message);
+                    }
+                });
+        }
+    }
+</script>
