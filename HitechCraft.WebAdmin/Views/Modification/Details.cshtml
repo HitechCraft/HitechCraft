@@ -1,4 +1,4 @@
-﻿@model HitechCraft.WebAdmin.Models.Modification.ModificationViewModel
+﻿@model HitechCraft.WebAdmin.Models.ModificationViewModel
 @{
     ViewBag.Title = "Мод " + Model.Name;
 }
@@ -11,31 +11,36 @@
         <div class="col-md-6">
             @if (Model.Image != null && Convert.ToBase64String(Model.Image) != String.Empty)
             {
-                <img alt="" class="mod-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" />
+                <img alt="" class="mod-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" style="width: 100%;"/>
             }
             else
             {
                 <img alt="" class="mod-image" src="~/Content/Images/no-image.jpg" />
             }
 
-            <p>Версия мода: @Model.Version</p>
+            <p><strong>Версия мода: @Model.Version</strong></p>
             <p>@Model.Description</p>
         </div>
         <div class="col-md-6">
             
             @if (!String.IsNullOrEmpty(Model.GuideVideoCode))
             {
-                <h3>Гайд на мод</h3>
+                <h3 class="guide-title">Гайд на мод</h3>
                 <iframe width="560" height="315" src="@("https://www.youtube.com/embed/" + @Model.GuideVideoCode)" frameborder="0" allowfullscreen></iframe>
+            }
+            else
+            {
+                <h3 class="guide-title">Гайд на мод не добавлен. <br/>Добавить его можно, @Html.ActionLink("изменив", "Edit", new { id = Model.Id }) модификацию!</h3>
             }
 
             <p>
-                Используется на серверах:<br/>
+                <h3>Используется на серверах:</h3>
+                <br/>
                 @if (Model.Servers != null && Model.Servers.Any())
                 {
                     foreach (var server in Model.Servers)
                     {
-                        <a href="@Url.Action("Details", "Server", new {id = server.Id})">@server.Name</a><br/>
+                        @*<a href="@Url.Action("Details", "Server", new {id = server.Id})">@server.Name</a>*@<br/>
                     }
                 }
                 else
@@ -45,14 +50,11 @@
             </p>
         </div>
         </div>
-
-    if (User.IsInRole("Administrator"))
-    {
+        
         <div class="btn-group">
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
-            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Удалить", "Delete", new { id = Model.Id }, new { @class = "btn btn-primary" })
         </div>
-    }
 }
 else
 {

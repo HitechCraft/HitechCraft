@@ -13,7 +13,6 @@ namespace HitechCraft.WebAdmin.Controllers
     using DAL.Domain;
     using Manager;
     using Models;
-    using Models.Modification;
     using PagedList;
 
     public class ShopItemController : BaseController
@@ -221,11 +220,11 @@ namespace HitechCraft.WebAdmin.Controllers
                     return Json(new { status = "OK", message = "Предмет успешно удален" });
                 }
 
-                return Json(new { status = "NO", message = "Ошибка удаления предмета" });
+                return Json(new { status = "NO", message = "Ошибка удаления предмета: Id имеет неверный формат" });
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return Json(new { status = "NO", message = "Ошибка удаления предмета" });
+                return Json(new { status = "NO", message = "Ошибка удаления предмета: " + e.Message });
             }
         }
 

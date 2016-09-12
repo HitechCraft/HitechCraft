@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HitechCraft.WebAdmin.Models.Modification
+namespace HitechCraft.WebAdmin.Models
 {
     public class ModificationViewModel
     {

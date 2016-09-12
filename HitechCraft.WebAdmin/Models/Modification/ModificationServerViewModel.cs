@@ -1,4 +1,4 @@
-﻿namespace HitechCraft.WebAdmin.Models.Modification
+﻿namespace HitechCraft.WebAdmin.Models
 {
     public class ModificationServerViewModel
     {

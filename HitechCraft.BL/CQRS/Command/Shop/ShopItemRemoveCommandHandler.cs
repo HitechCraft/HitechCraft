@@ -25,7 +25,7 @@ namespace HitechCraft.BL.CQRS.Command
 
             if (playerItemRep.Query(new PlayerItemByShopItemSpec(command.GameId)).Any())
             {
-                throw new Exception("Предмет используется пользователями. Удаление невозможно!");
+                throw new Exception("Предмет используется пользователями");
             }
 
             shopItemRep.Delete(command.GameId);

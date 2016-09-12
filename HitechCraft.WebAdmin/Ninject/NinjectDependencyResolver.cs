@@ -3,7 +3,6 @@ using HitechCraft.DAL.Domain;
 using HitechCraft.WebAdmin.Mapper.Modification;
 using HitechCraft.WebAdmin.Mapper.User;
 using HitechCraft.WebAdmin.Models;
-using HitechCraft.WebAdmin.Models.Modification;
 using HitechCraft.WebAdmin.Models.User;
 
 namespace HitechCraft.WebAdmin.Ninject
@@ -73,6 +72,14 @@ namespace HitechCraft.WebAdmin.Ninject
             this._kernel.Bind(typeof(ICommandHandler<ShopItemBuyCommand>)).To(typeof(ShopItemBuyCommandHandler));
             this._kernel.Bind(typeof(ICommandHandler<ShopItemCategoryCreateCommand>)).To(typeof(ShopItemCategoryCreateCommandHandler));
             this._kernel.Bind(typeof(ICommandHandler<ShopItemCategoryRemoveCommand>)).To(typeof(ShopItemCategoryRemoveCommandHandler));
+
+            this._kernel.Bind(typeof(ICommandHandler<ServerCreateCommand>)).To(typeof(ServerCreateCommandHandler));
+            this._kernel.Bind(typeof(ICommandHandler<ServerUpdateCommand>)).To(typeof(ServerUpdateCommandHandler));
+            this._kernel.Bind(typeof(ICommandHandler<ServerRemoveCommand>)).To(typeof(ServerRemoveCommandHandler));
+
+            this._kernel.Bind(typeof(ICommandHandler<ModificationCreateCommand>)).To(typeof(ModificationCreateCommandHandler));
+            this._kernel.Bind(typeof(ICommandHandler<ModificationUpdateCommand>)).To(typeof(ModificationUpdateCommandHandler));
+            this._kernel.Bind(typeof(ICommandHandler<ModificationRemoveCommand>)).To(typeof(ModificationRemoveCommandHandler));
 
             #endregion
 

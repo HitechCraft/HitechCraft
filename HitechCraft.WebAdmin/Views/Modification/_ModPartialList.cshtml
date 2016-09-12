@@ -1,0 +1,68 @@
+﻿@using HitechCraft.DAL.Domain.Extentions
+@using PagedList.Mvc
+@model PagedList.IPagedList<HitechCraft.WebAdmin.Models.ModificationViewModel>
+
+<table class="table table-bordered">
+    <tr>
+        <th></th>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Версия</th>
+        <th>Действия</th>
+    </tr>
+    @foreach (var mod in Model)
+    {
+        <tr>
+            <td>
+                @if (mod.Image != null && Convert.ToBase64String(mod.Image) != String.Empty)
+                {
+                    <img alt="" id="news-image" src="data:image/jpeg;base64,@Convert.ToBase64String(mod.Image)" />
+                }
+                else
+                {
+                    <img alt="" id="news-image" src="~/Content/Images/no-image.jpg" />
+                }
+
+            </td>
+            <td>@mod.Name</td>
+            <td>@mod.Description.Limit(100)</td>
+            <td>@mod.Version</td>
+            <td>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("Details", "Modification", new { id = mod.Id })">Инфо</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="@Url.Action("Edit", "Modification", new { id = mod.Id })">Изменить</a></li>
+                        <li><a href="javascript:DeleteMod('@mod.Id')">Удалить</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.PagedListPager(Model, page => "javascript:FilterMods(" + page + ")")
+
+<script type="text/javascript">
+
+    function DeleteMod(modId) {
+        if (confirm('Вы действительно хотите удалить модификацию?')) {
+            $.post('@Url.Action("Delete", "Modification")',
+                {
+                    id: parseInt(modId)
+                },
+                function (responce) {
+                    if (responce.status === 'OK') {
+                        growlSuccess(responce.message);
+                        setTimeout(function () {
+                            document.location.reload();
+                        },
+                                2000);
+                    } else {
+                        growlError(responce.message);
+                    }
+                });
+        }
+    }
+</script>

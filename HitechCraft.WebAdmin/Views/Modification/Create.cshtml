@@ -1,4 +1,4 @@
-﻿@model HitechCraft.WebAdmin.Models.Modification.ModificationEditViewModel
+﻿@model HitechCraft.WebAdmin.Models.ModificationEditViewModel
 @{
     ViewBag.Title = "Добавить модификацию";
 }
@@ -7,65 +7,51 @@
 
 @using (Html.BeginForm("Create", "Modification", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-6">
+            @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Добавить модификацию</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Version)
+                @Html.EditorFor(model => model.Version, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Version, "", new {@class = "text-danger"})
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger"})
+            </div>
+
+            <div id="guide" class="form-group">
+                @Html.LabelFor(model => model.GuideVideoCode)
+                @Html.EditorFor(model => model.GuideVideoCode, new {htmlAttributes = new {@class = "form-control", id = "guideVideo"}})
+                @Html.ValidationMessageFor(model => model.GuideVideoCode, "", new {@class = "text-danger"})
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Добавить" class="btn btn-primary"/>
+                @Html.ActionLink("Отмена", "Index", "Modification", null, new { @class = "btn btn-primary" })
             </div>
         </div>
+        <div class="col-md-6">
+            <img alt="" id="mod-image" src="~/Content/Images/no-image.jpg" style="max-width: 200px" />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Version, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Version, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Version, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div id="guide" class="form-group">
-            @Html.LabelFor(model => model.GuideVideoCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GuideVideoCode, new { htmlAttributes = new { @class = "form-control", id = "guideVideo" } })
-                @Html.ValidationMessageFor(model => model.GuideVideoCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <img alt="" id="mod-image" src="~/Content/Images/no-image.jpg" style="max-width: 200px" />
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="form-group image-changer">
+                <a href="#" class="btn btn-primary">Выбрать изображение</a>
                 <input type="file" name="uploadModImage" id="uploadModImage" />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Add" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

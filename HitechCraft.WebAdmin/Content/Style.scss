@@ -224,7 +224,7 @@ textarea {
     border: 1px solid #d6d6d6;
 }
 
-#shopitem-image{
+#shopitem-image {
     border: 1px solid #d6d6d6;
 }
 
@@ -303,5 +303,12 @@ textarea {
 .list {
     &-button {
         margin-bottom: 20px;
+    }
+}
+
+.guide {
+    &-title {
+        margin-top: 0;
+        margin-bottom: 30px;
     }
 }

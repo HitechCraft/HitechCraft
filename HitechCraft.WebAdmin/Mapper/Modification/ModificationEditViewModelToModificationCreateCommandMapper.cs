@@ -1,5 +1,5 @@
 ﻿using HitechCraft.BL.CQRS.Command;
-using HitechCraft.WebAdmin.Models.Modification;
+using HitechCraft.WebAdmin.Models;
 
 namespace HitechCraft.WebAdmin.Mapper.Modification
 {
