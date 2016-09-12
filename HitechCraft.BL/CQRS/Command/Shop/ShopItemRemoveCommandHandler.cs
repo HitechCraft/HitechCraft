@@ -1,4 +1,7 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using System.Linq;
+using HitechCraft.DAL.Repository.Specification;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
@@ -18,6 +21,12 @@
         public override void Handle(ShopItemRemoveCommand command)
         {
             var shopItemRep = this.GetRepository<ShopItem>();
+            var playerItemRep = this.GetRepository<PlayerItem>();
+
+            if (playerItemRep.Query(new PlayerItemByShopItemSpec(command.GameId)).Any())
+            {
+                throw new Exception("Предмет используется пользователями. Удаление невозможно!");
+            }
 
             shopItemRep.Delete(command.GameId);
             shopItemRep.Dispose();

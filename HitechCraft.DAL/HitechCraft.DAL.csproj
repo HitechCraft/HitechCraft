@@ -120,6 +120,7 @@
     <Compile Include="Repository\Specification\News\CommentByNewsIdSpec.cs" />
     <Compile Include="Repository\Specification\Permissions\PermissionsByGroupContainsSpec.cs" />
     <Compile Include="Repository\Specification\Permissions\PermissionsByNameSpec.cs" />
+    <Compile Include="Repository\Specification\PlayerItem\PlayerItemByShopItemSpec.cs" />
     <Compile Include="Repository\Specification\PlayerItem\PlayerItemByPlayerNameSpec.cs" />
     <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByServerSpec.cs" />
     <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByPlayerNameSpec.cs" />
