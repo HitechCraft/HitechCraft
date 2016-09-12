@@ -1,19 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HitechCraft.BL.CQRS.Command;
-using HitechCraft.BL.CQRS.Query;
-using HitechCraft.Common.DI;
-using HitechCraft.Common.Projector;
-using HitechCraft.DAL.Domain;
-using HitechCraft.WebAdmin.Manager;
-using HitechCraft.WebAdmin.Models;
-using HitechCraft.WebAdmin.Models.Modification;
-using PagedList;
+﻿using System.Text.RegularExpressions;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
     using System.Web.Mvc;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using BL.CQRS.Command;
+    using BL.CQRS.Query;
+    using Common.DI;
+    using Common.Projector;
+    using DAL.Domain;
+    using Manager;
+    using Models;
+    using Models.Modification;
+    using PagedList;
 
     public class ShopItemController : BaseController
     {
@@ -32,7 +33,7 @@ namespace HitechCraft.WebAdmin.Controllers
         {
             int currentPage = page ?? 1;
 
-            var items = new EntityListQueryHandler<ShopItem, ShopItemViewModel>(this.Container)
+            var items = new EntityListQueryHandler<ShopItem, ShopItemViewModel>(Container)
                 .Handle(new EntityListQuery<ShopItem, ShopItemViewModel>()
                 {
                     Projector = Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
@@ -47,14 +48,14 @@ namespace HitechCraft.WebAdmin.Controllers
         
         public ActionResult CreateItem()
         {
-            ViewBag.Mods = this.GetMods().Select(x => new SelectListItem()
+            ViewBag.Mods = GetMods().Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString(),
                 Selected = x.Name == "Vanilla"
             });
 
-            ViewBag.Categories = this.GetCategories().Select(x => new SelectListItem()
+            ViewBag.Categories = GetCategories().Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString()
@@ -68,12 +69,23 @@ namespace HitechCraft.WebAdmin.Controllers
         {
             try
             {
+                int gameId;
+
+                if(string.IsNullOrEmpty(vm.GameId))
+                    ModelState.AddModelError(String.Empty, "ID не может быть пустым");
+
+                if(!int.TryParse(vm.GameId, out gameId) || !Regex.IsMatch(vm.GameId, @"[0-9]+\:[0-9]+"))
+                    ModelState.AddModelError(String.Empty, "ID имеет неверный формат");
+
+                var uploadImage = Request.Files["uploadShopItemImage"];
+
+                if (uploadImage == null || uploadImage.ContentLength <= 0) ModelState.AddModelError(String.Empty, "Не выбрано изображение");
+
                 if (ModelState.IsValid)
                 {
-                    var uploadImage = Request.Files["uploadShopItemImage"];
                     vm.Image = ImageManager.GetImageBytes(uploadImage);
 
-                    this.CommandExecutor.Execute(this.Project<ShopItemEditViewModel, ShopItemCreateCommand>(vm));
+                    CommandExecutor.Execute(Project<ShopItemEditViewModel, ShopItemCreateCommand>(vm));
 
                     return RedirectToAction("CreateItem");
                 }
@@ -83,13 +95,13 @@ namespace HitechCraft.WebAdmin.Controllers
                 ViewBag.Error = e.Message;
             }
 
-            ViewBag.Mods = this.GetMods().Select(x => new SelectListItem()
+            ViewBag.Mods = GetMods().Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString()
             });
 
-            ViewBag.Categories = this.GetCategories().Select(x => new SelectListItem()
+            ViewBag.Categories = GetCategories().Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString()
@@ -98,28 +110,24 @@ namespace HitechCraft.WebAdmin.Controllers
             return View(vm);
         }
         
-        public ActionResult CreateItemCategory()
+        public ActionResult ItemCategory()
         {
-            var categories = new EntityListQueryHandler<ShopItemCategory, ShopItemCategoryViewModel>(this.Container)
-                .Handle(new EntityListQuery<ShopItemCategory, ShopItemCategoryViewModel>()
-                {
-                    Projector = this.Container.Resolve<IProjector<ShopItemCategory, ShopItemCategoryViewModel>>()
-                });
-
-            ViewBag.Categories = categories;
+            ViewBag.Categories = GetCategories();
 
             return View();
         }
 
         [HttpPost]
-        public ActionResult CreateItemCategory(ShopItemCategoryEditViewModel vm)
+        public ActionResult ItemCategory(ShopItemCategoryEditViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                this.CommandExecutor.Execute(this.Project<ShopItemCategoryEditViewModel, ShopItemCategoryCreateCommand>(vm));
+                CommandExecutor.Execute(Project<ShopItemCategoryEditViewModel, ShopItemCategoryCreateCommand>(vm));
 
-                return RedirectToAction("CreateItemCategory");
+                return RedirectToAction("ItemCategory");
             }
+
+            ViewBag.Categories = GetCategories();
 
             return View();
         }
@@ -132,11 +140,11 @@ namespace HitechCraft.WebAdmin.Controllers
             {
                 if (String.IsNullOrEmpty(gameId)) throw new Exception();
 
-                vm = new EntityQueryHandler<ShopItem, ShopItemEditViewModel>(this.Container)
+                vm = new EntityQueryHandler<ShopItem, ShopItemEditViewModel>(Container)
                    .Handle(new EntityQuery<ShopItem, ShopItemEditViewModel>()
                    {
                        Id = gameId,
-                       Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemEditViewModel>>()
+                       Projector = Container.Resolve<IProjector<ShopItem, ShopItemEditViewModel>>()
                    });
             }
             catch (Exception)
@@ -144,14 +152,14 @@ namespace HitechCraft.WebAdmin.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.Mods = this.GetMods().Select(x => new SelectListItem()
+            ViewBag.Mods = GetMods().Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString(),
                 Selected = (x.Id == vm.ModificationId)
             });
 
-            ViewBag.Categories = this.GetCategories().Select(x => new SelectListItem()
+            ViewBag.Categories = GetCategories().Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString(),
@@ -171,7 +179,7 @@ namespace HitechCraft.WebAdmin.Controllers
                     var uploadImage = Request.Files["uploadShopItemImage"];
                     if (uploadImage != null && uploadImage.ContentLength > 0) vm.Image = ImageManager.GetImageBytes(uploadImage);
 
-                    this.CommandExecutor.Execute(this.Project<ShopItemEditViewModel, ShopItemUpdateCommand>(vm));
+                    CommandExecutor.Execute(Project<ShopItemEditViewModel, ShopItemUpdateCommand>(vm));
 
                     return RedirectToAction("Index");
                 }
@@ -181,14 +189,14 @@ namespace HitechCraft.WebAdmin.Controllers
                 ViewBag.Error = e.Message;
             }
 
-            ViewBag.Mods = this.GetMods().Select(x => new SelectListItem()
+            ViewBag.Mods = GetMods().Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString(),
                 Selected = (x.Id == vm.ModificationId)
             });
 
-            ViewBag.Categories = this.GetCategories().Select(x => new SelectListItem()
+            ViewBag.Categories = GetCategories().Select(x => new SelectListItem()
             {
                 Text = x.Name,
                 Value = x.Id.ToString(),
@@ -205,7 +213,7 @@ namespace HitechCraft.WebAdmin.Controllers
             {
                 if (gameId != String.Empty)
                 {
-                    this.CommandExecutor.Execute(new ShopItemRemoveCommand()
+                    CommandExecutor.Execute(new ShopItemRemoveCommand()
                     {
                         GameId = gameId
                     });
@@ -221,21 +229,44 @@ namespace HitechCraft.WebAdmin.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult DeleteItemCategory(int categoryId)
+        {
+            try
+            {
+                if (categoryId > 0)
+                {
+                    CommandExecutor.Execute(new ShopItemCategoryRemoveCommand()
+                    {
+                        CategoryId = categoryId
+                    });
+
+                    return Json(new { status = "OK", message = "Категория успешно удалена" });
+                }
+
+                return Json(new { status = "NO", message = "Не указан Id категории" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "NO", message = "Ошибка удаления категории: " + e.Message });
+            }
+        }
+        
         private ICollection<ModificationViewModel> GetMods()
         {
-            return new EntityListQueryHandler<Modification, ModificationViewModel>(this.Container)
+            return new EntityListQueryHandler<Modification, ModificationViewModel>(Container)
                 .Handle(new EntityListQuery<Modification, ModificationViewModel>()
                 {
-                    Projector = this.Container.Resolve<IProjector<Modification, ModificationViewModel>>()
+                    Projector = Container.Resolve<IProjector<Modification, ModificationViewModel>>()
                 });
         }
 
         private ICollection<ShopItemCategoryViewModel> GetCategories()
         {
-            return new EntityListQueryHandler<ShopItemCategory, ShopItemCategoryViewModel>(this.Container)
+            return new EntityListQueryHandler<ShopItemCategory, ShopItemCategoryViewModel>(Container)
                 .Handle(new EntityListQuery<ShopItemCategory, ShopItemCategoryViewModel>()
                 {
-                    Projector = this.Container.Resolve<IProjector<ShopItemCategory, ShopItemCategoryViewModel>>()
+                    Projector = Container.Resolve<IProjector<ShopItemCategory, ShopItemCategoryViewModel>>()
                 });
         }
     }

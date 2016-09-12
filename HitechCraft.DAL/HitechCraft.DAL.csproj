@@ -134,6 +134,7 @@
     <Compile Include="Repository\Specification\PrivateMessage\PrivateMessageByRecipientSpec.cs" />
     <Compile Include="Repository\Specification\PrivateMessage\PrivateMessageByAuthorSpec.cs" />
     <Compile Include="Repository\Specification\Rule\RulePointByNameSpec.cs" />
+    <Compile Include="Repository\Specification\Shop\ShopItemByCategorySpec.cs" />
     <Compile Include="UnitOfWork\NHibernateUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup />

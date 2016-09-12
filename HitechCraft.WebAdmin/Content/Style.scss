@@ -221,6 +221,11 @@ textarea {
 
 #news-image {
     max-width: 256px;
+    border: 1px solid #d6d6d6;
+}
+
+#shopitem-image{
+    border: 1px solid #d6d6d6;
 }
 
 .news {
@@ -245,6 +250,22 @@ textarea {
                 opacity: 0;
                 cursor: pointer;
             }
+        }
+    }
+}
+
+.image {
+    &-changer {
+        margin-top: 20px;
+        position: relative;
+
+        input[type="file"] {
+            position: absolute;
+            top: 0px;
+            width: 200px;
+            height: 45px;
+            opacity: 0;
+            cursor: pointer;
         }
     }
 }
@@ -276,5 +297,11 @@ textarea {
 .item {
     &-image {
         max-width: 100px;
+    }
+}
+
+.list {
+    &-button {
+        margin-bottom: 20px;
     }
 }

@@ -14,7 +14,15 @@
     {
         <tr>
             <td>
-                <img src="data:image/jpeg;base64,@Convert.ToBase64String(news.Image)" class="news-image" />
+                @if (news.Image != null && Convert.ToBase64String(news.Image) != String.Empty)
+                {
+                    <img alt="" id="news-image" src="data:image/jpeg;base64,@Convert.ToBase64String(news.Image)" />
+                }
+                else
+                {
+                    <img alt="" id="news-image" src="~/Content/Images/no-image.jpg" />
+                }
+
             </td>
             <td>@news.Title</td>
             <td>@Html.Raw(news.FullText.Limit(100))</td>

@@ -5,7 +5,10 @@
 
 <h2 class="page-title">@ViewBag.Title</h2>
 
-<input id="filter" class="form-control" placeholder="Поиск по названию и тексту" />
+<div class="list-button">
+    <input id="filter" class="form-control" placeholder="Поиск по названию и тексту" />
+    @Html.ActionLink("Добавить новость", "Create", "News", null, new { @class = "btn btn-primary" })
+</div>
 
 <div id="newsList">
     @Html.Action("NewsPartialList")

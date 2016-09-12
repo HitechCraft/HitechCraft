@@ -269,6 +269,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\item-id.jpg" />
     <Content Include="Content\Images\loader.gif" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\no-image.jpg" />
@@ -438,7 +439,7 @@
     <Content Include="Views\News\Edit.cshtml" />
     <Content Include="Views\ShopItem\_ShopItemListPartial.cshtml" />
     <Content Include="Views\ShopItem\CreateItem.cshtml" />
-    <Content Include="Views\ShopItem\CreateItemCategory.cshtml" />
+    <Content Include="Views\ShopItem\ItemCategory.cshtml" />
     <Content Include="Views\ShopItem\EditItem.cshtml" />
     <Content Include="Views\ShopItem\Index.cshtml" />
     <Content Include="Views\Modification\Create.cshtml" />
@@ -446,6 +447,7 @@
     <Content Include="Views\Modification\Details.cshtml" />
     <Content Include="Views\Modification\Edit.cshtml" />
     <Content Include="Views\Modification\Index.cshtml" />
+    <Content Include="Views\ShopItem\_GameIdModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

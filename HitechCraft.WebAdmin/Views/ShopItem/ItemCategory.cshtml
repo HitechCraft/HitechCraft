@@ -1,0 +1,70 @@
+﻿@model HitechCraft.WebAdmin.Models.ShopItemCategoryEditViewModel
+@{
+    ViewBag.Title = "Категории предметов";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        @if (ViewBag.Categories != null)
+        {
+            foreach (var category in ViewBag.Categories)
+            {
+                <p style="font-size: 20px;" title="@category.Description">@category.Name <span class="glyphicon glyphicon-remove role-remove" onclick="DeleteCategory('@category.Id')" title="Удалить категорию"></span></p>
+            }
+        }
+        else
+        {
+            <h3>Нет категорий</h3>
+        }
+    </div>
+    <div class="col-md-6">
+        <h3>Добавить категорию:</h3>
+        @using (Html.BeginForm("ItemCategory", "ShopItem", FormMethod.Post, new {enctype = "multipart/form-data"}))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger"})
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary"/>
+                @Html.ActionLink("Назад", "Index", "ShopItem", new {@class = "btn btn-primary"})
+            </div>
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    function DeleteCategory(category) {
+        if (confirm('Вы действительно хотите удалить категорию?')) {
+            $.post('@Url.Action("DeleteItemCategory")',
+            {
+                categoryId: parseInt(category)
+            },
+            function (responce) {
+                if (responce.status === 'OK') {
+                    growlSuccess(responce.message);
+                    setTimeout(function () {
+                        document.location.reload();
+                    },
+                        2000);
+                } else {
+                    growlError(responce.message);
+                }
+            });
+        }
+    }
+</script>

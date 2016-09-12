@@ -113,6 +113,8 @@
     <Compile Include="CQRS\Command\Shop\ShopItemCategoryCreateCommand.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemBuyCommand.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemBuyCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemCategoryRemoveCommand.cs" />
+    <Compile Include="CQRS\Command\Shop\ShopItemCategoryRemoveCommandHandler.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemUpdateCommand.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemRemoveCommand.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemCreateCommand.cs" />

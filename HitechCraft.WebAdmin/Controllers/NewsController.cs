@@ -71,7 +71,7 @@
                         PlayerName = Admin.UserName
                     });
                     
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "News");
                 }
                 catch (Exception e)
                 {

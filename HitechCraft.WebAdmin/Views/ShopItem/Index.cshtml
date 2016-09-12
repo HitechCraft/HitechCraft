@@ -6,12 +6,13 @@
 <h2 class="page-title">@ViewBag.Title</h2>
 
 
-<input id="filter" class="form-control" placeholder="Поиск по названию" />
+<div class="list-button">
+    <input id="filter" class="form-control" placeholder="Поиск по названию" />
 
-@Html.ActionLink("Добавить предмет", "CreateItem", "ShopItem", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Добавить предмет", "CreateItem", "ShopItem", null, new { @class = "btn btn-primary" })
 
-@Html.ActionLink("Добавить категорию", "CreateItemCategory", "ShopItem", null, new { @class = "btn btn-primary" })
-<br/><br />
+    @Html.ActionLink("Добавить категорию", "ItemCategory", "ShopItem", null, new { @class = "btn btn-primary" })
+</div>
 <div id="itemsList">
     @Html.Action("ItemsPartialList")
 </div>
@@ -19,7 +20,7 @@
 <script type="text/javascript">
     $('#filter')
         .on('input',
-            function() {
+            function () {
                 LoadItems(null);
             });
 

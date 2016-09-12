@@ -18,7 +18,7 @@ namespace HitechCraft.WebAdmin.Models
         public byte[] Image { get; set; }
 
         [Required]
-        [Display(Name = "Цена")]
+        [Display(Name = "Цена (Gonts)")]
         public float Price { get; set; }
 
         [Display(Name = "Модификация")]

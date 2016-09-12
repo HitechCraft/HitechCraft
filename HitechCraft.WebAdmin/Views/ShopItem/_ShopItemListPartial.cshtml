@@ -28,7 +28,7 @@
                     <div class="btn-group">
                         <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("EditItem", "ShopItem", new { id = item.GameId })">Изменить</a></li>
+                            <li><a href="@Url.Action("EditItem", "ShopItem", new { gameId = item.GameId })">Изменить</a></li>
                             <li><a href="javascript:DeleteItem('@item.GameId')">Удалить</a></li>
                         </ul>
                     </div>
