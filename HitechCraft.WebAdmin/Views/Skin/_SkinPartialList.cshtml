@@ -1,0 +1,64 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<HitechCraft.WebAdmin.Models.SkinViewModel>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var skin in Model)
+        {
+            <div class="col-md-3">
+                <div class="panel panel-default skin-panel">
+                    <div class="panel-heading"><span>@skin.Name</span> <span class="glyphicon glyphicon-remove role-remove" onclick="DeleteSkin('@skin.Id')" title="Снять роль с пользователя"></span></div>
+                    <div class="panel-body">
+                        <div id="@("skinpreview" + skin.Id)" class="skinpreview" height="100%" width="100%"></div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @Html.PagedListPager(Model, page => "javascript:FilterSkins(" + page + ")")
+}
+else
+{
+    <h3>Скинов нет!</h3>
+}
+
+<script>
+    function DeleteSkin(skinId) {
+        if (confirm('Вы действительно хотите удалить скин?')) {
+            $.post('@Url.Action("Delete")',
+            {
+                id: parseInt(skinId)
+            },
+            function (responce) {
+                if (responce.status === 'OK') {
+                    growlSuccess(responce.message);
+                    setTimeout(function () {
+                        document.location.reload();
+                    },
+                        2000);
+                } else {
+                    growlError(responce.message);
+                }
+            });
+        }
+    }
+    @if (Model != null && Model.Any())
+    {
+        foreach (var skin in Model)
+        {
+            <text>
+                var @("P" + skin.Id) = new MSP({
+                    showcape: true,
+                    running: false,
+                    spin: false,
+                    freezecamera: true,
+                    container: "#@("skinpreview" + skin.Id)",
+                    width: 200,
+                    height: 300
+                });
+                @("P" + skin.Id).changeSkin('data:image/jpeg;base64,@Convert.ToBase64String(skin.Image)');
+            </text>
+        }
+    }
+</script>

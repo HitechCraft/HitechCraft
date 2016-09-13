@@ -30,7 +30,7 @@
             <td>@server.Name</td>
             <td>@server.Description</td>
             <td>@server.ClientVersion</td>
-            <td>@server.Address</td>
+            <td>@(server.IpAddress + ":" + server.ServerPort)</td>
             <td>
                 @Html.ServerStatusLabel(server.Data.Status, server.Data.Message)
                 <br />
@@ -38,8 +38,9 @@
                 <div class="progress progress-striped active">
                     @if (server.Data.Status != JsonMinecraftServerStatus.Error && server.Data.Status != JsonMinecraftServerStatus.Offline)
                     {
+                        <p>@(server.Data.PlayerCount + "/" + server.Data.MaxPlayerCount)</p>
                         <div class="progress-bar progress-bar-success" style="width: @((server.Data.PlayerCount/100*server.Data.MaxPlayerCount) + "%"); text-align: center">
-                            @(server.Data.PlayerCount + " / " + server.Data.MaxPlayerCount)
+
                         </div>
                     }
                     else
@@ -53,7 +54,7 @@
                     <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="@Url.Action("Details", "Server", new { id = server.Id })">Инфо</a></li>
-                        <li><a href="@("http://hitechcraft.ru:" + server.MapPort)" target="_blank">Карта</a></li>
+                        <li><a href="@(server.IpAddress + ":" + server.MapPort)" target="_blank">Карта</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="@Url.Action("Edit", "Server", new { id = server.Id })">Изменить</a></li>
                         <li><a href="javascript:DeleteServer('@server.Id')">Удалить</a></li>

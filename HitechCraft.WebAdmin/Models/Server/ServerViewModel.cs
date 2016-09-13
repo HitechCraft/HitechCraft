@@ -8,7 +8,9 @@ namespace HitechCraft.WebAdmin.Models
 
         public string Name { get; set; }
         
-        public string Address { get; set; }
+        public string IpAddress { get; set; }
+
+        public string ServerPort { get; set; }
 
         public string MapPort { get; set; }
 

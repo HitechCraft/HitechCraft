@@ -81,6 +81,9 @@ namespace HitechCraft.WebAdmin.Ninject
             this._kernel.Bind(typeof(ICommandHandler<ModificationUpdateCommand>)).To(typeof(ModificationUpdateCommandHandler));
             this._kernel.Bind(typeof(ICommandHandler<ModificationRemoveCommand>)).To(typeof(ModificationRemoveCommandHandler));
 
+            this._kernel.Bind(typeof(ICommandHandler<SkinCreateCommand>)).To(typeof(SkinCreateCommandHandler));
+            this._kernel.Bind(typeof(ICommandHandler<SkinRemoveCommand>)).To(typeof(SkinRemoveCommandHandler));
+
             #endregion
 
             _kernel.Bind(typeof(ICommandExecutor)).To(typeof(CommandExecutor));
@@ -119,6 +122,9 @@ namespace HitechCraft.WebAdmin.Ninject
             this._kernel.Bind(typeof(IProjector<ServerEditViewModel, ServerCreateCommand>)).To(typeof(ServerEditViewModelToServerCreateCommandMapper));
             this._kernel.Bind(typeof(IProjector<ServerEditViewModel, ServerUpdateCommand>)).To(typeof(ServerEditViewModelToServerUpdateCommandMapper));
             this._kernel.Bind(typeof(IProjector<ServerCreateCommand, Server>)).To(typeof(ServerCreateCommandToServerMapper));
+
+            this._kernel.Bind(typeof(IProjector<Skin, SkinViewModel>)).To(typeof(SkinToSkinViewModelMapper));
+            this._kernel.Bind(typeof(IProjector<Skin, SkinEditViewModel>)).To(typeof(SkinToSkinEditViewModelMapper));
 
             #endregion
 

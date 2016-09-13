@@ -19,14 +19,14 @@
             }
         </div>
         <div class="col-md-7">
-            <p>Статус: @Html.ServerStatusLabel(Model.Data.Status, Model.Data.Message)</p>
+            <p>@Html.ServerStatusLabel(Model.Data.Status, Model.Data.Message)</p>
 
             @if (Model.Data.Status == JsonMinecraftServerStatus.Empty || Model.Data.Status == JsonMinecraftServerStatus.Full || Model.Data.Status == JsonMinecraftServerStatus.Online)
             {
                 <p>Игроки: @(Model.Data.PlayerCount) из @(Model.Data.MaxPlayerCount)</p>
             }
 
-            <p>Версия @Model.ClientVersion</p>
+            <p>Версия: @Model.ClientVersion</p>
 
             <p>
                 Установленные модификации:<br />
@@ -39,58 +39,75 @@
                 }
                 else
                 {
-                <p>Модификаций нет (ванильный сервер)</p>
+                    <p>Модификаций нет (ванильный сервер)</p>
                 }
                 </p>
 
                 @if (User.IsInRole("Administrator"))
                 {
                     <p>
-                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
-                        @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+                        @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                        <a href="javascript:DeleteServer('@Model.Id')" class="btn btn-primary">Удалить</a>
                     </p>
                 }
-
-                @*@if (Model.ServerData.Status == JsonServerStatus.Online)
-                    {
-                    <div class="progress progress-striped active" style="width: 500px">
-                        <div class="progress-bar" style="width: @((int)((float)Model.ServerData.PlayerCount / Model.ServerData.MaxPlayerCount * 100f))%"></div>
-                    </div>
-                    }*@
             </div>
         </div>
-    <p>Описание:
+        <p>
+            <h3>Описание:</h3>
         <p>@Model.Description</p>
-    </p>
-    <div style="min-height:200px">
-        @if (Model.Data.Status == JsonMinecraftServerStatus.Error || Model.Data.Status == JsonMinecraftServerStatus.Offline)
-        {
-        <h1 class="server-map-title">
-            Интерактивная карта
-        </h1>
-        <h3>Интерактивная карта сервера не доступна. Сервер выключен.</h3>
-        }
-        else if (Model.MapPort == 0)
-        {
-        <h1 class="server-map-title">
-            Интерактивная карта
-        </h1>
-        <h3>Интерактивная карта не установлена на данном сервере!</h3>
-        }
-        else
-        {
-        <h1 class="server-map-title">
-            Интерактивная карта
-            <a href="http://@(Model.IpAddress):@(Model.MapPort)" target="_blank">
-                <span class="glyphicon glyphicon-fullscreen server-map-fullscreen" title="Полный экран"></span>
-            </a>
-        </h1>
-        <iframe class="server-map" src="http://@(Model.IpAddress):@(Model.MapPort)"></iframe>
-        }
-    </div>
+        </p>
+        <div style="min-height:200px">
+            @if (Model.Data.Status == JsonMinecraftServerStatus.Error || Model.Data.Status == JsonMinecraftServerStatus.Offline)
+            {
+                <h1 class="server-map-title">
+                    Интерактивная карта
+                </h1>
+                <h3>Интерактивная карта сервера не доступна. Сервер выключен.</h3>
+            }
+            else if (Model.MapPort == 0)
+            {
+                <h1 class="server-map-title">
+                    Интерактивная карта
+                </h1>
+                <h3>Интерактивная карта не установлена на данном сервере!</h3>
+            }
+            else
+            {
+                <h1 class="server-map-title">
+                    Интерактивная карта
+                    <a href="http://@(Model.IpAddress):@(Model.MapPort)" target="_blank">
+                        <span class="glyphicon glyphicon-fullscreen server-map-fullscreen" title="Полный экран"></span>
+                    </a>
+                </h1>
+                <iframe class="server-map" src="http://@(Model.IpAddress):@(Model.MapPort)"></iframe>
+            }
+        </div>
 }
 else
 {
     <h2>Ошибка</h2>
     <p>@ViewBag.Error</p>
 }
+
+<script type="text/javascript">
+
+    function DeleteServer(serverId) {
+        if (confirm('Вы действительно хотите удалить сервер?')) {
+            $.post('@Url.Action("Delete", "Server")',
+                {
+                    id: parseInt(serverId)
+                },
+                function (responce) {
+                    if (responce.status === 'OK') {
+                        growlSuccess(responce.message);
+                        setTimeout(function () {
+                            document.location.reload();
+                        },
+                                2000);
+                    } else {
+                        growlError(responce.message);
+                    }
+                });
+        }
+    }
+</script>

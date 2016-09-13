@@ -122,6 +122,8 @@
     <Compile Include="CQRS\Command\Shop\ShopItemUpdateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemRemoveCommandHandler.cs" />
     <Compile Include="CQRS\Command\Shop\ShopItemCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Skin\SkinRemoveCommand.cs" />
+    <Compile Include="CQRS\Command\Skin\SkinRemoveCommandHandler.cs" />
     <Compile Include="CQRS\Command\Skin\SkinInstallCommand.cs" />
     <Compile Include="CQRS\Command\Skin\SkinCreateCommand.cs" />
     <Compile Include="CQRS\Command\Skin\SkinInstallCommandHandler.cs" />

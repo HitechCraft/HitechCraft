@@ -227,6 +227,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Controllers\ShopItemController.cs" />
+    <Compile Include="Controllers\SkinController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -254,6 +255,8 @@
     <Compile Include="Mapper\Shop\ShopItemEditViewModelToShopItemUpdateCommandMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemToShopItemEditViewModelMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemToShopItemViewModelMapper.cs" />
+    <Compile Include="Mapper\Skin\SkinToSkinEditViewModelMapper.cs" />
+    <Compile Include="Mapper\Skin\SkinToSkinViewModelMapper.cs" />
     <Compile Include="Mapper\User\CurrencyToPlayerInfoViewModelMapper.cs" />
     <Compile Include="Mapper\User\PlayerSkinToPlayerSkinViewModelMapper.cs" />
     <Compile Include="Mapper\User\UserToUserViewModelMapper.cs" />
@@ -272,6 +275,8 @@
     <Compile Include="Models\Shop\ShopItemCategoryViewModel.cs" />
     <Compile Include="Models\Shop\ShopItemEditViewModel.cs" />
     <Compile Include="Models\Shop\ShopItemViewModel.cs" />
+    <Compile Include="Models\Skin\SkinEditViewModel.cs" />
+    <Compile Include="Models\Skin\SkinViewModel.cs" />
     <Compile Include="Models\User\PlayerInfoViewModel.cs" />
     <Compile Include="Models\User\PlayerSkinViewModel.cs" />
     <Compile Include="Models\User\UserViewModel.cs" />
@@ -465,6 +470,10 @@
     <Content Include="Views\Server\Create.cshtml" />
     <Content Include="Views\Server\Details.cshtml" />
     <Content Include="Views\Server\Edit.cshtml" />
+    <Content Include="Views\Skin\_SkinDuplicatedPartial.cshtml" />
+    <Content Include="Views\Skin\_SkinPartialList.cshtml" />
+    <Content Include="Views\Skin\Index.cshtml" />
+    <Content Include="Views\Skin\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

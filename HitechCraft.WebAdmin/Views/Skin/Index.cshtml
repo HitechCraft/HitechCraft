@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Cкины игрока";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<div class="list-button">
+    <input id="filter" class="form-control" placeholder="Поиск по названию" />
+    @Html.ActionLink("Добавить скин", "Create", "Skin", null, new { @class = "btn btn-primary" })
+</div>
+
+<div id="skinList">
+    @Html.Action("SkinPartialList")
+</div>
+
+<script type="text/javascript">
+    $('#filter')
+        .on('input',
+            function () {
+                LoadSkins(null);
+            });
+
+    function FilterSkins(currentPage) {
+        LoadSkins(currentPage);
+    }
+
+    function LoadSkins(currentPage) {
+        $.get("@Url.Action("SkinPartialList", "Skin")",
+            {
+                 page: currentPage,
+                 skinTitleFilter: $('#filter').val()
+            })
+            .done(function (data) {
+                $('#skinList').html('');
+                $('#skinList').html(data);
+            });
+    }
+</script>
