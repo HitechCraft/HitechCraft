@@ -154,16 +154,6 @@ textarea {
   .news-image-full {
     max-width: 220px;
     max-height: 220px; }
-  .news-image-changer {
-    margin-top: 20px;
-    position: relative; }
-    .news-image-changer input[type="file"] {
-      position: absolute;
-      top: 0px;
-      width: 200px;
-      height: 45px;
-      opacity: 0;
-      cursor: pointer; }
 
 .image-changer {
   margin-top: 20px;

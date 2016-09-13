@@ -6,6 +6,8 @@
     using Common.DI;
     using DAL.Domain;
     using System;
+    using System.Linq;
+    using DAL.Repository.Specification;
 
     #endregion
 
@@ -18,9 +20,15 @@
         public override void Handle(ServerRemoveCommand command)
         {
             var serverRep = this.GetRepository<Server>();
-            
+            var modRep = this.GetRepository<Modification>();
+
+            if(modRep.Query(new ModificationByServerSpec(command.Id)).Any())
+                throw new Exception("Сервер связан с модификациями");
+
             serverRep.Delete(command.Id);
+
             serverRep.Dispose();
+            modRep.Dispose();
         }
     }
 }

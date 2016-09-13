@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Minecraft сервера";
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+<div class="list-button">
+    <input id="filter" class="form-control" placeholder="Поиск по названию и описанию" />
+    @Html.ActionLink("Добавить сервер", "Create", "Server", null, new { @class = "btn btn-primary" })
+</div>
+
+<div id="serverList">
+    @Html.Action("ServerPartialList")
+</div>
+
+<script type="text/javascript">
+    $('#filter')
+        .on('input',
+            function() {
+                LoadServers(null);
+            });
+
+    function FilterServers(page) {
+        LoadServers(page);
+    }
+
+    function LoadServers(pageNumber) {
+        $.ajax({
+            url: '@Url.Action("ServerPartialList")',
+            data: {
+                page: pageNumber,
+                serverTitleFilter: $('#filter').val()
+            }
+        }).done(function (data) {
+            $('#serverList').html('');
+            $('#serverList').html(data);
+        });
+    }
+</script>

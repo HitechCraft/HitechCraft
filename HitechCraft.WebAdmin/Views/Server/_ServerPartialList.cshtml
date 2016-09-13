@@ -1,0 +1,90 @@
+﻿@using HitechCraft.Common.Models.Json.MinecraftServer
+@using HitechCraft.DAL.Domain.Extentions
+@using PagedList.Mvc
+@model PagedList.IPagedList<HitechCraft.WebAdmin.Models.ServerViewModel>
+
+<table class="table table-bordered">
+    <tr>
+        <th></th>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Версия клиента</th>
+        <th>Адрес</th>
+        <th>Статус</th>
+        <th>Действия</th>
+    </tr>
+    @foreach (var server in Model)
+    {
+        <tr>
+            <td>
+                @if (server.Image != null && Convert.ToBase64String(server.Image) != String.Empty)
+                {
+                    <img alt="" id="news-image" src="data:image/jpeg;base64,@Convert.ToBase64String(server.Image)" />
+                }
+                else
+                {
+                    <img alt="" id="news-image" src="~/Content/Images/no-image.jpg" />
+                }
+
+            </td>
+            <td>@server.Name</td>
+            <td>@server.Description</td>
+            <td>@server.ClientVersion</td>
+            <td>@server.Address</td>
+            <td>
+                @Html.ServerStatusLabel(server.Data.Status, server.Data.Message)
+                <br />
+                <br />
+                <div class="progress progress-striped active">
+                    @if (server.Data.Status != JsonMinecraftServerStatus.Error && server.Data.Status != JsonMinecraftServerStatus.Offline)
+                    {
+                        <div class="progress-bar progress-bar-success" style="width: @((server.Data.PlayerCount/100*server.Data.MaxPlayerCount) + "%"); text-align: center">
+                            @(server.Data.PlayerCount + " / " + server.Data.MaxPlayerCount)
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="progress-bar progress-bar-danger" style="width: 100%"></div>
+                    }
+                </div>
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("Details", "Server", new { id = server.Id })">Инфо</a></li>
+                        <li><a href="@("http://hitechcraft.ru:" + server.MapPort)" target="_blank">Карта</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="@Url.Action("Edit", "Server", new { id = server.Id })">Изменить</a></li>
+                        <li><a href="javascript:DeleteServer('@server.Id')">Удалить</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    }
+</table>
+
+@Html.PagedListPager(Model, page => "javascript:FilterServers(" + page + ")")
+
+<script type="text/javascript">
+
+    function DeleteServer(serverId) {
+        if (confirm('Вы действительно хотите удалить сервер?')) {
+            $.post('@Url.Action("Delete", "Server")',
+                {
+                    id: parseInt(serverId)
+                },
+                function (responce) {
+                    if (responce.status === 'OK') {
+                        growlSuccess(responce.message);
+                        setTimeout(function () {
+                            document.location.reload();
+                        },
+                                2000);
+                    } else {
+                        growlError(responce.message);
+                    }
+                });
+        }
+    }
+</script>

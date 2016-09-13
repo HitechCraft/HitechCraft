@@ -3,22 +3,34 @@
 }
 <div class="logo"></div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="admin-category" onclick="document.location='@Url.Action("Index", "User")'">
             <h2><span class="glyphicon glyphicon-user"></span></h2>
             <span>Пользователи</span>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="admin-category" onclick="document.location='@Url.Action("Index", "News")'">
             <h2><span class="glyphicon glyphicon-comment"></span></h2>
             <span>Новости</span>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="admin-category" onclick="document.location='@Url.Action("Index", "ShopItem")'">
             <h2><span class="glyphicon glyphicon-shopping-cart"></span></h2>
             <span>Магазин ресурсов</span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="admin-category" onclick="document.location='@Url.Action("Index", "Modification")'">
+            <h2><span class="glyphicon glyphicon-th"></span></h2>
+            <span>Модификации</span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="admin-category" onclick="document.location='@Url.Action("Index", "Server")'">
+            <h2><span class="glyphicon glyphicon-globe"></span></h2>
+            <span>Сервера</span>
         </div>
     </div>
     @*<div class="col-md-4">

@@ -1,0 +1,93 @@
+﻿@model HitechCraft.WebAdmin.Models.ServerEditViewModel
+@{
+    ViewBag.Title = "Изменить сервер" + Model.Name;
+}
+
+<h2 class="page-title">@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Edit", "Server", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name)
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClientVersion)
+                @Html.EditorFor(model => model.ClientVersion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ClientVersion, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IpAddress)
+                @Html.EditorFor(model => model.IpAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IpAddress, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Port)
+                @Html.EditorFor(model => model.Port, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Port, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MapPort)
+                @Html.EditorFor(model => model.MapPort, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MapPort, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Изменить" class="btn btn-primary" />
+                <a href="@Url.Action("Details", new {id = Model.Id})" class="btn btn-primary">Отмена</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label>Изображение</label>
+            <br />
+            @if (Model.Image != null && Convert.ToBase64String(Model.Image) != String.Empty)
+            {
+                <img alt="" id="news-image" src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" />
+            }
+            else
+            {
+                <img alt="" id="news-image" src="~/Content/Images/no-image.jpg" />
+            }
+
+            <div class="form-group image-changer">
+                <a href="#" class="btn btn-primary">Выбрать изображение</a>
+                <input type="file" name="uploadServerImage" id="uploadServerImage" />
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#server-image').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#uploadServerImage").change(function () {
+        readURL(this);
+    });
+</script>

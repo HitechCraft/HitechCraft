@@ -213,6 +213,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Annotations\HtmlHelperExtentions.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModificationController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Controllers\ShopItemController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -239,6 +241,12 @@
     <Compile Include="Mapper\News\NewsEditViewModelToNewsUpdateCommandMapper.cs" />
     <Compile Include="Mapper\News\NewsToNewsEditViewModelMapper.cs" />
     <Compile Include="Mapper\News\NewsToNewsViewModelMapper.cs" />
+    <Compile Include="Mapper\Server\ServerCreateCommandToServerMapper.cs" />
+    <Compile Include="Mapper\Server\ServerEditViewModelToServerCreateCommandMapper.cs" />
+    <Compile Include="Mapper\Server\ServerEditViewModelToServerUpdateCommandMapper.cs" />
+    <Compile Include="Mapper\Server\ServerToServerDetailViewModelMapper.cs" />
+    <Compile Include="Mapper\Server\ServerToServerEditViewModelMapper.cs" />
+    <Compile Include="Mapper\Server\ServerToServerViewModelMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemCategoryEditViewModelToShopItemCategoryCreateCommandMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemCategoryToShopItemCategoryEditViewModelMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemCategoryToShopItemCategoryViewModelMapper.cs" />
@@ -256,6 +264,10 @@
     <Compile Include="Models\Modification\ModificationViewModel.cs" />
     <Compile Include="Models\News\NewsEditViewModel.cs" />
     <Compile Include="Models\News\NewsViewModel.cs" />
+    <Compile Include="Models\Server\ServerDetailViewModel.cs" />
+    <Compile Include="Models\Server\ServerEditViewModel.cs" />
+    <Compile Include="Models\Server\ServerModificationViewModel.cs" />
+    <Compile Include="Models\Server\ServerViewModel.cs" />
     <Compile Include="Models\Shop\ShopItemCategoryEditViewModel.cs" />
     <Compile Include="Models\Shop\ShopItemCategoryViewModel.cs" />
     <Compile Include="Models\Shop\ShopItemEditViewModel.cs" />
@@ -425,8 +437,8 @@
     <Content Include="Views\User\Roles.cshtml" />
     <Content Include="Views\User\_SystemRolesPartial.cshtml" />
     <Content Include="Views\User\SystemRoles.cshtml" />
-    <Content Include="Views\News\Index.cshtml" />
-    <Content Include="Views\News\_NewsPartialList.cshtml" />
+    <Content Include="Views\Server\Index.cshtml" />
+    <Content Include="Views\Server\_ServerPartialList.cshtml" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
@@ -448,6 +460,11 @@
     <Content Include="Views\Modification\Index.cshtml" />
     <Content Include="Views\ShopItem\_GameIdModal.cshtml" />
     <Content Include="Views\Modification\_ModPartialList.cshtml" />
+    <Content Include="Views\News\_NewsPartialList.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Server\Create.cshtml" />
+    <Content Include="Views\Server\Details.cshtml" />
+    <Content Include="Views\Server\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

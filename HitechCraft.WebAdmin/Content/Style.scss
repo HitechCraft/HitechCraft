@@ -237,20 +237,6 @@ textarea {
             max-width: 220px;
             max-height: 220px;
         }
-
-        &-changer {
-            margin-top: 20px;
-            position: relative;
-
-            input[type="file"] {
-                position: absolute;
-                top: 0px;
-                width: 200px;
-                height: 45px;
-                opacity: 0;
-                cursor: pointer;
-            }
-        }
     }
 }
 
