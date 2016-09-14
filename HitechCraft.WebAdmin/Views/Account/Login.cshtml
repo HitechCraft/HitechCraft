@@ -9,19 +9,19 @@
     <div class="col-md-12">
         <section id="loginForm">
             <h2 class="page-title">@ViewBag.Title</h2>
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", id = "login" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(m => m.Email)
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Password)
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
                     @Html.CheckBoxFor(m => m.RememberMe)
@@ -31,8 +31,10 @@
                     <div class="g-recaptcha" data-sitekey="6LcdfycTAAAAAM0Ug6A-0YdyR4VcbSPolCIz3raD"></div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Вход" class="btn btn-info"/>
-                    <a href="http://hitechcraft.ru/" class="btn btn-default">На сайт проекта</a>
+                    <div class="btn-group-justified">
+                        <a href="javascript:loginSubmit()" class="btn btn-info">Вход</a>
+                        <a href="http://hitechcraft.ru/" class="btn btn-info">На сайт проекта</a>
+                    </div>
                 </div>
             }
         </section>
@@ -42,3 +44,8 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script type="text/javascript">
+    function loginSubmit() {
+        $('#login').submit();
+    }
+</script>

@@ -24,7 +24,7 @@ textarea {
   background: url("Images/logo.png");
   width: 465px;
   height: 66px;
-  margin: 45px 70px; }
+  margin: 45px 25px; }
 
 .page-title {
   margin: 50px 0; }
@@ -212,4 +212,8 @@ textarea {
 
 .skin-panel .panel-heading {
   text-align: center; }
+
+.g-recaptcha {
+  transform: scale(0.93);
+  transform-origin: 0 0; }
 

@@ -55,6 +55,7 @@ namespace HitechCraft.WebAdmin.Ninject
             #region Command Bindings
 
             _kernel.Bind(typeof(ICommandHandler<>)).To(typeof(BaseCommandHandler<>));
+
             _kernel.Bind(typeof(ICommandHandler<PlayerInfoUpdateCommand>)).To(typeof(PlayerInfoUpdateCommandHandler));
             _kernel.Bind(typeof(ICommandHandler<PlayerSkinCreateOrUpdateCommand>)).To(typeof(PlayerSkinCreateOrUpdateCommandHandler));
             _kernel.Bind(typeof(ICommandHandler<PlayerSkinRemoveCommand>)).To(typeof(PlayerSkinRemoveCommandHandler));

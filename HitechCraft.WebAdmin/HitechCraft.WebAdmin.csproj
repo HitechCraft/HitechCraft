@@ -233,6 +233,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Manager\ImageManager.cs" />
+    <Compile Include="Manager\ReCaptchaManager.cs" />
     <Compile Include="Mapper\BaseMapper.cs" />
     <Compile Include="Mapper\CommonMapper.cs" />
     <Compile Include="Mapper\Modification\ModificationEditViewModelToModificationCreateCommandMapper.cs" />
