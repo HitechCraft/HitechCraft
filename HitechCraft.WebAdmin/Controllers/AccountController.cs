@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using HitechCraft.Common.Models.Enum;
+using HitechCraft.WebAdmin.Manager;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
@@ -91,6 +93,14 @@ namespace HitechCraft.WebAdmin.Controllers
                 return View(model);
             }
 
+#if !DEBUG
+            
+            var captchaResponse = ReCaptchaManager.ValidateReCaptcha(Request["g-recaptcha-response"]);
+
+            if (captchaResponse.Status == JsonStatus.NO)
+                ModelState.AddModelError(String.Empty, "Не верный ответ в ReCaptcha");
+#endif
+
             if (!UserManager.CheckPassword(this.Context.Users.First(u => u.Email == model.Email), model.Password))
             {
                 ModelState.AddModelError(String.Empty, "Данные не верные. Сосите лапу!");
@@ -140,7 +150,7 @@ namespace HitechCraft.WebAdmin.Controllers
             return this.UserManager.Users.FirstOrDefault(x => x.Email == email);
         }
 
-        #region Deleted
+#region Deleted
 
         ////
         //// GET: /Account/VerifyCode
@@ -444,7 +454,7 @@ namespace HitechCraft.WebAdmin.Controllers
         //    return View();
         //}
 
-        #endregion
+#endregion
 
         //
         // POST: /Account/LogOff
@@ -476,7 +486,7 @@ namespace HitechCraft.WebAdmin.Controllers
             base.Dispose(disposing);
         }
 
-        #region Helpers
+#region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -533,6 +543,6 @@ namespace HitechCraft.WebAdmin.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
-        #endregion
+#endregion
     }
 }
