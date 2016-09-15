@@ -17,7 +17,13 @@
                         <li><a href="@Url.Action("SystemRoles", "User")">Системные роли</a></li>
                     </ul>
                 </li>
-                <li><a href="@Url.Action("Index", "News")">Новости</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Контент <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("Index", "News")">Новости</a></li>
+                        <li><a href="@Url.Action("Index", "Rule")">Правила</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Магазин <span class="caret"></span></a>
                     <ul class="dropdown-menu">

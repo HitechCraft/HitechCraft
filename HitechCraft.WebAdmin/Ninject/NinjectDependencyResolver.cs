@@ -85,6 +85,14 @@ namespace HitechCraft.WebAdmin.Ninject
             this._kernel.Bind(typeof(ICommandHandler<SkinCreateCommand>)).To(typeof(SkinCreateCommandHandler));
             this._kernel.Bind(typeof(ICommandHandler<SkinRemoveCommand>)).To(typeof(SkinRemoveCommandHandler));
 
+            this._kernel.Bind(typeof(ICommandHandler<RuleCreateCommand>)).To(typeof(RuleCreateCommandHandler));
+            this._kernel.Bind(typeof(ICommandHandler<RuleRemoveCommand>)).To(typeof(RuleRemoveCommandHandler));
+            this._kernel.Bind(typeof(ICommandHandler<RuleUpdateCommand>)).To(typeof(RuleUpdateCommandHandler));
+
+            this._kernel.Bind(typeof(ICommandHandler<RulePointCreateCommand>)).To(typeof(RulePointCreateCommandHandler));
+            this._kernel.Bind(typeof(ICommandHandler<RulePointUpdateCommand>)).To(typeof(RulePointUpdateCommandHandler));
+            this._kernel.Bind(typeof(ICommandHandler<RulePointRemoveCommand>)).To(typeof(RulePointRemoveCommandHandler));
+
             #endregion
 
             _kernel.Bind(typeof(ICommandExecutor)).To(typeof(CommandExecutor));
@@ -126,6 +134,8 @@ namespace HitechCraft.WebAdmin.Ninject
 
             this._kernel.Bind(typeof(IProjector<Skin, SkinViewModel>)).To(typeof(SkinToSkinViewModelMapper));
             this._kernel.Bind(typeof(IProjector<Skin, SkinEditViewModel>)).To(typeof(SkinToSkinEditViewModelMapper));
+
+            this._kernel.Bind(typeof(IProjector<RulePoint, RulePointViewModel>)).To(typeof(RuleToRuleViewModelMapper));
 
             #endregion
 

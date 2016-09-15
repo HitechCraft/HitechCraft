@@ -2,7 +2,7 @@
 using HitechCraft.DAL.Domain;
 using HitechCraft.WebAdmin.Models;
 
-namespace HitechCraft.WebAdmin.Mapper.Rule
+namespace HitechCraft.WebAdmin.Mapper
 {
     public class RuleToRuleViewModelMapper : BaseMapper<RulePoint, RulePointViewModel>
     {
