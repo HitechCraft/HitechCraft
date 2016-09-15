@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BF28E97F-0030-4C65-97B5-D2882EB1C9DE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HitechCraft.Core</RootNamespace>
+    <AssemblyName>HitechCraft.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.6\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entity\BaseEntity.cs" />
+    <Compile Include="Entity\Ban\Ban.cs" />
+    <Compile Include="Entity\Ban\BanIp.cs" />
+    <Compile Include="Entity\Extentions\ByteExtentions.cs" />
+    <Compile Include="Entity\Extentions\IEnumerableExtentions.cs" />
+    <Compile Include="Entity\Extentions\ServerExtentions.cs" />
+    <Compile Include="Entity\Extentions\StringExtentions.cs" />
+    <Compile Include="Entity\IK\IKTransaction.cs" />
+    <Compile Include="Entity\Minecraft\Job.cs" />
+    <Compile Include="Entity\Minecraft\Modification.cs" />
+    <Compile Include="Entity\Minecraft\Server.cs" />
+    <Compile Include="Entity\Minecraft\ServerModification.cs" />
+    <Compile Include="Entity\Minecraft\Skin.cs" />
+    <Compile Include="Entity\News\Comment.cs" />
+    <Compile Include="Entity\News\News.cs" />
+    <Compile Include="Entity\PermissionsEx\PermissionsExImpl\Permissions.cs" />
+    <Compile Include="Entity\PermissionsEx\PermissionsExImpl\PexEntity.cs" />
+    <Compile Include="Entity\PermissionsEx\PermissionsExImpl\PexInheritance.cs" />
+    <Compile Include="Entity\PermissionsEx\IPermissions.cs" />
+    <Compile Include="Entity\PermissionsEx\IPexEntity.cs" />
+    <Compile Include="Entity\PermissionsEx\IPexInheritance.cs" />
+    <Compile Include="Entity\Player\AuthLog.cs" />
+    <Compile Include="Entity\Player\Currency.cs" />
+    <Compile Include="Entity\Player\Player.cs" />
+    <Compile Include="Entity\Player\PlayerInfo.cs" />
+    <Compile Include="Entity\Player\PlayerSession.cs" />
+    <Compile Include="Entity\Player\PlayerSkin.cs" />
+    <Compile Include="Entity\Player\PMPlayerBox.cs" />
+    <Compile Include="Entity\Player\PrivateMessage.cs" />
+    <Compile Include="Entity\Services\Rule.cs" />
+    <Compile Include="Entity\Services\RulePoint.cs" />
+    <Compile Include="Entity\Shop\PlayerItem.cs" />
+    <Compile Include="Entity\Shop\ShopItem.cs" />
+    <Compile Include="Entity\Shop\ShopItemCategory.cs" />
+    <Compile Include="Entity\Shop\ShopSale.cs" />
+    <Compile Include="Helper\HashHelper.cs" />
+    <Compile Include="Helper\JsonSerializer.cs" />
+    <Compile Include="Helper\LogHelper.cs" />
+    <Compile Include="Helper\MinecraftServerHelper.cs" />
+    <Compile Include="DI\BaseContainer.cs" />
+    <Compile Include="DI\IContainer.cs" />
+    <Compile Include="Models\Enum\BanType.cs" />
+    <Compile Include="Models\Enum\CurrencyType.cs" />
+    <Compile Include="Models\Enum\Gender.cs" />
+    <Compile Include="Models\Enum\JsonStatus.cs" />
+    <Compile Include="Models\Enum\PlayerGroup.cs" />
+    <Compile Include="Models\Enum\PMPlayerType.cs" />
+    <Compile Include="Models\Enum\PMType.cs" />
+    <Compile Include="Models\Enum\SystemBit.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonClientPropertiesData.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonClientResponseData.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonClientUserData.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonErrorData.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonTextureData.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonUserSkinData.cs" />
+    <Compile Include="Models\Json\MinecraftClient\JsonUserUuidData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonClientData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonClientFilesData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonClientFilesStatusData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonErrorFileData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonLauncherNews.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonSessionData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonStatusData.cs" />
+    <Compile Include="Models\Json\MinecraftLauncher\JsonUserAuthData.cs" />
+    <Compile Include="Models\Json\MinecraftServer\JsonMinecraftServerData.cs" />
+    <Compile Include="Models\Json\MinecraftServer\JsonMinecraftServersInfo.cs" />
+    <Compile Include="Models\Json\MinecraftServer\JsonMinecraftServerStatusData.cs" />
+    <Compile Include="Models\Json\WebRequest\JsonCaptchaResponse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

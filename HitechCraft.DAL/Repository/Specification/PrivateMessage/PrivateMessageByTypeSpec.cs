@@ -4,10 +4,9 @@
 
     using System;
     using System.Linq.Expressions;
-    using Common.Repository.Specification;
-    using Domain;
+    using Core.Entity;
+    using Core.Models.Enum;
     using System.Linq;
-    using Common.Models.Enum;
 
     #endregion
 

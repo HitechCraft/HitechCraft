@@ -1,10 +1,11 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using HitechCraft.BL.CQRS.Command.Base;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
+    using Core.DI;
+    using Core.Entity;
     using System;
 
     #endregion
@@ -17,8 +18,8 @@
 
         public override void Handle(IKTransactionCreateCommand command)
         {
-            var ikTransactionRep = this.GetRepository<IKTransaction>();
-            var playerRep = this.GetRepository<Player>();
+            var ikTransactionRep = GetRepository<IKTransaction>();
+            var playerRep = GetRepository<Player>();
 
             var ikTransaction = new IKTransaction()
             {

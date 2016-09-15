@@ -4,10 +4,9 @@
 
     using System;
     using System.Linq.Expressions;
-    using Common.Repository.Specification;
-    using Domain;
     using System.Linq;
-    using Common.Models.Enum;
+    using HitechCraft.Core.Entity;
+    using HitechCraft.Core.Models.Enum;
 
     #endregion
 

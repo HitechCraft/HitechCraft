@@ -1,17 +1,15 @@
-﻿using HitechCraft.Common.Projector;
-
-namespace HitechCraft.BL.CQRS.Query
+﻿namespace HitechCraft.BL.CQRS.Query
 {
     #region UsingDirectives
 
-    using System.Linq;
-    using Common.CQRS.Query;
-    using Common.DI;
-    using Common.Repository;
-    using DAL.Domain;
+    using Core.DI;
+    using Core.Entity;
+    using Core.Models.Enum;
+    using DAL.Repository;
     using DAL.Repository.Specification;
-    using Common.Models.Enum;
     using System;
+    using System.Linq;
+
     #endregion
 
     public class PlayerSkinQueryHandler<TResult>
@@ -26,7 +24,7 @@ namespace HitechCraft.BL.CQRS.Query
 
         public TResult Handle(PlayerSkinQuery<TResult> query)
         {
-            var playerSkinRep = this._container.Resolve<IRepository<PlayerSkin>>();
+            var playerSkinRep = _container.Resolve<IRepository<PlayerSkin>>();
 
             TResult playerSkin;
 
@@ -42,7 +40,7 @@ namespace HitechCraft.BL.CQRS.Query
                     .Query(new PlayerSkinByUserNameSpec(query.UserName), query.Projector)
                     .First();
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 switch (query.Gender)
                 {

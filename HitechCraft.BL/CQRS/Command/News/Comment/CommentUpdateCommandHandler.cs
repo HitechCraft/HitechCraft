@@ -1,12 +1,12 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using HitechCraft.BL.CQRS.Command.Base;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
-    using System;
-
+    using Core.DI;
+    using Core.Entity;
+    
     #endregion
 
     public class CommentUpdateCommandHandler : BaseCommandHandler<CommentUpdateCommand>
@@ -17,7 +17,7 @@
 
         public override void Handle(CommentUpdateCommand command)
         {
-            var commentRep = this.GetRepository<Comment>();
+            var commentRep = GetRepository<Comment>();
             
             var comment = commentRep.GetEntity(command.Id);
             comment.Text = command.Text;

@@ -275,10 +275,6 @@
       <Project>{65b57fdc-c32e-4907-86c2-9489f2643a0f}</Project>
       <Name>HitechCraft.BL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HitechCraft.Common\HitechCraft.Common.csproj">
-      <Project>{7e3103fd-8f77-49b8-ba12-0250ceff3f25}</Project>
-      <Name>HitechCraft.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HitechCraft.DAL\HitechCraft.DAL.csproj">
       <Project>{61bb4d2b-a80d-4c3c-822e-ad0aa3735873}</Project>
       <Name>HitechCraft.DAL</Name>

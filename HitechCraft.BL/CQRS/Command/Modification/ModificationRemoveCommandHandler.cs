@@ -1,13 +1,13 @@
-﻿using System.Linq;
-using HitechCraft.DAL.Repository.Specification;
+﻿using HitechCraft.BL.CQRS.Command.Base;
 
 namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
+    using System.Linq;
+    using Core.DI;
+    using Core.Entity;
+    using DAL.Repository.Specification;
     using System;
 
     #endregion
@@ -20,9 +20,9 @@ namespace HitechCraft.BL.CQRS.Command
 
         public override void Handle(ModificationRemoveCommand command)
         {
-            var modRep = this.GetRepository<Modification>();
-            var serverRep = this.GetRepository<Server>();
-            var shopItemRep = this.GetRepository<ShopItem>();
+            var modRep = GetRepository<Modification>();
+            var serverRep = GetRepository<Server>();
+            var shopItemRep = GetRepository<ShopItem>();
 
             if (serverRep.Query(new ServerByModificationSpec(command.Id)).Any())
             {

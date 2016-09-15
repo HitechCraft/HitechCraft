@@ -1,5 +1,5 @@
 ﻿using HitechCraft.BL.CQRS.Command;
-using HitechCraft.DAL.Domain;
+using HitechCraft.BL.CQRS.Command.Base;
 using HitechCraft.WebAdmin.Mapper.Modification;
 using HitechCraft.WebAdmin.Mapper.User;
 using HitechCraft.WebAdmin.Models;
@@ -13,7 +13,6 @@ namespace HitechCraft.WebAdmin.Ninject
     using System.Collections.Generic;
     using System.Web.Mvc;
     using BL.CQRS.Query;
-    using Common.CQRS.Command;
     using Common.CQRS.Query;
     using Common.DI;
     using Common.Projector;

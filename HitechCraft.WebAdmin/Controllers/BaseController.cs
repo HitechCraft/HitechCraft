@@ -1,19 +1,15 @@
-﻿using HitechCraft.WebAdmin.Models;
-using Microsoft.AspNet.Identity;
+﻿using HitechCraft.BL.CQRS.Command.Base;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
     #region Using Directives
 
     using System.Web.Mvc;
-    using System.Collections.Generic;
-    using BL.CQRS.Query;
-    using Common.CQRS.Command;
     using Common.DI;
-    using Common.Entity;
     using Common.Projector;
-    using Common.Repository.Specification;
-    using DAL.Domain;
+    using Models;
+    using Microsoft.AspNet.Identity;
+
 
     #endregion
 

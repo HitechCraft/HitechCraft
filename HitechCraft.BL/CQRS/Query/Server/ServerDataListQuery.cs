@@ -1,9 +1,8 @@
 ﻿namespace HitechCraft.BL.CQRS.Query
 {
     #region Using Directives
-
-    using Common.CQRS.Query;
-    using Common.Models.Json.MinecraftServer;
+    
+    using Core.Models.Json;
     using System.Collections.Generic;
 
     #endregion

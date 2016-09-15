@@ -3,13 +3,11 @@
     #region UsingDirectives
 
     using System.Linq;
-    using Common.CQRS.Query;
-    using Common.DI;
-    using Common.Repository;
-    using DAL.Domain;
     using DAL.Repository.Specification;
-    using Common.Models.Enum;
-    using System;
+    using Core.DI;
+    using Core.Entity;
+    using DAL.Repository;
+
     #endregion
 
     public class PlayerSkinExistsQueryHandler
@@ -24,7 +22,7 @@
 
         public bool Handle(PlayerSkinExistsQuery query)
         {
-            var playerSkinRep = this._container.Resolve<IRepository<PlayerSkin>>();
+            var playerSkinRep = _container.Resolve<IRepository<PlayerSkin>>();
             
             try
             {

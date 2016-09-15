@@ -1,14 +1,14 @@
-﻿using System.Linq;
+﻿using HitechCraft.BL.CQRS.Command.Base;
 
 namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
+    using System.Linq;
+    using Core.DI;
+    using Core.Entity;
     using System;
-    using HitechCraft.DAL.Repository.Specification;
+    using DAL.Repository.Specification;
 
     #endregion
 
@@ -20,8 +20,8 @@ namespace HitechCraft.BL.CQRS.Command
 
         public override void Handle(ShopItemCategoryRemoveCommand command)
         {
-            var shopItemCategoryRep = this.GetRepository<ShopItemCategory>();
-            var shopItemRep = this.GetRepository<ShopItem>();
+            var shopItemCategoryRep = GetRepository<ShopItemCategory>();
+            var shopItemRep = GetRepository<ShopItem>();
 
             if (shopItemRep.Query(new ShopItemByCategorySpec(command.CategoryId)).Any())
             {

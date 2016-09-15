@@ -1,4 +1,7 @@
-﻿using HitechCraft.GameLauncherAPI.Mapper;
+﻿using HitechCraft.BL.CQRS.Command.Base;
+using HitechCraft.BL.CQRS.Query.Base;
+using HitechCraft.DAL.Repository;
+using HitechCraft.GameLauncherAPI.Mapper;
 using HitechCraft.GameLauncherAPI.Models;
 using HitechCraft.WebApplication.Mapper;
 
@@ -11,7 +14,6 @@ namespace HitechCraft.GameLauncherAPI.Ninject
     using System.Web.Mvc;
     using BL.CQRS.Command;
     using BL.CQRS.Query;
-    using Common.CQRS.Command;
     using Common.CQRS.Query;
     using Common.DI;
     using Common.Models.Json.MinecraftLauncher;

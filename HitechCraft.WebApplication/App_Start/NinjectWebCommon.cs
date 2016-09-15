@@ -14,8 +14,8 @@ namespace HitechCraft.WebApplication.App_Start
 
     using global::Ninject;
     using global::Ninject.Web.Common;
-
-    using Ninject;
+    
+    using Ninjector.Dependences;
 
     #endregion
 
@@ -69,7 +69,7 @@ namespace HitechCraft.WebApplication.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+            DependencyResolver.SetResolver(new Resolver(kernel));
         }        
     }
 }

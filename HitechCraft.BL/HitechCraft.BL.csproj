@@ -42,6 +42,10 @@
   <ItemGroup>
     <Compile Include="CQRS\Command\AuthLog\AuthLogCreateCommand.cs" />
     <Compile Include="CQRS\Command\AuthLog\AuthLogCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Base\BaseCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Base\CommandExecutor.cs" />
+    <Compile Include="CQRS\Command\Base\ICommandExecutor.cs" />
+    <Compile Include="CQRS\Command\Base\ICommandHandler.cs" />
     <Compile Include="CQRS\Command\Currency\CurrencyUpdateCommand.cs" />
     <Compile Include="CQRS\Command\Currency\CurrencyCreateCommand.cs" />
     <Compile Include="CQRS\Command\Currency\CurrencyUpdateCommandHandler.cs" />
@@ -128,12 +132,15 @@
     <Compile Include="CQRS\Command\Skin\SkinCreateCommand.cs" />
     <Compile Include="CQRS\Command\Skin\SkinInstallCommandHandler.cs" />
     <Compile Include="CQRS\Command\Skin\SkinCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Query\Base\IQuery.cs" />
+    <Compile Include="CQRS\Query\Base\IQueryExecutor.cs" />
+    <Compile Include="CQRS\Query\Base\IQueryHandler.cs" />
     <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQuery.cs" />
     <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQueryHandler.cs" />
-    <Compile Include="CQRS\Query\EntityListQuery.cs" />
-    <Compile Include="CQRS\Query\EntityListQueryHandler.cs" />
-    <Compile Include="CQRS\Query\EntityQuery.cs" />
-    <Compile Include="CQRS\Query\EntityQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Entity\EntityListQuery.cs" />
+    <Compile Include="CQRS\Query\Entity\EntityListQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Entity\EntityQuery.cs" />
+    <Compile Include="CQRS\Query\Entity\EntityQueryHandler.cs" />
     <Compile Include="CQRS\Query\Server\ServerDataListQuery.cs" />
     <Compile Include="CQRS\Query\Server\ServerDataListQueryHandler.cs" />
     <Compile Include="CQRS\Query\Player\PlayerSkinExistsQuery.cs" />
@@ -145,13 +152,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HitechCraft.Common\HitechCraft.Common.csproj">
-      <Project>{7e3103fd-8f77-49b8-ba12-0250ceff3f25}</Project>
-      <Name>HitechCraft.Common</Name>
+    <ProjectReference Include="..\HitechCraft.Core\HitechCraft.Core.csproj">
+      <Project>{bf28e97f-0030-4c65-97b5-d2882eb1c9de}</Project>
+      <Name>HitechCraft.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\HitechCraft.DAL\HitechCraft.DAL.csproj">
       <Project>{61bb4d2b-a80d-4c3c-822e-ad0aa3735873}</Project>
       <Name>HitechCraft.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HitechCraft.Projector\HitechCraft.Projector.csproj">
+      <Project>{1c83ee3f-e373-4957-8ea7-31672e1baf85}</Project>
+      <Name>HitechCraft.Projector</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -1,8 +1,8 @@
 ﻿namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
-    
-    using DAL.Domain;
+
+    using Core.Entity;
 
     #endregion
 

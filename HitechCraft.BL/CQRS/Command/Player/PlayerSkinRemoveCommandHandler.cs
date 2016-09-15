@@ -1,12 +1,14 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using HitechCraft.BL.CQRS.Command.Base;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
+    using Core.DI;
+    using Core.Entity;
     using DAL.Repository.Specification;
     using System.Linq;
+
     #endregion
 
     public class PlayerSkinRemoveCommandHandler : BaseCommandHandler<PlayerSkinRemoveCommand>
@@ -17,7 +19,7 @@
 
         public override void Handle(PlayerSkinRemoveCommand command)
         {
-            var playerSkinRep = this.GetRepository<PlayerSkin>();
+            var playerSkinRep = GetRepository<PlayerSkin>();
             
             try
             {

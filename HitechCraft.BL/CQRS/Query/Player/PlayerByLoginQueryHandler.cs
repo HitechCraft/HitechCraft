@@ -2,12 +2,11 @@
 {
     #region UsingDirectives
 
-    using System.Linq;
-    using Common.CQRS.Query;
-    using Common.DI;
-    using Common.Repository;
-    using DAL.Domain;
+    using DAL.Repository;
     using DAL.Repository.Specification;
+    using System.Linq;
+    using Core.DI;
+    using Core.Entity;
 
     #endregion
 
@@ -23,7 +22,7 @@
 
         public Player Handle(PlayerByLoginQuery<Player> query)
         {
-            var playerRep = this._container.Resolve<IRepository<Player>>();
+            var playerRep = _container.Resolve<IRepository<Player>>();
             
             return playerRep
                     .Query(new PlayerByLoginSpec(query.Login))

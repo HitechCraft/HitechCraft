@@ -52,37 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Ban\Ban.cs" />
-    <Compile Include="Domain\Ban\BanIp.cs" />
-    <Compile Include="Domain\Extentions\ByteExtentions.cs" />
-    <Compile Include="Domain\Extentions\IEnumerableExtentions.cs" />
-    <Compile Include="Domain\Extentions\StringExtentions.cs" />
-    <Compile Include="Domain\Minecraft\Job.cs" />
-    <Compile Include="Domain\Minecraft\Skin.cs" />
-    <Compile Include="Domain\News\Comment.cs" />
-    <Compile Include="Domain\Player\AuthLog.cs" />
-    <Compile Include="Domain\Player\Currency.cs" />
-    <Compile Include="Domain\Extentions\ServerExtentions.cs" />
-    <Compile Include="Domain\IKTransaction.cs" />
-    <Compile Include="Domain\Minecraft\Modification.cs" />
-    <Compile Include="Domain\News\News.cs" />
-    <Compile Include="Domain\PermissionsEx\Permissions.cs" />
-    <Compile Include="Domain\PermissionsEx\PexEntity.cs" />
-    <Compile Include="Domain\PermissionsEx\PexInheritance.cs" />
-    <Compile Include="Domain\Player\Player.cs" />
-    <Compile Include="Domain\Player\PlayerInfo.cs" />
-    <Compile Include="Domain\Player\PMPlayerBox.cs" />
-    <Compile Include="Domain\Player\PrivateMessage.cs" />
-    <Compile Include="Domain\Services\Rule.cs" />
-    <Compile Include="Domain\Services\RulePoint.cs" />
-    <Compile Include="Domain\Shop\PlayerItem.cs" />
-    <Compile Include="Domain\Player\PlayerSession.cs" />
-    <Compile Include="Domain\Player\PlayerSkin.cs" />
-    <Compile Include="Domain\Minecraft\Server.cs" />
-    <Compile Include="Domain\Minecraft\ServerModification.cs" />
-    <Compile Include="Domain\Shop\ShopItem.cs" />
-    <Compile Include="Domain\Shop\ShopItemCategory.cs" />
-    <Compile Include="Domain\Shop\ShopSale.cs" />
     <Compile Include="NHibernate\Helper\AutomappingHelper.cs" />
     <Compile Include="NHibernate\Helper\NHibernateHelper.cs" />
     <Compile Include="NHibernate\MappingConfig.cs" />
@@ -114,9 +83,16 @@
     <Compile Include="NHibernate\Mappings\BanOverrides.cs" />
     <Compile Include="NHibernate\Mappings\CurrencyOverrides.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BaseRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\Specification\BaseSpecification.cs" />
+    <Compile Include="Repository\Specification\Composite\AndSpecification.cs" />
+    <Compile Include="Repository\Specification\Composite\NotSpecification.cs" />
+    <Compile Include="Repository\Specification\Composite\OrSpecification.cs" />
     <Compile Include="Repository\Specification\Currency\CurrencyByPlayerNameSpec.cs" />
     <Compile Include="Repository\Specification\IKTransaction\IKTransactionByTransactionIdSpec.cs" />
     <Compile Include="Repository\Specification\IKTransaction\IKTransactionByPlayerNameSpec.cs" />
+    <Compile Include="Repository\Specification\ISpecification.cs" />
     <Compile Include="Repository\Specification\Modification\ModificationByServerSpec.cs" />
     <Compile Include="Repository\Specification\News\CommentByNewsIdSpec.cs" />
     <Compile Include="Repository\Specification\Permissions\PermissionsByGroupContainsSpec.cs" />
@@ -139,13 +115,17 @@
     <Compile Include="Repository\Specification\Server\ServerByModificationSpec.cs" />
     <Compile Include="Repository\Specification\Shop\ShopItemByModificationSpec.cs" />
     <Compile Include="Repository\Specification\Shop\ShopItemByCategorySpec.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\NHibernateUnitOfWork.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\HitechCraft.Common\HitechCraft.Common.csproj">
-      <Project>{7e3103fd-8f77-49b8-ba12-0250ceff3f25}</Project>
-      <Name>HitechCraft.Common</Name>
+    <ProjectReference Include="..\HitechCraft.Core\HitechCraft.Core.csproj">
+      <Project>{bf28e97f-0030-4c65-97b5-d2882eb1c9de}</Project>
+      <Name>HitechCraft.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HitechCraft.Projector\HitechCraft.Projector.csproj">
+      <Project>{1c83ee3f-e373-4957-8ea7-31672e1baf85}</Project>
+      <Name>HitechCraft.Projector</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

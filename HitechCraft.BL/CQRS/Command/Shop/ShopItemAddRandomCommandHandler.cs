@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using HitechCraft.BL.CQRS.Command.Base;
 
 namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
+    using System.Collections.Generic;
+    using Core.DI;
+    using Core.Entity;
     using System;
-    using System.Linq;
-    using DAL.Repository.Specification;
 
     #endregion
 
@@ -21,9 +19,9 @@ namespace HitechCraft.BL.CQRS.Command
 
         public override void Handle(ShopItemAddRandomCommand command)
         {
-            var shopItemRep = this.GetRepository<ShopItem>();
-            var playerRep = this.GetRepository<Player>();
-            var playerItemRep = this.GetRepository<PlayerItem>();
+            var shopItemRep = GetRepository<ShopItem>();
+            var playerRep = GetRepository<Player>();
+            var playerItemRep = GetRepository<PlayerItem>();
             
             var itemList = (List<ShopItem>)shopItemRep.Query();
             

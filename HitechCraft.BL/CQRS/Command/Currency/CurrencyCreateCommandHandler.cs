@@ -1,10 +1,11 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using HitechCraft.BL.CQRS.Command.Base;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
+    using Core.DI;
+    using Core.Entity;
 
     #endregion
 
@@ -16,8 +17,8 @@
 
         public override void Handle(CurrencyCreateCommand command)
         {
-            var currencyRep = this.GetRepository<Currency>();
-            var playerRep = this.GetRepository<Player>();
+            var currencyRep = GetRepository<Currency>();
+            var playerRep = GetRepository<Player>();
 
             currencyRep.Add(new Currency()
             {

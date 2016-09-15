@@ -1,4 +1,4 @@
-﻿using HitechCraft.Common.Models.Enum;
+﻿using HitechCraft.BL.CQRS.Command.Base;
 using HitechCraft.DAL.Repository.Specification;
 using HitechCraft.WebApplication.Models;
 
@@ -9,11 +9,9 @@ namespace HitechCraft.WebApplication.Controllers
     using System.Web.Mvc;
     using System.Collections.Generic;
     using BL.CQRS.Query;
-    using Common.CQRS.Command;
     using Common.DI;
     using Common.Entity;
     using Common.Projector;
-    using Common.Repository.Specification;
     using DAL.Domain;
     using Ninject.Current;
 

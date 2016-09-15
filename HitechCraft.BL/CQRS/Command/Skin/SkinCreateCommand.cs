@@ -1,8 +1,8 @@
 ﻿namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
-    
-    using Common.Models.Enum;
+
+    using Core.Models.Enum;
 
     #endregion
 

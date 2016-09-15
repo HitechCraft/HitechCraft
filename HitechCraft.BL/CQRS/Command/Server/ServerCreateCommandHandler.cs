@@ -1,11 +1,11 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using HitechCraft.BL.CQRS.Command.Base;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
-    using System;
+    using Core.DI;
+    using Core.Entity;
 
     #endregion
 
@@ -17,9 +17,9 @@
 
         public override void Handle(ServerCreateCommand command)
         {
-            var serverRep = this.GetRepository<Server>();
+            var serverRep = GetRepository<Server>();
 
-            var server = this.GetProjector<ServerCreateCommand, Server>().Project(command);
+            var server = GetProjector<ServerCreateCommand, Server>().Project(command);
 
             serverRep.Add(server);
             serverRep.Dispose();

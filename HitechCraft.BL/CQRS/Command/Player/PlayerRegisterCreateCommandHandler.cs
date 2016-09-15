@@ -1,12 +1,13 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using HitechCraft.BL.CQRS.Command.Base;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
+    using Core.DI;
+    using Core.Entity;
+    using Core.Helper;
     using System;
-    using HitechCraft.Common.Core;
 
     #endregion
 
@@ -18,9 +19,9 @@
 
         public override void Handle(PlayerRegisterCreateCommand command)
         {
-            var playerRep = this.GetRepository<Player>();
-            var playerInfoRep = this.GetRepository<PlayerInfo>();
-            var currencyRep = this.GetRepository<Currency>();
+            var playerRep = GetRepository<Player>();
+            var playerInfoRep = GetRepository<PlayerInfo>();
+            var currencyRep = GetRepository<Currency>();
 
             var playerInfo = new PlayerInfo()
             {
@@ -33,7 +34,7 @@
             }
             catch (Exception e)
             {
-                LogManager.Error("PlayerInfo Not added: " + e.Message, "Player Register");
+                LogHelper.Error("PlayerInfo Not added: " + e.Message, "Player Register");
             }
             
             if (!String.IsNullOrEmpty(command.ReferId))
@@ -61,7 +62,7 @@
             }
             catch (Exception e)
             {
-                LogManager.Error("Player adding error: " + e.Message, "Player Register");
+                LogHelper.Error("Player adding error: " + e.Message, "Player Register");
             }
 
             try
@@ -78,7 +79,7 @@
             }
             catch (Exception e)
             {
-                LogManager.Error("Error creating currency: " + e.Message, "Player Register");
+                LogHelper.Error("Error creating currency: " + e.Message, "Player Register");
             }
             
             playerInfoRep.Dispose();

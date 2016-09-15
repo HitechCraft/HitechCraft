@@ -1,10 +1,11 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using HitechCraft.BL.CQRS.Command.Base;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
+    using Core.DI;
+    using Core.Entity;
     using System;
 
     #endregion
@@ -17,8 +18,8 @@
 
         public override void Handle(NewsCreateCommand command)
         {
-            var newsRep = this.GetRepository<News>();
-            var playerRep = this.GetRepository<Player>();
+            var newsRep = GetRepository<News>();
+            var playerRep = GetRepository<Player>();
 
             var author = playerRep.GetEntity(command.PlayerName);
 

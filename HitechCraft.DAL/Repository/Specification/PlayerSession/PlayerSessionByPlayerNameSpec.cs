@@ -4,8 +4,7 @@
 
     using System;
     using System.Linq.Expressions;
-    using Common.Repository.Specification;
-    using Domain;
+    using HitechCraft.Core.Entity;
 
     #endregion
 

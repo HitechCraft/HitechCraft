@@ -1,14 +1,14 @@
-﻿using System.Linq;
-using HitechCraft.DAL.Repository.Specification;
+﻿using HitechCraft.BL.CQRS.Command.Base;
 
 namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
     using System;
+    using System.Linq;
+    using Core.DI;
+    using Core.Entity;
+    using DAL.Repository.Specification;
 
     #endregion
 
@@ -20,10 +20,10 @@ namespace HitechCraft.BL.CQRS.Command
 
         public override void Handle(ShopItemBuyCommand command)
         {
-            var shopItemRep = this.GetRepository<ShopItem>();
-            var playerRep = this.GetRepository<Player>();
-            var currencyRep = this.GetRepository<Currency>();
-            var playerItemRep = this.GetRepository<PlayerItem>();
+            var shopItemRep = GetRepository<ShopItem>();
+            var playerRep = GetRepository<Player>();
+            var currencyRep = GetRepository<Currency>();
+            var playerItemRep = GetRepository<PlayerItem>();
             
             var item = shopItemRep.GetEntity(command.GameId);
 

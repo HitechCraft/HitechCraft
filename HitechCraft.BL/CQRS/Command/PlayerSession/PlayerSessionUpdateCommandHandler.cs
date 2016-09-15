@@ -1,11 +1,11 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using HitechCraft.BL.CQRS.Command.Base;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
-    using System;
+    using Core.DI;
+    using Core.Entity;
 
     #endregion
 
@@ -17,7 +17,7 @@
 
         public override void Handle(PlayerSessionUpdateCommand command)
         {
-            var playerSessionRep = this.GetRepository<PlayerSession>();
+            var playerSessionRep = GetRepository<PlayerSession>();
 
             var playerSession = playerSessionRep.GetEntity(command.Id);
 

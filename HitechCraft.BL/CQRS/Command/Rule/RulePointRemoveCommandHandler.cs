@@ -1,10 +1,11 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using HitechCraft.BL.CQRS.Command.Base;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
+    using Core.DI;
+    using Core.Entity;
     using System;
     using System.Linq;
 
@@ -18,7 +19,7 @@
 
         public override void Handle(RulePointRemoveCommand command)
         {
-            var rulePointRep = this.GetRepository<RulePoint>();
+            var rulePointRep = GetRepository<RulePoint>();
 
             if(rulePointRep.GetEntity(command.Id).Rules.Any())
                 throw new Exception("Пункт правил содержит правила!");

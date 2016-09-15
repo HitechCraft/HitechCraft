@@ -2,11 +2,7 @@
 {
     #region Using Directives
 
-    using Common.CQRS.Query;
-    using Common.Entity;
-    using Common.Models.Enum;
-    using Common.Projector;
-    using HitechCraft.DAL.Domain;
+    using HitechCraft.Core.Entity;
 
     #endregion
 

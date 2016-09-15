@@ -1,11 +1,11 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using HitechCraft.BL.CQRS.Command.Base;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
-    using System;
+    using Core.DI;
+    using Core.Entity;
 
     #endregion
 
@@ -17,7 +17,7 @@
 
         public override void Handle(RuleRemoveCommand command)
         {
-            var ruleRep = this.GetRepository<Rule>();
+            var ruleRep = GetRepository<Rule>();
             
             ruleRep.Delete(command.Id);
 

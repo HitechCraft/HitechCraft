@@ -1,14 +1,11 @@
-﻿using System.Text;
-using HitechCraft.DAL.Domain.Extentions;
-
-namespace HitechCraft.DAL.Repository.Specification
+﻿namespace HitechCraft.DAL.Repository.Specification
 {
     #region Using Directives
 
     using System;
     using System.Linq.Expressions;
-    using Common.Repository.Specification;
-    using Domain;
+    using Core.Entity;
+    using Core.Entity.Extentions;
 
     #endregion
 

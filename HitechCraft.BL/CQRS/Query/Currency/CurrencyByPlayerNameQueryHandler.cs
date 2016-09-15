@@ -1,15 +1,12 @@
 ﻿namespace HitechCraft.BL.CQRS.Query
 {
-    #region UsingDirectives
+    #region Using Directives
 
     using System.Linq;
-    using Common.CQRS.Query;
-    using Common.DI;
-    using Common.Repository;
-    using DAL.Domain;
+    using Core.DI;
+    using DAL.Repository;
+    using Core.Entity;
     using DAL.Repository.Specification;
-    using Common.Models.Enum;
-    using System;
 
     #endregion
 
@@ -25,7 +22,7 @@
 
         public Currency Handle(CurrencyByPlayerNameQuery query)
         {
-            var currencyRep = this._container.Resolve<IRepository<Currency>>();
+            var currencyRep = _container.Resolve<IRepository<Currency>>();
 
             return currencyRep.Query(new CurrencyByPlayerNameSpec(query.PlayerName)).First();
         }

@@ -1,10 +1,11 @@
-﻿namespace HitechCraft.BL.CQRS.Command
+﻿using HitechCraft.BL.CQRS.Command.Base;
+
+namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
+    using Core.DI;
+    using Core.Entity;
     using System;
     using System.Linq;
     using DAL.Repository.Specification;
@@ -19,8 +20,8 @@
 
         public override void Handle(CurrencyUpdateCommand command)
         {
-            var currencyRep = this.GetRepository<Currency>();
-            var transactionRep = this.GetRepository<IKTransaction>();
+            var currencyRep = GetRepository<Currency>();
+            var transactionRep = GetRepository<IKTransaction>();
 
             Currency currency;
 

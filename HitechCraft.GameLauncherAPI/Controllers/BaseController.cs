@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using HitechCraft.Common.CQRS.Command;
+using HitechCraft.BL.CQRS.Command.Base;
 using HitechCraft.Common.DI;
 using HitechCraft.Common.Projector;
 

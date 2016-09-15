@@ -2,8 +2,8 @@ using System;
 using System.Web;
 using System.Web.Mvc;
 using HitechCraft.WebAdmin;
-using HitechCraft.WebAdmin.Ninject;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+
 using global::Ninject;
 using global::Ninject.Web.Common;
 
@@ -62,7 +62,7 @@ namespace HitechCraft.WebAdmin
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+            DependencyResolver.SetResolver(new Resolver(kernel));
         }
     }
 }

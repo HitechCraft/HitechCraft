@@ -1,13 +1,13 @@
-﻿using System.Linq;
-using HitechCraft.Common.Models.Enum;
+﻿using HitechCraft.BL.CQRS.Command.Base;
 
 namespace HitechCraft.BL.CQRS.Command
 {
     #region Using Directives
 
-    using Common.CQRS.Command;
-    using Common.DI;
-    using DAL.Domain;
+    using System.Linq;
+    using Core.DI;
+    using Core.Entity;
+    using Core.Models.Enum;
 
     #endregion
 

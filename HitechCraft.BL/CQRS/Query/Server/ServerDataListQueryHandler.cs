@@ -2,15 +2,14 @@
 {
     #region UsingDirectives
     
-    using Common.CQRS.Query;
-    using Common.DI;
-    using Common.Repository;
     using System.Collections.Generic;
-    using Common.Models.Json.MinecraftServer;
-    using DAL.Domain;
     using System.Linq;
-    using DAL.Domain.Extentions;
-
+    using Core.DI;
+    using Core.Entity;
+    using Core.Entity.Extentions;
+    using Core.Models.Json;
+    using DAL.Repository;
+    
     #endregion
 
     public class ServerDataListQueryHandler
@@ -25,7 +24,7 @@
 
         public ICollection<JsonMinecraftServerData> Handle(ServerDataListQuery query)
         {
-            var serverRep = this._container.Resolve<IRepository<Server>>();
+            var serverRep = _container.Resolve<IRepository<Server>>();
             
             return ((IEnumerable<Server>)serverRep.Query()).Select(x => x.GetServerData(x.Image)).ToList();
         }

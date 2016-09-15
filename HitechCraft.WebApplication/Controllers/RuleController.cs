@@ -8,8 +8,6 @@
     using BL.CQRS.Command;
     using BL.CQRS.Query;
     using Common.Projector;
-    using Common.Repository.Specification;
-    using DAL.Domain;
     using DAL.Repository.Specification;
     using Models;
 
