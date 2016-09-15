@@ -205,13 +205,13 @@
         .done(function (data) {
             if (data.status === "OK") {
                 growlSuccess(data.message);
+
+                setTimeout(function () {
+                    document.location = '@Url.Action("Groups", "Donate")';
+                }, 2000);
             } else {
                 growlError(data.message);
             }
-
-            setTimeout(function () {
-                document.location = '@Url.Action("Groups", "Donate")';
-            }, 2000);
         });
         }
     }

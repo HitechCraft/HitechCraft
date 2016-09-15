@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
     <title>@ViewBag.Title – HitechCraft - Multiserver Complex</title>
+	<meta name="Description" content="Мультисерверный игровой проект Minecraft. Только у нас сервера различной направленности. Максимум возможностей при минимуме доната.">
+	<meta name="Keywords" content="minecraft, майн, hitechcraft, support, worlds, parallel, extentions, minecraft, industrial, экстеншинс, паралельные, миры, дома, постройки, много, лавы, хороший, сервер, большой, онлайн, майник, сеты, магия, magic, индустриал"> 
     <link rel="icon" type="image/png" href="../../favicon.ico" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
@@ -13,13 +15,13 @@
 </head>
 <body>
     <div class="ajax-loader">
-        <img src="/Content/Images/loader.gif" />
+        <img src="/Content/Images/loader.gif"/>
         <div class="ajax-loader-text"><span>Загрузка...</span></div>
     </div>
     <div class="ajax-bg"></div>
     @Html.Partial("_NavBar")
-    @Html.Partial("_Header")
-    <div class="body-content">
+    <div class="container body-content">
+        @Html.Partial("_Header")
         <div class="row wrapper">
             <div class="cont">
                 @RenderBody()
@@ -29,7 +31,7 @@
     <div class="footer-content">
         @Html.Partial("_Footer")
     </div>
-    <script type="text/javascript">
+<script type="text/javascript">
 
     @*$(document).on('ready', function() {
         @if (ViewBag.NewMessages != null && ViewBag.NewMessages > 0)
@@ -41,54 +43,54 @@
         }
     });*@
 
-        $.fn.textWidth = function () {
-            var text = $(this).html();
-            $(this).html('<span>' + text + '</span>');
-            var width = $(this).find('span:first').width();
-            $(this).html(text);
-            return width;
-        };
+    $.fn.textWidth = function () {
+        var text = $(this).html();
+        $(this).html('<span>' + text + '</span>');
+        var width = $(this).find('span:first').width();
+        $(this).html(text);
+        return width;
+    };
 
-        $.AjaxLoaderSetText = function (text) {
-            $('.ajax-loader>span').html(text);
+    $.AjaxLoaderSetText = function (text) {
+        $('.ajax-loader>span').html(text);
+    }
+
+    $(document).ajaxStart(function () {
+        if (window.ajaxLoaderText === undefined) {
+            window.ajaxLoaderText = "Загрузка...";
         }
 
-        $(document).ajaxStart(function () {
-            if (window.ajaxLoaderText === undefined) {
-                window.ajaxLoaderText = "Загрузка...";
-            }
+        $.AjaxLoaderSetText(window.ajaxLoaderText);
 
-            $.AjaxLoaderSetText(window.ajaxLoaderText);
+        $('.ajax-loader').show();
+        $('.ajax-bg').show();
+        $('body').css('overflow', 'hidden');
+    }).ajaxStop(function () {
+        window.ajaxLoaderText = undefined;
 
-            $('.ajax-loader').show();
-            $('.ajax-bg').show();
-            $('body').css('overflow', 'hidden');
-        }).ajaxStop(function () {
-            window.ajaxLoaderText = undefined;
+        $('.ajax-loader').hide();
+        $('.ajax-bg').hide();
+        $('body').css('overflow', 'visible');
+    });
 
-            $('.ajax-loader').hide();
-            $('.ajax-bg').hide();
-            $('body').css('overflow', 'visible');
-        });
+    //function newMessageSound() {
 
-        //function newMessageSound() {
+    //    var audioElement = document.createElement('audio');
+    //    audioElement.setAttribute('src', './Content/Sounds/newMessage.mp3');
+    //    audioElement.setAttribute('autoplay', 'autoplay');
 
-        //    var audioElement = document.createElement('audio');
-        //    audioElement.setAttribute('src', './Content/Sounds/newMessage.mp3');
-        //    audioElement.setAttribute('autoplay', 'autoplay');
+    //    audioElement.addEventListener("load", function () {
+    //        audioElement.play();
+    //    }, true);
+    //};
 
-        //    audioElement.addEventListener("load", function () {
-        //        audioElement.play();
-        //    }, true);
-        //};
+    //$('.dropdown-toggle').on('mouseenter', function () {
+    //    $(this).dropdown('toggle');
+    //});
 
-        //$('.dropdown-toggle').on('mouseenter', function () {
-        //    $(this).dropdown('toggle');
-        //});
-
-        //$('.dropdown-toggle').on('mouseleave', function () {
-        //});
-    </script>
+    //$('.dropdown-toggle').on('mouseleave', function () {
+    //});
+</script>
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

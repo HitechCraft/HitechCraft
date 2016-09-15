@@ -18,6 +18,7 @@
                 Цена: @Model.Price Gont(s)
             </span>
             @Html.ActionLink("Перейти в корзину", "Cart", "Shop", null, new { @class = "btn btn-primary" })
+            @Html.ActionLink("В магазин", "Index", "Shop", null, new { @class = "btn btn-primary" })
         </div>
     </div>
     <div class="col-md-8">
@@ -92,8 +93,8 @@
                 if (data.status === "OK") {
                     growlSuccess(data.message);
 
-                    setTimeout(function () {
-                        document.location = '@Url.Action("Cart", "Shop")';
+                    setTimeout(function() {
+                        document.location.reload();
                     }, 2000);
                 } else {
                     growlError(data.message);

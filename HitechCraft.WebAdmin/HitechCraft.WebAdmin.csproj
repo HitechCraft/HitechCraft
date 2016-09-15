@@ -225,6 +225,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModificationController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\RuleController.cs" />
     <Compile Include="Controllers\ServerController.cs" />
     <Compile Include="Controllers\ShopItemController.cs" />
     <Compile Include="Controllers\SkinController.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="Mapper\News\NewsEditViewModelToNewsUpdateCommandMapper.cs" />
     <Compile Include="Mapper\News\NewsToNewsEditViewModelMapper.cs" />
     <Compile Include="Mapper\News\NewsToNewsViewModelMapper.cs" />
+    <Compile Include="Mapper\Rule\RuleToRuleViewModelMapper.cs" />
     <Compile Include="Mapper\Server\ServerCreateCommandToServerMapper.cs" />
     <Compile Include="Mapper\Server\ServerEditViewModelToServerCreateCommandMapper.cs" />
     <Compile Include="Mapper\Server\ServerEditViewModelToServerUpdateCommandMapper.cs" />
@@ -268,6 +270,8 @@
     <Compile Include="Models\Modification\ModificationViewModel.cs" />
     <Compile Include="Models\News\NewsEditViewModel.cs" />
     <Compile Include="Models\News\NewsViewModel.cs" />
+    <Compile Include="Models\Rule\RulePointViewModel.cs" />
+    <Compile Include="Models\Rule\RuleViewModel.cs" />
     <Compile Include="Models\Server\ServerDetailViewModel.cs" />
     <Compile Include="Models\Server\ServerEditViewModel.cs" />
     <Compile Include="Models\Server\ServerModificationViewModel.cs" />
@@ -475,6 +479,7 @@
     <Content Include="Views\Skin\_SkinPartialList.cshtml" />
     <Content Include="Views\Skin\Index.cshtml" />
     <Content Include="Views\Skin\Create.cshtml" />
+    <Content Include="Views\Rule\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
