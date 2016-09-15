@@ -1,9 +1,7 @@
-﻿using HitechCraft.DAL.Domain;
-using HitechCraft.WebAdmin.Models.User;
-
-namespace HitechCraft.WebAdmin.Mapper.User
+﻿namespace HitechCraft.WebAdmin.Mapper
 {
     using Models;
+    using Core.Entity;
 
     public class PlayerSkinToPlayerSkinViewModelMapper : BaseMapper<PlayerSkin, PlayerSkinViewModel>
     {

@@ -1,13 +1,13 @@
-﻿using System.Linq;
-using HitechCraft.WebAdmin.Models;
-
-namespace HitechCraft.WebAdmin.Mapper.Modification
+﻿namespace HitechCraft.WebAdmin.Mapper
 {
-    public class ModificationToModificationViewModelMapper : BaseMapper<DAL.Domain.Modification, ModificationViewModel>
+    using Models;
+    using System.Linq;
+
+    public class ModificationToModificationViewModelMapper : BaseMapper<Core.Entity.Modification, ModificationViewModel>
     {
         public ModificationToModificationViewModelMapper()
         {
-            this.ConfigurationStore.CreateMap<DAL.Domain.Modification, ModificationViewModel>()
+            this.ConfigurationStore.CreateMap<Core.Entity.Modification, ModificationViewModel>()
                 .ForMember(dst => dst.Id, ext => ext.MapFrom(src => src.Id))
                 .ForMember(dst => dst.Name, ext => ext.MapFrom(src => src.Name))
                 .ForMember(dst => dst.Description, ext => ext.MapFrom(src => src.Description))

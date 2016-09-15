@@ -1,4 +1,4 @@
-﻿namespace HitechCraft.WebAdmin.Models.User
+﻿namespace HitechCraft.WebAdmin.Models
 {
     public class PlayerSkinViewModel
     {

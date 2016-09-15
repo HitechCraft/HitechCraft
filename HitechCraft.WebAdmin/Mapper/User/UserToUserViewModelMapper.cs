@@ -1,4 +1,4 @@
-﻿namespace HitechCraft.WebAdmin.Mapper.User
+﻿namespace HitechCraft.WebAdmin.Mapper
 {
     using Models;
 

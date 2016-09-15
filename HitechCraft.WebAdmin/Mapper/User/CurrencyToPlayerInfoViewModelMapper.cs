@@ -1,10 +1,9 @@
-﻿using System;
-using HitechCraft.Common.Models.Enum;
-using HitechCraft.DAL.Domain;
-
-namespace HitechCraft.WebAdmin.Mapper.User
+﻿namespace HitechCraft.WebAdmin.Mapper.User
 {
+    using System;
     using Models;
+    using Core.Entity;
+    using Core.Models.Enum;
 
     public class CurrencyToPlayerInfoViewModelMapper : BaseMapper<Currency, PlayerInfoViewModel>
     {

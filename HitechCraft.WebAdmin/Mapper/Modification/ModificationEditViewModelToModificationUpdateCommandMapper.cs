@@ -1,8 +1,8 @@
-﻿using HitechCraft.BL.CQRS.Command;
-using HitechCraft.WebAdmin.Models;
-
-namespace HitechCraft.WebAdmin.Mapper.Modification
+﻿namespace HitechCraft.WebAdmin.Mapper
 {
+    using BL.CQRS.Command;
+    using Models;
+
     public class ModificationEditViewModelToModificationUpdateCommandMapper : BaseMapper<ModificationEditViewModel, ModificationUpdateCommand>
     {
         public ModificationEditViewModelToModificationUpdateCommandMapper()

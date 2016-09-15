@@ -1,7 +1,7 @@
 ﻿namespace HitechCraft.WebAdmin.Models
 {
-    using Common.Models.Enum;
     using System.ComponentModel.DataAnnotations;
+    using Core.Models.Enum;
 
     public class PlayerInfoViewModel
     {
