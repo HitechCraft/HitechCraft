@@ -1,10 +1,10 @@
-﻿using System.Web.Mvc;
-using HitechCraft.BL.CQRS.Command.Base;
-using HitechCraft.Common.DI;
-using HitechCraft.Common.Projector;
-
-namespace HitechCraft.GameLauncherAPI.Controllers
+﻿namespace HitechCraft.GameLauncherAPI.Controllers
 {
+    using System.Web.Mvc;
+    using HitechCraft.BL.CQRS.Command.Base;
+    using HitechCraft.Projector.Impl;
+    using Core.DI;
+
     public class BaseController : Controller
     {
         public IContainer Container { get; set; }

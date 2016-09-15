@@ -1,9 +1,9 @@
-﻿namespace HitechCraft.WebApplication.Mapper
+﻿using HitechCraft.Core.Entity;
+using HitechCraft.Core.Entity.Extentions;
+
+namespace HitechCraft.WebApplication.Mapper
 {
-    using DAL.Domain;
     using Models;
-    using System.Linq;
-    using DAL.Domain.Extentions;
     using System.Collections.Generic;
 
 

@@ -1,14 +1,17 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Repository.Specification;
+using HitechCraft.Core.Repository.Specification.Rule;
+using HitechCraft.Projector.Impl;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     using System.Web.Mvc;
-    using Common.DI;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using BL.CQRS.Command;
     using BL.CQRS.Query;
-    using Common.Projector;
-    using DAL.Repository.Specification;
     using Models;
 
     public class RuleController : BaseController

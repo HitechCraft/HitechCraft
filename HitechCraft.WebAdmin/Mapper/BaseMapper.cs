@@ -1,10 +1,11 @@
-﻿namespace HitechCraft.WebAdmin.Mapper
+﻿using HitechCraft.Projector.Impl;
+
+namespace HitechCraft.WebAdmin.Mapper
 {
     #region Using Directives
 
     using System;
     using System.Linq.Expressions;
-    using HitechCraft.Common.Projector;
     using AutoMapper;
     using AutoMapper.Mappers;
     using AutoMapper.QueryableExtensions;

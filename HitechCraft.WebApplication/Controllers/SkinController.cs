@@ -1,22 +1,23 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Entity.Extentions;
+using HitechCraft.Core.Helper;
+using HitechCraft.Core.Models.Enum;
+using HitechCraft.Projector.Impl;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
     using PagedList;
     using BL.CQRS.Query;
-    using Common.DI;
-    using Common.Projector;
-    using DAL.Domain;
     using Models;
     using System.Web.Mvc;
     using System;
     using BL.CQRS.Command;
     using Manager;
     using System.Linq;
-    using DAL.Domain.Extentions;
     using System.Collections.Generic;
-    using Common.Core;
-    using Common.Models.Enum;
     using Properties;
 
     #endregion
@@ -128,7 +129,7 @@
         [HttpPost]
         public ActionResult CheckExistingSkinByBase64(string base64)
         {
-            var bytes = HashManager.GetBase64Bytes(base64);
+            var bytes = HashHelper.GetBase64Bytes(base64);
 
             var skins = new EntityListQueryHandler<Skin, SkinViewModel>(this.Container)
                 .Handle(new EntityListQuery<Skin, SkinViewModel>()
@@ -171,7 +172,7 @@
         {
             try
             {
-                var image = HashManager.GetBase64Hash(Manager.FileManager.DownloadFile(url));
+                var image = HashHelper.GetBase64Hash(Manager.FileManager.DownloadFile(url));
 
                 return Json(new { status = "OK", message = @"data:image/jpeg;base64," + image, img = image });
             }

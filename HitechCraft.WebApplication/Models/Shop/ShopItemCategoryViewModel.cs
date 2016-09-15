@@ -1,7 +1,5 @@
 ﻿namespace HitechCraft.WebApplication.Models
 {
-    using System.ComponentModel.DataAnnotations;
-
     public class ShopItemCategoryViewModel
     {
         public int Id { get; set; }

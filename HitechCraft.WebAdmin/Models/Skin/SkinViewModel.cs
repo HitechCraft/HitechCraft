@@ -1,4 +1,4 @@
-﻿using HitechCraft.Common.Models.Enum;
+﻿using HitechCraft.Core.Models.Enum;
 
 namespace HitechCraft.WebAdmin.Models
 {

@@ -1,9 +1,9 @@
-﻿namespace HitechCraft.WebApplication.Manager
+﻿using HitechCraft.Core.Models.Enum;
+using HitechCraft.Core.Models.Json;
+
+namespace HitechCraft.WebApplication.Manager
 {
     using System.Net;
-    using Common.Models.Enum;
-    using Common.Models.Json;
-    using Common.Models.Json.MinecraftLauncher;
     using Newtonsoft.Json;
 
     public static class ReCaptchaManager

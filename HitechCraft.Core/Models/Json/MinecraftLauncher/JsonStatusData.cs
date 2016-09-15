@@ -1,5 +1,7 @@
 ﻿namespace HitechCraft.Core.Models.Json
 {
+    using Enum;
+
     /// <summary>
     /// Status of some action (can be extended)
     /// </summary>

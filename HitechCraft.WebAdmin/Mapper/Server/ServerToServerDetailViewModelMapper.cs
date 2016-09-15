@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
-using HitechCraft.DAL.Domain;
-using HitechCraft.DAL.Domain.Extentions;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Entity.Extentions;
 using HitechCraft.WebAdmin.Models;
 
 namespace HitechCraft.WebAdmin.Mapper
 {
-    public class ServerToServerDetailViewModelMapper : BaseMapper<DAL.Domain.Server, ServerDetailViewModel>
+    public class ServerToServerDetailViewModelMapper : BaseMapper<Server, ServerDetailViewModel>
     {
         public ServerToServerDetailViewModelMapper()
         {
-            this.ConfigurationStore.CreateMap<DAL.Domain.Server, ServerDetailViewModel>()
+            this.ConfigurationStore.CreateMap<Server, ServerDetailViewModel>()
                 .ForMember(dst => dst.Id, ext => ext.MapFrom(src => src.Id))
                 .ForMember(dst => dst.Name, ext => ext.MapFrom(src => src.Name))
                 .ForMember(dst => dst.Description, ext => ext.MapFrom(src => src.Description))

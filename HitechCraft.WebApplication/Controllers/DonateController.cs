@@ -1,17 +1,18 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Helper;
+using HitechCraft.Core.Repository.Specification.Permissions;
+using HitechCraft.Projector.Impl;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
     using System.Web.Mvc;
-    using Common.DI;
     using System;
     using BL.CQRS.Command;
-    using Common.Core;
-    using DAL.Domain;
     using System.Linq;
     using BL.CQRS.Query;
-    using Common.Projector;
-    using DAL.Repository.Specification;
     using Models;
 
     #endregion
@@ -58,7 +59,7 @@
         public JsonResult BuyGroupIe(IEGroup group)
         {
             //hash игрока
-            var hash = HashManager.UuidFromString("OfflinePlayer:" + this.Player.Name);
+            var hash = HashHelper.UuidFromString("OfflinePlayer:" + this.Player.Name);
 
             //Так конечно нельзя, но да пофигу
             var permissions = new Permissions()
@@ -128,7 +129,7 @@
                     {
                         Projector = this.Container.Resolve<IProjector<Permissions, PermissionsViewModel>>(),
                         Specification =
-                        new PermissionsByNameSpec(HashManager.UuidFromString("OfflinePlayer:" + this.Player.Name)) & new PermissionsByGroupContainsSpec()
+                        new PermissionsByNameSpec(HashHelper.UuidFromString("OfflinePlayer:" + this.Player.Name)) & new PermissionsByGroupContainsSpec()
                     }).First();
 
                 var datetime = new DateTime(1970, 1, 1).AddSeconds(int.Parse(group.Value));

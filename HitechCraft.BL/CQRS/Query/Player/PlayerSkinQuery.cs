@@ -4,6 +4,7 @@
     
     using Core.Entity;
     using Core.Models.Enum;
+    using HitechCraft.Projector.Impl;
 
     #endregion
 

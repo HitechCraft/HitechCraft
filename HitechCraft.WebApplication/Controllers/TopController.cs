@@ -1,15 +1,16 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Entity.Extentions;
+using HitechCraft.Projector.Impl;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
     using System.Web.Mvc;
-    using Common.DI;
     using System.Linq;
     using BL.CQRS.Query;
-    using Common.Projector;
-    using DAL.Domain;
     using Models;
-    using DAL.Domain.Extentions;
 
     #endregion
 

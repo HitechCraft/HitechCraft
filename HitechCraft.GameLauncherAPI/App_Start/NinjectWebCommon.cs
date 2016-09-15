@@ -64,7 +64,7 @@ namespace HitechCraft.GameLauncherAPI.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
+            DependencyResolver.SetResolver(new Resolver(kernel));
         }        
     }
 }

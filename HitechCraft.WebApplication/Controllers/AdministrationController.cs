@@ -1,11 +1,12 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Core.DI;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     using System;
     using System.Linq;
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
-    using Common.DI;
     using Models;
 
     [Authorize(Roles = "Administrator")]

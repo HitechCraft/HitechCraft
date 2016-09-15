@@ -1,22 +1,22 @@
 ﻿using System.Globalization;
+using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Helper;
+using HitechCraft.Core.Models.Enum;
+using HitechCraft.Core.Repository.Specification.IKTransaction;
+using HitechCraft.Projector.Impl;
 
 namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
     using System.Web.Mvc;
-    using Common.DI;
     using System;
-    using Common.Models.Enum;
-    using DAL.Domain;
     using System.Collections.Generic;
-    using Common.Core;
     using Manager;
     using Models;
     using System.Linq;
     using BL.CQRS.Query;
-    using Common.Projector;
-    using DAL.Repository.Specification;
     using BL.CQRS.Command;
 
     #endregion
@@ -150,11 +150,11 @@ namespace HitechCraft.WebApplication.Controllers
                     this.MoneyEnrollment(CurrencyType.Rub, float.Parse(pm.ik_am, CultureInfo.InvariantCulture), pm.ik_pm_no);
                 }
 
-                LogManager.Error(this.Player.Name + ": ошибка совершения оплаты. Невалидная транзакция " + pm.ik_pm_no, "IKPayment");
+                LogHelper.Error(this.Player.Name + ": ошибка совершения оплаты. Невалидная транзакция " + pm.ik_pm_no, "IKPayment");
             }
             catch (Exception e)
             {
-                LogManager.Error(this.Player.Name + ": ошибка совершения оплаты: " + e.Message, "IKPayment");
+                LogHelper.Error(this.Player.Name + ": ошибка совершения оплаты: " + e.Message, "IKPayment");
             }
 
             return null;
@@ -253,8 +253,8 @@ namespace HitechCraft.WebApplication.Controllers
 
             var paramString = this.Implode(objects, ":");
 
-            var md5 = HashManager.GetMd5Bites(paramString);
-            var base64 = HashManager.GetBase64Hash(md5);
+            var md5 = HashHelper.GetMd5Bites(paramString);
+            var base64 = HashHelper.GetBase64Hash(md5);
 
             return base64;
         }
@@ -327,7 +327,7 @@ namespace HitechCraft.WebApplication.Controllers
         private string GenerateTransactionID()
         {
             return
-                HashManager.GetMd5Hash("h4432hhdshf8924ee320fvdkshgm5i9332" + DateTime.Now + this.Player.Name);
+                HashHelper.GetMd5Hash("h4432hhdshf8924ee320fvdkshgm5i9332" + DateTime.Now + this.Player.Name);
         }
 
         /// <summary>
@@ -352,7 +352,7 @@ namespace HitechCraft.WebApplication.Controllers
             }
             catch (Exception e)
             {
-                LogManager.Error("Ошибка обновления счета! " + e.Message, "IKPayment");
+                LogHelper.Error("Ошибка обновления счета! " + e.Message, "IKPayment");
             }
         }
 

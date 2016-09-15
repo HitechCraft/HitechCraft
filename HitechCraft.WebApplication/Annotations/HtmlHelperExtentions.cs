@@ -1,9 +1,8 @@
 ﻿using System.Web.Mvc.Html;
+using HitechCraft.Core.Models.Json;
 
 namespace System.Web.Mvc
 {
-    using HitechCraft.Common.Models.Json.MinecraftServer;
-
     public static class HtmlHelperExtentions
     {
         public static MvcHtmlString ServerStatusLabel(this HtmlHelper html, JsonMinecraftServerStatus status, string text)

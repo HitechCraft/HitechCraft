@@ -1,12 +1,13 @@
 ﻿using HitechCraft.BL.CQRS.Command;
+using HitechCraft.Core.Entity;
 
 namespace HitechCraft.WebAdmin.Mapper
 {
-    public class ServerCreateCommandToServerMapper : BaseMapper<ServerCreateCommand, DAL.Domain.Server>
+    public class ServerCreateCommandToServerMapper : BaseMapper<ServerCreateCommand, Server>
     {
         public ServerCreateCommandToServerMapper()
         {
-            this.ConfigurationStore.CreateMap<ServerCreateCommand, DAL.Domain.Server>()
+            this.ConfigurationStore.CreateMap<ServerCreateCommand, Server>()
                 .ForMember(dst => dst.Name, ext => ext.MapFrom(src => src.Name))
                 .ForMember(dst => dst.Description, ext => ext.MapFrom(src => src.Description))
                 .ForMember(dst => dst.Image, ext => ext.MapFrom(src => src.Image))

@@ -3,15 +3,17 @@
     #region Using Directives
 
     using System.Web.Mvc;
-    using Common.DI;
     using System;
     using System.Collections.Generic;
     using BL.CQRS.Command;
     using BL.CQRS.Query;
-    using Common.Projector;
-    using DAL.Repository.Specification;
     using Models;
     using System.Linq;
+    using Core.DI;
+    using Core.Entity;
+    using Core.Repository.Specification;
+    using Core.Repository.Specification.Rule;
+    using Projector.Impl;
 
     #endregion
 
@@ -34,13 +36,13 @@
         {
             try
             {
-                this.GetRules(new RulePointByNameSpec(name)).First();
+                GetRules(new RulePointByNameSpec(name)).First();
 
                 return Json(new { status = "NO", message = "Пункт правил уже существует" });
             }
             catch (Exception)
             {
-                this.CommandExecutor.Execute(new RulePointCreateCommand()
+                CommandExecutor.Execute(new RulePointCreateCommand()
                 {
                     Name = name
                 });
@@ -54,7 +56,7 @@
         {
             try
             {
-                this.CommandExecutor.Execute(new RuleCreateCommand()
+                CommandExecutor.Execute(new RuleCreateCommand()
                 {
                     PointId = pointId,
                     Text = text
@@ -73,7 +75,7 @@
         {
             try
             {
-                this.CommandExecutor.Execute(new RulePointRemoveCommand()
+                CommandExecutor.Execute(new RulePointRemoveCommand()
                 {
                     Id = id
                 });
@@ -91,7 +93,7 @@
         {
             try
             {
-                this.CommandExecutor.Execute(new RuleRemoveCommand()
+                CommandExecutor.Execute(new RuleRemoveCommand()
                 {
                     Id = id
                 });
@@ -110,7 +112,7 @@
         {
             try
             {
-                this.CommandExecutor.Execute(new RuleUpdateCommand()
+                CommandExecutor.Execute(new RuleUpdateCommand()
                 {
                     Id = id,
                     Text = text

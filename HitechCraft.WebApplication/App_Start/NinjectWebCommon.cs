@@ -68,7 +68,7 @@ namespace HitechCraft.WebApplication.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            DependencyResolver.SetResolver(new Resolver(kernel));
+            DependencyResolver.SetResolver(new HitechCraft.WebApplication.Ninject.Resolver(kernel));
         }        
     }
 }

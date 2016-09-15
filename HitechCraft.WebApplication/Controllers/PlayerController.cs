@@ -1,25 +1,24 @@
-﻿using System.Text;
-using HitechCraft.Common.Core;
+﻿using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Entity.Extentions;
+using HitechCraft.Core.Helper;
+using HitechCraft.Core.Models.Enum;
+using HitechCraft.Core.Repository.Specification.Player;
+using HitechCraft.Projector.Impl;
 
 namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
-
-    using Common.DI;
+    
     using System;
     using System.Web.Mvc;
-    using DAL.Domain;
     using Models;
     using BL.CQRS.Query;
     using Properties;
     using System.Text.RegularExpressions;
-    using Common.Projector;
     using BL.CQRS.Command;
     using Manager;
-    using Common.Models.Enum;
     using System.Linq;
-    using DAL.Domain.Extentions;
-    using DAL.Repository.Specification;
     using System.Collections.Generic;
     using System.Web;
 
@@ -179,7 +178,7 @@ namespace HitechCraft.WebApplication.Controllers
                 {
                     //Specification = new JobByUuidSpec(HashManager.UuiBytes("OfflinePlayer:" + this.Player.Name)),
                     Projector = this.Container.Resolve<IProjector<Job, JobViewModel>>()
-                }).Where(x => x.Uuid.IsEquals(HashManager.UuiBytes("OfflinePlayer:" + this.Player.Name)));
+                }).Where(x => x.Uuid.IsEquals(HashHelper.UuiBytes("OfflinePlayer:" + this.Player.Name)));
 
             return PartialView("_JobsPartial", jobs);
         }

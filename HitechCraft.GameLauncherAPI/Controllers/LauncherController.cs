@@ -1,7 +1,16 @@
-﻿namespace HitechCraft.GameLauncherAPI.Controllers
+﻿using HitechCraft.Core.Entity;
+using HitechCraft.Core.Entity.Extentions;
+using HitechCraft.Core.Helper;
+using HitechCraft.Core.Models.Enum;
+using HitechCraft.Core.Models.Json;
+using HitechCraft.Core.Repository.Specification.PlayerSession;
+using HitechCraft.Projector.Impl;
+
+namespace HitechCraft.GameLauncherAPI.Controllers
 {
     #region Using Directives
 
+    using HitechCraft.Core.DI;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -11,15 +20,6 @@
     using System.Web.Mvc;
     using BL.CQRS.Command;
     using BL.CQRS.Query;
-    using Common.Core;
-    using Common.DI;
-    using Common.Models.Enum;
-    using Common.Models.Json.MinecraftLauncher;
-    using Common.Models.Json.MinecraftServer;
-    using Common.Projector;
-    using DAL.Domain;
-    using DAL.Domain.Extentions;
-    using DAL.Repository.Specification;
     using Models;
     using Microsoft.AspNet.Identity.Owin;
     using Managers;
@@ -213,7 +213,7 @@
                         .Select(x => new JsonClientFilesData()
                         {
                             FilePath = FileManager.GetClientFilePath(x, clientName),
-                            HashSum = HashManager.GetMd5Hash(System.IO.File.ReadAllBytes(x)),
+                            HashSum = HashHelper.GetMd5Hash(System.IO.File.ReadAllBytes(x)),
                             FileSize = (int)new FileInfo(x).Length
                         }));
                 }
@@ -411,7 +411,7 @@
 
         private string UuidConvert(string username)
         {
-            return HashManager.StringFromUuid(HashManager.UuidFromString("OfflinePlayer:" + username));
+            return HashHelper.StringFromUuid(HashHelper.UuidFromString("OfflinePlayer:" + username));
         }
 
         private string GenerateKey(string keyWord, string userName)

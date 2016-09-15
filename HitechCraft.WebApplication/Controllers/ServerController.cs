@@ -1,12 +1,13 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Projector.Impl;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
-    using Common.DI;
     using System.Web.Mvc;
     using BL.CQRS.Query;
-    using Common.Projector;
-    using DAL.Domain;
     using Models;
     using System;
     using BL.CQRS.Command;

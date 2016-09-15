@@ -1,8 +1,9 @@
-﻿namespace HitechCraft.WebApplication.Mapper
+﻿using System.Linq;
+using HitechCraft.Core.Entity;
+
+namespace HitechCraft.WebApplication.Mapper
 {
-    using DAL.Domain;
     using Models;
-    using System.Linq;
 
     public class ModificationToModificationViewModelMapper : BaseMapper<Modification, ModificationViewModel>
     {

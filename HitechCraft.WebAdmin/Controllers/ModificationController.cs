@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using HitechCraft.BL.CQRS.Command;
 using HitechCraft.BL.CQRS.Query;
-using HitechCraft.Common.DI;
-using HitechCraft.Common.Projector;
-using HitechCraft.DAL.Domain;
+using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Projector.Impl;
 using HitechCraft.WebAdmin.Manager;
 using HitechCraft.WebAdmin.Models;
 using PagedList;

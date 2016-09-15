@@ -6,6 +6,7 @@ using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
 using global::Ninject;
 using global::Ninject.Web.Common;
+using HitechCraft.WebAdmin.Ninject;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]

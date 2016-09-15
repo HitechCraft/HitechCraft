@@ -1,8 +1,8 @@
 ﻿namespace HitechCraft.DAL.NHibernate.Mappings
 {
     #region Using Directives
-    
-    using Domain;
+
+    using HitechCraft.Core.Entity;
     using FluentNHibernate.Automapping.Alterations;
     using FluentNHibernate.Automapping;
 

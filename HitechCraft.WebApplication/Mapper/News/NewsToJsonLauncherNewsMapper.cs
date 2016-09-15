@@ -1,9 +1,9 @@
-﻿namespace HitechCraft.WebApplication.Mapper
-{
-    using DAL.Domain;
-    using Common.Models.Json.MinecraftLauncher;
-    using DAL.Domain.Extentions;
+﻿using HitechCraft.Core.Entity;
+using HitechCraft.Core.Entity.Extentions;
+using HitechCraft.Core.Models.Json;
 
+namespace HitechCraft.WebApplication.Mapper
+{
     public class NewsToJsonLauncherNewsMapper : BaseMapper<News, JsonLauncherNews>
     {
         public NewsToJsonLauncherNewsMapper()

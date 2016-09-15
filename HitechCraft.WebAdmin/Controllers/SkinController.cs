@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using HitechCraft.BL.CQRS.Command;
 using HitechCraft.BL.CQRS.Query;
-using HitechCraft.Common.Core;
-using HitechCraft.Common.Models.Enum;
-using HitechCraft.Common.Projector;
-using HitechCraft.DAL.Domain;
-using HitechCraft.DAL.Domain.Extentions;
+using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Entity.Extentions;
+using HitechCraft.Core.Helper;
+using HitechCraft.Core.Models.Enum;
+using HitechCraft.Projector.Impl;
 using HitechCraft.WebAdmin.Manager;
 using HitechCraft.WebAdmin.Models;
-using MySql.Data.MySqlClient.Properties;
 using PagedList;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
     using System.Web.Mvc;
-    using HitechCraft.Common.DI;
 
     public class SkinController : BaseController
     {
@@ -135,7 +134,7 @@ namespace HitechCraft.WebAdmin.Controllers
         [HttpPost]
         public ActionResult CheckExistingSkinByBase64(string base64)
         {
-            var bytes = HashManager.GetBase64Bytes(base64);
+            var bytes = HashHelper.GetBase64Bytes(base64);
 
             var skins = new EntityListQueryHandler<Skin, SkinViewModel>(this.Container)
                 .Handle(new EntityListQuery<Skin, SkinViewModel>()

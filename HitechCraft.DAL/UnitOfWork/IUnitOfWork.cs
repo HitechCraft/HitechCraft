@@ -1,8 +1,10 @@
-﻿namespace HitechCraft.Common.UnitOfWork
+﻿using NHibernate;
+
+namespace HitechCraft.DAL.UnitOfWork
 {
     #region Using Directives
 
-    using NHibernate;
+    
 
     #endregion
 

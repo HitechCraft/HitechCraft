@@ -44,8 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dependences\Current\CurrentUser.cs" />
-    <Compile Include="Dependences\Current\ICurrentUser.cs" />
     <Compile Include="Dependences\NinjectDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -2,8 +2,7 @@
 {
     #region Using Directives
 
-    using FluentNHibernate.Mapping;
-    using Domain;
+    using HitechCraft.Core.Entity;
     using FluentNHibernate.Automapping;
     using FluentNHibernate.Automapping.Alterations;
 

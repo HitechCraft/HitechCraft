@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Linq;
-using HitechCraft.Common.Models.Enum;
-using HitechCraft.WebAdmin.Manager;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
     #region Using Directives
 
-    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;

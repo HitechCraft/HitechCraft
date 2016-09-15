@@ -1,13 +1,14 @@
-﻿using HitechCraft.DAL.Domain.Extentions;
+﻿using HitechCraft.Core.Entity;
+using HitechCraft.Core.Entity.Extentions;
 using HitechCraft.WebAdmin.Models;
 
 namespace HitechCraft.WebAdmin.Mapper
 {
-    public class NewsToNewsViewModelMapper : BaseMapper<DAL.Domain.News, NewsViewModel>
+    public class NewsToNewsViewModelMapper : BaseMapper<News, NewsViewModel>
     {
         public NewsToNewsViewModelMapper()
         {
-            this.ConfigurationStore.CreateMap<DAL.Domain.News, NewsViewModel>()
+            this.ConfigurationStore.CreateMap<News, NewsViewModel>()
                 .ForMember(dst => dst.Id, ext => ext.MapFrom(src => src.Id))
                 .ForMember(dst => dst.AuthorName, ext => ext.MapFrom(src => src.Author.Name))
                 .ForMember(dst => dst.ShortText, ext => ext.MapFrom(src => src.Text.Limit(500) + "..."))

@@ -5,8 +5,8 @@
     using FluentNHibernate.Automapping;
     using FluentNHibernate.Cfg;
     using Helper;
-    using Domain;
     using Mappings;
+    using Core.Entity;
 
     #endregion
 

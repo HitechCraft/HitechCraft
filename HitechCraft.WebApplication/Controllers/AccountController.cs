@@ -1,10 +1,7 @@
-﻿using System.Net;
-using System.Text.RegularExpressions;
-using HitechCraft.Common.Core;
-using HitechCraft.Common.Models.Json;
-using HitechCraft.Common.Models.Json.MinecraftLauncher;
+﻿using HitechCraft.Core.DI;
+using HitechCraft.Core.Helper;
+using HitechCraft.Core.Models.Enum;
 using HitechCraft.WebApplication.Manager;
-using Newtonsoft.Json;
 
 namespace HitechCraft.WebApplication.Controllers
 {
@@ -15,7 +12,6 @@ namespace HitechCraft.WebApplication.Controllers
     using System.Web;
     using System.Web.Mvc;
     using BL.CQRS.Command;
-    using Common.DI;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
@@ -23,7 +19,6 @@ namespace HitechCraft.WebApplication.Controllers
     using Properties;
     using System;
     using System.Collections.Generic;
-    using Common.Models.Enum;
 
     #endregion
 
@@ -247,7 +242,7 @@ namespace HitechCraft.WebApplication.Controllers
                     }
                     catch (Exception e)
                     {
-                        LogManager.Error(e.Message, "Account Register");
+                        LogHelper.Error(e.Message, "Account Register");
                     }
                     
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

@@ -1,7 +1,8 @@
-﻿namespace HitechCraft.WebApplication.Models
+﻿using HitechCraft.Core.Models.Enum;
+
+namespace HitechCraft.WebApplication.Models
 {
     using System;
-    using Common.Models.Enum;
 
     public class BanViewModel
     {

@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebApplication.Mapper
+﻿using HitechCraft.Projector.Impl;
+
+namespace HitechCraft.WebApplication.Mapper
 {
     #region Using Directives
 
@@ -7,7 +9,6 @@
     using AutoMapper;
     using AutoMapper.Mappers;
     using AutoMapper.QueryableExtensions;
-    using Common.Projector;
 
     #endregion
 

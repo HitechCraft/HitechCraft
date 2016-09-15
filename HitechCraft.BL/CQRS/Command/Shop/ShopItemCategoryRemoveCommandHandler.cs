@@ -1,4 +1,5 @@
 ﻿using HitechCraft.BL.CQRS.Command.Base;
+using HitechCraft.Core.Repository.Specification.Shop;
 
 namespace HitechCraft.BL.CQRS.Command
 {
@@ -8,7 +9,6 @@ namespace HitechCraft.BL.CQRS.Command
     using Core.DI;
     using Core.Entity;
     using System;
-    using DAL.Repository.Specification;
 
     #endregion
 

@@ -1,5 +1,9 @@
 ﻿using HitechCraft.BL.CQRS.Command.Base;
-using HitechCraft.DAL.Repository.Specification;
+using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Models.Enum;
+using HitechCraft.Core.Repository.Specification.PrivateMessage;
+using HitechCraft.Projector.Impl;
 using HitechCraft.WebApplication.Models;
 
 namespace HitechCraft.WebApplication.Controllers
@@ -7,12 +11,7 @@ namespace HitechCraft.WebApplication.Controllers
     #region Using Directives
 
     using System.Web.Mvc;
-    using System.Collections.Generic;
     using BL.CQRS.Query;
-    using Common.DI;
-    using Common.Entity;
-    using Common.Projector;
-    using DAL.Domain;
     using Ninject.Current;
 
     #endregion

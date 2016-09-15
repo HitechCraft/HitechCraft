@@ -2,7 +2,6 @@
 {
     #region Using Directives
 
-    using Common.UnitOfWork;
     using global::NHibernate;
     using NHibernate.Helper;
 

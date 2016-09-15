@@ -1,19 +1,20 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Helper;
+using HitechCraft.Core.Repository.Specification.Currency;
+using HitechCraft.Projector.Impl;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
-    using Common.DI;
     using System.Web.Mvc;
-    using Common.Core;
     using BL.CQRS.Command;
     using System;
     using System.Collections.Generic;
     using BL.CQRS.Query;
     using Models;
-    using DAL.Domain;
     using System.Linq;
-    using Common.Projector;
-    using DAL.Repository.Specification;
 
     #endregion
 
@@ -32,7 +33,7 @@
         [HttpPost]
         public ActionResult VoteOnTopcraft(string timestamp, string username, string signature)
         {
-            if (signature.ToLower() == HashManager.GetSha1Hash(username + timestamp + this.TopCraftSecret))
+            if (signature.ToLower() == HashHelper.GetSha1Hash(username + timestamp + this.TopCraftSecret))
             {
                 try
                 {
@@ -47,7 +48,7 @@
                 {
                     ViewBag.VoteError = "Ошибка голосования";
 
-                    LogManager.Error(username + ": Ошибка голосования. " + e.Message);
+                    LogHelper.Error(username + ": Ошибка голосования. " + e.Message);
                 }
             }
             else
@@ -61,7 +62,7 @@
         [HttpGet]
         public ActionResult VoteOnMctopsu(string nickname, string token)
         {
-            if (token == HashManager.GetMd5Hash(nickname + this.MCTopSuSecret))
+            if (token == HashHelper.GetMd5Hash(nickname + this.MCTopSuSecret))
             {
                 try
                 {
@@ -76,7 +77,7 @@
                 {
                     ViewBag.VoteError = "Ошибка голосования";
 
-                    LogManager.Error(nickname + ": Ошибка голосования. " + e.Message);
+                    LogHelper.Error(nickname + ": Ошибка голосования. " + e.Message);
                 }
             }
             else
@@ -107,7 +108,7 @@
                 {
                     ViewBag.VoteError = "Ошибка голосования";
 
-                    LogManager.Error(username + ": Ошибка голосования. " + e.Message);
+                    LogHelper.Error(username + ": Ошибка голосования. " + e.Message);
                 }
             }
             else
@@ -124,7 +125,7 @@
         {
             var paramString = this.Implode(objects, "");
 
-            var md5 = HashManager.GetMd5Hash(paramString + this.MCTopSecret);
+            var md5 = HashHelper.GetMd5Hash(paramString + this.MCTopSecret);
 
             return md5;
         }
@@ -150,7 +151,7 @@
                 Rubles = 0
             });
 
-            LogManager.Info(currency.PlayerName + ": голосование на Topcraft. Награда - 250 Gonts");
+            LogHelper.Info(currency.PlayerName + ": голосование на Topcraft. Награда - 250 Gonts");
         }
 
         private void PayVoteRubles(string userName)
@@ -169,7 +170,7 @@
                 Rubles = 2
             });
 
-            LogManager.Info(currency.PlayerName + ": голосование на MCtopSU. Награда - 2 RUB");
+            LogHelper.Info(currency.PlayerName + ": голосование на MCtopSU. Награда - 2 RUB");
         }
 
         private void GetVoteShopItem(string userName)
@@ -179,7 +180,7 @@
                 PlayerName = userName
             });
 
-            LogManager.Info(userName + ": голосование на MCtop. Награда - случайный предмет из магазина");
+            LogHelper.Info(userName + ": голосование на MCtop. Награда - случайный предмет из магазина");
         }
 
         #endregion

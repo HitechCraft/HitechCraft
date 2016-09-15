@@ -1,9 +1,7 @@
-﻿using HitechCraft.Common.Models.Enum;
+﻿using HitechCraft.Core.Models.Enum;
 
 namespace HitechCraft.WebApplication.Models
 {
-    using System;
-
     public class PMPlayerViewModel
     {
         public int Id { get; set; }

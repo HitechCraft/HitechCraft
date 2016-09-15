@@ -1,12 +1,13 @@
-﻿using HitechCraft.WebAdmin.Models;
+﻿using HitechCraft.Core.Entity;
+using HitechCraft.WebAdmin.Models;
 
 namespace HitechCraft.WebAdmin.Mapper
 {
-    public class ServerToServerEditViewModelMapper : BaseMapper<DAL.Domain.Server, ServerEditViewModel>
+    public class ServerToServerEditViewModelMapper : BaseMapper<Server, ServerEditViewModel>
     {
         public ServerToServerEditViewModelMapper()
         {
-            this.ConfigurationStore.CreateMap<DAL.Domain.Server, ServerEditViewModel>()
+            this.ConfigurationStore.CreateMap<Server, ServerEditViewModel>()
                 .ForMember(dst => dst.Id, ext => ext.MapFrom(src => src.Id))
                 .ForMember(dst => dst.Name, ext => ext.MapFrom(src => src.Name))
                 .ForMember(dst => dst.Description, ext => ext.MapFrom(src => src.Description))

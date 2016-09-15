@@ -1,12 +1,11 @@
-﻿using HitechCraft.Common.Models.Enum;
+﻿using HitechCraft.Core.DI;
+using HitechCraft.Core.Models.Enum;
 using HitechCraft.WebApplication.Manager;
-using HitechCraft.WebApplication.Models;
 
 namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
-    using Common.DI;
     using System;
     using System.Web.Mvc;
     using HitechCraft.BL.CQRS.Command;

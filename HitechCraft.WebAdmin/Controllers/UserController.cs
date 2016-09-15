@@ -3,7 +3,6 @@
     #region Using Directives
 
     using System.Web.Mvc;
-    using Common.DI;
     using System.Linq;
     using Models;
     using System;
@@ -11,19 +10,19 @@
     using System.Web;
     using BL.CQRS.Command;
     using BL.CQRS.Query;
-    using Common.Models.Enum;
-    using Common.Projector;
-    using DAL.Domain;
-    using DAL.Repository.Specification;
     using Manager;
-    using Models.User;
     using PagedList;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
+    using HitechCraft.Core.DI;
+    using HitechCraft.Core.Entity;
+    using HitechCraft.Core.Models.Enum;
+    using HitechCraft.Core.Repository.Specification.Currency;
+    using HitechCraft.Projector.Impl;
 
     #endregion
-    
+
     public class UserController : BaseController
     {
         #region Properties

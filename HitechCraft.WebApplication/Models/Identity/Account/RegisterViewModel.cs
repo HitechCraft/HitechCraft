@@ -1,8 +1,9 @@
-﻿namespace HitechCraft.WebApplication.Models
+﻿using HitechCraft.Core.Models.Enum;
+
+namespace HitechCraft.WebApplication.Models
 {
     using System.ComponentModel.DataAnnotations;
     using Properties;
-    using Common.Models.Enum;
 
     public class RegisterViewModel
     {

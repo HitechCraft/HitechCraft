@@ -1,9 +1,10 @@
-﻿namespace HitechCraft.BL.CQRS.Query
+﻿using HitechCraft.Core.Repository.Specification.Player;
+
+namespace HitechCraft.BL.CQRS.Query
 {
     #region UsingDirectives
 
     using System.Linq;
-    using DAL.Repository.Specification;
     using Core.DI;
     using Core.Entity;
     using DAL.Repository;

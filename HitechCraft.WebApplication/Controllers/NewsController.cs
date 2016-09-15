@@ -1,16 +1,16 @@
 ﻿using System.Linq;
+using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Repository.Specification.News;
+using HitechCraft.Projector.Impl;
 
 namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
-    
-    using Common.DI;
-    using DAL.Domain;
+
     using Models;
     using PagedList;
     using BL.CQRS.Query;
-    using Common.Projector;
-    using DAL.Repository.Specification;
     using System;
     using System.Web.Mvc;
     using Manager;

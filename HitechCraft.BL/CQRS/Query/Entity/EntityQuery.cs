@@ -3,6 +3,7 @@
     #region Using Directives
 
     using Core.Entity;
+    using HitechCraft.Projector.Impl;
 
     #endregion
 

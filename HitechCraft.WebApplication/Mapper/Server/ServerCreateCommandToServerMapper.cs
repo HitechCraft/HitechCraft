@@ -1,6 +1,7 @@
-﻿namespace HitechCraft.WebApplication.Mapper
+﻿using HitechCraft.Core.Entity;
+
+namespace HitechCraft.WebApplication.Mapper
 {
-    using DAL.Domain;
     using BL.CQRS.Command;
 
     public class ServerCreateCommandToServerMapper : BaseMapper<ServerCreateCommand, Server>

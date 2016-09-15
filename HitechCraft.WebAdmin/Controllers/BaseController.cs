@@ -1,12 +1,12 @@
 ﻿using HitechCraft.BL.CQRS.Command.Base;
+using HitechCraft.Core.DI;
+using HitechCraft.Projector.Impl;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
     #region Using Directives
 
     using System.Web.Mvc;
-    using Common.DI;
-    using Common.Projector;
     using Models;
     using Microsoft.AspNet.Identity;
 

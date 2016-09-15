@@ -1,11 +1,8 @@
-﻿using System;
+﻿using HitechCraft.Core.Entity;
 
 namespace HitechCraft.WebApplication.Mapper
 {
-    using DAL.Domain;
     using Models;
-    using System.Linq;
-    using Common.Models.Enum;
 
     public class PrivateMessageToPrivateMessageViewModelMapper : BaseMapper<PrivateMessage, PrivateMessageViewModel>
     {

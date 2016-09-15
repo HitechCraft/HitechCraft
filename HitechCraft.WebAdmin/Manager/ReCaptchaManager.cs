@@ -1,7 +1,6 @@
 ﻿using System.Net;
-using HitechCraft.Common.Models.Enum;
-using HitechCraft.Common.Models.Json;
-using HitechCraft.Common.Models.Json.MinecraftLauncher;
+using HitechCraft.Core.Models.Enum;
+using HitechCraft.Core.Models.Json;
 using Newtonsoft.Json;
 
 namespace HitechCraft.WebAdmin.Manager

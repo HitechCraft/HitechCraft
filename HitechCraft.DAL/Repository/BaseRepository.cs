@@ -1,4 +1,7 @@
-﻿namespace HitechCraft.Common.Repository
+﻿using HitechCraft.Core.Repository.Specification;
+using HitechCraft.DAL.UnitOfWork;
+
+namespace HitechCraft.Common.Repository
 {
     #region Using Directives
 
@@ -8,10 +11,8 @@
     using Core.DI;
     using Core.Entity;
     using DAL.Repository;
-    using DAL.Repository.Specification;
     using Projector.Impl;
     using Projector.Impl.Extentions;
-    using UnitOfWork;
     using NHibernate.Linq;
 
     #endregion

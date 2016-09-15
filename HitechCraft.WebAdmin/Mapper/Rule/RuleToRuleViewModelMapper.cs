@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using HitechCraft.DAL.Domain;
+using HitechCraft.Core.Entity;
 using HitechCraft.WebAdmin.Models;
 
 namespace HitechCraft.WebAdmin.Mapper

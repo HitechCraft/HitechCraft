@@ -1,10 +1,11 @@
-﻿namespace HitechCraft.BL.CQRS.Query
+﻿using HitechCraft.Core.Repository.Specification;
+
+namespace HitechCraft.BL.CQRS.Query
 {
     #region Using Directives
 
     using System.Collections.Generic;
     using Core.Entity;
-    using DAL.Repository.Specification;
     using Projector.Impl;
 
     #endregion

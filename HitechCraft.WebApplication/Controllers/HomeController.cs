@@ -1,7 +1,8 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Core.DI;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     using System.Web.Mvc;
-    using Common.DI;
 
     public class HomeController : BaseController
     {

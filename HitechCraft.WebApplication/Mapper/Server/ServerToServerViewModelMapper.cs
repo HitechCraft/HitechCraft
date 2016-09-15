@@ -1,10 +1,10 @@
-﻿namespace HitechCraft.WebApplication.Mapper
+﻿using HitechCraft.Core.Entity;
+using HitechCraft.Core.Entity.Extentions;
+
+namespace HitechCraft.WebApplication.Mapper
 {
-    using DAL.Domain;
     using Models;
-    using DAL.Domain.Extentions;
-    using System.Collections.Generic;
-    
+
     public class ServerToServerViewModelMapper : BaseMapper<Server, ServerViewModel>
     {
         public ServerToServerViewModelMapper()

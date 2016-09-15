@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using HitechCraft.Common.Models.Json.MinecraftServer;
+using HitechCraft.Core.Models.Json;
 
 namespace HitechCraft.WebAdmin.Models
 {

@@ -1,9 +1,9 @@
 ﻿namespace HitechCraft.DAL.NHibernate.Mappings
 {
     #region Using Directives
-    
-    using Domain;
-    using Common.Models.Enum;
+
+    using HitechCraft.Core.Entity;
+    using HitechCraft.Core.Models.Enum;
     using FluentNHibernate.Automapping;
     using FluentNHibernate.Automapping.Alterations;
 

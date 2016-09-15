@@ -285,7 +285,7 @@
     <Compile Include="Models\User\PlayerInfoViewModel.cs" />
     <Compile Include="Models\User\PlayerSkinViewModel.cs" />
     <Compile Include="Models\User\UserViewModel.cs" />
-    <Compile Include="Ninject\NinjectDependencyResolver.cs" />
+    <Compile Include="Ninject\Resolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -497,9 +497,17 @@
       <Project>{65b57fdc-c32e-4907-86c2-9489f2643a0f}</Project>
       <Name>HitechCraft.BL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HitechCraft.DAL\HitechCraft.DAL.csproj">
-      <Project>{61bb4d2b-a80d-4c3c-822e-ad0aa3735873}</Project>
-      <Name>HitechCraft.DAL</Name>
+    <ProjectReference Include="..\HitechCraft.Core\HitechCraft.Core.csproj">
+      <Project>{bf28e97f-0030-4c65-97b5-d2882eb1c9de}</Project>
+      <Name>HitechCraft.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HitechCraft.Ninjector\HitechCraft.Ninjector.csproj">
+      <Project>{85d9bb9f-4033-4450-95d6-5eaf3b9eb4ef}</Project>
+      <Name>HitechCraft.Ninjector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HitechCraft.Projector\HitechCraft.Projector.csproj">
+      <Project>{1c83ee3f-e373-4957-8ea7-31672e1baf85}</Project>
+      <Name>HitechCraft.Projector</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,8 @@
-﻿namespace HitechCraft.WebAdmin.Controllers
+﻿using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Projector.Impl;
+
+namespace HitechCraft.WebAdmin.Controllers
 {
     #region Using Directives
 
@@ -7,9 +11,6 @@
     using System.Web.Mvc;
     using BL.CQRS.Command;
     using BL.CQRS.Query;
-    using Common.DI;
-    using Common.Projector;
-    using DAL.Domain;
     using Manager;
     using Models;
     using PagedList;

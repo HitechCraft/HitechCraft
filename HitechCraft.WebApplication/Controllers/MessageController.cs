@@ -1,18 +1,19 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Models.Enum;
+using HitechCraft.Core.Repository.Specification.PrivateMessage;
+using HitechCraft.Projector.Impl;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
     using System.Web.Mvc;
     using BL.CQRS.Query;
-    using Common.DI;
-    using DAL.Domain;
     using Models;
     using System;
     using System.Linq;
     using BL.CQRS.Command;
-    using Common.Models.Enum;
-    using Common.Projector;
-    using DAL.Repository.Specification;
 
     #endregion
 

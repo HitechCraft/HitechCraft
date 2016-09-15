@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Web;
-using HitechCraft.Common.Models.Enum;
+using HitechCraft.Core.Models.Enum;
 
 namespace HitechCraft.GameLauncherAPI.Managers
 {

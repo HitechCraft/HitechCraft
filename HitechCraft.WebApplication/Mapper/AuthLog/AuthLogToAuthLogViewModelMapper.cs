@@ -1,11 +1,10 @@
-﻿namespace HitechCraft.WebApplication.Mapper
+﻿using HitechCraft.Core.Entity;
+
+namespace HitechCraft.WebApplication.Mapper
 {
     #region Using Directives
 
-    using DAL.Domain;
     using Models;
-    using System;
-    using Common.Models.Enum;
 
     #endregion
 

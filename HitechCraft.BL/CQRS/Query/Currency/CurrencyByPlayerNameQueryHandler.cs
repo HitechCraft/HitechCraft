@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.BL.CQRS.Query
+﻿using HitechCraft.Core.Repository.Specification.Currency;
+
+namespace HitechCraft.BL.CQRS.Query
 {
     #region Using Directives
 
@@ -6,7 +8,6 @@
     using Core.DI;
     using DAL.Repository;
     using Core.Entity;
-    using DAL.Repository.Specification;
 
     #endregion
 

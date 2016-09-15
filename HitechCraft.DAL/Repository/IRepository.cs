@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.DAL.Repository
+﻿using HitechCraft.Core.Repository.Specification;
+
+namespace HitechCraft.DAL.Repository
 {
     #region Using Directives
 
@@ -6,7 +8,6 @@
     using System.Collections;
     using System.Collections.Generic;
     using Core.Entity;
-    using Specification;
     using Projector.Impl;
 
     #endregion

@@ -1,12 +1,13 @@
-﻿using HitechCraft.WebAdmin.Models;
+﻿using HitechCraft.Core.Entity;
+using HitechCraft.WebAdmin.Models;
 
 namespace HitechCraft.WebAdmin.Mapper
 {
-    public class SkinToSkinEditViewModelMapper : BaseMapper<DAL.Domain.Skin, SkinEditViewModel>
+    public class SkinToSkinEditViewModelMapper : BaseMapper<Skin, SkinEditViewModel>
     {
         public SkinToSkinEditViewModelMapper()
         {
-            this.ConfigurationStore.CreateMap<DAL.Domain.Skin, SkinEditViewModel>()
+            this.ConfigurationStore.CreateMap<Skin, SkinEditViewModel>()
                 .ForMember(dst => dst.Id, ext => ext.MapFrom(src => src.Id))
                 .ForMember(dst => dst.Name, ext => ext.MapFrom(src => src.Name))
                 .ForMember(dst => dst.Image, ext => ext.MapFrom(src => src.Image))

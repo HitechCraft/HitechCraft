@@ -18,7 +18,7 @@
 
     public class Resolver : IDependencyResolver
     {
-        private readonly IKernel _kernel;
+        private IKernel _kernel;
 
         public Resolver(IKernel kernel)
         {
@@ -38,7 +38,7 @@
 
         public void AddBindings()
         {
-            new NinjectDependencyResolver(_kernel).AddBindings();
+            _kernel = NinjectDependencyResolver.AddBindings(_kernel);
 
             #region Projector Ninjects
 

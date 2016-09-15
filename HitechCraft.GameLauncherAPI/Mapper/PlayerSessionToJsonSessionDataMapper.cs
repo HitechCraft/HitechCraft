@@ -1,8 +1,8 @@
-﻿namespace HitechCraft.GameLauncherAPI.Mapper
-{
-    using Common.Models.Json.MinecraftLauncher;
-    using DAL.Domain;
+﻿using HitechCraft.Core.Entity;
+using HitechCraft.Core.Models.Json;
 
+namespace HitechCraft.GameLauncherAPI.Mapper
+{
     public class PlayerSessionToJsonSessionDataMapper : BaseMapper<PlayerSession, JsonSessionData>
     {
         public PlayerSessionToJsonSessionDataMapper()

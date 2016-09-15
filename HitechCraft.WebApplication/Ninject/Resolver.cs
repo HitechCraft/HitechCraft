@@ -4,6 +4,7 @@ using HitechCraft.Core.Models.Json;
 using HitechCraft.Projector.Impl;
 using HitechCraft.WebApplication.Mapper;
 using HitechCraft.WebApplication.Models;
+using HitechCraft.WebApplication.Ninject.Current;
 
 namespace HitechCraft.WebApplication.Ninject
 {
@@ -20,7 +21,7 @@ namespace HitechCraft.WebApplication.Ninject
 
     public class Resolver : IDependencyResolver
     {
-        private readonly IKernel _kernel;
+        private IKernel _kernel;
 
         public Resolver(IKernel kernel)
         {
@@ -40,7 +41,9 @@ namespace HitechCraft.WebApplication.Ninject
 
         public void AddBindings()
         {
-            new NinjectDependencyResolver(_kernel).AddBindings();
+            _kernel = NinjectDependencyResolver.AddBindings(_kernel);
+
+            _kernel.Bind(typeof(ICurrentUser)).To(typeof(CurrentUser));
 
             #region Projector Ninjects
 

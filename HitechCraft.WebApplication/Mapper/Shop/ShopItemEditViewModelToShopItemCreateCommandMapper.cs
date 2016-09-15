@@ -1,6 +1,5 @@
 ﻿namespace HitechCraft.WebApplication.Mapper
 {
-    using DAL.Domain;
     using Models;
     using BL.CQRS.Command;
 

@@ -1,7 +1,7 @@
-﻿namespace HitechCraft.WebApplication.Models
-{
-    using Common.Models.Enum;
+﻿using HitechCraft.Core.Models.Enum;
 
+namespace HitechCraft.WebApplication.Models
+{
     public class SkinViewModel
     {
         public int Id { get; set; }

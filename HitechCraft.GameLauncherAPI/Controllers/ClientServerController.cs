@@ -1,9 +1,15 @@
-﻿namespace HitechCraft.GameLauncherAPI.Controllers
+﻿using HitechCraft.Core.DI;
+using HitechCraft.Core.Entity;
+using HitechCraft.Core.Helper;
+using HitechCraft.Core.Models.Json;
+using HitechCraft.Core.Repository.Specification.PlayerSession;
+using HitechCraft.Projector.Impl;
+
+namespace HitechCraft.GameLauncherAPI.Controllers
 {
     #region Using Directives
 
     using System.Web.Mvc;
-    using Common.DI;
     using System;
     using System.Linq;
     using System.Text;
@@ -11,11 +17,6 @@
     using System.Web.Script.Serialization;
     using BL.CQRS.Command;
     using BL.CQRS.Query;
-    using Common.Core;
-    using Common.Models.Json.MinecraftClient;
-    using Common.Projector;
-    using DAL.Domain;
-    using DAL.Repository.Specification;
     using Managers;
     using Models;
 
@@ -122,7 +123,7 @@
             }
             catch (Exception e)
             {
-                LogManager.Error("Ошибка передачи параметров серверу: " + e.Message, "CheckServer");
+                LogHelper.Error("Ошибка передачи параметров серверу: " + e.Message, "CheckServer");
 
                 return Json(new JsonErrorData
                 {
@@ -218,7 +219,7 @@
             }
             catch (Exception e)
             {
-                LogManager.Error("Ошибка получения профиля игрока." + e.Message, "PlayerProfile");
+                LogHelper.Error("Ошибка получения профиля игрока." + e.Message, "PlayerProfile");
 
                 return null;
             }
