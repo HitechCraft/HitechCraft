@@ -127,6 +127,7 @@
         } else if (confirm("Действительно обменять " + value + " RUB на Gonts")) {
             $.post('@Url.Action("ExchangeRubToGont")', { count: parseInt(value) })
                 .done(function (data) {
+                    console.log(data);
                     if (data.status === 1) {
                         location.reload();
                         growlSuccess(data.message);

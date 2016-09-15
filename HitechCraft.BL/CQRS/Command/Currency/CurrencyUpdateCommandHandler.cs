@@ -35,9 +35,9 @@
                 currency = currencyRep.Query(new CurrencyByPlayerNameSpec(transaction.Player.Name)).First();
             }
 
-            if (command.Gonts < 0 && currency.Gonts < command.Gonts) throw new Exception("Недостаточно игровой валюты на счете!");
+            if (command.Gonts < 0 && currency.Gonts < Math.Abs(command.Gonts)) throw new Exception("Недостаточно игровой валюты на счете!");
 
-            if (command.Rubles < 0 && currency.Rubels < command.Rubles) throw new Exception("Недостаточно рублей на счете!");
+            if (command.Rubles < 0 && currency.Rubels < Math.Abs(command.Rubles)) throw new Exception("Недостаточно рублей на счете!");
 
             if (command.Gonts != 0)
             {

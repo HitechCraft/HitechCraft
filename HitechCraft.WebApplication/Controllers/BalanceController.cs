@@ -92,8 +92,7 @@ namespace HitechCraft.WebApplication.Controllers
         {
             try
             {
-                this.UpdateGonts(Math.Round(count / this.RubToGont));
-                this.UpdateRubles(-count, "");
+                this.UpdateCurrency(Math.Round(count / this.RubToGont), -count);
             }
             catch (Exception e)
             {
@@ -116,8 +115,7 @@ namespace HitechCraft.WebApplication.Controllers
         {
             try
             {
-                this.UpdateRubles(Math.Round(count / this.GontToRub, 2), "");
-                this.UpdateGonts(-count);
+                this.UpdateCurrency(-count, Math.Round(count / this.GontToRub, 2));
             }
             catch (Exception e)
             {
@@ -340,14 +338,21 @@ namespace HitechCraft.WebApplication.Controllers
         /// <param name="transactionID">IK Transaction ID</param>
         private void MoneyEnrollment(CurrencyType currencyType, float amount, string transactionId)
         {
-            switch (currencyType)
+            try
             {
-                case CurrencyType.Rub:
-                    this.UpdateRubles(amount, transactionId);
-                    break;
-                case CurrencyType.Gont:
-                    this.UpdateGonts(amount);
-                    break;
+                switch (currencyType)
+                {
+                    case CurrencyType.Rub:
+                        this.UpdateRubles(amount, transactionId);
+                        break;
+                    case CurrencyType.Gont:
+                        this.UpdateGonts(amount);
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                LogManager.Error("Ошибка обновления счета! " + e.Message, "IKPayment");
             }
         }
 
@@ -389,20 +394,28 @@ namespace HitechCraft.WebApplication.Controllers
         /// <param name="transactionId">Id of IK transaction</param>
         private void UpdateRubles(double amount, string transactionId)
         {
-            try
+            this.CommandExecutor.Execute(new CurrencyUpdateCommand()
             {
-                this.CommandExecutor.Execute(new CurrencyUpdateCommand()
-                {
-                    Id = this.Currency != null ? this.Currency.Id : 0,
-                    TransactionId = transactionId,
-                    Gonts = 0,
-                    Rubles = amount
-                });
-            }
-            catch (Exception e)
+                Id = this.Currency?.Id ?? 0,
+                TransactionId = transactionId,
+                Gonts = 0,
+                Rubles = amount
+            });
+        }
+
+        /// <summary>
+        /// Обновление осуществляется прибавлением (вычетом) значения. Указываем разницу, а не новое кол-во валюты!!!
+        /// </summary>
+        /// <param name="gontsAmount">Кол-во игровой валюты</param>
+        /// <param name="rublesAmount">Кол-во рублей</param>
+        private void UpdateCurrency(double gontsAmount, double rublesAmount)
+        {
+            this.CommandExecutor.Execute(new CurrencyUpdateCommand()
             {
-                LogManager.Error("Ошибка обновления счета! " + e.Message, "IKPayment");
-            }
+                Id = this.Currency.Id,
+                Gonts = gontsAmount,
+                Rubles = rublesAmount
+            });
         }
 
         #endregion
