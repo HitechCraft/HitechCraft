@@ -42,69 +42,7 @@ namespace HitechCraft.WebApplication.Controllers
         {
             return View();
         }
-
-        [HttpGet]
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Create()
-        {
-            ViewBag.Gender = new List<SelectListItem>()
-            {
-                new SelectListItem()
-                {
-                    Text = Resources.GenderMale,
-                    Value = ((int)Gender.Male).ToString(),
-                    Selected = true
-                },
-
-                new SelectListItem()
-                {
-                    Text = Resources.GenderFemale,
-                    Value = ((int)Gender.Female).ToString()
-                }
-            };
-
-            return View();
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Create(SkinEditViewModel vm)
-        {
-            var uploadFile = Request.Files["uploadSkinImage"];
-
-            if(uploadFile == null) ModelState.AddModelError(String.Empty, "Выберите изображение");
-
-            if (ModelState.IsValid)
-            {
-                this.CommandExecutor.Execute(new SkinCreateCommand()
-                {
-                    Name = vm.Name,
-                    Image = ImageManager.GetImageBytes(uploadFile),
-                    Gender = vm.Gender
-                });
-
-                return RedirectToAction("Create");
-            }
-
-            ViewBag.Gender = new List<SelectListItem>()
-            {
-                new SelectListItem()
-                {
-                    Text = Resources.GenderMale,
-                    Value = ((int)Gender.Male).ToString(),
-                    Selected = true
-                },
-
-                new SelectListItem()
-                {
-                    Text = Resources.GenderFemale,
-                    Value = ((int)Gender.Female).ToString()
-                }
-            };
-
-            return View();
-        }
-
+        
         [HttpPost]
         public ActionResult CheckExistingSkin()
         {

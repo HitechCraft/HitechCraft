@@ -1,8 +1,5 @@
-﻿using HitechCraft.Core.DI;
-using HitechCraft.Core.Entity;
-using HitechCraft.Core.Helper;
-using HitechCraft.Core.Repository.Specification.Currency;
-using HitechCraft.Projector.Impl;
+﻿using HitechCraft.Core;
+using HitechCraft.WebApplication.Manager;
 
 namespace HitechCraft.WebApplication.Controllers
 {
@@ -15,17 +12,16 @@ namespace HitechCraft.WebApplication.Controllers
     using BL.CQRS.Query;
     using Models;
     using System.Linq;
+    using Core.DI;
+    using Core.Entity;
+    using Core.Helper;
+    using Core.Repository.Specification.Currency;
+    using Projector.Impl;
 
     #endregion
 
     public class VoteController : BaseController
     {
-        public string TopCraftSecret => "de2d1e56cb36622a79d236bf942a939d";
-
-        public string MCTopSecret => "h5h43hrehfdse7we2rujdjfvz";
-
-        public string MCTopSuSecret => "3j4j34jfdsf9e932kjfdksjgdssepe3l2k";
-        
         public VoteController(IContainer container) : base(container)
         {
         }
@@ -33,16 +29,16 @@ namespace HitechCraft.WebApplication.Controllers
         [HttpPost]
         public ActionResult VoteOnTopcraft(string timestamp, string username, string signature)
         {
-            if (signature.ToLower() == HashHelper.GetSha1Hash(username + timestamp + this.TopCraftSecret))
+            if (signature.ToLower() == HashHelper.GetSha1Hash(username + timestamp + Const.TopCraftKey))
             {
                 try
                 {
-                    this.PayVoteGonts(username);
+                    PayVoteGonts(username);
 
                     ViewBag.VoteOn = "Topcraft.ru";
                     ViewBag.VoteReward = "250 Gonts на счет";
 
-                    return this.Content("OK");
+                    return Content("OK");
                 }
                 catch (Exception e)
                 {
@@ -56,22 +52,22 @@ namespace HitechCraft.WebApplication.Controllers
                 ViewBag.VoteError = "Ошибка голосования";
             }
 
-            return this.Content("NO");
+            return Content("NO");
         }
 
         [HttpGet]
         public ActionResult VoteOnMctopsu(string nickname, string token)
         {
-            if (token == HashHelper.GetMd5Hash(nickname + this.MCTopSuSecret))
+            if (token == HashHelper.GetMd5Hash(nickname + Const.McTopSuKey))
             {
                 try
                 {
-                    this.PayVoteRubles(nickname);
+                    PayVoteRubles(nickname);
 
                     ViewBag.VoteOn = "McTop.su";
                     ViewBag.VoteReward = "2 RUB на счет";
 
-                    return this.Content("OK");
+                    return Content("OK");
                 }
                 catch (Exception e)
                 {
@@ -85,7 +81,7 @@ namespace HitechCraft.WebApplication.Controllers
                 ViewBag.VoteError = "Ошибка голосования";
             }
 
-            return this.Content("NO");
+            return Content("NO");
         }
 
         [HttpGet]
@@ -98,11 +94,11 @@ namespace HitechCraft.WebApplication.Controllers
                 source
             };
 
-            if (sign == this.McTopSignBuilder(objects))
+            if (sign == McTopSignBuilder(objects))
             {
                 try
                 {
-                    this.GetVoteShopItem(username);
+                    GetVoteShopItem(username);
                 }
                 catch (Exception e)
                 {
@@ -123,9 +119,9 @@ namespace HitechCraft.WebApplication.Controllers
 
         private string McTopSignBuilder(List<string> objects)
         {
-            var paramString = this.Implode(objects, "");
+            var paramString = Implode(objects, "");
 
-            var md5 = HashHelper.GetMd5Hash(paramString + this.MCTopSecret);
+            var md5 = HashHelper.GetMd5Hash(paramString + Const.McTopKey);
 
             return md5;
         }
@@ -137,14 +133,14 @@ namespace HitechCraft.WebApplication.Controllers
 
         private void PayVoteGonts(string userName)
         {
-            var currency = new EntityListQueryHandler<Currency, CurrencyEditViewModel>(this.Container)
+            var currency = new EntityListQueryHandler<Currency, CurrencyEditViewModel>(Container)
                 .Handle(new EntityListQuery<Currency, CurrencyEditViewModel>()
                 {
                     Specification = new CurrencyByPlayerNameSpec(userName),
-                    Projector = this.Container.Resolve<IProjector<Currency, CurrencyEditViewModel>>()
+                    Projector = Container.Resolve<IProjector<Currency, CurrencyEditViewModel>>()
                 }).First();
 
-            this.CommandExecutor.Execute(new CurrencyUpdateCommand()
+            CommandExecutor.Execute(new CurrencyUpdateCommand()
             {
                 Id = currency.Id,
                 Gonts = 250,
@@ -156,14 +152,14 @@ namespace HitechCraft.WebApplication.Controllers
 
         private void PayVoteRubles(string userName)
         {
-            var currency = new EntityListQueryHandler<Currency, CurrencyEditViewModel>(this.Container)
+            var currency = new EntityListQueryHandler<Currency, CurrencyEditViewModel>(Container)
                         .Handle(new EntityListQuery<Currency, CurrencyEditViewModel>()
                         {
                             Specification = new CurrencyByPlayerNameSpec(userName),
-                            Projector = this.Container.Resolve<IProjector<Currency, CurrencyEditViewModel>>()
+                            Projector = Container.Resolve<IProjector<Currency, CurrencyEditViewModel>>()
                         }).First();
 
-            this.CommandExecutor.Execute(new CurrencyUpdateCommand()
+            CommandExecutor.Execute(new CurrencyUpdateCommand()
             {
                 Id = currency.Id,
                 Gonts = 0,
@@ -175,7 +171,7 @@ namespace HitechCraft.WebApplication.Controllers
 
         private void GetVoteShopItem(string userName)
         {
-            this.CommandExecutor.Execute(new ShopItemAddRandomCommand()
+            CommandExecutor.Execute(new ShopItemAddRandomCommand()
             {
                 PlayerName = userName
             });

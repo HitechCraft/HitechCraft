@@ -139,7 +139,9 @@
     <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQueryHandler.cs" />
     <Compile Include="CQRS\Query\Entity\EntityListQuery.cs" />
     <Compile Include="CQRS\Query\Entity\EntityListQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Entity\EntityExistsQuery.cs" />
     <Compile Include="CQRS\Query\Entity\EntityQuery.cs" />
+    <Compile Include="CQRS\Query\Entity\EntityExistsQueryHandler.cs" />
     <Compile Include="CQRS\Query\Entity\EntityQueryHandler.cs" />
     <Compile Include="CQRS\Query\Server\ServerDataListQuery.cs" />
     <Compile Include="CQRS\Query\Server\ServerDataListQueryHandler.cs" />

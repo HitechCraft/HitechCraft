@@ -41,46 +41,7 @@ namespace HitechCraft.WebApplication.Controllers
         {
             return PartialView("_CommentsPartialList", this.GetCommentList(page, newsId));
         }
-
-        [HttpGet]
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Create(NewsEditViewModel vm)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var uploadImage = Request.Files["uploadNewsImage"];
-
-                    this.CommandExecutor.Execute(new NewsCreateCommand()
-                    {
-                        Title = vm.Title,
-                        Image = ImageManager.GetImageBytes(uploadImage),
-                        Text = vm.Text,
-                        PlayerName = this.Player.Name
-                    });
-
-                    //TODO: redirect to details
-                    return RedirectToAction("Index", "Home");
-                }
-                catch (Exception e)
-                {
-                    ModelState.AddModelError(String.Empty, e.Message);
-
-                    return View();
-                }
-            }
-
-            return View();
-        }
-
+        
         [HttpGet]
         public ActionResult Details(int? id)
         {
@@ -107,109 +68,7 @@ namespace HitechCraft.WebApplication.Controllers
                 return HttpNotFound();
             }
         }
-
-        [HttpGet]
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Edit(int? id)
-        {
-            try
-            {
-                if (id == 0 || id == null) throw new Exception();
-
-                var vm = new EntityQueryHandler<News, NewsEditViewModel>(this.Container)
-                    .Handle(new EntityQuery<News, NewsEditViewModel>()
-                    {
-                        Id = id,
-                        Projector = this.Container.Resolve<IProjector<News, NewsEditViewModel>>()
-                    });
-
-                return View(vm);
-            }
-            catch (Exception)
-            {
-                return HttpNotFound();
-            }
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Edit(NewsEditViewModel vm)
-        {
-            if (ModelState.IsValid)
-            {
-                var uploadImage = Request.Files["uploadNewsImage"];
-                
-                if (uploadImage != null && uploadImage.ContentLength > 0) vm.Image = ImageManager.GetImageBytes(uploadImage);
-
-                this.CommandExecutor.Execute(this.Project<NewsEditViewModel, NewsUpdateCommand>(vm));
-
-                return RedirectToAction("Details", new { id = vm.Id });
-            }
-
-            return View(vm);
-        }
-
-        [Authorize(Roles = "Administrator")]
-        public ContentResult RemoveNewImage(int newsId)
-        {
-            try
-            {
-                this.CommandExecutor.Execute(new NewsImageRemoveCommand()
-                {
-                    NewsId = newsId
-                });
-                
-                return this.Content("OK");
-            }
-            catch (Exception e)
-            {
-                return this.Content(e.Message);
-            }
-        }
-
-        [HttpGet]
-        [Authorize(Roles = "Administrator")]
-        public ActionResult Delete(int? id)
-        {
-            try
-            {
-                if (id == 0 || id == null) throw new Exception();
-
-                var vm = new EntityQueryHandler<News, NewsViewModel>(this.Container)
-                    .Handle(new EntityQuery<News, NewsViewModel>()
-                    {
-                        Id = id,
-                        Projector = this.Container.Resolve<IProjector<News, NewsViewModel>>()
-                    });
-
-                return View(vm);
-            }
-            catch (Exception)
-            {
-                return HttpNotFound("LOL");
-            }
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Administrator")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            try
-            {
-                this.CommandExecutor.Execute(new NewsRemoveCommand()
-                {
-                    Id = id
-                });
-
-                return RedirectToAction("Index", "Home");
-            }
-            catch (Exception e)
-            {
-                return HttpNotFound();
-            }
-        }
-
+        
         #endregion
 
         #region Private Methods
