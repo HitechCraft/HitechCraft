@@ -1,5 +1,6 @@
 using System.Web.Mvc;
 using HitechCraft.GameLauncherAPI.Ninject;
+using HitechCraft.Ninjector.Dependences;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(HitechCraft.GameLauncherAPI.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(HitechCraft.GameLauncherAPI.App_Start.NinjectWebCommon), "Stop")]
@@ -42,13 +43,12 @@ namespace HitechCraft.GameLauncherAPI.App_Start
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
-            var kernel = new StandardKernel();
+            var kernel = new StandardKernel(new CommonModule(), new GameApiModule());
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-
-                RegisterServices(kernel);
+                
                 return kernel;
             }
             catch
@@ -56,15 +56,6 @@ namespace HitechCraft.GameLauncherAPI.App_Start
                 kernel.Dispose();
                 throw;
             }
-        }
-
-        /// <summary>
-        /// Load your modules or register your services here!
-        /// </summary>
-        /// <param name="kernel">The kernel.</param>
-        private static void RegisterServices(IKernel kernel)
-        {
-            DependencyResolver.SetResolver(new Resolver(kernel));
-        }        
+        }   
     }
 }

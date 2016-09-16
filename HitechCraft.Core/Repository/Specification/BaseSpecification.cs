@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 using HitechCraft.Core.Entity;
+using HitechCraft.Core.Entity.Base;
 using HitechCraft.Core.Repository.Specification.Composite;
 
 namespace HitechCraft.Core.Repository.Specification

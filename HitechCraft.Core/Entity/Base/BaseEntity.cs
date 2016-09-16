@@ -1,4 +1,4 @@
-﻿namespace HitechCraft.Core.Entity
+﻿namespace HitechCraft.Core.Entity.Base
 {
     public class BaseEntity<TEntity> where TEntity : BaseEntity<TEntity>
     {

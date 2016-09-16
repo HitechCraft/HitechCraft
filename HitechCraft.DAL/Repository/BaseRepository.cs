@@ -1,4 +1,5 @@
-﻿using HitechCraft.Core.Repository.Specification;
+﻿using HitechCraft.Core.Entity.Base;
+using HitechCraft.Core.Repository.Specification;
 using HitechCraft.DAL.UnitOfWork;
 
 namespace HitechCraft.Common.Repository

@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.Core.Entity
+﻿using HitechCraft.Core.Entity.Base;
+
+namespace HitechCraft.Core.Entity
 {
     public class Job : BaseEntity<Job>
     {

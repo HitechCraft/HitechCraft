@@ -1,5 +1,6 @@
 ﻿using HitechCraft.Core.DI;
 using HitechCraft.Core.Entity;
+using HitechCraft.Core.Entity.Base;
 using HitechCraft.DAL.Repository;
 using HitechCraft.Projector.Impl;
 

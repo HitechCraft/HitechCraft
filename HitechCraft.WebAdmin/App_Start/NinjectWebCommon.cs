@@ -6,6 +6,7 @@ using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
 using global::Ninject;
 using global::Ninject.Web.Common;
+using HitechCraft.Ninjector.Dependences;
 using HitechCraft.WebAdmin.Ninject;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
@@ -41,13 +42,12 @@ namespace HitechCraft.WebAdmin
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
-            var kernel = new StandardKernel();
+            var kernel = new StandardKernel(new CommonModule(), new AdminModule());
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
-
-                RegisterServices(kernel);
+                
                 return kernel;
             }
             catch
@@ -55,15 +55,6 @@ namespace HitechCraft.WebAdmin
                 kernel.Dispose();
                 throw;
             }
-        }
-
-        /// <summary>
-        /// Load your modules or register your services here!
-        /// </summary>
-        /// <param name="kernel">The kernel.</param>
-        private static void RegisterServices(IKernel kernel)
-        {
-            DependencyResolver.SetResolver(new Resolver(kernel));
         }
     }
 }

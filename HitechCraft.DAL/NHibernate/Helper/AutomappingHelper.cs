@@ -19,7 +19,7 @@
         /// <returns></returns>
         public override bool ShouldMap(Type type)
         {
-            return type.Namespace == "HitechCraft.DAL.Domain";
+            return type.Namespace == "HitechCraft.Core.Entity";
         }
     }
 }

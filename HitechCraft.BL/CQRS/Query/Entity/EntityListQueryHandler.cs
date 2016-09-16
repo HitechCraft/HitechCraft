@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.BL.CQRS.Query
+﻿using HitechCraft.Core.Entity.Base;
+
+namespace HitechCraft.BL.CQRS.Query
 {
     #region Using Directives
 
