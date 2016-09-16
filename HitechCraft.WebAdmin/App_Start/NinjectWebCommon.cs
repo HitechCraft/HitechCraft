@@ -6,8 +6,14 @@ using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
 using global::Ninject;
 using global::Ninject.Web.Common;
+using HitechCraft.BL.CQRS.Command.Base;
+using HitechCraft.Core.Entity;
 using HitechCraft.Ninjector.Dependences;
+using HitechCraft.Projector.Impl;
+using HitechCraft.WebAdmin.Mapper;
+using HitechCraft.WebAdmin.Models;
 using HitechCraft.WebAdmin.Ninject;
+using Ninject.Extensions.Conventions;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
