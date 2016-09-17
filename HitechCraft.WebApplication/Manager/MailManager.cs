@@ -24,8 +24,8 @@ namespace HitechCraft.WebApplication.Manager
 
             #endregion
             
-            sb.Append("<div style='background: url(http://"+ Const.Domain + "/Content/Images/mailbg.jpg) no-repeat; width: 753px; height: 545px; background-size: auto 100%; background-position-x: 50%; margin: 0 auto; padding: 30px;'>");
-            sb.Append("<div style='background: url(http://" + Const.Domain + "/Content/Images/logo.png) no-repeat; width: 465px; height: 66px; margin: 0 auto; margin-top: 30px;'></div>");
+            sb.Append("<div style='background: url(http://"+ Const.WebAppDomain + "/Content/Images/mailbg.jpg) no-repeat; width: 753px; height: 545px; background-size: auto 100%; background-position-x: 50%; margin: 0 auto; padding: 30px;'>");
+            sb.Append("<div style='background: url(http://" + Const.WebAppDomain + "/Content/Images/logo.png) no-repeat; width: 465px; height: 66px; margin: 0 auto; margin-top: 30px;'></div>");
             sb.Append("<div style='width: 100%; height: 70%; background: rgba(67, 228, 221, 0.38); margin-top: 35px; border: 2px solid;position: relative;'>");
             sb.Append("<p style='margin: 21px; font-size: 22px; color: #fff; font-weight: bold; text-shadow: 2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000, 1px 1px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;'>");
 

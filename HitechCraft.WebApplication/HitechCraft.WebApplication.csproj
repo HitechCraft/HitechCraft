@@ -213,7 +213,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BalanceController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CommentController.cs" />
@@ -478,8 +477,6 @@
     <Content Include="Views\Player\ChangePasswordModal.cshtml" />
     <Content Include="Views\Account\ConfirmEmailInfo.cshtml" />
     <Content Include="Views\Player\Profile.cshtml" />
-    <Content Include="Views\Administration\AddUserToRole.cshtml" />
-    <Content Include="Views\Administration\Index.cshtml" />
     <Content Include="Views\Balance\Fail.cshtml" />
     <Content Include="Views\Balance\Index.cshtml" />
     <Content Include="Views\Balance\Success.cshtml" />
@@ -489,19 +486,10 @@
     <Content Include="Views\BanSystem\Index.cshtml" />
     <Content Include="Views\BanSystem\PlayerBanList.cshtml" />
     <Content Include="Views\BanSystem\Unban.cshtml" />
-    <Content Include="Views\Modification\Create.cshtml" />
-    <Content Include="Views\Modification\Delete.cshtml" />
     <Content Include="Views\Modification\Details.cshtml" />
-    <Content Include="Views\Modification\Edit.cshtml" />
     <Content Include="Views\Modification\Index.cshtml" />
-    <Content Include="Views\News\Create.cshtml" />
-    <Content Include="Views\News\Delete.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
-    <Content Include="Views\News\Edit.cshtml" />
-    <Content Include="Views\Server\Create.cshtml" />
-    <Content Include="Views\Server\Delete.cshtml" />
     <Content Include="Views\Server\Details.cshtml" />
-    <Content Include="Views\Server\Edit.cshtml" />
     <Content Include="Views\Server\Index.cshtml" />
     <Content Include="Views\Shared\_CommentsPartialList.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
@@ -512,13 +500,10 @@
     <Content Include="Views\Home\GameStart.cshtml" />
     <Content Include="Views\Home\Vote.cshtml" />
     <Content Include="Views\Vote\Index.cshtml" />
-    <Content Include="Views\Shop\CreateItem.cshtml" />
-    <Content Include="Views\Shop\CreateItemCategory.cshtml" />
     <Content Include="Views\Shop\Index.cshtml" />
     <Content Include="Views\Base\DisplayTemplates\Double.cshtml" />
     <Content Include="Views\Shop\_ShopItemListPartial.cshtml" />
     <Content Include="Views\Shop\_ShopItemPartial.cshtml" />
-    <Content Include="Views\Shop\EditItem.cshtml" />
     <Content Include="Views\Shop\BuyItem.cshtml" />
     <Content Include="Views\Shop\Cart.cshtml" />
     <Content Include="Views\Player\Security.cshtml" />
@@ -534,9 +519,7 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\ErrorPage\Index.cshtml" />
     <Content Include="Views\Skin\Catalog.cshtml" />
-    <Content Include="Views\Skin\Create.cshtml" />
     <Content Include="Views\Skin\_SkinPartialList.cshtml" />
-    <Content Include="Views\Skin\_SkinDuplicatedPartial.cshtml" />
     <Content Include="Views\Player\_JobsPartial.cshtml" />
     <Content Include="Views\Home\_LauncherWinReq.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
@@ -549,7 +532,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Comment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

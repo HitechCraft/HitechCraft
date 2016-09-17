@@ -1,4 +1,5 @@
-﻿using HitechCraft.Core.DI;
+﻿using HitechCraft.Core;
+using HitechCraft.Core.DI;
 using HitechCraft.Core.Entity;
 using HitechCraft.Core.Repository.Specification.PlayerItem;
 using HitechCraft.Projector.Impl;
@@ -41,7 +42,6 @@ namespace HitechCraft.WebApplication.Controllers
                 });
 
             ViewBag.Mods = this.GetMods();
-
             ViewBag.Categories = this.GetCategories();
 
             return View(vm);
