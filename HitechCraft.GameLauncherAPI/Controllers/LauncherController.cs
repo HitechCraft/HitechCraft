@@ -326,19 +326,20 @@ namespace HitechCraft.GameLauncherAPI.Controllers
 
         #region Private Methods
 
+        //TODO: Вынести новости в Html объект (что то типа браузера)
         private void FixNewsTags(ref IEnumerable<JsonLauncherNews> newsList)
         {
             foreach (var news in newsList)
             {
                 news.Text = news.Text
-                    .Replace("[p]", "")
-                    .Replace("[/p]", "")
-                    .Replace("[b]", "")
-                    .Replace("[/b]", "")
-                    .Replace("[ul]", "")
-                    .Replace("[/ul]", "")
-                    .Replace("[li]", "")
-                    .Replace("[/li]", "");
+                    .Replace("<p>", "")
+                    .Replace("</p>", "")
+                    .Replace("<strong>", "")
+                    .Replace("</strong>", "")
+                    .Replace("<ul>", "")
+                    .Replace("</ul>", "")
+                    .Replace("<li>", "")
+                    .Replace("</li>", "");
             }
         }
 
