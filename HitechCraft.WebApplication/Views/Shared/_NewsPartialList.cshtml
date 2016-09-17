@@ -39,6 +39,8 @@
     .location = '@Url.Action("Details", "News", new {id = news.Id})'" />
                     }
                     <div class="news-text" id="news-text-@news.Id">
+                        @Html.Raw(news.ShortText)
+                        <h5>@news.AuthorName</h5>
                     </div>
                 </div>
             </div>
@@ -59,10 +61,7 @@
                 <div class="clear"></div>
             </div>
         </div>
-
-        <script type="text/javascript">
-            LoadNewsText('@Html.Raw(news.ShortText)', '@news.AuthorName', 'news-text-@(news.Id)')
-        </script>
+        
     }
 
     @Html.PagedListPager(Model, page => "javascript:FilterNews(" + page + ")")
@@ -73,13 +72,6 @@ else
 }
 
 <script type="text/javascript">
-    function LoadNewsText(text, author, id) {
-        text = text + '<h5>' + author + '</h5>'; //small fix for sign
-
-        $('#' + id).html('');
-        $('#' + id).html(text);
-    }
-
     $(document).ready(function () {
         if ($('ul.pagination').children().length <= 1) {
             $('ul.pagination').css('visibility', 'hidden');
