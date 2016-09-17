@@ -30,17 +30,15 @@
                 <div class="col-md-12" style="min-height: 250px">
                     @if (Convert.ToBase64String(news.Image) != String.Empty)
                     {
-                        <img alt="" class="news-image" src="data:image/jpeg;base64,@Convert.ToBase64String(news.Image)" onclick="document.location = '@Url.Action("Details", "News", new { id = news.Id })'" />
+                        <img alt="" class="news-image" src="data:image/jpeg;base64,@Convert.ToBase64String(news.Image)" onclick="document.location =
+    '@Url.Action("Details", "News", new {id = news.Id})'" />
                     }
                     else
                     {
-                        <img alt="" class="news-image" src="~/Content/Images/no-image.jpg" onclick="document.location = '@Url.Action("Details", "News", new { id = news.Id })'" />
+                        <img alt="" class="news-image" src="~/Content/Images/no-image.jpg" onclick="document
+    .location = '@Url.Action("Details", "News", new {id = news.Id})'" />
                     }
                     <div class="news-text" id="news-text-@news.Id">
-                        <span class="news-text-container">
-                            @Html.Raw(news.ShortText)
-                        </span>
-                        <span id="news-sign-@news.Id"></span>
                     </div>
                 </div>
             </div>
@@ -61,6 +59,10 @@
                 <div class="clear"></div>
             </div>
         </div>
+
+        <script type="text/javascript">
+            LoadNewsText('@Html.Raw(news.ShortText)', '@news.AuthorName', 'news-text-@(news.Id)')
+        </script>
     }
 
     @Html.PagedListPager(Model, page => "javascript:FilterNews(" + page + ")")
@@ -71,6 +73,13 @@ else
 }
 
 <script type="text/javascript">
+    function LoadNewsText(text, author, id) {
+        text = text + '<h5>' + author + '</h5>'; //small fix for sign
+
+        $('#' + id).html('');
+        $('#' + id).html(text);
+    }
+
     $(document).ready(function () {
         if ($('ul.pagination').children().length <= 1) {
             $('ul.pagination').css('visibility', 'hidden');

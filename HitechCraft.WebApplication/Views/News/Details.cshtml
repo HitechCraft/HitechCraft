@@ -32,7 +32,7 @@
                         <img alt="" class="news-image" src="~/Content/Images/no-image.jpg" />
                     }
                     <div class="news-text" id="news-text">
-                        @Html.Raw(Model.FullText)
+                        
                     </div>
                 </div>
             </div>
@@ -75,8 +75,19 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        LoadNewsText();
         LoadComments(1);
     });
+
+    function LoadNewsText() {
+        //Темная магия
+        var text = "@Html.Raw(Model.FullText)";
+
+        text = text + '<h5>@Model.AuthorName</h5>'; //small fix for sign
+
+        $('#news-text').html('');
+        $('#news-text').html(text);
+    }
 
     function FilterComments(currentPage) {
         LoadComments(currentPage);
