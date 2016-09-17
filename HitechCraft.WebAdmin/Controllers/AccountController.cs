@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using HitechCraft.Core.Models.Enum;
+using HitechCraft.WebAdmin.Manager;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
@@ -91,7 +93,6 @@ namespace HitechCraft.WebAdmin.Controllers
             }
 
 #if !DEBUG
-            
             var captchaResponse = ReCaptchaManager.ValidateReCaptcha(Request["g-recaptcha-response"]);
 
             if (captchaResponse.Status == JsonStatus.NO)
