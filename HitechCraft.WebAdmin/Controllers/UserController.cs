@@ -101,6 +101,45 @@
             return Convert.ToBase64String(playerSkinVm.Image);
         }
 
+        #region User Ban
+
+        public bool CheckBan(string userId)
+        {
+            return this.UserManager.IsInRole(userId, "Banned");
+        }
+
+        [HttpPost]
+        public JsonResult BanUser(string userId)
+        {
+            try
+            {
+                this.UserManager.AddToRole(userId, "Banned");
+
+                return Json(new { status = "OK", message = "Пользователь заблокирован!" }); ;
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "NO", message = "Ошибка блокировки: " + e.Message });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult UnbanUser(string userId)
+        {
+            try
+            {
+                this.UserManager.RemoveFromRole(userId, "Banned");
+
+                return Json(new { status = "OK", message = "Пользователь разблокирован!" }); ;
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "NO", message = "Ошибка разблокировки: " + e.Message });
+            }
+        }
+
+        #endregion
+
         public ActionResult PlayerInfoPartial(string userName = "")
         {
             try

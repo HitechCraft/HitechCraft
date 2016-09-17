@@ -1,12 +1,12 @@
-﻿using HitechCraft.Core.DI;
-using HitechCraft.Core.Helper;
-using HitechCraft.Core.Models.Enum;
-using HitechCraft.WebApplication.Manager;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
+    using Core.DI;
+    using Core.Helper;
+    using Core.Models.Enum;
+    using Manager;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
@@ -29,6 +29,8 @@ namespace HitechCraft.WebApplication.Controllers
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private RoleManager<IdentityRole> _roleManager;
+        private ApplicationDbContext _context;
 
         public ApplicationSignInManager SignInManager
         {
@@ -51,6 +53,28 @@ namespace HitechCraft.WebApplication.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+
+        public ApplicationDbContext Context
+        {
+            get
+            {
+                return _context ?? new ApplicationDbContext();
+            }
+            private set
+            {
+                _context = value;
+            }
+        }
+
+        public RoleManager<IdentityRole> RoleManager
+        {
+            get
+            {
+                if (_roleManager == null)
+                    _roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(this.Context));
+                return _roleManager;
             }
         }
 
@@ -118,13 +142,8 @@ namespace HitechCraft.WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            
             ApplicationUser user = null;
-
+            
             if (model.EmailOrNickName.Contains('@'))
             {
                 user = await UserManager.FindByEmailAsync(model.EmailOrNickName);
@@ -134,11 +153,19 @@ namespace HitechCraft.WebApplication.Controllers
                 user = await UserManager.FindByNameAsync(model.EmailOrNickName);
             }
 
+            if(user.Roles.Select(x => x.RoleId).Contains(this.RoleManager.FindByName("Banned").Id))
+                ModelState.AddModelError(String.Empty, "Пользователь забанен");
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             if (user != null)
             {
                 if (!await UserManager.IsEmailConfirmedAsync(user.Id))
                 {
-                    ModelState.AddModelError("", string.Format(Resources.ErrorEmailNotConfirmed, user.Email));
+                    ModelState.AddModelError(String.Empty, String.Format(Resources.ErrorEmailNotConfirmed, user.Email));
                     return View(model);
                 }
             }
@@ -149,7 +176,7 @@ namespace HitechCraft.WebApplication.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    this.CommandExecutor.Execute(new AuthLogCreateCommand()
+                    CommandExecutor.Execute(new AuthLogCreateCommand()
                     {
                         PlayerName = user.UserName,
                         Ip = Request.UserHostAddress,
@@ -232,7 +259,7 @@ namespace HitechCraft.WebApplication.Controllers
                     
                     try
                     {
-                        this.CommandExecutor.Execute(new PlayerRegisterCreateCommand()
+                        CommandExecutor.Execute(new PlayerRegisterCreateCommand()
                         {
                             Name = model.UserName,
                             Gender = model.Gender,
@@ -306,11 +333,11 @@ namespace HitechCraft.WebApplication.Controllers
                 return Json(new { status = JsonStatus.NO, response = modelErrors }, JsonRequestBehavior.AllowGet);
             }
 
-            var result = await UserManager.ChangePasswordAsync(this.User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
 
             if (result.Succeeded && !result.Errors.Any())
             {
-                var user = await UserManager.FindByIdAsync(this.User.Identity.GetUserId());
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
                 if (user != null)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

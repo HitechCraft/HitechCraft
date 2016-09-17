@@ -1,4 +1,5 @@
-﻿@model HitechCraft.WebApplication.Models.ShopItemViewModel
+﻿@using HitechCraft.WebApplication.Manager
+@model HitechCraft.WebApplication.Models.ShopItemViewModel
 @{
     ViewBag.Title = "Купить предмет";
     int defaultValue = 10;
@@ -17,6 +18,11 @@
             <span class="price">
                 Цена: @Model.Price Gont(s)
             </span>
+            @if (User.IsInRole("Administrator"))
+            {
+                <a class="btn btn-primary" href="@(Const.WebAdminBaseUrl + "ShopItem/EditItem?gameId=" + Model.GameId)">Администрирование</a>
+            }
+
             @Html.ActionLink("Перейти в корзину", "Cart", "Shop", null, new { @class = "btn btn-primary" })
             @Html.ActionLink("В магазин", "Index", "Shop", null, new { @class = "btn btn-primary" })
         </div>

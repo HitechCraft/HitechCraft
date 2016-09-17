@@ -16,21 +16,28 @@
         <tr@(Html.Action("CheckUserGameAccount", new { userName = user.UserName }).ToString() == "False" ? " class=accountError" : String.Empty)>
             <td>
                 <p>@user.UserName</p>
-                <img src="data:image/jpeg;base64,@Html.Action("GetSkinImage", "User", new {gender = Html.Action("GetPlayerGender", new {playerName = user.UserName}), userName = user.UserName})" id="skin-image" class="@("avaSkin" + user.Id)" hidden=""/>
+                <img src="data:image/jpeg;base64,@Html.Action("GetSkinImage", "User", new {gender = Html.Action("GetPlayerGender", new {playerName = user.UserName}), userName = user.UserName})" id="skin-image" class="@("avaSkin" + user.Id)" hidden="" />
             </td>
             <td>@user.Email</td>
             <td>@user.Id</td>
-            <td>@Html.Action("UserRolesPartial", new { userName = user.UserName})</td>
+            <td>@Html.Action("UserRolesPartial", new { userName = user.UserName })</td>
             <td>
                 <div class="btn-group">
                     <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        @if (Html.Action("CheckUserGameAccount", new {userName = user.UserName}).ToString() != "False")
+                        @if (Html.Action("CheckUserGameAccount", new { userName = user.UserName }).ToString() != "False")
                         {
                             <li><a href="javascript:LoadPlayerInfo('@user.UserName')">Инфо</a></li>
                             <li><a href="@Url.Action("Roles", new { userName = user.UserName })">Изменить роли</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Заблокировать</a></li>
+                            if (Html.Action("CheckBan", new { userId = user.Id }).ToString() == "True")
+                            {
+                                <li><a href="javascript:UnbanUser('@user.Id')">Разблокировать</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="javascript:BanUser('@user.Id')">Заблокировать</a></li>
+                            }
                         }
                         else
                         {
@@ -39,7 +46,7 @@
                     </ul>
                 </div>
             </td>
-        </tr>
+            </tr>
     }
 </table>
 
@@ -51,11 +58,45 @@
         @foreach (var user in Model)
         {
             <text>
-                renderMCSkins('@("avaSkin" + user.Id)', 4);
-                $('.@("avaSkin" + user.Id)').css('border', '2px solid');
-            </text>
+        renderMCSkins('@("avaSkin" + user.Id)', 4);
+        $('.@("avaSkin" + user.Id)').css('border', '2px solid');
+        </text>
         }
     });
+
+    function BanUser(id) {
+        if (confirm('Действительно забанить пользователя?')) {
+            $.post('@Url.Action("BanUser")',
+                {
+                    userId: id
+                })
+                .done(function (data) {
+                    if (data.status === "OK") {
+                        growlSuccess(data.message);
+                        document.location.reload();
+                    } else {
+                        growlError(data.message);
+                    }
+                });
+        }
+    }
+
+    function UnbanUser(id) {
+        if (confirm('Действительно разбанить пользователя?')) {
+            $.post('@Url.Action("UnbanUser")',
+                {
+                    userId: id
+                })
+                .done(function (data) {
+                    if (data.status === "OK") {
+                        growlSuccess(data.message);
+                        document.location.reload();
+                    } else {
+                        growlError(data.message);
+                    }
+                });
+        }
+    }
 
     function LoadPlayerInfo(user) {
         $.ajax({
