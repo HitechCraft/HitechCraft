@@ -1,4 +1,5 @@
-﻿
+﻿@using HitechCraft.WebApplication.Manager
+
 @{
     ViewBag.Title = "Магазин ресурсов";
 }
@@ -55,9 +56,7 @@
 {
     <div class="item-administration">
         <div class="btn-group-justified">
-            @Html.ActionLink("Добавить предмет", "CreateItem", "Shop", null, new { @class = "btn btn-success" })
-            @Html.ActionLink("Добавить категорию", "CreateItemCategory", "Shop", null, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Добавить модификацию", "Create", "Modification", null, new { @class = "btn btn-success" })
+            <a class="btn btn-primary" href="@(Const.WebAdminBaseUrl + "ShopItem")">Администрирование</a>
         </div>
     </div>
 }

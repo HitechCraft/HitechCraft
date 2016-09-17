@@ -232,6 +232,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Manager\Const.cs" />
     <Compile Include="Manager\FileManager.cs" />
     <Compile Include="Manager\IKConfig.cs" />
     <Compile Include="Manager\ImageManager.cs" />

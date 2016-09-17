@@ -229,6 +229,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Managers\Const.cs" />
     <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Managers\Config.cs" />
     <Compile Include="Managers\SkinManager.cs" />

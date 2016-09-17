@@ -1,4 +1,5 @@
-﻿@model HitechCraft.WebApplication.Models.NewsViewModel
+﻿@using HitechCraft.WebApplication.Manager
+@model HitechCraft.WebApplication.Models.NewsViewModel
 @{
     ViewBag.Title = Model.Title;
 }
@@ -16,8 +17,7 @@
                 @if (User != null && User.IsInRole("Administrator"))
                 {
                     <div class="news-modify">
-                        <span class="glyphicon glyphicon-pencil" onclick="document.location = '@Url.Action("Edit", new {id = Model.Id})'"></span>
-                        <span class="glyphicon glyphicon-remove" onclick="document.location = '@Url.Action("Delete", new {id = Model.Id})'"></span>
+                        <a class="btn btn-primary" href="@(Const.WebAdminBaseUrl + "News/Edit/" + Model.Id)">Администрирование</a>
                     </div>
                 }
             </div>

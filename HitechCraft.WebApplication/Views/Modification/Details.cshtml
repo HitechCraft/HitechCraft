@@ -1,4 +1,5 @@
-﻿@model HitechCraft.WebApplication.Models.ModificationViewModel
+﻿@using HitechCraft.WebApplication.Manager
+@model HitechCraft.WebApplication.Models.ModificationViewModel
 @{
     ViewBag.Title = "Мод " + Model.Name;
 }
@@ -49,8 +50,7 @@
     if (User.IsInRole("Administrator"))
     {
         <div class="btn-group">
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
-            @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger" })
+            <a class="btn btn-primary" href="@(Const.WebAdminBaseUrl + "Modification/Edit/" + Model.Id)">Администрирование</a>
         </div>
     }
 }

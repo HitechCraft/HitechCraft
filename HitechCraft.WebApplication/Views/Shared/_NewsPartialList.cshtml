@@ -1,4 +1,5 @@
-﻿@using PagedList.Mvc
+﻿@using HitechCraft.WebApplication.Manager
+@using PagedList.Mvc
 @model PagedList.IPagedList<HitechCraft.WebApplication.Models.NewsViewModel>
 @{
     Layout = null;
@@ -7,7 +8,7 @@
 @if (User.IsInRole("Administrator"))
 {
     <div class="news-administration">
-        @Html.ActionLink("Добавить новость", "Create", "News", null, new { @class = "btn btn-primary" })
+        <a class="btn btn-primary" href="@(Const.WebAdminBaseUrl + "News")">Администрирование</a>
     </div>
 }
 
@@ -21,8 +22,7 @@
                 @if (User != null && User.IsInRole("Administrator"))
                 {
                     <div class="news-modify">
-                        <span class="glyphicon glyphicon-pencil" onclick="document.location = '@Url.Action("Edit", "News", new { id = news.Id })'"></span>
-                        <span class="glyphicon glyphicon-remove" onclick="document.location = '@Url.Action("Delete", "News", new { id = news.Id })'"></span>
+                        <span class="glyphicon glyphicon-pencil" onclick="document.location = '@(Const.WebAdminBaseUrl + "News/Edit/" + news.Id)'"></span>
                     </div>
                 }
             </div>

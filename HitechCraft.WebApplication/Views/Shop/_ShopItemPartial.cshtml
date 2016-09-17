@@ -1,4 +1,5 @@
-﻿@model HitechCraft.WebApplication.Models.ShopItemViewModel
+﻿@using HitechCraft.WebApplication.Manager
+@model HitechCraft.WebApplication.Models.ShopItemViewModel
 
 <h2>@Model.Name</h2>
 <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="@Model.Description" />
@@ -11,7 +12,7 @@
 
 @if (User.IsInRole("Administrator"))
 {
-    <a class="btn btn-danger" onclick="deleteItem(@Model.GameId)">Удалить</a>
+    <a class="btn btn-primary" href="@(Const.WebAdminBaseUrl + "ShopItem/EditItem?gameId=" + Model.GameId)">Администрирование</a>
 }
 
 @Html.ActionLink("Купить", "BuyItem", "Shop", new { gameId = Model.GameId }, new { @class = "btn btn-primary" })
