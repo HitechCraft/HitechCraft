@@ -85,6 +85,8 @@
             Bind(typeof(ICommandHandler<PMInboxReadCommand>)).To(typeof(PMInboxReadCommandHandler));
             Bind(typeof(ICommandHandler<PMInboxRemoveCommand>)).To(typeof(PMInboxRemoveCommandHandler));
 
+            Bind(typeof(ICommandHandler<ReferPayCommand>)).To(typeof(ReferPayCommandHandler));
+
             #endregion
 
             Bind(typeof(ICommandExecutor)).To(typeof(CommandExecutor));

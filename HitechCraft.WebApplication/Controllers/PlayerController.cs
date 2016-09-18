@@ -46,12 +46,31 @@ namespace HitechCraft.WebApplication.Controllers
                 ViewBag.Gonts = this.Currency.Gonts;
                 ViewBag.Rubels = this.Currency.Rubels;
 
+                ViewBag.ReferCount = new EntityCountQueryHandler<Referal>(this.Container)
+                    .Handle(new EntityCountQuery<Referal>()
+                    {
+                        Specification = new ReferalByReferSpec(this.Player.Name)
+                    });
+
                 return View(vm);
             }
             catch (Exception e)
             {
                 return HttpNotFound();
             }
+        }
+
+        public ActionResult ReferPartial()
+        {
+            ViewBag.ReferCount = new EntityCountQueryHandler<Referal>(this.Container)
+                .Handle(new EntityCountQuery<Referal>()
+                {
+                    Specification = new ReferalByReferSpec(this.Player.Name)
+                });
+
+            ViewBag.PlayerName = this.Player.Name;
+
+            return PartialView("_ReferPartial");
         }
 
         [HttpPost]

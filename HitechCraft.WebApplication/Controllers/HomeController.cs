@@ -1,4 +1,5 @@
-﻿using HitechCraft.Core.DI;
+﻿using HitechCraft.BL.CQRS.Command;
+using HitechCraft.Core.DI;
 
 namespace HitechCraft.WebApplication.Controllers
 {

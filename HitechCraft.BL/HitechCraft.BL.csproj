@@ -46,6 +46,8 @@
     <Compile Include="CQRS\Command\Base\CommandExecutor.cs" />
     <Compile Include="CQRS\Command\Base\ICommandExecutor.cs" />
     <Compile Include="CQRS\Command\Base\ICommandHandler.cs" />
+    <Compile Include="CQRS\Command\Currency\ReferPayCommand.cs" />
+    <Compile Include="CQRS\Command\Currency\ReferPayCommandHandler.cs" />
     <Compile Include="CQRS\Command\Currency\CurrencyUpdateCommand.cs" />
     <Compile Include="CQRS\Command\Currency\CurrencyCreateCommand.cs" />
     <Compile Include="CQRS\Command\Currency\CurrencyUpdateCommandHandler.cs" />
@@ -137,6 +139,8 @@
     <Compile Include="CQRS\Query\Base\IQueryHandler.cs" />
     <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQuery.cs" />
     <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Entity\EntityCountQuery.cs" />
+    <Compile Include="CQRS\Query\Entity\EntityCountQueryHandler.cs" />
     <Compile Include="CQRS\Query\Entity\EntityListQuery.cs" />
     <Compile Include="CQRS\Query\Entity\EntityListQueryHandler.cs" />
     <Compile Include="CQRS\Query\Entity\EntityExistsQuery.cs" />

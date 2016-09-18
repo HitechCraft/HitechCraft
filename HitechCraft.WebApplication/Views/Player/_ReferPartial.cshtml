@@ -1,0 +1,29 @@
+﻿@using HitechCraft.WebApplication.Manager
+<p>
+    Никогда не хотели, чтобы валюта поступала вам на счет <strong>просто так</strong>? Реферальная система предоставляет вам такую возможность.
+    Зарегистрировавшийся по Вашей ссылке пользователь будет приносить вам прибыль, за счет пополнения своего счета RUB (<strong>только при покупке через Интеркасса!</strong>).
+
+</p>
+<p>Ваша ссылка: <span id="ref-url">@(Const.WebAppBaseUrl + "?refer=" + ViewBag.PlayerName)</span> (<a href="javascript:copyLink()">скопировать</a>)</p>
+<p>
+    Разместить ссылку можно где угодно: на форумах, группах ВКонтакте и пр. Приведенный вами игрок при пополнении счета RUB
+    будет приносить вам прибыть в размере <strong>2%</strong> от пополнения (<strong>минимальное пополнение - 0.5 RUB</strong>).
+</p>
+<script type="text/javascript">
+    function copyLink() {
+        var link = document.querySelector('#ref-url');
+        var range = document.createRange();
+        range.selectNode(link);
+        window.getSelection().addRange(range);
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            growlSuccess('Ссылка скопирована!');
+        } catch (err) {
+            growlError('Ошибка копирования: ' + err);
+        }
+
+        window.getSelection().removeAllRanges();
+    }
+</script>

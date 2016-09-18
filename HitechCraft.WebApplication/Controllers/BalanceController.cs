@@ -148,6 +148,7 @@ namespace HitechCraft.WebApplication.Controllers
                 if (this.IsValidTransaction(pm))
                 {
                     this.MoneyEnrollment(CurrencyType.Rub, float.Parse(pm.ik_am, CultureInfo.InvariantCulture), pm.ik_pm_no);
+                    this.PayRefer(pm.ik_pm_no, float.Parse(pm.ik_am, CultureInfo.InvariantCulture));
                 }
 
                 LogHelper.Error(this.Player.Name + ": ошибка совершения оплаты. Невалидная транзакция " + pm.ik_pm_no, "IKPayment");
@@ -415,6 +416,25 @@ namespace HitechCraft.WebApplication.Controllers
                 Id = this.Currency.Id,
                 Gonts = gontsAmount,
                 Rubles = rublesAmount
+            });
+        }
+
+        private void PayRefer(string transactionId, double rubleAmount)
+        {
+            var refererName = new EntityListQueryHandler<IKTransaction, IKTransactionViewModel>(this.Container)
+                    .Handle(new EntityListQuery<IKTransaction, IKTransactionViewModel>()
+                    {
+                        Specification = new IKTransactionByTransactionIdSpec(transactionId),
+                        Projector = this.Container.Resolve<IProjector<IKTransaction, IKTransactionViewModel>>()
+                    }).First().PlayerName;
+
+            var percents = 2;
+            
+            this.CommandExecutor.Execute(new ReferPayCommand()
+            {
+                RefererName = refererName,
+                GiftPercents = percents,
+                RubleAmount = rubleAmount
             });
         }
 

@@ -530,6 +530,8 @@
     <Content Include="Views\Message\_MessageOptions.cshtml" />
     <Content Include="Views\Home\NewIndex.cshtml" />
     <Content Include="Views\Shared\_NewTitleBox.cshtml" />
+    <Content Include="Views\Player\_ReferModal.cshtml" />
+    <Content Include="Views\Player\_ReferPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
