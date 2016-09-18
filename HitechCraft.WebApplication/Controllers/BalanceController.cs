@@ -419,6 +419,11 @@ namespace HitechCraft.WebApplication.Controllers
             });
         }
 
+        /// <summary>
+        /// Payment gift for refer
+        /// </summary>
+        /// <param name="transactionId"></param>
+        /// <param name="rubleAmount"></param>
         private void PayRefer(string transactionId, double rubleAmount)
         {
             var refererName = new EntityListQueryHandler<IKTransaction, IKTransactionViewModel>(this.Container)
