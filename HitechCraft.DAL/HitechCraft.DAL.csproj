@@ -56,6 +56,7 @@
     <Compile Include="NHibernate\Helper\NHibernateHelper.cs" />
     <Compile Include="NHibernate\MappingConfig.cs" />
     <Compile Include="NHibernate\Mappings\AuthLogOverrides.cs" />
+    <Compile Include="NHibernate\Mappings\ReferalOverrides.cs" />
     <Compile Include="NHibernate\Mappings\PMPlayerBoxOverrides.cs" />
     <Compile Include="NHibernate\Mappings\PrivateMessageOverrides.cs" />
     <Compile Include="NHibernate\Mappings\SkinOverrides.cs" />

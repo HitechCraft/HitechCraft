@@ -68,6 +68,16 @@ namespace HitechCraft.Common.Repository
             return ((IQueryable<TResult>)entities).ToList();
         }
 
+        public bool Exist(object id)
+        {
+            return this.GetEntity(id) != null;
+        }
+
+        public bool Exist(ISpecification<TEntity> specification)
+        {
+            return this.Query(specification).Any();
+        }
+
         public ICollection<TEntity> Query(ISpecification<TEntity> specification)
         {
             return Query<TEntity>(specification, null);

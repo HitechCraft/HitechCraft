@@ -22,6 +22,7 @@ namespace HitechCraft.BL.CQRS.Command
             var playerRep = GetRepository<Player>();
             var playerInfoRep = GetRepository<PlayerInfo>();
             var currencyRep = GetRepository<Currency>();
+            var referalRep = GetRepository<Referal>();
 
             var playerInfo = new PlayerInfo()
             {
@@ -37,18 +38,6 @@ namespace HitechCraft.BL.CQRS.Command
                 LogHelper.Error("PlayerInfo Not added: " + e.Message, "Player Register");
             }
             
-            if (!String.IsNullOrEmpty(command.ReferId))
-            {
-                try
-                {
-                    var refPlayer = playerRep.GetEntity(command.ReferId);
-                    playerInfo.Refer = refPlayer;
-                }
-                catch
-                {
-                }
-            }
-
             try
             {
                 var player = new Player()
@@ -59,6 +48,18 @@ namespace HitechCraft.BL.CQRS.Command
                 };
 
                 playerRep.Add(player);
+                
+                if (!String.IsNullOrEmpty(command.ReferId) && playerRep.Exist(command.ReferId))
+                {
+                    var referal = new Referal()
+                    {
+                        Refer = playerRep.GetEntity(command.ReferId),
+                        Referer = player
+                    };
+
+                    referalRep.Add(referal);
+                }
+
             }
             catch (Exception e)
             {
@@ -81,7 +82,8 @@ namespace HitechCraft.BL.CQRS.Command
             {
                 LogHelper.Error("Error creating currency: " + e.Message, "Player Register");
             }
-            
+
+            referalRep.Dispose();
             playerInfoRep.Dispose();
             playerRep.Dispose();
             currencyRep.Dispose();

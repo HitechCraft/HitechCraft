@@ -41,6 +41,8 @@
                     .UseOverridesFromAssemblyOf<CurrencyOverrides>())
                 .Add(AutoMap.AssemblyOf<Player>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<PlayerOverrides>())
+                .Add(AutoMap.AssemblyOf<Referal>(autoMapHelper)
+                    .UseOverridesFromAssemblyOf<ReferalOverrides>())
                 .Add(AutoMap.AssemblyOf<Skin>(autoMapHelper)
                     .UseOverridesFromAssemblyOf<SkinOverrides>())
                 .Add(AutoMap.AssemblyOf<PlayerInfo>(autoMapHelper)

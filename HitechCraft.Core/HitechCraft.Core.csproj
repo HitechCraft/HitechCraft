@@ -80,6 +80,7 @@
     <Compile Include="Entity\Player\PlayerSkin.cs" />
     <Compile Include="Entity\Player\PMPlayerBox.cs" />
     <Compile Include="Entity\Player\PrivateMessage.cs" />
+    <Compile Include="Entity\Player\Referal.cs" />
     <Compile Include="Entity\Services\Rule.cs" />
     <Compile Include="Entity\Services\RulePoint.cs" />
     <Compile Include="Entity\Shop\PlayerItem.cs" />

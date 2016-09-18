@@ -237,11 +237,13 @@
             if(!model.RulesAgree)
                 ModelState.AddModelError(String.Empty, "Вы должны быть согласны с правилами проекта");
 
+#if !DEBUG
             var captchaResponse = ReCaptchaManager.ValidateReCaptcha(Request["g-recaptcha-response"]);
 
             if(captchaResponse.Status == JsonStatus.NO)
                 ModelState.AddModelError(String.Empty, "Не верный ответ в ReCaptcha");
-            
+#endif
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -259,12 +261,14 @@
                     
                     try
                     {
+                        var refer = Session["ReferalId"] != null ? Session["ReferalId"].ToString() : String.Empty;
+
                         CommandExecutor.Execute(new PlayerRegisterCreateCommand()
                         {
                             Name = model.UserName,
                             Gender = model.Gender,
                             Email = model.Email,
-                            ReferId = Session["ReferalId"] != null ? Session["ReferalId"].ToString() : String.Empty
+                            ReferId = refer
                         });
                     }
                     catch (Exception e)
@@ -463,9 +467,9 @@
             return RedirectToAction("Index", "Home");
         }
 
-        #endregion
+#endregion
 
-        #region Deleted Actions
+#region Deleted Actions
         ////
         //// GET: /Account/VerifyCode
         //[AllowAnonymous]
@@ -644,9 +648,9 @@
         //    return View();
         //}
 
-        #endregion
+#endregion
         
-        #region Вспомогательные приложения
+#region Вспомогательные приложения
         // Используется для защиты от XSRF-атак при добавлении внешних имен входа
         private const string XsrfKey = "XsrfId";
 
@@ -703,6 +707,6 @@
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
-        #endregion
+#endregion
     }
 }

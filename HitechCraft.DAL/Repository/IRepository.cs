@@ -62,5 +62,17 @@ namespace HitechCraft.DAL.Repository
         /// <param name="projector"></param>
         /// <returns></returns>
         ICollection<TResult> Query<TResult>(ISpecification<TEntity> specification, IProjector<TEntity, TResult> projector);
+        /// <summary>
+        /// Check entity existing
+        /// </summary>
+        /// <param name="id">Entity Id</param>
+        /// <returns></returns>
+        bool Exist(object id);
+        /// <summary>
+        /// Check entity existing
+        /// </summary>
+        /// <param name="specification">Entity spec</param>
+        /// <returns></returns>
+        bool Exist(ISpecification<TEntity> specification);
     }
 }
