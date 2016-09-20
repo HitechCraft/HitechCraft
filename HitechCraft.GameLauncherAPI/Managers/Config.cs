@@ -22,7 +22,7 @@
         /// <summary>
         /// Player skin url
         /// </summary>
-        public static string SkinsUrlString => Const.WebAppBaseUrl + "ClientServer/GetSkinImage?playerName=";
+        public static string SkinsUrlString => Const.WebApiBaseUrl + "ClientServer/GetSkinImage?playerName=";
 
         /// <summary>
         /// Minecraft clients folder

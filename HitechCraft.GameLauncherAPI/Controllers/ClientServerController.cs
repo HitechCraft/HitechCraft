@@ -76,7 +76,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
         /// <param name="username">>Player nickname</param>
         /// <param name="serverId">Server Id</param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         public JsonResult CheckServer(string username, string serverId)
         {
             try
