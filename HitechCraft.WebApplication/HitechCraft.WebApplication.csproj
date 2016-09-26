@@ -421,6 +421,7 @@
     <None Include="Properties\PublishProfiles\HitechCraft.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\circle-progress.js" />
+    <Content Include="Scripts\clipboard.min.js" />
     <Content Include="Scripts\jgrowl.alerts.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

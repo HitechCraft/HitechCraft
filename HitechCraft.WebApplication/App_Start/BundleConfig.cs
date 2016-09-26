@@ -16,6 +16,7 @@ namespace HitechCraft.WebApplication
                         "~/Scripts/jquery-ui*",
                         "~/Scripts/jgrowl.alerts.js",
                         "~/Scripts/skin2DRender.js",
+                        "~/Scripts/clipboard.min.js",
                         "~/Scripts/tree.js",
                         "~/Scripts/MSP.js"));
 
