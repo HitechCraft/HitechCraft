@@ -88,8 +88,6 @@ namespace HitechCraft.WebAdmin.Controllers
             if (!this.Context.Users.Any(u => u.Email == model.Email))
             {
                 ModelState.AddModelError(String.Empty, "Данные не верные. Сосите лапу!");
-
-                return View(model);
             }
 
 #if !DEBUG
@@ -102,19 +100,17 @@ namespace HitechCraft.WebAdmin.Controllers
             if (!UserManager.CheckPassword(this.Context.Users.First(u => u.Email == model.Email), model.Password))
             {
                 ModelState.AddModelError(String.Empty, "Данные не верные. Сосите лапу!");
-
-                return View(model);
             }
 
             if (!IsAdmin(model.Email))
             {
                 ModelState.AddModelError(String.Empty, "Ошибка авторизации. Сосите лапу!");
-
-                return View(model);
             }
 
             if (!ModelState.IsValid)
             {
+                ViewBag.Errors = true;
+
                 return View(model);
             }
 

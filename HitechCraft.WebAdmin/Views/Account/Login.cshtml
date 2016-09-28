@@ -45,6 +45,14 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 <script type="text/javascript">
+
+    @if (ViewBag.Errors != null)
+    {
+        <text>
+            speechSynthesis.speak(new SpeechSynthesisUtterance('Лох, пароль неверный'));
+        </text>
+    }
+
     function loginSubmit() {
         $('#login').submit();
     }
