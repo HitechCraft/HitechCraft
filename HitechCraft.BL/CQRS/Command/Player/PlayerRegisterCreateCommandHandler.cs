@@ -58,6 +58,7 @@ namespace HitechCraft.BL.CQRS.Command
                     };
 
                     referalRep.Add(referal);
+                    referalRep.Dispose();
                 }
 
             }
@@ -83,7 +84,6 @@ namespace HitechCraft.BL.CQRS.Command
                 LogHelper.Error("Error creating currency: " + e.Message, "Player Register");
             }
 
-            referalRep.Dispose();
             playerInfoRep.Dispose();
             playerRep.Dispose();
             currencyRep.Dispose();
