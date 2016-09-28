@@ -22,7 +22,6 @@ namespace HitechCraft.BL.CQRS.Command
             var playerRep = GetRepository<Player>();
             var playerInfoRep = GetRepository<PlayerInfo>();
             var currencyRep = GetRepository<Currency>();
-            var referalRep = GetRepository<Referal>();
 
             var playerInfo = new PlayerInfo()
             {
@@ -51,6 +50,7 @@ namespace HitechCraft.BL.CQRS.Command
                 
                 if (!String.IsNullOrEmpty(command.ReferId) && playerRep.Exist(command.ReferId))
                 {
+                    var referalRep = GetRepository<Referal>();
                     var referal = new Referal()
                     {
                         Refer = playerRep.GetEntity(command.ReferId),
