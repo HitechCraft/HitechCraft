@@ -140,6 +140,7 @@
     <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByPlayerProfileSpec.cs" />
     <Compile Include="Repository\Specification\PlayerSession\PlayerSessionByServerSpec.cs" />
     <Compile Include="Repository\Specification\Player\AuthLogByPlayerNameSpec.cs" />
+    <Compile Include="Repository\Specification\Player\PlayerInfoByEmailSpec.cs" />
     <Compile Include="Repository\Specification\Player\ReferalByRefererSpec.cs" />
     <Compile Include="Repository\Specification\Player\ReferalByReferSpec.cs" />
     <Compile Include="Repository\Specification\Player\JobByUuidSpec.cs" />

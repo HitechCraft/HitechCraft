@@ -1,4 +1,6 @@
 ﻿using HitechCraft.BL.CQRS.Command.Base;
+using HitechCraft.Core.Repository.Specification.Currency;
+using HitechCraft.Core.Repository.Specification.Player;
 
 namespace HitechCraft.BL.CQRS.Command
 {
@@ -23,56 +25,38 @@ namespace HitechCraft.BL.CQRS.Command
             var playerInfoRep = GetRepository<PlayerInfo>();
             var currencyRep = GetRepository<Currency>();
 
-            var playerInfo = new PlayerInfo()
-            {
-                Email = command.Email
-            };
+            var playerInfo = new PlayerInfo();
+            var player = new Player();
+            var currency = new Currency();
 
-            try
+            if (!playerInfoRep.Exist(new PlayerInfoByEmailSpec(command.Email)))
             {
+                playerInfo.Email = command.Email;
+
                 playerInfoRep.Add(playerInfo);
-            }
-            catch (Exception e)
-            {
-                LogHelper.Error("PlayerInfo Not added: " + e.Message, "Player Fix");
+                playerInfoRep.Dispose();
             }
 
-            try
+            if (!playerRep.Exist(new PlayerByLoginSpec(command.Name)))
             {
-                var player = new Player()
-                {
-                    Name = command.Name,
-                    Gender = command.Gender,
-                    Info = playerInfo
-                };
+                player.Name = command.Name;
+                player.Gender = command.Gender;
+                player.Info = playerInfo;
 
                 playerRep.Add(player);
-            }
-            catch (Exception e)
-            {
-                LogHelper.Error("Player Not added: " + e.Message, "Player Fix");
+                playerRep.Dispose();
             }
 
-            try
+            if (!currencyRep.Exist(new CurrencyByPlayerNameSpec(command.Name)))
             {
-                var currency = new Currency()
-                {
-                    Gonts = 100.00,
-                    Rubels = 10.00,
-                    Player = playerRep.GetEntity(command.Name),
-                    Status = 0
-                };
+                currency.Gonts = 100.00;
+                currency.Rubels = 10.00;
+                currency.Player = playerRep.GetEntity(command.Name);
+                currency.Status = 0;
 
                 currencyRep.Add(currency);
+                currencyRep.Dispose();
             }
-            catch (Exception e)
-            {
-                LogHelper.Error("Currency Not added: " + e.Message, "Player Fix");
-            }
-
-            playerInfoRep.Dispose();
-            playerRep.Dispose();
-            currencyRep.Dispose();
         }
     }
 }
