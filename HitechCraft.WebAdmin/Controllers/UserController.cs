@@ -346,12 +346,11 @@ namespace HitechCraft.WebAdmin.Controllers
                         Specification = new CurrencyByPlayerNameSpec(userName)
                     }).Any())
                 {
-                    this.CommandExecutor.Execute(new PlayerRegisterCreateCommand()
+                    this.CommandExecutor.Execute(new PlayerFixCommand()
                     {
                         Name = userName,
                         Gender = gender,
-                        Email = email,
-                        ReferId = String.Empty
+                        Email = email
                     });
                 }
             }
