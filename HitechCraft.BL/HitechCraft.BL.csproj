@@ -82,6 +82,8 @@
     <Compile Include="CQRS\Command\PlayerSession\PlayerSessionUpdateCommand.cs" />
     <Compile Include="CQRS\Command\PlayerSession\PlayerSessionCreateCommandHandler.cs" />
     <Compile Include="CQRS\Command\PlayerSession\PlayerSessionUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Player\Initial\PlayerAccountCreateCommand.cs" />
+    <Compile Include="CQRS\Command\Player\Initial\PlayerAccountCreateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Player\PlayerInfoUpdateCommand.cs" />
     <Compile Include="CQRS\Command\Player\PlayerInfoUpdateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Player\PlayerFixCommand.cs" />
