@@ -82,7 +82,9 @@
     <Compile Include="CQRS\Command\PlayerSession\PlayerSessionUpdateCommand.cs" />
     <Compile Include="CQRS\Command\PlayerSession\PlayerSessionCreateCommandHandler.cs" />
     <Compile Include="CQRS\Command\PlayerSession\PlayerSessionUpdateCommandHandler.cs" />
+    <Compile Include="CQRS\Command\Player\PlayerReferCreateCommand.cs" />
     <Compile Include="CQRS\Command\Player\PlayerInfoUpdateCommand.cs" />
+    <Compile Include="CQRS\Command\Player\PlayerReferCreateCommandHandler.cs" />
     <Compile Include="CQRS\Command\Player\PlayerInfoUpdateCommandHandler.cs" />
     <Compile Include="CQRS\Command\PrivateMessage\PMInboxRemoveCommand.cs" />
     <Compile Include="CQRS\Command\PrivateMessage\PMInboxReadCommand.cs" />

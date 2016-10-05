@@ -36,36 +36,15 @@ namespace HitechCraft.BL.CQRS.Command
             {
                 LogHelper.Error("PlayerInfo Not added: " + e.Message, "Player Register");
             }
-            
-            try
+
+            var player = new Player()
             {
-                var player = new Player()
-                {
-                    Name = command.Name,
-                    Gender = command.Gender,
-                    Info = playerInfo
-                };
+                Name = command.Name,
+                Gender = command.Gender,
+                Info = playerInfo
+            };
 
-                playerRep.Add(player);
-                
-                if (!String.IsNullOrEmpty(command.ReferId) && playerRep.Exist(command.ReferId))
-                {
-                    var referalRep = GetRepository<Referal>();
-                    var referal = new Referal()
-                    {
-                        Refer = playerRep.GetEntity(command.ReferId),
-                        Referer = player
-                    };
-
-                    referalRep.Add(referal);
-                    referalRep.Dispose();
-                }
-
-            }
-            catch (Exception e)
-            {
-                LogHelper.Error("Player adding error: " + e.Message, "Player Register");
-            }
+            playerRep.Add(player);
 
             try
             {
@@ -86,6 +65,20 @@ namespace HitechCraft.BL.CQRS.Command
 
             playerInfoRep.Dispose();
             playerRep.Dispose();
+
+            if (!String.IsNullOrEmpty(command.ReferId) && playerRep.Exist(command.ReferId))
+            {
+                var referalRep = GetRepository<Referal>();
+                var referal = new Referal()
+                {
+                    Refer = playerRep.GetEntity(command.ReferId),
+                    Referer = player
+                };
+
+                referalRep.Add(referal);
+                referalRep.Dispose();
+            }
+
             currencyRep.Dispose();
         }
     }
