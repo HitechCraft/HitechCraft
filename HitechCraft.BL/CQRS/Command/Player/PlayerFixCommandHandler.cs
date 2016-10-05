@@ -11,13 +11,13 @@ namespace HitechCraft.BL.CQRS.Command
 
     #endregion
 
-    public class PlayerRegisterCreateCommandHandler : BaseCommandHandler<PlayerRegisterCreateCommand>
+    public class PlayerFixCommandHandler : BaseCommandHandler<PlayerFixCommand>
     {
-        public PlayerRegisterCreateCommandHandler(IContainer container) : base(container)
+        public PlayerFixCommandHandler(IContainer container) : base(container)
         {
         }
 
-        public override void Handle(PlayerRegisterCreateCommand command)
+        public override void Handle(PlayerFixCommand command)
         {
             var playerRep = GetRepository<Player>();
             var playerInfoRep = GetRepository<PlayerInfo>();
@@ -34,17 +34,24 @@ namespace HitechCraft.BL.CQRS.Command
             }
             catch (Exception e)
             {
-                LogHelper.Error("PlayerInfo Not added: " + e.Message, "Player Register");
+                LogHelper.Error("PlayerInfo Not added: " + e.Message, "Player Fix");
             }
-            
-            var player = new Player()
-            {
-                Name = command.Name,
-                Gender = command.Gender,
-                Info = playerInfo
-            };
 
-            playerRep.Add(player);
+            try
+            {
+                var player = new Player()
+                {
+                    Name = command.Name,
+                    Gender = command.Gender,
+                    Info = playerInfo
+                };
+
+                playerRep.Add(player);
+            }
+            catch (Exception e)
+            {
+                LogHelper.Error("Player Not added: " + e.Message, "Player Fix");
+            }
 
             try
             {
@@ -60,25 +67,11 @@ namespace HitechCraft.BL.CQRS.Command
             }
             catch (Exception e)
             {
-                LogHelper.Error("Error creating currency: " + e.Message, "Player Register");
+                LogHelper.Error("Currency Not added: " + e.Message, "Player Fix");
             }
 
             playerInfoRep.Dispose();
             playerRep.Dispose();
-
-            if (!String.IsNullOrEmpty(command.ReferId) && playerRep.Exist(command.ReferId))
-            {
-                var referalRep = GetRepository<Referal>();
-                var referal = new Referal()
-                {
-                    Refer = playerRep.GetEntity(command.ReferId),
-                    Referer = player
-                };
-
-                referalRep.Add(referal);
-                referalRep.Dispose();
-            }
-
             currencyRep.Dispose();
         }
     }
