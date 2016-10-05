@@ -12,32 +12,15 @@
 
     public class PlayerFixCommandHandler : BaseCommandHandler<PlayerFixCommand>
     {
-        private IContainer _container;
-
         public PlayerFixCommandHandler(IContainer container) : base(container)
         {
-            _container = container;
         }
 
         public override void Handle(PlayerFixCommand command)
         {
             var playerRep = GetRepository<Player>();
             var currencyRep = GetRepository<Currency>();
-
-            try
-            {
-                new PlayerAccountCreateCommandHandler(_container)
-                    .Handle(new PlayerAccountCreateCommand
-                    {
-                        Email = command.Email,
-                        Gender = command.Gender,
-                        Name = command.Name
-                    });
-            }
-            catch (Exception)
-            {
-            }
-
+            
             if (!currencyRep.Exist(new CurrencyByPlayerNameSpec(command.Name)))
             {
                 var currency = new Currency

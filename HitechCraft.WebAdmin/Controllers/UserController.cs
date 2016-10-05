@@ -337,14 +337,28 @@ namespace HitechCraft.WebAdmin.Controllers
 
         public ActionResult FixUserAccount(string userName, Gender gender, string email)
         {
-            try
-            {
-                if (!new EntityListQueryHandler<Currency, PlayerInfoViewModel>(this.Container)
+            if (!new EntityListQueryHandler<Currency, PlayerInfoViewModel>(this.Container)
                     .Handle(new EntityListQuery<Currency, PlayerInfoViewModel>()
                     {
                         Projector = this.Container.Resolve<IProjector<Currency, PlayerInfoViewModel>>(),
                         Specification = new CurrencyByPlayerNameSpec(userName)
                     }).Any())
+            {
+                try
+                {
+                    this.CommandExecutor.Execute(new PlayerAccountCreateCommand
+                    {
+                        Email = email,
+                        Gender = gender,
+                        Name = userName
+                    });
+                }
+                catch (Exception e)
+                {
+                    LogHelper.Error("Ошибка фикса аккаунта: " + e.Message);
+                }
+
+                try
                 {
                     this.CommandExecutor.Execute(new PlayerFixCommand()
                     {
@@ -353,10 +367,10 @@ namespace HitechCraft.WebAdmin.Controllers
                         Email = email
                     });
                 }
-            }
-            catch (Exception e)
-            {
-                LogHelper.Error("Ошибка фикса пользователя: " + e.Message);
+                catch (Exception e)
+                {
+                    LogHelper.Error("Ошибка фикса пользователя: " + e.Message);
+                }
             }
 
             return RedirectToAction("Index");

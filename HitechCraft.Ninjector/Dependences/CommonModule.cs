@@ -27,6 +27,7 @@
 
             Bind(typeof(ICommandHandler<>)).To(typeof(BaseCommandHandler<>));
             Bind(typeof(ICommandHandler<PlayerRegisterCreateCommand>)).To(typeof(PlayerRegisterCreateCommandHandler));
+            Bind(typeof(ICommandHandler<PlayerAccountCreateCommand>)).To(typeof(PlayerAccountCreateCommandHandler));
             Bind(typeof(ICommandHandler<PlayerFixCommand>)).To(typeof(PlayerFixCommandHandler));
             Bind(typeof(ICommandHandler<PlayerInfoUpdateCommand>)).To(typeof(PlayerInfoUpdateCommandHandler));
             Bind(typeof(ICommandHandler<PlayerSkinCreateOrUpdateCommand>)).To(typeof(PlayerSkinCreateOrUpdateCommandHandler));
