@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebAdmin.Controllers
+﻿using HitechCraft.Core.Helper;
+
+namespace HitechCraft.WebAdmin.Controllers
 {
     #region Using Directives
 
@@ -355,6 +357,7 @@
             }
             catch (Exception e)
             {
+                LogHelper.Error("Ошибка фикса пользователя: " + e.Message);
             }
 
             return RedirectToAction("Index");
