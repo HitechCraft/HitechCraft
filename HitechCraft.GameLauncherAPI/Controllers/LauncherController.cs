@@ -260,7 +260,6 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                 using (var fileContent = System.IO.File.Open(FileManager.GetServerPath(fileServerPath), FileMode.Open))
                 {
                     Response.AppendHeader("Content-Length", fileContent.Length.ToString());
-                    fileContent.Close();
                 }
 
                 Response.TransmitFile(fileServerPath);
