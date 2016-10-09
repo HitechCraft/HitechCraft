@@ -82,6 +82,8 @@ namespace HitechCraft.GameLauncherAPI.Controllers
             {
                 if (IsValidAuth(login, password))
                 {
+                    LogHelper.Info(Resource.SuccessAuth, "{User Checker}");
+
                     return Json(new JsonUserAuthData()
                     {
                         Status = JsonStatus.YES,
@@ -93,6 +95,8 @@ namespace HitechCraft.GameLauncherAPI.Controllers
             }
             catch (Exception e)
             {
+                LogHelper.Error("Ошибка проверки данных пользователя: " + e.Message, "{User Checker}");
+
                 return Json(new JsonUserAuthData()
                 {
                     Status = JsonStatus.NO,
@@ -121,6 +125,8 @@ namespace HitechCraft.GameLauncherAPI.Controllers
             {
                 if (Config.MasterVersion.Equals(masterVersion))
                 {
+                    LogHelper.Info(Resource.ValidVersion, "{Version Checker}");
+
                     return Json(new JsonStatusData()
                     {
                         Status = JsonStatus.YES,
@@ -131,6 +137,8 @@ namespace HitechCraft.GameLauncherAPI.Controllers
             }
             catch (Exception e)
             {
+                LogHelper.Error("Ошибка проверки версии лаунчера: " + e.Message, "{Version Checker}");
+
                 return Json(new JsonStatusData()
                 {
                     Status = JsonStatus.NO,
@@ -138,6 +146,8 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                 },
                 JsonRequestBehavior.AllowGet);
             }
+
+            LogHelper.Error(String.Format(Resource.InvalidVersion, Config.MasterVersion), "{Version Checker}");
 
             return Json(new JsonStatusData()
             {
@@ -163,6 +173,8 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                 {
                     if (!FileManager.IsDirOrFileExists(folder))
                     {
+                        LogHelper.Error(String.Format(Resource.ClientNoFolder, clientName, folder), "{Client Folders Checker}");
+
                         return Json(new JsonStatusData()
                         {
                             Status = JsonStatus.NO,
@@ -174,6 +186,8 @@ namespace HitechCraft.GameLauncherAPI.Controllers
             }
             catch (Exception e)
             {
+                LogHelper.Error("Ошибка проверки обязательных папок клиента: " + e.Message, "{Client Folders Checker}");
+
                 return Json(new JsonStatusData()
                 {
                     Status = JsonStatus.NO,
@@ -181,6 +195,8 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                 },
                 JsonRequestBehavior.AllowGet);
             }
+
+            LogHelper.Info(Resource.ClientAllFolders, "{Client Folders Checker}");
 
             return Json(new JsonStatusData()
             {
@@ -218,7 +234,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                         }));
                 }
             }
-
+            
             return Json(new JsonClientData()
             {
                 FilesData = clientFiles,
@@ -233,20 +249,27 @@ namespace HitechCraft.GameLauncherAPI.Controllers
         /// <param name="filePath">File Path with client name</param>
         public void DownloadClientFile(string filePath)
         {
-            string serverClientPath = "\\Launcher\\Clients\\";
-
-            string fileServerPath = (serverClientPath + filePath.Replace("/", "\\")).Replace("\\\\", "\\"); //fix
-
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(fileServerPath));
-
-            using (var fileContent = System.IO.File.Open(FileManager.GetServerPath(fileServerPath), FileMode.Open))
+            try
             {
-                Response.AppendHeader("Content-Length", fileContent.Length.ToString());
-                fileContent.Close();
-            }
+                string serverClientPath = "\\Launcher\\Clients\\";
 
-            Response.TransmitFile(fileServerPath);
-            Response.End();
+                string fileServerPath = (serverClientPath + filePath.Replace("/", "\\")).Replace("\\\\", "\\"); //fix
+
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(fileServerPath));
+
+                using (var fileContent = System.IO.File.Open(FileManager.GetServerPath(fileServerPath), FileMode.Open))
+                {
+                    Response.AppendHeader("Content-Length", fileContent.Length.ToString());
+                    fileContent.Close();
+                }
+
+                Response.TransmitFile(fileServerPath);
+                Response.End();
+            }
+            catch (Exception e)
+            {
+                LogHelper.Error("Ошибка скачивания файла: " + e.Message, "{Downloader}");
+            }
         }
         
         /// <summary>
@@ -268,12 +291,16 @@ namespace HitechCraft.GameLauncherAPI.Controllers
             }
             catch (Exception e)
             {
+                LogHelper.Error("Java не прошла проверку. " + e.Message, "{Java Checker}");
+
                 return Json(new JsonStatusData()
                 {
                     Status = JsonStatus.NO,
                     Message = "Java не прошла проверку. " + e.Message
                 }, JsonRequestBehavior.AllowGet);
             }
+
+            LogHelper.Info("Java прошла проверку", "{Java Checker}");
 
             return Json(new JsonStatusData()
             {
@@ -287,22 +314,33 @@ namespace HitechCraft.GameLauncherAPI.Controllers
         /// </summary>
         public JsonResult GetServersInfo()
         {
-            var serversData = new ServerDataListQueryHandler(Container)
+            try
+            {
+                var serversData = new ServerDataListQueryHandler(Container)
                 .Handle(new ServerDataListQuery());
 
-            if (!serversData.Any())
-            {
+                if (!serversData.Any())
+                {
+                    return Json(new JsonMinecraftServersInfo()
+                    {
+                        ServerCount = 0
+                    }, JsonRequestBehavior.AllowGet);
+                }
+
+                LogHelper.Info("Данные сервера получены", "{Server info}");
+
                 return Json(new JsonMinecraftServersInfo()
                 {
-                    ServerCount = 0
+                    ServerData = serversData,
+                    ServerCount = serversData.Count()
                 }, JsonRequestBehavior.AllowGet);
             }
-
-            return Json(new JsonMinecraftServersInfo()
+            catch (Exception e)
             {
-                ServerData = serversData,
-                ServerCount = serversData.Count()
-            }, JsonRequestBehavior.AllowGet);
+                LogHelper.Error("Ошибка получения данных сервера: " + e.Message, "{Server info}");
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -311,15 +349,26 @@ namespace HitechCraft.GameLauncherAPI.Controllers
         /// <returns></returns>
         public JsonResult GetLauncherNews()
         {
-            var news = new EntityListQueryHandler<News, JsonLauncherNews>(Container)
-                .Handle(new EntityListQuery<News, JsonLauncherNews>()
-                {
-                    Projector = Container.Resolve<IProjector<News, JsonLauncherNews>>()
-                }).OrderByDescending(x => x.Id).Limit(2);
+            try
+            {
+                var news = new EntityListQueryHandler<News, JsonLauncherNews>(Container)
+                    .Handle(new EntityListQuery<News, JsonLauncherNews>()
+                    {
+                        Projector = Container.Resolve<IProjector<News, JsonLauncherNews>>()
+                    }).OrderByDescending(x => x.Id).Limit(2);
 
-            FixNewsTags(ref news);
+                FixNewsTags(ref news);
 
-            return Json(news, JsonRequestBehavior.AllowGet);
+                LogHelper.Info("Новости получены", "{News info}");
+
+                return Json(news, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                LogHelper.Error("Ошибка получения новостей: " + e.Message, "{News info}");
+            }
+
+            return null;
         }
         
         #endregion
