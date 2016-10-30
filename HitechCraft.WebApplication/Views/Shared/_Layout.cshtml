@@ -31,7 +31,7 @@
     <div class="footer-content">
         @Html.Partial("_Footer")
     </div>
-    <script type="text/javascript">
+<script type="text/javascript">
 
     @*$(document).on('ready', function() {
         @if (ViewBag.NewMessages != null && ViewBag.NewMessages > 0)
@@ -43,19 +43,20 @@
         }
     });*@
 
-        $.fn.textWidth = function () {
-            var text = $(this).html();
-            $(this).html('<span>' + text + '</span>');
-            var width = $(this).find('span:first').width();
-            $(this).html(text);
-            return width;
-        };
+    $.fn.textWidth = function() {
+        var text = $(this).html();
+        $(this).html('<span>' + text + '</span>');
+        var width = $(this).find('span:first').width();
+        $(this).html(text);
+        return width;
+    };
 
-        $.AjaxLoaderSetText = function (text) {
-            $('.ajax-loader>span').html(text);
-        }
+    $.AjaxLoaderSetText = function(text) {
+        $('.ajax-loader>span').html(text);
+    }
 
-        $(document).ajaxStart(function () {
+    $(document)
+        .ajaxStart(function() {
             if (window.ajaxLoaderText === undefined) {
                 window.ajaxLoaderText = "Загрузка...";
             }
@@ -65,7 +66,8 @@
             $('.ajax-loader').show();
             $('.ajax-bg').show();
             $('body').css('overflow', 'hidden');
-        }).ajaxStop(function () {
+        })
+        .ajaxStop(function() {
             window.ajaxLoaderText = undefined;
 
             $('.ajax-loader').hide();
@@ -73,25 +75,49 @@
             $('body').css('overflow', 'visible');
         });
 
-        //function newMessageSound() {
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function () {
+            try {
+                w.yaCounter40555930 = new Ya.Metrika({
+                    id: 40555930,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true
+                });
+            } catch (e) { }
+        });
 
-        //    var audioElement = document.createElement('audio');
-        //    audioElement.setAttribute('src', './Content/Sounds/newMessage.mp3');
-        //    audioElement.setAttribute('autoplay', 'autoplay');
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
 
-        //    audioElement.addEventListener("load", function () {
-        //        audioElement.play();
-        //    }, true);
-        //};
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
 
-        //$('.dropdown-toggle').on('mouseenter', function () {
-        //    $(this).dropdown('toggle');
-        //});
+    //function newMessageSound() {
 
-        //$('.dropdown-toggle').on('mouseleave', function () {
-        //});
-    </script>
-    @Scripts.Render("~/bundles/bootstrap")
+    //    var audioElement = document.createElement('audio');
+    //    audioElement.setAttribute('src', './Content/Sounds/newMessage.mp3');
+    //    audioElement.setAttribute('autoplay', 'autoplay');
+
+    //    audioElement.addEventListener("load", function () {
+    //        audioElement.play();
+    //    }, true);
+    //};
+
+    //$('.dropdown-toggle').on('mouseenter', function () {
+    //    $(this).dropdown('toggle');
+    //});
+
+    //$('.dropdown-toggle').on('mouseleave', function () {
+    //});
+</script>
+@Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
