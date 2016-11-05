@@ -48,11 +48,11 @@ namespace HitechCraft.WebApplication.Controllers
         {
             try
             {
-                var vm = new EntityQueryHandler<Server, ServerDetailViewModel>(this.Container)
-                    .Handle(new EntityQuery<Server, ServerDetailViewModel>()
+                var vm = new EntityQueryHandler<Server, ServerViewModel>(this.Container)
+                    .Handle(new EntityQuery<Server, ServerViewModel>()
                     {
                         Id = id,
-                        Projector = this.Container.Resolve<IProjector<Server, ServerDetailViewModel>>()
+                        Projector = this.Container.Resolve<IProjector<Server, ServerViewModel>>()
                     });
 
                 return View(vm);

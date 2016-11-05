@@ -10,10 +10,6 @@ namespace HitechCraft.WebAdmin.Models
         [Required]
         [Display(Name = "Наименование")]
         public string Name { get; set; }
-
-        [Required]
-        [Display(Name = "Описание")]
-        public string Description { get; set; }
         
         public byte[] Image { get; set; }
 

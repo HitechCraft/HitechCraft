@@ -24,7 +24,6 @@ namespace HitechCraft.BL.CQRS.Command
             var shopItem = shopItemRep.GetEntity(command.GameId);
 
             //TODO: в автомаппер
-            shopItem.Description = command.Description;
             shopItem.Image = command.Image ?? shopItem.Image;
             shopItem.ItemCategory = shopItemCategoryRep.GetEntity(command.CategoryId);
             shopItem.Modification = modificationRep.GetEntity(command.ModificationId);

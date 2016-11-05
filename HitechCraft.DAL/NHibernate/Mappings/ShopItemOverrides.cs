@@ -23,9 +23,6 @@
                 .Length(128)
                 .Not.Nullable();
 
-            mapping.Map(x => x.Description)
-                .Length(2000);
-
             mapping.Map(x => x.Price);
 
             mapping.Map(x => x.Image);

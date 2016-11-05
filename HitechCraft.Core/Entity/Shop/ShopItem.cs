@@ -1,7 +1,7 @@
-﻿using HitechCraft.Core.Entity.Base;
-
-namespace HitechCraft.Core.Entity
+﻿namespace HitechCraft.Core.Entity
 {
+    using Base;
+
     /// <summary>
     /// Minecraft shop item
     /// </summary>
@@ -18,11 +18,6 @@ namespace HitechCraft.Core.Entity
         /// Item name
         /// </summary>
         public virtual string Name { get; set; }
-
-        /// <summary>
-        /// Item description
-        /// </summary>
-        public virtual string Description { get; set; }
 
         /// <summary>
         /// Byte array of item icon

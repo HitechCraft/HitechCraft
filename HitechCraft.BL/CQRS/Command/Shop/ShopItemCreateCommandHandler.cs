@@ -23,7 +23,6 @@ namespace HitechCraft.BL.CQRS.Command
 
             var shopItem = new ShopItem()
             {
-                Description = command.Description,
                 GameId = command.GameId,
                 Image = command.Image,
                 Name = command.Name,

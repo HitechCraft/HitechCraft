@@ -71,7 +71,7 @@ namespace HitechCraft.WebApplication.Controllers
 
             if (!string.IsNullOrEmpty(filterText))
             {
-                itemList = itemList.Where(x => x.Name.Contains(filterText) || x.Description.Contains(filterText));
+                itemList = itemList.Where(x => x.Name.Contains(filterText));
             }
             
             ViewBag.ItemsOnPage = itemOnPage ?? this.ItemsOnPage;
