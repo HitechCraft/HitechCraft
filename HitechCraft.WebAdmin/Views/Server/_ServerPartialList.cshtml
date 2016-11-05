@@ -29,7 +29,7 @@
             <td>@server.Name</td>
             <td>@server.Description</td>
             <td>@server.ClientVersion</td>
-            <td>@(server.IpAddress + ":" + server.ServerPort)</td>
+            <td>@(server.IpAddress + ":" + server.Port)</td>
             <td>
                 @Html.ServerStatusLabel(server.Data.Status, server.Data.Message)
                 <br />

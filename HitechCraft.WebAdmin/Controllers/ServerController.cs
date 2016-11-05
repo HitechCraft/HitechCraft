@@ -1,17 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Web.Mvc;
-using HitechCraft.BL.CQRS.Command;
-using HitechCraft.BL.CQRS.Query;
-using HitechCraft.Core.DI;
-using HitechCraft.Core.Entity;
-using HitechCraft.Projector.Impl;
-using HitechCraft.WebAdmin.Manager;
-using HitechCraft.WebAdmin.Models;
-using PagedList;
-
-namespace HitechCraft.WebAdmin.Controllers
+﻿namespace HitechCraft.WebAdmin.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+    using BL.CQRS.Command;
+    using BL.CQRS.Query;
+    using Core.DI;
+    using Core.Entity;
+    using Projector.Impl;
+    using Manager;
+    using Models;
+    using PagedList;
+
     public class ServerController : BaseController
     {
         public int ServersOnPage => 10;
@@ -106,11 +106,11 @@ namespace HitechCraft.WebAdmin.Controllers
         {
             try
             {
-                var vm = new EntityQueryHandler<Server, ServerDetailViewModel>(this.Container)
-                    .Handle(new EntityQuery<Server, ServerDetailViewModel>()
+                var vm = new EntityQueryHandler<Server, ServerViewModel>(this.Container)
+                    .Handle(new EntityQuery<Server, ServerViewModel>()
                     {
                         Id = id,
-                        Projector = this.Container.Resolve<IProjector<Server, ServerDetailViewModel>>()
+                        Projector = this.Container.Resolve<IProjector<Server, ServerViewModel>>()
                     });
 
                 return View(vm);

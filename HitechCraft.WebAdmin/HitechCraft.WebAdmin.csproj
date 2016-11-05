@@ -257,9 +257,8 @@
     <Compile Include="Mapper\Server\ServerCreateCommandToServerMapper.cs" />
     <Compile Include="Mapper\Server\ServerEditViewModelToServerCreateCommandMapper.cs" />
     <Compile Include="Mapper\Server\ServerEditViewModelToServerUpdateCommandMapper.cs" />
-    <Compile Include="Mapper\Server\ServerToServerDetailViewModelMapper.cs" />
-    <Compile Include="Mapper\Server\ServerToServerEditViewModelMapper.cs" />
     <Compile Include="Mapper\Server\ServerToServerViewModelMapper.cs" />
+    <Compile Include="Mapper\Server\ServerToServerEditViewModelMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemCategoryEditViewModelToShopItemCategoryCreateCommandMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemCategoryToShopItemCategoryEditViewModelMapper.cs" />
     <Compile Include="Mapper\Shop\ShopItemCategoryToShopItemCategoryViewModelMapper.cs" />
@@ -281,7 +280,6 @@
     <Compile Include="Models\News\NewsViewModel.cs" />
     <Compile Include="Models\Rule\RulePointViewModel.cs" />
     <Compile Include="Models\Rule\RuleViewModel.cs" />
-    <Compile Include="Models\Server\ServerDetailViewModel.cs" />
     <Compile Include="Models\Server\ServerEditViewModel.cs" />
     <Compile Include="Models\Server\ServerModificationViewModel.cs" />
     <Compile Include="Models\Server\ServerViewModel.cs" />
