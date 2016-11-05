@@ -53,18 +53,18 @@ namespace HitechCraft.Common.Repository
             _unitOfWork.Session.Delete(_unitOfWork.Session.Load<TEntity>(id));
         }
 
-        public ICollection<TResult> Query<TResult>(ISpecification<TEntity> specification, IProjector<TEntity, TResult> projector)
+        public ICollection<TResult> Query<TResult>(ISpecification<TEntity> specification,
+            IProjector<TEntity, TResult> projector)
         {
             var entities = _unitOfWork.Session.Query<TEntity>();
-            
+
             if (specification != null) entities = entities.Where(specification.IsSatisfiedBy());
 
             if (projector != null)
             {
-                return entities.Project(projector).ToList();
+                return entities.ToList().Project(projector);
             }
 
-            //С коллекцией ругается...
             return ((IQueryable<TResult>)entities).ToList();
         }
 
