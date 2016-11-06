@@ -1,4 +1,4 @@
-﻿using HitechCraft.Core.Entity.Base;
+﻿using HitechCraft.Core.Databases;
 
 namespace HitechCraft.BL.CQRS.Query
 {
@@ -8,6 +8,7 @@ namespace HitechCraft.BL.CQRS.Query
     using Core.DI;
     using Core.Entity;
     using DAL.Repository;
+    using HitechCraft.Core.Entity.Base;
 
     #endregion
 
@@ -23,7 +24,7 @@ namespace HitechCraft.BL.CQRS.Query
 
         public TResult Handle(EntityQuery<TEntity, TResult> query)
         {
-            var entityRep = _container.Resolve<IRepository<TEntity>>();
+            var entityRep = _container.Resolve<IRepository<MySQLConnection, TEntity>>();
 
             if(query.Projector == null)
                 throw new Exception("Для получения объекта необходима проекция сущностей");

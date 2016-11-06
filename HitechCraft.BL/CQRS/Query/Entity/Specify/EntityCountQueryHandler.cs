@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.BL.CQRS.Query
+﻿using HitechCraft.Core.Databases;
+
+namespace HitechCraft.BL.CQRS.Query.Specify
 {
     #region UsingDirectives
     
@@ -9,8 +11,8 @@
 
     #endregion
 
-    public class EntityCountQueryHandler<TEntity> 
-        : IQueryHandler<EntityCountQuery<TEntity>, int> where TEntity : BaseEntity<TEntity>
+    public class EntityCountQueryHandler<TEntity, TDataBase> 
+        : IQueryHandler<EntityCountQuery<TEntity>, int> where TEntity : BaseEntity<TEntity> where TDataBase : IDataBase
     {
         private readonly IContainer _container;
 
@@ -21,7 +23,7 @@
 
         public int Handle(EntityCountQuery<TEntity> query)
         {
-            var entityRep = _container.Resolve<IRepository<TEntity>>();
+            var entityRep = _container.Resolve<IRepository<TDataBase, TEntity>>();
             
             return entityRep.Query(query.Specification).Count;
         }

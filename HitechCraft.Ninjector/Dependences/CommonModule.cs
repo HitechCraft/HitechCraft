@@ -21,7 +21,7 @@
         {
             Bind(typeof(IContainer)).To(typeof(BaseContainer));
 
-            Bind(typeof(IRepository<>)).To(typeof(BaseRepository<>));
+            Bind(typeof(IRepository<,>)).To(typeof(BaseRepository<,>));
             
             #region Command Bindings
 
@@ -92,12 +92,10 @@
             #endregion
 
             Bind(typeof(ICommandExecutor)).To(typeof(CommandExecutor));
-        
-            Bind(typeof(IQueryHandler<,>)).To(typeof(EntityListQueryHandler<,>));
-            Bind(typeof(IQueryHandler<,>)).To(typeof(EntityQueryHandler<,>));
+            
             Bind(typeof(IQueryHandler<,>)).To(typeof(PlayerByLoginQueryHandler));
             
-            Bind(typeof(IUnitOfWork)).To(typeof(NHibernateUnitOfWork));
+            Bind(typeof(IUnitOfWork<>)).To(typeof(NHibernateUnitOfWork<>));
         }
     }
 }

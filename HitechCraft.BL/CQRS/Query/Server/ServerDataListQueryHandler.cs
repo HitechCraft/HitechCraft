@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.BL.CQRS.Query
+﻿using HitechCraft.Core.Databases;
+
+namespace HitechCraft.BL.CQRS.Query
 {
     #region UsingDirectives
     
@@ -24,7 +26,7 @@
 
         public ICollection<JsonMinecraftServerData> Handle(ServerDataListQuery query)
         {
-            var serverRep = _container.Resolve<IRepository<Server>>();
+            var serverRep = _container.Resolve<IRepository<MySQLConnection, Server>>();
             
             return ((IEnumerable<Server>)serverRep.Query()).Select(x => x.GetServerData(x.Image)).ToList();
         }

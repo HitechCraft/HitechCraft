@@ -1,4 +1,5 @@
-﻿using HitechCraft.Core.Repository.Specification.Currency;
+﻿using HitechCraft.Core.Databases;
+using HitechCraft.Core.Repository.Specification.Currency;
 
 namespace HitechCraft.BL.CQRS.Query
 {
@@ -23,7 +24,7 @@ namespace HitechCraft.BL.CQRS.Query
 
         public Currency Handle(CurrencyByPlayerNameQuery query)
         {
-            var currencyRep = _container.Resolve<IRepository<Currency>>();
+            var currencyRep = _container.Resolve<IRepository<MySQLConnection, Currency>>();
 
             return currencyRep.Query(new CurrencyByPlayerNameSpec(query.PlayerName)).First();
         }

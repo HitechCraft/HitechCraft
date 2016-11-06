@@ -1,6 +1,7 @@
-﻿using HitechCraft.Core.Entity.Base;
+﻿using HitechCraft.Core.Databases;
+using HitechCraft.Core.Entity.Base;
 
-namespace HitechCraft.BL.CQRS.Query
+namespace HitechCraft.BL.CQRS.Query.Specify
 {
     #region Using Directives
 
@@ -12,8 +13,8 @@ namespace HitechCraft.BL.CQRS.Query
 
     #endregion
 
-    public class EntityListQueryHandler<TEntity, TResult> 
-        : IQueryHandler<EntityListQuery<TEntity, TResult>, ICollection<TResult>> where TEntity : BaseEntity<TEntity>
+    public class EntityListQueryHandler<TEntity, TResult, TDataBase> 
+        : IQueryHandler<EntityListQuery<TEntity, TResult>, ICollection<TResult>> where TEntity : BaseEntity<TEntity> where TDataBase : IDataBase
     {
         private readonly IContainer _container;
 
@@ -24,7 +25,7 @@ namespace HitechCraft.BL.CQRS.Query
 
         public ICollection<TResult> Handle(EntityListQuery<TEntity, TResult> query)
         {
-            var entityRep = _container.Resolve<IRepository<TEntity>>();
+            var entityRep = _container.Resolve<IRepository<TDataBase, TEntity>>();
             
             if(query.Projector == null)
                 throw new Exception("Для получения объектов необходима проекция сущностей");

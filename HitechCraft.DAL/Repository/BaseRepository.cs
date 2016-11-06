@@ -1,6 +1,4 @@
-﻿using HitechCraft.Core.Entity.Base;
-using HitechCraft.Core.Repository.Specification;
-using HitechCraft.DAL.UnitOfWork;
+﻿using HitechCraft.Core.Databases;
 
 namespace HitechCraft.Common.Repository
 {
@@ -15,19 +13,22 @@ namespace HitechCraft.Common.Repository
     using Projector.Impl;
     using Projector.Impl.Extentions;
     using NHibernate.Linq;
+    using HitechCraft.Core.Entity.Base;
+    using HitechCraft.Core.Repository.Specification;
+    using HitechCraft.DAL.UnitOfWork;
 
     #endregion
 
-    public class BaseRepository<TEntity> : IRepository<TEntity> 
-        where TEntity : BaseEntity<TEntity>
+    public class BaseRepository<TDataBase, TEntity> : IRepository<TDataBase, TEntity> 
+        where TEntity : BaseEntity<TEntity> where TDataBase : IDataBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork<TDataBase> _unitOfWork;
         private readonly IContainer _container;
 
         public BaseRepository(IContainer container)
         {
             _container = container;
-            _unitOfWork = _container.Resolve<IUnitOfWork>();
+            _unitOfWork = _container.Resolve<IUnitOfWork<TDataBase>>();
         }
 
         public TEntity GetEntity(object id)

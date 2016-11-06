@@ -8,7 +8,7 @@ namespace HitechCraft.DAL.UnitOfWork
 
     #endregion
 
-    public interface IUnitOfWork
+    public interface IUnitOfWork<TDataBase>
     {
         /// <summary>
         /// Session NHibernate

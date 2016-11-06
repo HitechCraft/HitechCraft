@@ -1,4 +1,5 @@
-﻿using HitechCraft.Core.Repository.Specification.Player;
+﻿using HitechCraft.Core.Databases;
+using HitechCraft.Core.Repository.Specification.Player;
 
 namespace HitechCraft.BL.CQRS.Query
 {
@@ -23,7 +24,7 @@ namespace HitechCraft.BL.CQRS.Query
 
         public Player Handle(PlayerByLoginQuery<Player> query)
         {
-            var playerRep = _container.Resolve<IRepository<Player>>();
+            var playerRep = _container.Resolve<IRepository<MySQLConnection, Player>>();
             
             return playerRep
                     .Query(new PlayerByLoginSpec(query.Login))

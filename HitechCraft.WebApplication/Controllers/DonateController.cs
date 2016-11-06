@@ -1,10 +1,4 @@
-﻿using HitechCraft.Core.DI;
-using HitechCraft.Core.Entity;
-using HitechCraft.Core.Helper;
-using HitechCraft.Core.Repository.Specification.Permissions;
-using HitechCraft.Projector.Impl;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -14,6 +8,12 @@ namespace HitechCraft.WebApplication.Controllers
     using System.Linq;
     using BL.CQRS.Query;
     using Models;
+    using HitechCraft.Core.Databases;
+    using HitechCraft.Core.DI;
+    using HitechCraft.Core.Entity;
+    using HitechCraft.Core.Helper;
+    using HitechCraft.Core.Repository.Specification.Permissions;
+    using HitechCraft.Projector.Impl;
 
     #endregion
 
@@ -124,7 +124,7 @@ namespace HitechCraft.WebApplication.Controllers
         {
             try
             {
-                var group = new EntityListQueryHandler<Permissions, PermissionsViewModel>(this.Container)
+                var group = new BL.CQRS.Query.Specify.EntityListQueryHandler<Permissions, PermissionsViewModel, IEConnection>(this.Container)
                     .Handle(new EntityListQuery<Permissions, PermissionsViewModel>()
                     {
                         Projector = this.Container.Resolve<IProjector<Permissions, PermissionsViewModel>>(),

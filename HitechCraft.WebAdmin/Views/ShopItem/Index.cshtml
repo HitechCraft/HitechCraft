@@ -12,7 +12,7 @@
     @Html.ActionLink("Добавить предмет", "CreateItem", "ShopItem", null, new { @class = "btn btn-primary" })
     @Html.ActionLink("Добавить категорию", "ItemCategory", "ShopItem", null, new { @class = "btn btn-primary" })
     @Html.ActionLink("Добавить модификацию", "Create", "Modification", null, new { @class = "btn btn-primary" })
-    <a href="javascript:Export()" class="btn btn-primary">Экспорт предметов</a>
+    @*<a href="javascript:Export()" class="btn btn-primary">Экспорт предметов</a>*@
 </div>
 <div id="itemsList">
     @Html.Action("ItemsPartialList")

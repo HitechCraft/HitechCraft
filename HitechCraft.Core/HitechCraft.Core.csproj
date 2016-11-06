@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Databases\IDataBase.cs" />
+    <Compile Include="Databases\IEConnection.cs" />
+    <Compile Include="Databases\MySQLConnection.cs" />
     <Compile Include="Entity\Base\BaseEntity.cs" />
     <Compile Include="Entity\Ban\Ban.cs" />
     <Compile Include="Entity\Ban\BanIp.cs" />

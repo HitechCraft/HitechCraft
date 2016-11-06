@@ -1,4 +1,4 @@
-﻿using HitechCraft.BL.CQRS.Command.Base;
+﻿using HitechCraft.Core.Databases;
 
 namespace HitechCraft.BL.CQRS.Command
 {
@@ -7,6 +7,7 @@ namespace HitechCraft.BL.CQRS.Command
     using Core.DI;
     using Core.Entity;
     using System;
+    using HitechCraft.BL.CQRS.Command.Base;
 
     #endregion
 
@@ -18,9 +19,9 @@ namespace HitechCraft.BL.CQRS.Command
 
         public override void Handle(DonateGroupIEBuyCommand command)
         {
-            var permissionsRep = GetRepository<Permissions>();
+            var permissionsRep = GetRepository<IEConnection, Permissions>();
             var currencyRep = GetRepository<Currency>();
-            var pexInheritanceRep = GetRepository<PexInheritance>();
+            var pexInheritanceRep = GetRepository<IEConnection, PexInheritance>();
 
             var currency = currencyRep.GetEntity(command.CurrencyId);
 

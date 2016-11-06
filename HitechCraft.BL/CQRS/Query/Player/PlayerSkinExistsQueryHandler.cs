@@ -1,4 +1,5 @@
-﻿using HitechCraft.Core.Repository.Specification.Player;
+﻿using HitechCraft.Core.Databases;
+using HitechCraft.Core.Repository.Specification.Player;
 
 namespace HitechCraft.BL.CQRS.Query
 {
@@ -23,7 +24,7 @@ namespace HitechCraft.BL.CQRS.Query
 
         public bool Handle(PlayerSkinExistsQuery query)
         {
-            var playerSkinRep = _container.Resolve<IRepository<PlayerSkin>>();
+            var playerSkinRep = _container.Resolve<IRepository<MySQLConnection, PlayerSkin>>();
             
             try
             {

@@ -1,14 +1,14 @@
-﻿using HitechCraft.Core.DI;
-using HitechCraft.Core.Entity;
-using HitechCraft.Core.Entity.Base;
-using HitechCraft.DAL.Repository;
-using HitechCraft.Projector.Impl;
+﻿using HitechCraft.Core.Databases;
 
 namespace HitechCraft.BL.CQRS.Command.Base
 {
     #region Using Directives
 
-    
+    using HitechCraft.Core.DI;
+    using HitechCraft.Core.Entity;
+    using HitechCraft.Core.Entity.Base;
+    using HitechCraft.DAL.Repository;
+    using HitechCraft.Projector.Impl;
 
     #endregion
 
@@ -21,9 +21,14 @@ namespace HitechCraft.BL.CQRS.Command.Base
             _container = container;
         }
 
-        public IRepository<TEntity> GetRepository<TEntity>() where TEntity : BaseEntity<TEntity>
+        public IRepository<TDataBase, TEntity> GetRepository<TDataBase, TEntity>() where TEntity : BaseEntity<TEntity> where TDataBase : IDataBase
         {
-            return _container.Resolve<IRepository<TEntity>>();
+            return _container.Resolve<IRepository<TDataBase, TEntity>>();
+        }
+
+        public IRepository<MySQLConnection, TEntity> GetRepository<TEntity>() where TEntity : BaseEntity<TEntity>
+        {
+            return _container.Resolve<IRepository<MySQLConnection, TEntity>>();
         }
 
         public IProjector<TEntity, TResult> GetProjector<TEntity, TResult>()

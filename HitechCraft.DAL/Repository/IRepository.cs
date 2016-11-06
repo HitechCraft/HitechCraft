@@ -1,5 +1,4 @@
-﻿using HitechCraft.Core.Entity.Base;
-using HitechCraft.Core.Repository.Specification;
+﻿using HitechCraft.Core.Databases;
 
 namespace HitechCraft.DAL.Repository
 {
@@ -10,10 +9,12 @@ namespace HitechCraft.DAL.Repository
     using System.Collections.Generic;
     using Core.Entity;
     using Projector.Impl;
+    using HitechCraft.Core.Entity.Base;
+    using HitechCraft.Core.Repository.Specification;
 
     #endregion
 
-    public interface IRepository<TEntity> : IDisposable where TEntity : BaseEntity<TEntity> 
+    public interface IRepository<TDataBase, TEntity> : IDisposable where TEntity : BaseEntity<TEntity> where TDataBase : IDataBase
     {
         /// <summary>
         /// Get entity by id

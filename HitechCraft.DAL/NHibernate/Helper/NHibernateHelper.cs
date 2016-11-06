@@ -1,10 +1,11 @@
-﻿namespace HitechCraft.DAL.NHibernate.Helper
+﻿using HitechCraft.Core.Databases;
+
+namespace HitechCraft.DAL.NHibernate.Helper
 {
     #region Using Directives
     
     using FluentNHibernate.Cfg;
     using FluentNHibernate.Cfg.Db;
-
     using global::NHibernate;
     using global::NHibernate.Context;
 
@@ -13,7 +14,7 @@
     /// <summary>
     /// Here basic NHibernate manipulation methods are implemented.
     /// </summary>
-    public class NHibernateHelper
+    public class NHibernateHelper<TDataBase> where TDataBase : IDataBase
     {
         private ISessionFactory _sessionFactory;
 
@@ -27,11 +28,7 @@
             {
                 if (_sessionFactory == null)
                 {
-                    _sessionFactory = Fluently.Configure()
-                        .Database(MySQLConfiguration.Standard.ConnectionString(x => x.FromConnectionStringWithKey("MySQLConnection")))
-                        .Mappings(x => x.AutoMappings(new AutomappingHelper()))
-                        .ExposeConfiguration(config => config.SetProperty("current_session_context_class", "web"))
-                        .BuildSessionFactory();
+                    _sessionFactory = this.BuildSessionFactory();
                 }
 
                 return _sessionFactory;
@@ -44,6 +41,17 @@
             {
                 return this.GetCurrentSession();
             }
+        }
+
+        private ISessionFactory BuildSessionFactory()
+        {
+            var database = typeof(TDataBase);
+            
+            return Fluently.Configure()
+                        .Database(MySQLConfiguration.Standard.ConnectionString(x => x.FromConnectionStringWithKey(database.Name)))
+                        .Mappings(x => x.AutoMappings(new AutomappingHelper()))
+                        .ExposeConfiguration(config => config.SetProperty("current_session_context_class", "web"))
+                        .BuildSessionFactory();
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.BL.CQRS.Query
+﻿using HitechCraft.Core.Databases;
+
+namespace HitechCraft.BL.CQRS.Query
 {
     #region UsingDirectives
     
@@ -21,7 +23,7 @@
 
         public bool Handle(EntityExistsQuery<TEntity> query)
         {
-            var entityRep = _container.Resolve<IRepository<TEntity>>();
+            var entityRep = _container.Resolve<IRepository<MySQLConnection, TEntity>>();
             
             return entityRep.Query(query.Specification).Any();
         }

@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.DAL.UnitOfWork
+﻿using HitechCraft.Core.Databases;
+
+namespace HitechCraft.DAL.UnitOfWork
 {
     #region Using Directives
 
@@ -10,14 +12,14 @@
     /// <summary>
     /// Implementation of IUOW to NHibernate
     /// </summary>
-    public class NHibernateUnitOfWork : IUnitOfWork
+    public class NHibernateUnitOfWork<TDataBase> : IUnitOfWork<TDataBase> where TDataBase : IDataBase
     {
         public ISession Session { get; set; }
 
         #region Private Fields
 
         private ITransaction _transaction;
-        private static NHibernateHelper _nhHelper;
+        private static NHibernateHelper<TDataBase> _nhHelper;
 
         #endregion
 
@@ -25,7 +27,7 @@
 
         static NHibernateUnitOfWork()
         {
-            _nhHelper = new NHibernateHelper();
+            _nhHelper = new NHibernateHelper<TDataBase>();
         }
 
         public NHibernateUnitOfWork()
