@@ -12,6 +12,7 @@
     @Html.ActionLink("Добавить предмет", "CreateItem", "ShopItem", null, new { @class = "btn btn-primary" })
     @Html.ActionLink("Добавить категорию", "ItemCategory", "ShopItem", null, new { @class = "btn btn-primary" })
     @Html.ActionLink("Добавить модификацию", "Create", "Modification", null, new { @class = "btn btn-primary" })
+    <a href="javascript:Export()" class="btn btn-primary">Экспорт предметов</a>
 </div>
 <div id="itemsList">
     @Html.Action("ItemsPartialList")
@@ -39,5 +40,17 @@
             $('#itemsList').html('');
             $('#itemsList').html(data);
         });
+    }
+
+    function Export() {
+        $.post('@Url.Action("ExportToExcel")',
+            {},
+            function(response) {
+                if (response.status === "OK") {
+                    growlSuccess(response.message);
+                } else {
+                    growlError(response.message);
+                }
+            });
     }
 </script>

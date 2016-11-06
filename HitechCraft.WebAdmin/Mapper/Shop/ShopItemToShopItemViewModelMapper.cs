@@ -1,13 +1,14 @@
-﻿using HitechCraft.Core.Entity;
-using HitechCraft.WebAdmin.Models;
-
-namespace HitechCraft.WebAdmin.Mapper
+﻿namespace HitechCraft.WebAdmin.Mapper
 {
+    using HitechCraft.Core.Entity;
+    using HitechCraft.WebAdmin.Models;
+
     public class ShopItemToShopItemViewModelMapper : BaseMapper<ShopItem, ShopItemViewModel>
     {
         public ShopItemToShopItemViewModelMapper()
         {
             this.ConfigurationStore.CreateMap<ShopItem, ShopItemViewModel>()
+                .ForMember(dst => dst.Id, ext => ext.MapFrom(src => src.Id))
                 .ForMember(dst => dst.GameId, ext => ext.MapFrom(src => src.GameId))
                 .ForMember(dst => dst.Name, ext => ext.MapFrom(src => src.Name))
                 .ForMember(dst => dst.Price, ext => ext.MapFrom(src => src.Price))

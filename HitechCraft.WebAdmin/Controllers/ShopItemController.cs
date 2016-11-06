@@ -1,10 +1,9 @@
-﻿using System.Text.RegularExpressions;
-using HitechCraft.Core.DI;
-using HitechCraft.Core.Entity;
-using HitechCraft.Projector.Impl;
+﻿using System.IO;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
+    #region Using Directives
+
     using System.Web.Mvc;
     using System;
     using System.Collections.Generic;
@@ -14,6 +13,13 @@ namespace HitechCraft.WebAdmin.Controllers
     using Manager;
     using Models;
     using PagedList;
+    using System.Text.RegularExpressions;
+    using Core.DI;
+    using Core.Entity;
+    using Projector.Impl;
+    using Microsoft.Office.Interop.Excel;
+
+    #endregion
 
     public class ShopItemController : BaseController
     {
@@ -250,7 +256,74 @@ namespace HitechCraft.WebAdmin.Controllers
                 return Json(new { status = "NO", message = "Ошибка удаления категории: " + e.Message });
             }
         }
-        
+
+        #region Actions
+
+        [HttpPost]
+        public JsonResult ExportToExcel()
+        {
+            try
+            {
+                var entities = new EntityListQueryHandler<ShopItem, ShopItemViewModel>(this.Container)
+                    .Handle(new EntityListQuery<ShopItem, ShopItemViewModel>
+                    {
+                        Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
+                    }).ToArray();
+
+                var xlApp = new Application();
+
+                var missing = System.Reflection.Missing.Value;
+
+                var xlWorkBook = xlApp.Workbooks.Add(System.Reflection.Missing.Value);
+                var xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1); ;
+
+                xlWorkSheet.Cells[1, 1] = "ID";
+                xlWorkSheet.Cells[1, 2] = "GameId";
+                xlWorkSheet.Cells[1, 3] = "Name";
+                xlWorkSheet.Cells[1, 4] = "Price";
+                xlWorkSheet.Cells[1, 5] = "Modification";
+                xlWorkSheet.Cells[1, 6] = "Category";
+
+                for (int i = 0; i < entities.Length; i++)
+                {
+                    xlWorkSheet.Cells[i + 2, 1] = entities[i].Id;
+                    xlWorkSheet.Cells[i + 2, 2] = entities[i].GameId;
+                    xlWorkSheet.Cells[i + 2, 3] = entities[i].Name;
+                    xlWorkSheet.Cells[i + 2, 4] = entities[i].Price;
+                    xlWorkSheet.Cells[i + 2, 5] = entities[i].ModificationName;
+                    xlWorkSheet.Cells[i + 2, 6] = entities[i].CategoryName;
+                }
+
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename=ShopItem" + DateTime.Now.ToString("dd-MM-yy-HH:mm:ss") +".xlsx");
+
+                using (MemoryStream myMemoryStream = new MemoryStream())
+                {
+                    xlWorkBook.SaveAs(myMemoryStream);
+                    xlWorkBook.Close(true, missing, missing);
+                    xlApp.Quit();
+
+                    myMemoryStream.WriteTo(Response.OutputStream);
+
+                    Response.Flush();
+                    Response.End();
+                }
+
+                return Json(new { status = "OK", message = "Успешно!" });
+            }
+            catch (Exception e)
+            {
+                return Json(new { status = "NO", message = "Ошибка экспорта: " + e.Message });
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
+
         private ICollection<ModificationViewModel> GetMods()
         {
             return new EntityListQueryHandler<Modification, ModificationViewModel>(Container)
@@ -268,5 +341,7 @@ namespace HitechCraft.WebAdmin.Controllers
                     Projector = Container.Resolve<IProjector<ShopItemCategory, ShopItemCategoryViewModel>>()
                 });
         }
+
+        #endregion
     }
 }
