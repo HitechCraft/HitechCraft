@@ -43,13 +43,10 @@
                 }
                 </p>
 
-                @if (User.IsInRole("Administrator"))
-                {
-                    <p>
-                        @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
-                        <a href="javascript:DeleteServer('@Model.Id')" class="btn btn-primary">Удалить</a>
-                    </p>
-                }
+                <p>
+                    @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
+                    <a href="javascript:DeleteServer('@Model.Id')" class="btn btn-primary">Удалить</a>
+                </p>
             </div>
         </div>
         <p>
