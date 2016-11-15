@@ -352,10 +352,9 @@
     <Content Include="Content\Images\banners\acc_blue_on_white_ru.png" />
     <Content Include="Content\Images\banners\v_blue_on_white_ru.png" />
     <Content Include="Content\Images\charRendered.png" />
-    <Content Include="Content\Images\kits\ie_kit_eat.png" />
-    <Content Include="Content\Images\kits\ie_kit_medic.png" />
+    <Content Include="Content\Images\kits\ie_kit_apple.png" />
+    <Content Include="Content\Images\kits\ie_kit_default.png" />
     <Content Include="Content\Images\kits\ie_kit_premium.png" />
-    <Content Include="Content\Images\kits\ie_kit_start.png" />
     <Content Include="Content\Images\kits\ie_kit_ultra.png" />
     <Content Include="Content\Images\kits\ie_kit_vip.png" />
     <Content Include="Content\Images\mailbg.jpg" />

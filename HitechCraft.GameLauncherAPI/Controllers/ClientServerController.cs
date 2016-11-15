@@ -48,6 +48,8 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                         Projector = Container.Resolve<IProjector<PlayerSession, PlayerSessionModel>>()
                     }).First();
 
+                LogHelper.Info($"Передача параметров серверу: имя: {playerSession.PlayerName}, serverId: {serverId}, session: {playerSession.Token}", "JoinServer");
+
                 playerSession.Server = serverId;
 
                 this.CommandExecutor.Execute(this.Project<PlayerSessionModel, PlayerSessionUpdateCommand>(playerSession));
@@ -61,6 +63,8 @@ namespace HitechCraft.GameLauncherAPI.Controllers
             }
             catch (Exception e)
             {
+                LogHelper.Error($"Ошибка передачи параметров клиенту: {e.Message} - uuid: {selectedProfile}, serverId: {serverId}, session : {accessToken}", "JoinServer");
+
                 return Json(new JsonErrorData
                 {
                     error = "Bad login",
@@ -88,6 +92,8 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                         Projector = Container.Resolve<IProjector<PlayerSession, PlayerSessionModel>>()
                     }).First();
 
+                LogHelper.Info($"Передача параметров серверу: имя: {username}, serverId: {serverId}, session: {playerSession.Token}", "CheckServer");
+
                 var unixTimeNow = ((int)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds).ToString();
                 var userSkinUrl = Config.SkinsUrlString + "/" + playerSession.PlayerName + ".png";
 
@@ -104,6 +110,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                         }
                     }
                 }, JsonRequestBehavior.AllowGet);
+
 
                 return Json(new JsonClientResponseData
                 {
@@ -123,7 +130,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
             }
             catch (Exception e)
             {
-                LogHelper.Error("Ошибка передачи параметров серверу: " + e.Message, "CheckServer");
+                LogHelper.Error($"Ошибка передачи параметров серверу: {e.Message} - имя: {username}, serverId: {serverId}", "CheckServer");
 
                 return Json(new JsonErrorData
                 {
@@ -219,7 +226,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
             }
             catch (Exception e)
             {
-                LogHelper.Error("Ошибка получения профиля игрока." + e.Message, "PlayerProfile");
+                LogHelper.Error($"Ошибка получения профиля игрока. {e.Message}, userUuid: {user}", "PlayerProfile");
 
                 return null;
             }

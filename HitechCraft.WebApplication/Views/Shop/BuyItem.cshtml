@@ -11,10 +11,7 @@
     <div class="col-md-4">
         <div class="item-info">
             <h2>@Model.Name</h2>
-            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)" alt="@Model.Description" />
-            <p>
-                @Model.Description
-            </p>
+            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Image)"  />
             <span class="price">
                 Цена: @Model.Price Gont(s)
             </span>

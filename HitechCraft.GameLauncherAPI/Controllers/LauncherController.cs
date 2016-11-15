@@ -260,6 +260,8 @@ namespace HitechCraft.GameLauncherAPI.Controllers
                 using (var fileContent = System.IO.File.Open(FileManager.GetServerPath(fileServerPath), FileMode.Open))
                 {
                     Response.AppendHeader("Content-Length", fileContent.Length.ToString());
+                    LogHelper.Info("Файл: " + filePath + ", Размер: " + fileContent.Length, "{Downloader}");
+                    fileContent.Close();
                 }
 
                 Response.TransmitFile(fileServerPath);
@@ -267,7 +269,7 @@ namespace HitechCraft.GameLauncherAPI.Controllers
             }
             catch (Exception e)
             {
-                LogHelper.Error("Ошибка скачивания файла: " + e.Message, "{Downloader}");
+                LogHelper.Error("Ошибка скачивания файла \""+ filePath + "\": " + e.Message, "{Downloader}");
             }
         }
         

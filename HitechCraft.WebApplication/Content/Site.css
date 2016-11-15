@@ -150,9 +150,9 @@
       font-weight: bold;
       color: #333333; }
     .server-info li-offline {
-      color: red; }
+      color: #d62c1a; }
     .server-info li-online {
-      color: lawngreen; }
+      color: #18bc9c; }
 
 .server-description {
   text-align: justify; }
