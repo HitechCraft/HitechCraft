@@ -530,6 +530,7 @@
     <Content Include="Views\Shared\_NewTitleBox.cshtml" />
     <Content Include="Views\Player\_ReferModal.cshtml" />
     <Content Include="Views\Player\_ReferPartial.cshtml" />
+    <Content Include="Views\Shared\ServiceUnavailable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

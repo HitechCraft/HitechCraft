@@ -44,7 +44,14 @@ namespace HitechCraft.WebApplication.Controllers
             ViewBag.Mods = this.GetMods();
             ViewBag.Categories = this.GetCategories();
 
-            return View(vm);
+            if (Const.ShopEnable)
+            {
+                return View(vm);
+            }
+            else
+            {
+                return View("ServiceUnavailable");
+            }
         }
 
         [HttpGet]

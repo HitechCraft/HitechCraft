@@ -8,7 +8,7 @@
 <div class="row profile-block">
     <div class="col-md-6">
         <div class="panel panel-default">
-            <div class="panel-heading">Информация о валюте</div>
+            <div class="panel-heading">Информация о балансе</div>
             <div class="panel-body info-block currency-info">
                 <h3 class="info-title">Рубли</h3>
                 <p>
@@ -16,18 +16,16 @@
                 </p>
                 <p>
                     <span>Курс к игровой валюте (Gont):</span>
-                    @*//TODO: возможно сделаю биржу где будет происходить смена курса*@
                     <br /><strong>1 RUB = @ViewBag.RublesToGonts Gont</strong>
                 </p>
                 <h3 class="info-title">Gont</h3>
                 <p>
                     <span>Кол-во:</span> <strong>@ViewBag.Gonts</strong> единиц
                 </p>
-                <p>
+                @*<p>
                     <span>Курс к реальной валюте (RUB):</span>
-                    @*//TODO: возможно сделаю биржу где будет происходить смена курса*@
                     <br /><strong>@ViewBag.GontsToRubles Gont = 1 RUB</strong>
-                </p>
+                </p>*@
             </div>
         </div>
     </div>
@@ -62,7 +60,7 @@
                         <a href="#" class="btn btn-primary buy-button" id="exchangeRubToGont">Обменять</a>
                     </div>
                     <p></p>
-                    <h3 class="info-title">Обменять Gont</h3>
+                    @*<h3 class="info-title">Обменять Gont</h3>
                     <div class="form-group">
                         <div class="input-group exchange">
                             <input type="number" class="form-control" step="1" min="13" id="GontExchangeFieldGonts" placeholder="Gont" value="0">
@@ -72,7 +70,7 @@
                     </div>
                     <div class="form-group">
                         <a href="#" class="btn btn-primary buy-button" id="exchangeGontToRub">Обменять</a>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>

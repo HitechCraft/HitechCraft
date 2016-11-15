@@ -31,12 +31,12 @@ namespace HitechCraft.WebApplication.Controllers
         /// <summary>
         /// Exchange rate of Rub to Gont (example 1 RUB = 1000 Gont means 0.001)
         /// </summary>
-        public float RubToGont => 0.002f;
+        public float RubToGont => Const.RubToGontValue;
 
         /// <summary>
         /// Exchange rate of Gont to Rub (example 2500 Gont = 1 RUB means 2500)
         /// </summary>
-        public float GontToRub => 2500f;
+        public float GontToRub => Const.GontToRubValue;
 
         public BalanceController(IContainer container) : base(container)
         {
