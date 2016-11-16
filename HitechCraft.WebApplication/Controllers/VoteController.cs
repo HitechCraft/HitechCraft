@@ -143,11 +143,11 @@ namespace HitechCraft.WebApplication.Controllers
             CommandExecutor.Execute(new CurrencyUpdateCommand()
             {
                 Id = currency.Id,
-                Gonts = 200,
+                Gonts = 100,
                 Rubles = 0
             });
 
-            LogHelper.Info(currency.PlayerName + ": голосование на Topcraft. Награда - 250 Gonts");
+            LogHelper.Info(currency.PlayerName + ": Награда - 100 Gonts");
         }
 
         private void PayVoteRubles(string userName)
