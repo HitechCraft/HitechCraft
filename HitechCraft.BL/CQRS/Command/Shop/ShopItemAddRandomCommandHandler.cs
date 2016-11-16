@@ -32,7 +32,7 @@ namespace HitechCraft.BL.CQRS.Command
             int randCount = randForCount.Next(1, 64);
 
             //фикс для рандомной выдачи предмета. лимит 10к Gont
-            while (randItem.Price * randCount > 10000)
+            while (randItem.Price * randCount > 6500)
             {
                 randItem = itemList[randForItem.Next(1, itemList.Count) - 1];
                 randCount = randForCount.Next(1, 64);

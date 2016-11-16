@@ -28,7 +28,7 @@
       <publishTime>07/05/2016 21:48:07</publishTime>
     </File>
     <File Include="bin/HitechCraft.BL.dll">
-      <publishTime>09/11/2016 01:36:10</publishTime>
+      <publishTime>11/15/2016 23:49:58</publishTime>
     </File>
     <File Include="bin/HitechCraft.Common.dll">
       <publishTime>08/27/2016 20:13:35</publishTime>
@@ -40,13 +40,13 @@
       <publishTime>09/11/2016 01:36:10</publishTime>
     </File>
     <File Include="bin/HitechCraft.Ninjector.dll">
-      <publishTime>09/11/2016 01:36:10</publishTime>
+      <publishTime>11/15/2016 23:49:58</publishTime>
     </File>
     <File Include="bin/HitechCraft.Projector.dll">
       <publishTime>09/11/2016 01:36:09</publishTime>
     </File>
     <File Include="bin/HitechCraft.WebApplication.dll">
-      <publishTime>11/15/2016 23:26:25</publishTime>
+      <publishTime>11/15/2016 23:56:17</publishTime>
     </File>
     <File Include="bin/Iesi.Collections.dll">
       <publishTime>02/01/2016 00:12:31</publishTime>
@@ -781,7 +781,7 @@
       <publishTime>09/20/2016 15:27:57</publishTime>
     </File>
     <File Include="Views/Shared/_Sidebar.cshtml">
-      <publishTime>09/20/2016 15:27:57</publishTime>
+      <publishTime>11/15/2016 23:44:39</publishTime>
     </File>
     <File Include="Views/Shared/_TitleBox.cshtml">
       <publishTime>09/20/2016 15:27:57</publishTime>

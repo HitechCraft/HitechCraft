@@ -62,10 +62,10 @@ namespace HitechCraft.WebApplication.Controllers
             {
                 try
                 {
-                    PayVoteRubles(nickname);
+                    PayVoteGonts(nickname);
 
                     ViewBag.VoteOn = "McTop.su";
-                    ViewBag.VoteReward = "2 RUB на счет";
+                    ViewBag.VoteReward = "250 Gonts на счет";
 
                     return Content("OK");
                 }
@@ -98,7 +98,7 @@ namespace HitechCraft.WebApplication.Controllers
             {
                 try
                 {
-                    GetVoteShopItem(username);
+                    PayVoteGonts(username);
                 }
                 catch (Exception e)
                 {
@@ -143,7 +143,7 @@ namespace HitechCraft.WebApplication.Controllers
             CommandExecutor.Execute(new CurrencyUpdateCommand()
             {
                 Id = currency.Id,
-                Gonts = 250,
+                Gonts = 200,
                 Rubles = 0
             });
 
