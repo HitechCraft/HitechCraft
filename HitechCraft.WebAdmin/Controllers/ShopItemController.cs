@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Data.SqlTypes;
+using System.IO;
 using System.Reflection;
 using System.Text;
 using HitechCraft.Core.Helper;
@@ -262,15 +263,15 @@ namespace HitechCraft.WebAdmin.Controllers
 
         #region Actions
         
-        public FileContentResult ExportToExcel()
+        public ActionResult ExportToExcel()
         {
             var entities = new EntityListQueryHandler<ShopItem, ShopItemViewModel>(this.Container)
                 .Handle(new EntityListQuery<ShopItem, ShopItemViewModel>
                 {
                     Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
                 }).ToArray();
-            
-            return File(csvExport.ExportToBytes(), "text/csv", $"ShopItem-{DateTime.Now.ToString("dd-MM-yy-HH:mm:ss")}.csv");
+
+            return File(this.ExportItems<ShopItemViewModel>(entities.ToList(), true), "text/csv", $"ShopItem-{DateTime.Now.ToString("dd-MM-yy-HH:mm:ss")}.csv");
         }
 
         #endregion
@@ -303,12 +304,31 @@ namespace HitechCraft.WebAdmin.Controllers
             {
                 foreach (PropertyInfo propertyInfo in propertyInfos)
                 {
-                    sb.Append(CsvHelper.MakeValueCsvFriendly(propertyInfo.GetValue(obj, null))).Append(";");
+                    sb.Append(MakeValueCsvFriendly(propertyInfo.GetValue(obj, null))).Append(";");
                 }
                 sb.Remove(sb.Length - 1, 1).AppendLine();
             }
 
             return sb.ToString();
+        }
+        private static string MakeValueCsvFriendly(object value)
+        {
+            if (value == null) return "";
+            if (value is Nullable && ((INullable)value).IsNull) return "";
+
+            if (value is DateTime)
+            {
+                if (((DateTime)value).TimeOfDay.TotalSeconds == 0)
+                    return ((DateTime)value).ToString("yyyy-MM-dd");
+                return ((DateTime)value).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            string output = value.ToString();
+
+            if (output.Contains(",") || output.Contains("\""))
+                output = '"' + output.Replace("\"", "\"\"") + '"';
+
+            return output;
+
         }
 
         private ICollection<ModificationViewModel> GetMods()
