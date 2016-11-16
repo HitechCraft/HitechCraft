@@ -1,4 +1,7 @@
 ﻿using System.IO;
+using System.Reflection;
+using System.Text;
+using HitechCraft.Core.Helper;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
@@ -50,7 +53,7 @@ namespace HitechCraft.WebAdmin.Controllers
 
             return PartialView("_ShopItemListPartial", items.ToPagedList(currentPage, ItemsOnPage));
         }
-        
+
         public ActionResult CreateItem()
         {
             ViewBag.Mods = GetMods().Select(x => new SelectListItem()
@@ -76,10 +79,10 @@ namespace HitechCraft.WebAdmin.Controllers
             {
                 int gameId;
 
-                if(string.IsNullOrEmpty(vm.GameId))
+                if (string.IsNullOrEmpty(vm.GameId))
                     ModelState.AddModelError(String.Empty, "ID не может быть пустым");
 
-                if(!int.TryParse(vm.GameId, out gameId) || !Regex.IsMatch(vm.GameId, @"[0-9]+\:[0-9]+"))
+                if (!int.TryParse(vm.GameId, out gameId) || !Regex.IsMatch(vm.GameId, @"[0-9]+\:[0-9]+"))
                     ModelState.AddModelError(String.Empty, "ID имеет неверный формат");
 
                 var uploadImage = Request.Files["uploadShopItemImage"];
@@ -114,7 +117,7 @@ namespace HitechCraft.WebAdmin.Controllers
 
             return View(vm);
         }
-        
+
         public ActionResult ItemCategory()
         {
             ViewBag.Categories = GetCategories();
@@ -136,7 +139,7 @@ namespace HitechCraft.WebAdmin.Controllers
 
             return View();
         }
-        
+
         public ActionResult EditItem(string gameId)
         {
             ShopItemEditViewModel vm;
@@ -258,71 +261,55 @@ namespace HitechCraft.WebAdmin.Controllers
         }
 
         #region Actions
-
-        [HttpPost]
-        public JsonResult ExportToExcel()
+        
+        public FileContentResult ExportToExcel()
         {
-            try
-            {
-                var entities = new EntityListQueryHandler<ShopItem, ShopItemViewModel>(this.Container)
-                    .Handle(new EntityListQuery<ShopItem, ShopItemViewModel>
-                    {
-                        Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
-                    }).ToArray();
-
-                var xlApp = new Application();
-
-                var missing = System.Reflection.Missing.Value;
-
-                var xlWorkBook = xlApp.Workbooks.Add(System.Reflection.Missing.Value);
-                var xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1); ;
-
-                xlWorkSheet.Cells[1, 1] = "ID";
-                xlWorkSheet.Cells[1, 2] = "GameId";
-                xlWorkSheet.Cells[1, 3] = "Name";
-                xlWorkSheet.Cells[1, 4] = "Price";
-                xlWorkSheet.Cells[1, 5] = "Modification";
-                xlWorkSheet.Cells[1, 6] = "Category";
-
-                for (int i = 0; i < entities.Length; i++)
+            var entities = new EntityListQueryHandler<ShopItem, ShopItemViewModel>(this.Container)
+                .Handle(new EntityListQuery<ShopItem, ShopItemViewModel>
                 {
-                    xlWorkSheet.Cells[i + 2, 1] = entities[i].Id;
-                    xlWorkSheet.Cells[i + 2, 2] = entities[i].GameId;
-                    xlWorkSheet.Cells[i + 2, 3] = entities[i].Name;
-                    xlWorkSheet.Cells[i + 2, 4] = entities[i].Price;
-                    xlWorkSheet.Cells[i + 2, 5] = entities[i].ModificationName;
-                    xlWorkSheet.Cells[i + 2, 6] = entities[i].CategoryName;
-                }
-
-                Response.Clear();
-                Response.Buffer = true;
-                Response.Charset = "";
-                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename=ShopItem" + DateTime.Now.ToString("dd-MM-yy-HH:mm:ss") +".xlsx");
-
-                using (MemoryStream myMemoryStream = new MemoryStream())
-                {
-                    xlWorkBook.SaveAs(myMemoryStream);
-                    xlWorkBook.Close(true, missing, missing);
-                    xlApp.Quit();
-
-                    myMemoryStream.WriteTo(Response.OutputStream);
-
-                    Response.Flush();
-                    Response.End();
-                }
-
-                return Json(new { status = "OK", message = "Успешно!" });
-            }
-            catch (Exception e)
-            {
-                return Json(new { status = "NO", message = "Ошибка экспорта: " + e.Message });
-            }
+                    Projector = this.Container.Resolve<IProjector<ShopItem, ShopItemViewModel>>()
+                }).ToArray();
+            
+            return File(csvExport.ExportToBytes(), "text/csv", $"ShopItem-{DateTime.Now.ToString("dd-MM-yy-HH:mm:ss")}.csv");
         }
 
         #endregion
 
         #region Private Methods
+
+        public string ExportItems<T>(List<T> objects, bool includeHeaderLine)
+        {
+            List<string> uselessFields = new List<string>
+            {
+                "Image"
+            };
+
+            StringBuilder sb = new StringBuilder();
+            //Get properties using reflection.
+            IList<PropertyInfo> propertyInfos = typeof(T).GetProperties();
+
+            if (includeHeaderLine)
+            {
+                //add header line.
+                foreach (PropertyInfo propertyInfo in propertyInfos)
+                {
+                    sb.Append(propertyInfo.Name).Append(";");
+                }
+                sb.Remove(sb.Length - 1, 1).AppendLine();
+            }
+
+            //add value for each property.
+            foreach (T obj in objects)
+            {
+                foreach (PropertyInfo propertyInfo in propertyInfos)
+                {
+                    sb.Append(CsvHelper.MakeValueCsvFriendly(propertyInfo.GetValue(obj, null))).Append(";");
+                }
+                sb.Remove(sb.Length - 1, 1).AppendLine();
+            }
+
+            return sb.ToString();
+        }
 
         private ICollection<ModificationViewModel> GetMods()
         {

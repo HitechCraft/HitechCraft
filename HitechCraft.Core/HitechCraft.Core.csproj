@@ -90,6 +90,7 @@
     <Compile Include="Entity\Shop\ShopItem.cs" />
     <Compile Include="Entity\Shop\ShopItemCategory.cs" />
     <Compile Include="Entity\Shop\ShopSale.cs" />
+    <Compile Include="Helper\CsvHelper.cs" />
     <Compile Include="Helper\HashHelper.cs" />
     <Compile Include="Helper\JsonSerializer.cs" />
     <Compile Include="Helper\LogHelper.cs" />
