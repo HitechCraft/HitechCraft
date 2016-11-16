@@ -83,7 +83,7 @@ namespace HitechCraft.WebAdmin.Controllers
                 if (string.IsNullOrEmpty(vm.GameId))
                     ModelState.AddModelError(String.Empty, "ID не может быть пустым");
 
-                if (!int.TryParse(vm.GameId, out gameId) || !Regex.IsMatch(vm.GameId, @"[0-9]+\:[0-9]+"))
+                if (!int.TryParse(vm.GameId, out gameId) && !Regex.IsMatch(vm.GameId, @"[0-9]+\:[0-9]+"))
                     ModelState.AddModelError(String.Empty, "ID имеет неверный формат");
 
                 var uploadImage = Request.Files["uploadShopItemImage"];
