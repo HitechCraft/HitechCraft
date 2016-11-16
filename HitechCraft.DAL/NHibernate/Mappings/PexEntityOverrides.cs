@@ -15,6 +15,7 @@
             mapping.Table("PexEntity");
 
             mapping.Id(x => x.Id)
+                .Column("id")
                 .GeneratedBy.Increment();
 
             mapping.Map(x => x.Name)

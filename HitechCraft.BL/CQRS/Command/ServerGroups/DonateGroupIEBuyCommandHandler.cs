@@ -1,4 +1,6 @@
 ﻿using HitechCraft.Core.Databases;
+using HitechCraft.Core.Helper;
+using HitechCraft.Core.Repository.Specification;
 
 namespace HitechCraft.BL.CQRS.Command
 {
@@ -25,20 +27,34 @@ namespace HitechCraft.BL.CQRS.Command
 
             var currency = currencyRep.GetEntity(command.CurrencyId);
 
-            if(currency.Rubels < command.Price)
+            #region Check User Pex Info
+
+            if (!permissionsRep.Exist(new PermissionByUserSpec(command.PlayerName)))
+                permissionsRep.Add(new Permissions
+                {
+                    Name = HashHelper.UuidFromString("OfflinePlayer:" + command.PlayerName),
+                    Type = 1,
+                    Permission = "name",
+                    World = "",
+                    Value = command.PlayerName
+                });
+
+            #endregion
+
+            if (currency.Rubels < command.Price)
                 throw new Exception("Недостаточно денег на счете!");
 
             currency.Rubels -= command.Price;
 
-            command.Permissions.Value = ((int)Math.Round((DateTime.UtcNow.AddDays(30).Subtract(new DateTime(1970, 1, 1))).TotalSeconds)).ToString();
+            command.Permissions.Value = ((int)Math.Round(DateTime.Now.AddMonths(1).Subtract(new DateTime(1970, 1, 1)).TotalSeconds)).ToString();
 
-            command.Permissions.World = "*";
+            command.Permissions.World = "";
 
             currencyRep.Update(currency);
 
             permissionsRep.Add(command.Permissions);
             pexInheritanceRep.Add(command.PexInheritance);
-
+            
             currencyRep.Dispose();
             permissionsRep.Dispose();
             pexInheritanceRep.Dispose();

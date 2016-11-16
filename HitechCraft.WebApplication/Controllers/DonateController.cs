@@ -17,7 +17,7 @@
 
     #endregion
 
-    public enum IEGroup
+    public enum IEGroupPrice
     {
         LightPro = 90,
         Pro = 210,
@@ -37,13 +37,7 @@
         {
             return View();
         }
-
-        [Authorize]
-        public ActionResult Kits()
-        {
-            return View();
-        }
-
+        
         #region Server Groups
 
         public ActionResult GroupsIe()
@@ -56,7 +50,7 @@
         }
 
         //TODO: сделать дополнительную проверку о покупке (есть ли активные группы), во избежании внедрения html
-        public JsonResult BuyGroupIe(IEGroup group)
+        public JsonResult BuyGroupIe(IEGroupPrice group)
         {
             //hash игрока
             var hash = HashHelper.UuidFromString("OfflinePlayer:" + this.Player.Name);
@@ -71,7 +65,8 @@
             var pexInheritance = new PexInheritance()
             {
                 Type = 1,
-                Child = hash
+                Child = hash,
+                World = null
             };
 
             //имя группы в pex
@@ -81,19 +76,19 @@
             {
                 switch (group)
                 {
-                    case IEGroup.LightPro:
+                    case IEGroupPrice.LightPro:
                         groupString = "lightpro";
                         break;
-                    case IEGroup.Pro:
+                    case IEGroupPrice.Pro:
                         groupString = "pro";
                         break;
-                    case IEGroup.Vip:
+                    case IEGroupPrice.Vip:
                         groupString = "vip";
                         break;
-                    case IEGroup.Premium:
+                    case IEGroupPrice.Premium:
                         groupString = "premium";
                         break;
-                    case IEGroup.Ultra:
+                    case IEGroupPrice.Ultra:
                         groupString = "ultra";
                         break;
                     default:
