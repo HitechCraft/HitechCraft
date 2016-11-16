@@ -928,7 +928,7 @@ footer {
     text-align: center;
     cursor: pointer;
     margin-bottom: 30px;
-    min-height: 230px;
+    min-height: 240px;
 
     &-selected {
         border: 1px solid #3fb618 !important;
@@ -974,7 +974,7 @@ footer {
     }
 
     h4 {
-        min-height: 40px;
+        min-height: 60px;
     }
 
     &-filter {
@@ -1473,6 +1473,6 @@ footer {
     }
 }
 
-#ref-url{
+#ref-url {
     color: #e74c3c;
 }
