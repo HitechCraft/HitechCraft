@@ -328,7 +328,7 @@ namespace HitechCraft.WebApplication.Controllers
         private string GenerateTransactionID()
         {
             return
-                HashHelper.GetMd5Hash("h4432hhdshf8924ee320fvdkshgm5i9332" + DateTime.Now + this.Player.Name);
+                HashHelper.GetMd5Hash("SomeEpicSolt" + DateTime.Now);
         }
 
         /// <summary>
