@@ -174,10 +174,6 @@
       <Project>{61bb4d2b-a80d-4c3c-822e-ad0aa3735873}</Project>
       <Name>HitechCraft.DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HitechCraft.Projector\HitechCraft.Projector.csproj">
-      <Project>{1c83ee3f-e373-4957-8ea7-31672e1baf85}</Project>
-      <Name>HitechCraft.Projector</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

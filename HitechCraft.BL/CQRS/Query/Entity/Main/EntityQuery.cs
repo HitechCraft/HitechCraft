@@ -1,11 +1,12 @@
 ﻿using HitechCraft.Core.Entity.Base;
+using HitechCraft.Core.Projector;
 
 namespace HitechCraft.BL.CQRS.Query
 {
     #region Using Directives
 
     using Core.Entity;
-    using HitechCraft.Projector.Impl;
+    
 
     #endregion
 

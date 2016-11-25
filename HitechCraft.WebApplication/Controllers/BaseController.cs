@@ -2,8 +2,9 @@
 using HitechCraft.Core.DI;
 using HitechCraft.Core.Entity;
 using HitechCraft.Core.Models.Enum;
+using HitechCraft.Core.Projector;
 using HitechCraft.Core.Repository.Specification.PrivateMessage;
-using HitechCraft.Projector.Impl;
+
 using HitechCraft.WebApplication.Models;
 
 namespace HitechCraft.WebApplication.Controllers

@@ -3,8 +3,9 @@ using HitechCraft.Core.Entity.Extentions;
 using HitechCraft.Core.Helper;
 using HitechCraft.Core.Models.Enum;
 using HitechCraft.Core.Models.Json;
+using HitechCraft.Core.Projector;
 using HitechCraft.Core.Repository.Specification.PlayerSession;
-using HitechCraft.Projector.Impl;
+
 
 namespace HitechCraft.GameLauncherAPI.Controllers
 {

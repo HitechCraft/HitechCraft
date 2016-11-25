@@ -1,8 +1,10 @@
-﻿namespace HitechCraft.WebAdmin.Ninject
+﻿using HitechCraft.Core.Projector;
+
+namespace HitechCraft.WebAdmin.Ninject
 {
     using BL.CQRS.Command;
     using Core.Entity;
-    using Projector.Impl;
+    
     using Mapper;
     using Mapper.User;
     using Models;

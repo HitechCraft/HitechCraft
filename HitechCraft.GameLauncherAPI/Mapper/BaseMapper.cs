@@ -1,4 +1,5 @@
-﻿using HitechCraft.Projector.Impl;
+﻿using HitechCraft.Core.Projector;
+
 
 namespace HitechCraft.GameLauncherAPI.Mapper
 {

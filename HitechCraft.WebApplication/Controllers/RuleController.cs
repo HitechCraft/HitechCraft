@@ -1,8 +1,9 @@
 ﻿using HitechCraft.Core.DI;
 using HitechCraft.Core.Entity;
+using HitechCraft.Core.Projector;
 using HitechCraft.Core.Repository.Specification;
 using HitechCraft.Core.Repository.Specification.Rule;
-using HitechCraft.Projector.Impl;
+
 
 namespace HitechCraft.WebApplication.Controllers
 {

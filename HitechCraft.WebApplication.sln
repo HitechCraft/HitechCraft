@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitechCraft.WebApplication", "HitechCraft.WebApplication\HitechCraft.WebApplication.csproj", "{BF81C46A-8121-4514-945F-2344BFB04AFB}"
 EndProject
@@ -21,8 +21,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitechCraft.Core", "HitechCraft.Core\HitechCraft.Core.csproj", "{BF28E97F-0030-4C65-97B5-D2882EB1C9DE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitechCraft.Ninjector", "HitechCraft.Ninjector\HitechCraft.Ninjector.csproj", "{85D9BB9F-4033-4450-95D6-5EAF3B9EB4EF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HitechCraft.Projector", "HitechCraft.Projector\HitechCraft.Projector.csproj", "{1C83EE3F-E373-4957-8EA7-31672E1BAF85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,10 +56,6 @@ Global
 		{85D9BB9F-4033-4450-95D6-5EAF3B9EB4EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85D9BB9F-4033-4450-95D6-5EAF3B9EB4EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85D9BB9F-4033-4450-95D6-5EAF3B9EB4EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C83EE3F-E373-4957-8EA7-31672E1BAF85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C83EE3F-E373-4957-8EA7-31672E1BAF85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C83EE3F-E373-4957-8EA7-31672E1BAF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C83EE3F-E373-4957-8EA7-31672E1BAF85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

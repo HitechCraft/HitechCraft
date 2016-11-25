@@ -1,8 +1,10 @@
-﻿namespace HitechCraft.GameLauncherAPI.Controllers
+﻿using HitechCraft.Core.Projector;
+
+namespace HitechCraft.GameLauncherAPI.Controllers
 {
     using System.Web.Mvc;
     using HitechCraft.BL.CQRS.Command.Base;
-    using HitechCraft.Projector.Impl;
+    
     using Core.DI;
 
     public class BaseController : Controller

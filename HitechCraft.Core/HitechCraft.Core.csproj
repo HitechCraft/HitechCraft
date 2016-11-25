@@ -124,6 +124,9 @@
     <Compile Include="Models\Json\MinecraftServer\JsonMinecraftServersInfo.cs" />
     <Compile Include="Models\Json\MinecraftServer\JsonMinecraftServerStatusData.cs" />
     <Compile Include="Models\Json\WebRequest\JsonCaptchaResponse.cs" />
+    <Compile Include="Projector\BaseProjector.cs" />
+    <Compile Include="Projector\Extentions\ProjectorQueryExtentions.cs" />
+    <Compile Include="Projector\IProjector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\Specification\BaseSpecification.cs" />
     <Compile Include="Repository\Specification\Composite\AndSpecification.cs" />

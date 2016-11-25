@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebApplication.Controllers
+﻿using HitechCraft.Core.Projector;
+
+namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
@@ -13,7 +15,7 @@
     using HitechCraft.Core.Entity;
     using HitechCraft.Core.Helper;
     using HitechCraft.Core.Repository.Specification.Permissions;
-    using HitechCraft.Projector.Impl;
+    
 
     #endregion
 

@@ -3,8 +3,9 @@ using HitechCraft.Core.Entity;
 using HitechCraft.Core.Entity.Extentions;
 using HitechCraft.Core.Helper;
 using HitechCraft.Core.Models.Enum;
+using HitechCraft.Core.Projector;
 using HitechCraft.Core.Repository.Specification.Player;
-using HitechCraft.Projector.Impl;
+
 
 namespace HitechCraft.WebApplication.Controllers
 {

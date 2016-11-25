@@ -1,4 +1,5 @@
 ﻿using HitechCraft.Core.Helper;
+using HitechCraft.Core.Projector;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
@@ -21,7 +22,7 @@ namespace HitechCraft.WebAdmin.Controllers
     using HitechCraft.Core.Entity;
     using HitechCraft.Core.Models.Enum;
     using HitechCraft.Core.Repository.Specification.Currency;
-    using HitechCraft.Projector.Impl;
+    
 
     #endregion
 

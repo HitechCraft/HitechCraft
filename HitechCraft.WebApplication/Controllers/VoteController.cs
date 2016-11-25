@@ -1,4 +1,5 @@
 ﻿using HitechCraft.Core;
+using HitechCraft.Core.Projector;
 using HitechCraft.WebApplication.Manager;
 
 namespace HitechCraft.WebApplication.Controllers
@@ -16,7 +17,7 @@ namespace HitechCraft.WebApplication.Controllers
     using Core.Entity;
     using Core.Helper;
     using Core.Repository.Specification.Currency;
-    using Projector.Impl;
+    
 
     #endregion
 

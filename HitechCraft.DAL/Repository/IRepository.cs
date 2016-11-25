@@ -1,4 +1,5 @@
 ﻿using HitechCraft.Core.Databases;
+using HitechCraft.Core.Projector;
 
 namespace HitechCraft.DAL.Repository
 {
@@ -8,7 +9,7 @@ namespace HitechCraft.DAL.Repository
     using System.Collections;
     using System.Collections.Generic;
     using Core.Entity;
-    using Projector.Impl;
+    
     using HitechCraft.Core.Entity.Base;
     using HitechCraft.Core.Repository.Specification;
 

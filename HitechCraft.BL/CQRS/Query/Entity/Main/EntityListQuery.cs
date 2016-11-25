@@ -1,4 +1,5 @@
 ﻿using HitechCraft.Core.Entity.Base;
+using HitechCraft.Core.Projector;
 using HitechCraft.Core.Repository.Specification;
 
 namespace HitechCraft.BL.CQRS.Query
@@ -7,7 +8,7 @@ namespace HitechCraft.BL.CQRS.Query
 
     using System.Collections.Generic;
     using Core.Entity;
-    using Projector.Impl;
+    
 
     #endregion
 

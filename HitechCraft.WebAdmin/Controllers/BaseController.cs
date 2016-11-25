@@ -1,6 +1,7 @@
 ﻿using HitechCraft.BL.CQRS.Command.Base;
 using HitechCraft.Core.DI;
-using HitechCraft.Projector.Impl;
+using HitechCraft.Core.Projector;
+
 
 namespace HitechCraft.WebAdmin.Controllers
 {

@@ -94,10 +94,6 @@
       <Project>{bf28e97f-0030-4c65-97b5-d2882eb1c9de}</Project>
       <Name>HitechCraft.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HitechCraft.Projector\HitechCraft.Projector.csproj">
-      <Project>{1c83ee3f-e373-4957-8ea7-31672e1baf85}</Project>
-      <Name>HitechCraft.Projector</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

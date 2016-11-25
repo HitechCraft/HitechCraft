@@ -5,7 +5,8 @@ using HitechCraft.BL.CQRS.Command;
 using HitechCraft.BL.CQRS.Query;
 using HitechCraft.Core.DI;
 using HitechCraft.Core.Entity;
-using HitechCraft.Projector.Impl;
+using HitechCraft.Core.Projector;
+
 using HitechCraft.WebAdmin.Manager;
 using HitechCraft.WebAdmin.Models;
 using PagedList;

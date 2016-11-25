@@ -8,7 +8,8 @@ using HitechCraft.Core.Entity;
 using HitechCraft.Core.Entity.Extentions;
 using HitechCraft.Core.Helper;
 using HitechCraft.Core.Models.Enum;
-using HitechCraft.Projector.Impl;
+using HitechCraft.Core.Projector;
+
 using HitechCraft.WebAdmin.Manager;
 using HitechCraft.WebAdmin.Models;
 using PagedList;

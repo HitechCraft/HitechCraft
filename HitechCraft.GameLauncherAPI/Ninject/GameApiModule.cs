@@ -1,11 +1,13 @@
-﻿namespace HitechCraft.GameLauncherAPI.Ninject
+﻿using HitechCraft.Core.Projector;
+
+namespace HitechCraft.GameLauncherAPI.Ninject
 {
     using BL.CQRS.Command;
     using Core.Entity;
     using Core.Models.Json;
     using Mapper;
     using Models;
-    using Projector.Impl;
+    
     using WebApplication.Mapper;
 
     using global::Ninject.Modules;

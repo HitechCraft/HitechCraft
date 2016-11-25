@@ -1,8 +1,9 @@
 ﻿using System.Linq;
 using HitechCraft.Core.DI;
 using HitechCraft.Core.Entity;
+using HitechCraft.Core.Projector;
 using HitechCraft.Core.Repository.Specification.News;
-using HitechCraft.Projector.Impl;
+
 
 namespace HitechCraft.WebApplication.Controllers
 {

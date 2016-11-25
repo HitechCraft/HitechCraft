@@ -1,6 +1,7 @@
 ﻿using HitechCraft.Core.DI;
 using HitechCraft.Core.Entity;
-using HitechCraft.Projector.Impl;
+using HitechCraft.Core.Projector;
+
 
 namespace HitechCraft.WebAdmin.Controllers
 {

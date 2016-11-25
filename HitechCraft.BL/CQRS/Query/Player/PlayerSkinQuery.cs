@@ -1,10 +1,12 @@
-﻿namespace HitechCraft.BL.CQRS.Query
+﻿using HitechCraft.Core.Projector;
+
+namespace HitechCraft.BL.CQRS.Query
 {
     #region Using Directives
     
     using Core.Entity;
     using Core.Models.Enum;
-    using HitechCraft.Projector.Impl;
+    
 
     #endregion
 

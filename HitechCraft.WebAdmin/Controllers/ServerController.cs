@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebAdmin.Controllers
+﻿using HitechCraft.Core.Projector;
+
+namespace HitechCraft.WebAdmin.Controllers
 {
     using System;
     using System.Linq;
@@ -7,7 +9,7 @@
     using BL.CQRS.Query;
     using Core.DI;
     using Core.Entity;
-    using Projector.Impl;
+    
     using Manager;
     using Models;
     using PagedList;

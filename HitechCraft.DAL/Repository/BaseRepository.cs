@@ -1,4 +1,6 @@
 ﻿using HitechCraft.Core.Databases;
+using HitechCraft.Core.Projector;
+using HitechCraft.Core.Projector.Extentions;
 
 namespace HitechCraft.Common.Repository
 {
@@ -10,8 +12,7 @@ namespace HitechCraft.Common.Repository
     using Core.DI;
     using Core.Entity;
     using DAL.Repository;
-    using Projector.Impl;
-    using Projector.Impl.Extentions;
+    
     using NHibernate.Linq;
     using HitechCraft.Core.Entity.Base;
     using HitechCraft.Core.Repository.Specification;

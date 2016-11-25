@@ -553,10 +553,6 @@
       <Project>{85d9bb9f-4033-4450-95d6-5eaf3b9eb4ef}</Project>
       <Name>HitechCraft.Ninjector</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HitechCraft.Projector\HitechCraft.Projector.csproj">
-      <Project>{1c83ee3f-e373-4957-8ea7-31672e1baf85}</Project>
-      <Name>HitechCraft.Projector</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

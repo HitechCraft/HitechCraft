@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using HitechCraft.Core.Helper;
+using HitechCraft.Core.Projector;
 
 namespace HitechCraft.WebAdmin.Controllers
 {
@@ -20,7 +21,7 @@ namespace HitechCraft.WebAdmin.Controllers
     using System.Text.RegularExpressions;
     using Core.DI;
     using Core.Entity;
-    using Projector.Impl;
+    
     using Microsoft.Office.Interop.Excel;
 
     #endregion

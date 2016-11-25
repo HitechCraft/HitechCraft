@@ -1,4 +1,6 @@
-﻿namespace HitechCraft.WebAdmin.Controllers
+﻿using HitechCraft.Core.Projector;
+
+namespace HitechCraft.WebAdmin.Controllers
 {
     #region Using Directives
 
@@ -13,7 +15,7 @@
     using Core.Entity;
     using Core.Repository.Specification;
     using Core.Repository.Specification.Rule;
-    using Projector.Impl;
+    
 
     #endregion
 

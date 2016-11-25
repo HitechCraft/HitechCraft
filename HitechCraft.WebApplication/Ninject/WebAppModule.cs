@@ -1,9 +1,11 @@
-﻿namespace HitechCraft.WebApplication.Ninject
+﻿using HitechCraft.Core.Projector;
+
+namespace HitechCraft.WebApplication.Ninject
 {
     using BL.CQRS.Command;
     using Core.Entity;
     using Core.Models.Json;
-    using Projector.Impl;
+    
     using Mapper;
     using Models;
     using Current;

@@ -1,4 +1,5 @@
 ﻿using HitechCraft.Core.Databases;
+using HitechCraft.Core.Projector;
 
 namespace HitechCraft.BL.CQRS.Command.Base
 {
@@ -8,7 +9,7 @@ namespace HitechCraft.BL.CQRS.Command.Base
     using HitechCraft.Core.Entity;
     using HitechCraft.Core.Entity.Base;
     using HitechCraft.DAL.Repository;
-    using HitechCraft.Projector.Impl;
+    
 
     #endregion
 
