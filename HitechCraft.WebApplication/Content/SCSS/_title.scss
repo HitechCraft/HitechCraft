@@ -1,0 +1,7 @@
+﻿$title_background_url: url("../Images/titles.png");
+
+.title {
+    &-main {
+        background-image: $title_background_url;
+    }
+}

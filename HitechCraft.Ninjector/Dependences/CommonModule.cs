@@ -12,6 +12,7 @@
     using Ninject.Modules;
 
     using Ninject;
+    using HitechCraft.BL.CQRS.Query.Base;
 
     #endregion
 
@@ -92,8 +93,9 @@
             #endregion
 
             Bind(typeof(ICommandExecutor)).To(typeof(CommandExecutor));
-            
-            Bind(typeof(IQueryHandler<,>)).To(typeof(PlayerByLoginQueryHandler));
+
+            Bind(typeof(IQueryHandler<,>)).To(typeof(BaseQueryHandler<,>));
+            Bind(typeof(IQueryExecutor)).To(typeof(QueryExecutor));
             
             Bind(typeof(IUnitOfWork<>)).To(typeof(NHibernateUnitOfWork<>));
         }

@@ -346,34 +346,22 @@
     <Compile Include="Models\Skin\SkinViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\Images\banners\acc_blue_on_white_ru.png" />
-    <Content Include="Content\Images\banners\v_blue_on_white_ru.png" />
-    <Content Include="Content\Images\charRendered.png" />
-    <Content Include="Content\Images\kits\ie_kit_apple.png" />
-    <Content Include="Content\Images\kits\ie_kit_default.png" />
-    <Content Include="Content\Images\kits\ie_kit_premium.png" />
-    <Content Include="Content\Images\kits\ie_kit_ultra.png" />
-    <Content Include="Content\Images\kits\ie_kit_vip.png" />
-    <Content Include="Content\Images\mailbg.jpg" />
-    <Content Include="Content\Images\world.jpg" />
-    <Content Include="Content\Sounds\newMessage.mp3" />
-    <Content Include="favicon.ico" />
-    <Content Include="Content\Images\game-start.png" />
-    <Content Include="Content\Images\launcher-linux.png" />
-    <Content Include="Content\Images\launcher-win.png" />
-    <Content Include="Content\Images\loader.gif" />
+    <Content Include="Content\Images\banners\interkassa.png" />
+    <Content Include="Content\Images\banners\webmoney-sert.png" />
+    <Content Include="Content\Images\banners\webmoney.png" />
+    <Content Include="Content\Images\banners\ztn.png" />
+    <Content Include="Content\Images\bg.jpg" />
+    <Content Include="Content\Images\desc.jpg" />
+    <Content Include="Content\Images\hex-menu.jpg" />
+    <Content Include="Content\Images\hex_icons.png" />
+    <Content Include="Content\Images\hole.png" />
     <Content Include="Content\Images\logo.png" />
-    <Content Include="Content\Images\no-image.jpg" />
-    <Content Include="Content\Images\social-icons.png" />
-    <Content Include="Content\Images\Valute.png" />
-    <Content Include="Content\Images\vote\mctop.png" />
-    <Content Include="Content\Images\vote\mctopsu.png" />
-    <Content Include="Content\Images\vote\topcraft.png" />
-    <Content Include="Content\Images\ztn-logo.png" />
-    <Content Include="Content\Images\ZTNTeam.png" />
+    <Content Include="Content\Images\menu-bg.jpg" />
+    <Content Include="Content\Images\slider\1.jpg" />
+    <Content Include="Content\Images\testblock.png" />
+    <Content Include="Content\Images\titles.png" />
+    <Content Include="favicon.ico" />
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.structure.css" />
     <Content Include="Content\jquery-ui.theme.css" />
@@ -388,9 +376,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\SCSS\Site.scss" />
     <Content Include="Content\SCSS\_fonts.scss" />
-    <Content Include="Content\SCSS\_media.scss" />
-    <Content Include="Content\SCSS\_mixins.scss" />
-    <Content Include="Content\SCSS\_socials.scss" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -398,7 +383,6 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\SCSS\_ListServers.scss" />
     <Content Include="Content\fonts\arbat.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -412,6 +396,11 @@
     <Content Include="Content\fonts\headplane.TTF" />
     <Content Include="Content\fonts\opensans-bold.TTF" />
     <Content Include="Content\fonts\opensans-regular.TTF" />
+    <Content Include="Content\SCSS\_variables.scss" />
+    <Content Include="Content\fonts\Furore.otf" />
+    <Content Include="Content\SCSS\_title.scss" />
+    <Content Include="Content\SCSS\_hex.scss" />
+    <Content Include="Content\SCSS\_animations.scss" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -534,6 +523,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\kits\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

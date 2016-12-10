@@ -2,27 +2,94 @@
     ViewBag.Title = "Главная";
 }
 
-@Html.Partial("_TitleBox")
-@*<div class="monitoring">
-    <h2 class="overall">Общий онлайн 534 из 1000 игроков!</h2>
-    <div class="progress progress-striped active">
-        <div class="progress-bar progress-bar-success" style="width: 35%"></div>
-        <div class="progress-bar progress-bar-warning" style="width: 20%"></div>
-        <div class="progress-bar progress-bar-danger" style="width: 10%"></div>
+<div class="slider" style="background-image: url('/Content/Images/slider/1.jpg')">
+    <div class="logo">
+        <span class="text">HitechCraft</span>
+        <span class="sign">Multiserver Complex</span>
     </div>
-</div>*@
-
-<div class="content">
-    @Html.Partial("_Sidebar")
-
-    <div class="col-md-8">
-        <h1 class="news-title">
-            Новости проекта
-        </h1>
-        <div id="news">
-            @Html.Action("NewsPartialList", "News", new { page = 1 })
+    <div class="item-day">
+        <h4>ТОВАР ДНЯ!</h4>
+        <img src="../../Content/Images/testblock.png"/>
+        <a href="#">Купить</a>
+        <span><del>500</del> 400 Gont</span>
+    </div>
+    <div class="title-block" style="position: absolute; bottom: 0;">
+        <div class="title">
+            <div class="title-image title-main"></div>
+            <div class="title-text">Приветствуем тебя, игрок!</div>
+            <div class="title-desc">Нажми начать играть и вперед осваивать новые возможности!</div>
+        </div>
+        <div class="title-link">
+            <a href="#">Начать игру</a>
         </div>
     </div>
+</div>
+    
+<div class="hex-menu">
+    <div class="hex-menu-content">
+        <div class="hex hex-news hex-gap">
+            <div class="inner">
+                <h4>НОВОСТИ</h4>
+            </div>
+            <div class="corner-1"></div>
+            <div class="corner-2"></div>
+        </div>
+        <div class="hex hex-forum">
+            <div class="inner">
+                <h4>Форум</h4>
+            </div>
+            <div class="corner-1"></div>
+            <div class="corner-2"></div>
+        </div>
+        <div class="hex hex-servers">
+            <div class="inner">
+                <h4>Сервера</h4>
+            </div>
+            <div class="corner-1"></div>
+            <div class="corner-2"></div>
+        </div>
+        <div class="hex hex-top">
+            <div class="inner">
+                <h4>Топ игроков</h4>
+            </div>
+            <div class="corner-1"></div>
+            <div class="corner-2"></div>
+        </div>
+        <div class="hex hex-shop">
+            <div class="inner">
+                <h4>Магазин</h4>
+            </div>
+            <div class="corner-1"></div>
+            <div class="corner-2"></div>
+        </div>
+        <div class="hex hex-vote">
+            <div class="inner">
+                <h4>Голосовать!</h4>
+            </div>
+            <div class="corner-1"></div>
+            <div class="corner-2"></div>
+        </div>
+        <div class="hex hex-skin">
+            <div class="inner">
+                <h4>Скины</h4>
+            </div>
+            <div class="corner-1"></div>
+            <div class="corner-2"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="splitter">
+    <span>Если вы стали свидетелем нарушения сообщите на форум!</span>
+</div>
+
+<div class="project-desc">
+    <h1>
+        Проект HitechCraft является мультисерверным комплексом Minecraft различной тематики (от экстремального выживания до RPG серверов). 
+        <br/>Мы предоставляем ознакомительный вариант игры, а официальную версию можно приобрести <a href="https://minecraft.net/">здесь</a>.
+    </h1>
 </div>
 
 <script type="text/javascript">

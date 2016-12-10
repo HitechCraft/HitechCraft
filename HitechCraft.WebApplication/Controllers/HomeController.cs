@@ -3,6 +3,11 @@ using HitechCraft.Core.DI;
 
 namespace HitechCraft.WebApplication.Controllers
 {
+    using HitechCraft.BL.CQRS.Query;
+    using HitechCraft.Core.Entity;
+    using HitechCraft.Core.Projector;
+    using HitechCraft.Core.Repository.Specification.News;
+    using HitechCraft.WebApplication.Models;
     using System.Web.Mvc;
 
     public class HomeController : BaseController
@@ -16,7 +21,7 @@ namespace HitechCraft.WebApplication.Controllers
             Session["ReferalId"] = refer;
 
             ViewBag.NewMessages = this.NewMessagesCount;
-
+            
             return View();
         }
 

@@ -1,4 +1,4 @@
-﻿namespace HitechCraft.BL.CQRS.Query
+﻿namespace HitechCraft.BL.CQRS.Query.Base
 {
     public interface IQueryExecutor
     {

@@ -1,19 +1,19 @@
-﻿using HitechCraft.BL.CQRS.Command.Base;
-using HitechCraft.Core.DI;
-using HitechCraft.Core.Entity;
-using HitechCraft.Core.Models.Enum;
-using HitechCraft.Core.Projector;
-using HitechCraft.Core.Repository.Specification.PrivateMessage;
-
-using HitechCraft.WebApplication.Models;
-
-namespace HitechCraft.WebApplication.Controllers
+﻿namespace HitechCraft.WebApplication.Controllers
 {
     #region Using Directives
 
     using System.Web.Mvc;
     using BL.CQRS.Query;
     using Ninject.Current;
+    using HitechCraft.BL.CQRS.Command.Base;
+    using HitechCraft.Core.DI;
+    using HitechCraft.Core.Entity;
+    using HitechCraft.Core.Models.Enum;
+    using HitechCraft.Core.Projector;
+    using HitechCraft.Core.Repository.Specification.PrivateMessage;
+
+    using HitechCraft.WebApplication.Models;
+    using HitechCraft.BL.CQRS.Query.Base;
 
     #endregion
 
@@ -32,6 +32,8 @@ namespace HitechCraft.WebApplication.Controllers
         public IContainer Container { get; set; }
 
         public ICommandExecutor CommandExecutor { get; set; }
+
+        public IQueryExecutor Query { get; set; }
 
         public ICurrentUser CurrentUser { get; set; }
 
@@ -78,6 +80,7 @@ namespace HitechCraft.WebApplication.Controllers
         {
             this.Container = container;
             this.CommandExecutor = this.Container.Resolve<ICommandExecutor>();
+            this.Query = this.Container.Resolve<IQueryExecutor>();
 
             this.CurrentUser = this.Container.Resolve<ICurrentUser>();
         }

@@ -138,11 +138,15 @@
     <Compile Include="CQRS\Command\Skin\SkinCreateCommand.cs" />
     <Compile Include="CQRS\Command\Skin\SkinInstallCommandHandler.cs" />
     <Compile Include="CQRS\Command\Skin\SkinCreateCommandHandler.cs" />
+    <Compile Include="CQRS\Query\Base\BaseQueryHandler.cs" />
     <Compile Include="CQRS\Query\Base\IQuery.cs" />
     <Compile Include="CQRS\Query\Base\IQueryExecutor.cs" />
     <Compile Include="CQRS\Query\Base\IQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Base\QueryExecutor.cs" />
     <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQuery.cs" />
     <Compile Include="CQRS\Query\Currency\CurrencyByPlayerNameQueryHandler.cs" />
+    <Compile Include="CQRS\Query\Entity\Main\TestListQuery.cs" />
+    <Compile Include="CQRS\Query\Entity\Main\TestListQueryHandler.cs" />
     <Compile Include="CQRS\Query\Entity\Specify\EntityCountQueryHandler.cs" />
     <Compile Include="CQRS\Query\Entity\Specify\EntityListQueryHandler.cs" />
     <Compile Include="CQRS\Query\Entity\Specify\EntityExistsQueryHandler.cs" />

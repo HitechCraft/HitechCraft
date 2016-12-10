@@ -1,14 +1,12 @@
-﻿using HitechCraft.Core.Databases;
-
-namespace HitechCraft.BL.CQRS.Query
+﻿namespace HitechCraft.BL.CQRS.Query
 {
-    #region UsingDirectives
+    #region Using Directives
 
     using System;
     using Core.DI;
-    using Core.Entity;
     using DAL.Repository;
     using HitechCraft.Core.Entity.Base;
+    using HitechCraft.Core.Databases;
 
     #endregion
 
