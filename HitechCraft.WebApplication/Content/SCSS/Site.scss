@@ -1,6 +1,6 @@
 ﻿/*IMPORT*/
 
-@import 'fonts';
+@import '_fonts';
 @import '_variables';
 @import '_animations';
 @import '_hex';
@@ -71,7 +71,7 @@ ul.nav {
 
         a {
             display: block;
-            font-family: Furore, sans-serif;
+            font-family: 'Furore', sans-serif;
             padding: 40px 0;
             text-align: center;
 
@@ -223,7 +223,7 @@ ul.nav {
 
         a {
             display: block;
-            font-family: Furore;
+            font-family: 'Furore';
             font-size: 55px;
             padding: 42px 13px;
             text-align: center;
@@ -265,7 +265,7 @@ ul.nav {
     margin-top: 100px;
 
     .text {
-        font-family: Furore;
+        font-family: 'Furore';
         font-size: 80px;
     }
 
@@ -307,7 +307,7 @@ footer {
         float: left;
 
         .copyrights {
-            font-family: Furore;
+            font-family: 'Furore';
             color: #fff;
             font-size: 21px;
             padding: 37px;
@@ -343,7 +343,7 @@ footer {
 .splitter {
     background-color: #22313F;
     height: 100px;
-    font-family: Furore;
+    font-family: 'Furore';
     color: #fff;
     text-align: center;
     font-size: 25px;
@@ -365,7 +365,7 @@ footer {
 
         h4 {
             position: absolute;
-            font-family: Furore;
+            font-family: 'Furore';
             color: #fff;
             font-size: 28px;
             text-align: center;
@@ -402,7 +402,7 @@ footer {
             top: 323px;
             width: 100%;
             text-align: center;
-            font-family: Furore;
+            font-family: 'Furore';
             color: #fff;
         }
     }
