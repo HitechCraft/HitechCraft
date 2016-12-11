@@ -358,9 +358,9 @@
     <Content Include="Content\Images\hole.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\menu-bg.jpg" />
-    <Content Include="Content\Images\slider\1.jpg" />
-    <Content Include="Content\Images\slider\2.jpg" />
-    <Content Include="Content\Images\slider\3.jpg" />
+    <Content Include="Content\Images\slider\1.png" />
+    <Content Include="Content\Images\slider\2.png" />
+    <Content Include="Content\Images\slider\3.png" />
     <Content Include="Content\Images\testblock.png" />
     <Content Include="Content\Images\titles.png" />
     <Content Include="favicon.ico" />
