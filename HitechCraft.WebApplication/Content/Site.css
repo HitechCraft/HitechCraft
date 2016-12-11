@@ -340,6 +340,10 @@ ul.nav {
     width: 100%; }
     .slider ul li {
       width: 100%; }
+      .slider ul li .text {
+        display: none; }
+      .slider ul li .desc {
+        display: none; }
       .slider ul li img {
         width: 100%; }
 

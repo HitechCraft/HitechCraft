@@ -267,6 +267,14 @@ ul.nav {
         li {
             width: 100%;
 
+            .text{
+                display: none;
+            }
+            
+            .desc {
+                display: none;
+            }
+
             img {
                 width: 100%;
             }
