@@ -19,6 +19,18 @@
   font-family: 'Furore';
   src: url("fonts/Furore.otf"); }
 
+@media (min-width: 1420px) and (max-width: 1659px) {
+  .slider {
+    height: 942px !important; } }
+
+@media (min-width: 1660px) and (max-width: 1920px) {
+  .slider {
+    height: 1094px !important; } }
+
+@media (min-width: 1920px) {
+  .slider {
+    height: 1118px !important; } }
+
 @-webkit-keyframes shake {
   0% {
     -webkit-transform: translate(2px, 1px) rotate(0deg); }
@@ -152,7 +164,7 @@ html, body {
   padding: 0;
   font-family: "Open Sans", sans-serif;
   min-width: 1200px;
-  max-width: 1980px;
+  max-width: 1920px;
   margin: 0 auto;
   height: 100%;
   background-image: url("Images/bg.jpg"); }
@@ -320,6 +332,16 @@ ul.nav {
   background-repeat: no-repeat;
   background-size: 100%;
   height: 800px; }
+  .slider ul {
+    position: absolute;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%; }
+    .slider ul li {
+      width: 100%; }
+      .slider ul li img {
+        width: 100%; }
 
 .logo {
   background: #2e3c49;

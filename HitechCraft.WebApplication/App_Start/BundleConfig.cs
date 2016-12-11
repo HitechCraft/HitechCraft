@@ -18,7 +18,8 @@ namespace HitechCraft.WebApplication
                         "~/Scripts/skin2DRender.js",
                         "~/Scripts/clipboard.min.js",
                         "~/Scripts/tree.js",
-                        "~/Scripts/MSP.js"));
+                        "~/Scripts/MSP.js",
+                        "~/Scripts/fadeSlideShow.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

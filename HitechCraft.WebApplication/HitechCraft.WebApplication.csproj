@@ -359,6 +359,8 @@
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\menu-bg.jpg" />
     <Content Include="Content\Images\slider\1.jpg" />
+    <Content Include="Content\Images\slider\2.jpg" />
+    <Content Include="Content\Images\slider\3.jpg" />
     <Content Include="Content\Images\testblock.png" />
     <Content Include="Content\Images\titles.png" />
     <Content Include="favicon.ico" />
@@ -401,6 +403,7 @@
     <Content Include="Content\SCSS\_title.scss" />
     <Content Include="Content\SCSS\_hex.scss" />
     <Content Include="Content\SCSS\_animations.scss" />
+    <Content Include="Content\SCSS\_media.scss" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -409,6 +412,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\circle-progress.js" />
     <Content Include="Scripts\clipboard.min.js" />
+    <Content Include="Scripts\fadeSlideShow.js" />
     <Content Include="Scripts\jgrowl.alerts.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

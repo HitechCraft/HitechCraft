@@ -2,14 +2,19 @@
     ViewBag.Title = "Главная";
 }
 
-<div class="slider" style="background-image: url('/Content/Images/slider/1.jpg')">
+<div class="slider">
+    <ul>
+        <li><img src="/Content/Images/slider/1.jpg" /></li>
+        <li><img src="/Content/Images/slider/2.jpg" /></li>
+        <li><img src="/Content/Images/slider/3.jpg" /></li>
+    </ul>
     <div class="logo">
         <span class="text">HitechCraft</span>
         <span class="sign">Multiserver Complex</span>
     </div>
     <div class="item-day">
         <h4>ТОВАР ДНЯ!</h4>
-        <img src="../../Content/Images/testblock.png"/>
+        <img src="../../Content/Images/testblock.png" />
         <a href="#">Купить</a>
         <span><del>500</del> 400 Gont</span>
     </div>
@@ -24,7 +29,7 @@
         </div>
     </div>
 </div>
-    
+
 <div class="hex-menu">
     <div class="hex-menu-content">
         <div class="hex hex-news hex-gap">
@@ -87,8 +92,8 @@
 
 <div class="project-desc">
     <h1>
-        Проект HitechCraft является мультисерверным комплексом Minecraft различной тематики (от экстремального выживания до RPG серверов). 
-        <br/>Мы предоставляем ознакомительный вариант игры, а официальную версию можно приобрести <a href="https://minecraft.net/">здесь</a>.
+        Проект HitechCraft является мультисерверным комплексом Minecraft различной тематики (от экстремального выживания до RPG серверов).
+        <br />Мы предоставляем ознакомительный вариант игры, а официальную версию можно приобрести <a href="https://minecraft.net/">здесь</a>.
     </h1>
 </div>
 
@@ -96,6 +101,10 @@
     function FilterNews(currentPage) {
         LoadNews(currentPage);
     }
+
+    $(document).ready(function () {
+        $('.slider>ul').fadeSlideShow();
+    });
 
     function LoadNews(currentPage) {
         window.ajaxLoaderText = "Загрузка новостей...";
