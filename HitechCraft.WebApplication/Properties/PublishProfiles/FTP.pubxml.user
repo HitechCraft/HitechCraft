@@ -17,40 +17,40 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/26/2015 21:51:50</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>02/03/2015 09:32:26</publishTime>
+      <publishTime>03/02/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>02/03/2015 09:32:26</publishTime>
+      <publishTime>03/02/2015 09:32:26</publishTime>
     </File>
     <File Include="bin/FluentNHibernate.dll">
-      <publishTime>07/10/2015 00:34:24</publishTime>
+      <publishTime>10/07/2015 00:34:24</publishTime>
     </File>
     <File Include="bin/HitechCraft.BL.dll">
-      <publishTime>11/12/2016 01:18:48</publishTime>
+      <publishTime>12/11/2016 01:18:48</publishTime>
     </File>
     <File Include="bin/HitechCraft.Core.dll">
-      <publishTime>11/12/2016 01:18:46</publishTime>
+      <publishTime>12/11/2016 01:18:46</publishTime>
     </File>
     <File Include="bin/HitechCraft.DAL.dll">
-      <publishTime>11/12/2016 01:18:47</publishTime>
+      <publishTime>12/11/2016 01:18:47</publishTime>
     </File>
     <File Include="bin/HitechCraft.Ninjector.dll">
-      <publishTime>11/12/2016 01:18:48</publishTime>
+      <publishTime>12/11/2016 01:18:48</publishTime>
     </File>
     <File Include="bin/HitechCraft.WebApplication.dll">
-      <publishTime>11/12/2016 01:18:55</publishTime>
+      <publishTime>12/11/2016 14:42:34</publishTime>
     </File>
     <File Include="bin/Iesi.Collections.dll">
       <publishTime>10/27/2012 18:50:12</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
-      <publishTime>03/04/2015 17:07:22</publishTime>
+      <publishTime>04/03/2015 17:07:22</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.EntityFramework.dll">
-      <publishTime>03/04/2015 17:07:22</publishTime>
+      <publishTime>04/03/2015 17:07:22</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
-      <publishTime>03/04/2015 17:07:22</publishTime>
+      <publishTime>04/03/2015 17:07:22</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>06/15/2015 02:06:24</publishTime>
@@ -92,13 +92,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/03/2014 11:27:32</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>03/08/2014 20:33:56</publishTime>
+      <publishTime>08/03/2014 20:33:56</publishTime>
     </File>
     <File Include="bin/NHibernate.dll">
       <publishTime>08/17/2015 23:18:30</publishTime>
     </File>
     <File Include="bin/Ninject.dll">
-      <publishTime>02/04/2014 18:40:18</publishTime>
+      <publishTime>04/02/2014 18:40:18</publishTime>
     </File>
     <File Include="bin/Ninject.Web.Common.dll">
       <publishTime>03/21/2014 17:08:58</publishTime>
@@ -158,19 +158,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/18/2015 20:19:46</publishTime>
     </File>
     <File Include="bin/ru/EntityFramework.resources.dll">
-      <publishTime>02/03/2015 11:32:38</publishTime>
+      <publishTime>03/02/2015 11:32:38</publishTime>
     </File>
     <File Include="bin/ru/EntityFramework.SqlServer.resources.dll">
-      <publishTime>02/03/2015 11:32:38</publishTime>
+      <publishTime>03/02/2015 11:32:38</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.AspNet.Identity.Core.resources.dll">
-      <publishTime>03/04/2015 18:09:50</publishTime>
+      <publishTime>04/03/2015 18:09:50</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.AspNet.Identity.EntityFramework.resources.dll">
-      <publishTime>03/04/2015 18:09:52</publishTime>
+      <publishTime>04/03/2015 18:09:52</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.AspNet.Identity.Owin.resources.dll">
-      <publishTime>03/04/2015 18:09:52</publishTime>
+      <publishTime>04/03/2015 18:09:52</publishTime>
     </File>
     <File Include="bin/ru/Microsoft.Owin.Host.SystemWeb.resources.dll">
       <publishTime>02/13/2015 15:24:52</publishTime>
@@ -200,7 +200,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 06:02:30</publishTime>
     </File>
     <File Include="bin/ru/System.Web.Optimization.resources.dll">
-      <publishTime>11/02/2014 18:28:42</publishTime>
+      <publishTime>02/11/2014 18:28:42</publishTime>
     </File>
     <File Include="bin/ru/System.Web.Razor.resources.dll">
       <publishTime>01/28/2015 06:02:40</publishTime>
@@ -230,7 +230,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:02:18</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>11/02/2014 15:26:04</publishTime>
+      <publishTime>02/11/2014 15:26:04</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
       <publishTime>01/28/2015 04:02:32</publishTime>
@@ -245,7 +245,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2015 04:04:30</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
-      <publishTime>08/02/2013 16:42:28</publishTime>
+      <publishTime>02/08/2013 16:42:28</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>07/17/2013 17:03:52</publishTime>
@@ -281,46 +281,55 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/20/2016 15:23:44</publishTime>
     </File>
     <File Include="Content/Images/banners/interkassa.png">
-      <publishTime>10/12/2016 02:30:32</publishTime>
+      <publishTime>12/10/2016 02:30:32</publishTime>
     </File>
     <File Include="Content/Images/banners/webmoney-sert.png">
-      <publishTime>10/12/2016 14:08:19</publishTime>
+      <publishTime>12/10/2016 14:08:19</publishTime>
     </File>
     <File Include="Content/Images/banners/webmoney.png">
-      <publishTime>10/12/2016 02:30:11</publishTime>
+      <publishTime>12/10/2016 02:30:11</publishTime>
     </File>
     <File Include="Content/Images/banners/ztn.png">
-      <publishTime>10/12/2016 13:57:00</publishTime>
+      <publishTime>12/10/2016 13:57:00</publishTime>
     </File>
     <File Include="Content/Images/bg.jpg">
-      <publishTime>10/12/2016 00:17:33</publishTime>
+      <publishTime>12/10/2016 00:17:33</publishTime>
     </File>
     <File Include="Content/Images/desc.jpg">
-      <publishTime>10/12/2016 16:47:13</publishTime>
+      <publishTime>12/10/2016 16:47:13</publishTime>
     </File>
     <File Include="Content/Images/hex-menu.jpg">
-      <publishTime>10/12/2016 21:58:10</publishTime>
+      <publishTime>12/10/2016 21:58:10</publishTime>
     </File>
     <File Include="Content/Images/hex_icons.png">
-      <publishTime>10/12/2016 16:16:44</publishTime>
+      <publishTime>12/10/2016 16:16:44</publishTime>
     </File>
     <File Include="Content/Images/hole.png">
-      <publishTime>11/12/2016 00:54:23</publishTime>
+      <publishTime>12/11/2016 00:54:23</publishTime>
     </File>
     <File Include="Content/Images/logo.png">
-      <publishTime>08/12/2016 02:55:02</publishTime>
+      <publishTime>12/08/2016 02:55:02</publishTime>
     </File>
     <File Include="Content/Images/menu-bg.jpg">
-      <publishTime>10/12/2016 14:56:41</publishTime>
+      <publishTime>12/10/2016 14:56:41</publishTime>
     </File>
     <File Include="Content/Images/slider/1.jpg">
       <publishTime>11/12/2016 00:48:06</publishTime>
     </File>
+    <File Include="Content/Images/slider/1.png">
+      <publishTime>12/11/2016 14:36:59</publishTime>
+    </File>
+    <File Include="Content/Images/slider/2.png">
+      <publishTime>12/11/2016 14:37:34</publishTime>
+    </File>
+    <File Include="Content/Images/slider/3.png">
+      <publishTime>12/11/2016 14:40:33</publishTime>
+    </File>
     <File Include="Content/Images/testblock.png">
-      <publishTime>10/12/2016 16:12:32</publishTime>
+      <publishTime>12/10/2016 16:12:32</publishTime>
     </File>
     <File Include="Content/Images/titles.png">
-      <publishTime>08/12/2016 01:38:17</publishTime>
+      <publishTime>12/08/2016 01:38:17</publishTime>
     </File>
     <File Include="Content/jquery-ui.min.css">
       <publishTime>09/20/2016 15:23:44</publishTime>
@@ -338,28 +347,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/20/2016 15:23:44</publishTime>
     </File>
     <File Include="Content/SCSS/Site.scss">
-      <publishTime>12/11/2016 01:23:11</publishTime>
+      <publishTime>12/11/2016 14:26:25</publishTime>
     </File>
     <File Include="Content/SCSS/_animations.scss">
-      <publishTime>10/12/2016 21:24:47</publishTime>
+      <publishTime>12/10/2016 21:24:47</publishTime>
     </File>
     <File Include="Content/SCSS/_fonts.scss">
-      <publishTime>12/11/2016 01:23:17</publishTime>
+      <publishTime>11/12/2016 01:23:17</publishTime>
     </File>
     <File Include="Content/SCSS/_hex.scss">
-      <publishTime>10/12/2016 23:37:12</publishTime>
+      <publishTime>12/10/2016 23:37:12</publishTime>
+    </File>
+    <File Include="Content/SCSS/_media.scss">
+      <publishTime>12/11/2016 14:14:09</publishTime>
     </File>
     <File Include="Content/SCSS/_title.scss">
-      <publishTime>08/12/2016 01:57:06</publishTime>
+      <publishTime>12/08/2016 01:57:06</publishTime>
     </File>
     <File Include="Content/SCSS/_variables.scss">
-      <publishTime>08/12/2016 00:05:17</publishTime>
+      <publishTime>12/08/2016 00:05:17</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>12/11/2016 01:23:18</publishTime>
+      <publishTime>12/11/2016 14:26:26</publishTime>
     </File>
     <File Include="Content/Site.min.css">
-      <publishTime>12/11/2016 01:23:18</publishTime>
+      <publishTime>12/11/2016 14:26:26</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>09/20/2016 15:23:47</publishTime>
@@ -405,6 +417,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/clipboard.min.js">
       <publishTime>09/21/2016 14:21:24</publishTime>
+    </File>
+    <File Include="Scripts/fadeSlideShow.js">
+      <publishTime>12/11/2016 14:34:33</publishTime>
     </File>
     <File Include="Scripts/jgrowl.alerts.js">
       <publishTime>09/20/2016 15:23:45</publishTime>
@@ -467,7 +482,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/20/2016 15:23:46</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>09/26/2016 11:25:33</publishTime>
+      <publishTime>12/11/2016 13:56:58</publishTime>
     </File>
     <File Include="sitemap.xml">
       <publishTime>09/20/2016 15:23:47</publishTime>
@@ -563,7 +578,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/20/2016 15:23:46</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>11/12/2016 00:25:07</publishTime>
+      <publishTime>12/11/2016 14:40:57</publishTime>
     </File>
     <File Include="Views/Home/NewIndex.cshtml">
       <publishTime>09/20/2016 15:23:46</publishTime>
@@ -623,10 +638,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/20/2016 15:23:47</publishTime>
     </File>
     <File Include="Views/Server/Details.cshtml">
-      <publishTime>05/11/2016 15:59:38</publishTime>
+      <publishTime>11/05/2016 15:59:38</publishTime>
     </File>
     <File Include="Views/Server/Index.cshtml">
-      <publishTime>05/11/2016 16:03:32</publishTime>
+      <publishTime>11/05/2016 16:03:32</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>09/20/2016 15:23:47</publishTime>
@@ -641,19 +656,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/20/2016 15:23:47</publishTime>
     </File>
     <File Include="Views/Shared/_Footer.cshtml">
-      <publishTime>10/12/2016 14:11:40</publishTime>
+      <publishTime>12/10/2016 14:11:40</publishTime>
     </File>
     <File Include="Views/Shared/_Header.cshtml">
       <publishTime>11/26/2016 18:57:47</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>10/12/2016 02:29:14</publishTime>
+      <publishTime>12/10/2016 02:29:14</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>10/12/2016 15:06:26</publishTime>
+      <publishTime>12/10/2016 15:06:26</publishTime>
     </File>
     <File Include="Views/Shared/_NavBar.cshtml">
-      <publishTime>10/12/2016 21:27:34</publishTime>
+      <publishTime>12/10/2016 21:27:34</publishTime>
     </File>
     <File Include="Views/Shared/_NewsPartialList.cshtml">
       <publishTime>09/20/2016 15:23:47</publishTime>
@@ -680,10 +695,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/20/2016 15:23:47</publishTime>
     </File>
     <File Include="Views/Shop/_ShopItemListPartial.cshtml">
-      <publishTime>05/11/2016 15:51:24</publishTime>
+      <publishTime>11/05/2016 15:51:24</publishTime>
     </File>
     <File Include="Views/Shop/_ShopItemPartial.cshtml">
-      <publishTime>05/11/2016 15:51:19</publishTime>
+      <publishTime>11/05/2016 15:51:19</publishTime>
     </File>
     <File Include="Views/Skin/Catalog.cshtml">
       <publishTime>09/20/2016 15:23:47</publishTime>
@@ -710,7 +725,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/20/2016 15:23:47</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/12/2016 01:18:56</publishTime>
+      <publishTime>12/11/2016 01:18:56</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -10,10 +10,20 @@
     float: left;
     margin: 40px 5px;
     text-align: center;
-    zoom: 1;
+    perspective: 1000px;
+    webkit-transition: 0.6s;
+    -webkit-transform-style: preserve-3d;
+    -ms-transition: 0.6s;
+    -moz-transition: 0.6s;
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transition: 0.6s;
+    transform-style: preserve-3d;
 
-    &:hover{
-        background-color: #339c84;
+    &:hover {
+        background-color: transparent;
+        transform: rotateY(180deg);
     }
 
     &-gap {
@@ -83,11 +93,49 @@
     }
 
     .inner {
+        backface-visibility: hidden;
         position: relative;
         z-index: 3;
         background-image: url('../Images/hex_icons.png');
         background-repeat: no-repeat;
         background-position: 50%;
+        -webkit-transform: rotateY(0deg);
+        -ms-transform: rotateY(0deg);
+
+        &-flip {
+            backface-visibility: hidden;
+            position: absolute;
+            z-index: 5;
+            width: 100%;
+            top: -15px;
+            -webkit-transform: rotateY(-180deg);
+            -moz-transform: rotateY(-180deg);
+            -o-transform: rotateY(-180deg);
+            -ms-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+        }
+
+        .inner, .inner-flip {
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -ms-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transition: 0.6s;
+            -webkit-transform-style: preserve-3d;
+            -webkit-transform: rotateY(0deg);
+            -moz-transition: 0.6s;
+            -moz-transform-style: preserve-3d;
+            -moz-transform: rotateY(0deg);
+            -o-transition: 0.6s;
+            -o-transform-style: preserve-3d;
+            -o-transform: rotateY(0deg);
+            -ms-transition: 0.6s;
+            -ms-transform-style: preserve-3d;
+            -ms-transform: rotateY(0deg);
+            transition: 0.6s;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+        }
     }
 
     h4 {

@@ -21,9 +21,9 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-jQuery.fn.fadeSlideShow = function(options) {
+$.fn.fadeSlideShow = function(options) {
 	return this.each(function(){
-		settings = jQuery.extend({
+		settings = $.extend({
 			speed: 'slow', // default animation transition speed
 			interval: 3000, // default interval between image change
 			PlayPauseElement: 'fssPlayPause', // default css id for the play / pause element
@@ -42,16 +42,16 @@ jQuery.fn.fadeSlideShow = function(options) {
 	 	}, options);
 		
 		// set styles for child element
-		jQuery('> *',this).css({
+		$('> *',this).css({
 			position: 'absolute'
 		});
 		
 		// count number of slides
-		Slides = jQuery('> *', this).length;
+		Slides = $('> *', this).length;
 		Slides = Slides - 1;
 		ActSlide = Slides;
-		// Set jQuery Slide short var
-		jQslide = jQuery('> *', this);
+		// Set $ Slide short var
+		jQslide = $('> *', this);
 		// save this
 		fssThis = this;
 		
@@ -63,8 +63,8 @@ jQuery.fn.fadeSlideShow = function(options) {
 				if(settings.ListElement){
 					setActLi = (Slides - ActSlide) + 1;
 					if(setActLi > Slides){setActLi=0;}
-					jQuery('#'+settings.ListElement+' li').removeClass(settings.ListLiActive);
-					jQuery('#' + settings.ListElement + ' li').eq(setActLi).addClass(settings.ListLiActive);
+					$('#'+settings.ListElement+' li').removeClass(settings.ListLiActive);
+					$('#' + settings.ListElement + ' li').eq(setActLi).addClass(settings.ListLiActive);
 
 					$('.title-text').text($(jQslide[setActLi]).find('.text').text());
 					$('.title-desc').text($(jQslide[setActLi]).find('.desc').text());
@@ -79,12 +79,12 @@ jQuery.fn.fadeSlideShow = function(options) {
 			}, settings.interval);
 			
 			if(settings.PlayPauseElement){
-				jQuery('#'+settings.PlayPauseElement).html(settings.PauseText);
+				$('#'+settings.PlayPauseElement).html(settings.PauseText);
 			}
 		}
 		
 		if(settings.allowKeyboardCtrl){
-			jQuery(document).bind('keydown', function(e){
+			$(document).bind('keydown', function(e){
 				if(e.which==39){
 					nextSlide = ActSlide-1;
 					stopAutoplay();
